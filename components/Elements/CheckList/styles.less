@@ -1,0 +1,24 @@
+.check-list {
+  @icon-space: 20px;
+  margin: 25px 0;
+  .list-elem {
+    display: flex;
+    margin: 5px 0;
+    .anticon {
+      margin-right: 8px;
+      margin-top: 4px;
+      width: @icon-space;
+    }
+    .desc {
+      flex: 1;
+      width: calc(100% - @icon-space);
+      > div {
+        display: inline-block;
+        p {
+          display: inline;
+          margin: 0;
+        }
+      }
+    }
+  }
+}
