@@ -77,7 +77,7 @@ const StickyHeader = () => {
     <div>
       <motion.div className="header-inner" style={{ background: color }}>
         <div className="header-logo" onClick={() => setProgress(progress + 1)}>
-          <motion.img src="/logos/logo.svg" style={dynamicStyles.logo} />
+          <motion.img src="/images/logo.svg" style={dynamicStyles.logo} />
         </div>
         <div className="challenge-bar">
           <div className="challenge-name text-appear-wrapper">

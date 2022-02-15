@@ -1,5 +1,5 @@
 @import '../../styles/vars.less';
-@import '../../styles/mixins.less';
+@import '../../styles/fonts.less';
 
 .cookie-consent-banner {
   align-items: baseline;
@@ -40,9 +40,9 @@
         font-size: 13px;
         padding: 4px 0;
         &.active {
-          border-left: 3px solid @color-1;
+          border-left: 3px solid @primary-color;
           .anticon {
-            color: @color-1;
+            color: @primary-color;
           }
         }
         .text-wrapper {
@@ -67,14 +67,14 @@
       width: 47%;
       padding: 6px 0;
       font-size: 14px;
-      background: @color-1;
-      border-color: @color-1;
+      background: @primary-color;
+      border-color: @primary-color;
       &:first-child {
         margin-right: 5%;
       }
       &.ant-btn-background-ghost {
-        border: 1px solid @color-1;
-        color: @color-1;
+        border: 1px solid @primary-color;
+        color: @primary-color;
       }
     }
   }

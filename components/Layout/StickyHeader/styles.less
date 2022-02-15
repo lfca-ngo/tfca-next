@@ -1,5 +1,5 @@
 @import '../../../styles/vars.less';
-@import '../../../styles/mixins.less';
+@import '../../../styles/fonts.less';
 
 @header-height-mini: 75px;
 @header-height: 420px;
@@ -45,7 +45,7 @@
       }
     }
     .challenge-name {
-      // .font-semi();
+      .font-semi();
       font-size: 20px;
     }
     .challenge-invitee {
@@ -89,6 +89,7 @@
     }
     h1 {
       font-size: 43px;
+      .font-bold();
       @media (min-width: @screen-md) {
         font-size: 60px;
       }
