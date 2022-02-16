@@ -7,3 +7,24 @@ export const AllNavsFragment = gql`
     }
   }
 `
+
+export const ActionSwitchEnergyFragment = gql`
+  fragment ActionSwitchEnergyFragment on ActionSwitchEnergy {
+    name
+    actionId
+  }
+`
+
+export const AllActionsFragment = gql`
+  ${ActionSwitchEnergyFragment}
+  fragment AllActionsFragment on ActionsLocalCollection {
+    items {
+      regionCode
+      actionsCollection(limit: 20) {
+        items {
+          ...ActionSwitchEnergyFragment
+        }
+      }
+    }
+  }
+`
