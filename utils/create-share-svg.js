@@ -15,7 +15,7 @@ export function createShareSvg({
       <svg width="481" height="540" x="30" y="30">
         ${createMultilineText({
           color: '#DCF1FF',
-          fontFamily: 'Helvetica Neue',
+          fontFamily: 'Manrope',
           fontSize: 48,
           fontWeight: 'bold',
           lineHeight: 52,
@@ -32,7 +32,7 @@ export function createShareSvg({
         ${createMultilineText({
           boldAsLong: friendName1,
           color: '#1F335E',
-          fontFamily: 'Helvetica Neue',
+          fontFamily: 'Manrope',
           fontSize: 28,
           lineHeight: 32,
           maxWidth: 514 - 90,
@@ -48,7 +48,7 @@ export function createShareSvg({
         ${createMultilineText({
           boldAsLong: friendName2,
           color: '#1F335E',
-          fontFamily: 'Helvetica Neue',
+          fontFamily: 'Manrope',
           fontSize: 28,
           lineHeight: 32,
           maxWidth: 514 - 90,
@@ -64,7 +64,7 @@ export function createShareSvg({
         ${createMultilineText({
           boldAsLong: friendName3,
           color: '#1F335E',
-          fontFamily: 'Helvetica Neue',
+          fontFamily: 'Manrope',
           fontSize: 28,
           lineHeight: 32,
           maxWidth: 514 - 90,

@@ -84,7 +84,7 @@ function NominateNameInput({ onChange, value }) {
           value={value.challenge}
         >
           <Option value="Energy">Energy</Option>
-          <Option value="Eolitics">Politics</Option>
+          <Option value="Politics">Politics</Option>
           <Option value="Banking">Banking</Option>
         </Select>
       }

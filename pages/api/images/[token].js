@@ -4,9 +4,18 @@
  */
 
 import jwt from 'jsonwebtoken'
+import path from 'path'
 import sharp from 'sharp'
 
 import { createShareSvg } from '../../../utils'
+
+/**
+ * Resolve fonts so that they are bundled
+ * See: https://github.com/lovell/sharp/issues/2499#issuecomment-987643630
+ */
+path.resolve(process.cwd(), 'fonts', 'fonts.conf')
+path.resolve(process.cwd(), 'fonts', 'Manrope-Bold.ttf')
+path.resolve(process.cwd(), 'fonts', 'Manrope-Regular.ttf')
 
 export default async function handler(req, res) {
   try {
@@ -27,10 +36,10 @@ export default async function handler(req, res) {
 
     const jpeg = await sharp(svgImage).jpeg().toBuffer()
 
-    res.writeHead(200, {
-      'Cache-Control': 's-maxage=31536000', // 1 year
-      'Content-Type': 'image/jpeg',
-    })
+    // res.writeHead(200, {
+    //   'Cache-Control': 's-maxage=31536000', // 1 year
+    //   'Content-Type': 'image/jpeg',
+    // })
     res.end(jpeg)
   } catch (e) {
     res.status(404).send({ error: 'Not found' })
