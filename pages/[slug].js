@@ -7,9 +7,12 @@ import {
   fetchAllStaticContent,
   fetchContent,
 } from '../services/contentful'
+import { useSwitchRates } from '../services/switchforclimate'
 
 const ActionCollection = (props) => {
-  console.log(props)
+  const res = useSwitchRates('12043', 'Berlin', 2200, '9900080000007')
+  const { data, error, isFetching, status } = res
+  console.log(res, status, data, error, isFetching)
   return (
     <SplitLayout>
       <h1>Space for actions!</h1>

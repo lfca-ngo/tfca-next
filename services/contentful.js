@@ -7,10 +7,11 @@ import {
 } from '../fragments'
 import { SETTINGS_ID } from '../utils'
 
-// Graphql Layer
 const space = process.env.NEXT_PUBLIC_CF_SPACE_ID
 const accessToken = process.env.NEXT_PUBLIC_CF_ACCESS_TOKEN
 
+// Generic GraphQL client for contentful used
+// by all subsequent queries, can also called directly
 export const fetchContent = async (query, variables) => {
   try {
     const res = await request({
