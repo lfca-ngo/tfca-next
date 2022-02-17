@@ -1,8 +1,3 @@
-/**
- * Use this token for testing:
- * eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmllbmQxIjp7ImNoYWxsZW5nZSI6IkVuZXJneSIsIm5hbWUiOiJUaW1vIn0sImZyaWVuZDIiOnsiY2hhbGxlbmdlIjoiRW5lcmd5IiwibmFtZSI6IkFubmEifSwiZnJpZW5kMyI6eyJjaGFsbGVuZ2UiOiJFbmVyZ3kiLCJuYW1lIjoiU2FyYWgifSwic2VsZiI6eyJjaGFsbGVuZ2UiOiJFb2xpdGljcyIsIm5hbWUiOiJEYXZpZCJ9LCJpYXQiOjE2NDUwMTcyNjF9.bsqW3ZYhAs7qx3vc8l4czrqC2pQ1s93ObbsqdR47jZ0
- */
-
 import jwt from 'jsonwebtoken'
 import path from 'path'
 import sharp from 'sharp'

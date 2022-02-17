@@ -1,9 +1,4 @@
-/**
- * Use this token for testing:
- * eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmllbmQxIjp7ImNoYWxsZW5nZSI6IkVuZXJneSIsIm5hbWUiOiJUaW1vIn0sImZyaWVuZDIiOnsiY2hhbGxlbmdlIjoiRW5lcmd5IiwibmFtZSI6IkFubmEifSwiZnJpZW5kMyI6eyJjaGFsbGVuZ2UiOiJFbmVyZ3kiLCJuYW1lIjoiU2FyYWgifSwic2VsZiI6eyJjaGFsbGVuZ2UiOiJFb2xpdGljcyIsIm5hbWUiOiJEYXZpZCJ9LCJpYXQiOjE2NDUwMTcyNjF9.bsqW3ZYhAs7qx3vc8l4czrqC2pQ1s93ObbsqdR47jZ0
- */
-
-import { Card, Space, Tabs, Typography } from 'antd'
+import { Button, Card, Space, Tabs, Typography } from 'antd'
 import jwt from 'jsonwebtoken'
 import Image from 'next/image'
 import React from 'react'
@@ -45,6 +40,13 @@ export default function Share({ friend1, friend2, friend3, self, token }) {
             TBD.
           </TabPane>
         </Tabs>
+        <Button
+          onClick={() => {
+            window.open(`/de/deu/${token}`, '_blank')
+          }}
+        >
+          Open shareable link
+        </Button>
       </Space>
     </Card>
   )
