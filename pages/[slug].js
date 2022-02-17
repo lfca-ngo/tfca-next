@@ -10,9 +10,13 @@ import {
 } from '../services/contentful'
 
 const ActionCollection = (props) => {
+  const { actions } = props
+
+  console.log(actions)
+
   return (
     <SplitLayout>
-      <ActionModules actions={props.actions?.actionsCollection?.items} />
+      <ActionModules actions={props.actions} />
     </SplitLayout>
   )
 }

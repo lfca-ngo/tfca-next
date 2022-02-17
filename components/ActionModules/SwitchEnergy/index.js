@@ -78,6 +78,8 @@ const steps = {
 }
 
 const SwitchEnergyFlow = (props) => {
+  console.log(props)
+
   const { goTo, index, setVisible, visible } = useFlow({
     name: props.name,
     initial: 'intro',
