@@ -2,6 +2,10 @@ import React, { createContext, useContext, useEffect, useState } from 'react'
 
 export const ChallengeContext = createContext(null)
 
+// Provider to share all challenge specific data
+// passed via URL params, and made available to
+// all components in the app
+
 export const ChallengeProvider = (props) => {
   const [progress, setProgress] = useState(0)
   const [customization, setCustomization] = useState(null)

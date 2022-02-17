@@ -2,10 +2,16 @@ import { gql } from 'graphql-request'
 import React from 'react'
 
 import SplitLayout from '../components/Layout/SplitLayout'
-import { fetchContent } from '../services/contentful'
-import { AllActionsFragment, AllNavsFragment } from '../utils/fragments'
+import {
+  fetchAllActions,
+  fetchAllNavs,
+  fetchContent,
+  fetchMetaData,
+} from '../services/contentful'
+import { SETTINGS_ID } from '../utils'
 
 const ActionCollection = (props) => {
+  console.log(props)
   return (
     <SplitLayout>
       <h1>Space for actions!</h1>
@@ -17,41 +23,19 @@ export async function getStaticProps({ locale, params }) {
   // we have the locale and can get
   // the correct translations in build
   // time by passing it to the query
-  const query = gql`
-    ${AllActionsFragment}
-    ${AllNavsFragment}
-    query ($locale: String, $slug: String) {
-      navigationCollection(locale: $locale) {
-        ... on NavigationCollection {
-          ...AllNavsFragment
-        }
-      }
-      actionsLocalCollection(
-        limit: 50
-        locale: $locale
-        where: { slug: $slug }
-      ) {
-        ... on ActionsLocalCollection {
-          ...AllActionsFragment
-        }
-      }
-    }
-  `
-  const variables = {
-    locale: locale,
-    preview: false, // true = get unpublished cf entries
-    slug: params.slug,
-  }
+  const { slug } = params
 
-  const { actionsLocalCollection, navigationCollection } = await fetchContent(
-    query,
-    variables
-  )
+  const actions = await fetchAllActions(locale, slug)
+  const navs = await fetchAllNavs(locale)
+  const metaData = await fetchMetaData(locale, SETTINGS_ID)
 
   return {
     props: {
-      actions: actionsLocalCollection.items[0],
-      navigationCollection,
+      actions: actions,
+      content: {
+        metaData,
+        navs,
+      },
     },
   }
 }

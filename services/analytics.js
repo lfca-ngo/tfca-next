@@ -1,4 +1,5 @@
 // import axios from 'axios'
+import { useCookies } from 'react-cookie'
 
 import { isDev } from '../utils'
 
@@ -12,6 +13,36 @@ const TRACKING = `apiUtilsTfca`
 const REPS = `apiUtilsFindRep`
 const ANALYTICS = `apiUtilsAnalytics`
 
+// tracking can be manually disabled in development
+// by setting TRACKING_DISABLED to true
+const TRACKING_DISABLED = isDev && true
+
+const useAnalytics = () => {
+  const [cookies, setReactCookie] = useCookies()
+  const userId = cookies[COOKIE]
+
+  const trackUser = async () => {
+    const newUserId = await trackUserApi()
+    setReactCookie(COOKIE, newUserId)
+    return newUserId
+  }
+
+  const trackEvent = async (name, values) => {
+    if (TRACKING_DISABLED) return { status: 200 }
+
+    if (!userId) {
+      const newUserId = await trackUser()
+      return trackEventApi(newUserId, name, values)
+    } else {
+      return trackEventApi(userId, name, values)
+    }
+  }
+
+  return { trackEvent }
+}
+
+export default useAnalytics
+
 export const pushStat = (actionName, data) => {
   const config = {
     Accept: 'application/json',
@@ -21,7 +52,7 @@ export const pushStat = (actionName, data) => {
   // return axios.post(endpoint, data, config)
 }
 
-export const trackUser = async () => {
+const trackUser = async () => {
   const config = {
     Accept: 'application/json',
     'Content-Type': 'application/json',
@@ -33,7 +64,7 @@ export const trackUser = async () => {
   // })
 }
 
-export const trackEvent = async (userId, name, values) => {
+const trackEvent = async (userId, name, values) => {
   const config = {
     Accept: 'application/json',
     'Content-Type': 'application/json',
@@ -42,7 +73,8 @@ export const trackEvent = async (userId, name, values) => {
   // return axios.post(endpoint, { name: name, data: values }, config)
 }
 
-export const fetchReps = (location) => {
+// move to separate folder > politics API
+const fetchReps = (location) => {
   const config = {
     Accept: 'application/json',
     'Content-Type': 'application/json',

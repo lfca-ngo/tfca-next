@@ -6,7 +6,7 @@ import { motion, useTransform, useViewportScroll } from 'framer-motion'
 import React, { useEffect, useState } from 'react'
 import { scroller } from 'react-scroll'
 
-import useAnalytics from '../../../hooks/useAnalytics'
+// import useAnalytics from '../../../hooks/useAnalytics'
 import { useChallenge } from '../../../hooks/useChallenge'
 import { textReveal } from '../../../utils/animations'
 import Progress from './Progress'
@@ -21,7 +21,7 @@ const FAQ = [
 const StickyHeader = () => {
   // const { isMobile } = useIsMobile()
   const isMobile = false // @TODO: remove this line
-  const { trackEvent } = useAnalytics()
+  // const { trackEvent } = useAnalytics()
   const [open, setOpen] = useState(false)
   const { customization, progress, setProgress } = useChallenge()
 
@@ -46,12 +46,12 @@ const StickyHeader = () => {
 
   const handleClick = () => {
     scroller.scrollTo('switch_energy', { offset: -75, smooth: true })
-    trackEvent('start_challenge')
+    // trackEvent('start_challenge')
   }
 
   const toggleMenu = () => {
     setOpen(!open)
-    trackEvent('toggle_faq', { open: !open })
+    // trackEvent('toggle_faq', { open: !open })
   }
 
   const WORDING = customization
