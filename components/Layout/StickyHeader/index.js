@@ -6,10 +6,10 @@ import { motion, useTransform, useViewportScroll } from 'framer-motion'
 import React, { useEffect, useState } from 'react'
 import { scroller } from 'react-scroll'
 
-// import useAnalytics from '../../../hooks/useAnalytics'
 import { useChallenge } from '../../../hooks/useChallenge'
 import { useContent } from '../../../hooks/useTranslation'
 import { textReveal } from '../../../utils/animations'
+import SimpleFooter from '../SimpleFooter'
 import Progress from './Progress'
 
 const { Panel } = Collapse
@@ -149,7 +149,7 @@ const StickyHeader = () => {
           )}
         </motion.div>
 
-        {/* {!isMobile && <SimpleFooter />} */}
+        {!isMobile && <SimpleFooter />}
       </div>
       <Drawer onClose={toggleMenu} placement="left" title="FAQs" visible={open}>
         <Collapse accordion>
