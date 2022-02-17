@@ -36,14 +36,14 @@ const ActionWrapper = (props) => {
       >
         <div className="action-body">
           {React.cloneElement(props.children, {
+            color: props.color,
             expand: expand,
-            isExpanded: isExpanded,
             hideBar: hideBar,
             isBarHidden: isBarHidden,
-            startCounter: startCounter,
+            isExpanded: isExpanded,
             name: props.name,
-            color: props.color,
             setShowConfetti: setShowConfetti,
+            startCounter: startCounter,
           })}
         </div>
         <div className="footer">

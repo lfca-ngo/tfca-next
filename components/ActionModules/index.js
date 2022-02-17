@@ -13,7 +13,7 @@ const ActionModules = ({ actions, openDrawer, statsLabels, usageStats }) => {
         component = <SwitchEnergy key={action.actionId} module={action} />
         break
       default:
-        component = <div />
+        component = <div key={`action-${i}`} />
         break
     }
     const otherUsers = 0 // usageStats[module.actionId] || 0
@@ -30,12 +30,12 @@ const ActionModules = ({ actions, openDrawer, statsLabels, usageStats }) => {
         timeToImplement={action.timeToImplement}
       >
         {React.cloneElement(component, {
-          name: module.name,
-          conversionValue: action.carbonSaved / 1000,
-          timeToImplement: action.timeToImplement,
-          otherUsers: otherUsers,
-          openDrawer: openDrawer,
           color: `color-${(i % 4) + 1}`,
+          conversionValue: action.carbonSaved / 1000,
+          name: module.name,
+          openDrawer: openDrawer,
+          otherUsers: otherUsers,
+          timeToImplement: action.timeToImplement,
         })}
       </ActionWrapper>
     )
