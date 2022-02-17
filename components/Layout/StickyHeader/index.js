@@ -8,6 +8,7 @@ import { scroller } from 'react-scroll'
 
 // import useAnalytics from '../../../hooks/useAnalytics'
 import { useChallenge } from '../../../hooks/useChallenge'
+import { useContent } from '../../../hooks/useTranslation'
 import { textReveal } from '../../../utils/animations'
 import Progress from './Progress'
 

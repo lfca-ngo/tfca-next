@@ -24,5 +24,5 @@ export const TranslationProvider = ({ children, content }) => {
 
 export const useContent = () => {
   const context = useContext(TranslationContext)
-  return context
+  return context.store
 }

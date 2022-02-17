@@ -4,11 +4,9 @@ import React from 'react'
 import SplitLayout from '../components/Layout/SplitLayout'
 import {
   fetchAllActions,
-  fetchAllNavs,
+  fetchAllStaticContent,
   fetchContent,
-  fetchMetaData,
 } from '../services/contentful'
-import { SETTINGS_ID } from '../utils'
 
 const ActionCollection = (props) => {
   console.log(props)
@@ -26,16 +24,12 @@ export async function getStaticProps({ locale, params }) {
   const { slug } = params
 
   const actions = await fetchAllActions(locale, slug)
-  const navs = await fetchAllNavs(locale)
-  const metaData = await fetchMetaData(locale, SETTINGS_ID)
+  const content = await fetchAllStaticContent(locale)
 
   return {
     props: {
       actions: actions,
-      content: {
-        metaData,
-        navs,
-      },
+      content: content,
     },
   }
 }

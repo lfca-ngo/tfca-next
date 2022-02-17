@@ -5,6 +5,7 @@ import {
   AllNavsFragment,
   MetaDataFragment,
 } from '../fragments'
+import { SETTINGS_ID } from '../utils'
 
 // Graphql Layer
 const space = process.env.NEXT_PUBLIC_CF_SPACE_ID
@@ -96,4 +97,20 @@ export const fetchMetaData = async (locale, settingsId) => {
 
   const { settings } = await fetchContent(query, variables)
   return settings
+}
+
+// collector function all contentful queries for the
+// translator provider that is used on every page
+// feeding non page related translations, e.g. navs
+// or meta data
+export const fetchAllStaticContent = async (locale) => {
+  const [navs, metaData] = await Promise.all([
+    fetchAllNavs(locale),
+    fetchMetaData(locale, SETTINGS_ID),
+  ])
+
+  return {
+    metaData,
+    navs,
+  }
 }
