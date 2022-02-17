@@ -1,13 +1,13 @@
 import { gql } from 'graphql-request'
 import React from 'react'
 
-import SplitLayout from '../components/Layout/SplitLayout'
+import SplitLayout from '../../components/Layout/SplitLayout'
 import {
   fetchAllActions,
   fetchAllStaticContent,
   fetchContent,
-} from '../services/contentful'
-import { useSwitchRates } from '../services/switchforclimate'
+} from '../../services/contentful'
+import { useSwitchRates } from '../../services/switchforclimate'
 
 const ActionCollection = (props) => {
   const { data, error, isFetching, status } = useSwitchRates(
@@ -17,7 +17,6 @@ const ActionCollection = (props) => {
     '9900080000007'
   )
 
-  console.log(status, data, error, isFetching)
   return (
     <SplitLayout>
       <h1>Space for actions!</h1>
@@ -38,6 +37,7 @@ export async function getStaticProps({ locale, params }) {
     props: {
       actions: actions,
       content: content,
+      locale,
     },
   }
 }
@@ -53,7 +53,6 @@ export async function getStaticPaths({ locales }) {
     }
   `
   const { actionsLocalCollection } = await fetchContent(query)
-
   const paths = actionsLocalCollection.items.reduce((allPaths, item) => {
     const pagePaths = locales.map((locale) => ({
       locale,
