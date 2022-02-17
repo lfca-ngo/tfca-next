@@ -4,8 +4,8 @@ import Link from 'next/link'
 import React from 'react'
 
 const LINKS = [
-  { title: 'Datenschutz', url: 'privacy' },
-  { title: 'Impressum', url: 'imprint' },
+  { title: 'Datenschutz', url: '/privacy' },
+  { title: 'Impressum', url: '/imprint' },
 ]
 
 const SimpleFooter = (props) => {
