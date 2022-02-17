@@ -10,17 +10,18 @@ import {
 import { useSwitchRates } from '../services/switchforclimate'
 
 const ActionCollection = (props) => {
-  const { data, error, isFetching, status } = useSwitchRates(
-    '12043',
-    'Berlin',
-    2200,
-    '9900080000007'
-  )
+  // const { data, error, isFetching, status } = useSwitchRates(
+  //   '12043',
+  //   'Berlin',
+  //   2200,
+  //   '9900080000007'
+  // )
 
-  console.log(status, data, error, isFetching)
   return (
     <SplitLayout>
-      <h1>Space for actions!</h1>
+      <div style={{ background: 'red', height: '1000px' }}>
+        <h1>Space for actions!</h1>
+      </div>
     </SplitLayout>
   )
 }

@@ -1,12 +1,13 @@
 require('./styles.less')
 
-import { Button } from 'antd'
-import { Collapse, Drawer } from 'antd'
+import { Button, Collapse, Drawer, Typography } from 'antd'
 import { motion, useTransform, useViewportScroll } from 'framer-motion'
 import React, { useEffect, useState } from 'react'
+import { isMobile } from 'react-device-detect'
 import { scroller } from 'react-scroll'
 
 import { useChallenge } from '../../../hooks/useChallenge'
+import useIsClient from '../../../hooks/useIsClient'
 import { useContent } from '../../../hooks/useTranslation'
 import { textReveal } from '../../../utils/animations'
 import SimpleFooter from '../SimpleFooter'
@@ -20,9 +21,9 @@ const FAQ = [
 ]
 
 const StickyHeader = () => {
-  // const { isMobile } = useIsMobile()
-  const isMobile = false // @TODO: remove this line
   // const { trackEvent } = useAnalytics()
+  const { isClient, key } = useIsClient()
+
   const [open, setOpen] = useState(false)
   const { customization, progress, setProgress } = useChallenge()
 
@@ -74,6 +75,8 @@ const StickyHeader = () => {
     : {
         textUp: { y: 200 },
       }
+
+  // if (!isClient) return null
   return (
     <div>
       <motion.div className="header-inner" style={{ background: color }}>
@@ -111,7 +114,7 @@ const StickyHeader = () => {
       <div className={`header-outer`}>
         <div className="placeholder" />
         <motion.div className="content" style={dynamicStyles.opacity}>
-          <h1 className="text-appear-wrapper">
+          <Typography.Title className="text-appear-wrapper">
             <motion.span
               animate="visible"
               initial="hidden"
@@ -119,7 +122,7 @@ const StickyHeader = () => {
             >
               {WORDING.title}
             </motion.span>
-          </h1>
+          </Typography.Title>
           <p className="text-appear-wrapper">
             <motion.span
               animate="visible"
