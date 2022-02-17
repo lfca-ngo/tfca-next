@@ -16,13 +16,13 @@ export default function ShareLandingPage({
   friend1,
   friend2,
   friend3,
+  ogImageUrl,
   self,
-  token,
 }) {
   return (
     <>
       <Head>
-        <meta content={`/api/images/${token}`} property="og:image" />
+        <meta content={ogImageUrl} property="og:image" />
       </Head>
       return (
       <SplitLayout>
@@ -49,10 +49,11 @@ export async function getStaticProps(props) {
 
     return {
       props: {
+        ...parsedToken,
         actions: actions,
         content: content,
         locale,
-        ...parsedToken,
+        ogImageUrl: `${process.env.BASE_URL}/api/images/${token}`,
         token,
       },
     }
