@@ -1,0 +1,47 @@
+@import '../../styles/vars.less';
+@import '../../styles/fonts.less';
+
+.disclosure {
+  section {
+    margin: 0 0 30px;
+    br {
+      content: 'A';
+      display: block;
+      margin-bottom: 1em;
+    }
+  }
+  .actions-wrapper {
+    margin: 20px 0 0;
+  }
+  .actions-container {
+    .action {
+      .icon,
+      .inline {
+        display: inline-block;
+      }
+      .icon {
+        width: 36px;
+        vertical-align: top;
+      }
+      .inline {
+        width: calc(100% - 36px);
+      }
+      .anticon {
+        margin: 0 10px 0 0;
+        svg {
+          width: auto;
+        }
+      }
+    }
+  }
+
+  header {
+    h1 {
+      margin: 20px 0 10px;
+    }
+
+    .logo-wrapper {
+      .logo-circle(90px, @light-grey);
+    }
+  }
+}

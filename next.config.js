@@ -1,16 +1,20 @@
+const withPlugins = require('next-compose-plugins')
 const withAntdLess = require('next-plugin-antd-less')
 
-module.exports = withAntdLess({
-  // Antd config
+const nextConfig = {
+  i18n: {
+    defaultLocale: 'en',
+    localeDetection: false,
+    locales: ['en', 'de', 'tr'],
+  },
+}
+
+const pluginAntdLess = withAntdLess({
   lessVarsFilePath: './styles/ant-default-vars.less',
   lessVarsFilePathAppendToEndOfContent: false,
   nextjs: {
     localIdentNameFollowDev: true,
   },
-
-  // NextJS config
-  reactStrictMode: true,
-
   webpack: (config) => {
     config.module.rules.push({
       issuer: /\.[jt]sx?$/,
@@ -21,3 +25,5 @@ module.exports = withAntdLess({
     return config
   },
 })
+
+module.exports = withPlugins([[pluginAntdLess]], nextConfig)

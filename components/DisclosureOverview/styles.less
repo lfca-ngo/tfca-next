@@ -1,0 +1,112 @@
+@import '../../styles/vars.less';
+@import '../../styles/fonts.less';
+
+.disclosure-overview {
+  background: @white;
+  padding: 0 0 10px;
+  @media (min-width: @screen-md) {
+    padding: 0 60px 10px;
+  }
+  .navigation {
+    padding: 20px 0;
+    h3 {
+      margin: 15px 0 10px;
+      font-size: 24px;
+    }
+  }
+  .disclosure-wrapper {
+    background: @white;
+    margin-top: -10px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 15%);
+    padding: 0 0 30px;
+    @media (min-width: @screen-md) {
+      padding: 0 20px 30px;
+      margin-top: -20px;
+    }
+
+    .overview-wrapper {
+      .actions {
+        white-space: normal;
+      }
+      .disclosure-items {
+        white-space: normal;
+      }
+    }
+  }
+  // used on overview page
+  .ant-list.ant-list-split {
+    .contribution-item {
+      border-bottom: none;
+      display: flex;
+
+      .action-preview {
+        padding: 8px;
+        margin: 0 6px 6px 0;
+        text-align: center;
+        border: 1px solid @light-grey;
+        .mini-title {
+          font-size: 12px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+
+      .ant-tag {
+        padding: 4px 7px;
+        margin-bottom: 8px;
+      }
+
+      // @media (max-width: @screen-md-max) {
+      .ant-card-meta-detail,
+      .ant-card-meta-avatar {
+        width: 100%;
+        display: block;
+        text-align: center;
+        margin: 0;
+      }
+      .ant-card-meta-detail {
+        .ant-card-meta-title .title {
+          display: none;
+        }
+      }
+
+      .ant-card-meta-avatar {
+        border-bottom: 1px solid #f4f4f4;
+        .logo-wrapper {
+          margin: 0 auto;
+          height: 80px;
+        }
+      }
+      // }
+
+      .ant-card-meta-avatar {
+        @media (min-width: @screen-md) {
+          margin-right: 20px;
+        }
+      }
+
+      .preview-images {
+        text-align: right;
+        .ant-image-img {
+          max-width: 140px;
+        }
+      }
+
+      .desc {
+        .title {
+          .font-bold();
+          margin: 10px 0 10px;
+        }
+      }
+
+      .logo-wrapper {
+        .logo-circle(120px, transparent);
+      }
+      .content-wrapper {
+        flex-grow: 1;
+      }
+    }
+  }
+}

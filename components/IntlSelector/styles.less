@@ -1,0 +1,57 @@
+@import '../../styles/vars.less';
+@import '../../styles/fonts.less';
+
+.intl-selector,
+.intl-selector-popover {
+  @icon-width: 30px;
+  @icon-width-sm: 20px;
+  .ant-popover-inner-content {
+    padding: 8px 16px 12px;
+  }
+  .ant-form-item {
+    display: inline-block;
+    margin: 0;
+    &:nth-child(2) {
+      margin-left: 12px;
+    }
+    .ant-form-item-label {
+      margin-bottom: 2px;
+      padding-bottom: 2px;
+      line-height: 1.2;
+      label {
+        font-size: 13px;
+      }
+    }
+  }
+  .ant-select-selection-item {
+    display: flex;
+    align-items: center;
+    .intl-icon-full {
+      margin-right: 8px;
+    }
+  }
+  .intl-icon-full {
+    background-size: cover;
+    width: @icon-width-sm;
+    height: @icon-width-sm;
+    display: inline-block;
+  }
+  .intl-icon {
+    height: @icon-width;
+    .scale-height(@icon-width);
+    .intl-icon-half {
+      background-size: cover;
+      width: @icon-width / 2;
+      height: @icon-width;
+      display: inline-block;
+      .scale-width(@icon-width / 2);
+      .scale-height(@icon-width);
+      &.left {
+        background-position: left;
+      }
+      &.right {
+        background-position: right;
+      }
+    }
+  }
+}
