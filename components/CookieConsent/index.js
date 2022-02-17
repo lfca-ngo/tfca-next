@@ -2,7 +2,6 @@ require('./styles.less')
 
 import { QuestionCircleOutlined } from '@ant-design/icons'
 import Icon from '@ant-design/icons'
-import { useLocation } from '@reach/router' // this helps tracking the location
 import { Button, Popover } from 'antd'
 import { motion } from 'framer-motion'
 // import { initializeAndTrack } from 'gatsby-plugin-gdpr-cookies'
@@ -12,8 +11,8 @@ import { useCookies } from 'react-cookie'
 
 import IconCheck from '../../assets/icons/c-check.svg'
 import IconRemove from '../../assets/icons/c-remove.svg'
+import { useContent } from '../../hooks/useTranslation'
 import { isBrowser, renderAsHtml } from '../../utils'
-// import { useContentfulCookie } from '../../utils/useContentfulCookie'
 
 export const SAME_SITE_OPTIONS = {
   LAX: 'lax',
@@ -35,10 +34,7 @@ const CookieSelector = (props) => {
         />{' '}
         {props.title}
         {props.showInfo && (
-          <Popover
-            content={renderAsHtml(props.infoBox)}
-            overlayClassName={'simple-popover'}
-          >
+          <Popover content={props.infoBox} overlayClassName={'simple-popover'}>
             <QuestionCircleOutlined className="add-info" />
           </Popover>
         )}
@@ -62,8 +58,8 @@ const INITIAL_COOKIE_STATE = {
 }
 
 const CookieConsent = (props) => {
-  // const cookieBanner = useContentfulCookie()
-  const location = useLocation()
+  const cookieBanner = useContent()?.metaData?.cookieBanner
+  console.log(cookieBanner)
   const gaCookieName = 'ga_cookie' // defaultOptions.googleAnalytics.cookieName
   const fbCookieName = 'fb_cookie' // defaultOptions.facebookPixel.cookieName
   const [visible, setVisible] = useState(false)
@@ -80,7 +76,6 @@ const CookieConsent = (props) => {
   useEffect(() => {
     const { debug } = props
 
-    // if cookie undefined or debug
     if (getCookieValue(gaCookieName) === undefined || debug) {
       setTimeout(() => {
         setVisible(true)
@@ -199,10 +194,10 @@ const CookieConsent = (props) => {
       >
         <div className="cookie-content">
           <div className="title">{title}</div>
-          <div className="description">{renderAsHtml(disclaimer)}</div>
+          <div className="description">{disclaimer}</div>
           <div className="consent">
             <ul>
-              {cookieBanner.levels.map((level, i) => {
+              {cookieBanner.levelsCollection?.items.map((level, i) => {
                 return (
                   <CookieSelector
                     disabled={cookiesState[level.key].disabled}
@@ -210,11 +205,7 @@ const CookieConsent = (props) => {
                     isActive={cookiesState[level.key].value}
                     key={`level-${i}`}
                     showInfo={cookiesState[level.key].showInfo}
-                    title={
-                      <div className="text-wrapper">
-                        {level.value.childMarkdownRemark.rawMarkdownBody}
-                      </div>
-                    }
+                    title={<div className="text-wrapper">{level.value}</div>}
                     toggleValue={(checked) =>
                       setCookieState(level.key, checked)
                     }

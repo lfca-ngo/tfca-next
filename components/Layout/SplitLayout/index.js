@@ -1,13 +1,14 @@
 import React from 'react'
 
+import Template from '../'
 import StickyHeader from '../StickyHeader'
 
 const SplitLayout = ({ children }) => {
   return (
-    <div>
+    <Template>
       <StickyHeader />
       {children}
-    </div>
+    </Template>
   )
 }
 

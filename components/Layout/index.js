@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import React, { Fragment } from 'react'
 
+import favicon from '../../public/favicon.ico'
 import CookieConsent from '../CookieConsent'
 
 const Template = ({ children }) => {
@@ -15,12 +16,7 @@ const Template = ({ children }) => {
 
         <div className="siteContent">
           {children}
-          {/* <CookieConsent
-            cookieName={'consentCookieName'}
-            cookieValue={'consentCookieAccept'}
-            declineCookieValue={'consentCookieDeclined'}
-            expires={60}
-          /> */}
+          <CookieConsent expires={60} />
         </div>
       </div>
     </Fragment>
