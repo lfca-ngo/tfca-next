@@ -1,10 +1,10 @@
 require('./styles.less')
 
-import Icon, { QuestionCircleFilled } from '@ant-design/icons'
+import Icon from '@ant-design/icons'
 import React from 'react'
 
 import IconCheck from '../../../assets/icons/g-check.svg'
-import Text from '../../../utils/Text'
+import { Text } from '../../../utils/Text'
 
 const CheckList = ({ data }) => {
   if (!data) return null

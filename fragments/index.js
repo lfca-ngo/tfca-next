@@ -57,9 +57,11 @@ export const ActionFragment = gql`
     }
     blocksCollection(limit: 50) {
       items {
-        key
-        value {
-          json
+        ... on Block {
+          key
+          value {
+            json
+          }
         }
       }
     }

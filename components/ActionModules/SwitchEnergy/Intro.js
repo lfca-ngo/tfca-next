@@ -2,7 +2,7 @@ import { documentToHtmlString } from '@contentful/rich-text-html-renderer'
 import { Button, Col, Row } from 'antd'
 import React from 'react'
 
-import Text from '../../../utils/Text'
+import { Text, text } from '../../../utils/Text'
 import Category from '../Category'
 
 const Intro = (props) => {
@@ -19,9 +19,7 @@ const Intro = (props) => {
   return (
     <div className="step">
       <Category title={props.module.categoryTitle} type={props.name} />
-      <h2>
-        <Text asString block={props.blocks['intro.title']} />
-      </h2>
+      <h2>{text(props.blocks['intro.title'])}</h2>
 
       <Row gutter={12} style={{ marginBottom: '15px' }}>
         <Col md={12} xs={24}>

@@ -7,7 +7,7 @@ import IconFourPeople from '../../../assets/icons/person-four.svg'
 import IconOnePerson from '../../../assets/icons/person-one.svg'
 import IconThreePeople from '../../../assets/icons/person-three.svg'
 import IconTwoPeople from '../../../assets/icons/person-two.svg'
-import Text from '../../../utils/Text'
+import { Text, text } from '../../../utils/Text'
 import CheckList from '../../Elements/CheckList'
 import Category from '../Category'
 
@@ -19,17 +19,17 @@ export const USERS = [
 ]
 
 export const ITEMS = {
-  postcode: () => (
+  postcode: (blocks) => (
     <Form.Item
       name="postcode"
       rules={[
         {
+          message: text(blocks['form.postcode.message']),
           required: true,
-          message: 'Bitte eine PLZ angeben!',
         },
         {
+          message: text(blocks['form.postcode.pattern.message']),
           pattern: new RegExp(/^(?!01000|99999)(0[1-9]\d{3}|[1-9]\d{4})$/g),
-          message: 'Postleitzahl mit 5 Ziffern',
         },
       ]}
     >
@@ -37,16 +37,21 @@ export const ITEMS = {
         className="site-input-right"
         inputMode="numeric"
         pattern="[0-9]*"
-        placeholder="Postleitzahl"
+        placeholder={text(blocks['form.postcode.placeholder'])}
         size="large"
         type="number"
       />
     </Form.Item>
   ),
-  users: () => (
+  users: (blocks) => (
     <Form.Item
       name="users"
-      rules={[{ required: true, message: 'Number of flatmates' }]}
+      rules={[
+        {
+          message: text(blocks['form.users.message']),
+          required: true,
+        },
+      ]}
     >
       <Select
         className="site-input-left"
@@ -65,14 +70,14 @@ export const ITEMS = {
   ),
 }
 
-export const EnergyForm = (props) => {
+export const EnergyForm = ({ blocks, initialValues, onFinish }) => {
   return (
-    <Form initialValues={props.initialValues} onFinish={props.onFinish}>
+    <Form initialValues={initialValues} onFinish={onFinish}>
       <Row className="site-input-group-wrapper form-spacing">
         <Input.Group>
           <Row>
-            <Col xs={isMobile ? 12 : 10}>{ITEMS.users()}</Col>
-            <Col xs={isMobile ? 12 : 14}>{ITEMS.postcode()}</Col>
+            <Col xs={isMobile ? 12 : 10}>{ITEMS.users(blocks)}</Col>
+            <Col xs={isMobile ? 12 : 14}>{ITEMS.postcode(blocks)}</Col>
           </Row>
         </Input.Group>
 
@@ -94,8 +99,6 @@ const Calculate = (props) => {
     props.goTo('results')
   }
 
-  console.log(props.lists)
-
   return (
     <div className="step">
       <Category
@@ -105,9 +108,7 @@ const Calculate = (props) => {
         type={props.name}
       />
 
-      <h2>
-        <Text asString block={props.blocks['calculate.title']} />
-      </h2>
+      <h2>{text(props.blocks['calculate.title'])}</h2>
 
       <CheckList data={props.lists?.benefits} />
 

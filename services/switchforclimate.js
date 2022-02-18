@@ -52,7 +52,11 @@ export const useSwitchRates = (zipCode, city, consumption, operatorId) => {
     zipCode,
   }
 
-  return useQuery('switch_rates', async () => fetchData(query, variables))
+  return useQuery(
+    ['switch_rates', consumption, zipCode, operatorId],
+    async () => fetchData(query, variables),
+    { enabled: !!operatorId }
+  )
 }
 
 export const useOperatorId = (zipCode) => {
@@ -70,7 +74,9 @@ export const useOperatorId = (zipCode) => {
     zipCode,
   }
 
-  return useQuery('locations', async () => fetchData(query, variables))
+  return useQuery(['locations', zipCode], async () =>
+    fetchData(query, variables)
+  )
 }
 
 export const useLocalRate = (zipCode, operatorId) => {
@@ -93,7 +99,9 @@ export const useLocalRate = (zipCode, operatorId) => {
     zipCode,
   }
 
-  return useQuery('localRate', async () => fetchData(query, variables))
+  return useQuery(['localRate', operatorId, zipCode], async () =>
+    fetchData(query, variables)
+  )
 }
 
 export const useLocalRates = (zipCode) => {
@@ -114,7 +122,9 @@ export const useLocalRates = (zipCode) => {
     zipCode,
   }
 
-  return useQuery('localRates', async () => fetchData(query, variables))
+  return useQuery(['localRates', zipCode], async () =>
+    fetchData(query, variables)
+  )
 }
 
 export const useSearchProvider = (searchString) => {
@@ -130,5 +140,7 @@ export const useSearchProvider = (searchString) => {
     searchString,
   }
 
-  return useQuery('providersSearch', async () => fetchData(query, variables))
+  return useQuery(['providersSearch', searchString], async () =>
+    fetchData(query, variables)
+  )
 }
