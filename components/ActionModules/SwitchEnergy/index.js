@@ -63,6 +63,7 @@ const SwitchEnergyFlow = (props) => {
         })}
       </Tabs>
       {/* Sharing Dialog */}
+      {/* This should be generic for all actions */}
       <Modal
         footer={null}
         onCancel={() => setVisible(false)}

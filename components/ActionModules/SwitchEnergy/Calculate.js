@@ -1,22 +1,10 @@
-import Icon from '@ant-design/icons'
 import { Button, Col, Form, Input, Row, Select } from 'antd'
-import React, { useState } from 'react'
+import React from 'react'
 import { isMobile } from 'react-device-detect'
 
-import IconFourPeople from '../../../assets/icons/person-four.svg'
-import IconOnePerson from '../../../assets/icons/person-one.svg'
-import IconThreePeople from '../../../assets/icons/person-three.svg'
-import IconTwoPeople from '../../../assets/icons/person-two.svg'
-import { Text, text } from '../../../utils/Text'
+import { text } from '../../../utils/Text'
 import CheckList from '../../Elements/CheckList'
 import Category from '../Category'
-
-export const USERS = [
-  { title: '1 Pers.', kwh: 1300, icon: <Icon component={IconOnePerson} /> },
-  { title: '2 Pers.', kwh: 2300, icon: <Icon component={IconTwoPeople} /> },
-  { title: '3 Pers.', kwh: 3200, icon: <Icon component={IconThreePeople} /> },
-  { title: '4+ Pers.', kwh: 4000, icon: <Icon component={IconFourPeople} /> },
-]
 
 export const ITEMS = {
   postcode: (blocks) => (
@@ -43,7 +31,7 @@ export const ITEMS = {
       />
     </Form.Item>
   ),
-  users: (blocks) => (
+  users: (blocks, usersInput) => (
     <Form.Item
       name="users"
       rules={[
@@ -58,10 +46,10 @@ export const ITEMS = {
         size="large"
         style={{ width: '100%' }}
       >
-        {USERS.map((user, i) => (
-          <Select.Option key={i} label={user.title} value={user.kwh}>
+        {usersInput.map((user, i) => (
+          <Select.Option key={i} label={user.label} value={user.valueNumber}>
             <div className="option-with-icon">
-              {user.icon} {user.title}
+              <img src={user.icon.url} /> {user.label}
             </div>
           </Select.Option>
         ))}
@@ -70,13 +58,15 @@ export const ITEMS = {
   ),
 }
 
-export const EnergyForm = ({ blocks, initialValues, onFinish }) => {
+export const EnergyForm = ({ blocks, data, initialValues, onFinish }) => {
   return (
     <Form initialValues={initialValues} onFinish={onFinish}>
       <Row className="site-input-group-wrapper form-spacing">
         <Input.Group>
           <Row>
-            <Col xs={isMobile ? 12 : 10}>{ITEMS.users(blocks)}</Col>
+            <Col xs={isMobile ? 12 : 10}>
+              {ITEMS.users(blocks, data?.input_users)}
+            </Col>
             <Col xs={isMobile ? 12 : 14}>{ITEMS.postcode(blocks)}</Col>
           </Row>
         </Input.Group>
@@ -92,7 +82,7 @@ export const EnergyForm = ({ blocks, initialValues, onFinish }) => {
 }
 
 const Calculate = (props) => {
-  const { setStore, store } = props
+  const { data, setStore, store } = props
 
   const handleFinish = (allValues) => {
     setStore({
@@ -119,7 +109,7 @@ const Calculate = (props) => {
 
       <EnergyForm
         {...props}
-        initialValues={{ users: USERS[0].kwh }}
+        initialValues={{ users: data?.input_users[0].valueNumber }}
         onFinish={handleFinish}
       />
     </div>
