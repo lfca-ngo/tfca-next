@@ -31,11 +31,9 @@ export default async function handler(req, res) {
 
     const jpeg = await sharp(svgImage).jpeg().toBuffer()
 
-    // res.writeHead(200, {
-    //   'Cache-Control': 's-maxage=31536000', // 1 year
-    //   'Content-Type': 'image/jpeg',
-    // })
-    res.end(jpeg)
+    res.setHeader('Content-Type', 'image/png')
+    // res.setHeader('Cache-Control', 's-maxage=31536000') // 1 year
+    res.send(jpeg)
   } catch (e) {
     res.status(404).send({ error: 'Not found' })
   }
