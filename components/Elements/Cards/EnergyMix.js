@@ -4,28 +4,28 @@ import React from 'react'
 const EnergyMix = (props) => {
   const data = props.data.map((e) => ({ type: e.source, value: e.percent }))
   const config = {
-    autoFit: false,
-    appendPadding: 0,
-    data,
     angleField: 'value',
+    appendPadding: 0,
+    autoFit: false,
     colorField: 'type',
-    radius: 0.8,
+    data,
     height: 120,
+    interactions: [
+      {
+        enable: false,
+        type: 'legend-filter',
+      },
+    ],
     label: {
-      type: 'inner',
-      offset: '-30%',
       content: null,
+      offset: '-30%',
       style: {
         fontSize: 14,
         textAlign: 'center',
       },
+      type: 'inner',
     },
-    interactions: [
-      {
-        type: 'legend-filter',
-        enable: false,
-      },
-    ],
+    radius: 0.8,
   }
 
   return <Pie {...config} />
