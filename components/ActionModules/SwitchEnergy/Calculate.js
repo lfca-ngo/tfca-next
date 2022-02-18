@@ -1,14 +1,14 @@
 import Icon from '@ant-design/icons'
 import { Button, Col, Form, Input, Row, Select } from 'antd'
 import React, { useState } from 'react'
+import { isMobile } from 'react-device-detect'
 
 import IconFourPeople from '../../../assets/icons/person-four.svg'
 import IconOnePerson from '../../../assets/icons/person-one.svg'
 import IconThreePeople from '../../../assets/icons/person-three.svg'
 import IconTwoPeople from '../../../assets/icons/person-two.svg'
-// import { renderAsHtml } from '../../../utils'
+import Text from '../../../utils/Text'
 import CheckList from '../../Elements/CheckList'
-// import { useIsMobile } from "../../../utils/IsMobileProvider";
 import Category from '../Category'
 
 export const USERS = [
@@ -66,7 +66,6 @@ export const ITEMS = {
 }
 
 export const EnergyForm = (props) => {
-  const { isMobile } = useIsMobile()
   return (
     <Form initialValues={props.initialValues} onFinish={props.onFinish}>
       <Row className="site-input-group-wrapper form-spacing">
@@ -95,6 +94,8 @@ const Calculate = (props) => {
     props.goTo('results')
   }
 
+  console.log(props.lists)
+
   return (
     <div className="step">
       <Category
@@ -104,10 +105,11 @@ const Calculate = (props) => {
         type={props.name}
       />
 
-      <h2>{props.module.stepCalculateTitle}</h2>
-      {/* {renderAsHtml(props.module.stepCalculateText)} */}
+      <h2>
+        <Text asString block={props.blocks['calculate.title']} />
+      </h2>
 
-      <CheckList data={props.module.arguments} />
+      <CheckList data={props.lists?.benefits} />
 
       <EnergyForm
         {...props}

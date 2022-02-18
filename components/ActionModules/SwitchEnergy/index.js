@@ -78,8 +78,6 @@ const steps = {
 }
 
 const SwitchEnergyFlow = (props) => {
-  console.log(props)
-
   const { goTo, index, setVisible, visible } = useFlow({
     name: props.name,
     initial: 'intro',
@@ -113,6 +111,7 @@ const SwitchEnergyFlow = (props) => {
                   expand={props.expand}
                   goTo={goTo}
                   hideBar={props.hideBar}
+                  lists={props.module?.lists || {}}
                   module={props.module}
                   name={props.name}
                   onFinish={handleFinish}
