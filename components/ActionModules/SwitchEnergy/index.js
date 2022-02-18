@@ -78,10 +78,10 @@ const SwitchEnergyFlow = (props) => {
           (noch) nicht zu tun!
         </p>
         <p>
-          Wir bereiten eine große Kampagne für den Earth Day '22 vor und du hast
+          {`Wir bereiten eine große Kampagne für den Earth Day '22 vor und du hast
           uns mit diesem Testlauf sehr geholfen. Einige der Prozesse auf der
           Website laufen noch manuell und einen Ansturm könnten wir aktuell noch
-          nicht handlen.
+          nicht handlen.`}
         </p>
         <h4>Fragen?</h4>
         Schreib uns eine Email an{' '}
