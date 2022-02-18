@@ -59,6 +59,7 @@ export const fetchAllActions = async (locale, slug) => {
   const { actionsLocalCollection } = await fetchContent(query, variables)
   const [actions] = actionsLocalCollection.items
 
+  console.log(actions)
   const transformed = actions?.actionsCollection?.items.map((item) => {
     // transform blocks to key value pairs
     const blocks = item.blocksCollection?.items.reduce((allBlocks, block) => {

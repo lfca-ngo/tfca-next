@@ -38,8 +38,6 @@ const Results = ({
   const [visible, setVisible] = useState(false)
   const [sorting, setSorting] = useState(SORT[0].type)
 
-  // const { trackEvent } = useAnalytics()
-
   const changeSorting = (value) => {
     setSorting(value)
   }
@@ -55,10 +53,14 @@ const Results = ({
   const { city, operators } = data?.locations[0] || {}
   const firstOperatorId = getFirstOperatorId(operators)
 
-  const {
-    data: { switchRates },
-    isLoading: fetchingRates,
-  } = useSwitchRates(postcode, city, energyKwh, firstOperatorId)
+  const { data: rates, isLoading: fetchingRates } = useSwitchRates(
+    postcode,
+    city,
+    energyKwh,
+    firstOperatorId
+  )
+
+  const switchRates = rates?.switchRates
 
   const sortedList = useMemo(() => {
     if (!switchRates) return []
@@ -92,7 +94,7 @@ const Results = ({
         type={name}
       />
       <h2>{text(blocks['results.title'])}</h2>
-      {/* <CheckList data={module.arguments} /> */}
+      <CheckList data={lists.comparison_benefits} />
 
       <Row>
         <Col xs={12}>

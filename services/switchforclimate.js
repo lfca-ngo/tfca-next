@@ -24,8 +24,6 @@ export const fetchData = async (query, variables) => {
 
 // hooks to consume specific data
 export const useSwitchRates = (zipCode, city, consumption, operatorId) => {
-  if (!operatorId) throw new Error('Must include operatorId')
-
   const query = gql`
     ${SwitchRateFragment}
     query (

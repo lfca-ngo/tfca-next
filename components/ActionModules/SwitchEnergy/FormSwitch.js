@@ -17,27 +17,12 @@ import {
 } from 'antd'
 import React, { useEffect, useState } from 'react'
 
-// import useAnalytics from '../../../hooks/useAnalytics'
+import { Text, text } from '../../../utils/Text'
 import CheckList from '../../Elements/CheckList'
 import Category from '../Category'
 
 const { Option } = Select
 const { TabPane } = Tabs
-
-const ARGS_NOW = (name) => [
-  {
-    text: `Nach dem Aufgeben deiner Bestellung erhältst du eine Bestätigung per
-    Email. Dein Vertrag kommt direkt mit dem Provider zu stande. Wir sind
-    nur hier um deinen Umstieg so einfach wie möglich zu machen!`,
-  },
-  {
-    text: `Garantiert keine Extrakosten und keine Doppelzahlungen. Der Provider kümmert sich um die Kündigung deines existierenden Vertrags.`,
-  },
-  {
-    text: `${name} hat bei uns eine Handynummer hinterlegt und bekommt sofort eine
-    Nachricht sobald du die Challenge erfüllt hast! 🚀`,
-  },
-]
 
 const GroupWrapper = (props) => {
   return (
@@ -54,60 +39,36 @@ const GroupWrapper = (props) => {
 }
 
 const ITEMS = {
-  firstname: () => (
-    <Form.Item
-      label="Vorname"
-      name="firstname"
-      rules={[{ required: true, message: 'Bitte gib deinen Vornamen an!' }]}
-    >
-      <Input placeholder="Greta" size="large" />
-    </Form.Item>
-  ),
-  lastname: () => (
-    <Form.Item
-      label="Nachname"
-      name="lastname"
-      rules={[{ required: true, message: 'Bitte gib deinen Nachnamen an!' }]}
-    >
-      <Input placeholder="Thunberg" size="large" />
-    </Form.Item>
-  ),
   address: () => (
     <Form.Item
       label="Straße und Hausnummer"
       name="address"
-      rules={[{ required: true, message: 'Bitte gib deine Adresse an!' }]}
+      rules={[{ message: 'Bitte gib deine Adresse an!', required: true }]}
     >
       <Input placeholder="Auf der Erde 2" size="large" />
     </Form.Item>
   ),
-  postcode: () => (
+  alreadyCancelled: () => (
     <Form.Item
-      label="Postleitzahl"
-      name="postcode"
-      rules={[{ required: true, message: 'Wie lautet deine Postleitzahl?' }]}
+      initialValue={false}
+      label="Hast du deinen Vertrag schon gekündigt?"
+      name="alreadyCancelled"
+      rules={[{ message: 'Please input your username!', required: true }]}
     >
-      <Input placeholder="12099" size="large" />
+      <Select size="large">
+        <Option value={false}>Nein, noch nicht</Option>
+        <Option value={true}>Ja, habe ich schon</Option>
+      </Select>
     </Form.Item>
   ),
+
   city: () => (
     <Form.Item
       label="Stadt"
       name="city"
-      rules={[{ required: true, message: 'Bitte gib deine Stadt an!' }]}
+      rules={[{ message: 'Bitte gib deine Stadt an!', required: true }]}
     >
       <Input placeholder="Paris" size="large" />
-    </Form.Item>
-  ),
-  email: () => (
-    <Form.Item
-      label="Email"
-      name="email"
-      rules={[
-        { type: 'email', required: true, message: 'Gib deine Email an!' },
-      ]}
-    >
-      <Input placeholder="greta.thunberg@earth.io" size="large" />
     </Form.Item>
   ),
   confirmEmail: () => (
@@ -116,7 +77,7 @@ const ITEMS = {
       label="Bestätige deine Email"
       name="confirmEmail"
       rules={[
-        { type: 'email', required: true, message: 'Wiederhole deine Email!' },
+        { message: 'Wiederhole deine Email!', required: true, type: 'email' },
         ({ getFieldValue }) => ({
           validator(_, value) {
             if (!value || getFieldValue('email') === value) {
@@ -130,15 +91,6 @@ const ITEMS = {
       ]}
     >
       <Input placeholder="greta.thunberg@earth.io" size="large" />
-    </Form.Item>
-  ),
-  provider: () => (
-    <Form.Item
-      label="Name deines aktuellen Providers"
-      name="provider"
-      rules={[{ required: true, message: 'Please input your username!' }]}
-    >
-      <Input placeholder="Vattenfall" size="large" />
     </Form.Item>
   ),
   counterId: () => (
@@ -156,7 +108,7 @@ const ITEMS = {
         </div>
       }
       name="counterId"
-      rules={[{ required: true, message: 'Please input your username!' }]}
+      rules={[{ message: 'Please input your username!', required: true }]}
     >
       <Input
         inputMode="numeric"
@@ -167,26 +119,60 @@ const ITEMS = {
       />
     </Form.Item>
   ),
+  email: () => (
+    <Form.Item
+      label="Email"
+      name="email"
+      rules={[
+        { message: 'Gib deine Email an!', required: true, type: 'email' },
+      ]}
+    >
+      <Input placeholder="greta.thunberg@earth.io" size="large" />
+    </Form.Item>
+  ),
+  firstname: () => (
+    <Form.Item
+      label="Vorname"
+      name="firstname"
+      rules={[{ message: 'Bitte gib deinen Vornamen an!', required: true }]}
+    >
+      <Input placeholder="Greta" size="large" />
+    </Form.Item>
+  ),
   iban: () => (
     <Form.Item
       label="IBAN"
       name="iban"
-      rules={[{ required: true, message: 'Please input your username!' }]}
+      rules={[{ message: 'Please input your username!', required: true }]}
     >
       <Input placeholder="DE12872220001222" size="large" />
     </Form.Item>
   ),
-  alreadyCancelled: () => (
+  lastname: () => (
     <Form.Item
-      initialValue={false}
-      label="Hast du deinen Vertrag schon gekündigt?"
-      name="alreadyCancelled"
-      rules={[{ required: true, message: 'Please input your username!' }]}
+      label="Nachname"
+      name="lastname"
+      rules={[{ message: 'Bitte gib deinen Nachnamen an!', required: true }]}
     >
-      <Select size="large">
-        <Option value={false}>Nein, noch nicht</Option>
-        <Option value={true}>Ja, habe ich schon</Option>
-      </Select>
+      <Input placeholder="Thunberg" size="large" />
+    </Form.Item>
+  ),
+  postcode: () => (
+    <Form.Item
+      label="Postleitzahl"
+      name="postcode"
+      rules={[{ message: 'Wie lautet deine Postleitzahl?', required: true }]}
+    >
+      <Input placeholder="12099" size="large" />
+    </Form.Item>
+  ),
+  provider: () => (
+    <Form.Item
+      label="Name deines aktuellen Providers"
+      name="provider"
+      rules={[{ message: 'Please input your username!', required: true }]}
+    >
+      <Input placeholder="Vattenfall" size="large" />
     </Form.Item>
   ),
 }
@@ -226,11 +212,11 @@ const EmailReminder = (props) => {
 const FormSwitch = (props) => {
   const [visible, setVisible] = useState(false)
   const [loading, setLoading] = useState(false)
-  const { trackEvent } = useAnalytics()
+  // const { trackEvent } = useAnalytics()
   const [form] = Form.useForm()
   const onFinish = async (values) => {
     setLoading(true)
-    const res = await trackEvent('form_submit', values)
+    const res = { status: 200 } // await trackEvent('form_submit', values)
     setLoading(false)
     if (res?.status === 200) {
       props.goTo('success', { smooth: true })
@@ -249,7 +235,7 @@ const FormSwitch = (props) => {
       />
       <h2>Eine sehr gute Wahl. Du hast es fast geschafft!</h2>
       {/* {renderAsHtml(props.module.stepAlreadyDoneText)} */}
-      <CheckList data={ARGS_NOW(props.customization?.from)} />
+      {/* <CheckList data={ARGS_NOW(props.customization?.from)} /> */}
 
       <div style={{ fontSize: '16px' }}>
         Gerade keine Zeit? Wir senden dir eine{' '}

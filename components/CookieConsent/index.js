@@ -123,7 +123,7 @@ const CookieConsent = (props) => {
     const expiresFromNow = new Date(new Date().valueOf() + expiresDays)
     let { cookieSecurity } = props
 
-    if (cookieSecurity === undefined && isBrowser()) {
+    if (cookieSecurity === undefined && isBrowser) {
       cookieSecurity = window.location
         ? window.location.protocol === 'https:'
         : true
