@@ -3,10 +3,10 @@ import React, { createContext, useContext, useEffect, useState } from 'react'
 export const ChallengeContext = createContext(null)
 
 // Provider to share all challenge specific data
-// passed via URL params, and made available to
+// passed via URL params or share token, and made available to
 // all components in the app
 
-export const ChallengeProvider = ({ children, customization }) => {
+export const ChallengeProvider = ({ children, customization = null }) => {
   const [progress, setProgress] = useState(0)
 
   return (
