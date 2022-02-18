@@ -7,6 +7,15 @@ const nextConfig = {
     localeDetection: false,
     locales: ['en', 'de', 'tr'],
   },
+  async redirects() {
+    return [
+      {
+        destination: '/int',
+        permanent: true,
+        source: '/',
+      },
+    ]
+  },
 }
 
 const pluginAntdLess = withAntdLess({
