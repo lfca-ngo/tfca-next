@@ -1,25 +1,20 @@
 import { gql } from 'graphql-request'
 import React from 'react'
 
-import SplitLayout from '../../components/Layout/SplitLayout'
+import ActionModules from '../components/ActionModules'
+import SplitLayout from '../components/Layout/SplitLayout'
 import {
   fetchAllActions,
   fetchAllStaticContent,
   fetchContent,
-} from '../../services/contentful'
-import { useSwitchRates } from '../../services/switchforclimate'
+} from '../services/contentful'
 
 export default function ActionCollectionPage(props) {
-  const { data, error, isFetching, status } = useSwitchRates(
-    '12043',
-    'Berlin',
-    2200,
-    '9900080000007'
-  )
+  const { actions } = props
 
   return (
     <SplitLayout>
-      <h1>Space for actions!</h1>
+      <ActionModules actions={actions} />
     </SplitLayout>
   )
 }
