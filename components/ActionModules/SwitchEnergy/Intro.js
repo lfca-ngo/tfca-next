@@ -18,7 +18,10 @@ const Intro = (props) => {
 
   return (
     <div className="step">
-      <Category title={props.module.categoryTitle} type={props.name} />
+      <Category
+        title={text(props.blocks['category.title'])}
+        type={props.name}
+      />
       <h2>{text(props.blocks['intro.title'])}</h2>
 
       <Row gutter={12} style={{ marginBottom: '15px' }}>

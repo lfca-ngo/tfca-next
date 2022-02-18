@@ -2,7 +2,7 @@ import { FileDoneOutlined, LoadingOutlined } from '@ant-design/icons'
 import { Alert, Button, ConfigProvider, Form, Select } from 'antd'
 import React, { useEffect, useState } from 'react'
 
-// import { renderAsHtml } from '../../../utils'
+import { Text, text } from '../../../utils/Text'
 import Category from '../Category'
 
 const { Option } = Select
@@ -97,7 +97,7 @@ const CheckProvider = (props) => {
       <Category
         goBack
         prev={() => props.goTo('intro')}
-        title={props.module.categoryTitle}
+        title={text(props.blocks['category.title'])}
         type={props.name}
       />
       <h2>{`Wunderbar!  Überprüfe deinen Provider um die Challenge abzuschließen`}</h2>

@@ -2,6 +2,8 @@ import { GlobalOutlined, HeartOutlined, RiseOutlined } from '@ant-design/icons'
 import { Button, Form, Input, List, Select } from 'antd'
 import React, { useEffect, useState } from 'react'
 
+import { useConfetti } from '../../../hooks/useChallenge'
+import { text } from '../../../utils/Text'
 // import useAnalytics from '../../../hooks/useAnalytics'
 import Category from '../Category'
 
@@ -24,12 +26,11 @@ const ARGS = [
 
 const Success = (props) => {
   // const { trackEvent } = useAnalytics()
+  const fireConfetti = useConfetti()
 
   useEffect(() => {
     props.setProgress(1)
-    props.setShowConfetti(true)
-    let timer = setTimeout(() => props.setShowConfetti(false), 3500)
-    return () => clearTimeout(timer)
+    fireConfetti()
   }, [])
 
   const handleFinish = (values) => {
@@ -45,7 +46,10 @@ const Success = (props) => {
 
   return (
     <div className="step">
-      <Category title={props.module.categoryTitle} type={props.name} />
+      <Category
+        title={text(props.blocks['category.title'])}
+        type={props.name}
+      />
       <h2>
         High five! Planet Erde sagt Danke. Nominiere 3 Freunde und verdreifache
         deinen Impact!

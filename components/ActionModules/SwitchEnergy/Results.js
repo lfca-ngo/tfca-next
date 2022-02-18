@@ -28,7 +28,6 @@ const Results = ({
   energyKwh,
   goTo,
   lists,
-  module,
   name,
   postcode,
   setEnergyKwh,

@@ -104,7 +104,7 @@ const Calculate = (props) => {
       <Category
         goBack
         prev={() => props.goTo('intro')}
-        title={props.module.categoryTitle}
+        title={text(props.blocks['category.title'])}
         type={props.name}
       />
 
