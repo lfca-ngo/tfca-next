@@ -1,8 +1,3 @@
-/**
- * Use this token for testing:
- * eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmllbmQxIjp7ImNoYWxsZW5nZSI6IkVuZXJneSIsIm5hbWUiOiJUaW1vIn0sImZyaWVuZDIiOnsiY2hhbGxlbmdlIjoiRW5lcmd5IiwibmFtZSI6IkFubmEifSwiZnJpZW5kMyI6eyJjaGFsbGVuZ2UiOiJFbmVyZ3kiLCJuYW1lIjoiU2FyYWgifSwic2VsZiI6eyJjaGFsbGVuZ2UiOiJFb2xpdGljcyIsIm5hbWUiOiJEYXZpZCJ9LCJpYXQiOjE2NDUwMTcyNjF9.bsqW3ZYhAs7qx3vc8l4czrqC2pQ1s93ObbsqdR47jZ0
- */
-
 import jwt from 'jsonwebtoken'
 import path from 'path'
 import sharp from 'sharp'
@@ -36,11 +31,9 @@ export default async function handler(req, res) {
 
     const jpeg = await sharp(svgImage).jpeg().toBuffer()
 
-    // res.writeHead(200, {
-    //   'Cache-Control': 's-maxage=31536000', // 1 year
-    //   'Content-Type': 'image/jpeg',
-    // })
-    res.end(jpeg)
+    res.setHeader('Content-Type', 'image/png')
+    // res.setHeader('Cache-Control', 's-maxage=31536000') // 1 year
+    res.send(jpeg)
   } catch (e) {
     res.status(404).send({ error: 'Not found' })
   }

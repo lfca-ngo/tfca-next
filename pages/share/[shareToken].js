@@ -1,22 +1,30 @@
-/**
- * Use this token for testing:
- * eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmllbmQxIjp7ImNoYWxsZW5nZSI6IkVuZXJneSIsIm5hbWUiOiJUaW1vIn0sImZyaWVuZDIiOnsiY2hhbGxlbmdlIjoiRW5lcmd5IiwibmFtZSI6IkFubmEifSwiZnJpZW5kMyI6eyJjaGFsbGVuZ2UiOiJFbmVyZ3kiLCJuYW1lIjoiU2FyYWgifSwic2VsZiI6eyJjaGFsbGVuZ2UiOiJFb2xpdGljcyIsIm5hbWUiOiJEYXZpZCJ9LCJpYXQiOjE2NDUwMTcyNjF9.bsqW3ZYhAs7qx3vc8l4czrqC2pQ1s93ObbsqdR47jZ0
- */
-
-import { Card, Space, Tabs, Typography } from 'antd'
+import { Button, Card, Space, Tabs, Typography } from 'antd'
 import jwt from 'jsonwebtoken'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 import React from 'react'
 
 const { Text, Title } = Typography
 
 const { TabPane } = Tabs
 
-export default function Share({ friend1, friend2, friend3, self, token }) {
+export default function SharePage({
+  friend1,
+  friend2,
+  friend3,
+  self,
+  shareToken,
+}) {
+  const { isFallback } = useRouter()
+
+  if (isFallback) {
+    return <h1>Generating...</h1>
+  }
+
   return (
     <Card style={{ width: 400 }}>
       <Space direction="vertical">
-        <Title level={2}>Ready! Invite your friends</Title>
+        <Title level={2}>{`Ready ${self.name}! Invite your friends`}</Title>
 
         <Tabs defaultActiveKey="1" style={{ width: 300 }}>
           <TabPane key="1" tab="Multi-Invite">
@@ -30,7 +38,7 @@ export default function Share({ friend1, friend2, friend3, self, token }) {
             <Image
               alt="TFCA share"
               height={166}
-              src={`/api/images/${token}`}
+              src={`/api/images/${shareToken}`}
               width={300}
             />
           </TabPane>
@@ -45,6 +53,13 @@ export default function Share({ friend1, friend2, friend3, self, token }) {
             TBD.
           </TabPane>
         </Tabs>
+        <Button
+          onClick={() => {
+            window.open(`/de/new/invite/${shareToken}`, '_blank')
+          }}
+        >
+          Open shareable link in a new tab
+        </Button>
       </Space>
     </Card>
   )
@@ -52,12 +67,15 @@ export default function Share({ friend1, friend2, friend3, self, token }) {
 
 export async function getStaticProps({ params }) {
   try {
-    const token = params.token
-    const parsedToken = jwt.verify(token, process.env.JWT_TOKEN_PRIVATE_KEY)
+    const { shareToken } = params
+    const parsedToken = jwt.verify(
+      shareToken,
+      process.env.JWT_TOKEN_PRIVATE_KEY
+    )
     return {
       props: {
         ...parsedToken,
-        token,
+        shareToken,
       },
     }
   } catch (e) {
@@ -68,5 +86,5 @@ export async function getStaticProps({ params }) {
 }
 
 export async function getStaticPaths() {
-  return { fallback: 'blocking', paths: [] }
+  return { fallback: true, paths: [] }
 }

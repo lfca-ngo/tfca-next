@@ -7,6 +7,30 @@ const nextConfig = {
     localeDetection: false,
     locales: ['en', 'de', 'tr'],
   },
+  async redirects() {
+    /**
+     * TODO:
+     * - change default actionCollection from `new` to `int` once content is ready
+     * - change permanent redirect from `false` to `true`
+     */
+    return [
+      {
+        destination: '/new',
+        permanent: false,
+        source: '/',
+      },
+      {
+        destination: '/new/supporter/:companySlug',
+        permanent: false,
+        source: '/supporter/:companySlug',
+      },
+      {
+        destination: '/new/invite/:shareToken',
+        permanent: false,
+        source: '/invite/:shareToken',
+      },
+    ]
+  },
 }
 
 const pluginAntdLess = withAntdLess({
