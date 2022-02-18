@@ -8,7 +8,13 @@ const { Text, Title } = Typography
 
 const { TabPane } = Tabs
 
-export default function Share({ friend1, friend2, friend3, self, shareToken }) {
+export default function SharePage({
+  friend1,
+  friend2,
+  friend3,
+  self,
+  shareToken,
+}) {
   const { isFallback } = useRouter()
 
   if (isFallback) {
