@@ -1,7 +1,8 @@
+import { documentToHtmlString } from '@contentful/rich-text-html-renderer'
 import { Button, Col, Row } from 'antd'
 import React from 'react'
 
-// import { commentToHtml, renderAsHtml } from '../../../utils'
+import Text from '../../../utils/Text'
 import Category from '../Category'
 
 const Intro = (props) => {
@@ -18,11 +19,14 @@ const Intro = (props) => {
   return (
     <div className="step">
       <Category title={props.module.categoryTitle} type={props.name} />
-      <h2>{props.module.stepIntroTitle}</h2>
+      <h2>
+        <Text asString block={props.blocks['intro.title']} />
+      </h2>
+
       <Row gutter={12} style={{ marginBottom: '15px' }}>
         <Col md={12} xs={24}>
           <Button block onClick={handleNext} size="large" type="primary">
-            {props.module.stepIntroButtonPrimary}
+            <Text asString block={props.blocks['intro.button.primary']} />
           </Button>
         </Col>
         <Col md={12} xs={24}>
@@ -33,14 +37,15 @@ const Intro = (props) => {
             size="large"
             type="primary"
           >
-            {props.module.stepIntroButtonSecondary}
+            <Text asString block={props.blocks['intro.button.secondary']} />
           </Button>
         </Col>
       </Row>
 
       <Row>
-        <Col xs={24}>jo</Col>
-        {/* {renderAsHtml(props.module.stepIntroHint)} */}
+        <Col xs={24}>
+          <Text block={props.blocks['intro.hint']} />
+        </Col>
       </Row>
     </div>
   )

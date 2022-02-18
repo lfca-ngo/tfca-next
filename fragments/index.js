@@ -42,9 +42,14 @@ export const ActionFragment = gql`
         listId
         itemsCollection(limit: 5) {
           items {
-            key
-            value {
-              json
+            ... on Block {
+              key
+              value {
+                json
+              }
+            }
+            ... on DataPoint {
+              key
             }
           }
         }

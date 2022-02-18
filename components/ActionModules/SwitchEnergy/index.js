@@ -107,6 +107,7 @@ const SwitchEnergyFlow = (props) => {
             return (
               <TabPane key={key} tab={`${props.name}`}>
                 <Page
+                  blocks={props.module?.blocks || {}}
                   customization={customization}
                   energyKwh={energyKwh}
                   expand={props.expand}
