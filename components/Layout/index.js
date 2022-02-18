@@ -1,7 +1,6 @@
 import Head from 'next/head'
 import React, { Fragment } from 'react'
 
-import favicon from '../../public/favicon.ico'
 import CookieConsent from '../CookieConsent'
 
 const Template = ({ children }) => {
@@ -11,7 +10,7 @@ const Template = ({ children }) => {
         <Head>
           <title>TFCA</title>
           <meta charSet="utf-8" />
-          <link href={favicon} rel="icon" />
+          <link href="/favicon.ico" rel="icon" />
         </Head>
 
         <div className="siteContent">

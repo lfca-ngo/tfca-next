@@ -35,24 +35,31 @@ export async function getStaticProps({ locale, params }) {
 }
 
 export async function getStaticPaths({ locales }) {
-  const query = gql`
-    query {
-      actionsLocalCollection(limit: 50) {
-        items {
-          slug
-        }
-      }
-    }
-  `
-  const { actionsLocalCollection } = await fetchContent(query)
-  const paths = actionsLocalCollection.items.reduce((allPaths, item) => {
-    const pagePaths = locales.map((locale) => ({
-      locale,
-      params: { actionCollectionSlug: item.slug },
-    }))
+  // TODO: Uncomment and use remote collections
+  // const query = gql`
+  //   query {
+  //     actionsLocalCollection(limit: 50) {
+  //       items {
+  //         slug
+  //       }
+  //     }
+  //   }
+  // `
+  // const { actionsLocalCollection } = await fetchContent(query)
+  // const paths = actionsLocalCollection.items.reduce((allPaths, item) => {
+  //   const pagePaths = locales.map((locale) => ({
+  //     locale,
+  //     params: { actionCollectionSlug: item.slug },
+  //   }))
 
-    return [...allPaths, ...pagePaths]
-  }, [])
+  //   return [...allPaths, ...pagePaths]
+  // }, [])
+
+  const paths = [
+    { locale: 'en', params: { actionCollectionSlug: 'new' } },
+    { locale: 'de', params: { actionCollectionSlug: 'new' } },
+    { locale: 'tr', params: { actionCollectionSlug: 'new' } },
+  ]
 
   return {
     fallback: false,
