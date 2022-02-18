@@ -1,6 +1,6 @@
 import { EditOutlined, LoadingOutlined } from '@ant-design/icons'
 import { Button, Col, List, Modal, Row, Select, Space } from 'antd'
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useMemo, useState } from 'react'
 
 import RobinIcon from '../../../assets/icons/robin.svg'
 import {
@@ -25,14 +25,12 @@ export const getFullPrice = (item, kwh) =>
 
 const Results = ({
   blocks,
-  energyKwh,
   goTo,
   lists,
   name,
-  postcode,
-  setEnergyKwh,
-  setPostcode,
   setProgress,
+  setStore,
+  store,
 }) => {
   const [visible, setVisible] = useState(false)
   const [sorting, setSorting] = useState(SORT[0].type)
@@ -43,19 +41,21 @@ const Results = ({
 
   const updateProviders = (values) => {
     setVisible(false)
-    setPostcode(values.postcode)
-    setEnergyKwh(values.users)
+    setStore({
+      postcode: values.postcode,
+      users: values.users,
+    })
   }
 
   const getFirstOperatorId = (o) => (o ? Object.keys(o)[0] : null)
-  const { data, isLoading: fetchingOperators } = useOperatorId(postcode)
+  const { data, isLoading: fetchingOperators } = useOperatorId(store?.postcode)
   const { city, operators } = data?.locations[0] || {}
   const firstOperatorId = getFirstOperatorId(operators)
 
   const { data: rates, isLoading: fetchingRates } = useSwitchRates(
-    postcode,
+    store?.postcode,
     city,
-    energyKwh,
+    store?.users,
     firstOperatorId
   )
 
@@ -65,8 +65,8 @@ const Results = ({
     if (!switchRates) return []
     if (sorting === 'price') {
       return switchRates.sort((a, b) => {
-        const priceA = getFullPrice(a, energyKwh)
-        const priceB = getFullPrice(b, energyKwh)
+        const priceA = getFullPrice(a, store?.users)
+        const priceB = getFullPrice(b, store?.users)
         return priceA - priceB
       })
     } else {
@@ -76,7 +76,7 @@ const Results = ({
           a.rating.contributionByConsumption
       )
     }
-  }, [sorting, energyKwh, switchRates])
+  }, [sorting, store?.users, switchRates])
 
   const loading = fetchingOperators || fetchingRates
 
@@ -120,7 +120,7 @@ const Results = ({
         loading={loading}
         renderItem={(item, i) => (
           <ProviderCard
-            energyKwh={energyKwh}
+            energyKwh={store?.users}
             item={item}
             key={`card-${i}`}
             next={() => {
@@ -134,7 +134,7 @@ const Results = ({
       <Modal footer={null} onCancel={() => setVisible(false)} visible={visible}>
         <EnergyForm
           blocks={blocks}
-          initialValues={{ postcode: postcode, users: energyKwh }}
+          initialValues={{ postcode: store?.postcode, users: store?.users }}
           onFinish={updateProviders}
         />
       </Modal>

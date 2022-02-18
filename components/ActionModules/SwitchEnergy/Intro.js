@@ -1,4 +1,3 @@
-import { documentToHtmlString } from '@contentful/rich-text-html-renderer'
 import { Button, Col, Row } from 'antd'
 import React from 'react'
 
@@ -7,7 +6,6 @@ import Category from '../Category'
 
 const Intro = (props) => {
   const handleNext = () => {
-    props.startCounter()
     props.setProgress(0.3)
     props.goTo('calculate', { smooth: true })
   }

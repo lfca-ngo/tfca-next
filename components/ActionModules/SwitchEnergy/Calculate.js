@@ -92,9 +92,14 @@ export const EnergyForm = ({ blocks, initialValues, onFinish }) => {
 }
 
 const Calculate = (props) => {
+  const { setStore, store } = props
+
   const handleFinish = (allValues) => {
-    props.setPostcode(allValues.postcode)
-    props.setEnergyKwh(allValues.users)
+    setStore({
+      postcode: allValues.postcode,
+      users: allValues.users,
+    })
+
     props.setProgress(0.5)
     props.goTo('results')
   }

@@ -37,10 +37,10 @@ export const ActionFragment = gql`
     actionId
     carbonSaved
     timeToImplement
-    dataCollection(limit: 5) {
+    dataCollection(limit: 3) {
       items {
         listId
-        itemsCollection(limit: 5) {
+        itemsCollection(limit: 10) {
           items {
             ... on Input {
               key
@@ -71,7 +71,7 @@ export const ActionFragment = gql`
         }
       }
     }
-    blocksCollection(limit: 50) {
+    blocksCollection(limit: 30) {
       items {
         ... on Block {
           key
