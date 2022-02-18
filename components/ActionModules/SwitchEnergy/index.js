@@ -17,16 +17,16 @@ const { TabPane } = Tabs
 
 const ARGS_NOW = (name) => [
   {
-    text: `Dir ist der Klimawandel nicht egal, sonst hätte ${name} dich gar nicht eingeladen. Mit deinem Wechsel sparst du jährlich über eine Tonne CO2 und bringst die Energiewende wirklich voran`,
     icon: iconWorld,
+    text: `Dir ist der Klimawandel nicht egal, sonst hätte ${name} dich gar nicht eingeladen. Mit deinem Wechsel sparst du jährlich über eine Tonne CO2 und bringst die Energiewende wirklich voran`,
   },
   {
-    text: 'Wir haben alle deutschen Energieprovider mit 100% EE zusammengebracht, du bekommst also garantiert das beste Angebot und kannst direkt hier in der App wechseln',
     icon: iconVerified,
+    text: 'Wir haben alle deutschen Energieprovider mit 100% EE zusammengebracht, du bekommst also garantiert das beste Angebot und kannst direkt hier in der App wechseln',
   },
   {
-    text: 'Wenn du jetzt und hier wechselst, fließt die volle Provision (30€) noch zusätzlich in den Klimaschutz. Wenn nicht jetzt, wann dann?',
     icon: iconEuro,
+    text: 'Wenn du jetzt und hier wechselst, fließt die volle Provision (30€) noch zusätzlich in den Klimaschutz. Wenn nicht jetzt, wann dann?',
   },
 ]
 
@@ -50,6 +50,15 @@ const ARGS_CALC = [
 ]
 
 const steps = {
+  calculate: (props) => {
+    let { customization, module, ...rest } = props
+    module.stepCalculateTitle =
+      'Super, jetzt ist der perfekte Zeitpunkt zu wechseln! Warum?'
+    module.arguments = ARGS_NOW(customization?.from)
+    return <Calculate {...rest} module={module} />
+  },
+  check: (props) => <CheckProvider {...props} />,
+  form: (props) => <FormSwitch {...props} />,
   intro: (props) => {
     let { customization, module, ...rest } = props
     module.stepIntroTitle = `${customization?.from} möchte wissen ob du für deinen Haushalt schon 100% Ökostrom nutzt?`
@@ -59,28 +68,19 @@ const steps = {
       'Fast 70% der deutschen Haushalte beziehen Strom bei ihrem Grundversorger und unterstützen damit oft unwissentlich Kohle & co. Dabei ist wechseln heute so leicht. Probier’s aus!'
     return <Intro {...rest} module={module} />
   },
-  calculate: (props) => {
-    let { customization, module, ...rest } = props
-    module.stepCalculateTitle =
-      'Super, jetzt ist der perfekte Zeitpunkt zu wechseln! Warum?'
-    module.arguments = ARGS_NOW(customization?.from)
-    return <Calculate {...rest} module={module} />
-  },
   results: (props) => {
     let { module, ...rest } = props
     module.stepResultsTitle = 'Wunderbar! Hier sind alle Anbieter im Überblick'
     module.arguments = ARGS_CALC
     return <Results {...rest} module={module} />
   },
-  form: (props) => <FormSwitch {...props} />,
   success: (props) => <Success {...props} />,
-  check: (props) => <CheckProvider {...props} />,
 }
 
 const SwitchEnergyFlow = (props) => {
   const { goTo, index, setVisible, visible } = useFlow({
-    name: props.name,
     initial: 'intro',
+    name: props.name,
   })
 
   const [postcode, setPostcode] = useState()
@@ -143,9 +143,9 @@ const SwitchEnergyFlow = (props) => {
             dich das (noch) nicht zu tun!
           </p>
           <p>
-            Wir bereiten eine große Kampagne für den Earth Day '22 vor und du
-            hast uns mit diesem Testlauf sehr geholfen. Einige der Prozesse auf
-            der Website laufen noch manuell und einen Ansturm könnten wir
+            Wir bereiten eine große Kampagne für den Earth Day &apos;22 vor und
+            du hast uns mit diesem Testlauf sehr geholfen. Einige der Prozesse
+            auf der Website laufen noch manuell und einen Ansturm könnten wir
             aktuell noch nicht handlen.
           </p>
           <h4>Fragen?</h4>

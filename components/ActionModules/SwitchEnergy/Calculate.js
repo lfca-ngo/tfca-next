@@ -12,10 +12,10 @@ import CheckList from '../../Elements/CheckList'
 import Category from '../Category'
 
 export const USERS = [
-  { title: '1 Pers.', kwh: 1300, icon: <Icon component={IconOnePerson} /> },
-  { title: '2 Pers.', kwh: 2300, icon: <Icon component={IconTwoPeople} /> },
-  { title: '3 Pers.', kwh: 3200, icon: <Icon component={IconThreePeople} /> },
-  { title: '4+ Pers.', kwh: 4000, icon: <Icon component={IconFourPeople} /> },
+  { icon: <Icon component={IconOnePerson} />, kwh: 1300, title: '1 Pers.' },
+  { icon: <Icon component={IconTwoPeople} />, kwh: 2300, title: '2 Pers.' },
+  { icon: <Icon component={IconThreePeople} />, kwh: 3200, title: '3 Pers.' },
+  { icon: <Icon component={IconFourPeople} />, kwh: 4000, title: '4+ Pers.' },
 ]
 
 export const ITEMS = {

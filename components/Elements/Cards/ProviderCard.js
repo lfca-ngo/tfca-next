@@ -25,9 +25,9 @@ const { TabPane } = Tabs
 const IMG_BASE_URL = process.env.NEXT_PUBLIC_SWITCH_CLIMATE_IMG_URL
 
 const INTL_UNIT = {
-  weeks: 'Wochen',
-  months: 'Monate',
   days: 'Tage',
+  months: 'Monate',
+  weeks: 'Wochen',
   years: 'Jahre',
 }
 
@@ -158,8 +158,8 @@ const ProviderCard = ({ energyKwh, item, next }) => {
 
           <Col
             xs={{
-              span: 12,
               offset: 0,
+              span: 12,
             }}
           >
             <div className="actions">

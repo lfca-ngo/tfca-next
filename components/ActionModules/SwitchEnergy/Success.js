@@ -66,8 +66,8 @@ const Success = (props) => {
           name="invitee1"
           rules={[
             {
-              required: true,
               message: 'Bitte lade mindestens eine Person ein',
+              required: true,
             },
           ]}
         >

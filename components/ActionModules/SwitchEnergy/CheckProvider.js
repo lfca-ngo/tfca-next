@@ -26,7 +26,12 @@ const GREEN = [
 ]
 
 const customizeRenderEmpty = () => (
-  <div style={{ textAlign: 'center', margin: '20px 0' }}>
+  <div
+    style={{
+      margin: '20px 0',
+      textAlign: 'center',
+    }}
+  >
     <FileDoneOutlined style={{ fontSize: 32, marginBottom: '20px' }} />
     <p>Du findest den Namen deines Providers z.B. auf deiner Stromrechnung</p>
   </div>
@@ -36,9 +41,7 @@ const CheckProvider = (props) => {
   const [provider, setProvider] = useState()
   const [loading, setLoading] = useState()
 
-  const onFinish = async (values) => {
-    console.log(values)
-  }
+  const onFinish = async (values) => {}
 
   const handleChange = (val) => {
     setProvider(val)
