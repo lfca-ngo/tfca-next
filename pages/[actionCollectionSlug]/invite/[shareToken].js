@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken'
 import Head from 'next/head'
 import React from 'react'
 
+import ActionModules from '../../../components/ActionModules'
 import SplitLayout from '../../../components/Layout/SplitLayout'
 import {
   fetchAllActions,
@@ -11,25 +12,15 @@ import {
 
 const { Title } = Typography
 
-export default function InvitePage({
-  friend1,
-  friend2,
-  friend3,
-  ogImageUrl,
-  self,
-}) {
+export default function InvitePage({ actions, ogImageUrl }) {
   return (
     <>
       <Head>
         <meta content={ogImageUrl} property="og:image" />
       </Head>
-      return (
       <SplitLayout>
-        <Title
-          level={2}
-        >{`Hey ${friend1.name}, ${friend2.name} and ${friend3.name} you have been invited by ${self.name} to take action!`}</Title>
+        <ActionModules actions={actions} />
       </SplitLayout>
-      )
     </>
   )
 }
@@ -51,13 +42,13 @@ export async function getStaticProps(props) {
 
     return {
       props: {
-        actions: actions,
-        content: content,
-        friend1,
-        friend2,
-        friend3,
+        actions,
+        content,
+        customization: {
+          from: self.name,
+          to: `${friend1.name}, ${friend2.name} and ${friend3.name}`,
+        },
         ogImageUrl: `${process.env.BASE_URL}/api/images/${shareToken}`,
-        self,
       },
     }
   } catch (e) {

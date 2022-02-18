@@ -1,6 +1,7 @@
 import { gql } from 'graphql-request'
 import React from 'react'
 
+import ActionModules from '../../../components/ActionModules'
 import SplitLayout from '../../../components/Layout/SplitLayout'
 import {
   fetchAllActions,
@@ -8,10 +9,10 @@ import {
   fetchContent,
 } from '../../../services/contentful'
 
-export default function SupporterPage(props) {
+export default function SupporterPage({ actions }) {
   return (
     <SplitLayout>
-      <h1>{`Space for actions with support from company ${props.company.slug}`}</h1>
+      <ActionModules actions={actions} />
     </SplitLayout>
   )
 }
@@ -33,13 +34,12 @@ export async function getStaticProps({ locale, params }) {
 
   return {
     props: {
-      actions: actions,
-      company: {
-        slug: companySlug,
+      actions,
+      content,
+      customization: {
+        from: companySlug,
+        to: 'YOU!',
       },
-      companyActions: [],
-      content: content,
-      locale,
     },
   }
 }

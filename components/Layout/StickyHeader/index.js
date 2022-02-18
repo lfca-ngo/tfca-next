@@ -8,7 +8,6 @@ import { scroller } from 'react-scroll'
 
 import { useChallenge } from '../../../hooks/useChallenge'
 import useIsClient from '../../../hooks/useIsClient'
-import { useContent } from '../../../hooks/useTranslation'
 import { textReveal } from '../../../utils/animations'
 import SimpleFooter from '../SimpleFooter'
 import Progress from './Progress'
@@ -26,7 +25,6 @@ const StickyHeader = () => {
 
   const [open, setOpen] = useState(false)
   const { customization, progress, setProgress } = useChallenge()
-  console.log('customization', customization)
 
   const { scrollY } = useViewportScroll()
   const logoSize = useTransform(scrollY, [0, 200], [65, 40])

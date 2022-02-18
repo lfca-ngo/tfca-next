@@ -19,7 +19,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <QueryClientProvider client={apiClient}>
       <CookiesProvider>
-        <ChallengeProvider>
+        <ChallengeProvider customization={pageProps?.customization}>
           <TranslationProvider content={pageProps?.content}>
             <Component {...pageProps} />
           </TranslationProvider>

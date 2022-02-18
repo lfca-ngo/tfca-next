@@ -1,17 +1,15 @@
 import { gql } from 'graphql-request'
 import React from 'react'
 
-import ActionModules from '../components/ActionModules'
-import SplitLayout from '../components/Layout/SplitLayout'
+import ActionModules from '../../components/ActionModules'
+import SplitLayout from '../../components/Layout/SplitLayout'
 import {
   fetchAllActions,
   fetchAllStaticContent,
   fetchContent,
-} from '../services/contentful'
+} from '../../services/contentful'
 
-export default function ActionCollectionPage(props) {
-  const { actions } = props
-
+export default function ActionCollectionPage({ actions }) {
   return (
     <SplitLayout>
       <ActionModules actions={actions} />
@@ -30,9 +28,8 @@ export async function getStaticProps({ locale, params }) {
 
   return {
     props: {
-      actions: actions,
-      content: content,
-      locale,
+      actions,
+      content,
     },
   }
 }

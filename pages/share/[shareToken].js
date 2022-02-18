@@ -55,7 +55,7 @@ export default function SharePage({
         </Tabs>
         <Button
           onClick={() => {
-            window.open(`/de/deu/invite/${shareToken}`, '_blank')
+            window.open(`/de/new/invite/${shareToken}`, '_blank')
           }}
         >
           Open shareable link in a new tab
