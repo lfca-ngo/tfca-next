@@ -41,7 +41,7 @@ export const fetchAllActions = async (locale, slug) => {
 
     query ($locale: String, $slug: String) {
       actionsLocalCollection(
-        limit: 10
+        limit: 8
         locale: $locale
         where: { slug: $slug }
       ) {
