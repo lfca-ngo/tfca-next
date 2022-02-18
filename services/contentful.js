@@ -58,7 +58,29 @@ export const fetchAllActions = async (locale, slug) => {
 
   const { actionsLocalCollection } = await fetchContent(query, variables)
   const [actions] = actionsLocalCollection.items
-  return actions
+
+  console.log(actions)
+  const transformed = actions?.actionsCollection?.items.map((item) => {
+    // transform blocks to key value pairs
+    const blocks = item.blocksCollection?.items.reduce((allBlocks, block) => {
+      const { key, value } = block
+      return { ...allBlocks, [key]: value }
+    }, {})
+    // transform lists to key value pairs
+    const lists = item.listsCollection?.items.reduce((allLists, list) => {
+      const { itemsCollection, listId } = list
+      return { ...allLists, [listId]: itemsCollection.items }
+    }, {})
+    // replace transformed attributes
+    const transformedActions = {
+      ...item,
+      blocks,
+      lists,
+    }
+    return transformedActions
+  })
+
+  return transformed
 }
 
 export const fetchAllNavs = async (locale) => {

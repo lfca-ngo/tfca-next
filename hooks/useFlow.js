@@ -1,6 +1,6 @@
 import { useState } from 'react'
+import { scroller } from 'react-scroll'
 
-// import { scroller } from 'react-scroll'
 // import useAnalytics from '../hooks/useAnalytics'
 import { NAVBAR_HEIGHT_XS } from '../utils'
 

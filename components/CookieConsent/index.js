@@ -59,7 +59,6 @@ const INITIAL_COOKIE_STATE = {
 
 const CookieConsent = (props) => {
   const cookieBanner = useContent()?.metaData?.cookieBanner
-  console.log(cookieBanner)
   const gaCookieName = 'ga_cookie' // defaultOptions.googleAnalytics.cookieName
   const fbCookieName = 'fb_cookie' // defaultOptions.facebookPixel.cookieName
   const [visible, setVisible] = useState(false)
@@ -124,7 +123,7 @@ const CookieConsent = (props) => {
     const expiresFromNow = new Date(new Date().valueOf() + expiresDays)
     let { cookieSecurity } = props
 
-    if (cookieSecurity === undefined && isBrowser()) {
+    if (cookieSecurity === undefined && isBrowser) {
       cookieSecurity = window.location
         ? window.location.protocol === 'https:'
         : true

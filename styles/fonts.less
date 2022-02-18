@@ -1,3 +1,5 @@
+@import './vars.less';
+
 .font-bold() {
   font-family: 'Manrope', sans-serif;
   font-weight: 800;
@@ -20,4 +22,47 @@
   font-family: 'Manrope', sans-serif;
   font-weight: normal;
   font-style: normal;
+}
+
+.h1() {
+  .font-bold();
+  font-size: 36px;
+  @media (min-width: @screen-sm) {
+    font-size: 62px;
+  }
+}
+
+.h2() {
+  .font-bold();
+  font-size: 36px;
+  @media (min-width: @screen-sm) {
+    font-size: 48px;
+  }
+}
+
+.h3() {
+  .font-semi();
+  font-size: 28px;
+  @media (min-width: @screen-sm) {
+    font-size: 36px;
+  }
+}
+
+.h4() {
+  .font-semi();
+  font-size: 21px;
+  @media (min-width: @screen-sm) {
+    font-size: 28px;
+  }
+}
+
+.default-text() {
+  color: fade(@black, 85%);
+}
+
+.text-appear-wrapper {
+  overflow: hidden;
+  span {
+    display: inline-block;
+  }
 }

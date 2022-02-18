@@ -31,21 +31,51 @@ export const AllNavsFragment = gql`
   }
 `
 
-export const ActionSwitchEnergyFragment = gql`
-  fragment ActionSwitchEnergyFragment on ActionSwitchEnergy {
+export const ActionFragment = gql`
+  fragment ActionFragment on Action {
     name
     actionId
+    carbonSaved
+    timeToImplement
+    listsCollection(limit: 5) {
+      items {
+        listId
+        itemsCollection(limit: 5) {
+          items {
+            ... on Block {
+              key
+              value {
+                json
+              }
+            }
+            ... on DataPoint {
+              key
+            }
+          }
+        }
+      }
+    }
+    blocksCollection(limit: 50) {
+      items {
+        ... on Block {
+          key
+          value {
+            json
+          }
+        }
+      }
+    }
   }
 `
 
 export const AllActionsFragment = gql`
-  ${ActionSwitchEnergyFragment}
+  ${ActionFragment}
   fragment AllActionsFragment on ActionsLocalCollection {
     items {
       regionCode
-      actionsCollection(limit: 20) {
+      actionsCollection(limit: 10) {
         items {
-          ...ActionSwitchEnergyFragment
+          ...ActionFragment
         }
       }
     }

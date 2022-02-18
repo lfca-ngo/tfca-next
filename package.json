@@ -9,6 +9,9 @@
     "lint:fix": "next lint"
   },
   "dependencies": {
+    "@ant-design/plots": "^1.0.9",
+    "@contentful/rich-text-html-renderer": "^15.11.1",
+    "@contentful/rich-text-plain-text-renderer": "^15.11.1",
     "antd": "4.18.7",
     "framer-motion": "^6.2.6",
     "graphql": "^16.3.0",
@@ -16,7 +19,9 @@
     "jsonwebtoken": "^8.5.1",
     "next": "12.0.10",
     "react": "17.0.2",
+    "react-confetti": "^6.0.1",
     "react-cookie": "^4.1.1",
+    "react-device-detect": "^2.1.2",
     "react-dom": "17.0.2",
     "react-query": "^3.34.15",
     "react-scroll": "^1.8.4",
