@@ -14,6 +14,16 @@ const nextConfig = {
         permanent: true,
         source: '/',
       },
+      {
+        destination: '/int/supporter/:companySlug',
+        permanent: true,
+        source: '/supporter/:companySlug',
+      },
+      {
+        destination: '/int/invite/:shareToken',
+        permanent: true,
+        source: '/invite/:shareToken',
+      },
     ]
   },
 }

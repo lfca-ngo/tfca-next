@@ -9,7 +9,7 @@ import {
 } from '../../services/contentful'
 import { useSwitchRates } from '../../services/switchforclimate'
 
-const ActionCollection = (props) => {
+export default function ActionCollectionPage(props) {
   const { data, error, isFetching, status } = useSwitchRates(
     '12043',
     'Berlin',
@@ -28,9 +28,9 @@ export async function getStaticProps({ locale, params }) {
   // we have the locale and can get
   // the correct translations in build
   // time by passing it to the query
-  const { slug } = params
+  const { actionCollectionSlug } = params
 
-  const actions = await fetchAllActions(locale, slug)
+  const actions = await fetchAllActions(locale, actionCollectionSlug)
   const content = await fetchAllStaticContent(locale)
 
   return {
@@ -56,7 +56,7 @@ export async function getStaticPaths({ locales }) {
   const paths = actionsLocalCollection.items.reduce((allPaths, item) => {
     const pagePaths = locales.map((locale) => ({
       locale,
-      params: { slug: item.slug },
+      params: { actionCollectionSlug: item.slug },
     }))
 
     return [...allPaths, ...pagePaths]
@@ -67,5 +67,3 @@ export async function getStaticPaths({ locales }) {
     paths,
   }
 }
-
-export default ActionCollection

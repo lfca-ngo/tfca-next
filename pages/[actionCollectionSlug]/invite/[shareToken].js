@@ -1,18 +1,17 @@
 import { Typography } from 'antd'
-import { gql } from 'graphql-request'
 import jwt from 'jsonwebtoken'
 import Head from 'next/head'
 import React from 'react'
 
-import SplitLayout from '../../components/Layout/SplitLayout'
+import SplitLayout from '../../../components/Layout/SplitLayout'
 import {
   fetchAllActions,
   fetchAllStaticContent,
-} from '../../services/contentful'
+} from '../../../services/contentful'
 
 const { Title } = Typography
 
-export default function ShareLandingPage({
+export default function InvitePage({
   friend1,
   friend2,
   friend3,
@@ -38,23 +37,27 @@ export default function ShareLandingPage({
 export async function getStaticProps(props) {
   const { locale, params } = props
   try {
-    const { slug, token } = params
+    const { actionCollectionSlug, shareToken } = params
 
     // Parse token
-    const parsedToken = jwt.verify(token, process.env.JWT_TOKEN_PRIVATE_KEY)
+    const { friend1, friend2, friend3, self } = jwt.verify(
+      shareToken,
+      process.env.JWT_TOKEN_PRIVATE_KEY
+    )
 
     // Fetch content
-    const actions = await fetchAllActions(locale, slug)
+    const actions = await fetchAllActions(locale, actionCollectionSlug)
     const content = await fetchAllStaticContent(locale)
 
     return {
       props: {
-        ...parsedToken,
         actions: actions,
         content: content,
-        locale,
-        ogImageUrl: `${process.env.BASE_URL}/api/images/${token}`,
-        token,
+        friend1,
+        friend2,
+        friend3,
+        ogImageUrl: `${process.env.BASE_URL}/api/images/${shareToken}`,
+        self,
       },
     }
   } catch (e) {
