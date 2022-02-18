@@ -41,7 +41,7 @@ export const fetchAllActions = async (locale, slug) => {
 
     query ($locale: String, $slug: String) {
       actionsLocalCollection(
-        limit: 10
+        limit: 8
         locale: $locale
         where: { slug: $slug }
       ) {
@@ -59,7 +59,6 @@ export const fetchAllActions = async (locale, slug) => {
   const { actionsLocalCollection } = await fetchContent(query, variables)
   const [actions] = actionsLocalCollection.items
 
-  console.log(actions)
   const transformed = actions?.actionsCollection?.items.map((item) => {
     // transform blocks to key value pairs
     const blocks = item.blocksCollection?.items.reduce((allBlocks, block) => {
@@ -71,11 +70,17 @@ export const fetchAllActions = async (locale, slug) => {
       const { itemsCollection, listId } = list
       return { ...allLists, [listId]: itemsCollection.items }
     }, {})
+    // transform data to key value pairs
+    const data = item.dataCollection?.items.reduce((allData, data) => {
+      const { itemsCollection, listId } = data
+      return { ...allData, [listId]: itemsCollection.items }
+    }, {})
     // replace transformed attributes
     const transformedActions = {
       ...item,
       blocks,
       lists,
+      data,
     }
     return transformedActions
   })

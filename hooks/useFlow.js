@@ -7,7 +7,8 @@ import { NAVBAR_HEIGHT_XS } from '../utils'
 // helper for managing the flow state of
 // the different action modules
 
-const useFlow = ({ initial, name }) => {
+export const useFlow = ({ initial, name }) => {
+  const [store, setStore] = useState({}) // used to share state between steps
   const [index, set] = useState(initial)
   const [visible, setVisible] = useState(false)
   // const { isMobile } = useIsMobile()
@@ -36,9 +37,9 @@ const useFlow = ({ initial, name }) => {
     goTo: goTo,
     index: index,
     set: set,
+    setStore: setStore,
     setVisible: setVisible,
+    store: store,
     visible: visible,
   }
 }
-
-export default useFlow

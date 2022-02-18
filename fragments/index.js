@@ -37,6 +37,25 @@ export const ActionFragment = gql`
     actionId
     carbonSaved
     timeToImplement
+    dataCollection(limit: 3) {
+      items {
+        listId
+        itemsCollection(limit: 10) {
+          items {
+            ... on Input {
+              key
+              label
+              valueNumber
+              valueString
+              type
+              icon {
+                url
+              }
+            }
+          }
+        }
+      }
+    }
     listsCollection(limit: 5) {
       items {
         listId
@@ -48,14 +67,11 @@ export const ActionFragment = gql`
                 json
               }
             }
-            ... on DataPoint {
-              key
-            }
           }
         }
       }
     }
-    blocksCollection(limit: 50) {
+    blocksCollection(limit: 30) {
       items {
         ... on Block {
           key

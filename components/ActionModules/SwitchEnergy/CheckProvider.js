@@ -2,7 +2,7 @@ import { FileDoneOutlined, LoadingOutlined } from '@ant-design/icons'
 import { Alert, Button, ConfigProvider, Form, Select } from 'antd'
 import React, { useEffect, useState } from 'react'
 
-// import { renderAsHtml } from '../../../utils'
+import { Text, text } from '../../../utils/Text'
 import Category from '../Category'
 
 const { Option } = Select
@@ -26,7 +26,7 @@ const GREEN = [
 ]
 
 const customizeRenderEmpty = () => (
-  <div style={{ textAlign: 'center', margin: '20px 0' }}>
+  <div style={{ margin: '20px 0', textAlign: 'center' }}>
     <FileDoneOutlined style={{ fontSize: 32, marginBottom: '20px' }} />
     <p>Du findest den Namen deines Providers z.B. auf deiner Stromrechnung</p>
   </div>
@@ -37,7 +37,7 @@ const CheckProvider = (props) => {
   const [loading, setLoading] = useState()
 
   const onFinish = async (values) => {
-    console.log(values)
+    // console.log(values)
   }
 
   const handleChange = (val) => {
@@ -97,7 +97,7 @@ const CheckProvider = (props) => {
       <Category
         goBack
         prev={() => props.goTo('intro')}
-        title={props.module.categoryTitle}
+        title={text(props.blocks['category.title'])}
         type={props.name}
       />
       <h2>{`Wunderbar!  Überprüfe deinen Provider um die Challenge abzuschließen`}</h2>

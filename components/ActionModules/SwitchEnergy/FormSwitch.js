@@ -230,7 +230,7 @@ const FormSwitch = (props) => {
       <Category
         goBack
         prev={() => props.goTo('results')}
-        title={props.module.categoryTitle}
+        title={text(props.blocks['category.title'])}
         type={props.name}
       />
       <h2>Eine sehr gute Wahl. Du hast es fast geschafft!</h2>
