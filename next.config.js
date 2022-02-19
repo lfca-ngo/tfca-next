@@ -7,6 +7,9 @@ const nextConfig = {
     localeDetection: false,
     locales: ['en', 'de', 'tr'],
   },
+  images: {
+    domains: ['images.ctfassets.net'],
+  },
   async redirects() {
     /**
      * TODO:
