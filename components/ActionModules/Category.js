@@ -1,12 +1,12 @@
 import { ArrowLeftOutlined } from '@ant-design/icons'
 import { Button } from 'antd'
-import React, { useMemo } from 'react'
+import React from 'react'
 
-// import useContentfulBlock from '../../hooks/useContentfulBlock'
-// import CustomIcon from '../../utils/CustomIcon'
+import { useBlocks } from '../../hooks/useTranslation'
+import CustomIcon from '../../utils/CustomIcon'
 
 const Category = (props) => {
-  const backString = 'back' //useContentfulBlock('nav.back')
+  const backString = useBlocks('nav.back')
   if (props.goBack) {
     return (
       <div className="action-category">
@@ -19,8 +19,7 @@ const Category = (props) => {
   return (
     <div className="action-category">
       <span className="icon-wrapper">
-        Icon
-        {/* <CustomIcon name={props.type} /> */}
+        <CustomIcon name={props.type} />
       </span>
       {props.title}
     </div>

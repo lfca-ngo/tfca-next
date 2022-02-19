@@ -5,6 +5,7 @@
   align-items: center;
   position: relative;
   overflow: hidden;
+  min-height: 100vh;
 
   @media (min-width: @screen-lg) {
     padding-left: 50%;
@@ -18,6 +19,24 @@
   h6,
   p {
     color: @white;
+  }
+
+  .action-category,
+  .step,
+  .ant-form-vertical .ant-form-item-label > label,
+  .form-group .form-group-label,
+  .form-group .form-group-description,
+  .ant-tabs .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn,
+  .ant-btn-link {
+    color: @white;
+  }
+
+  .ant-divider {
+    border-color: fade(@white, 75%);
+  }
+
+  .ant-tabs .ant-tabs-tab {
+    color: fade(@white, 75%);
   }
 
   &.color-1 {
@@ -35,6 +54,9 @@
 
   .action-container {
     padding: @default-section-padding;
+    @media (min-width: @screen-lg) {
+      padding: 50px;
+    }
   }
 
   .action-body {

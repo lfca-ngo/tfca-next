@@ -79,8 +79,8 @@ export const fetchAllActions = async (locale, slug) => {
     const transformedActions = {
       ...item,
       blocks,
-      lists,
       data,
+      lists,
     }
     return transformedActions
   })
@@ -124,7 +124,17 @@ export const fetchMetaData = async (locale, settingsId) => {
   }
 
   const { settings } = await fetchContent(query, variables)
-  return settings
+  const { resourcesCollection, ...rest } = settings
+
+  const blocks = resourcesCollection?.items.reduce((allBlocks, block) => {
+    const { key, value } = block
+    return { ...allBlocks, [key]: value }
+  }, {})
+
+  return {
+    blocks,
+    ...rest,
+  }
 }
 
 // collector function all contentful queries for the

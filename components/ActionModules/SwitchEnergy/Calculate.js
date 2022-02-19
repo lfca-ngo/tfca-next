@@ -63,7 +63,7 @@ export const EnergyForm = ({ blocks, data, initialValues, onFinish }) => {
     <Form initialValues={initialValues} onFinish={onFinish}>
       <Row className="site-input-group-wrapper form-spacing">
         <Input.Group>
-          <Row>
+          <Row gutter={8}>
             <Col xs={isMobile ? 12 : 10}>
               {ITEMS.users(blocks, data?.input_users)}
             </Col>
