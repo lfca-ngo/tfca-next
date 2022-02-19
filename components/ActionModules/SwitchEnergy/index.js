@@ -3,12 +3,12 @@ import React from 'react'
 
 import { useChallenge } from '../../../hooks/useChallenge'
 import { useFlow } from '../../../hooks/useFlow'
+import Success from '../ActionWrapper/Success'
 import Calculate from './Calculate'
 import CheckProvider from './CheckProvider'
 import FormSwitch from './FormSwitch'
 import Intro from './Intro'
 import Results from './Results'
-import Success from './Success'
 
 const { TabPane } = Tabs
 

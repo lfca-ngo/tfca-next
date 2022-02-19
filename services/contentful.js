@@ -4,6 +4,7 @@ import {
   AllActionsFragment,
   AllNavsFragment,
   MetaDataFragment,
+  MetaDataListsFragment,
 } from '../fragments'
 import { SETTINGS_ID } from '../utils'
 
@@ -137,18 +138,47 @@ export const fetchMetaData = async (locale, settingsId) => {
   }
 }
 
+export const fetchMetaDataLists = async (locale, settingsId) => {
+  const query = gql`
+    ${MetaDataListsFragment}
+    query ($locale: String, $settingsId: String!) {
+      settings(locale: $locale, id: $settingsId) {
+        ... on Settings {
+          ...MetaDataListsFragment
+        }
+      }
+    }
+  `
+  const variables = {
+    locale: locale,
+    settingsId: settingsId,
+  }
+
+  const { settings } = await fetchContent(query, variables)
+  const { listsCollection } = settings
+
+  const lists = listsCollection?.items.reduce((allLists, list) => {
+    const { itemsCollection, listId } = list
+    return { ...allLists, [listId]: itemsCollection }
+  }, {})
+
+  return lists
+}
+
 // collector function all contentful queries for the
 // translator provider that is used on every page
 // feeding non page related translations, e.g. navs
 // or meta data
 export const fetchAllStaticContent = async (locale) => {
-  const [navs, metaData] = await Promise.all([
+  const [navs, metaData, metaDataLists] = await Promise.all([
     fetchAllNavs(locale),
     fetchMetaData(locale, SETTINGS_ID),
+    fetchMetaDataLists(locale, SETTINGS_ID),
   ])
 
   return {
     metaData,
+    metaDataLists,
     navs,
   }
 }

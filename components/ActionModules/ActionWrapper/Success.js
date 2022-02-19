@@ -1,41 +1,27 @@
-import { GlobalOutlined, HeartOutlined, RiseOutlined } from '@ant-design/icons'
 import { Button, Form, Input, List, Select } from 'antd'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 
 import { useConfetti } from '../../../hooks/useChallenge'
+import { useLists } from '../../../hooks/useTranslation'
 import { text } from '../../../utils/Text'
-// import useAnalytics from '../../../hooks/useAnalytics'
+import CheckList from '../../Elements/CheckList'
 import Category from '../Category'
 
 const { Option } = Select
 
-const ARGS = [
-  {
-    icon: <RiseOutlined />,
-    text: 'Gemeinsam können wir ein Zeichen setzen: Lade deine Freunde mit einer persönlichen Nachricht ein mitzumachen',
-  },
-  {
-    icon: <GlobalOutlined />,
-    text: 'Unsicher ob sie bereits Ökostrom nutzen? Kein Problem, dann wird es nur ein schneller Check-in',
-  },
-  {
-    icon: <HeartOutlined />,
-    text: 'Kein Social Media Mensch? Kein Problem, teile die Challenge einfach über WhatsApp oder SMS!',
-  },
-]
-
 const Success = (props) => {
-  // const { trackEvent } = useAnalytics()
-  const fireConfetti = useConfetti()
+  const { setProgress } = props
+  const benefits = useLists('sharing.benefits')
+
+  useConfetti() // creates confetti
 
   useEffect(() => {
-    props.setProgress(1)
-    fireConfetti()
-  }, [])
+    setProgress(1)
+    // fireConfetti()
+  }, [setProgress])
 
   const handleFinish = (values) => {
     props.onFinish()
-    // trackEvent('invite', { ...values })
   }
 
   const challengeSelect = (
@@ -55,15 +41,7 @@ const Success = (props) => {
         deinen Impact!
       </h2>
 
-      <List
-        className="simple-list"
-        dataSource={ARGS}
-        renderItem={(item) => (
-          <List.Item>
-            <List.Item.Meta avatar={item.icon} description={item.text} />
-          </List.Item>
-        )}
-      />
+      <CheckList data={benefits?.items} />
 
       <Form onFinish={handleFinish} style={{ marginTop: '20px' }}>
         <Form.Item

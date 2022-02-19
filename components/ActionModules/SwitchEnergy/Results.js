@@ -25,6 +25,7 @@ export const getFullPrice = (item, kwh) =>
 
 const Results = ({
   blocks,
+  data,
   goTo,
   lists,
   name,
@@ -48,8 +49,10 @@ const Results = ({
   }
 
   const getFirstOperatorId = (o) => (o ? Object.keys(o)[0] : null)
-  const { data, isLoading: fetchingOperators } = useOperatorId(store?.postcode)
-  const { city, operators } = data?.locations[0] || {}
+  const { data: operatorData, isLoading: fetchingOperators } = useOperatorId(
+    store?.postcode
+  )
+  const { city, operators } = operatorData?.locations[0] || {}
   const firstOperatorId = getFirstOperatorId(operators)
 
   const { data: rates, isLoading: fetchingRates } = useSwitchRates(
@@ -134,6 +137,7 @@ const Results = ({
       <Modal footer={null} onCancel={() => setVisible(false)} visible={visible}>
         <EnergyForm
           blocks={blocks}
+          data={data}
           initialValues={{ postcode: store?.postcode, users: store?.users }}
           onFinish={updateProviders}
         />

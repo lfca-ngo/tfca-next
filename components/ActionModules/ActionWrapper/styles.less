@@ -39,8 +39,20 @@
     color: fade(@white, 75%);
   }
 
+  .stats-wrapper {
+    .description-wrapper {
+      color: @white;
+    }
+    .ant-tag {
+      color: @white;
+    }
+  }
+
   &.color-1 {
     background: @blue;
+    .stats-wrapper .ant-tag {
+      background: darken(@blue, 10%);
+    }
   }
   &.color-2 {
     background: @orange;
@@ -254,14 +266,7 @@
   .ant-form-item {
     margin-bottom: 8px;
   }
-  .ant-btn.ant-btn-primary.ant-btn-lg {
-    // .ant-btn-xl();
-  }
-  .ant-btn.ant-btn-primary {
-    // padding: 12px 20px;
-    // margin: 0;
-    // margin-left: 8px;
-  }
+
   .ant-tag {
     border: none;
     font-size: 14px;

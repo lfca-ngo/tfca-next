@@ -3,7 +3,7 @@ import React from 'react'
 import ActionWrapper from './ActionWrapper'
 import SwitchEnergy from './SwitchEnergy'
 
-const ActionModules = ({ actions, openDrawer, statsLabels, usageStats }) => {
+const ActionModules = ({ actions, openDrawer, usageStats }) => {
   if (!actions) return null
 
   return actions.map((action, i) => {
@@ -24,7 +24,6 @@ const ActionModules = ({ actions, openDrawer, statsLabels, usageStats }) => {
         carbonSaved={action.carbonSaved}
         color={`color-${(i % 4) + 1}`}
         key={action.actionId}
-        labels={statsLabels}
         name={action.actionId}
         otherUsers={otherUsers}
         timeToImplement={action.timeToImplement}
