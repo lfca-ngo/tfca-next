@@ -5,6 +5,7 @@
   align-items: center;
   position: relative;
   overflow: hidden;
+  min-height: 100vh;
 
   @media (min-width: @screen-lg) {
     padding-left: 50%;
@@ -20,8 +21,38 @@
     color: @white;
   }
 
+  .action-category,
+  .step,
+  .ant-form-vertical .ant-form-item-label > label,
+  .form-group .form-group-label,
+  .form-group .form-group-description,
+  .ant-tabs .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn,
+  .ant-btn-link {
+    color: @white;
+  }
+
+  .ant-divider {
+    border-color: fade(@white, 75%);
+  }
+
+  .ant-tabs .ant-tabs-tab {
+    color: fade(@white, 75%);
+  }
+
+  .stats-wrapper {
+    .description-wrapper {
+      color: @white;
+    }
+    .ant-tag {
+      color: @white;
+    }
+  }
+
   &.color-1 {
     background: @blue;
+    .stats-wrapper .ant-tag {
+      background: darken(@blue, 10%);
+    }
   }
   &.color-2 {
     background: @orange;
@@ -35,6 +66,9 @@
 
   .action-container {
     padding: @default-section-padding;
+    @media (min-width: @screen-lg) {
+      padding: 70px;
+    }
   }
 
   .action-body {
@@ -232,14 +266,7 @@
   .ant-form-item {
     margin-bottom: 8px;
   }
-  .ant-btn.ant-btn-primary.ant-btn-lg {
-    // .ant-btn-xl();
-  }
-  .ant-btn.ant-btn-primary {
-    // padding: 12px 20px;
-    // margin: 0;
-    // margin-left: 8px;
-  }
+
   .ant-tag {
     border: none;
     font-size: 14px;

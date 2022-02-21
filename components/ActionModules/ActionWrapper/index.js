@@ -38,7 +38,6 @@ const ActionWrapper = (props) => {
         <div className="footer">
           <ActionStats
             carbonSaved={props.carbonSaved}
-            labels={props.labels}
             name={props.name}
             otherUsers={props.otherUsers}
             timeLeft={counterActive ? timeLeft / 1000 : null}

@@ -4,6 +4,7 @@ import {
   AllActionsFragment,
   AllNavsFragment,
   MetaDataFragment,
+  MetaDataListsFragment,
 } from '../fragments'
 import { SETTINGS_ID } from '../utils'
 
@@ -79,8 +80,8 @@ export const fetchAllActions = async (locale, slug) => {
     const transformedActions = {
       ...item,
       blocks,
-      lists,
       data,
+      lists,
     }
     return transformedActions
   })
@@ -124,7 +125,44 @@ export const fetchMetaData = async (locale, settingsId) => {
   }
 
   const { settings } = await fetchContent(query, variables)
-  return settings
+  const { resourcesCollection, ...rest } = settings
+
+  const blocks = resourcesCollection?.items.reduce((allBlocks, block) => {
+    const { key, value } = block
+    return { ...allBlocks, [key]: value }
+  }, {})
+
+  return {
+    blocks,
+    ...rest,
+  }
+}
+
+export const fetchMetaDataLists = async (locale, settingsId) => {
+  const query = gql`
+    ${MetaDataListsFragment}
+    query ($locale: String, $settingsId: String!) {
+      settings(locale: $locale, id: $settingsId) {
+        ... on Settings {
+          ...MetaDataListsFragment
+        }
+      }
+    }
+  `
+  const variables = {
+    locale: locale,
+    settingsId: settingsId,
+  }
+
+  const { settings } = await fetchContent(query, variables)
+  const { listsCollection } = settings
+
+  const lists = listsCollection?.items.reduce((allLists, list) => {
+    const { itemsCollection, listId } = list
+    return { ...allLists, [listId]: itemsCollection }
+  }, {})
+
+  return lists
 }
 
 // collector function all contentful queries for the
@@ -132,13 +170,15 @@ export const fetchMetaData = async (locale, settingsId) => {
 // feeding non page related translations, e.g. navs
 // or meta data
 export const fetchAllStaticContent = async (locale) => {
-  const [navs, metaData] = await Promise.all([
+  const [navs, metaData, metaDataLists] = await Promise.all([
     fetchAllNavs(locale),
     fetchMetaData(locale, SETTINGS_ID),
+    fetchMetaDataLists(locale, SETTINGS_ID),
   ])
 
   return {
     metaData,
+    metaDataLists,
     navs,
   }
 }

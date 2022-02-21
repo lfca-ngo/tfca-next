@@ -1,11 +1,12 @@
 import Icon from '@ant-design/icons'
 import { Col, Row, Tag } from 'antd'
 import React, { useState } from 'react'
+import { Link } from 'react-scroll'
 
-// import IconTimer from '../../../assets/icons/counter.svg'
-// // import { Link } from "react-scroll";
-// import IconKg from '../../../assets/icons/kg.svg'
-// import IconUsers from '../../../assets/icons/users.svg'
+import IconTimer from '../../../assets/icons/counter.svg'
+import IconKg from '../../../assets/icons/kg.svg'
+import IconUsers from '../../../assets/icons/users.svg'
+import { useBlocks } from '../../../hooks/useTranslation'
 // import { useIsMobile } from '../../../utils/IsMobileProvider'
 
 const Stat = (props) => {
@@ -19,7 +20,7 @@ const Stat = (props) => {
     <div className="stats-wrapper">
       <div className="stat">
         <Tag>
-          {/* <Icon component={props.icon} /> {props.data} */}
+          <Icon component={props.icon} /> {props.data}
           {/* {isMobile ? (
             props.data
           ) : (
@@ -44,7 +45,6 @@ const minTwoDigits = (n) => {
 
 const ActionStats = (props) => {
   const [isFocus, setIsFocus] = useState(false)
-  const labels = props.labels || {}
   const minLeft = Math.floor(props.timeLeft / 60)
   const secondsLeft = props.timeLeft % 60
   const time = props.timeLeft ? `${minLeft}:${minTwoDigits(secondsLeft)}` : null
@@ -62,24 +62,24 @@ const ActionStats = (props) => {
 
       <Stat
         data={props.otherUsers}
-        // icon={IconUsers}
+        icon={IconUsers}
         isFocus={isFocus}
-        text={labels.otherUsers}
+        text={useBlocks('stats.usersdoingthis')}
       />
 
       <Stat
         data={props.timeToImplement}
-        // icon={IconTimer}
+        icon={IconTimer}
         isFocus={isFocus}
         overwriteData={time}
-        text={labels.timeToImplement}
+        text={useBlocks('stats.timetoimplement')}
       />
 
       <Stat
         data={props.carbonSaved}
-        // icon={IconKg}
+        icon={IconKg}
         isFocus={isFocus}
-        text={labels.carbonSaved}
+        text={useBlocks('stats.carbonsaved')}
       />
     </div>
   )

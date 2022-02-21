@@ -26,3 +26,13 @@ export const useContent = () => {
   const context = useContext(TranslationContext)
   return context.store
 }
+
+export const useBlocks = (key) => {
+  const context = useContext(TranslationContext)
+  return context.store?.metaData?.blocks?.[key]
+}
+
+export const useLists = (key) => {
+  const context = useContext(TranslationContext)
+  return context.store?.metaDataLists?.[key]
+}

@@ -98,6 +98,26 @@ export const AllActionsFragment = gql`
   }
 `
 
+export const MetaDataListsFragment = gql`
+  fragment MetaDataListsFragment on Settings {
+    listsCollection(limit: 20) {
+      items {
+        listId
+        itemsCollection {
+          items {
+            ... on Block {
+              key
+              value {
+                json
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`
+
 export const MetaDataFragment = gql`
   fragment MetaDataFragment on Settings {
     settingsId

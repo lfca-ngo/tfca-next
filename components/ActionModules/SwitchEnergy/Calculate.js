@@ -1,4 +1,5 @@
 import { Button, Col, Form, Input, Row, Select } from 'antd'
+import Image from 'next/image'
 import React from 'react'
 import { isMobile } from 'react-device-detect'
 
@@ -49,7 +50,7 @@ export const ITEMS = {
         {usersInput.map((user, i) => (
           <Select.Option key={i} label={user.label} value={user.valueNumber}>
             <div className="option-with-icon">
-              <img src={user.icon.url} /> {user.label}
+              <Image height={32} src={user.icon.url} width={32} /> {user.label}
             </div>
           </Select.Option>
         ))}
@@ -63,7 +64,7 @@ export const EnergyForm = ({ blocks, data, initialValues, onFinish }) => {
     <Form initialValues={initialValues} onFinish={onFinish}>
       <Row className="site-input-group-wrapper form-spacing">
         <Input.Group>
-          <Row>
+          <Row gutter={8}>
             <Col xs={isMobile ? 12 : 10}>
               {ITEMS.users(blocks, data?.input_users)}
             </Col>

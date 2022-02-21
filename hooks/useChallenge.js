@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useEffect, useState } from 'react'
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from 'react'
 import Confetti from 'react-confetti'
 
 export const ChallengeContext = createContext(null)
@@ -11,15 +17,9 @@ export const ChallengeProvider = ({ children, customization = null }) => {
   const [showConfetti, setShowConfetti] = useState(false)
   const [progress, setProgress] = useState(0)
 
-  const fireConfetti = () => {
-    setShowConfetti(true)
-    let timer = setTimeout(() => setShowConfetti(false), 3500)
-    return () => clearTimeout(timer)
-  }
-
   return (
     <ChallengeContext.Provider
-      value={{ customization, fireConfetti, progress, setProgress }}
+      value={{ customization, progress, setProgress, setShowConfetti }}
     >
       {showConfetti && <Confetti />}
       {children}
@@ -33,6 +33,17 @@ export const useChallenge = () => {
 }
 
 export const useConfetti = () => {
-  const context = useContext(ChallengeContext)
-  return context.fireConfetti
+  const { setShowConfetti } = useContext(ChallengeContext)
+
+  const fireConfetti = useCallback(() => {
+    setShowConfetti(true)
+    let timer = setTimeout(() => setShowConfetti(false), 3500)
+    return () => clearTimeout(timer)
+  }, [setShowConfetti])
+
+  useEffect(() => {
+    fireConfetti()
+  }, [fireConfetti])
+
+  return true
 }
