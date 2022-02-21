@@ -36,10 +36,6 @@ const CheckProvider = (props) => {
   const [provider, setProvider] = useState()
   const [loading, setLoading] = useState()
 
-  const onFinish = async (values) => {
-    // console.log(values)
-  }
-
   const handleChange = (val) => {
     setProvider(val)
   }

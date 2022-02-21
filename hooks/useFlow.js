@@ -10,7 +10,6 @@ import { NAVBAR_HEIGHT_XS } from '../utils'
 export const useFlow = ({ initial, name }) => {
   const [store, setStore] = useState({}) // used to share state between steps
   const [index, set] = useState(initial)
-  const [visible, setVisible] = useState(false)
   // const { isMobile } = useIsMobile()
   // const { trackEvent } = useAnalytics()
   let baseScrollOptions = { offset: -NAVBAR_HEIGHT_XS }
@@ -38,8 +37,6 @@ export const useFlow = ({ initial, name }) => {
     index: index,
     set: set,
     setStore: setStore,
-    setVisible: setVisible,
     store: store,
-    visible: visible,
   }
 }
