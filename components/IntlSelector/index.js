@@ -13,8 +13,8 @@ export const IntlSelector = () => {
 
   const {
     locale,
-
-    query: { actionCollectionSlug },
+    pathname,
+    query: { actionCollectionSlug, companySlug, shareToken },
   } = router
 
   const regions = metaData?.regionsCollection?.items || []
@@ -53,7 +53,9 @@ export const IntlSelector = () => {
           <Form layout="vertical">
             <Form.Item label="Region">
               <Select
-                onChange={handleRegionChange}
+                onChange={(newActionCollectionSlug) =>
+                  handleRegionOrLocaleChange({ newActionCollectionSlug })
+                }
                 value={activeRegion.actionCollection.slug}
               >
                 {regions.map((region) => (
@@ -71,7 +73,9 @@ export const IntlSelector = () => {
             </Form.Item>
             <Form.Item label="Language">
               <Select
-                onChange={handleLangChange}
+                onChange={(newLocale) =>
+                  handleRegionOrLocaleChange({ newLocale })
+                }
                 value={activeLanguage.isoCode}
               >
                 {activeRegion.languagesCollection.items.map((lang) => (
@@ -107,18 +111,21 @@ export const IntlSelector = () => {
     </div>
   )
 
-  function handleRegionChange(newActionCollectionSlug) {
-    const defaultLanguage =
-      regionsByActionCollectionSlug[newActionCollectionSlug].defaultLanguage
+  function handleRegionOrLocaleChange({ newActionCollectionSlug, newLocale }) {
+    let path = `/${newActionCollectionSlug || actionCollectionSlug}`
 
-    router.push(`/${newActionCollectionSlug}`, `/${newActionCollectionSlug}`, {
-      locale: defaultLanguage.isoCode,
-    })
-  }
+    if (companySlug) {
+      path += `/supporter/${companySlug}`
+    } else if (shareToken) {
+      path = `/invite/${shareToken}`
+    }
 
-  function handleLangChange(newLocale) {
-    router.push(`/${actionCollectionSlug}`, `/${actionCollectionSlug}`, {
-      locale: newLocale,
+    router.push(path, path, {
+      locale:
+        newLocale ||
+        regionsByActionCollectionSlug[
+          newActionCollectionSlug || actionCollectionSlug
+        ].defaultLanguage.isoCode,
     })
   }
 }
