@@ -5,7 +5,9 @@ const nextConfig = {
   i18n: {
     defaultLocale: 'en',
     localeDetection: false,
-    locales: ['en', 'de', 'tr'],
+    // IMPORTANT: This must! match all possible isoCodes in the `languagesCollection` in contentful!!!
+    // TODO: fetch contentful languages dynamically
+    locales: ['de', 'en', 'es', 'fr', 'tr'],
   },
   images: {
     domains: ['images.ctfassets.net'],
