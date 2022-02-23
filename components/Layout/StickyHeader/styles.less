@@ -13,14 +13,14 @@ header.header {
 .header-inner {
   height: @header-height-mini;
   position: fixed;
-  z-index: 1001;
+  z-index: 101;
   top: 0;
   width: 100%;
   padding: 10px 15px;
   background: @white;
 
   .header-inner-content {
-    max-width: @container-width;
+    max-width: @container-header-max-width;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
@@ -70,7 +70,7 @@ header.header {
   flex-direction: column;
   align-items: center;
   background: @white;
-  z-index: 1000;
+  z-index: 100;
   transform: translate3d(0, 0, 0);
   max-width: @container-action-width;
 
@@ -111,6 +111,9 @@ header.header {
     padding: 30px + @header-height-mini @default-section-padding 50px;
     @media @desktop {
       padding: 50px 45px;
+    }
+    @media @desktop-xl {
+      padding: 80px + @header-height-mini @default-section-padding 80px;
     }
     h1 {
       font-size: 43px;
