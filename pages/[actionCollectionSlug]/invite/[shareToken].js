@@ -31,10 +31,13 @@ export async function getStaticProps(props) {
     const { actionCollectionSlug, shareToken } = params
 
     // Parse token
-    const { friend1, friend2, friend3, self } = jwt.verify(
-      shareToken,
-      process.env.JWT_TOKEN_PRIVATE_KEY
-    )
+    // TODO: Add propper fallback values
+    const {
+      invitee1 = { challenge: 'unkown challenge', name: 'unknown name' },
+      invitee2 = { challenge: 'unkown challenge', name: 'unknown name' },
+      invitee3 = { challenge: 'unkown challenge', name: 'unknown name' },
+      sender = { challenge: 'unkown challenge', name: 'unknown name' },
+    } = jwt.verify(shareToken, process.env.JWT_TOKEN_PRIVATE_KEY)
 
     // Fetch content
     const actions = await fetchAllActions(locale, actionCollectionSlug)
@@ -45,8 +48,8 @@ export async function getStaticProps(props) {
         actions,
         content,
         customization: {
-          from: self.name,
-          to: `${friend1.name}, ${friend2.name} and ${friend3.name}`,
+          from: sender.name,
+          to: `${invitee1.name}, ${invitee2.name} and ${invitee3.name}`,
         },
         ogImageUrl: `${process.env.BASE_URL}/api/images/${shareToken}`,
       },
