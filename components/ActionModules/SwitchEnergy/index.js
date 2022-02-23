@@ -13,15 +13,15 @@ import Results from './Results'
 
 const { TabPane } = Tabs
 
-const steps = {
-  calculate: (props) => <Calculate {...props} />,
-  check: (props) => <CheckProvider {...props} />,
-  form: (props) => <FormSwitch {...props} />,
-  intro: (props) => <Intro {...props} />,
-  results: (props) => <Results {...props} />,
-  share: (props) => <Share {...props} />,
-  success: (props) => <Success {...props} />,
-}
+const steps = new Map([
+  ['intro', Intro],
+  ['calculate', Calculate],
+  ['check-provider', CheckProvider],
+  ['results', Results],
+  ['form-switch', FormSwitch],
+  ['success', Success],
+  ['share', Share],
+])
 
 const SwitchEnergyFlow = (props) => {
   const { goTo, index, setStore, store } = useFlow({
@@ -39,8 +39,8 @@ const SwitchEnergyFlow = (props) => {
         destroyInactiveTabPane
         renderTabBar={() => null}
       >
-        {Object.keys(steps).map((key) => {
-          const Page = steps[key]
+        {[...steps.keys()].map((key) => {
+          const Page = steps.get(key)
           return (
             <TabPane key={key} tab={`${props.name}`}>
               <Page
