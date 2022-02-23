@@ -3,7 +3,6 @@ require('./styles.less')
 import { Button, Collapse, Drawer, Typography } from 'antd'
 import { motion, useTransform, useViewportScroll } from 'framer-motion'
 import React, { useEffect, useState } from 'react'
-import { isMobile } from 'react-device-detect'
 import { scroller } from 'react-scroll'
 
 import { useChallenge } from '../../../hooks/useChallenge'
@@ -21,7 +20,7 @@ const FAQ = [
 
 const StickyHeader = () => {
   // const { trackEvent } = useAnalytics()
-  const { isClient, key } = useIsClient()
+  const { isMobile } = useIsClient()
 
   const [open, setOpen] = useState(false)
   const { customization, progress, setProgress } = useChallenge()
@@ -72,10 +71,11 @@ const StickyHeader = () => {
         textUp: { y: textUp },
       }
     : {
+        logo: { width: '120px' },
         textUp: { y: 200 },
       }
 
-  if (!isClient) return null
+  // if (!isClient) return null
   return (
     <div>
       <motion.div className="header-inner" style={{ background: color }}>
@@ -132,26 +132,26 @@ const StickyHeader = () => {
               Los geht’s{isMobile ? ` 👇` : ` 👉`}
             </motion.span>
           </p>
-          {isMobile && (
-            <motion.div
-              animate="visible"
-              initial="hidden"
-              variants={textReveal}
+
+          <motion.div
+            animate="visible"
+            className="start-btn"
+            initial="hidden"
+            variants={textReveal}
+          >
+            <Button
+              block
+              className="ant-btn-xl"
+              onClick={handleClick}
+              size="large"
+              type="primary"
             >
-              <Button
-                block
-                className="ant-btn-xl"
-                onClick={handleClick}
-                size="large"
-                type="primary"
-              >
-                {`Los geht's`}
-              </Button>
-            </motion.div>
-          )}
+              {`Los geht's`}
+            </Button>
+          </motion.div>
         </motion.div>
 
-        {!isMobile && <SimpleFooter />}
+        <SimpleFooter />
       </div>
       <Drawer onClose={toggleMenu} placement="left" title="FAQs" visible={open}>
         <Collapse accordion>

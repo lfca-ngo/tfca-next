@@ -44,7 +44,7 @@ export const IntlSelector = () => {
     regionsByActionCollectionSlug[actionCollectionSlug] ||
     regionsByActionCollectionSlug['int']
   const activeLanguage =
-    activeRegion.languagesByIsoCode[locale] || activeRegion.defaultLanguage
+    activeRegion?.languagesByIsoCode[locale] || activeRegion?.defaultLanguage
 
   return (
     <div className="intl-selector">
@@ -56,7 +56,7 @@ export const IntlSelector = () => {
                 onChange={(newActionCollectionSlug) =>
                   handleRegionOrLocaleChange({ newActionCollectionSlug })
                 }
-                value={activeRegion.actionCollection.slug}
+                value={activeRegion?.actionCollection.slug}
               >
                 {regions.map((region) => (
                   <Select.Option key={region.actionCollection.slug}>
@@ -76,9 +76,9 @@ export const IntlSelector = () => {
                 onChange={(newLocale) =>
                   handleRegionOrLocaleChange({ newLocale })
                 }
-                value={activeLanguage.isoCode}
+                value={activeLanguage?.isoCode}
               >
-                {activeRegion.languagesCollection.items.map((lang) => (
+                {activeRegion?.languagesCollection.items.map((lang) => (
                   <Select.Option key={lang.isoCode}>
                     <div
                       className="intl-icon-full"
@@ -100,11 +100,11 @@ export const IntlSelector = () => {
         <div className="intl-icon">
           <div
             className="intl-icon-half left"
-            style={{ backgroundImage: `url(${activeRegion.icon.url})` }}
+            style={{ backgroundImage: `url(${activeRegion?.icon.url})` }}
           />
           <div
             className="intl-icon-half right"
-            style={{ backgroundImage: `url(${activeLanguage.icon.url})` }}
+            style={{ backgroundImage: `url(${activeLanguage?.icon.url})` }}
           />
         </div>
       </Popover>
