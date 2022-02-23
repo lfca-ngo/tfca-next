@@ -52,7 +52,6 @@ const SwitchEnergyFlow = (props) => {
                 name={props.name}
                 setProgress={setProgress}
                 setStore={setStore}
-                stepRef={props.stepRef}
                 store={store}
               />
             </TabPane>
