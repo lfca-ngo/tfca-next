@@ -7,6 +7,7 @@ import IconTimer from '../../../assets/icons/counter.svg'
 import IconKg from '../../../assets/icons/kg.svg'
 import IconUsers from '../../../assets/icons/users.svg'
 import { useBlocks } from '../../../hooks/useTranslation'
+import { text } from '../../../utils/Text'
 // import { useIsMobile } from '../../../utils/IsMobileProvider'
 
 const Stat = (props) => {
@@ -64,7 +65,7 @@ const ActionStats = (props) => {
         data={props.otherUsers}
         icon={IconUsers}
         isFocus={isFocus}
-        text={useBlocks('stats.usersdoingthis')}
+        text={text(useBlocks('stats.usersdoingthis'))}
       />
 
       <Stat
@@ -72,14 +73,14 @@ const ActionStats = (props) => {
         icon={IconTimer}
         isFocus={isFocus}
         overwriteData={time}
-        text={useBlocks('stats.timetoimplement')}
+        text={text(useBlocks('stats.timetoimplement'))}
       />
 
       <Stat
         data={props.carbonSaved}
         icon={IconKg}
         isFocus={isFocus}
-        text={useBlocks('stats.carbonsaved')}
+        text={text(useBlocks('stats.carbonsaved'))}
       />
     </div>
   )

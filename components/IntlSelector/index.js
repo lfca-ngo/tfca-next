@@ -13,7 +13,6 @@ export const IntlSelector = () => {
 
   const {
     locale,
-    pathname,
     query: { actionCollectionSlug, companySlug, shareToken },
   } = router
 
