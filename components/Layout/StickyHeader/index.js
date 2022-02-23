@@ -1,25 +1,19 @@
 require('./styles.less')
 
-import { Button, Collapse, Drawer, Typography } from 'antd'
+import { Drawer } from 'antd'
 import { motion, useTransform, useViewportScroll } from 'framer-motion'
 import React, { useEffect, useState } from 'react'
 import { scroller } from 'react-scroll'
 
 import { useChallenge } from '../../../hooks/useChallenge'
 import useIsClient from '../../../hooks/useIsClient'
-import { useLists } from '../../../hooks/useTranslation'
-import { textReveal } from '../../../utils/animations'
-import { Text } from '../../../utils/Text'
+import { Hero } from '../../Elements/Hero'
+import { QuestionAnswer } from '../../Elements/QuestionAnswer'
 import SimpleFooter from '../SimpleFooter'
 import Progress from './Progress'
 
-const { Panel } = Collapse
-
 const StickyHeader = () => {
-  // const { trackEvent } = useAnalytics()
   const { isMobile } = useIsClient()
-  const faqContent = useLists('faq.general')?.items || []
-  console.log(faqContent)
 
   const [open, setOpen] = useState(false)
   const { customization, progress, setProgress } = useChallenge()
@@ -45,15 +39,13 @@ const StickyHeader = () => {
 
   const handleClick = () => {
     scroller.scrollTo('switch_energy', { offset: -75, smooth: true })
-    // trackEvent('start_challenge')
   }
 
   const toggleMenu = () => {
     setOpen(!open)
-    // trackEvent('toggle_faq', { open: !open })
   }
 
-  const WORDING = customization
+  const textBlocks = customization
     ? {
         invited: `eingeladen von ${customization.from}`,
         title: `Hi ${customization.to}, bereit für deine Challenge?`,
@@ -74,7 +66,6 @@ const StickyHeader = () => {
         textUp: { y: 200 },
       }
 
-  // if (!isClient) return null
   return (
     <div>
       <motion.div className="header-inner" style={{ background: color }}>
@@ -89,7 +80,7 @@ const StickyHeader = () => {
           </div>
           <div className="challenge-invitee text-appear-wrapper">
             <motion.span style={dynamicStyles.textUp}>
-              {WORDING.invited}
+              {textBlocks.invited}
             </motion.span>
           </div>
         </div>
@@ -111,55 +102,15 @@ const StickyHeader = () => {
 
       <div className={`header-outer`}>
         <div className="placeholder" />
-        <motion.div className="content" style={dynamicStyles.opacity}>
-          <Typography.Title className="text-appear-wrapper">
-            <motion.span
-              animate="visible"
-              initial="hidden"
-              variants={textReveal}
-            >
-              {WORDING.title}
-            </motion.span>
-          </Typography.Title>
-          <p className="text-appear-wrapper">
-            <motion.span
-              animate="visible"
-              initial="hidden"
-              variants={textReveal}
-            >
-              Du wurdest eingeladen mit ein paar Klicks etwas fürs Klima zu tun!
-              Los geht’s{isMobile ? ` 👇` : ` 👉`}
-            </motion.span>
-          </p>
-
-          <motion.div
-            animate="visible"
-            className="start-btn"
-            initial="hidden"
-            variants={textReveal}
-          >
-            <Button
-              block
-              className="ant-btn-xl"
-              onClick={handleClick}
-              size="large"
-              type="primary"
-            >
-              {`Los geht's`}
-            </Button>
-          </motion.div>
-        </motion.div>
-
+        <Hero
+          dynamicStyles={dynamicStyles}
+          onClick={handleClick}
+          textBlocks={textBlocks}
+        />
         <SimpleFooter />
       </div>
       <Drawer onClose={toggleMenu} placement="left" title="FAQs" visible={open}>
-        <Collapse accordion>
-          {faqContent.map((faq, index) => (
-            <Panel header={faq.question} key={index}>
-              <Text block={faq.answer} />
-            </Panel>
-          ))}
-        </Collapse>
+        <QuestionAnswer />
       </Drawer>
     </div>
   )
