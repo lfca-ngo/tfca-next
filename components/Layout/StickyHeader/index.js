@@ -7,20 +7,19 @@ import { scroller } from 'react-scroll'
 
 import { useChallenge } from '../../../hooks/useChallenge'
 import useIsClient from '../../../hooks/useIsClient'
+import { useLists } from '../../../hooks/useTranslation'
 import { textReveal } from '../../../utils/animations'
+import { Text } from '../../../utils/Text'
 import SimpleFooter from '../SimpleFooter'
 import Progress from './Progress'
 
 const { Panel } = Collapse
 
-const FAQ = [
-  { answer: 'Hallo', question: 'Was ist das für eine “Challenge”?' },
-  { answer: 'Hllo', question: 'Ich traue euch nicht.Wer seid ihr überhaupt?' },
-]
-
 const StickyHeader = () => {
   // const { trackEvent } = useAnalytics()
   const { isMobile } = useIsClient()
+  const faqContent = useLists('faq.general')?.items || []
+  console.log(faqContent)
 
   const [open, setOpen] = useState(false)
   const { customization, progress, setProgress } = useChallenge()
@@ -155,9 +154,9 @@ const StickyHeader = () => {
       </div>
       <Drawer onClose={toggleMenu} placement="left" title="FAQs" visible={open}>
         <Collapse accordion>
-          {FAQ.map((faq, index) => (
+          {faqContent.map((faq, index) => (
             <Panel header={faq.question} key={index}>
-              {faq.answer}
+              <Text block={faq.answer} />
             </Panel>
           ))}
         </Collapse>

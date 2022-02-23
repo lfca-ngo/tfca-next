@@ -111,6 +111,12 @@ export const MetaDataListsFragment = gql`
                 json
               }
             }
+            ... on QuestionAndAnswer {
+              question
+              answer {
+                json
+              }
+            }
           }
         }
       }
