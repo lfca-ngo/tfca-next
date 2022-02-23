@@ -177,8 +177,12 @@ export const MetaDataFragment = gql`
     }
     resourcesCollection(limit: 100) {
       items {
-        key
-        value
+        ... on Block {
+          key
+          value {
+            json
+          }
+        }
       }
     }
   }

@@ -29,10 +29,10 @@ export const useContent = () => {
 
 export const useBlocks = (key) => {
   const context = useContext(TranslationContext)
-  return context.store?.metaData?.blocks?.[key]
+  return context.store?.metaData?.blocks?.[key] || ''
 }
 
 export const useLists = (key) => {
   const context = useContext(TranslationContext)
-  return context.store?.metaDataLists?.[key]
+  return context.store?.metaDataLists?.[key] || { items: [] }
 }

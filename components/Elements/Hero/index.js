@@ -3,7 +3,9 @@ import { motion } from 'framer-motion'
 import React from 'react'
 
 import useIsClient from '../../../hooks/useIsClient'
+import { useBlocks } from '../../../hooks/useTranslation'
 import { textReveal } from '../../../utils/animations'
+import { Text } from '../../../utils/Text'
 
 export const Hero = (props) => {
   const { isMobile } = useIsClient()
@@ -17,8 +19,10 @@ export const Hero = (props) => {
       </Typography.Title>
       <p className="text-appear-wrapper">
         <motion.span animate="visible" initial="hidden" variants={textReveal}>
-          Du wurdest eingeladen mit ein paar Klicks etwas fürs Klima zu tun! Los
-          geht’s{isMobile ? ` 👇` : ` 👉`}
+          <Text
+            block={useBlocks('header.body')}
+            vars={{ emoji: isMobile ? ` 👇` : ` 👉` }}
+          />
         </motion.span>
       </p>
 
