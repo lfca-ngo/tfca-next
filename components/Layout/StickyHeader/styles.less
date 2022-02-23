@@ -1,22 +1,33 @@
 @import '../../../styles/vars.less';
 @import '../../../styles/fonts.less';
 
-@header-height-mini: 75px;
-@header-height: 420px;
+header.header {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  @media @desktop {
+    align-items: flex-start;
+  }
+}
 
 .header-inner {
   height: @header-height-mini;
   position: fixed;
+  z-index: 1001;
   top: 0;
   width: 100%;
   padding: 10px 15px;
   background: @white;
-  display: flex;
-  justify-content: space-between;
-  z-index: 10;
-  transform: translate3d(0, 0, 0);
 
-  @media (min-width: @screen-md) {
+  .header-inner-content {
+    max-width: @container-width;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    transform: translate3d(0, 0, 0);
+  }
+
+  @media @desktop {
     width: 50%;
     height: auto;
     padding: 25px 25px;
@@ -61,6 +72,7 @@
   background: @white;
   z-index: 1000;
   transform: translate3d(0, 0, 0);
+  max-width: @container-action-width;
 
   footer.footer {
     display: none;
@@ -70,7 +82,8 @@
     display: block;
   }
 
-  @media (min-width: @screen-lg) {
+  @media @desktop {
+    max-width: none;
     width: 50%;
     height: 100%;
     top: 0;
@@ -89,27 +102,27 @@
   }
 
   .placeholder {
-    @media (min-width: @screen-md) {
+    @media @desktop {
       height: 110px;
     }
   }
 
   .content {
-    padding: 30px + @header-height-mini 25px 50px;
-    @media (min-width: @screen-md) {
+    padding: 30px + @header-height-mini @default-section-padding 50px;
+    @media @desktop {
       padding: 50px 45px;
     }
     h1 {
       font-size: 43px;
       .font-bold();
-      @media (min-width: @screen-md) {
+      @media @desktop {
         font-size: 60px;
       }
     }
     p {
       font-size: 19px;
       margin-bottom: 20px;
-      @media (min-width: @screen-md) {
+      @media @desktop {
         font-size: 26px;
       }
     }

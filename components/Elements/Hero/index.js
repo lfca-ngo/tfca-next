@@ -47,7 +47,7 @@ export const Hero = (props) => {
           size="large"
           type="primary"
         >
-          <Text block={useBlocks('header.button.primary')} />
+          {text(useBlocks('header.button.primary'))}
         </Button>
       </motion.div>
     </motion.div>

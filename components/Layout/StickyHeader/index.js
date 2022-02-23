@@ -28,12 +28,24 @@ const StickyHeader = () => {
   const [open, setOpen] = useState(false)
   const { customization, progress, setProgress } = useChallenge()
 
+  // Framer animations for the header
   const { scrollY } = useViewportScroll()
   const logoSize = useTransform(scrollY, SCROLL_RANGE, LOGO_SIZE_RANGE)
   const opacity = useTransform(scrollY, SCROLL_RANGE, OPACITY_RANGE)
   const color = useTransform(scrollY, SCROLL_RANGE, COLOR_RANGE)
   const textUp = useTransform(scrollY, SCROLL_RANGE, TEXT_UP_RANGE)
 
+  const dynamicStyles = isMobile
+    ? {
+        logo: { width: logoSize },
+        opacity: { opacity: opacity },
+        textUp: { y: textUp },
+      }
+    : {
+        textUp: { y: TEXT_Y }, // on desktop text is never visible
+      }
+
+  // show progress as soon as the user stars scrolling
   useEffect(
     () =>
       scrollY.onChange((latest) => {
@@ -60,46 +72,41 @@ const StickyHeader = () => {
     ? text(inviteTextCustom, { name: customization.from })
     : text(inviteText)
 
-  const dynamicStyles = isMobile
-    ? {
-        logo: { width: logoSize },
-        opacity: { opacity: opacity },
-        textUp: { y: textUp },
-      }
-    : {
-        textUp: { y: TEXT_Y }, // on desktop text is never visible
-      }
-
   return (
-    <div>
+    <header className="header">
       <motion.div className="header-inner" style={{ background: color }}>
-        <div className="header-logo" onClick={() => setProgress(progress + 1)}>
-          <motion.img src="/images/logo.svg" style={dynamicStyles.logo} />
-        </div>
-        <div className="challenge-bar">
-          <div className="challenge-name text-appear-wrapper">
-            <motion.span style={dynamicStyles.textUp}>
-              Energy Challenge
-            </motion.span>
-          </div>
-          <div className="challenge-invitee text-appear-wrapper">
-            <motion.span style={dynamicStyles.textUp}>{invite}</motion.span>
-          </div>
-        </div>
-
-        <Progress step={progress} total={1} />
-
-        <nav className="header-navigation">
-          <button
-            className={`hamburger hamburger--spin ${open && 'is-active'}`}
-            onClick={toggleMenu}
-            type="button"
+        <div className="header-inner-content">
+          <div
+            className="header-logo"
+            onClick={() => setProgress(progress + 1)}
           >
-            <span className="hamburger-box">
-              <span className="hamburger-inner" />
-            </span>
-          </button>
-        </nav>
+            <motion.img src="/images/logo.svg" style={dynamicStyles.logo} />
+          </div>
+          <div className="challenge-bar">
+            <div className="challenge-name text-appear-wrapper">
+              <motion.span style={dynamicStyles.textUp}>
+                Energy Challenge
+              </motion.span>
+            </div>
+            <div className="challenge-invitee text-appear-wrapper">
+              <motion.span style={dynamicStyles.textUp}>{invite}</motion.span>
+            </div>
+          </div>
+
+          <Progress step={progress} total={1} />
+
+          <nav className="header-navigation">
+            <button
+              className={`hamburger hamburger--spin ${open && 'is-active'}`}
+              onClick={toggleMenu}
+              type="button"
+            >
+              <span className="hamburger-box">
+                <span className="hamburger-inner" />
+              </span>
+            </button>
+          </nav>
+        </div>
       </motion.div>
 
       <div className={`header-outer`}>
@@ -110,7 +117,7 @@ const StickyHeader = () => {
       <Drawer onClose={toggleMenu} placement="left" title="FAQs" visible={open}>
         <QuestionAnswer />
       </Drawer>
-    </div>
+    </header>
   )
 }
 

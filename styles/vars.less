@@ -2,10 +2,10 @@
 
 // Container variables
 @container-width: 1240px;
-@container-width-xl: 1400px;
-@container-width-xxl: 1520px;
-@container-width-xxxl: 1800px;
-@container-width-simple: 860px;
+@container-width-xl: @container-width;
+@container-width-xxl: @container-width;
+@container-width-xxxl: @container-width;
+@container-action-width: 700px;
 @default-section-padding-md: 60px 0;
 @default-section-padding-xs: 40px 0;
 @default-section-padding: 25px;
@@ -96,3 +96,9 @@
 
 // Text
 @text-color: fade(@black, 80%);
+
+// Custom vars
+@header-height-mini: 75px;
+@header-height: 420px;
+
+@desktop: ~'only screen and (min-width: @{screen-lg}) and (max-width: @{screen-xxl-max})';
