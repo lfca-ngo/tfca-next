@@ -131,6 +131,13 @@ export const MetaDataFragment = gql`
       items {
         name
         isoCode
+        icon {
+          url
+        }
+        actionCollection {
+          name
+          slug
+        }
         defaultLanguage {
           name
           isoCode

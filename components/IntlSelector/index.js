@@ -1,117 +1,131 @@
-// require('./styles.less')
+require('./styles.less')
 
-// import { Form, Popover, Select } from 'antd'
-// import { navigate } from 'gatsby'
-// import React from 'react'
+import { Form, Popover, Select } from 'antd'
+import { useRouter } from 'next/router'
+import React from 'react'
+import { isMobile } from 'react-device-detect'
 
-// import { getPrefixByLangAndRegion, isBrowser } from '../../utils'
-// import { useIsMobile } from '../../utils/IsMobileProvider'
-// import { defaultLangKey, defaultRegionKey } from '../../utils/siteConfig'
-// import useIntl from '../../utils/useIntl'
+import { useContent } from '../../hooks/useTranslation'
 
-// const isDefaultLangAndRegion = (activeLanguage, activeRegion) => {
-//   if (
-//     activeRegion.isoCode === defaultRegionKey &&
-//     activeLanguage.isoCode === defaultLangKey
-//   ) {
-//     return true
-//   } else return false
-// }
+export const IntlSelector = () => {
+  const router = useRouter()
+  const { metaData } = useContent()
 
-// const IntlSelector = (props) => {
-//   const { activeLanguage, activeRegion, regions } = useIntl()
-//   const { isMobile } = useIsMobile()
+  const {
+    locale,
+    pathname,
+    query: { actionCollectionSlug, companySlug, shareToken },
+  } = router
 
-//   const goToPage = (prefix) => {
-//     const pathArray = isBrowser() ? window.location.pathname.split('/') : []
-//     const isRoot = isDefaultLangAndRegion(activeLanguage, activeRegion)
-//     const companySubpage = isRoot ? pathArray[1] : pathArray[2]
-//     const companyLink = companySubpage ? `/${companySubpage}` : ''
+  const regions = metaData?.regionsCollection?.items || []
 
-//     if (prefix === '' && companyLink) navigate(`${prefix}${companyLink}`)
-//     else navigate(`/${prefix}${companyLink}`)
-//   }
+  const regionsByActionCollectionSlug = React.useMemo(() => {
+    if (!metaData?.regionsCollection?.items) return {}
 
-//   const handleRegionChange = (regionCode) => {
-//     const newRegion = regions.find((region) => region.isoCode === regionCode)
-//     const prefix = getPrefixByLangAndRegion(
-//       newRegion.defaultLanguage.isoCode,
-//       newRegion.isoCode,
-//       newRegion.languages
-//     )
-//     goToPage(prefix)
-//   }
+    return metaData.regionsCollection.items.reduce((regions, currRegion) => {
+      const actionCollectionSlug = currRegion.actionCollection.slug
+      const languagesByIsoCode = currRegion.languagesCollection.items.reduce(
+        (languages, currLanguage) => {
+          languages[currLanguage.isoCode] = currLanguage
+          return languages
+        },
+        {}
+      )
+      regions[actionCollectionSlug] = {
+        ...currRegion,
+        languagesByIsoCode,
+      }
 
-//   const handleLangChange = (langCode) => {
-//     const prefix = getPrefixByLangAndRegion(
-//       langCode,
-//       activeRegion.isoCode,
-//       activeRegion.languages
-//     )
-//     goToPage(prefix)
-//   }
+      return regions
+    }, {})
+  }, [metaData?.regionsCollection?.items])
 
-//   return (
-//     <div className="intl-selector">
-//       <Popover
-//         content={
-//           <div>
-//             <Form layout="vertical">
-//               <Form.Item label="Region">
-//                 <Select
-//                   onChange={handleRegionChange}
-//                   value={activeRegion.isoCode}
-//                 >
-//                   {regions.map((region, i) => (
-//                     <Select.Option key={region.isoCode}>
-//                       <div
-//                         className="intl-icon-full"
-//                         style={{
-//                           backgroundImage: `url(${region.icon.file.url})`,
-//                         }}
-//                       />
-//                       {region.name}
-//                     </Select.Option>
-//                   ))}
-//                 </Select>
-//               </Form.Item>
-//               <Form.Item label="Language">
-//                 <Select
-//                   onChange={handleLangChange}
-//                   value={activeLanguage.isoCode}
-//                 >
-//                   {activeRegion.languages.map((lang, i) => (
-//                     <Select.Option key={lang.isoCode}>
-//                       <div
-//                         className="intl-icon-full"
-//                         style={{
-//                           backgroundImage: `url(${lang.icon.file.url})`,
-//                         }}
-//                       />
-//                       {lang.name}
-//                     </Select.Option>
-//                   ))}
-//                 </Select>
-//               </Form.Item>
-//             </Form>
-//           </div>
-//         }
-//         overlayClassName="intl-selector-popover"
-//         placement={isMobile ? 'right' : 'right'}
-//       >
-//         <div className="intl-icon">
-//           <div
-//             className="intl-icon-half left"
-//             style={{ backgroundImage: `url(${activeRegion.icon.file.url})` }}
-//           />
-//           <div
-//             className="intl-icon-half right"
-//             style={{ backgroundImage: `url(${activeLanguage.icon.file.url})` }}
-//           />
-//         </div>
-//       </Popover>
-//     </div>
-//   )
-// }
+  const activeRegion =
+    regionsByActionCollectionSlug[actionCollectionSlug] ||
+    regionsByActionCollectionSlug['int']
+  const activeLanguage =
+    activeRegion.languagesByIsoCode[locale] || activeRegion.defaultLanguage
 
-// export default IntlSelector
+  return (
+    <div className="intl-selector">
+      <Popover
+        content={
+          <Form layout="vertical">
+            <Form.Item label="Region">
+              <Select
+                onChange={(newActionCollectionSlug) =>
+                  handleRegionOrLocaleChange({ newActionCollectionSlug })
+                }
+                value={activeRegion.actionCollection.slug}
+              >
+                {regions.map((region) => (
+                  <Select.Option key={region.actionCollection.slug}>
+                    <div
+                      className="intl-icon-full"
+                      style={{
+                        backgroundImage: `url(${region.icon.url})`,
+                      }}
+                    />
+                    {region.name}
+                  </Select.Option>
+                ))}
+              </Select>
+            </Form.Item>
+            <Form.Item label="Language">
+              <Select
+                onChange={(newLocale) =>
+                  handleRegionOrLocaleChange({ newLocale })
+                }
+                value={activeLanguage.isoCode}
+              >
+                {activeRegion.languagesCollection.items.map((lang) => (
+                  <Select.Option key={lang.isoCode}>
+                    <div
+                      className="intl-icon-full"
+                      style={{
+                        backgroundImage: `url(${lang.icon.url})`,
+                      }}
+                    />
+                    {lang.name}
+                  </Select.Option>
+                ))}
+              </Select>
+            </Form.Item>
+          </Form>
+        }
+        destroyTooltipOnHide={true}
+        overlayClassName="intl-selector-popover"
+        placement={isMobile ? 'right' : 'right'}
+      >
+        <div className="intl-icon">
+          <div
+            className="intl-icon-half left"
+            style={{ backgroundImage: `url(${activeRegion.icon.url})` }}
+          />
+          <div
+            className="intl-icon-half right"
+            style={{ backgroundImage: `url(${activeLanguage.icon.url})` }}
+          />
+        </div>
+      </Popover>
+    </div>
+  )
+
+  function handleRegionOrLocaleChange({ newActionCollectionSlug, newLocale }) {
+    let path = `/${newActionCollectionSlug || actionCollectionSlug}`
+
+    if (companySlug) {
+      path += `/supporter/${companySlug}`
+    } else if (shareToken) {
+      path = `/invite/${shareToken}`
+    }
+
+    router.push(path, path, {
+      locale:
+        newLocale ||
+        regionsByActionCollectionSlug[
+          newActionCollectionSlug || actionCollectionSlug
+        ].defaultLanguage.isoCode,
+    })
+  }
+}
