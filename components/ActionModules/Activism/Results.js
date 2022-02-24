@@ -28,7 +28,7 @@ const Results = (props) => {
   }
 
   const data = props.data['organizations'] || []
-  console.log(props)
+
   return (
     <div className="step">
       <Category
