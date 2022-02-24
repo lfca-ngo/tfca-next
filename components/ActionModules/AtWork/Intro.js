@@ -1,8 +1,14 @@
-import { Button, Col, Row } from 'antd'
+import { Button, Col, Form, Row } from 'antd'
 import React from 'react'
 
 import { Text, text } from '../../../utils/Text'
+import { MultiSelect } from '../../Elements/MultiSelect'
 import Category from '../ActionWrapper/Category'
+
+const JOB_TYPES = [
+  { label: 'Product & Design', value: 'product-design' },
+  { label: 'Development', value: 'dev' },
+]
 
 const Intro = (props) => {
   const handleNext = () => {
@@ -21,6 +27,15 @@ const Intro = (props) => {
         type={props.name}
       />
       <h2>{text(props.blocks['intro.title'])}</h2>
+
+      <Form onFinish={(v) => console.log(v)}>
+        <Form.Item label="test" name="job-type">
+          <MultiSelect items={JOB_TYPES} />
+        </Form.Item>
+        <Form.Item>
+          <Button htmlType="submit">Submit</Button>
+        </Form.Item>
+      </Form>
 
       <Row gutter={12} style={{ marginBottom: '15px' }}>
         <Col md={12} xs={24}>

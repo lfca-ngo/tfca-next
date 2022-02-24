@@ -19,7 +19,7 @@ import React, { useEffect, useState } from 'react'
 
 import { Text, text } from '../../../utils/Text'
 import CheckList from '../../Elements/CheckList'
-import Category from '../Category'
+import Category from '../ActionWrapper/Category'
 
 const { Option } = Select
 const { TabPane } = Tabs

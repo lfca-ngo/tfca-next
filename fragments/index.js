@@ -111,6 +111,12 @@ export const MetaDataListsFragment = gql`
                 json
               }
             }
+            ... on QuestionAndAnswer {
+              question
+              answer {
+                json
+              }
+            }
           }
         }
       }
@@ -171,8 +177,12 @@ export const MetaDataFragment = gql`
     }
     resourcesCollection(limit: 100) {
       items {
-        key
-        value
+        ... on Block {
+          key
+          value {
+            json
+          }
+        }
       }
     }
   }

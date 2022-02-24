@@ -1,69 +1,39 @@
 require('./styles.less')
 
-import { Button, Collapse, Drawer, Typography } from 'antd'
+import { Drawer } from 'antd'
 import { motion, useTransform, useViewportScroll } from 'framer-motion'
 import React, { useEffect, useState } from 'react'
-import { isMobile } from 'react-device-detect'
 import { scroller } from 'react-scroll'
 
 import { useChallenge } from '../../../hooks/useChallenge'
 import useIsClient from '../../../hooks/useIsClient'
-import { textReveal } from '../../../utils/animations'
+import { useBlocks } from '../../../hooks/useTranslation'
+import { NAVBAR_HEIGHT_XS } from '../../../utils'
+import { text } from '../../../utils/Text'
+import { Hero } from '../../Elements/Hero'
+import { QuestionAnswer } from '../../Elements/QuestionAnswer'
 import SimpleFooter from '../SimpleFooter'
 import Progress from './Progress'
 
-const { Panel } = Collapse
-
-const FAQ = [
-  { answer: 'Hallo', question: 'Was ist das für eine “Challenge”?' },
-  { answer: 'Hllo', question: 'Ich traue euch nicht.Wer seid ihr überhaupt?' },
-]
+const SCROLL_RANGE = [0, 200]
+const LOGO_SIZE_RANGE = [65, 40]
+const COLOR_RANGE = [`rgba(255, 255, 255, 0.5)`, `rgba(255, 255, 255, 1)`]
+const TEXT_UP_RANGE = [30, 0]
+const OPACITY_RANGE = [1, 0]
+const TEXT_Y = 200
 
 const StickyHeader = () => {
-  // const { trackEvent } = useAnalytics()
-  const { isClient, key } = useIsClient()
+  const { isMobile } = useIsClient()
 
   const [open, setOpen] = useState(false)
   const { customization, progress, setProgress } = useChallenge()
 
+  // Framer animations for the header
   const { scrollY } = useViewportScroll()
-  const logoSize = useTransform(scrollY, [0, 200], [65, 40])
-  const opacity = useTransform(scrollY, [0, 200], [1, 0])
-  const color = useTransform(
-    scrollY,
-    [0, 200],
-    [`rgba(255, 255, 255, 0.5)`, `rgba(255, 255, 255, 1)`]
-  )
-  const textUp = useTransform(scrollY, [0, 200], [30, 0])
-
-  useEffect(
-    () =>
-      scrollY.onChange((latest) => {
-        if (progress === 0 && latest > 200) setProgress(0.25)
-        else if (progress === 0.25 && latest <= 200) setProgress(0)
-      }),
-    [scrollY, progress, setProgress]
-  )
-
-  const handleClick = () => {
-    scroller.scrollTo('switch_energy', { offset: -75, smooth: true })
-    // trackEvent('start_challenge')
-  }
-
-  const toggleMenu = () => {
-    setOpen(!open)
-    // trackEvent('toggle_faq', { open: !open })
-  }
-
-  const WORDING = customization
-    ? {
-        invited: `eingeladen von ${customization.from}`,
-        title: `Hi ${customization.to}, bereit für deine Challenge?`,
-      }
-    : {
-        invited: `eingeladen`,
-        title: `Tu was fürs Klima in 5 Minuten`,
-      }
+  const logoSize = useTransform(scrollY, SCROLL_RANGE, LOGO_SIZE_RANGE)
+  const opacity = useTransform(scrollY, SCROLL_RANGE, OPACITY_RANGE)
+  const color = useTransform(scrollY, SCROLL_RANGE, COLOR_RANGE)
+  const textUp = useTransform(scrollY, SCROLL_RANGE, TEXT_UP_RANGE)
 
   const dynamicStyles = isMobile
     ? {
@@ -72,97 +42,82 @@ const StickyHeader = () => {
         textUp: { y: textUp },
       }
     : {
-        textUp: { y: 200 },
+        textUp: { y: TEXT_Y }, // on desktop text is never visible
       }
 
-  if (!isClient) return null
+  // show progress as soon as the user stars scrolling
+  useEffect(
+    () =>
+      scrollY.onChange((latest) => {
+        if (progress === 0 && latest > SCROLL_RANGE[1]) setProgress(0.25)
+        else if (progress === 0.25 && latest <= SCROLL_RANGE[1]) setProgress(0)
+      }),
+    [scrollY, progress, setProgress]
+  )
+
+  const handleClick = () => {
+    scroller.scrollTo('switch_energy', {
+      offset: NAVBAR_HEIGHT_XS,
+      smooth: true,
+    })
+  }
+
+  const toggleMenu = () => {
+    setOpen(!open)
+  }
+
+  const inviteText = useBlocks('header.invited')
+  const inviteTextCustom = useBlocks('header.invited.custom')
+  const invite = customization
+    ? text(inviteTextCustom, { name: customization.from })
+    : text(inviteText)
+
   return (
-    <div>
+    <header className="header">
       <motion.div className="header-inner" style={{ background: color }}>
-        <div className="header-logo" onClick={() => setProgress(progress + 1)}>
-          <motion.img src="/images/logo.svg" style={dynamicStyles.logo} />
-        </div>
-        <div className="challenge-bar">
-          <div className="challenge-name text-appear-wrapper">
-            <motion.span style={dynamicStyles.textUp}>
-              Energy Challenge
-            </motion.span>
-          </div>
-          <div className="challenge-invitee text-appear-wrapper">
-            <motion.span style={dynamicStyles.textUp}>
-              {WORDING.invited}
-            </motion.span>
-          </div>
-        </div>
-
-        <Progress step={progress} total={1} />
-
-        <nav className="header-navigation">
-          <button
-            className={`hamburger hamburger--spin ${open && 'is-active'}`}
-            onClick={toggleMenu}
-            type="button"
+        <div className="header-inner-content">
+          <div
+            className="header-logo"
+            onClick={() => setProgress(progress + 1)}
           >
-            <span className="hamburger-box">
-              <span className="hamburger-inner" />
-            </span>
-          </button>
-        </nav>
+            <motion.img src="/images/logo.svg" style={dynamicStyles.logo} />
+          </div>
+          <div className="challenge-bar">
+            <div className="challenge-name text-appear-wrapper">
+              <motion.span style={dynamicStyles.textUp}>
+                Energy Challenge
+              </motion.span>
+            </div>
+            <div className="challenge-invitee text-appear-wrapper">
+              <motion.span style={dynamicStyles.textUp}>{invite}</motion.span>
+            </div>
+          </div>
+
+          <Progress step={progress} total={1} />
+
+          <nav className="header-navigation">
+            <button
+              className={`hamburger hamburger--spin ${open && 'is-active'}`}
+              onClick={toggleMenu}
+              type="button"
+            >
+              <span className="hamburger-box">
+                <span className="hamburger-inner" />
+              </span>
+            </button>
+          </nav>
+        </div>
       </motion.div>
 
       <div className={`header-outer`}>
         <div className="placeholder" />
-        <motion.div className="content" style={dynamicStyles.opacity}>
-          <Typography.Title className="text-appear-wrapper">
-            <motion.span
-              animate="visible"
-              initial="hidden"
-              variants={textReveal}
-            >
-              {WORDING.title}
-            </motion.span>
-          </Typography.Title>
-          <p className="text-appear-wrapper">
-            <motion.span
-              animate="visible"
-              initial="hidden"
-              variants={textReveal}
-            >
-              Du wurdest eingeladen mit ein paar Klicks etwas fürs Klima zu tun!
-              Los geht’s{isMobile ? ` 👇` : ` 👉`}
-            </motion.span>
-          </p>
-          {isMobile && (
-            <motion.div
-              animate="visible"
-              initial="hidden"
-              variants={textReveal}
-            >
-              <Button
-                block
-                className="ant-btn-xl"
-                onClick={handleClick}
-                size="large"
-                type="primary"
-              >
-                {`Los geht's`}
-              </Button>
-            </motion.div>
-          )}
-        </motion.div>
-
-        {!isMobile && <SimpleFooter />}
+        <Hero dynamicStyles={dynamicStyles} onClick={handleClick} />
+        <SimpleFooter />
       </div>
       <Drawer onClose={toggleMenu} placement="left" title="FAQs" visible={open}>
-        <Collapse accordion>
-          {FAQ.map((faq, index) => (
-            <Panel header={faq.question} key={index}>
-              {faq.answer}
-            </Panel>
-          ))}
-        </Collapse>
+        <QuestionAnswer />
       </Drawer>
-    </div>
+    </header>
   )
 }
 

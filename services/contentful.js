@@ -129,6 +129,7 @@ export const fetchMetaData = async (locale, settingsId) => {
 
   const blocks = resourcesCollection?.items.reduce((allBlocks, block) => {
     const { key, value } = block
+    if (!key) return allBlocks
     return { ...allBlocks, [key]: value }
   }, {})
 

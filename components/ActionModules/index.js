@@ -1,44 +1,35 @@
 import React from 'react'
 
 import ActionWrapper from './ActionWrapper'
+import AtWork from './AtWork'
 import SwitchEnergy from './SwitchEnergy'
 
-const ActionModules = ({ actions, openDrawer, usageStats }) => {
-  if (!actions) return null
+const ActionModules = (props) => {
+  if (!props.actions) return null
 
-  return actions.map((action, i) => {
-    let component
+  const renderAction = (action) => {
     switch (action.actionId) {
       case 'switch_energy':
-        component = <SwitchEnergy key={action.actionId} module={action} />
-        break
+        return <SwitchEnergy key={action.actionId} module={action} />
+      case 'at_work':
+        return <AtWork key={action.actionId} module={action} />
       default:
-        component = <div key={`action-${i}`} />
-        break
+        return <div />
     }
-    const otherUsers = 0 // usageStats[module.actionId] || 0
-    return (
-      <ActionWrapper
-        actionsCount={actions.length}
-        activeStep={i + 1}
-        carbonSaved={action.carbonSaved}
-        color={`color-${(i % 4) + 1}`}
-        key={action.actionId}
-        name={action.actionId}
-        otherUsers={otherUsers}
-        timeToImplement={action.timeToImplement}
-      >
-        {React.cloneElement(component, {
-          color: `color-${(i % 4) + 1}`,
-          conversionValue: action.carbonSaved / 1000,
-          name: module.name,
-          openDrawer: openDrawer,
-          otherUsers: otherUsers,
-          timeToImplement: action.timeToImplement,
-        })}
-      </ActionWrapper>
-    )
-  })
+  }
+
+  return props.actions.map((action, i) => (
+    <ActionWrapper
+      carbonSaved={action.carbonSaved}
+      color={`color-${(i % 4) + 1}`}
+      key={action.actionId}
+      name={action.actionId}
+      otherUsers={0}
+      timeToImplement={action.timeToImplement}
+    >
+      {renderAction(action, i)}
+    </ActionWrapper>
+  ))
 }
 
 export default ActionModules

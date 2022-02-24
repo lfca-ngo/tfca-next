@@ -3,7 +3,7 @@ import React from 'react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 
 import { text } from '../../../utils/Text'
-import Category from '../Category'
+import Category from './Category'
 
 const { TextArea } = Input
 

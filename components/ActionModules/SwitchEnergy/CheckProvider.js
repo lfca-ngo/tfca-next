@@ -3,7 +3,7 @@ import { Alert, Button, ConfigProvider, Form, Select } from 'antd'
 import React, { useEffect, useState } from 'react'
 
 import { Text, text } from '../../../utils/Text'
-import Category from '../Category'
+import Category from '../ActionWrapper/Category'
 
 const { Option } = Select
 

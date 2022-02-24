@@ -5,25 +5,17 @@ import { useChallenge } from '../../../hooks/useChallenge'
 import { useFlow } from '../../../hooks/useFlow'
 import { Share } from '../ActionWrapper/Share'
 import Success from '../ActionWrapper/Success'
-import Calculate from './Calculate'
-import CheckProvider from './CheckProvider'
-import FormSwitch from './FormSwitch'
 import Intro from './Intro'
-import Results from './Results'
 
 const { TabPane } = Tabs
 
 const steps = new Map([
   ['intro', Intro],
-  ['calculate', Calculate],
-  ['check', CheckProvider],
-  ['results', Results],
-  ['form-switch', FormSwitch],
   ['success', Success],
   ['share', Share],
 ])
 
-const SwitchEnergyFlow = (props) => {
+const AtWorkFlow = (props) => {
   const { goTo, index, setStore, store } = useFlow({
     initial: 'intro',
     name: props.name,
@@ -62,4 +54,4 @@ const SwitchEnergyFlow = (props) => {
   )
 }
 
-export default SwitchEnergyFlow
+export default AtWorkFlow
