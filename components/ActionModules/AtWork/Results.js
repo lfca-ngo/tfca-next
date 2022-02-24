@@ -12,13 +12,20 @@ const Results = (props) => {
     props.setProgress(0.3)
     props.goTo('calculate', { smooth: true })
   }
-  const handleUsesAlready = () => {
-    props.setProgress(0.5)
-    props.goTo('check')
+  const handleValuesChange = (changedValues, allValues) => {
+    props.setStore({ ...props.store, ...changedValues })
+  }
+
+  const filterByAttributes = (item) => {
+    const { type } = props.store
+    const tags = item?.tagsCollection?.items?.map((i) => i.key)
+
+    if (tags?.some((t) => type.includes(t))) return true
+    else return false
   }
 
   const data = props.data['actions'] || []
-  console.log(props)
+
   return (
     <div className="step">
       <Category
@@ -33,7 +40,7 @@ const Results = (props) => {
         className="scrollable-filters"
         initialValues={props.store}
         layout="vertical"
-        onFinish={(v) => console.log(v)}
+        onValuesChange={handleValuesChange}
       >
         <Form.Item label="Job Type" name="type">
           <Select size="small">
@@ -56,7 +63,7 @@ const Results = (props) => {
       </Form>
 
       <List
-        dataSource={data}
+        dataSource={data.filter(filterByAttributes)}
         renderItem={(item) => (
           <List.Item>
             <Card>

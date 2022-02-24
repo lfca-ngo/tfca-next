@@ -11,7 +11,7 @@ const Intro = (props) => {
     props.setProgress(0.3)
     props.goTo('results', { smooth: true })
   }
-  console.log(props.store)
+
   return (
     <div className="step">
       <Category
