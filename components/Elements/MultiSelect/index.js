@@ -3,7 +3,12 @@ require('./styles.less')
 import { Checkbox } from 'antd'
 import React, { useState } from 'react'
 
-export const MultiSelect = ({ value = {}, onChange, items = [] }) => {
+export const MultiSelect = ({
+  value = {},
+  onChange,
+  items = [],
+  singleMode,
+}) => {
   const [selected, setSelected] = useState([])
 
   const triggerChange = (changedValue) => {
@@ -15,16 +20,24 @@ export const MultiSelect = ({ value = {}, onChange, items = [] }) => {
   }
 
   const onCheckboxChange = (selectedValues) => {
-    setSelected(selectedValues)
+    let newValues = selectedValues
+    // in single mode only one value can be selected
+    if (singleMode) {
+      // get the latest change by checking the difference to the state
+      const [latestChange] = selectedValues.filter((v) => !selected.includes(v))
+      newValues = [latestChange]
+    }
+
+    setSelected(newValues)
 
     triggerChange({
-      selected: selectedValues,
+      selected: newValues,
     })
   }
 
   return (
     <span className="multi-select">
-      <Checkbox.Group onChange={onCheckboxChange}>
+      <Checkbox.Group onChange={onCheckboxChange} value={selected}>
         {items.map((item, i) => (
           <Checkbox
             key={`selected-${i}`}

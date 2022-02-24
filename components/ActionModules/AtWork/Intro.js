@@ -30,7 +30,7 @@ const Intro = (props) => {
 
       <Form layout="vertical" onFinish={(v) => console.log(v)}>
         <Form.Item label="test" name="job-type">
-          <MultiSelect items={JOB_TYPES} />
+          <MultiSelect items={JOB_TYPES} singleMode />
         </Form.Item>
         <Form.Item>
           <Button htmlType="submit">Submit</Button>
