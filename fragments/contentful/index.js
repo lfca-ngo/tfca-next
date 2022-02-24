@@ -49,6 +49,9 @@ export const ActionFragment = gql`
               }
               tagsCollection(limit: 6) {
                 items {
+                  value {
+                    json
+                  }
                   key
                   icon {
                     url

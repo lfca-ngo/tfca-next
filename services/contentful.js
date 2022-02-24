@@ -133,7 +133,9 @@ export const fetchAllStaticContent = async (locale) => {
 }
 
 // Fetch all action module related content
-
+// to prevent too complex queries we fetch the collection
+// ids in a separate query and afterwards get the content
+// for each action module with a separate api call
 export const fetchCollectionIds = async (locale, slug) => {
   const query = gql`
     query ($locale: String, $slug: String) {
@@ -142,14 +144,12 @@ export const fetchCollectionIds = async (locale, slug) => {
         locale: $locale
         where: { slug: $slug }
       ) {
-        ... on ActionsLocalCollection {
-          items {
-            actionsCollection(limit: 15) {
-              items {
-                ... on Action {
-                  sys {
-                    id
-                  }
+        items {
+          actionsCollection(limit: 15) {
+            items {
+              ... on Action {
+                sys {
+                  id
                 }
               }
             }
@@ -170,6 +170,7 @@ export const fetchCollectionIds = async (locale, slug) => {
   return ids
 }
 
+// Fetch all action module related content
 const fetchActionDataById = async (id, locale) => {
   const query = gql`
     ${ActionFragment}

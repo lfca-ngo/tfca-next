@@ -32,7 +32,6 @@ const ActionWrapper = (props) => {
           {React.cloneElement(props.children, {
             color: props.color,
             name: props.name,
-            startCounter: startCounter,
           })}
         </div>
         <div className="footer">

@@ -5,36 +5,9 @@ import { Text, text } from '../../../utils/Text'
 import { MultiSelect } from '../../Elements/MultiSelect'
 import Category from '../ActionWrapper/Category'
 
-const JOB_TYPES = [
-  {
-    iconUrl:
-      'https://images.ctfassets.net/f3bw2oxveb3i/4PZbes4aWFqxkVyLaWb0vo/0256b0f5743726a3670d7c2fd28c0a2b/aubergine.svg',
-    label: 'Product & Design',
-    value: 'product-design',
-  },
-  {
-    iconUrl:
-      'https://images.ctfassets.net/f3bw2oxveb3i/4PZbes4aWFqxkVyLaWb0vo/0256b0f5743726a3670d7c2fd28c0a2b/aubergine.svg',
-    label: 'Development',
-    value: 'dev',
-  },
-  {
-    iconUrl:
-      'https://images.ctfassets.net/f3bw2oxveb3i/4PZbes4aWFqxkVyLaWb0vo/0256b0f5743726a3670d7c2fd28c0a2b/aubergine.svg',
-    label: 'Sustainability',
-    value: 'sus',
-  },
-  {
-    iconUrl:
-      'https://images.ctfassets.net/f3bw2oxveb3i/4PZbes4aWFqxkVyLaWb0vo/0256b0f5743726a3670d7c2fd28c0a2b/aubergine.svg',
-    label: 'Other',
-    value: 'other',
-  },
-]
-
 const Intro = (props) => {
+  console.log(props.availableJobTypes)
   const handleNext = (v) => {
-    console.log(v)
     props.setProgress(0.3)
     props.goTo('results', { smooth: true })
   }
@@ -49,7 +22,7 @@ const Intro = (props) => {
 
       <Form layout="vertical" onFinish={handleNext}>
         <Form.Item label="Choose 1 option" name="job-type">
-          <MultiSelect items={JOB_TYPES} singleMode />
+          <MultiSelect items={props.availableJobTypes} singleMode />
         </Form.Item>
         <Form.Item>
           <Button block htmlType="submit" size="large" type="primary">

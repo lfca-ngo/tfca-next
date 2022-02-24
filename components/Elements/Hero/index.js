@@ -27,10 +27,7 @@ export const Hero = (props) => {
       </Typography.Title>
       <p className="text-appear-wrapper">
         <motion.span animate="visible" initial="hidden" variants={textReveal}>
-          <Text
-            block={useBlocks('header.body')}
-            vars={{ emoji: isMobile ? ` 👇` : ` 👉` }}
-          />
+          {text(useBlocks('header.body'), { emoji: isMobile ? ` 👇` : ` 👉` })}
         </motion.span>
       </p>
 
