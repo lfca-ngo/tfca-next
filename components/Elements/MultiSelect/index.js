@@ -1,6 +1,7 @@
 require('./styles.less')
 
 import { Checkbox } from 'antd'
+import Image from 'next/image'
 import React, { useState } from 'react'
 
 export const MultiSelect = ({
@@ -44,7 +45,14 @@ export const MultiSelect = ({
             style={{ lineHeight: '32px' }}
             value={item.value}
           >
-            {item.label}
+            <span className="label-wrapper">
+              {item.iconUrl && (
+                <span className="icon">
+                  <Image height={20} src={item.iconUrl} width={20} />
+                </span>
+              )}
+              {item.label}
+            </span>
           </Checkbox>
         ))}
       </Checkbox.Group>

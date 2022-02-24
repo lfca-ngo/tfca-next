@@ -6,8 +6,18 @@ import { MultiSelect } from '../../Elements/MultiSelect'
 import Category from '../ActionWrapper/Category'
 
 const JOB_TYPES = [
-  { label: 'Product & Design', value: 'product-design' },
-  { label: 'Development', value: 'dev' },
+  {
+    iconUrl:
+      'https://images.ctfassets.net/f3bw2oxveb3i/4PZbes4aWFqxkVyLaWb0vo/0256b0f5743726a3670d7c2fd28c0a2b/aubergine.svg',
+    label: 'Product & Design',
+    value: 'product-design',
+  },
+  {
+    iconUrl:
+      'https://images.ctfassets.net/f3bw2oxveb3i/4PZbes4aWFqxkVyLaWb0vo/0256b0f5743726a3670d7c2fd28c0a2b/aubergine.svg',
+    label: 'Development',
+    value: 'dev',
+  },
 ]
 
 const Intro = (props) => {
