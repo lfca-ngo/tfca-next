@@ -62,6 +62,34 @@ export const ActionFragment = gql`
         listId
         itemsCollection(limit: 5) {
           items {
+            ... on DataOrganization {
+              name
+              tagsCollection(limit: 5) {
+                items {
+                  value {
+                    json
+                  }
+                  key
+                  icon {
+                    url
+                  }
+                }
+              }
+            }
+            ... on DataBank {
+              name
+              typeCollection(limit: 5) {
+                items {
+                  value {
+                    json
+                  }
+                  key
+                  icon {
+                    url
+                  }
+                }
+              }
+            }
             ... on DataWork {
               name
               icon {
