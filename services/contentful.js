@@ -151,6 +151,15 @@ export const fetchCollectionIds = async (locale, slug) => {
                 sys {
                   id
                 }
+                blocksCollection(limit: 1) {
+                  total
+                }
+                dataCollection(limit: 1) {
+                  total
+                }
+                listsCollection(limit: 1) {
+                  total
+                }
               }
             }
           }
@@ -165,7 +174,12 @@ export const fetchCollectionIds = async (locale, slug) => {
 
   const { actionsLocalCollection } = await fetchContent(query, variables)
   const ids = actionsLocalCollection?.items[0]?.actionsCollection?.items?.map(
-    (item) => item.sys.id
+    (item) => ({
+      blocksLimit: item.blocksCollection.total,
+      dataLimit: item.dataCollection.total,
+      id: item.sys.id,
+      listsLimit: item.listsCollection.total,
+    })
   )
   return ids
 }
@@ -174,7 +188,13 @@ export const fetchCollectionIds = async (locale, slug) => {
 const fetchActionDataById = async (id, locale) => {
   const query = gql`
     ${ActionFragment}
-    query ($locale: String, $id: String!) {
+    query (
+      $locale: String
+      $id: String!
+      $dataLimit: Int
+      $blocksLimit: Int
+      $listsLimit: Int
+    ) {
       action(id: $id, locale: $locale) {
         ... on Action {
           ...ActionFragment
@@ -183,7 +203,10 @@ const fetchActionDataById = async (id, locale) => {
     }
   `
   const variables = {
-    id: id,
+    blocksLimit: id.blocksLimit,
+    dataLimit: id.dataLimit,
+    id: id.id,
+    listsLimit: id.listsLimit,
     locale: locale,
   }
 

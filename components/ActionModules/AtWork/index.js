@@ -3,6 +3,7 @@ import React, { useEffect, useMemo } from 'react'
 
 import { useChallenge } from '../../../hooks/useChallenge'
 import { useFlow } from '../../../hooks/useFlow'
+import { getFilterOptions } from '../../../utils'
 import { text } from '../../../utils/Text'
 import { Share } from '../ActionWrapper/Share'
 import Success from '../ActionWrapper/Success'
@@ -26,22 +27,15 @@ const AtWorkFlow = (props) => {
 
   const actions = props.module?.data['actions']
 
-  const availableJobTypes = useMemo(() => {
-    const types = actions?.reduce((acc, action) => {
-      action?.tagsCollection?.items?.forEach((tag) => {
-        if (!acc[tag.key]) {
-          acc[tag.key] = {
-            iconUrl: tag.icon?.url,
-            label: text(tag.value),
-            value: tag.key,
-          }
-        }
-      })
-      return acc
-    }, {})
-    // return as array
-    return Object.keys(types)?.map((type) => types[type])
-  }, [actions])
+  const availableJobTypes = useMemo(
+    () => getFilterOptions(actions, 'tagsCollection'),
+    [actions]
+  )
+
+  const availableJobLevels = useMemo(
+    () => getFilterOptions(actions, 'levelCollection'),
+    [actions]
+  )
 
   const { customization, setProgress } = useChallenge()
 
@@ -58,6 +52,7 @@ const AtWorkFlow = (props) => {
           return (
             <TabPane key={key} tab={`${props.name}`}>
               <Page
+                availableJobLevels={availableJobLevels}
                 availableJobTypes={availableJobTypes}
                 blocks={props.module?.blocks || {}}
                 customization={customization}

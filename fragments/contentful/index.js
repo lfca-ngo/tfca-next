@@ -37,17 +37,28 @@ export const ActionFragment = gql`
     actionId
     carbonSaved
     timeToImplement
-    dataCollection(limit: 3) {
+    dataCollection(limit: $dataLimit) {
       items {
         listId
-        itemsCollection(limit: 10) {
+        itemsCollection(limit: 5) {
           items {
             ... on DataWork {
               name
               description {
                 json
               }
-              tagsCollection(limit: 6) {
+              levelCollection(limit: 5) {
+                items {
+                  value {
+                    json
+                  }
+                  key
+                  icon {
+                    url
+                  }
+                }
+              }
+              tagsCollection(limit: 5) {
                 items {
                   value {
                     json
@@ -73,7 +84,7 @@ export const ActionFragment = gql`
         }
       }
     }
-    listsCollection(limit: 5) {
+    listsCollection(limit: $listsLimit) {
       items {
         listId
         itemsCollection(limit: 5) {
@@ -88,7 +99,7 @@ export const ActionFragment = gql`
         }
       }
     }
-    blocksCollection(limit: 30) {
+    blocksCollection(limit: $blocksLimit) {
       items {
         ... on Block {
           key

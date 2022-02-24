@@ -10,14 +10,10 @@ export const MultiSelect = ({
   items = [],
   singleMode,
 }) => {
-  const [selected, setSelected] = useState([])
+  const [selected, setSelected] = useState(value)
 
   const triggerChange = (changedValue) => {
-    onChange?.({
-      selected,
-      ...value,
-      ...changedValue,
-    })
+    onChange?.(changedValue)
   }
 
   const onCheckboxChange = (selectedValues) => {
@@ -31,9 +27,7 @@ export const MultiSelect = ({
 
     setSelected(newValues)
 
-    triggerChange({
-      selected: newValues,
-    })
+    triggerChange(newValues)
   }
 
   return (

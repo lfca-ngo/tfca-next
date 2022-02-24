@@ -6,12 +6,12 @@ import { MultiSelect } from '../../Elements/MultiSelect'
 import Category from '../ActionWrapper/Category'
 
 const Intro = (props) => {
-  console.log(props.availableJobTypes)
   const handleNext = (v) => {
+    props.setStore({ ...props.store, type: v.type })
     props.setProgress(0.3)
     props.goTo('results', { smooth: true })
   }
-
+  console.log(props.store)
   return (
     <div className="step">
       <Category
@@ -20,8 +20,8 @@ const Intro = (props) => {
       />
       <h2>{text(props.blocks['intro.title'])}</h2>
 
-      <Form layout="vertical" onFinish={handleNext}>
-        <Form.Item label="Choose 1 option" name="job-type">
+      <Form initialValues={props.store} layout="vertical" onFinish={handleNext}>
+        <Form.Item label="Choose 1 option" name="type">
           <MultiSelect items={props.availableJobTypes} singleMode />
         </Form.Item>
         <Form.Item>
