@@ -10,7 +10,7 @@ const Results = (props) => {
 
   const handleNext = () => {
     props.setProgress(0.3)
-    props.goTo('calculate', { smooth: true })
+    props.goTo('details', { smooth: true })
   }
   const handleValuesChange = (changedValues, allValues) => {
     props.setStore({ ...props.store, ...changedValues })
@@ -71,6 +71,7 @@ const Results = (props) => {
                 description={<Text block={item.description} />}
                 title={item.name}
               />
+              <Button onClick={handleNext}>Details</Button>
             </Card>
           </List.Item>
         )}

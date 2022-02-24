@@ -5,7 +5,7 @@ import Image from 'next/image'
 import React, { useState } from 'react'
 
 export const MultiSelect = ({
-  value = {},
+  value = [],
   onChange,
   items = [],
   singleMode,

@@ -7,6 +7,7 @@ import { getFilterOptions } from '../../../utils'
 import { text } from '../../../utils/Text'
 import { Share } from '../ActionWrapper/Share'
 import Success from '../ActionWrapper/Success'
+import Details from './Details'
 import Intro from './Intro'
 import Results from './Results'
 
@@ -15,6 +16,7 @@ const { TabPane } = Tabs
 const steps = new Map([
   ['intro', Intro],
   ['results', Results],
+  ['details', Details],
   ['success', Success],
   ['share', Share],
 ])
