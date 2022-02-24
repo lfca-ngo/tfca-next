@@ -12,6 +12,7 @@ const Success = (props) => {
   const { goTo, setProgress } = props
   const benefits = useLists('sharing.benefits')
   const [isGeneratingToken, setIsGeneratingToken] = React.useState(false)
+  const [error, setError] = React.useState('')
 
   useConfetti() // creates confetti
 
@@ -71,12 +72,13 @@ const Success = (props) => {
 
       {/* Loading modal while generating shareToken */}
       <Modal
-        closable={false}
+        closable={!!error}
         footer={null}
-        visible={isGeneratingToken}
+        onCancel={() => setError('')}
+        visible={isGeneratingToken || error}
         wrapClassName={`modal-md ${props.color} has-top`}
       >
-        <h3>Generating link...</h3>
+        {error ? <h3>{error}</h3> : <h3>Generating link...</h3>}
       </Modal>
     </>
   )
@@ -84,7 +86,7 @@ const Success = (props) => {
   async function handleFinish({ invitee1, invitee2, invitee3 }) {
     setIsGeneratingToken(true)
     // Gereate the share token
-    const payload = {
+    const tokenPayload = {
       invitee1,
       invitee2,
       invitee3,
@@ -95,21 +97,30 @@ const Success = (props) => {
       },
     }
 
-    const response = await fetch('/api/create-share-token', {
-      body: JSON.stringify(payload),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      method: 'POST',
-    })
+    try {
+      const response = await fetch('/api/create-shareable-link', {
+        // TODO: Dynamically set actionCollectionSlug
+        body: JSON.stringify({
+          actionCollectionSlug: 'new',
+          tokenPayload,
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        method: 'POST',
+      })
 
-    const { token } = await response.json()
-    props.setStore({
-      ...props.store,
-      shareToken: token,
-    })
+      const { shortLink } = await response.json()
+      props.setStore({
+        ...props.store,
+        shareLink: shortLink,
+      })
 
-    goTo('share')
+      goTo('share')
+    } catch (e) {
+      setError('Failed to generate link')
+      setIsGeneratingToken(false)
+    }
   }
 }
 

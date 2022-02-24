@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "leaders-for-climate-action"
+  },
+  "targets": {
+    "leaders-for-climate-action": {
+      "hosting": {
+        "sharetfca-production": [
+          "sharetfca"
+        ]
+      }
+    }
+  }
+}

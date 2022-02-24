@@ -9,11 +9,9 @@ const { TextArea } = Input
 
 export const Share = (props) => {
   const { goTo, store } = props
-  const { shareToken } = store
+  const { shareLink } = store
 
   const [hasCopied, setHasCopied] = React.useState(false)
-
-  const INVITE_LINK = generateInviteLink()
 
   return (
     <div className="step">
@@ -21,7 +19,7 @@ export const Share = (props) => {
         title={text(props.blocks['category.title'])}
         type={props.name}
       />
-      {!shareToken ? (
+      {!shareLink ? (
         <>
           <h2>Something went wrong...</h2>
           <button onClick={() => goTo('success')}>Go back</button>
@@ -30,8 +28,8 @@ export const Share = (props) => {
         <>
           <h2>Share the link! Go go go!</h2>
 
-          <TextArea autoSize={true} disabled={true} value={INVITE_LINK} />
-          <CopyToClipboard onCopy={() => setHasCopied(true)} text={INVITE_LINK}>
+          <TextArea autoSize={true} disabled={true} value={shareLink} />
+          <CopyToClipboard onCopy={() => setHasCopied(true)} text={shareLink}>
             <Tooltip placement="topLeft" title="Copied" visible={hasCopied}>
               <Button>Copy to clipboard with button</Button>
             </Tooltip>
@@ -40,10 +38,4 @@ export const Share = (props) => {
       )}
     </div>
   )
-
-  function generateInviteLink() {
-    const { host, protocol } = window.location
-
-    return `${protocol}//${host}/de/new/invite/${shareToken}`
-  }
 }
