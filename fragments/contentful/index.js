@@ -44,6 +44,9 @@ export const ActionFragment = gql`
           items {
             ... on DataWork {
               name
+              icon {
+                url
+              }
               description {
                 json
               }

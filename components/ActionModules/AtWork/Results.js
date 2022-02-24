@@ -2,13 +2,15 @@ import { Button, Card, Col, Form, List, Row, Select } from 'antd'
 import React from 'react'
 
 import { Text, text } from '../../../utils/Text'
+import ActionCard from '../../Elements/Cards/ActionCard'
 import Category from '../ActionWrapper/Category'
 
 const Results = (props) => {
   const availableJobTypes = props.availableJobTypes || []
   const availableJobLevels = props.availableJobLevels || []
 
-  const handleNext = () => {
+  const handleNext = (item) => {
+    props.setStore({ ...props.store, item: item })
     props.setProgress(0.3)
     props.goTo('details', { smooth: true })
   }
@@ -17,10 +19,13 @@ const Results = (props) => {
   }
 
   const filterByAttributes = (item) => {
-    const { type } = props.store
+    const { level, type } = props.store
     const tags = item?.tagsCollection?.items?.map((i) => i.key)
+    const levels = item?.levelCollection?.items?.map((i) => i.key)
 
-    if (tags?.some((t) => type.includes(t))) return true
+    const matchesTag = type ? tags?.some((t) => type?.includes(t)) : true
+    const matchesLevel = level ? levels?.some((t) => level?.includes(t)) : true
+    if (matchesTag && matchesLevel) return true
     else return false
   }
 
@@ -43,7 +48,7 @@ const Results = (props) => {
         onValuesChange={handleValuesChange}
       >
         <Form.Item label="Job Type" name="type">
-          <Select size="small">
+          <Select placeholder="Please select" size="small">
             {availableJobTypes.map((item) => (
               <Select.Option key={item.value} value={item.value}>
                 {item.label}
@@ -52,7 +57,7 @@ const Results = (props) => {
           </Select>
         </Form.Item>
         <Form.Item label="Job Level" name="level">
-          <Select size="small">
+          <Select placeholder="Please select" size="small">
             {availableJobLevels.map((item) => (
               <Select.Option key={item.value} value={item.value}>
                 {item.label}
@@ -66,13 +71,7 @@ const Results = (props) => {
         dataSource={data.filter(filterByAttributes)}
         renderItem={(item) => (
           <List.Item>
-            <Card>
-              <Card.Meta
-                description={<Text block={item.description} />}
-                title={item.name}
-              />
-              <Button onClick={handleNext}>Details</Button>
-            </Card>
+            <ActionCard item={item} onNext={handleNext} />
           </List.Item>
         )}
       />
