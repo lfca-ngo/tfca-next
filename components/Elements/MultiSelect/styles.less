@@ -1,0 +1,32 @@
+@import '../../../styles/vars.less';
+@import '../../../styles/fonts.less';
+
+.multi-select {
+  .ant-checkbox-group {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    .ant-checkbox-wrapper {
+      display: flex;
+      width: 100%;
+      background: @white;
+      margin-bottom: 15px;
+      padding: 12px 18px;
+      border-radius: @border-radius-base;
+      box-shadow: @box-shadow-base;
+      transition: all 0.3s ease;
+      &:hover {
+        transform: translateY(-2px);
+      }
+      &:last-child {
+        margin-bottom: 0;
+      }
+      .ant-checkbox + span {
+        padding: 0 12px;
+      }
+    }
+    .ant-checkbox-wrapper + .ant-checkbox-wrapper {
+      margin-left: 0;
+    }
+  }
+}

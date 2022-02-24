@@ -28,7 +28,7 @@ const Intro = (props) => {
       />
       <h2>{text(props.blocks['intro.title'])}</h2>
 
-      <Form onFinish={(v) => console.log(v)}>
+      <Form layout="vertical" onFinish={(v) => console.log(v)}>
         <Form.Item label="test" name="job-type">
           <MultiSelect items={JOB_TYPES} />
         </Form.Item>

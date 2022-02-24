@@ -1,3 +1,5 @@
+require('./styles.less')
+
 import { Checkbox } from 'antd'
 import React, { useState } from 'react'
 
@@ -21,7 +23,7 @@ export const MultiSelect = ({ value = {}, onChange, items = [] }) => {
   }
 
   return (
-    <span>
+    <span className="multi-select">
       <Checkbox.Group onChange={onCheckboxChange}>
         {items.map((item, i) => (
           <Checkbox
