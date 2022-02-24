@@ -2,9 +2,9 @@ import { ArrowLeftOutlined } from '@ant-design/icons'
 import { Button } from 'antd'
 import React from 'react'
 
-import { useBlocks } from '../../hooks/useTranslation'
-import CustomIcon from '../../utils/CustomIcon'
-import { text } from '../../utils/Text'
+import { useBlocks } from '../../../hooks/useTranslation'
+import CustomIcon from '../../../utils/CustomIcon'
+import { text } from '../../../utils/Text'
 
 const Category = (props) => {
   const backString = useBlocks('nav.back')

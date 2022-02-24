@@ -6,7 +6,7 @@ import { useLists } from '../../../hooks/useTranslation'
 import { text } from '../../../utils/Text'
 import CheckList from '../../Elements/CheckList'
 import { NominateNameInput } from '../../Elements/NominateInput'
-import Category from '../Category'
+import Category from './Category'
 
 const Success = (props) => {
   const { goTo, setProgress } = props
