@@ -48,7 +48,7 @@ const Results = (props) => {
         onValuesChange={handleValuesChange}
       >
         <Form.Item label="Job Type" name="type">
-          <Select placeholder="Please select" size="small">
+          <Select allowClear placeholder="Please select" size="small">
             {availableJobTypes.map((item) => (
               <Select.Option key={item.value} value={item.value}>
                 {item.label}
@@ -57,7 +57,7 @@ const Results = (props) => {
           </Select>
         </Form.Item>
         <Form.Item label="Job Level" name="level">
-          <Select placeholder="Please select" size="small">
+          <Select allowClear placeholder="Please select" size="small">
             {availableJobLevels.map((item) => (
               <Select.Option key={item.value} value={item.value}>
                 {item.label}

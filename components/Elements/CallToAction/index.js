@@ -1,38 +1,33 @@
-// require('./styles.less')
+import { Button } from 'antd'
+import React from 'react'
 
-// import { Button, Icon } from 'antd'
-// import React from 'react'
+import { CustomLink } from '../CustomLink'
 
-// import { CustomLink } from '../../Elements'
+const CallToAction = ({ block, ghost, slug, style, text, type, url }) => {
+  // const svg = get(icon, 'svg.content')
 
-// const CallToAction = ({
-//   after,
-//   before,
-//   cta: { slug, text, type, url },
-//   ctaClass,
-//   style,
-// }) => {
-//   const isGhost = type === 'ghost'
-//   const CtaButton = () => (
-//     <>
-//       {before}
-//       <Button
-//         className={`cta ${ctaClass || ''}`}
-//         ghost={isGhost}
-//         size="large"
-//         style={style}
-//         type={isGhost ? 'primary' : type}
-//       >
-//         {text}
-//       </Button>
-//       {after}
-//     </>
-//   )
-//   return (
-//     <CustomLink slug={slug} url={url}>
-//       <CtaButton />
-//     </CustomLink>
-//   )
-// }
+  // const customIcon = svg ? (
+  //   <div className="custom-icon" dangerouslySetInnerHTML={{ __html: svg }} />
+  // ) : null
 
-// export default CallToAction
+  const CtaButton = () => (
+    <Button
+      block={block || null}
+      className={`cta-button`}
+      ghost={ghost}
+      size={size || 'large'}
+      style={style}
+      type={type}
+    >
+      {text}
+      {/* {customIcon} */}
+    </Button>
+  )
+  return (
+    <CustomLink slug={slug} url={url}>
+      <CtaButton />
+    </CustomLink>
+  )
+}
+
+export default CallToAction

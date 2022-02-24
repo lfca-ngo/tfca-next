@@ -31,6 +31,26 @@ export const AllNavsFragment = gql`
   }
 `
 
+export const DataWorkDescriptionFragment = gql`
+  fragment DataWorkDescriptionFragment on Action {
+    sys {
+      id
+    }
+    description {
+      json
+      links {
+        entries {
+          block {
+            ... on CallToAction {
+              text
+            }
+          }
+        }
+      }
+    }
+  }
+`
+
 export const ActionFragment = gql`
   fragment ActionFragment on Action {
     name
@@ -49,6 +69,11 @@ export const ActionFragment = gql`
               }
               description {
                 json
+              }
+              actionsCollection(limit: 5) {
+                items {
+                  text
+                }
               }
               levelCollection(limit: 5) {
                 items {

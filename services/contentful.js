@@ -3,6 +3,7 @@ import { gql, request } from 'graphql-request'
 import {
   ActionFragment,
   AllNavsFragment,
+  DataWorkDescriptionFragment,
   MetaDataFragment,
   MetaDataListsFragment,
 } from '../fragments/contentful'
@@ -212,6 +213,25 @@ const fetchActionDataById = async (id, locale) => {
 
   const { action } = await fetchContent(query, variables)
   return action
+}
+
+// Fetch all action module related content
+const fetchDataWorkById = async (id, locale) => {
+  const query = gql`
+    ${DataWorkDescriptionFragment}
+    query ($locale: String, $id: String!) {
+      dataWork(id: $id, locale: $locale) {
+        ...DataWorkDescriptionFragment
+      }
+    }
+  `
+  const variables = {
+    id: id.id,
+    locale: locale,
+  }
+
+  const { dataWork } = await fetchContent(query, variables)
+  return dataWork
 }
 
 export const fetchAllActions = async (locale, actionCollectionSlug) => {
