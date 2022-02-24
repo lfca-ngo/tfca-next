@@ -4,6 +4,7 @@ import ActionWrapper from './ActionWrapper'
 import Activism from './Activism'
 import AtWork from './AtWork'
 import Banking from './Banking'
+import Politics from './Politics'
 import SwitchEnergy from './SwitchEnergy'
 
 const ActionModules = (props) => {
@@ -19,6 +20,8 @@ const ActionModules = (props) => {
         return <Banking key={action.actionId} module={action} />
       case 'activism':
         return <Activism key={action.actionId} module={action} />
+      case 'politics':
+        return <Politics key={action.actionId} module={action} />
       default:
         return <div />
     }

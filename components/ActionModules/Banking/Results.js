@@ -6,8 +6,7 @@ import ActionCard from '../../Elements/Cards/ActionCard'
 import Category from '../ActionWrapper/Category'
 
 const Results = (props) => {
-  const availableJobTypes = props.availableJobTypes || []
-  const availableJobLevels = props.availableJobLevels || []
+  const availableBankingTypes = props.availableBankingTypes || []
 
   const handleNext = (item) => {
     props.setStore({ ...props.store, item: item })
@@ -19,17 +18,16 @@ const Results = (props) => {
   }
 
   const filterByAttributes = (item) => {
-    const { level, type } = props.store
-    const tags = item?.tagsCollection?.items?.map((i) => i.key)
-    const levels = item?.levelCollection?.items?.map((i) => i.key)
+    const { type } = props.store
+    const types = item?.typeCollection?.items?.map((i) => i.key)
 
-    const matchesTag = type ? tags?.some((t) => type?.includes(t)) : true
-    const matchesLevel = level ? levels?.some((t) => level?.includes(t)) : true
-    if (matchesTag && matchesLevel) return true
+    const matchesType = type ? types?.some((t) => type?.includes(t)) : true
+
+    if (matchesType) return true
     else return false
   }
 
-  const data = props.data['actions'] || []
+  const data = props.data['banks'] || []
 
   return (
     <div className="step">
@@ -49,16 +47,7 @@ const Results = (props) => {
       >
         <Form.Item label="Job Type" name="type">
           <Select allowClear placeholder="Please select" size="small">
-            {availableJobTypes.map((item) => (
-              <Select.Option key={item.value} value={item.value}>
-                {item.label}
-              </Select.Option>
-            ))}
-          </Select>
-        </Form.Item>
-        <Form.Item label="Job Level" name="level">
-          <Select allowClear placeholder="Please select" size="small">
-            {availableJobLevels.map((item) => (
+            {availableBankingTypes.map((item) => (
               <Select.Option key={item.value} value={item.value}>
                 {item.label}
               </Select.Option>
