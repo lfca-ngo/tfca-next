@@ -6,11 +6,13 @@ import { useFlow } from '../../../hooks/useFlow'
 import { Share } from '../ActionWrapper/Share'
 import Success from '../ActionWrapper/Success'
 import Intro from './Intro'
+import Results from './Results'
 
 const { TabPane } = Tabs
 
 const steps = new Map([
   ['intro', Intro],
+  ['results', Results],
   ['success', Success],
   ['share', Share],
 ])

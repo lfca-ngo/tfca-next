@@ -18,16 +18,25 @@ const JOB_TYPES = [
     label: 'Development',
     value: 'dev',
   },
+  {
+    iconUrl:
+      'https://images.ctfassets.net/f3bw2oxveb3i/4PZbes4aWFqxkVyLaWb0vo/0256b0f5743726a3670d7c2fd28c0a2b/aubergine.svg',
+    label: 'Sustainability',
+    value: 'sus',
+  },
+  {
+    iconUrl:
+      'https://images.ctfassets.net/f3bw2oxveb3i/4PZbes4aWFqxkVyLaWb0vo/0256b0f5743726a3670d7c2fd28c0a2b/aubergine.svg',
+    label: 'Other',
+    value: 'other',
+  },
 ]
 
 const Intro = (props) => {
-  const handleNext = () => {
+  const handleNext = (v) => {
+    console.log(v)
     props.setProgress(0.3)
-    props.goTo('calculate', { smooth: true })
-  }
-  const handleUsesAlready = () => {
-    props.setProgress(0.5)
-    props.goTo('check')
+    props.goTo('results', { smooth: true })
   }
 
   return (
@@ -38,39 +47,16 @@ const Intro = (props) => {
       />
       <h2>{text(props.blocks['intro.title'])}</h2>
 
-      <Form layout="vertical" onFinish={(v) => console.log(v)}>
-        <Form.Item label="test" name="job-type">
+      <Form layout="vertical" onFinish={handleNext}>
+        <Form.Item label="Choose 1 option" name="job-type">
           <MultiSelect items={JOB_TYPES} singleMode />
         </Form.Item>
         <Form.Item>
-          <Button htmlType="submit">Submit</Button>
+          <Button block htmlType="submit" size="large" type="primary">
+            Submit
+          </Button>
         </Form.Item>
       </Form>
-
-      <Row gutter={12} style={{ marginBottom: '15px' }}>
-        <Col md={12} xs={24}>
-          <Button block onClick={handleNext} size="large" type="primary">
-            <Text asString block={props.blocks['intro.button.primary']} />
-          </Button>
-        </Col>
-        <Col md={12} xs={24}>
-          <Button
-            block
-            ghost
-            onClick={handleUsesAlready}
-            size="large"
-            type="primary"
-          >
-            <Text asString block={props.blocks['intro.button.secondary']} />
-          </Button>
-        </Col>
-      </Row>
-
-      <Row>
-        <Col xs={24}>
-          <Text block={props.blocks['intro.hint']} />
-        </Col>
-      </Row>
     </div>
   )
 }

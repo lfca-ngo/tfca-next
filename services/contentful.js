@@ -1,11 +1,11 @@
 import { gql, request } from 'graphql-request'
 
 import {
-  AllActionsFragment,
+  ActionFragment,
   AllNavsFragment,
   MetaDataFragment,
   MetaDataListsFragment,
-} from '../fragments'
+} from '../fragments/contentful'
 import { SETTINGS_ID } from '../utils'
 
 const space = process.env.NEXT_PUBLIC_CF_SPACE_ID
@@ -36,58 +36,6 @@ export const fetchContent = async (query, variables) => {
 // Specific queries are needed because the contentful
 // graphql api has a limit for complexity so we need to
 // split the calls into multiple queries
-export const fetchAllActions = async (locale, slug) => {
-  const query = gql`
-    ${AllActionsFragment}
-
-    query ($locale: String, $slug: String) {
-      actionsLocalCollection(
-        limit: 8
-        locale: $locale
-        where: { slug: $slug }
-      ) {
-        ... on ActionsLocalCollection {
-          ...AllActionsFragment
-        }
-      }
-    }
-  `
-  const variables = {
-    locale: locale,
-    slug: slug,
-  }
-
-  const { actionsLocalCollection } = await fetchContent(query, variables)
-  const [actions] = actionsLocalCollection.items
-
-  const transformed = actions?.actionsCollection?.items.map((item) => {
-    // transform blocks to key value pairs
-    const blocks = item.blocksCollection?.items.reduce((allBlocks, block) => {
-      const { key, value } = block
-      return { ...allBlocks, [key]: value }
-    }, {})
-    // transform lists to key value pairs
-    const lists = item.listsCollection?.items.reduce((allLists, list) => {
-      const { itemsCollection, listId } = list
-      return { ...allLists, [listId]: itemsCollection.items }
-    }, {})
-    // transform data to key value pairs
-    const data = item.dataCollection?.items.reduce((allData, data) => {
-      const { itemsCollection, listId } = data
-      return { ...allData, [listId]: itemsCollection.items }
-    }, {})
-    // replace transformed attributes
-    const transformedActions = {
-      ...item,
-      blocks,
-      data,
-      lists,
-    }
-    return transformedActions
-  })
-
-  return transformed
-}
 
 export const fetchAllNavs = async (locale) => {
   const query = gql`
@@ -182,4 +130,103 @@ export const fetchAllStaticContent = async (locale) => {
     metaDataLists,
     navs,
   }
+}
+
+// Fetch all action module related content
+
+export const fetchCollectionIds = async (locale, slug) => {
+  const query = gql`
+    query ($locale: String, $slug: String) {
+      actionsLocalCollection(
+        limit: 1
+        locale: $locale
+        where: { slug: $slug }
+      ) {
+        ... on ActionsLocalCollection {
+          items {
+            actionsCollection(limit: 15) {
+              items {
+                ... on Action {
+                  sys {
+                    id
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  `
+  const variables = {
+    locale: locale,
+    slug: slug,
+  }
+
+  const { actionsLocalCollection } = await fetchContent(query, variables)
+  const ids = actionsLocalCollection?.items[0]?.actionsCollection?.items?.map(
+    (item) => item.sys.id
+  )
+  return ids
+}
+
+const fetchActionDataById = async (id, locale) => {
+  const query = gql`
+    ${ActionFragment}
+    query ($locale: String, $id: String!) {
+      action(id: $id, locale: $locale) {
+        ... on Action {
+          ...ActionFragment
+        }
+      }
+    }
+  `
+  const variables = {
+    id: id,
+    locale: locale,
+  }
+
+  const { action } = await fetchContent(query, variables)
+  return action
+}
+
+export const fetchAllActions = async (locale, actionCollectionSlug) => {
+  const collectionIds = await fetchCollectionIds(locale, actionCollectionSlug)
+  const promises = collectionIds.map((id) => fetchActionDataById(id, locale))
+
+  const results = await Promise.all(promises)
+  const transformed = transformResults(results)
+
+  return transformed
+}
+
+// Helper function to transform the results
+const transformResults = (results) => {
+  const transformed = results?.map((item) => {
+    // transform blocks to key value pairs
+    const blocks = item.blocksCollection?.items.reduce((allBlocks, block) => {
+      const { key, value } = block
+      return { ...allBlocks, [key]: value }
+    }, {})
+    // transform lists to key value pairs
+    const lists = item.listsCollection?.items.reduce((allLists, list) => {
+      const { itemsCollection, listId } = list
+      return { ...allLists, [listId]: itemsCollection.items }
+    }, {})
+    // transform data to key value pairs
+    const data = item.dataCollection?.items.reduce((allData, data) => {
+      const { itemsCollection, listId } = data
+      return { ...allData, [listId]: itemsCollection.items }
+    }, {})
+    // replace transformed attributes
+    const transformedActions = {
+      ...item,
+      blocks,
+      data,
+      lists,
+    }
+    return transformedActions
+  })
+
+  return transformed
 }

@@ -42,6 +42,20 @@ export const ActionFragment = gql`
         listId
         itemsCollection(limit: 10) {
           items {
+            ... on DataWork {
+              name
+              description {
+                json
+              }
+              tagsCollection(limit: 6) {
+                items {
+                  key
+                  icon {
+                    url
+                  }
+                }
+              }
+            }
             ... on Input {
               key
               label
@@ -92,6 +106,46 @@ export const AllActionsFragment = gql`
       actionsCollection(limit: 10) {
         items {
           ...ActionFragment
+        }
+      }
+    }
+  }
+`
+
+export const AllActionsDataFragment = gql`
+  fragment AllActionsDataFragment on ActionsLocalCollection {
+    items {
+      actionsCollection(limit: 15) {
+        items {
+          ... on Action {
+            dataCollection(limit: 50) {
+              items {
+                ... on Block {
+                  key
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`
+
+export const AllActionsBlocksFragment = gql`
+  fragment AllActionsBlocksFragment on ActionsLocalCollection {
+    items {
+      actionsCollection(limit: 15) {
+        items {
+          ... on Action {
+            blocksCollection(limit: 50) {
+              items {
+                ... on Block {
+                  key
+                }
+              }
+            }
+          }
         }
       }
     }
@@ -184,131 +238,6 @@ export const MetaDataFragment = gql`
           }
         }
       }
-    }
-  }
-`
-
-// Switch for the Climate Api
-export const SwitchRateFragment = gql`
-  fragment SwitchRateFragment on SwitchRate {
-    affiliateLink
-    id
-    name
-    slug
-    foreignId
-    ranking
-    description
-    energyDescription
-    price {
-      basePrice
-      workingPrice
-    }
-    emissions {
-      type
-      value
-    }
-    labels {
-      slug
-      name
-      description
-      authority
-      authorityLink
-      labelOnlineLink
-      image {
-        url
-        width
-        height
-      }
-      thumbnail {
-        url
-        width
-        height
-      }
-    }
-    advantages
-    minimumTerm {
-      unit
-      value
-    }
-    extendedTerm {
-      unit
-      value
-    }
-    cancellationPeriod {
-      unit
-      value
-    }
-    priceGuarantee {
-      date
-      period {
-        unit
-        value
-      }
-    }
-    energyMix {
-      source
-      percent
-    }
-    energyMixYear
-    provider {
-      id
-      name
-      slug
-      tagline
-      legalName
-      about
-      website
-      logo {
-        url
-        width
-        height
-      }
-      robinWoodRating {
-        companyName
-        criteriaId
-        reason
-        note
-        teaser
-        text
-        link
-        recommendation
-      }
-      robinWoodRecommendation {
-        contribution
-        energySources
-        entanglements
-        company
-      }
-      utopiaTestLink
-      robinWoodProviderLink
-      yearFounded
-      shareholders
-      employeeCount
-      customerCount
-      bankAccountsAt
-      address
-      federalState
-      customerServiceEmail
-      customerServicePhone
-      connection
-      connectionDetails
-      legalInfo {
-        termsLink
-        cancellationLink
-        privacyLink
-        debitInfo
-      }
-    }
-    rating {
-      contributionByConsumption
-      contributionPerCustomerAndYear
-      additionalContribution
-      supportsSmallProducers
-      labelOkPower
-      labelGruenerStrom
-      labelTuevNord
-      transparentSources
-      buildsPowerStations
     }
   }
 `
