@@ -5,6 +5,11 @@ import { Text, text } from '../../../utils/Text'
 import { MultiSelect } from '../../Elements/MultiSelect'
 import Category from '../ActionWrapper/Category'
 
+const JOB_TYPES = [
+  { label: 'Product & Design', value: 'product-design' },
+  { label: 'Development', value: 'dev' },
+]
+
 const Intro = (props) => {
   const handleNext = () => {
     props.setProgress(0.3)
@@ -25,7 +30,7 @@ const Intro = (props) => {
 
       <Form onFinish={(v) => console.log(v)}>
         <Form.Item label="test" name="job-type">
-          <MultiSelect items={[{ label: 'Some', value: 'A' }]} />
+          <MultiSelect items={JOB_TYPES} />
         </Form.Item>
         <Form.Item>
           <Button htmlType="submit">Submit</Button>
