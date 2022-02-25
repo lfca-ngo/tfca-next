@@ -1,9 +1,7 @@
 import React from 'react'
 
-import ActionWrapper from './ActionWrapper'
-import Activism from './Activism'
-import AtWork from './AtWork'
-import Banking from './Banking'
+import ActionFinderFlow from './ActionFinder'
+import ActionWrapper from './helpers/ActionWrapper'
 import Politics from './Politics'
 import SwitchEnergy from './SwitchEnergy'
 
@@ -14,12 +12,8 @@ const ActionModules = (props) => {
     switch (action.actionId) {
       case 'switch_energy':
         return <SwitchEnergy key={action.actionId} module={action} />
-      case 'at_work':
-        return <AtWork key={action.actionId} module={action} />
-      case 'banking':
-        return <Banking key={action.actionId} module={action} />
-      case 'activism':
-        return <Activism key={action.actionId} module={action} />
+      case 'action_finder':
+        return <ActionFinderFlow key={action.actionId} module={action} />
       case 'politics':
         return <Politics key={action.actionId} module={action} />
       default:

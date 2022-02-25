@@ -10,7 +10,7 @@ import {
 import { Text, text } from '../../../utils/Text'
 import ProviderCard from '../../Elements/Cards/ProviderCard'
 import CheckList from '../../Elements/CheckList'
-import Category from '../ActionWrapper/Category'
+import Category from '../helpers/Category'
 import { EnergyForm } from './Calculate'
 
 const { Option } = Select

@@ -259,8 +259,14 @@ const transformResults = (results) => {
     }, {})
     // transform data to key value pairs
     const data = item.dataCollection?.items.reduce((allData, data) => {
-      const { itemsCollection, listId } = data
-      return { ...allData, [listId]: itemsCollection.items }
+      const { filterableAttributes, itemsCollection, listId } = data
+      return {
+        ...allData,
+        [listId]: {
+          filterableAttributes,
+          items: itemsCollection.items,
+        },
+      }
     }, {})
     // replace transformed attributes
     const transformedActions = {

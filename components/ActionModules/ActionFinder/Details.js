@@ -3,7 +3,7 @@ import React from 'react'
 
 import { Text, text } from '../../../utils/Text'
 import { MultiSelect } from '../../Elements/MultiSelect'
-import Category from '../ActionWrapper/Category'
+import Category from '../helpers/Category'
 
 const Details = (props) => {
   const item = props.store?.item

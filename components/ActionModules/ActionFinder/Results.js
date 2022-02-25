@@ -3,10 +3,10 @@ import React from 'react'
 
 import { Text, text } from '../../../utils/Text'
 import ActionCard from '../../Elements/Cards/ActionCard'
-import Category from '../ActionWrapper/Category'
+import Category from '../helpers/Category'
 
 const Results = (props) => {
-  const availableBankingTypes = props.availableBankingTypes || []
+  const availableFilters = props.availableFilters || []
 
   const handleNext = (item) => {
     props.setStore({ ...props.store, item: item })
@@ -18,17 +18,25 @@ const Results = (props) => {
   }
 
   const filterByAttributes = (item) => {
-    const { type } = props.store
-    const types = item?.typeCollection?.items?.map((i) => i.key)
+    for (const availableFilter of availableFilters) {
+      const { fieldName } = availableFilter
+      const collectionName = `${fieldName}Collection`
+      const itemValues = item?.[collectionName]?.items?.map((i) => i.key)
 
-    const matchesType = type ? types?.some((t) => type?.includes(t)) : true
+      const storeValues = props.store[fieldName]
 
-    if (matchesType) return true
-    else return false
+      console.log(collectionName, itemValues, storeValues)
+
+      const matches = itemValues
+        ? storeValues?.some((v) => itemValues?.includes(v))
+        : true
+      if (!matches) return false
+    }
+    return true
   }
 
-  const data = props.data['banks'] || []
-
+  const data = props.data['main']?.items || []
+  console.log(data, availableFilters, props.store)
   return (
     <div className="step">
       <Category
@@ -45,15 +53,21 @@ const Results = (props) => {
         layout="vertical"
         onValuesChange={handleValuesChange}
       >
-        <Form.Item label="Job Type" name="type">
-          <Select allowClear placeholder="Please select" size="small">
-            {availableBankingTypes.map((item) => (
-              <Select.Option key={item.value} value={item.value}>
-                {item.label}
-              </Select.Option>
-            ))}
-          </Select>
-        </Form.Item>
+        {availableFilters.map((filter) => (
+          <Form.Item
+            key={filter?.fieldName}
+            label="Job Type"
+            name={filter?.fieldName}
+          >
+            <Select allowClear placeholder="Please select" size="small">
+              {filter?.options.map((item) => (
+                <Select.Option key={item.value} value={item.value}>
+                  {item.label}
+                </Select.Option>
+              ))}
+            </Select>
+          </Form.Item>
+        ))}
       </Form>
 
       <List

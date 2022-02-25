@@ -2,7 +2,7 @@ import { Button, Col, Form, Row } from 'antd'
 import React from 'react'
 
 import { Text, text } from '../../../utils/Text'
-import Category from '../ActionWrapper/Category'
+import Category from '../helpers/Category'
 
 const Intro = (props) => {
   const handleNext = (v) => {

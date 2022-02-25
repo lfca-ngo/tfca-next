@@ -4,8 +4,8 @@ import React, { useEffect, useMemo } from 'react'
 import { useChallenge } from '../../../hooks/useChallenge'
 import { useFlow } from '../../../hooks/useFlow'
 import { text } from '../../../utils/Text'
-import { Share } from '../ActionWrapper/Share'
-import Success from '../ActionWrapper/Success'
+import { Share } from '../helpers/Share'
+import Success from '../helpers/Success'
 import Intro from './Intro'
 
 const { TabPane } = Tabs

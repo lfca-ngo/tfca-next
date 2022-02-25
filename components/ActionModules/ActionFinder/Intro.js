@@ -3,11 +3,15 @@ import React from 'react'
 
 import { Text, text } from '../../../utils/Text'
 import { MultiSelect } from '../../Elements/MultiSelect'
-import Category from '../ActionWrapper/Category'
+import Category from '../helpers/Category'
 
 const Intro = (props) => {
+  // take the first filter for the intro screen
+  const [filterOption] = props.availableFilters || []
+
   const handleNext = (v) => {
-    props.setStore({ ...props.store, type: v.type })
+    const value = v[filterOption?.fieldName]
+    props.setStore({ ...props.store, [filterOption?.fieldName]: value })
     props.setProgress(0.3)
     props.goTo('results', { smooth: true })
   }
@@ -21,8 +25,8 @@ const Intro = (props) => {
       <h2>{text(props.blocks['intro.title'])}</h2>
 
       <Form initialValues={props.store} layout="vertical" onFinish={handleNext}>
-        <Form.Item label="Choose 1 option" name="type">
-          <MultiSelect items={props.availableOrganizationTypes} singleMode />
+        <Form.Item label="Choose 1 option" name={filterOption?.fieldName}>
+          <MultiSelect items={filterOption?.options} singleMode />
         </Form.Item>
         <Form.Item>
           <Button block htmlType="submit" size="large" type="primary">

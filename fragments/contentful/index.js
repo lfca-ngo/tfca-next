@@ -31,20 +31,73 @@ export const AllNavsFragment = gql`
   }
 `
 
-export const DataWorkDescriptionFragment = gql`
-  fragment DataWorkDescriptionFragment on Action {
-    sys {
-      id
+const DataWorkFragment = gql`
+  fragment DataWorkFragment on DataWork {
+    name
+    icon {
+      url
     }
     description {
       json
-      links {
-        entries {
-          block {
-            ... on CallToAction {
-              text
-            }
-          }
+    }
+    actionsCollection(limit: 5) {
+      items {
+        text
+      }
+    }
+    levelsCollection(limit: 5) {
+      items {
+        value {
+          json
+        }
+        key
+        icon {
+          url
+        }
+      }
+    }
+    tagsCollection(limit: 5) {
+      items {
+        value {
+          json
+        }
+        key
+        icon {
+          url
+        }
+      }
+    }
+  }
+`
+
+const DataOrganizationFragment = gql`
+  fragment DataOrganizationFragment on DataOrganization {
+    name
+    tagsCollection(limit: 5) {
+      items {
+        value {
+          json
+        }
+        key
+        icon {
+          url
+        }
+      }
+    }
+  }
+`
+
+const DataBankFragment = gql`
+  fragment DataBankFragment on DataBank {
+    name
+    typeCollection(limit: 5) {
+      items {
+        value {
+          json
+        }
+        key
+        icon {
+          url
         }
       }
     }
@@ -52,6 +105,9 @@ export const DataWorkDescriptionFragment = gql`
 `
 
 export const ActionFragment = gql`
+  ${DataWorkFragment}
+  ${DataOrganizationFragment}
+  ${DataBankFragment}
   fragment ActionFragment on Action {
     name
     actionId
@@ -60,81 +116,17 @@ export const ActionFragment = gql`
     dataCollection(limit: $dataLimit) {
       items {
         listId
+        filterableAttributes
         itemsCollection(limit: 5) {
           items {
             ... on DataOrganization {
-              name
-              tagsCollection(limit: 5) {
-                items {
-                  value {
-                    json
-                  }
-                  key
-                  icon {
-                    url
-                  }
-                }
-              }
+              ...DataOrganizationFragment
             }
             ... on DataBank {
-              name
-              typeCollection(limit: 5) {
-                items {
-                  value {
-                    json
-                  }
-                  key
-                  icon {
-                    url
-                  }
-                }
-              }
+              ...DataBankFragment
             }
             ... on DataWork {
-              name
-              icon {
-                url
-              }
-              description {
-                json
-              }
-              actionsCollection(limit: 5) {
-                items {
-                  text
-                }
-              }
-              levelCollection(limit: 5) {
-                items {
-                  value {
-                    json
-                  }
-                  key
-                  icon {
-                    url
-                  }
-                }
-              }
-              tagsCollection(limit: 5) {
-                items {
-                  value {
-                    json
-                  }
-                  key
-                  icon {
-                    url
-                  }
-                }
-              }
-            }
-            ... on Input {
-              key
-              label
-              valueNumber
-              valueString
-              type
-              icon {
-                url
-              }
+              ...DataWorkFragment
             }
           }
         }
