@@ -18,16 +18,16 @@ const Results = (props) => {
   }
 
   const filterByAttributes = (item) => {
+    // every item needs to pass every filter
+    // as soon as one item fails a filter, return false
     for (const availableFilter of availableFilters) {
       const { fieldName } = availableFilter
       const collectionName = `${fieldName}Collection`
       const itemValues = item?.[collectionName]?.items?.map((i) => i.key)
-
       const storeValues = props.store[fieldName]
+      const isEmpty = !storeValues || storeValues?.length === 0
 
-      console.log(collectionName, itemValues, storeValues)
-
-      const matches = itemValues
+      const matches = !isEmpty
         ? storeValues?.some((v) => itemValues?.includes(v))
         : true
       if (!matches) return false
@@ -36,7 +36,7 @@ const Results = (props) => {
   }
 
   const data = props.data['main']?.items || []
-  console.log(data, availableFilters, props.store)
+
   return (
     <div className="step">
       <Category
@@ -59,7 +59,12 @@ const Results = (props) => {
             label="Job Type"
             name={filter?.fieldName}
           >
-            <Select allowClear placeholder="Please select" size="small">
+            <Select
+              allowClear
+              mode="multiple"
+              placeholder="Please select"
+              size="small"
+            >
               {filter?.options.map((item) => (
                 <Select.Option key={item.value} value={item.value}>
                   {item.label}
