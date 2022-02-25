@@ -9,6 +9,7 @@ export const MultiSelect = ({
   onChange,
   items = [],
   singleMode,
+  onSelect,
 }) => {
   const [selected, setSelected] = useState(value)
 
@@ -17,6 +18,8 @@ export const MultiSelect = ({
   }
 
   const onCheckboxChange = (selectedValues) => {
+    onSelect && onSelect(selectedValues)
+
     let newValues = selectedValues
     // in single mode only one value can be selected
     if (singleMode) {

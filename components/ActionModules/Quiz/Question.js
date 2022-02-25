@@ -1,5 +1,5 @@
 import { Button, Col, Form, Row } from 'antd'
-import React, { useMemo } from 'react'
+import React, { useMemo, useState } from 'react'
 
 import { checkAnswers, transformOption } from '../../../utils'
 import { Text, text } from '../../../utils/Text'
@@ -7,6 +7,8 @@ import { MultiSelect } from '../../Elements/MultiSelect'
 import Category from '../helpers/Category'
 
 const Question = ({ activeQuestion, blocks, name, store }) => {
+  const [status, setStatus] = useState()
+
   const answers = useMemo(() => {
     const correctAnswers = []
     const answerOptions = activeQuestion?.answersCollection?.items?.map(
@@ -25,6 +27,9 @@ const Question = ({ activeQuestion, blocks, name, store }) => {
     const correctAnswers = answers?.correctAnswers
     const selectedAnswers = v[activeQuestion?.questionId]
     const isCorrect = checkAnswers(correctAnswers, selectedAnswers)
+
+    if (!isCorrect) setStatus('error')
+
     console.log(correctAnswers, selectedAnswers, isCorrect)
     // setStore({ ...store, [filterOption?.fieldName]: value })
     // setProgress(0.3)
@@ -37,8 +42,17 @@ const Question = ({ activeQuestion, blocks, name, store }) => {
       <h2>{activeQuestion.question}</h2>
 
       <Form initialValues={store} layout="vertical" onFinish={handleNext}>
-        <Form.Item label="Choose 1 option" name={activeQuestion?.questionId}>
-          <MultiSelect items={answers?.options} singleMode />
+        <Form.Item
+          help="Upps you are wrong!"
+          label="Choose 1 option"
+          name={activeQuestion?.questionId}
+          validateStatus={status}
+        >
+          <MultiSelect
+            items={answers?.options}
+            onSelect={() => setStatus(null)}
+            singleMode
+          />
         </Form.Item>
         <Form.Item>
           <Button block htmlType="submit" size="large" type="primary">
