@@ -3,6 +3,7 @@ import React from 'react'
 import ActionFinderFlow from './ActionFinder'
 import ActionWrapper from './helpers/ActionWrapper'
 import Politics from './Politics'
+import Quiz from './Quiz'
 import SwitchEnergy from './SwitchEnergy'
 
 const ActionModules = (props) => {
@@ -16,6 +17,8 @@ const ActionModules = (props) => {
         return <ActionFinderFlow key={action.actionId} module={action} />
       case 'politics':
         return <Politics key={action.actionId} module={action} />
+      case 'quiz':
+        return <Quiz key={action.actionId} module={action} />
       default:
         return <div />
     }

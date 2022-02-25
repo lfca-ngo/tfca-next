@@ -10,15 +10,21 @@ export const getFilterOptions = (items, fieldName) => {
   const types = items?.reduce((acc, action) => {
     action?.[fieldName]?.items?.forEach((tag) => {
       if (!acc[tag.key]) {
-        acc[tag.key] = {
-          iconUrl: tag.icon?.url,
-          label: text(tag.value),
-          value: tag.key,
-        }
+        acc[tag.key] = transformOption(tag, tag.key)
       }
     })
     return acc
   }, {})
   // return as array
   return Object.keys(types)?.map((type) => types[type])
+}
+
+export const transformOption = (item, key) => ({
+  iconUrl: item.icon?.url,
+  label: text(item.value),
+  value: key,
+})
+
+export const checkAnswers = (arr1, arr2) => {
+  return JSON.stringify(arr1) === JSON.stringify(arr2)
 }

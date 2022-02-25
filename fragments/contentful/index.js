@@ -104,15 +104,42 @@ const DataBankFragment = gql`
   }
 `
 
+const QuizFragment = gql`
+  fragment QuizFragment on Quiz {
+    question
+    questionId
+    answersCollection {
+      items {
+        key
+        value {
+          json
+        }
+        icon {
+          url
+        }
+        isCorrect
+      }
+    }
+  }
+`
+
 export const ActionFragment = gql`
   ${DataWorkFragment}
   ${DataOrganizationFragment}
   ${DataBankFragment}
+  ${QuizFragment}
   fragment ActionFragment on Action {
     name
     actionId
     carbonSaved
     timeToImplement
+    quizCollection(limit: $quizLimit) {
+      items {
+        ... on Quiz {
+          ...QuizFragment
+        }
+      }
+    }
     dataCollection(limit: $dataLimit) {
       items {
         listId

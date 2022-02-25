@@ -152,6 +152,9 @@ export const fetchCollectionIds = async (locale, slug) => {
                 sys {
                   id
                 }
+                quizCollection(limit: 1) {
+                  total
+                }
                 blocksCollection(limit: 1) {
                   total
                 }
@@ -180,6 +183,7 @@ export const fetchCollectionIds = async (locale, slug) => {
       dataLimit: item.dataCollection.total,
       id: item.sys.id,
       listsLimit: item.listsCollection.total,
+      quizLimit: item.quizCollection.total,
     })
   )
   return ids
@@ -195,6 +199,7 @@ const fetchActionDataById = async (id, locale) => {
       $dataLimit: Int
       $blocksLimit: Int
       $listsLimit: Int
+      $quizLimit: Int
     ) {
       action(id: $id, locale: $locale) {
         ... on Action {
@@ -209,29 +214,11 @@ const fetchActionDataById = async (id, locale) => {
     id: id.id,
     listsLimit: id.listsLimit,
     locale: locale,
+    quizLimit: id.quizLimit,
   }
-
+  console.log(variables)
   const { action } = await fetchContent(query, variables)
   return action
-}
-
-// Fetch all action module related content
-const fetchDataWorkById = async (id, locale) => {
-  const query = gql`
-    ${DataWorkDescriptionFragment}
-    query ($locale: String, $id: String!) {
-      dataWork(id: $id, locale: $locale) {
-        ...DataWorkDescriptionFragment
-      }
-    }
-  `
-  const variables = {
-    id: id.id,
-    locale: locale,
-  }
-
-  const { dataWork } = await fetchContent(query, variables)
-  return dataWork
 }
 
 export const fetchAllActions = async (locale, actionCollectionSlug) => {
