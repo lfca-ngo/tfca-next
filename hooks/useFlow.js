@@ -1,22 +1,22 @@
 import { useState } from 'react'
 import { scroller } from 'react-scroll'
 
-import useIsClient from '../hooks/useIsClient'
 import { NAVBAR_HEIGHT_XS } from '../utils'
 
 // helper for managing the flow state of
 // the different action modules
 
 export const useFlow = ({ initial, name }) => {
-  const { isMobile } = useIsClient()
+  // const { isMobile } = useIsClient()
   const [store, setStore] = useState({}) // used to share state between steps
   const [index, set] = useState(initial)
   // const { isMobile } = useIsMobile()
   // const { trackEvent } = useAnalytics()
+
   let baseScrollOptions = {}
-  if (isMobile) {
-    baseScrollOptions.offset = -NAVBAR_HEIGHT_XS
-  }
+  // if (isMobile) {
+  //   baseScrollOptions.offset = NAVBAR_HEIGHT_XS
+  // }
   // on mobile devices, we need to
   // scroll on the whole body to
   // prevent additional scrollbars

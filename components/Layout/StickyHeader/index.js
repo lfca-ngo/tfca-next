@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react'
 import { scroller } from 'react-scroll'
 
 import { useChallenge } from '../../../hooks/useChallenge'
-import useIsClient from '../../../hooks/useIsClient'
+import { useIsMobile } from '../../../hooks/useIsClient'
 import { useBlocks } from '../../../hooks/useTranslation'
 import { NAVBAR_HEIGHT_XS } from '../../../utils'
 import { text } from '../../../utils/Text'
@@ -23,7 +23,7 @@ const OPACITY_RANGE = [1, 0]
 const TEXT_Y = 200
 
 const StickyHeader = () => {
-  const { isMobile } = useIsClient()
+  const isMobile = useIsMobile()
 
   const [open, setOpen] = useState(false)
   const { customization, progress, setProgress } = useChallenge()

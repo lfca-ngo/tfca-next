@@ -3,13 +3,13 @@ import { motion } from 'framer-motion'
 import React from 'react'
 
 import { useChallenge } from '../../../hooks/useChallenge'
-import useIsClient from '../../../hooks/useIsClient'
+import { useIsMobile } from '../../../hooks/useIsClient'
 import { useBlocks } from '../../../hooks/useTranslation'
 import { textReveal } from '../../../utils/animations'
 import { Text, text } from '../../../utils/Text'
 
 export const Hero = (props) => {
-  const { isMobile } = useIsClient()
+  const isMobile = useIsMobile()
   const { customization } = useChallenge()
   const customHeaderText = useBlocks('header.title.custom')
   const headerText = useBlocks('header.title')
