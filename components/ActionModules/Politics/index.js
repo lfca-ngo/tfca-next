@@ -1,10 +1,11 @@
 import { Tabs } from 'antd'
-import React from 'react'
+import React, { useEffect, useMemo } from 'react'
 
 import { useChallenge } from '../../../hooks/useChallenge'
 import { useFlow } from '../../../hooks/useFlow'
-import { Share } from '../ActionWrapper/Share'
-import Success from '../ActionWrapper/Success'
+import { text } from '../../../utils/Text'
+import { Share } from '../helpers/Share'
+import Success from '../helpers/Success'
 import Intro from './Intro'
 
 const { TabPane } = Tabs
@@ -15,7 +16,7 @@ const steps = new Map([
   ['share', Share],
 ])
 
-const AtWorkFlow = (props) => {
+const BankingFlow = (props) => {
   const { goTo, index, setStore, store } = useFlow({
     initial: 'intro',
     name: props.name,
@@ -54,4 +55,4 @@ const AtWorkFlow = (props) => {
   )
 }
 
-export default AtWorkFlow
+export default BankingFlow

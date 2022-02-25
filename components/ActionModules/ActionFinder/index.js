@@ -1,13 +1,13 @@
 import { Tabs } from 'antd'
-import React from 'react'
+import React, { useEffect, useMemo } from 'react'
 
 import { useChallenge } from '../../../hooks/useChallenge'
 import { useFlow } from '../../../hooks/useFlow'
+import { getFilterOptions } from '../../../utils'
+import { text } from '../../../utils/Text'
 import { Share } from '../helpers/Share'
 import Success from '../helpers/Success'
-import Calculate from './Calculate'
-import CheckProvider from './CheckProvider'
-import FormSwitch from './FormSwitch'
+import Details from './Details'
 import Intro from './Intro'
 import Results from './Results'
 
@@ -15,19 +15,30 @@ const { TabPane } = Tabs
 
 const steps = new Map([
   ['intro', Intro],
-  ['calculate', Calculate],
-  ['check', CheckProvider],
   ['results', Results],
-  ['form-switch', FormSwitch],
+  ['details', Details],
   ['success', Success],
   ['share', Share],
 ])
 
-const SwitchEnergyFlow = (props) => {
+const ActionFinderFlow = (props) => {
   const { goTo, index, setStore, store } = useFlow({
     initial: 'intro',
     name: props.name,
   })
+
+  const { filterableAttributes, items } = props.module?.data['main'] || {}
+
+  const availableFilters = useMemo(() => {
+    const filters = []
+    for (const filterableAttribute of filterableAttributes) {
+      const fieldName = filterableAttribute.toLowerCase()
+      const collectionName = `${fieldName}Collection`
+      const options = getFilterOptions(items, collectionName)
+      filters.push({ fieldName, options })
+    }
+    return filters
+  }, [items, filterableAttributes])
 
   const { customization, setProgress } = useChallenge()
 
@@ -44,6 +55,7 @@ const SwitchEnergyFlow = (props) => {
           return (
             <TabPane key={key} tab={`${props.name}`}>
               <Page
+                availableFilters={availableFilters}
                 blocks={props.module?.blocks || {}}
                 customization={customization}
                 data={props.module?.data || {}}
@@ -62,4 +74,4 @@ const SwitchEnergyFlow = (props) => {
   )
 }
 
-export default SwitchEnergyFlow
+export default ActionFinderFlow

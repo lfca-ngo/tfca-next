@@ -31,32 +31,108 @@ export const AllNavsFragment = gql`
   }
 `
 
+const DataWorkFragment = gql`
+  fragment DataWorkFragment on DataWork {
+    name
+    icon {
+      url
+    }
+    description {
+      json
+    }
+    actionsCollection(limit: 5) {
+      items {
+        text
+      }
+    }
+    levelsCollection(limit: 5) {
+      items {
+        value {
+          json
+        }
+        key
+        icon {
+          url
+        }
+      }
+    }
+    tagsCollection(limit: 5) {
+      items {
+        value {
+          json
+        }
+        key
+        icon {
+          url
+        }
+      }
+    }
+  }
+`
+
+const DataOrganizationFragment = gql`
+  fragment DataOrganizationFragment on DataOrganization {
+    name
+    tagsCollection(limit: 5) {
+      items {
+        value {
+          json
+        }
+        key
+        icon {
+          url
+        }
+      }
+    }
+  }
+`
+
+const DataBankFragment = gql`
+  fragment DataBankFragment on DataBank {
+    name
+    typeCollection(limit: 5) {
+      items {
+        value {
+          json
+        }
+        key
+        icon {
+          url
+        }
+      }
+    }
+  }
+`
+
 export const ActionFragment = gql`
+  ${DataWorkFragment}
+  ${DataOrganizationFragment}
+  ${DataBankFragment}
   fragment ActionFragment on Action {
     name
     actionId
     carbonSaved
     timeToImplement
-    dataCollection(limit: 3) {
+    dataCollection(limit: $dataLimit) {
       items {
         listId
-        itemsCollection(limit: 10) {
+        filterableAttributes
+        itemsCollection(limit: 5) {
           items {
-            ... on Input {
-              key
-              label
-              valueNumber
-              valueString
-              type
-              icon {
-                url
-              }
+            ... on DataOrganization {
+              ...DataOrganizationFragment
+            }
+            ... on DataBank {
+              ...DataBankFragment
+            }
+            ... on DataWork {
+              ...DataWorkFragment
             }
           }
         }
       }
     }
-    listsCollection(limit: 5) {
+    listsCollection(limit: $listsLimit) {
       items {
         listId
         itemsCollection(limit: 5) {
@@ -71,7 +147,7 @@ export const ActionFragment = gql`
         }
       }
     }
-    blocksCollection(limit: 30) {
+    blocksCollection(limit: $blocksLimit) {
       items {
         ... on Block {
           key
@@ -92,6 +168,46 @@ export const AllActionsFragment = gql`
       actionsCollection(limit: 10) {
         items {
           ...ActionFragment
+        }
+      }
+    }
+  }
+`
+
+export const AllActionsDataFragment = gql`
+  fragment AllActionsDataFragment on ActionsLocalCollection {
+    items {
+      actionsCollection(limit: 15) {
+        items {
+          ... on Action {
+            dataCollection(limit: 50) {
+              items {
+                ... on Block {
+                  key
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`
+
+export const AllActionsBlocksFragment = gql`
+  fragment AllActionsBlocksFragment on ActionsLocalCollection {
+    items {
+      actionsCollection(limit: 15) {
+        items {
+          ... on Action {
+            blocksCollection(limit: 50) {
+              items {
+                ... on Block {
+                  key
+                }
+              }
+            }
+          }
         }
       }
     }
@@ -184,131 +300,6 @@ export const MetaDataFragment = gql`
           }
         }
       }
-    }
-  }
-`
-
-// Switch for the Climate Api
-export const SwitchRateFragment = gql`
-  fragment SwitchRateFragment on SwitchRate {
-    affiliateLink
-    id
-    name
-    slug
-    foreignId
-    ranking
-    description
-    energyDescription
-    price {
-      basePrice
-      workingPrice
-    }
-    emissions {
-      type
-      value
-    }
-    labels {
-      slug
-      name
-      description
-      authority
-      authorityLink
-      labelOnlineLink
-      image {
-        url
-        width
-        height
-      }
-      thumbnail {
-        url
-        width
-        height
-      }
-    }
-    advantages
-    minimumTerm {
-      unit
-      value
-    }
-    extendedTerm {
-      unit
-      value
-    }
-    cancellationPeriod {
-      unit
-      value
-    }
-    priceGuarantee {
-      date
-      period {
-        unit
-        value
-      }
-    }
-    energyMix {
-      source
-      percent
-    }
-    energyMixYear
-    provider {
-      id
-      name
-      slug
-      tagline
-      legalName
-      about
-      website
-      logo {
-        url
-        width
-        height
-      }
-      robinWoodRating {
-        companyName
-        criteriaId
-        reason
-        note
-        teaser
-        text
-        link
-        recommendation
-      }
-      robinWoodRecommendation {
-        contribution
-        energySources
-        entanglements
-        company
-      }
-      utopiaTestLink
-      robinWoodProviderLink
-      yearFounded
-      shareholders
-      employeeCount
-      customerCount
-      bankAccountsAt
-      address
-      federalState
-      customerServiceEmail
-      customerServicePhone
-      connection
-      connectionDetails
-      legalInfo {
-        termsLink
-        cancellationLink
-        privacyLink
-        debitInfo
-      }
-    }
-    rating {
-      contributionByConsumption
-      contributionPerCustomerAndYear
-      additionalContribution
-      supportsSmallProducers
-      labelOkPower
-      labelGruenerStrom
-      labelTuevNord
-      transparentSources
-      buildsPowerStations
     }
   }
 `

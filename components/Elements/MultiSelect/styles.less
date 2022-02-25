@@ -1,0 +1,51 @@
+@import '../../../styles/vars.less';
+@import '../../../styles/fonts.less';
+
+.multi-select {
+  .ant-checkbox-group {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    .ant-checkbox-wrapper {
+      display: flex;
+      align-items: center;
+      flex-direction: row-reverse;
+      width: 100%;
+      background: fade(@white, 30%);
+      margin-bottom: 10px;
+      padding: 12px 18px;
+      border-radius: @border-radius-base;
+      box-shadow: @box-shadow-base;
+      transition: all 0.3s ease;
+
+      &:hover {
+        transform: translateY(-2px);
+      }
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      &.ant-checkbox-wrapper-checked {
+        background: @white;
+      }
+
+      .ant-checkbox {
+        top: 0;
+      }
+      .ant-checkbox + span {
+        flex: 1;
+        .label-wrapper {
+          display: flex;
+          .icon {
+            margin-right: 10px;
+            align-items: center;
+            display: flex;
+          }
+        }
+      }
+    }
+    .ant-checkbox-wrapper + .ant-checkbox-wrapper {
+      margin-left: 0;
+    }
+  }
+}

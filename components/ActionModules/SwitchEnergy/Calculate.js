@@ -5,7 +5,7 @@ import { isMobile } from 'react-device-detect'
 
 import { text } from '../../../utils/Text'
 import CheckList from '../../Elements/CheckList'
-import Category from '../ActionWrapper/Category'
+import Category from '../helpers/Category'
 
 export const ITEMS = {
   postcode: (blocks) => (
