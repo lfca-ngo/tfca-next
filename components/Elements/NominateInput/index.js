@@ -29,7 +29,7 @@ export const NominateNameInput = ({
       onFocus={onFocus}
       placeholder={placeholder}
       style={{ width: '100%' }}
-      value={value.name || name}
+      value={'name' in value ? value.name : name}
     />
   )
 

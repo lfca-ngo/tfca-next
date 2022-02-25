@@ -5,7 +5,10 @@ import React from 'react'
 const replaceVars = (text, vars) => {
   let s = text
   for (const prop in vars) {
-    s = s.replace(new RegExp('{{' + prop + '}}', 'g'), vars[prop])
+    s =
+      (typeof s === 'string' &&
+        s.replace(new RegExp('{{' + prop + '}}', 'g'), vars[prop])) ||
+      ''
   }
   return s
 }

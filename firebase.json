@@ -1,0 +1,8 @@
+{
+  "hosting": {
+    "appAssociation": "AUTO",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "rewrites": [{ "source": "/**", "dynamicLinks": true }],
+    "target": "sharetfca-production"
+  }
+}
