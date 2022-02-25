@@ -6,7 +6,7 @@ import { Text, text } from '../../../utils/Text'
 import { MultiSelect } from '../../Elements/MultiSelect'
 import Category from '../helpers/Category'
 
-const Question = ({ activeQuestion, blocks, name, store }) => {
+const Question = ({ activeQuestion, blocks, goTo, name, nextKey, store }) => {
   const [status, setStatus] = useState()
 
   const answers = useMemo(() => {
@@ -28,12 +28,8 @@ const Question = ({ activeQuestion, blocks, name, store }) => {
     const selectedAnswers = v[activeQuestion?.questionId]
     const isCorrect = checkAnswers(correctAnswers, selectedAnswers)
 
-    if (!isCorrect) setStatus('error')
-
-    console.log(correctAnswers, selectedAnswers, isCorrect)
-    // setStore({ ...store, [filterOption?.fieldName]: value })
-    // setProgress(0.3)
-    // goTo('results', { smooth: true })
+    if (!isCorrect) return setStatus('error')
+    goTo(nextKey)
   }
 
   return (

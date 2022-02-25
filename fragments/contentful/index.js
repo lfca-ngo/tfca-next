@@ -108,6 +108,9 @@ const QuizFragment = gql`
   fragment QuizFragment on Quiz {
     question
     questionId
+    result {
+      json
+    }
     answersCollection {
       items {
         key

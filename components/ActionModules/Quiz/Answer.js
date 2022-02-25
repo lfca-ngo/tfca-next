@@ -22,7 +22,7 @@ const Answer = (props) => {
         type={props.name}
       />
       {/* <h2>{text(props.blocks['intro.title'])}</h2> */}
-
+      <Text block={props.activeQuestion?.result} />
       <Button block size="large" type="primary">
         Submit
       </Button>

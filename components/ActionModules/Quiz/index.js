@@ -9,6 +9,8 @@ import Success from '../helpers/Success'
 import Answer from './Answer'
 import Question from './Question'
 
+export const ANSWER_SUFFIX = '_answer'
+
 const { TabPane } = Tabs
 
 const QuizFlow = (props) => {
@@ -25,10 +27,10 @@ const QuizFlow = (props) => {
   // that can be accessed via "next" or by calling it's key
   // we store all the answers in the store
   const steps = useMemo(() => {
-    const quizSteps = quizItems.map((item) => [
+    const quizSteps = quizItems.map((item, i) => [
       [item.questionId, { activeQuestion: item, component: Question }],
       [
-        `${item.questionId}_answer`,
+        `${item.questionId}${ANSWER_SUFFIX}`,
         { activeQuestion: item, component: Answer },
       ],
     ])
@@ -40,6 +42,8 @@ const QuizFlow = (props) => {
     ])
   }, [quizItems])
 
+  const stepsKeys = [...steps.keys()]
+
   return (
     <div className="steps-container">
       <Tabs
@@ -48,8 +52,10 @@ const QuizFlow = (props) => {
         destroyInactiveTabPane
         renderTabBar={() => null}
       >
-        {[...steps.keys()].map((key) => {
+        {stepsKeys.map((key, i) => {
           const { activeQuestion, component: Page } = steps.get(key)
+          const nextKey = i <= stepsKeys.length ? stepsKeys[i + 1] : null
+          const prevKey = i > 0 ? stepsKeys[i - 1] : null
           return (
             <TabPane key={key} tab={`${props.name}`}>
               <Page
@@ -60,6 +66,8 @@ const QuizFlow = (props) => {
                 goTo={goTo}
                 lists={props.module?.lists || {}}
                 name={props.name}
+                nextKey={nextKey}
+                prevKey={prevKey}
                 quizItems={quizItems}
                 setProgress={setProgress}
                 setStore={setStore}
