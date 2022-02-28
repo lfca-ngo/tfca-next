@@ -3,8 +3,7 @@ import { Button } from 'antd'
 import { motion, useTransform, useViewportScroll } from 'framer-motion'
 import React, { useState } from 'react'
 
-// import { Link } from 'react-scroll'
-import { useIsMobile } from '../../../hooks/useIsClient'
+import { useActiveAction, useIsMobile } from '../../../hooks/useIsClient'
 
 const SCROLL_RANGE = [0, 200]
 
@@ -13,13 +12,14 @@ export const Header = (props) => {
   const { scrollY } = useViewportScroll()
   const contentWidth = useTransform(scrollY, SCROLL_RANGE, [0, 100])
   const isMobile = useIsMobile()
+  const { activeAction } = useActiveAction()
 
   const toggleMenu = () => {
     setOpen(!open)
   }
 
-  const scroll = () => {
-    const section = document.querySelector('#Food')
+  const scroll = (name) => {
+    const section = document.querySelector(`#${name}`)
     section.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
 
@@ -50,7 +50,7 @@ export const Header = (props) => {
               <Button
                 activeClass="active"
                 containerId="scroll-container"
-                onClick={scroll}
+                onClick={() => scroll(action.name)}
                 smooth
                 type="link"
               >

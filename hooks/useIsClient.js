@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { isMobile as isMobileClient } from 'react-device-detect'
 
-const IsMobileContext = React.createContext()
+const IsClientContext = React.createContext()
 
-export const IsMobileProvider = ({ children }) => {
+export const IsClientProvider = ({ children }) => {
+  const [activeAction, setActiveAction] = useState()
   const [isClient, setClient] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
   const key = isClient ? 'client' : 'server'
@@ -15,13 +16,20 @@ export const IsMobileProvider = ({ children }) => {
   }, [])
 
   return (
-    <IsMobileContext.Provider value={{ isClient, isMobile, key }}>
+    <IsClientContext.Provider
+      value={{ activeAction, isClient, isMobile, key, setActiveAction }}
+    >
       {children}
-    </IsMobileContext.Provider>
+    </IsClientContext.Provider>
   )
 }
 
 export const useIsMobile = () => {
-  const { isMobile } = React.useContext(IsMobileContext)
+  const { isMobile } = React.useContext(IsClientContext)
   return isMobile
+}
+
+export const useActiveAction = () => {
+  const { activeAction, setActiveAction } = React.useContext(IsClientContext)
+  return { activeAction, setActiveAction }
 }

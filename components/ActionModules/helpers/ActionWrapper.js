@@ -1,8 +1,10 @@
 require('./styles.less')
 
 import { motion } from 'framer-motion'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useInView } from 'react-intersection-observer'
 
+import { useActiveAction } from '../../../hooks/useIsClient'
 import { appear } from '../../../utils/animations'
 import ActionStats from './ActionStats'
 
@@ -16,8 +18,19 @@ const ActionWrapper = (props) => {
     // start();
   }
 
+  const { entry, inView, ref } = useInView()
+  const { setActiveAction } = useActiveAction()
+
+  useEffect(() => {
+    if (inView) setActiveAction(props.name)
+  }, [inView])
+
   return (
-    <div className={`action-wrapper ${props.color || ''}`} id={props.name}>
+    <div
+      className={`action-wrapper ${props.color || ''}`}
+      id={props.name}
+      ref={ref}
+    >
       <motion.div
         className="action-container main-container"
         initial={'hidden'}
