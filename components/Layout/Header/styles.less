@@ -2,7 +2,7 @@
 @import '../../../styles/fonts.less';
 
 header.header {
-  flex: 1 0 20%;
+  flex: 1 0 @side-bar-width;
   border-right: 1px solid @black;
   display: flex;
   flex-direction: row;
@@ -12,8 +12,11 @@ header.header {
   }
 
   .logo {
-    border-bottom: 1px solid @black;
     padding: 20px 20px;
+
+    @media @desktop {
+      border-bottom: 1px solid @black;
+    }
   }
 
   .header-content {
@@ -34,8 +37,9 @@ header.header {
       .action-element {
         display: flex;
         padding: 15px 20px;
-        border-bottom: 1px solid @black;
-
+        @media @desktop {
+          border-bottom: 1px solid @black;
+        }
         a {
           display: flex;
           &.active {
