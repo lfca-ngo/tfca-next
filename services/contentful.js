@@ -32,9 +32,8 @@ export const fetchContent = async (query, variables) => {
   // Try getting the data from cache
   try {
     data = JSON.parse(fs.readFileSync(CACHE_PATH, 'utf8'))
-    console.info('Cache hit (contentful)')
   } catch (error) {
-    console.info('Cache miss (contentful)')
+    // Nothing to do
   }
 
   if (!data) {
@@ -60,7 +59,6 @@ export const fetchContent = async (query, variables) => {
     // Write data to cache
     try {
       fs.writeFileSync(CACHE_PATH, JSON.stringify(data), 'utf8')
-      console.info('Wrote to cache (contentful)')
     } catch (e) {
       console.error('Error writing to cache', e)
     }
