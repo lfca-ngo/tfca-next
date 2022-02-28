@@ -16,6 +16,10 @@ export const Header = (props) => {
   const opacity = useTransform(scrollY, SCROLL_RANGE_SHORT, [1, 0])
   const headerWidth = useTransform(scrollY, SCROLL_RANGE, ['100%', '16%'])
   const logoPadding = useTransform(scrollY, SCROLL_RANGE, ['20px', '0px'])
+  const boxShadow = useTransform(scrollY, SCROLL_RANGE, [
+    '0px 10px 10px rgba(0, 0, 0, 0.0)',
+    '0px 10px 10px rgba(0, 0, 0, 0.05)',
+  ])
 
   const { activeAction } = useActiveAction()
 
@@ -29,7 +33,7 @@ export const Header = (props) => {
   }
 
   return (
-    <header className="header">
+    <motion.header className="header" style={{ boxShadow }}>
       <motion.div className="header-start" style={{ width: headerWidth }}>
         <motion.div className="logo" style={{ opacity, padding: logoPadding }}>
           <img src="/images/logo.svg" />
@@ -66,6 +70,6 @@ export const Header = (props) => {
 
         <div className="header-bottom">More ideas?</div>
       </motion.div>
-    </header>
+    </motion.header>
   )
 }
