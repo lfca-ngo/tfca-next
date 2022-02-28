@@ -30,3 +30,16 @@ body {
     margin-right: 12px;
   }
 }
+
+.main-container {
+  max-width: @container-action-width;
+  margin: 0 auto 0 100px;
+}
+
+.hidden {
+  &.md {
+    @media (max-width: @screen-md-max) {
+      display: none;
+    }
+  }
+}

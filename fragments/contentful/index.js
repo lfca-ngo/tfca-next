@@ -172,6 +172,9 @@ export const ActionFragment = gql`
     actionId
     carbonSaved
     timeToImplement
+    icon {
+      url
+    }
     quizCollection(limit: $quizLimit) {
       items {
         ... on Quiz {

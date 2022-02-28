@@ -239,7 +239,15 @@ export const fetchAllActions = async (locale, actionCollectionSlug) => {
 
 // Helper function to transform the results
 const transformResults = (results) => {
+  const nav = []
   const transformed = results?.map((item) => {
+    // create a simple summary element, used in nav
+    nav.push({
+      icon: item.icon?.url || '',
+      id: item.id || '',
+      name: item.name || '',
+    })
+
     // transform blocks to key value pairs
     const blocks = item.blocksCollection?.items.reduce((allBlocks, block) => {
       const { key, value } = block
@@ -271,5 +279,8 @@ const transformResults = (results) => {
     return transformedActions
   })
 
-  return transformed
+  return {
+    items: transformed,
+    nav,
+  }
 }

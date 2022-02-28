@@ -23,7 +23,7 @@ const ActionWrapper = (props) => {
       name={props.name}
     >
       <motion.div
-        className="action-container"
+        className="action-container main-container"
         initial={'hidden'}
         variants={appear}
         whileInView={'visible'}

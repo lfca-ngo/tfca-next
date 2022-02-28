@@ -1,3 +1,5 @@
+require('./styles.less')
+
 import { Button, Typography } from 'antd'
 import { motion } from 'framer-motion'
 import React from 'react'
@@ -19,7 +21,7 @@ export const Hero = (props) => {
     : text(headerText)
 
   return (
-    <motion.div className="content" style={props.dynamicStyles.opacity}>
+    <motion.div className="hero content main-container">
       <Typography.Title className="text-appear-wrapper">
         <motion.span animate="visible" initial="hidden" variants={textReveal}>
           {header}
@@ -38,7 +40,6 @@ export const Hero = (props) => {
         variants={textReveal}
       >
         <Button
-          block
           className="ant-btn-xl"
           onClick={props.onClick}
           size="large"

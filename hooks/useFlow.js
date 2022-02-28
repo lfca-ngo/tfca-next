@@ -11,7 +11,9 @@ export const useFlow = ({ initial, name }) => {
   const [index, set] = useState(initial)
   const isMobile = useIsMobile()
 
-  let baseScrollOptions = {}
+  let baseScrollOptions = {
+    containerId: 'scroll-container',
+  }
   if (isMobile) {
     baseScrollOptions.offset = -NAVBAR_HEIGHT_XS
   }

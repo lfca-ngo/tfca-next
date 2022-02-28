@@ -1,0 +1,22 @@
+@import '../../../styles/vars.less';
+@import '../../../styles/fonts.less';
+
+.hero {
+  @media @desktop {
+    padding: 135px 25px;
+  }
+  h1 {
+    font-size: 43px;
+    .font-bold();
+    @media @desktop {
+      font-size: 60px;
+    }
+  }
+  p {
+    font-size: 19px;
+    margin-bottom: 20px;
+    @media @desktop {
+      font-size: 26px;
+    }
+  }
+}
