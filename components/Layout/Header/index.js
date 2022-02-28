@@ -11,6 +11,9 @@ export const Header = (props) => {
   const [open, setOpen] = useState(false)
   const { scrollY } = useViewportScroll()
   const contentWidth = useTransform(scrollY, SCROLL_RANGE, [0, 375])
+  const opacity = useTransform(scrollY, [0, 100], [1, 0])
+  const headerWidth = useTransform(scrollY, SCROLL_RANGE, ['100%', '16%'])
+  const padding = useTransform(scrollY, SCROLL_RANGE, ['20px', '0px'])
   const isMobile = useIsMobile()
   const { activeAction } = useActiveAction()
 
@@ -25,10 +28,10 @@ export const Header = (props) => {
 
   return (
     <header className="header">
-      <div className="header-start">
-        <div className="logo">
+      <motion.div className="header-start" style={{ width: headerWidth }}>
+        <motion.div className="logo" style={{ opacity, padding }}>
           <img src="/images/logo.svg" />
-        </div>
+        </motion.div>
         <button
           className={`hamburger hamburger--spin ${open && 'is-active'}`}
           onClick={toggleMenu}
@@ -38,7 +41,7 @@ export const Header = (props) => {
             <span className="hamburger-inner" />
           </span>
         </button>
-      </div>
+      </motion.div>
 
       <motion.div
         className="header-content"

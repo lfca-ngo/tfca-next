@@ -11,7 +11,7 @@ header.header {
   z-index: 101;
   top: 0;
   width: 100%;
-  padding: 10px 15px;
+  // padding: 10px 15px;
   background: @light-white;
   height: @header-height-mini;
 
@@ -40,6 +40,10 @@ header.header {
     }
   }
 
+  .hamburger {
+    padding: 0 20px;
+  }
+
   .header-content {
     display: flex;
     height: @header-height-mini;
@@ -47,6 +51,11 @@ header.header {
     flex-direction: row;
     overflow: scroll;
     background: @light-white;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
     // width: 0;
     @media @desktop {
       flex-direction: column;
@@ -57,6 +66,7 @@ header.header {
       display: flex;
       flex-direction: row;
       margin: 0;
+      width: 100%;
       @media @desktop {
         flex-direction: column;
       }
@@ -98,8 +108,11 @@ header.header {
     margin-top: auto;
     padding: 0;
     border-top: 1px solid @black;
+    width: 100%;
+    display: none;
     @media @desktop {
       padding: 12px 20px;
+      display: block;
     }
   }
 }
