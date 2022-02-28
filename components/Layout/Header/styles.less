@@ -2,13 +2,34 @@
 @import '../../../styles/fonts.less';
 
 header.header {
-  flex: 1 0 @side-bar-width;
   border-right: 1px solid @black;
   display: flex;
   flex-direction: row;
 
+  // fix on mobile
+  position: fixed;
+  z-index: 101;
+  top: 0;
+  width: 100%;
+  padding: 10px 15px;
+  background: @light-white;
+  height: @header-height-mini;
+
   @media @desktop {
+    position: relative;
     flex-direction: column;
+    flex: 1 0 @side-bar-width;
+    padding: 0;
+    height: auto;
+  }
+
+  .header-start {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    @media @desktop {
+      display: block;
+    }
   }
 
   .logo {
@@ -24,6 +45,7 @@ header.header {
     height: 100%;
     flex-direction: row;
     overflow: scroll;
+    // width: 0;
     @media @desktop {
       flex-direction: column;
       overflow: auto;

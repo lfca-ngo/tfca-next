@@ -3,8 +3,8 @@ require('./styles.less')
 import { Drawer } from 'antd'
 import { motion, useTransform, useViewportScroll } from 'framer-motion'
 import React, { useEffect, useState } from 'react'
-import { scroller } from 'react-scroll'
 
+// import { scroller } from 'react-scroll'
 import { useChallenge } from '../../../hooks/useChallenge'
 import { useIsMobile } from '../../../hooks/useIsClient'
 import { useBlocks } from '../../../hooks/useTranslation'
@@ -56,10 +56,10 @@ const StickyHeader = () => {
   )
 
   const handleClick = () => {
-    scroller.scrollTo('switch_energy', {
-      offset: NAVBAR_HEIGHT_XS,
-      smooth: true,
-    })
+    // scroller.scrollTo('switch_energy', {
+    //   offset: NAVBAR_HEIGHT_XS,
+    //   smooth: true,
+    // })
   }
 
   const toggleMenu = () => {

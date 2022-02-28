@@ -1,8 +1,8 @@
 require('./styles.less')
 
 import React from 'react'
-import { Element } from 'react-scroll'
 
+// import { Element } from 'react-scroll'
 import { Hero } from '../../Elements/Hero'
 import Template from '../'
 import { Header } from '../Header'
@@ -12,13 +12,13 @@ const SplitLayout = ({ children, nav }) => {
   return (
     <Template>
       <Header actions={nav} />
-      <Element id="scroll-container" name="scroll-container">
+      <div id="scroll-container">
         <main>
           <Nav className="hidden md" />
           <Hero />
           {children}
         </main>
-      </Element>
+      </div>
     </Template>
   )
 }

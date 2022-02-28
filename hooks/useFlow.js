@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { scroller } from 'react-scroll'
 
+// import { scroller } from 'react-scroll'
 import { useIsMobile } from '../hooks/useIsClient'
 import { NAVBAR_HEIGHT_XS } from '../utils'
 
@@ -24,7 +24,7 @@ export const useFlow = ({ initial, name }) => {
       ...additionalScrollOptions,
     }
     set(page)
-    scroller.scrollTo(name, baseScrollOptions)
+    // scroller.scrollTo(name, baseScrollOptions)
   }
 
   return {

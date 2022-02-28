@@ -1,52 +1,70 @@
 require('./styles.less')
+import { Button } from 'antd'
+import { motion, useTransform, useViewportScroll } from 'framer-motion'
 import React, { useState } from 'react'
-import { Element, Link, scroller, scrollSpy } from 'react-scroll'
+
+// import { Link } from 'react-scroll'
+import { useIsMobile } from '../../../hooks/useIsClient'
+
+const SCROLL_RANGE = [0, 200]
 
 export const Header = (props) => {
   const [open, setOpen] = useState(false)
+  const { scrollY } = useViewportScroll()
+  const contentWidth = useTransform(scrollY, SCROLL_RANGE, [0, 100])
+  const isMobile = useIsMobile()
 
   const toggleMenu = () => {
     setOpen(!open)
   }
 
+  const scroll = () => {
+    const section = document.querySelector('#Food')
+    section.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+
   return (
     <header className="header">
-      <div className="logo">
-        <img src="/images/logo.svg" />
+      <div className="header-start">
+        <div className="logo">
+          <img src="/images/logo.svg" />
+        </div>
+        <button
+          className={`hamburger hamburger--spin ${open && 'is-active'}`}
+          onClick={toggleMenu}
+          type="button"
+        >
+          <span className="hamburger-box">
+            <span className="hamburger-inner" />
+          </span>
+        </button>
       </div>
 
-      <button
-        className={`hamburger hamburger--spin ${open && 'is-active'}`}
-        onClick={toggleMenu}
-        type="button"
+      <motion.div
+        className="header-content"
+        style={{ width: isMobile ? contentWidth : 'auto' }}
       >
-        <span className="hamburger-box">
-          <span className="hamburger-inner" />
-        </span>
-      </button>
-
-      <div className="header-content">
         <ul>
           {props.actions?.map((action) => (
             <li className="action-element" key={action.name}>
-              <Link
+              <Button
                 activeClass="active"
                 containerId="scroll-container"
+                onClick={scroll}
                 smooth
-                spy={true}
-                to={action.name}
+                type="link"
               >
                 <div className="icon">
                   <img src={action.icon} />
                 </div>
                 <div className="text">{action.name}</div>
-              </Link>
+              </Button>
             </li>
           ))}
         </ul>
 
         <div className="header-bottom">More ideas?</div>
-      </div>
+      </motion.div>
     </header>
   )
 }

@@ -1,8 +1,8 @@
 import Icon from '@ant-design/icons'
 import { Col, Row, Tag } from 'antd'
 import React, { useState } from 'react'
-import { Link } from 'react-scroll'
 
+// import { Link } from 'react-scroll'
 import IconTimer from '../../../assets/icons/counter.svg'
 import IconKg from '../../../assets/icons/kg.svg'
 import IconUsers from '../../../assets/icons/users.svg'

@@ -2,7 +2,6 @@ require('./styles.less')
 
 import { motion } from 'framer-motion'
 import React, { useState } from 'react'
-import { Element, Link, scroller } from 'react-scroll'
 
 import { appear } from '../../../utils/animations'
 import ActionStats from './ActionStats'
@@ -18,10 +17,7 @@ const ActionWrapper = (props) => {
   }
 
   return (
-    <Element
-      className={`action-wrapper ${props.color || ''}`}
-      name={props.name}
-    >
+    <div className={`action-wrapper ${props.color || ''}`} id={props.name}>
       <motion.div
         className="action-container main-container"
         initial={'hidden'}
@@ -44,7 +40,7 @@ const ActionWrapper = (props) => {
           />
         </div>
       </motion.div>
-    </Element>
+    </div>
   )
 }
 
