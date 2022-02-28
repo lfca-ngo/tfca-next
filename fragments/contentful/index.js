@@ -104,6 +104,19 @@ const DataBankFragment = gql`
   }
 `
 
+const DataInputFragment = gql`
+  fragment DataInputFragment on Input {
+    key
+    label
+    type
+    valueNumber
+    valueString
+    icon {
+      url
+    }
+  }
+`
+
 const CallToActionFragment = gql`
   fragment CallToActionFragment on CallToAction {
     text
@@ -153,6 +166,7 @@ export const ActionFragment = gql`
   ${DataOrganizationFragment}
   ${DataBankFragment}
   ${QuizFragment}
+  ${DataInputFragment}
   fragment ActionFragment on Action {
     name
     actionId
@@ -179,6 +193,9 @@ export const ActionFragment = gql`
             }
             ... on DataWork {
               ...DataWorkFragment
+            }
+            ... on Input {
+              ...DataInputFragment
             }
           }
         }

@@ -66,7 +66,7 @@ export const EnergyForm = ({ blocks, data, initialValues, onFinish }) => {
         <Input.Group>
           <Row gutter={8}>
             <Col xs={isMobile ? 12 : 10}>
-              {ITEMS.users(blocks, data?.input_users)}
+              {ITEMS.users(blocks, data?.input_users?.items)}
             </Col>
             <Col xs={isMobile ? 12 : 14}>{ITEMS.postcode(blocks)}</Col>
           </Row>
@@ -110,7 +110,7 @@ const Calculate = (props) => {
 
       <EnergyForm
         {...props}
-        initialValues={{ users: data?.input_users[0].valueNumber }}
+        initialValues={{ users: data?.input_users?.items[0]?.valueNumber }}
         onFinish={handleFinish}
       />
     </div>

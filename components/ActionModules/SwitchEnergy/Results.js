@@ -128,7 +128,7 @@ const Results = ({
             key={`card-${i}`}
             next={() => {
               setProgress(0.75)
-              goTo('form')
+              goTo('form-switch')
             }}
           />
         )}
