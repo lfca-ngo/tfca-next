@@ -21,19 +21,19 @@ export const Hero = (props) => {
     : text(headerText)
 
   return (
-    <motion.div className="hero content main-container">
-      <Typography.Title className="text-appear-wrapper">
-        <motion.span animate="visible" initial="hidden" variants={textReveal}>
+    <div className="hero content main-container">
+      <Typography.Title>
+        <span animate="visible" initial="hidden" variants={textReveal}>
           {header}
-        </motion.span>
+        </span>
       </Typography.Title>
-      <p className="text-appear-wrapper">
-        <motion.span animate="visible" initial="hidden" variants={textReveal}>
+      <p>
+        <span animate="visible" initial="hidden" variants={textReveal}>
           {text(useBlocks('header.body'), { emoji: isMobile ? ` 👇` : ` 👉` })}
-        </motion.span>
+        </span>
       </p>
 
-      <motion.div
+      <div
         animate="visible"
         className="start-btn"
         initial="hidden"
@@ -47,7 +47,7 @@ export const Hero = (props) => {
         >
           {text(useBlocks('header.button.primary'))}
         </Button>
-      </motion.div>
-    </motion.div>
+      </div>
+    </div>
   )
 }
