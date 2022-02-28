@@ -10,7 +10,7 @@ const SCROLL_RANGE = [0, 200]
 export const Header = (props) => {
   const [open, setOpen] = useState(false)
   const { scrollY } = useViewportScroll()
-  const contentWidth = useTransform(scrollY, SCROLL_RANGE, [0, 100])
+  const contentWidth = useTransform(scrollY, SCROLL_RANGE, [0, 375])
   const isMobile = useIsMobile()
   const { activeAction } = useActiveAction()
 
@@ -22,7 +22,7 @@ export const Header = (props) => {
     const section = document.querySelector(`#${name}`)
     section?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
-  console.log(props.actions)
+
   return (
     <header className="header">
       <div className="header-start">

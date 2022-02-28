@@ -42,25 +42,32 @@ header.header {
 
   .header-content {
     display: flex;
-    height: 100%;
+    height: @header-height-mini;
+    align-items: center;
     flex-direction: row;
     overflow: scroll;
+    background: @light-white;
     // width: 0;
     @media @desktop {
       flex-direction: column;
       overflow: auto;
+      height: 100%;
     }
     ul {
       display: flex;
       flex-direction: row;
+      margin: 0;
       @media @desktop {
         flex-direction: column;
       }
       .action-element {
         display: flex;
-        padding: 15px 20px;
+        padding: 0;
+        margin-left: 20px;
         @media @desktop {
           border-bottom: 1px solid @black;
+          padding: 15px 20px;
+          margin-left: 0;
         }
         &.active {
           .text {
@@ -89,8 +96,11 @@ header.header {
   .header-bottom {
     margin-bottom: 0;
     margin-top: auto;
-    padding: 12px 20px;
+    padding: 0;
     border-top: 1px solid @black;
+    @media @desktop {
+      padding: 12px 20px;
+    }
   }
 }
 
