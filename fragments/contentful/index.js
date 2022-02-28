@@ -104,12 +104,34 @@ const DataBankFragment = gql`
   }
 `
 
+const CallToActionFragment = gql`
+  fragment CallToActionFragment on CallToAction {
+    text
+    type
+    slug
+    url
+    size
+    icon {
+      url
+    }
+    ghost
+  }
+`
+
 const QuizFragment = gql`
+  ${CallToActionFragment}
   fragment QuizFragment on Quiz {
     question
     questionId
     result {
       json
+    }
+    resultActionsCollection(limit: 5) {
+      items {
+        ... on CallToAction {
+          ...CallToActionFragment
+        }
+      }
     }
     answersCollection {
       items {

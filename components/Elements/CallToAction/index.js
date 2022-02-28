@@ -1,21 +1,20 @@
 import { Button } from 'antd'
+import Link from 'next/link'
 import React from 'react'
 
-import { CustomLink } from '../CustomLink'
-
-const CallToAction = ({ block, ghost, slug, style, text, type, url }) => {
+const CallToAction = ({ block, ghost, size, slug, style, text, type, url }) => {
   // const svg = get(icon, 'svg.content')
 
   // const customIcon = svg ? (
   //   <div className="custom-icon" dangerouslySetInnerHTML={{ __html: svg }} />
   // ) : null
-
+  console.log(text)
   const CtaButton = () => (
     <Button
-      block={block || null}
+      block={block}
       className={`cta-button`}
       ghost={ghost}
-      size={size || 'large'}
+      size={size}
       style={style}
       type={type}
     >
@@ -24,9 +23,9 @@ const CallToAction = ({ block, ghost, slug, style, text, type, url }) => {
     </Button>
   )
   return (
-    <CustomLink slug={slug} url={url}>
+    <Link href={slug || url} passHref>
       <CtaButton />
-    </CustomLink>
+    </Link>
   )
 }
 

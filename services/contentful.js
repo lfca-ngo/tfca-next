@@ -216,7 +216,7 @@ const fetchActionDataById = async (id, locale) => {
     locale: locale,
     quizLimit: id.quizLimit,
   }
-  console.log(variables)
+
   const { action } = await fetchContent(query, variables)
   return action
 }

@@ -1,30 +1,32 @@
-import { Button, Col, Form, Row } from 'antd'
+import { Button } from 'antd'
 import React from 'react'
 
 import { Text, text } from '../../../utils/Text'
-import { MultiSelect } from '../../Elements/MultiSelect'
+import CallToAction from '../../Elements/CallToAction'
 import Category from '../helpers/Category'
 
 const Answer = (props) => {
-  // take the first filter for the intro screen
+  const actions = props.activeQuestion?.resultActionsCollection
 
-  const handleNext = (v) => {
-    // const value = v[filterOption?.fieldName]
-    // props.setStore({ ...props.store, [filterOption?.fieldName]: value })
+  const handleNext = () => {
     props.setProgress(0.3)
-    // props.goTo('results', { smooth: true })
+    props.goTo(props.nextKey, { smooth: true })
   }
-  console.log('answer', props)
+  console.log(actions, props)
   return (
     <div className="step">
       <Category
         title={text(props.blocks['category.title'])}
         type={props.name}
       />
-      {/* <h2>{text(props.blocks['intro.title'])}</h2> */}
       <Text block={props.activeQuestion?.result} />
-      <Button block size="large" type="primary">
-        Submit
+
+      {actions?.items?.map((action, i) => (
+        <CallToAction key={`action-${i}`} {...action} />
+      ))}
+
+      <Button block onClick={handleNext} size="large" type="primary">
+        Continue
       </Button>
     </div>
   )
