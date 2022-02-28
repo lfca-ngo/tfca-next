@@ -12,7 +12,7 @@ const Answer = (props) => {
     props.setProgress(0.3)
     props.goTo(props.nextKey, { smooth: true })
   }
-  console.log(actions, props)
+
   return (
     <div className="step">
       <Category

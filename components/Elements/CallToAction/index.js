@@ -8,7 +8,7 @@ const CallToAction = ({ block, ghost, size, slug, style, text, type, url }) => {
   // const customIcon = svg ? (
   //   <div className="custom-icon" dangerouslySetInnerHTML={{ __html: svg }} />
   // ) : null
-  console.log(text)
+
   const CtaButton = () => (
     <Button
       block={block}
