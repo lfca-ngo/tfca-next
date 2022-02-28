@@ -255,9 +255,7 @@ const fetchActionDataById = async (id, locale) => {
 
 export const fetchAllActions = async (locale, actionCollectionSlug) => {
   const collectionIds = await fetchCollectionIds(locale, actionCollectionSlug)
-  const promises = collectionIds.map((id) =>
-    limit(() => fetchActionDataById(id, locale))
-  )
+  const promises = collectionIds.map((id) => fetchActionDataById(id, locale))
 
   const results = await Promise.all(promises)
   const transformed = transformResults(results)
