@@ -1,7 +1,6 @@
 import crypto from 'crypto'
 import fs from 'fs'
 import { gql, request } from 'graphql-request'
-import pLimit from 'p-limit'
 import path from 'path'
 
 import {
@@ -11,8 +10,6 @@ import {
   MetaDataListsFragment,
 } from '../fragments/contentful'
 import { SETTINGS_ID } from '../utils'
-
-const limit = pLimit(1)
 
 const space = process.env.NEXT_PUBLIC_CF_SPACE_ID
 const accessToken = process.env.NEXT_PUBLIC_CF_ACCESS_TOKEN
