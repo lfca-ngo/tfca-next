@@ -2,7 +2,6 @@ require('./styles.less')
 
 import React from 'react'
 
-// import { Element } from 'react-scroll'
 import { Hero } from '../../Elements/Hero'
 import Template from '../'
 import { Header } from '../Header'

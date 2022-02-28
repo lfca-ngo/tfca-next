@@ -3,18 +3,20 @@ import { Button } from 'antd'
 import { motion, useTransform, useViewportScroll } from 'framer-motion'
 import React, { useState } from 'react'
 
-import { useActiveAction, useIsMobile } from '../../../hooks/useIsClient'
+import { useActiveAction } from '../../../hooks/useIsClient'
 
 const SCROLL_RANGE = [0, 200]
+const SCROLL_RANGE_SHORT = [0, 60]
 
 export const Header = (props) => {
   const [open, setOpen] = useState(false)
+  // animations for mobile, the event does not fire on desktop
   const { scrollY } = useViewportScroll()
   const contentWidth = useTransform(scrollY, SCROLL_RANGE, [0, 375])
-  const opacity = useTransform(scrollY, [0, 60], [1, 0])
+  const opacity = useTransform(scrollY, SCROLL_RANGE_SHORT, [1, 0])
   const headerWidth = useTransform(scrollY, SCROLL_RANGE, ['100%', '16%'])
-  const padding = useTransform(scrollY, SCROLL_RANGE, ['20px', '0px'])
-  const isMobile = useIsMobile()
+  const logoPadding = useTransform(scrollY, SCROLL_RANGE, ['20px', '0px'])
+
   const { activeAction } = useActiveAction()
 
   const toggleMenu = () => {
@@ -29,7 +31,7 @@ export const Header = (props) => {
   return (
     <header className="header">
       <motion.div className="header-start" style={{ width: headerWidth }}>
-        <motion.div className="logo" style={{ opacity, padding }}>
+        <motion.div className="logo" style={{ opacity, padding: logoPadding }}>
           <img src="/images/logo.svg" />
         </motion.div>
         <button
@@ -43,10 +45,7 @@ export const Header = (props) => {
         </button>
       </motion.div>
 
-      <motion.div
-        className="header-content"
-        style={{ width: isMobile ? contentWidth : 'auto' }}
-      >
+      <motion.div className="header-content" style={{ width: contentWidth }}>
         <ul>
           {props.actions?.map((action) => (
             <li
@@ -55,7 +54,7 @@ export const Header = (props) => {
               }`}
               key={action.id}
             >
-              <Button onClick={() => scroll(action.id)} smooth type="link">
+              <Button onClick={() => scroll(action.id)} type="link">
                 <div className="icon">
                   <img src={action.icon} />
                 </div>

@@ -29,7 +29,7 @@ const ActionModules = (props) => {
       carbonSaved={action.carbonSaved}
       color={`color-${(i % 4) + 1}`}
       id={action.id}
-      key={action.actionId}
+      key={action.id}
       name={action.name}
       otherUsers={0}
       timeToImplement={action.timeToImplement}
