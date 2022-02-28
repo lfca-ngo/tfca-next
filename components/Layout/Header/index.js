@@ -11,7 +11,7 @@ export const Header = (props) => {
   const [open, setOpen] = useState(false)
   const { scrollY } = useViewportScroll()
   const contentWidth = useTransform(scrollY, SCROLL_RANGE, [0, 375])
-  const opacity = useTransform(scrollY, [0, 100], [1, 0])
+  const opacity = useTransform(scrollY, [0, 60], [1, 0])
   const headerWidth = useTransform(scrollY, SCROLL_RANGE, ['100%', '16%'])
   const padding = useTransform(scrollY, SCROLL_RANGE, ['20px', '0px'])
   const isMobile = useIsMobile()
