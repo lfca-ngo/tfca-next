@@ -17,8 +17,8 @@ const QuizFlow = (props) => {
   const quizItems = props.module?.quizCollection?.items
 
   const { goTo, index, setStore, store } = useFlow({
+    id: props.module?.id,
     initial: quizItems[0]?.questionId,
-    name: props.name,
   })
 
   const { customization, setProgress } = useChallenge()

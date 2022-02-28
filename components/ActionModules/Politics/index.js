@@ -18,8 +18,8 @@ const steps = new Map([
 
 const BankingFlow = (props) => {
   const { goTo, index, setStore, store } = useFlow({
+    id: props.module?.id,
     initial: 'intro',
-    name: props.name,
   })
 
   const { customization, setProgress } = useChallenge()
