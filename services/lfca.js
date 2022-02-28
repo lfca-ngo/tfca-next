@@ -28,7 +28,6 @@ export const fetchData = async (query, variables) => {
           document: query,
           requestHeaders: {
             authorization: `Bearer ${process.env.LFCA_BE_ADMIN_TOKEN}`,
-            'content-type': 'application/json',
           },
           url: process.env.LFCA_BE_URL,
           variables: variables,
