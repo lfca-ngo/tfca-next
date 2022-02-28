@@ -87,13 +87,13 @@ const Results = ({
     <div className="step">
       <Category
         goBack
+        icon={props.icon}
         prev={() => goTo('calculate')}
         title={
           <span>
             {text(blocks['category.title'])} {loading && <LoadingOutlined />}{' '}
           </span>
         }
-        type={name}
       />
       <h2>{text(blocks['results.title'])}</h2>
       <CheckList data={lists.comparison_benefits} />

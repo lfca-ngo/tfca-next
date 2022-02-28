@@ -229,9 +229,9 @@ const FormSwitch = (props) => {
     <div className="step">
       <Category
         goBack
+        icon={props.icon}
         prev={() => props.goTo('results')}
         title={text(props.blocks['category.title'])}
-        type={props.name}
       />
       <h2>Eine sehr gute Wahl. Du hast es fast geschafft!</h2>
       {/* {renderAsHtml(props.module.stepAlreadyDoneText)} */}

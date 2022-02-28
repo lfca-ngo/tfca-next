@@ -16,8 +16,8 @@ const Answer = (props) => {
   return (
     <div className="step">
       <Category
+        icon={props.icon}
         title={text(props.blocks['category.title'])}
-        type={props.name}
       />
       <Text block={props.activeQuestion?.result} />
 

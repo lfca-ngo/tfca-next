@@ -41,6 +41,7 @@ const BankingFlow = (props) => {
                 customization={customization}
                 data={props.module?.data || {}}
                 goTo={goTo}
+                icon={props.module?.icon?.url}
                 lists={props.module?.lists || {}}
                 name={props.name}
                 setProgress={setProgress}

@@ -41,9 +41,9 @@ const Results = (props) => {
     <div className="step">
       <Category
         goBack
+        icon={props.icon}
         prev={() => props.goTo('intro')}
         title={text(props.blocks['category.title'])}
-        type={props.name}
       />
       <h2>{text(props.blocks['intro.title'])}</h2>
 

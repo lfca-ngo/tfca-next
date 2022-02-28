@@ -25,8 +25,8 @@ const Success = (props) => {
     <>
       <div className="step">
         <Category
+          icon={props.icon}
           title={text(props.blocks['category.title'])}
-          type={props.name}
         />
         <h2>
           High five! Planet Erde sagt Danke. Nominiere 3 Freunde und

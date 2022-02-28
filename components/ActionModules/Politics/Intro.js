@@ -14,8 +14,8 @@ const Intro = (props) => {
   return (
     <div className="step">
       <Category
+        icon={props.icon}
         title={text(props.blocks['category.title'])}
-        type={props.name}
       />
       <h2>Hallo David</h2>
     </div>
