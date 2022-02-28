@@ -62,13 +62,17 @@ header.header {
         @media @desktop {
           border-bottom: 1px solid @black;
         }
-        a {
-          display: flex;
-          &.active {
-            .text {
-              margin-left: 16px;
-            }
+        &.active {
+          .text {
+            margin-left: 16px;
           }
+        }
+        .ant-btn {
+          display: flex;
+          margin: 0;
+          padding: 0;
+          line-height: normal;
+          height: auto;
         }
         .icon {
           width: 20px;

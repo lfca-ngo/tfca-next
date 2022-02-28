@@ -20,9 +20,9 @@ export const Header = (props) => {
 
   const scroll = (name) => {
     const section = document.querySelector(`#${name}`)
-    section.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    section?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
-
+  console.log(props.actions)
   return (
     <header className="header">
       <div className="header-start">
@@ -46,14 +46,13 @@ export const Header = (props) => {
       >
         <ul>
           {props.actions?.map((action) => (
-            <li className="action-element" key={action.name}>
-              <Button
-                activeClass="active"
-                containerId="scroll-container"
-                onClick={() => scroll(action.name)}
-                smooth
-                type="link"
-              >
+            <li
+              className={`action-element ${
+                activeAction === action.id ? 'active' : ''
+              }`}
+              key={action.id}
+            >
+              <Button onClick={() => scroll(action.id)} smooth type="link">
                 <div className="icon">
                   <img src={action.icon} />
                 </div>

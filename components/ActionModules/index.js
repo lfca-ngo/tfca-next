@@ -28,6 +28,7 @@ const ActionModules = (props) => {
     <ActionWrapper
       carbonSaved={action.carbonSaved}
       color={`color-${(i % 4) + 1}`}
+      id={action.id}
       key={action.actionId}
       name={action.name}
       otherUsers={0}

@@ -18,17 +18,17 @@ const ActionWrapper = (props) => {
     // start();
   }
 
-  const { entry, inView, ref } = useInView()
+  const { inView, ref } = useInView({ threshold: 0.5 })
   const { setActiveAction } = useActiveAction()
 
   useEffect(() => {
-    if (inView) setActiveAction(props.name)
-  }, [inView])
+    if (inView) setActiveAction(props.id)
+  }, [inView, props.id])
 
   return (
     <div
       className={`action-wrapper ${props.color || ''}`}
-      id={props.name}
+      id={props.id}
       ref={ref}
     >
       <motion.div
