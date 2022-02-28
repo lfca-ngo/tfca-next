@@ -8,6 +8,7 @@ import {
   fetchAllStaticContent,
   fetchContent,
 } from '../../../services/contentful'
+import { fetchData } from '../../../services/lfca'
 
 export default function SupporterPage({ actions }) {
   return (
@@ -29,7 +30,7 @@ export async function getStaticProps({ locale, params }) {
   /**
    * TODO:
    * - Fetch company from firebase
-   * - Fetch completed companyActions from GQL BE
+   * - Fetch completed companyActions from GQL BE (maybe fetch ALL actions once and re-use from cache)
    */
 
   return {
@@ -45,7 +46,7 @@ export async function getStaticProps({ locale, params }) {
 }
 
 export async function getStaticPaths({ locales }) {
-  const query = gql`
+  const actionsLocalCollectionQuery = gql`
     query {
       actionsLocalCollection(limit: 50) {
         items {
@@ -54,19 +55,40 @@ export async function getStaticPaths({ locales }) {
       }
     }
   `
-  const { actionsLocalCollection } = await fetchContent(query)
+  const { actionsLocalCollection } = await fetchContent(
+    actionsLocalCollectionQuery
+  )
 
-  /**
-   * TODO:
-   * - Fetch all supporting companies
-   * - Create paths for all possible combinations of
-   *    - `locales`
-   *    - `actionsLocalCollection`
-   *    - `company`
-   */
+  const qualifiedCompaniesQuery = gql`
+    query qualifiedCompanies($input: QualifiedCompaniesInput) {
+      qualifiedCompanies(input: $input) {
+        company {
+          id
+          micrositeSlug
+          name
+          logoUrl
+        }
+      }
+    }
+  `
+
+  const { qualifiedCompanies } = await fetchData(qualifiedCompaniesQuery)
 
   return {
-    fallback: 'blocking', // TODO: set to `false` once `getStaticPaths` is implemeted
-    paths: [],
+    fallback: false,
+    /**
+     * TODO: Instead of using badge qualification:
+     * - Fetch all supporting companies
+     * - Create paths for all possible combinations of
+     *    - `locales`
+     *    - `actionsLocalCollection`
+     *    - `company`
+     */
+    paths: qualifiedCompanies.map(({ company }) => ({
+      params: {
+        actionCollectionSlug: 'new',
+        companySlug: company.micrositeSlug,
+      },
+    })),
   }
 }

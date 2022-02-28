@@ -1,5 +1,7 @@
+import crypto from 'crypto'
+import fs from 'fs'
 import { gql, request } from 'graphql-request'
-import pLimit from 'p-limit'
+import path from 'path'
 
 import {
   ActionFragment,
@@ -9,31 +11,57 @@ import {
 } from '../fragments/contentful'
 import { SETTINGS_ID } from '../utils'
 
-const limit = pLimit(1)
-
 const space = process.env.NEXT_PUBLIC_CF_SPACE_ID
 const accessToken = process.env.NEXT_PUBLIC_CF_ACCESS_TOKEN
 
 // Generic GraphQL client for contentful used
 // by all subsequent queries, can also called directly
 export const fetchContent = async (query, variables) => {
+  const hash = crypto
+    .createHash('md5')
+    .update(query + JSON.stringify(variables || {}))
+    .digest('hex')
+
+  const CACHE_PATH = path.join(__dirname, `.${hash}`)
+
+  let data
+
+  // Try getting the data from cache
   try {
-    const res = await request({
-      document: query,
-      requestHeaders: {
-        authorization: `Bearer ${accessToken}`,
-        'content-type': 'application/json',
-      },
-      url: `https://graphql.contentful.com/content/v1/spaces/${space}`,
-      variables: variables,
-    })
-    return res || {}
+    data = JSON.parse(fs.readFileSync(CACHE_PATH, 'utf8'))
   } catch (error) {
-    console.error(
-      `There was a problem retrieving entries with the query ${query}`
-    )
-    console.error(error)
+    // Nothing to do
   }
+
+  if (!data) {
+    // Fetch fresh data if no cached data is available
+    try {
+      data =
+        (await request({
+          document: query,
+          requestHeaders: {
+            authorization: `Bearer ${accessToken}`,
+            'content-type': 'application/json',
+          },
+          url: `https://graphql.contentful.com/content/v1/spaces/${space}`,
+          variables: variables,
+        })) || {}
+    } catch (error) {
+      console.error(
+        `There was a problem retrieving entries with the query ${query}`
+      )
+      console.error(error)
+    }
+
+    // Write data to cache
+    try {
+      fs.writeFileSync(CACHE_PATH, JSON.stringify(data), 'utf8')
+    } catch (e) {
+      console.error('Error writing to cache', e)
+    }
+  }
+
+  return data
 }
 
 // Specific queries are needed because the contentful
@@ -123,9 +151,9 @@ export const fetchMetaDataLists = async (locale, settingsId) => {
 // or meta data
 export const fetchAllStaticContent = async (locale) => {
   const promises = [
-    limit(() => fetchAllNavs(locale)),
-    limit(() => fetchMetaData(locale, SETTINGS_ID)),
-    limit(() => fetchMetaDataLists(locale, SETTINGS_ID)),
+    fetchAllNavs(locale),
+    fetchMetaData(locale, SETTINGS_ID),
+    fetchMetaDataLists(locale, SETTINGS_ID),
   ]
 
   const [navs, metaData, metaDataLists] = await Promise.all(promises)
