@@ -1,13 +1,15 @@
 import { gql, request } from 'graphql-request'
+import pLimit from 'p-limit'
 
 import {
   ActionFragment,
   AllNavsFragment,
-  DataWorkDescriptionFragment,
   MetaDataFragment,
   MetaDataListsFragment,
 } from '../fragments/contentful'
 import { SETTINGS_ID } from '../utils'
+
+const limit = pLimit(1)
 
 const space = process.env.NEXT_PUBLIC_CF_SPACE_ID
 const accessToken = process.env.NEXT_PUBLIC_CF_ACCESS_TOKEN
@@ -120,11 +122,13 @@ export const fetchMetaDataLists = async (locale, settingsId) => {
 // feeding non page related translations, e.g. navs
 // or meta data
 export const fetchAllStaticContent = async (locale) => {
-  const [navs, metaData, metaDataLists] = await Promise.all([
-    fetchAllNavs(locale),
-    fetchMetaData(locale, SETTINGS_ID),
-    fetchMetaDataLists(locale, SETTINGS_ID),
-  ])
+  const promises = [
+    limit(() => fetchAllNavs(locale)),
+    limit(() => fetchMetaData(locale, SETTINGS_ID)),
+    limit(() => fetchMetaDataLists(locale, SETTINGS_ID)),
+  ]
+
+  const [navs, metaData, metaDataLists] = await Promise.all(promises)
 
   return {
     metaData,
@@ -223,7 +227,9 @@ const fetchActionDataById = async (id, locale) => {
 
 export const fetchAllActions = async (locale, actionCollectionSlug) => {
   const collectionIds = await fetchCollectionIds(locale, actionCollectionSlug)
-  const promises = collectionIds.map((id) => fetchActionDataById(id, locale))
+  const promises = collectionIds.map((id) =>
+    limit(() => fetchActionDataById(id, locale))
+  )
 
   const results = await Promise.all(promises)
   const transformed = transformResults(results)
