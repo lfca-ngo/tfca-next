@@ -1,6 +1,8 @@
 @import (reference) '../../../styles/vars.less';
 @import (reference) '../../../styles/fonts.less';
 
+@element-padding: 15px 20px;
+
 header.header {
   border-right: 1px solid @black;
   display: flex;
@@ -76,7 +78,7 @@ header.header {
         margin-left: 20px;
         @media @desktop {
           border-bottom: 1px solid @black;
-          padding: 15px 20px;
+          padding: @element-padding;
           margin-left: 0;
         }
         &.active {
@@ -110,8 +112,11 @@ header.header {
     border-top: 1px solid @black;
     width: 100%;
     display: none;
+    .anticon {
+      margin-right: 8px;
+    }
     @media @desktop {
-      padding: 12px 20px;
+      padding: @element-padding;
       display: block;
     }
   }

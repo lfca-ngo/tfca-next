@@ -1,8 +1,10 @@
 require('./styles.less')
+import Icon from '@ant-design/icons'
 import { Button } from 'antd'
 import { motion, useTransform, useViewportScroll } from 'framer-motion'
 import React, { useState } from 'react'
 
+import IconIdeas from '../../../assets/icons/ideas.svg'
 import { useActiveAction, useIsMobile } from '../../../hooks/useIsClient'
 
 const SCROLL_RANGE = [0, 200]
@@ -32,7 +34,7 @@ export const Header = (props) => {
     const section = document.querySelector(`#${name}`)
     section?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
-  console.log('x', contentWidth)
+
   return (
     <motion.header className="header" style={{ boxShadow }}>
       <motion.div className="header-start" style={{ width: headerWidth }}>
@@ -72,7 +74,10 @@ export const Header = (props) => {
           ))}
         </ul>
 
-        <div className="header-bottom">More ideas?</div>
+        <div className="header-bottom">
+          <Icon component={IconIdeas} />
+          More ideas?
+        </div>
       </motion.div>
     </motion.header>
   )
