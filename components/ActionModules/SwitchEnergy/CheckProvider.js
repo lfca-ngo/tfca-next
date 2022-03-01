@@ -40,7 +40,7 @@ const CheckProvider = (props) => {
     setProvider(val)
   }
 
-  const handleNext = () => props.goTo('success', { smooth: true })
+  const handleNext = () => props.goTo('success')
 
   const isVerified = provider !== '-'
   const infoAlert = isVerified ? (

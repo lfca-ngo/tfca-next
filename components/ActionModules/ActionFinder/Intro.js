@@ -13,7 +13,7 @@ const Intro = (props) => {
     const value = v[filterOption?.fieldName]
     props.setStore({ ...props.store, [filterOption?.fieldName]: value })
     props.setProgress(0.3)
-    props.goTo('results', { smooth: true })
+    props.goTo('results')
   }
 
   return (

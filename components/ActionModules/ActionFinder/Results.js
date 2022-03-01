@@ -11,7 +11,7 @@ const Results = (props) => {
   const handleNext = (item) => {
     props.setStore({ ...props.store, item: item })
     props.setProgress(0.3)
-    props.goTo('details', { smooth: true })
+    props.goTo('details')
   }
   const handleValuesChange = (changedValues, allValues) => {
     props.setStore({ ...props.store, ...changedValues })

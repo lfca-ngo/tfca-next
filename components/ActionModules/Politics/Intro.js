@@ -8,7 +8,7 @@ const Intro = (props) => {
   const handleNext = (v) => {
     props.setStore({ ...props.store, type: v.type })
     props.setProgress(0.3)
-    props.goTo('results', { smooth: true })
+    props.goTo('results')
   }
 
   return (

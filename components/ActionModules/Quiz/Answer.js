@@ -10,7 +10,7 @@ const Answer = (props) => {
 
   const handleNext = () => {
     props.setProgress(0.3)
-    props.goTo(props.nextKey, { smooth: true })
+    props.goTo(props.nextKey)
   }
 
   return (

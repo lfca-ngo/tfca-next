@@ -219,7 +219,7 @@ const FormSwitch = (props) => {
     const res = { status: 200 } // await trackEvent('form_submit', values)
     setLoading(false)
     if (res?.status === 200) {
-      props.goTo('success', { smooth: true })
+      props.goTo('success')
     } else {
       alert('Etwas ist schiefgelaufen. Bitte melde dich bei timo@lfca.earth')
     }

@@ -7,7 +7,7 @@ import Category from '../helpers/Category'
 const Intro = (props) => {
   const handleNext = () => {
     props.setProgress(0.3)
-    props.goTo('calculate', { smooth: true })
+    props.goTo('calculate')
   }
   const handleUsesAlready = () => {
     props.setProgress(0.5)
