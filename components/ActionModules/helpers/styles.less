@@ -42,6 +42,7 @@
     }
     .ant-tag {
       color: @white;
+      border: none;
     }
   }
 
@@ -79,36 +80,7 @@
       margin: 20px 0;
     }
   }
-  .action-category {
-    .font-medium();
-    font-size: 17px;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
 
-    .ant-btn-link {
-      border-bottom: none;
-      border-top: none;
-      margin-bottom: 10px;
-
-      .font-medium();
-      > .anticon + span {
-        margin-left: 0;
-      }
-      font-size: 17px;
-    }
-    .icon-wrapper {
-      margin-right: 8px;
-      font-size: 15px;
-      background: @white;
-      width: 30px;
-      height: 30px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 8px;
-    }
-  }
   .footer {
     padding: 0;
     @media @desktop {
@@ -133,14 +105,20 @@
       .font-medium();
     }
   }
+
   h2 {
     .h2();
     margin-bottom: 15px;
+    @media @desktop {
+      margin-bottom: 30px;
+    }
   }
+
   p {
     line-height: 1.4;
     .font-regular();
   }
+
   .steps-container {
     position: relative;
     height: auto;
@@ -156,6 +134,31 @@
     }
     .ant-tabs {
       width: 100%; // fix on IE 10
+    }
+  }
+
+  .action-category {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+
+    .ant-btn-link {
+      border-bottom: none;
+      border-top: none;
+      margin: 0;
+      .font-medium();
+      font-size: 17px;
+      padding: 0;
+    }
+    .icon {
+      margin-right: 12px;
+      background: @white;
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 

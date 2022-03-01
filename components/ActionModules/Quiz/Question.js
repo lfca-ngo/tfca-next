@@ -11,7 +11,6 @@ const Question = ({
   blocks,
   goTo,
   icon,
-  name,
   nextKey,
   prevKey,
   store,
@@ -46,7 +45,7 @@ const Question = ({
       <Category
         goBack={!!prevKey}
         icon={icon}
-        prev={() => props.goTo(prevKey)}
+        prev={() => goTo(prevKey)}
         title={text(blocks['category.title'])}
       />
       <h2>{activeQuestion.question}</h2>

@@ -18,10 +18,10 @@ const Category = (props) => {
   }
   return (
     <div className="action-category">
-      <span className="icon-wrapper">
+      <div className="icon">
         <img src={props.icon} />
-      </span>
-      {props.title}
+      </div>
+      <div className="text">{props.title}</div>
     </div>
   )
 }
