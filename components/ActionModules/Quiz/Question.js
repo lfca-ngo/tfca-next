@@ -13,6 +13,7 @@ const Question = ({
   icon,
   name,
   nextKey,
+  prevKey,
   store,
 }) => {
   const [status, setStatus] = useState()
@@ -42,12 +43,17 @@ const Question = ({
 
   return (
     <div className="step">
-      <Category icon={icon} title={text(blocks['category.title'])} />
+      <Category
+        goBack={!!prevKey}
+        icon={icon}
+        prev={() => props.goTo(prevKey)}
+        title={text(blocks['category.title'])}
+      />
       <h2>{activeQuestion.question}</h2>
 
       <Form initialValues={store} layout="vertical" onFinish={handleNext}>
         <Form.Item
-          help="Upps you are wrong!"
+          help={status === 'error' && 'Upps you are wrong!'}
           label="Choose 1 option"
           name={activeQuestion?.questionId}
           validateStatus={status}

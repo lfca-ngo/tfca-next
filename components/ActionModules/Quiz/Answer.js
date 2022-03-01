@@ -16,7 +16,9 @@ const Answer = (props) => {
   return (
     <div className="step">
       <Category
+        goBack={!!props.prevKey}
         icon={props.icon}
+        prev={() => props.goTo(props.prevKey)}
         title={text(props.blocks['category.title'])}
       />
       <Text block={props.activeQuestion?.result} />
