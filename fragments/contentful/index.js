@@ -383,6 +383,7 @@ export const QualifiedCompanyFragment = gql`
       id
       name
       micrositeSlug
+      logoUrl
     }
     completedCompanyActions {
       contentId
