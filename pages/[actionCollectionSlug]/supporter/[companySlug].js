@@ -19,6 +19,17 @@ export default function SupporterPage({ actions, company }) {
   )
 }
 
+const allQualifiedCompaniesQuery = gql`
+  ${QualifiedCompanyFragment}
+  query qualifiedCompany($input: QualifiedCompaniesInput) {
+    qualifiedCompanies(input: $input) {
+      ... on QualifiedCompanyItem {
+        ...QualifiedCompanyFragment
+      }
+    }
+  }
+`
+
 export async function getStaticProps({ locale, params }) {
   // we have the locale and can get
   // the correct translations in build
@@ -29,30 +40,19 @@ export async function getStaticProps({ locale, params }) {
   const content = await fetchAllStaticContent(locale)
 
   /**
-   * TODO:
-   * - fetch ALL actions once and re-use from cache
+   * NOTE:
+   * We fetch ALL companies once (already on `getStaticPaths`)
+   * and re-use the result from cache
    */
-  const qualifiedCompanyQuery = gql`
-    ${QualifiedCompanyFragment}
-    query qualifiedCompany($slug: String!) {
-      qualifiedCompanies(
-        input: { filter: { companyMicrositeSlugs: [$slug] } }
-      ) {
-        ... on QualifiedCompanyItem {
-          ...QualifiedCompanyFragment
-        }
-      }
-    }
-  `
-
-  const { qualifiedCompanies } = await fetchData(qualifiedCompanyQuery, {
-    slug: companySlug,
-  })
+  const { qualifiedCompanies } = await fetchData(allQualifiedCompaniesQuery)
+  const company = qualifiedCompanies.find(
+    ({ company }) => company.micrositeSlug === companySlug
+  )
 
   return {
     props: {
       actions,
-      company: qualifiedCompanies[0],
+      company,
       content,
       customization: {
         from: companySlug,
@@ -76,17 +76,7 @@ export async function getStaticPaths({ locales }) {
     actionsLocalCollectionQuery
   )
 
-  const qualifiedCompaniesQuery = gql`
-    query qualifiedCompanies($input: QualifiedCompaniesInput) {
-      qualifiedCompanies(input: $input) {
-        company {
-          micrositeSlug
-        }
-      }
-    }
-  `
-
-  const { qualifiedCompanies } = await fetchData(qualifiedCompaniesQuery)
+  const { qualifiedCompanies } = await fetchData(allQualifiedCompaniesQuery)
 
   return {
     fallback: false,
