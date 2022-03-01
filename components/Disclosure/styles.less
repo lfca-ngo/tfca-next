@@ -1,7 +1,11 @@
 @import (reference) '../../styles/vars.less';
 @import (reference) '../../styles/fonts.less';
+@import (reference) '../../styles/mixins.less';
 
 .disclosure {
+  @media @desktop {
+    padding: 30px;
+  }
   section {
     margin: 0 0 30px;
     br {
@@ -37,11 +41,16 @@
 
   header {
     h1 {
+      .h1();
       margin: 20px 0 10px;
     }
 
     .logo-wrapper {
       .logo-circle(90px, @light-grey);
     }
+  }
+
+  h4 {
+    .h4();
   }
 }

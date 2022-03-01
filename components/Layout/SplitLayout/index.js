@@ -7,13 +7,13 @@ import Template from '../'
 import { Header } from '../Header'
 import { Nav } from '../Nav'
 
-const SplitLayout = ({ children, nav }) => {
+const SplitLayout = ({ children, company, nav }) => {
   return (
     <Template>
       <Header actions={nav} />
       <div id="scroll-container">
         <main>
-          <Nav className="hidden md" />
+          <Nav className="hidden md" company={company} />
           <Hero />
           {children}
         </main>

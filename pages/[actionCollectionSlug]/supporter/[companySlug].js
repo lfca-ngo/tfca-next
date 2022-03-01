@@ -3,6 +3,7 @@ import React from 'react'
 
 import ActionModules from '../../../components/ActionModules'
 import SplitLayout from '../../../components/Layout/SplitLayout'
+import { QualifiedCompanyFragment } from '../../../fragments/contentful'
 import {
   fetchAllActions,
   fetchAllStaticContent,
@@ -10,9 +11,9 @@ import {
 } from '../../../services/contentful'
 import { fetchData } from '../../../services/lfca'
 
-export default function SupporterPage({ actions }) {
+export default function SupporterPage({ actions, company }) {
   return (
-    <SplitLayout nav={actions?.nav}>
+    <SplitLayout company={company} nav={actions?.nav}>
       <ActionModules actions={actions?.items} />
     </SplitLayout>
   )
@@ -29,13 +30,29 @@ export async function getStaticProps({ locale, params }) {
 
   /**
    * TODO:
-   * - Fetch company from firebase
-   * - Fetch completed companyActions from GQL BE (maybe fetch ALL actions once and re-use from cache)
+   * - fetch ALL actions once and re-use from cache
    */
+  const qualifiedCompanyQuery = gql`
+    ${QualifiedCompanyFragment}
+    query qualifiedCompany($slug: String!) {
+      qualifiedCompanies(
+        input: { filter: { companyMicrositeSlugs: [$slug] } }
+      ) {
+        ... on QualifiedCompanyItem {
+          ...QualifiedCompanyFragment
+        }
+      }
+    }
+  `
+
+  const { qualifiedCompanies } = await fetchData(qualifiedCompanyQuery, {
+    slug: companySlug,
+  })
 
   return {
     props: {
       actions,
+      company: qualifiedCompanies[0],
       content,
       customization: {
         from: companySlug,
@@ -63,10 +80,7 @@ export async function getStaticPaths({ locales }) {
     query qualifiedCompanies($input: QualifiedCompaniesInput) {
       qualifiedCompanies(input: $input) {
         company {
-          id
           micrositeSlug
-          name
-          logoUrl
         }
       }
     }
