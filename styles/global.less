@@ -1,6 +1,7 @@
 @import './vars.less';
 @import './reset.less';
 @import './fonts.less';
+@import './mixins.less';
 
 html,
 body {
@@ -26,12 +27,19 @@ body {
 .ant-form.scrollable-filters {
   display: flex;
   overflow-x: auto;
+  .hide-scrollbar();
   .ant-form-item {
     margin-right: 12px;
+    display: flex;
+    flex-direction: row;
+    @media @desktop {
+      flex-direction: column;
+    }
   }
 }
 
 .main-container {
+  width: 100%;
   max-width: @container-action-width;
   margin: 0;
   padding: 0 @default-section-padding;

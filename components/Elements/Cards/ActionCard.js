@@ -13,22 +13,24 @@ const ActionCard = ({ item, onNext }) => {
 
   return (
     <Card className="action-card">
-      <div className="icon">
-        <img src={item.icon?.url} />
-      </div>
-      <div className="text">
-        <Card.Meta title={item.name} />
-        <div className="tags">
-          {levelTags?.map((tag, index) => (
-            <Tag color="gold" key={index}>
-              {tag}
-            </Tag>
-          ))}
-          {typeTags?.map((tag, index) => (
-            <Tag color="blue" key={index}>
-              {tag}
-            </Tag>
-          ))}
+      <div className="body-content">
+        <div className="icon">
+          <img src={item.icon?.url} />
+        </div>
+        <div className="text">
+          <div className="title">{item.name}</div>
+          <div className="tags">
+            {levelTags?.map((tag, index) => (
+              <Tag color="gold" key={index}>
+                {tag}
+              </Tag>
+            ))}
+            {typeTags?.map((tag, index) => (
+              <Tag color="blue" key={index}>
+                {tag}
+              </Tag>
+            ))}
+          </div>
         </div>
       </div>
       <div className="actions">
