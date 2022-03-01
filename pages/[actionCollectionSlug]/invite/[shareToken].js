@@ -18,8 +18,8 @@ export default function InvitePage({ actions, ogImageUrl }) {
       <Head>
         <meta content={ogImageUrl} property="og:image" />
       </Head>
-      <SplitLayout>
-        <ActionModules actions={actions} />
+      <SplitLayout nav={actions?.nav}>
+        <ActionModules actions={actions?.items} />
       </SplitLayout>
     </>
   )
