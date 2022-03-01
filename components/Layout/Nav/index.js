@@ -1,15 +1,18 @@
 require('./styles.less')
 import Link from 'next/link'
-import React from 'react'
+import React, { useState } from 'react'
 
+import { DisclosureDrawer } from '../../Disclosure/DisclosureDrawer'
 import { IntlSelector } from '../../IntlSelector'
 
 const LINKS = [
-  { title: 'Datenschutz', url: '/privacy' },
-  { title: 'Impressum', url: '/imprint' },
+  { title: 'Why act?', url: '/privacy' },
+  { title: 'Questions?', url: '/imprint' },
 ]
 
 export const Nav = (props) => {
+  const [visible, setVisible] = useState(false)
+  const toggle = () => setVisible(!visible)
   return (
     <nav className={`${props.className} nav`}>
       <ul>
@@ -20,10 +23,19 @@ export const Nav = (props) => {
             </li>
           )
         })}
+        {/* Company Info */}
+        {props.company && (
+          <li onClick={toggle}>{props.company?.company?.name}</li>
+        )}
         <li>
           <IntlSelector />
         </li>
       </ul>
+      <DisclosureDrawer
+        data={props.company}
+        onClose={toggle}
+        visible={visible}
+      />
     </nav>
   )
 }

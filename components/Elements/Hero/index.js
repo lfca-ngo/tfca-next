@@ -1,13 +1,11 @@
 require('./styles.less')
 
 import { Button, Typography } from 'antd'
-import { motion } from 'framer-motion'
 import React from 'react'
 
 import { useChallenge } from '../../../hooks/useChallenge'
 import { useIsMobile } from '../../../hooks/useIsClient'
 import { useBlocks } from '../../../hooks/useTranslation'
-import { textReveal } from '../../../utils/animations'
 import { Text, text } from '../../../utils/Text'
 
 export const Hero = (props) => {
@@ -23,22 +21,15 @@ export const Hero = (props) => {
   return (
     <div className="hero content main-container">
       <Typography.Title>
-        <span animate="visible" initial="hidden" variants={textReveal}>
-          {header}
-        </span>
+        <span>{header}</span>
       </Typography.Title>
       <p>
-        <span animate="visible" initial="hidden" variants={textReveal}>
+        <span>
           {text(useBlocks('header.body'), { emoji: isMobile ? ` 👇` : ` 👉` })}
         </span>
       </p>
 
-      <div
-        animate="visible"
-        className="start-btn"
-        initial="hidden"
-        variants={textReveal}
-      >
+      <div className="start-btn">
         <Button
           className="ant-btn-xl"
           onClick={props.onClick}

@@ -3,6 +3,7 @@ import React from 'react'
 
 import ActionModules from '../../../components/ActionModules'
 import SplitLayout from '../../../components/Layout/SplitLayout'
+import { QualifiedCompanyFragment } from '../../../fragments/contentful'
 import {
   fetchAllActions,
   fetchAllStaticContent,
@@ -10,13 +11,24 @@ import {
 } from '../../../services/contentful'
 import { fetchData } from '../../../services/lfca'
 
-export default function SupporterPage({ actions }) {
+export default function SupporterPage({ actions, company }) {
   return (
-    <SplitLayout nav={actions?.nav}>
+    <SplitLayout company={company} nav={actions?.nav}>
       <ActionModules actions={actions?.items} />
     </SplitLayout>
   )
 }
+
+const allQualifiedCompaniesQuery = gql`
+  ${QualifiedCompanyFragment}
+  query qualifiedCompany($input: QualifiedCompaniesInput) {
+    qualifiedCompanies(input: $input) {
+      ... on QualifiedCompanyItem {
+        ...QualifiedCompanyFragment
+      }
+    }
+  }
+`
 
 export async function getStaticProps({ locale, params }) {
   // we have the locale and can get
@@ -28,14 +40,19 @@ export async function getStaticProps({ locale, params }) {
   const content = await fetchAllStaticContent(locale)
 
   /**
-   * TODO:
-   * - Fetch company from firebase
-   * - Fetch completed companyActions from GQL BE (maybe fetch ALL actions once and re-use from cache)
+   * NOTE:
+   * We fetch ALL companies once (already on `getStaticPaths`)
+   * and re-use the result from cache
    */
+  const { qualifiedCompanies } = await fetchData(allQualifiedCompaniesQuery)
+  const company = qualifiedCompanies.find(
+    ({ company }) => company.micrositeSlug === companySlug
+  )
 
   return {
     props: {
       actions,
+      company,
       content,
       customization: {
         from: companySlug,
@@ -59,20 +76,7 @@ export async function getStaticPaths({ locales }) {
     actionsLocalCollectionQuery
   )
 
-  const qualifiedCompaniesQuery = gql`
-    query qualifiedCompanies($input: QualifiedCompaniesInput) {
-      qualifiedCompanies(input: $input) {
-        company {
-          id
-          micrositeSlug
-          name
-          logoUrl
-        }
-      }
-    }
-  `
-
-  const { qualifiedCompanies } = await fetchData(qualifiedCompaniesQuery)
+  const { qualifiedCompanies } = await fetchData(allQualifiedCompaniesQuery)
 
   return {
     fallback: false,

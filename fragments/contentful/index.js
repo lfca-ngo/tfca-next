@@ -376,3 +376,26 @@ export const MetaDataFragment = gql`
     }
   }
 `
+
+export const QualifiedCompanyFragment = gql`
+  fragment QualifiedCompanyFragment on QualifiedCompanyItem {
+    company {
+      id
+      name
+      micrositeSlug
+      logoUrl
+    }
+    completedCompanyActions {
+      contentId
+      description
+      id
+      requirements {
+        contentId
+        description
+        id
+        title
+      }
+      title
+    }
+  }
+`

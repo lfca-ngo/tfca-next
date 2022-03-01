@@ -1,0 +1,24 @@
+@import (reference) './vars.less';
+
+// Circled image for company logos
+.logo-circle(@size, @border-color) {
+  max-width: 100%;
+  background: @white;
+  height: @size;
+  width: @size;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  padding: 6%;
+  border: 5px solid @border-color;
+  img {
+    max-width: 90%;
+    object-fit: cover;
+    max-height: 75%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: auto;
+  }
+}
