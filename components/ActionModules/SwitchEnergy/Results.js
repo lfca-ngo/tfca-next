@@ -27,8 +27,9 @@ const Results = ({
   blocks,
   data,
   goTo,
+  icon,
+
   lists,
-  name,
   setProgress,
   setStore,
   store,
@@ -87,7 +88,7 @@ const Results = ({
     <div className="step">
       <Category
         goBack
-        icon={props.icon}
+        icon={icon}
         prev={() => goTo('calculate')}
         title={
           <span>
