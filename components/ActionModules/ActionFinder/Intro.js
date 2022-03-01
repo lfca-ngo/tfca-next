@@ -23,7 +23,7 @@ const Intro = (props) => {
         title={text(props.blocks['category.title'])}
       />
       <h2>{text(props.blocks['intro.title'])}</h2>
-
+      <p>{text(props.blocks['intro.subtitle'])}</p>
       <Form initialValues={props.store} layout="vertical" onFinish={handleNext}>
         <Form.Item label="Choose 1 option" name={filterOption?.fieldName}>
           <MultiSelect items={filterOption?.options} singleMode />

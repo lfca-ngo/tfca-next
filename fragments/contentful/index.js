@@ -187,6 +187,8 @@ export const ActionFragment = gql`
       items {
         listId
         filterableAttributes
+        cardLayout
+        listGrid
         itemsCollection(limit: 5) {
           items {
             ... on DataOrganization {

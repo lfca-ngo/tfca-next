@@ -1,6 +1,7 @@
 import { Button, Card, Col, Form, List, Row, Select } from 'antd'
 import React from 'react'
 
+import { LIST_GRIDS } from '../../../utils'
 import { Text, text } from '../../../utils/Text'
 import ActionCard from '../../Elements/Cards/ActionCard'
 import Category from '../helpers/Category'
@@ -35,8 +36,10 @@ const Results = (props) => {
     return true
   }
 
-  const data = props.data['main']?.items || []
+  const dataMain = props.data['main']
+  const data = dataMain?.items || []
 
+  console.log(dataMain)
   return (
     <div className="step">
       <Category
@@ -45,8 +48,8 @@ const Results = (props) => {
         prev={() => props.goTo('intro')}
         title={text(props.blocks['category.title'])}
       />
-      <h2>{text(props.blocks['intro.title'])}</h2>
-
+      <h2>{text(props.blocks['results.title'])}</h2>
+      <p>{text(props.blocks['results.subtitle'])}</p>
       <Form
         className="scrollable-filters"
         initialValues={props.store}
@@ -77,6 +80,7 @@ const Results = (props) => {
 
       <List
         dataSource={data.filter(filterByAttributes)}
+        grid={LIST_GRIDS['1-col']}
         renderItem={(item) => (
           <List.Item>
             <ActionCard item={item} onNext={handleNext} />

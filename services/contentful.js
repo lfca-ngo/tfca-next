@@ -263,7 +263,7 @@ export const fetchAllActions = async (locale, actionCollectionSlug) => {
   return transformed
 }
 
-// Helper function to transform the results
+// Helper function to transform the results into key value pairs
 const transformResults = (results) => {
   const nav = []
   const transformed = results?.map((item) => {
@@ -286,12 +286,20 @@ const transformResults = (results) => {
     }, {})
     // transform data to key value pairs
     const data = item.dataCollection?.items.reduce((allData, data) => {
-      const { filterableAttributes, itemsCollection, listId } = data
+      const {
+        cardLayout,
+        filterableAttributes,
+        itemsCollection,
+        listGrid,
+        listId,
+      } = data
       return {
         ...allData,
         [listId]: {
+          cardLayout,
           filterableAttributes,
           items: itemsCollection.items,
+          listGrid,
         },
       }
     }, {})
