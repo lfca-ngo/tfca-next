@@ -168,10 +168,14 @@ export const ActionFragment = gql`
   ${QuizFragment}
   ${DataInputFragment}
   fragment ActionFragment on Action {
+    id
     name
     actionId
     carbonSaved
     timeToImplement
+    icon {
+      url
+    }
     quizCollection(limit: $quizLimit) {
       items {
         ... on Quiz {

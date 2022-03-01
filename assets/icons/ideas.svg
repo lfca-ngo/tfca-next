@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="17px" viewBox="0 0 16 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>bulb-63</title>
+    <g id="Colors" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="blue-copy-3" transform="translate(-25.000000, -660.000000)" stroke="#111E3B">
+            <g id="Group-14" transform="translate(-10.000000, 642.000000)">
+                <g id="bulb-63" transform="translate(36.000000, 19.000000)">
+                    <line x1="7" y1="0" x2="7" y2="2" id="Path"></line>
+                    <line x1="1.343" y1="2.343" x2="2.757" y2="3.757" id="Path"></line>
+                    <line x1="12.657" y1="2.343" x2="11.243" y2="3.757" id="Path"></line>
+                    <path d="M11.0000461,8 C11.0092686,6.05645351 9.6201329,4.3875139 7.70717565,4.04392491 C5.79421839,3.70033591 3.91112446,4.78154568 3.2434665,6.60683791 C2.57580855,8.43213014 3.31683299,10.4731936 5,11.445 L5,15 L9,15 L9,11.445 C10.2344135,10.7366013 10.9968908,9.42323424 11.0000461,8 L11.0000461,8 Z" id="Path"></path>
+                    <line x1="13" y1="8" x2="14" y2="8" id="Path"></line>
+                    <line x1="0" y1="8" x2="1" y2="8" id="Path"></line>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

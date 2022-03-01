@@ -1,35 +1,19 @@
 import Icon from '@ant-design/icons'
-import { Col, Row, Tag } from 'antd'
+import { Tag } from 'antd'
 import React, { useState } from 'react'
-import { Link } from 'react-scroll'
 
 import IconTimer from '../../../assets/icons/counter.svg'
 import IconKg from '../../../assets/icons/kg.svg'
 import IconUsers from '../../../assets/icons/users.svg'
 import { useBlocks } from '../../../hooks/useTranslation'
 import { text } from '../../../utils/Text'
-// import { useIsMobile } from '../../../utils/IsMobileProvider'
 
 const Stat = (props) => {
-  // const animation = useSpring({
-  //   from: { number: 0 },
-  //   number: props.isFocus ? props.data : 0,
-  // })
-  // const { isMobile } = useIsMobile()
-
   return (
     <div className="stats-wrapper">
       <div className="stat">
         <Tag>
           <Icon component={props.icon} /> {props.data}
-          {/* {isMobile ? (
-            props.data
-          ) : (
-            <animated.span>
-              {props.overwriteData ||
-                animation.number.interpolate((el) => el.toFixed(0))}
-            </animated.span>
-          )} */}
         </Tag>{' '}
       </div>
 
@@ -52,15 +36,6 @@ const ActionStats = (props) => {
 
   return (
     <div className="action-stats">
-      {/* <Link
-        className="animation-activator"
-        activeClass="active"
-        // containerId="scroll-container"
-        onSetActive={() => setIsFocus(true)}
-        // spy={true}
-        to={props.name}
-      /> */}
-
       <Stat
         data={props.otherUsers}
         icon={IconUsers}

@@ -4,18 +4,17 @@
 
 html,
 body {
-  height: 100%;
   width: 100%;
+  @media @desktop {
+    height: 100%;
+  }
 }
 
 #__next {
-  height: 100%;
   width: 100%;
-}
-
-.container {
-  height: 100%;
-  width: 100%;
+  @media @desktop {
+    height: 100%;
+  }
 }
 
 .option-with-icon {
@@ -29,4 +28,28 @@ body {
   .ant-form-item {
     margin-right: 12px;
   }
+}
+
+.main-container {
+  max-width: @container-action-width;
+  margin: 0;
+  padding: 0 @default-section-padding;
+  @media @desktop {
+    margin: 0 auto 0 75px;
+    padding: 0 @default-section-padding;
+  }
+}
+
+.hidden {
+  &.md {
+    @media (max-width: @screen-md-max) {
+      display: none;
+    }
+  }
+}
+
+.ant-btn-xl.ant-btn {
+  height: 58px;
+  line-height: 58px;
+  padding: 0 34px;
 }

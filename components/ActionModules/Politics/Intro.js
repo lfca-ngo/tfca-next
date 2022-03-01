@@ -8,14 +8,14 @@ const Intro = (props) => {
   const handleNext = (v) => {
     props.setStore({ ...props.store, type: v.type })
     props.setProgress(0.3)
-    props.goTo('results', { smooth: true })
+    props.goTo('results')
   }
 
   return (
     <div className="step">
       <Category
+        icon={props.icon}
         title={text(props.blocks['category.title'])}
-        type={props.name}
       />
       <h2>Hallo David</h2>
     </div>

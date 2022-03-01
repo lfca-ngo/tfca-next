@@ -40,10 +40,10 @@ const nextConfig = {
 
 const pluginAntdLess = withAntdLess({
   lessVarsFilePath: './styles/ant-default-vars.less',
-  lessVarsFilePathAppendToEndOfContent: false,
-  nextjs: {
-    localIdentNameFollowDev: true,
-  },
+  // lessVarsFilePathAppendToEndOfContent: false,
+  // nextjs: {
+  //   localIdentNameFollowDev: true,
+  // },
   webpack: (config) => {
     config.module.rules.push({
       issuer: /\.[jt]sx?$/,

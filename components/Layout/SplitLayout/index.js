@@ -1,13 +1,23 @@
+require('./styles.less')
+
 import React from 'react'
 
+import { Hero } from '../../Elements/Hero'
 import Template from '../'
-import StickyHeader from '../StickyHeader'
+import { Header } from '../Header'
+import { Nav } from '../Nav'
 
-const SplitLayout = ({ children }) => {
+const SplitLayout = ({ children, nav }) => {
   return (
     <Template>
-      <StickyHeader />
-      {children}
+      <Header actions={nav} />
+      <div id="scroll-container">
+        <main>
+          <Nav className="hidden md" />
+          <Hero />
+          {children}
+        </main>
+      </div>
     </Template>
   )
 }

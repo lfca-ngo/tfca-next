@@ -10,14 +10,16 @@ const Answer = (props) => {
 
   const handleNext = () => {
     props.setProgress(0.3)
-    props.goTo(props.nextKey, { smooth: true })
+    props.goTo(props.nextKey)
   }
 
   return (
     <div className="step">
       <Category
+        goBack={!!props.prevKey}
+        icon={props.icon}
+        prev={() => props.goTo(props.prevKey)}
         title={text(props.blocks['category.title'])}
-        type={props.name}
       />
       <Text block={props.activeQuestion?.result} />
 

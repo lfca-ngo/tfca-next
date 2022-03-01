@@ -7,7 +7,7 @@ import Category from '../helpers/Category'
 const Intro = (props) => {
   const handleNext = () => {
     props.setProgress(0.3)
-    props.goTo('calculate', { smooth: true })
+    props.goTo('calculate')
   }
   const handleUsesAlready = () => {
     props.setProgress(0.5)
@@ -17,8 +17,8 @@ const Intro = (props) => {
   return (
     <div className="step">
       <Category
+        icon={props.icon}
         title={text(props.blocks['category.title'])}
-        type={props.name}
       />
       <h2>{text(props.blocks['intro.title'])}</h2>
 

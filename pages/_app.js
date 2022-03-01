@@ -5,7 +5,7 @@ import { CookiesProvider } from 'react-cookie'
 import { QueryClient, QueryClientProvider } from 'react-query'
 
 import { ChallengeProvider } from '../hooks/useChallenge'
-import { IsMobileProvider } from '../hooks/useIsClient'
+import { IsClientProvider } from '../hooks/useIsClient'
 import { TranslationProvider } from '../hooks/useTranslation'
 
 const apiClient = new QueryClient({
@@ -22,9 +22,9 @@ function MyApp({ Component, pageProps }) {
       <CookiesProvider>
         <ChallengeProvider customization={pageProps?.customization}>
           <TranslationProvider content={pageProps?.content}>
-            <IsMobileProvider>
+            <IsClientProvider>
               <Component {...pageProps} />
-            </IsMobileProvider>
+            </IsClientProvider>
           </TranslationProvider>
         </ChallengeProvider>
       </CookiesProvider>

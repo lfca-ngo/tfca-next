@@ -11,7 +11,7 @@ const Results = (props) => {
   const handleNext = (item) => {
     props.setStore({ ...props.store, item: item })
     props.setProgress(0.3)
-    props.goTo('details', { smooth: true })
+    props.goTo('details')
   }
   const handleValuesChange = (changedValues, allValues) => {
     props.setStore({ ...props.store, ...changedValues })
@@ -41,9 +41,9 @@ const Results = (props) => {
     <div className="step">
       <Category
         goBack
+        icon={props.icon}
         prev={() => props.goTo('intro')}
         title={text(props.blocks['category.title'])}
-        type={props.name}
       />
       <h2>{text(props.blocks['intro.title'])}</h2>
 

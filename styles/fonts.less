@@ -1,4 +1,4 @@
-@import './vars.less';
+@import (reference) './vars.less';
 
 .font-bold() {
   font-family: 'Manrope', sans-serif;
@@ -27,6 +27,8 @@
 .h1() {
   .font-bold();
   font-size: 36px;
+  letter-spacing: -1.1px;
+  line-height: 1.2;
   @media (min-width: @screen-sm) {
     font-size: 62px;
   }
@@ -35,6 +37,7 @@
 .h2() {
   .font-bold();
   font-size: 36px;
+  line-height: 1.2;
   @media (min-width: @screen-sm) {
     font-size: 48px;
   }

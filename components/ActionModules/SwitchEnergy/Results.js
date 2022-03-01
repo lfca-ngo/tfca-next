@@ -27,8 +27,9 @@ const Results = ({
   blocks,
   data,
   goTo,
+  icon,
+
   lists,
-  name,
   setProgress,
   setStore,
   store,
@@ -87,13 +88,13 @@ const Results = ({
     <div className="step">
       <Category
         goBack
+        icon={icon}
         prev={() => goTo('calculate')}
         title={
           <span>
             {text(blocks['category.title'])} {loading && <LoadingOutlined />}{' '}
           </span>
         }
-        type={name}
       />
       <h2>{text(blocks['results.title'])}</h2>
       <CheckList data={lists.comparison_benefits} />

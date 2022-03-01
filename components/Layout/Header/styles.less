@@ -1,142 +1,125 @@
-@import '../../../styles/vars.less';
-@import '../../../styles/fonts.less';
+@import (reference) '../../../styles/vars.less';
+@import (reference) '../../../styles/fonts.less';
+
+@element-padding: 15px 20px;
 
 header.header {
+  border-right: 1px solid @black;
   display: flex;
-  align-items: center;
-  flex-direction: column;
-  @media @desktop {
-    align-items: flex-start;
-  }
-}
+  flex-direction: row;
 
-.header-inner {
-  height: @header-height-mini;
+  // fix on mobile
   position: fixed;
   z-index: 101;
   top: 0;
   width: 100%;
-  padding: 10px 15px;
-  background: @white;
-
-  .header-inner-content {
-    max-width: @container-header-max-width;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    transform: translate3d(0, 0, 0);
-  }
+  // padding: 10px 15px;
+  background: @light-white;
+  height: @header-height-mini;
 
   @media @desktop {
-    width: 50%;
-    height: auto;
-    padding: 25px 25px;
-  }
-
-  .header-logo {
-    max-height: 100%;
-    display: flex;
-    width: 63px;
-    img {
-      width: 100%;
-    }
-  }
-  .challenge-bar {
-    text-align: center;
-    display: flex;
+    position: relative;
     flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    flex: 1;
-
-    .challenge-name,
-    .challenge-invitee {
-      span {
-        white-space: nowrap;
-      }
-    }
-    .challenge-name {
-      .font-semi();
-      font-size: 20px;
-    }
-    .challenge-invitee {
-      font-size: 13px;
-    }
-  }
-}
-
-.header-outer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: @white;
-  z-index: 100;
-  transform: translate3d(0, 0, 0);
-  max-width: @container-action-width;
-
-  footer.footer {
-    display: none;
+    flex: 1 0 @side-bar-width;
+    padding: 0;
+    height: auto;
   }
 
-  .start-btn {
-    display: block;
-  }
-
-  @media @desktop {
-    max-width: none;
-    width: 50%;
-    height: 100%;
-    top: 0;
-    position: fixed;
-    z-index: 1;
-    pointer-events: initial;
+  .header-start {
+    display: flex;
     justify-content: space-between;
-    align-items: flex-start;
-    footer.footer {
-      padding: 40px 45px;
+    width: 100%;
+    @media @desktop {
       display: block;
     }
-    .start-btn {
+  }
+
+  .logo {
+    padding: 20px 20px;
+
+    @media @desktop {
+      border-bottom: 1px solid @black;
+    }
+  }
+
+  .hamburger {
+    padding: 0 20px;
+  }
+
+  .header-content {
+    display: flex;
+    height: @header-height-mini;
+    align-items: center;
+    flex-direction: row;
+    overflow: scroll;
+    background: @light-white;
+    &::-webkit-scrollbar {
       display: none;
     }
-  }
-
-  .placeholder {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+    // width: 0;
     @media @desktop {
-      height: 110px;
+      flex-direction: column;
+      overflow: auto;
+      height: 100%;
     }
-  }
-
-  .content {
-    padding: 30px + @header-height-mini @default-section-padding 50px;
-    @media @desktop {
-      padding: 50px 45px;
-    }
-    @media @desktop-xl {
-      padding: 80px + @header-height-mini @default-section-padding 80px;
-    }
-    h1 {
-      font-size: 43px;
-      .font-bold();
+    ul {
+      display: flex;
+      flex-direction: row;
+      margin: 0;
+      width: 100%;
       @media @desktop {
-        font-size: 60px;
+        flex-direction: column;
+      }
+      .action-element {
+        display: flex;
+        padding: 0;
+        margin-left: 20px;
+        @media @desktop {
+          border-bottom: 1px solid @black;
+          padding: @element-padding;
+          margin-left: 0;
+        }
+        &.active {
+          .text {
+            margin-left: 16px;
+          }
+        }
+        .ant-btn {
+          display: flex;
+          margin: 0;
+          padding: 0;
+          line-height: normal;
+          height: auto;
+        }
+        .icon {
+          width: 20px;
+        }
+        .text {
+          margin-left: 12px;
+          flex: 1;
+          transition: all 0.2s ease-in-out;
+        }
       }
     }
-    p {
-      font-size: 19px;
-      margin-bottom: 20px;
-      @media @desktop {
-        font-size: 26px;
-      }
+  }
+
+  .header-bottom {
+    margin-bottom: 0;
+    margin-top: auto;
+    padding: 0;
+    border-top: 1px solid @black;
+    width: 100%;
+    display: none;
+    .anticon {
+      margin-right: 8px;
+    }
+    @media @desktop {
+      padding: @element-padding;
+      display: block;
     }
   }
-}
-
-.progress-element {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 10px;
 }
 
 // Hamburger
@@ -152,6 +135,9 @@ header.header {
   border: 0;
   margin: 0;
   overflow: visible;
+  @media @desktop {
+    display: none;
+  }
 }
 .hamburger:hover {
   opacity: 0.7;
@@ -178,7 +164,7 @@ header.header {
 .hamburger-inner {
   display: block;
   top: 50%;
-  margin-top: -2px;
+  margin-top: -4px;
 }
 .hamburger-inner,
 .hamburger-inner::after {

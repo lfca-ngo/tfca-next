@@ -219,7 +219,7 @@ const FormSwitch = (props) => {
     const res = { status: 200 } // await trackEvent('form_submit', values)
     setLoading(false)
     if (res?.status === 200) {
-      props.goTo('success', { smooth: true })
+      props.goTo('success')
     } else {
       alert('Etwas ist schiefgelaufen. Bitte melde dich bei timo@lfca.earth')
     }
@@ -229,9 +229,9 @@ const FormSwitch = (props) => {
     <div className="step">
       <Category
         goBack
+        icon={props.icon}
         prev={() => props.goTo('results')}
         title={text(props.blocks['category.title'])}
-        type={props.name}
       />
       <h2>Eine sehr gute Wahl. Du hast es fast geschafft!</h2>
       {/* {renderAsHtml(props.module.stepAlreadyDoneText)} */}

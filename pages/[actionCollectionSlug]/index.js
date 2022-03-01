@@ -11,8 +11,8 @@ import {
 
 export default function ActionCollectionPage({ actions }) {
   return (
-    <SplitLayout>
-      <ActionModules actions={actions} />
+    <SplitLayout nav={actions?.nav}>
+      <ActionModules actions={actions?.items} />
     </SplitLayout>
   )
 }

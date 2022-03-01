@@ -16,8 +16,8 @@ export const Share = (props) => {
   return (
     <div className="step">
       <Category
+        icon={props.icon}
         title={text(props.blocks['category.title'])}
-        type={props.name}
       />
       {!shareLink ? (
         <>

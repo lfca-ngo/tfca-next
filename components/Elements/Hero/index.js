@@ -1,3 +1,5 @@
+require('./styles.less')
+
 import { Button, Typography } from 'antd'
 import { motion } from 'framer-motion'
 import React from 'react'
@@ -19,26 +21,25 @@ export const Hero = (props) => {
     : text(headerText)
 
   return (
-    <motion.div className="content" style={props.dynamicStyles.opacity}>
-      <Typography.Title className="text-appear-wrapper">
-        <motion.span animate="visible" initial="hidden" variants={textReveal}>
+    <div className="hero content main-container">
+      <Typography.Title>
+        <span animate="visible" initial="hidden" variants={textReveal}>
           {header}
-        </motion.span>
+        </span>
       </Typography.Title>
-      <p className="text-appear-wrapper">
-        <motion.span animate="visible" initial="hidden" variants={textReveal}>
+      <p>
+        <span animate="visible" initial="hidden" variants={textReveal}>
           {text(useBlocks('header.body'), { emoji: isMobile ? ` 👇` : ` 👉` })}
-        </motion.span>
+        </span>
       </p>
 
-      <motion.div
+      <div
         animate="visible"
         className="start-btn"
         initial="hidden"
         variants={textReveal}
       >
         <Button
-          block
           className="ant-btn-xl"
           onClick={props.onClick}
           size="large"
@@ -46,7 +47,7 @@ export const Hero = (props) => {
         >
           {text(useBlocks('header.button.primary'))}
         </Button>
-      </motion.div>
-    </motion.div>
+      </div>
+    </div>
   )
 }

@@ -23,8 +23,8 @@ const steps = new Map([
 
 const ActionFinderFlow = (props) => {
   const { goTo, index, setStore, store } = useFlow({
+    id: props.module?.id,
     initial: 'intro',
-    name: props.name,
   })
 
   const { filterableAttributes, items } = props.module?.data['main'] || {}
@@ -60,6 +60,7 @@ const ActionFinderFlow = (props) => {
                 customization={customization}
                 data={props.module?.data || {}}
                 goTo={goTo}
+                icon={props.module?.icon?.url}
                 lists={props.module?.lists || {}}
                 name={props.name}
                 setProgress={setProgress}

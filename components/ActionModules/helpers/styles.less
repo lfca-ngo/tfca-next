@@ -1,15 +1,12 @@
-@import '../../../styles/vars.less';
-@import '../../../styles/fonts.less';
+@import (reference) '../../../styles/vars.less';
+@import (reference) '../../../styles/fonts.less';
 
 .action-wrapper {
   align-items: center;
   position: relative;
   overflow: hidden;
   min-height: 100vh;
-
-  @media @desktop {
-    padding-left: 50%;
-  }
+  display: flex;
 
   h1,
   h2,
@@ -45,6 +42,7 @@
     }
     .ant-tag {
       color: @white;
+      border: none;
     }
   }
 
@@ -73,49 +71,20 @@
     }
   }
 
-  .action-container {
-    padding: @default-section-padding;
-    max-width: @container-action-width;
-    margin: 0 auto;
-    @media @desktop {
-      padding: 70px;
-    }
-  }
-
   .action-body {
     padding: 50px 0;
     @media @desktop {
-      padding: 120px 0 80px;
+      padding: 80px 0 80px;
     }
     .form-spacing {
       margin: 20px 0;
     }
   }
-  .action-category {
-    .font-medium();
-    font-size: 17px;
-    margin-bottom: 10px;
 
-    .ant-btn-link {
-      border-bottom: none;
-      border-top: none;
-      margin-bottom: 10px;
-
-      .font-medium();
-      > .anticon + span {
-        margin-left: 0;
-      }
-      font-size: 17px;
-    }
-    .anticon {
-      margin-right: 8px;
-      font-size: 15px;
-    }
-  }
   .footer {
     padding: 0;
     @media @desktop {
-      padding: 5px 0;
+      padding: 15px 0 35px;
     }
   }
   .counter {
@@ -136,22 +105,20 @@
       .font-medium();
     }
   }
+
   h2 {
-    .font-bold();
+    .h2();
     margin-bottom: 15px;
-    font-size: 41px;
-    .emoji {
-      img {
-        vertical-align: top;
-        width: 41px;
-        margin-left: 4px;
-      }
+    @media @desktop {
+      margin-bottom: 30px;
     }
   }
+
   p {
     line-height: 1.4;
     .font-regular();
   }
+
   .steps-container {
     position: relative;
     height: auto;
@@ -167,6 +134,31 @@
     }
     .ant-tabs {
       width: 100%; // fix on IE 10
+    }
+  }
+
+  .action-category {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+
+    .ant-btn-link {
+      border-bottom: none;
+      border-top: none;
+      margin: 0;
+      .font-medium();
+      font-size: 17px;
+      padding: 0;
+    }
+    .icon {
+      margin-right: 12px;
+      background: @white;
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 

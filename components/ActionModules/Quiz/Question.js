@@ -6,7 +6,15 @@ import { Text, text } from '../../../utils/Text'
 import { MultiSelect } from '../../Elements/MultiSelect'
 import Category from '../helpers/Category'
 
-const Question = ({ activeQuestion, blocks, goTo, name, nextKey, store }) => {
+const Question = ({
+  activeQuestion,
+  blocks,
+  goTo,
+  icon,
+  nextKey,
+  prevKey,
+  store,
+}) => {
   const [status, setStatus] = useState()
 
   const answers = useMemo(() => {
@@ -34,12 +42,17 @@ const Question = ({ activeQuestion, blocks, goTo, name, nextKey, store }) => {
 
   return (
     <div className="step">
-      <Category title={text(blocks['category.title'])} type={name} />
+      <Category
+        goBack={!!prevKey}
+        icon={icon}
+        prev={() => goTo(prevKey)}
+        title={text(blocks['category.title'])}
+      />
       <h2>{activeQuestion.question}</h2>
 
       <Form initialValues={store} layout="vertical" onFinish={handleNext}>
         <Form.Item
-          help="Upps you are wrong!"
+          help={status === 'error' && 'Upps you are wrong!'}
           label="Choose 1 option"
           name={activeQuestion?.questionId}
           validateStatus={status}

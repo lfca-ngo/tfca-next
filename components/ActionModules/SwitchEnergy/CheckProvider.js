@@ -40,7 +40,7 @@ const CheckProvider = (props) => {
     setProvider(val)
   }
 
-  const handleNext = () => props.goTo('success', { smooth: true })
+  const handleNext = () => props.goTo('success')
 
   const isVerified = provider !== '-'
   const infoAlert = isVerified ? (
@@ -92,9 +92,9 @@ const CheckProvider = (props) => {
     <div className="step">
       <Category
         goBack
+        icon={props.icon}
         prev={() => props.goTo('intro')}
         title={text(props.blocks['category.title'])}
-        type={props.name}
       />
       <h2>{`Wunderbar!  Überprüfe deinen Provider um die Challenge abzuschließen`}</h2>
       {/* {renderAsHtml(props.module.stepAlreadyDoneText)} */}

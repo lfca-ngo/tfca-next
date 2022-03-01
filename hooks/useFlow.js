@@ -1,28 +1,19 @@
 import { useState } from 'react'
-import { scroller } from 'react-scroll'
-
-import { useIsMobile } from '../hooks/useIsClient'
-import { NAVBAR_HEIGHT_XS } from '../utils'
 
 // helper hook for managing the flow state of
 // the different action modules
-export const useFlow = ({ initial, name }) => {
+export const useFlow = ({ id, initial }) => {
   const [store, setStore] = useState({})
   const [index, set] = useState(initial)
-  const isMobile = useIsMobile()
 
-  let baseScrollOptions = {}
-  if (isMobile) {
-    baseScrollOptions.offset = -NAVBAR_HEIGHT_XS
+  const scroll = (id) => {
+    const section = document.querySelector(`#${id}`)
+    section?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
 
-  const goTo = (page, additionalScrollOptions) => {
-    baseScrollOptions = {
-      ...baseScrollOptions,
-      ...additionalScrollOptions,
-    }
+  const goTo = (page) => {
     set(page)
-    scroller.scrollTo(name, baseScrollOptions)
+    scroll(id)
   }
 
   return {
