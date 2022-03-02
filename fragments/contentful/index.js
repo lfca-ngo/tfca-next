@@ -1,5 +1,17 @@
 import { gql } from 'graphql-request'
 
+const CALL_TO_ACTION_FIELDS = `
+  text
+  type
+  slug
+  url
+  size
+  icon {
+    url
+  }
+  ghost
+`
+
 export const AllNavsFragment = gql`
   fragment AllNavsFragment on NavigationCollection {
     items {
@@ -32,7 +44,6 @@ export const AllNavsFragment = gql`
 `
 
 const DataWorkFragment = gql`
-  ${CallToActionFragment}
   fragment DataWorkFragment on DataWork {
     name
     icon {
@@ -43,7 +54,7 @@ const DataWorkFragment = gql`
     }
     actionsCollection(limit: 5) {
       items {
-        ...CallToActionFragment
+        ${CALL_TO_ACTION_FIELDS}
       }
     }
     levelsCollection(limit: 5) {
@@ -129,22 +140,7 @@ const DataInputFragment = gql`
   }
 `
 
-const CallToActionFragment = gql`
-  fragment CallToActionFragment on CallToAction {
-    text
-    type
-    slug
-    url
-    size
-    icon {
-      url
-    }
-    ghost
-  }
-`
-
 const QuizFragment = gql`
-  ${CallToActionFragment}
   fragment QuizFragment on Quiz {
     question
     questionId
@@ -154,7 +150,7 @@ const QuizFragment = gql`
     resultActionsCollection(limit: 5) {
       items {
         ... on CallToAction {
-          ...CallToActionFragment
+          ${CALL_TO_ACTION_FIELDS}
         }
       }
     }
