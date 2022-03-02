@@ -2,7 +2,7 @@
 
 .font-bold() {
   font-family: 'Manrope', sans-serif;
-  font-weight: 800;
+  font-weight: 800 !important;
   font-style: normal;
 }
 
@@ -44,15 +44,15 @@
 }
 
 .h3() {
-  .font-semi();
+  .font-bold();
   font-size: 28px;
   @media (min-width: @screen-sm) {
-    font-size: 36px;
+    font-size: 32px;
   }
 }
 
 .h4() {
-  .font-semi();
+  .font-bold();
   font-size: 21px;
   @media (min-width: @screen-sm) {
     font-size: 28px;

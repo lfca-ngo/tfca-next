@@ -1,8 +1,8 @@
-import { Button, Card, Col, Form, List, Row, Select } from 'antd'
+import { Form, List, Select } from 'antd'
 import React from 'react'
 
 import { LIST_GRIDS } from '../../../utils'
-import { Text, text } from '../../../utils/Text'
+import { text } from '../../../utils/Text'
 import ActionCard from '../../Elements/Cards/ActionCard'
 import Category from '../helpers/Category'
 
@@ -12,7 +12,7 @@ const Results = (props) => {
   const handleNext = (item) => {
     props.setStore({ ...props.store, item: item })
     props.setProgress(0.3)
-    props.goTo('details')
+    props.goTo(props.nextKey)
   }
   const handleValuesChange = (changedValues, allValues) => {
     props.setStore({ ...props.store, ...changedValues })
@@ -44,7 +44,7 @@ const Results = (props) => {
       <Category
         goBack
         icon={props.icon}
-        prev={() => props.goTo('intro')}
+        prev={() => props.goTo(props.prevKey)}
         title={text(props.blocks['category.title'])}
       />
       <h2>{text(props.blocks['results.title'])}</h2>

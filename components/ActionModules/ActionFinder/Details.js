@@ -2,10 +2,11 @@ import { Button, Col, Form, Row } from 'antd'
 import React from 'react'
 
 import { Text, text } from '../../../utils/Text'
-import { MultiSelect } from '../../Elements/MultiSelect'
+import { ActionDetails } from '../../Elements/DetailViews/ActionDetails'
 import Category from '../helpers/Category'
 
 const Details = (props) => {
+  const cardLayout = props.data?.main?.cardLayout || 'action'
   const item = props.store?.item
   if (!item) return null
 
@@ -14,12 +15,21 @@ const Details = (props) => {
       <Category
         goBack
         icon={props.icon}
-        prev={() => props.goTo('results')}
+        prev={() => props.goTo(props.prevKey)}
         title={text(props.blocks['category.title'])}
       />
-      <h2>{item.name}</h2>
+      <DetailView cardLayout={cardLayout} item={item} />
     </div>
   )
+}
+
+const DetailView = (props) => {
+  switch (props.cardLayout) {
+    case 'action':
+      return <ActionDetails item={props.item} />
+    default:
+      return null
+  }
 }
 
 export default Details

@@ -32,6 +32,7 @@ export const AllNavsFragment = gql`
 `
 
 const DataWorkFragment = gql`
+  ${CallToActionFragment}
   fragment DataWorkFragment on DataWork {
     name
     icon {
@@ -42,7 +43,7 @@ const DataWorkFragment = gql`
     }
     actionsCollection(limit: 5) {
       items {
-        text
+        ...CallToActionFragment
       }
     }
     levelsCollection(limit: 5) {
