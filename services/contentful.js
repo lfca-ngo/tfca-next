@@ -288,7 +288,7 @@ const transformResults = (results) => {
     const data = item.dataCollection?.items.reduce((allData, data) => {
       const {
         cardLayout,
-        filterableAttributes,
+        filtersCollection,
         itemsCollection,
         listGrid,
         listId,
@@ -297,8 +297,8 @@ const transformResults = (results) => {
         ...allData,
         [listId]: {
           cardLayout,
-          filterableAttributes,
-          items: itemsCollection.items,
+          filters: filtersCollection?.items || [],
+          items: itemsCollection?.items || [],
           listGrid,
         },
       }

@@ -8,40 +8,57 @@ import { text } from '../../../utils/Text'
 import { Share } from '../helpers/Share'
 import Success from '../helpers/Success'
 import Details from './Details'
-import Intro from './Intro'
+import Filter from './Filter'
 import Results from './Results'
 
 const { TabPane } = Tabs
 
-const steps = new Map([
-  ['intro', Intro],
-  ['results', Results],
-  ['details', Details],
-  ['success', Success],
-  ['share', Share],
-])
-
 const ActionFinderFlow = (props) => {
-  const { goTo, index, setStore, store } = useFlow({
-    id: props.module?.id,
-    initial: 'intro',
-  })
+  const { filters, items } = props.module?.data['main'] || {}
 
-  const { filterableAttributes, items } = props.module?.data['main'] || {}
-
-  const availableFilters = useMemo(() => {
-    const filters = []
-    for (const filterableAttribute of filterableAttributes) {
-      const fieldName = filterableAttribute.toLowerCase()
+  const { availableFilters, steps } = useMemo(() => {
+    const steps = []
+    const parsedFilters = []
+    for (const filter of filters) {
+      const fieldName = filter?.key.toLowerCase()
       const collectionName = `${fieldName}Collection`
       const options = getFilterOptions(items, collectionName)
-      filters.push({ fieldName, options })
+      const filterElement = {
+        fieldName,
+        options,
+        question: filter.question,
+      }
+      parsedFilters.push(filterElement)
+      // create pages for marked filters
+      if (filter.renderAsStep) {
+        steps.push([
+          `${fieldName}`,
+          { component: Filter, fieldName, filterElement },
+        ])
+      }
     }
-    return filters
-  }, [items, filterableAttributes])
+
+    const dynamicSteps = new Map([
+      ...steps,
+      ['results', { component: Results }],
+      ['details', { component: Details }],
+      ['success', { component: Success }],
+      ['share', { component: Share }],
+    ])
+    return { availableFilters: parsedFilters, steps: dynamicSteps }
+  }, [items, filters])
+
+  const [firstStep] = steps.keys()
+
+  const { goTo, index, setStore, store } = useFlow({
+    id: props.module?.id,
+    initial: firstStep,
+  })
 
   const { customization, setProgress } = useChallenge()
 
+  const stepsKeys = [...steps.keys()]
+  console.log(stepsKeys)
   return (
     <div className="steps-container">
       <Tabs
@@ -50,8 +67,10 @@ const ActionFinderFlow = (props) => {
         destroyInactiveTabPane
         renderTabBar={() => null}
       >
-        {[...steps.keys()].map((key) => {
-          const Page = steps.get(key)
+        {[...steps.keys()].map((key, i) => {
+          const { component: Page, filterElement } = steps.get(key)
+          const nextKey = i <= stepsKeys.length ? stepsKeys[i + 1] : null
+          const prevKey = i > 0 ? stepsKeys[i - 1] : null
           return (
             <TabPane key={key} tab={`${props.name}`}>
               <Page
@@ -59,10 +78,13 @@ const ActionFinderFlow = (props) => {
                 blocks={props.module?.blocks || {}}
                 customization={customization}
                 data={props.module?.data || {}}
+                filterElement={filterElement}
                 goTo={goTo}
                 icon={props.module?.icon?.url}
                 lists={props.module?.lists || {}}
                 name={props.name}
+                nextKey={nextKey}
+                prevKey={prevKey}
                 setProgress={setProgress}
                 setStore={setStore}
                 store={store}

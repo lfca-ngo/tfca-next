@@ -56,6 +56,17 @@ const DataWorkFragment = gql`
         }
       }
     }
+    areasCollection(limit: 5) {
+      items {
+        value {
+          json
+        }
+        key
+        icon {
+          url
+        }
+      }
+    }
     tagsCollection(limit: 5) {
       items {
         value {
@@ -186,9 +197,16 @@ export const ActionFragment = gql`
     dataCollection(limit: $dataLimit) {
       items {
         listId
-        filterableAttributes
         cardLayout
         listGrid
+        filtersCollection(limit: 3) {
+          items {
+            key
+            label
+            question
+            renderAsStep
+          }
+        }
         itemsCollection(limit: 5) {
           items {
             ... on DataOrganization {

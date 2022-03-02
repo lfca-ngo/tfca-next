@@ -39,7 +39,6 @@ const Results = (props) => {
   const dataMain = props.data['main']
   const data = dataMain?.items || []
 
-  console.log(dataMain)
   return (
     <div className="step">
       <Category
