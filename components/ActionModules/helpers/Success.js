@@ -1,24 +1,30 @@
-import { Button, Form, Modal } from 'antd'
+import { LoadingOutlined } from '@ant-design/icons'
+import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons'
+import { Button, Drawer, Form } from 'antd'
 import React, { useEffect } from 'react'
 
 import { useConfetti } from '../../../hooks/useChallenge'
-import { useLists } from '../../../hooks/useTranslation'
+import { useIsMobile } from '../../../hooks/useIsClient'
+import { useBlocks, useLists } from '../../../hooks/useTranslation'
 import { text } from '../../../utils/Text'
 import CheckList from '../../Elements/CheckList'
 import { NominateNameInput } from '../../Elements/NominateInput'
 import Category from './Category'
+import { Share } from './Share'
 
 const Success = (props) => {
+  const isMobile = useIsMobile()
   const { goTo, setProgress } = props
   const benefits = useLists('sharing.benefits')
   const [isGeneratingToken, setIsGeneratingToken] = React.useState(false)
   const [error, setError] = React.useState('')
+  const [visible, setVisible] = React.useState('')
+  const [shareLink, setShareLink] = React.useState()
 
   useConfetti() // creates confetti
 
   useEffect(() => {
     setProgress(1)
-    // fireConfetti()
   }, [setProgress])
 
   return (
@@ -28,60 +34,94 @@ const Success = (props) => {
           icon={props.icon}
           title={text(props.blocks['category.title'])}
         />
-        <h2>{text(props.blocks['sharing.title'])}</h2>
+        <h2>{text(useBlocks('sharing.headline'))}</h2>
 
         <CheckList data={benefits?.items} />
-
-        <Form onFinish={handleFinish} style={{ marginTop: '20px' }}>
-          <Form.Item
-            name="invitee1"
-            rules={[
-              {
-                message: 'Bitte lade mindestens eine Person ein',
-                required: true,
-              },
-            ]}
-          >
-            <NominateNameInput
-              // onFocus={() => trackEvent('start_invite', { field: '1' })}
-              placeholder="Tina"
-            />
-          </Form.Item>
-          <Form.Item name="invitee2">
-            <NominateNameInput
-              // onFocus={() => trackEvent('start_invite', { field: '2' })}
-              placeholder="Peter"
-            />
-          </Form.Item>
-          <Form.Item name="invitee3">
-            <NominateNameInput
-              // onFocus={() => trackEvent('start_invite', { field: '3' })}
-              placeholder="Luisa"
-            />
-          </Form.Item>
+        <Form
+          initialValues={{ names: [{ challenge: 'Energy', name: null }] }}
+          layout="vertical"
+          name="dynamic_invitees"
+          onFinish={(val) => console.log(val)}
+          onFinishFailed={(error) => console.log(error)}
+        >
+          <Form.List name="names">
+            {(fields, { add, remove }, { errors }) => (
+              <>
+                {fields.map((field, index) => (
+                  <Form.Item key={field.key} required={false}>
+                    <Form.Item
+                      {...field}
+                      rules={[
+                        {
+                          message: 'Please input a name or delete this field.',
+                          required: true,
+                        },
+                      ]}
+                      validateTrigger={['onChange', 'onBlur']}
+                    >
+                      <NominateNameInput
+                        placeholder="Name"
+                        style={{ width: '60%' }}
+                      />
+                    </Form.Item>
+                    {fields.length > 1 ? (
+                      <MinusCircleOutlined
+                        className="dynamic-delete-button"
+                        onClick={() => remove(field.name)}
+                      />
+                    ) : null}
+                  </Form.Item>
+                ))}
+                <Form.Item>
+                  <Button
+                    icon={<PlusOutlined />}
+                    onClick={() => add()}
+                    style={{ width: '60%' }}
+                    type="dashed"
+                  >
+                    Add field
+                  </Button>
+                  <Form.ErrorList errors={errors} />
+                </Form.Item>
+              </>
+            )}
+          </Form.List>
           <Form.Item>
-            <Button block htmlType="submit" size="large" type="primary">
-              Freunde einladen
+            <Button htmlType="submit" type="primary">
+              Submit
             </Button>
           </Form.Item>
         </Form>
       </div>
 
       {/* Loading modal while generating shareToken */}
-      <Modal
-        closable={!!error}
+      <Drawer
+        className={`drawer-md`}
         footer={null}
         onCancel={() => setError('')}
-        visible={isGeneratingToken || error}
-        wrapClassName={`modal-md ${props.color} has-top`}
+        visible={visible}
+        width={isMobile ? '100%' : '700px'}
       >
-        {error ? <h3>{error}</h3> : <h3>Generating link...</h3>}
-      </Modal>
+        {error ? (
+          <h3>{error}</h3>
+        ) : (
+          <div>
+            {isGeneratingToken && <LoadingOutlined />}
+            <Share shareLink={shareLink} />
+          </div>
+        )}
+      </Drawer>
     </>
   )
 
-  async function handleFinish({ invitee1, invitee2, invitee3 }) {
+  // create multiple invite links
+  // map of promises with infos
+  const createInvites = (invitees) => {
+    setVisible(true)
     setIsGeneratingToken(true)
+  }
+
+  async function createInvite({ invitee1, invitee2, invitee3 }) {
     // Gereate the share token
     const tokenPayload = {
       invitee1,
@@ -107,16 +147,11 @@ const Success = (props) => {
         method: 'POST',
       })
 
-      const { shortLink } = await response.json()
-      props.setStore({
-        ...props.store,
-        shareLink: shortLink,
-      })
+      const { ogImage, shortLink } = await response.json()
 
-      goTo('share')
+      return { ogImage, shortLink }
     } catch (e) {
       setError('Failed to generate link')
-      setIsGeneratingToken(false)
     }
   }
 }

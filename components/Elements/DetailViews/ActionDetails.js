@@ -19,17 +19,17 @@ export const ActionDetails = ({ item }) => {
       <h2>{item.name}</h2>
       <div className="tags">
         {levelTags?.map((tag, index) => (
-          <Tag color="gold" key={index}>
+          <Tag className="base-tag" color="gold" key={index}>
             {tag}
           </Tag>
         ))}
         {areaTags?.map((tag, index) => (
-          <Tag color="blue" key={index}>
+          <Tag className="base-tag" color="blue" key={index}>
             {tag}
           </Tag>
         ))}
         {tagsTags?.map((tag, index) => (
-          <Tag color="blue" key={index}>
+          <Tag className="base-tag" color="blue" key={index}>
             {tag}
           </Tag>
         ))}

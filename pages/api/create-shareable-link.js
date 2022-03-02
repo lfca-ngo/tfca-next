@@ -49,7 +49,7 @@ export default async function handler(req, res) {
     )
     const { shortLink } = await response.json()
 
-    res.status(200).json({ shortLink })
+    res.status(200).json({ ogImageUrl, shortLink })
   } catch (e) {
     throw new Error(e.message || e)
   }

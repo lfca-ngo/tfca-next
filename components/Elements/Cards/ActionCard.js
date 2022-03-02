@@ -21,12 +21,12 @@ const ActionCard = ({ item, onNext }) => {
           <div className="title">{item.name}</div>
           <div className="tags">
             {levelTags?.map((tag, index) => (
-              <Tag color="gold" key={index}>
+              <Tag className="base-tag" color="gold" key={index}>
                 {tag}
               </Tag>
             ))}
             {typeTags?.map((tag, index) => (
-              <Tag color="blue" key={index}>
+              <Tag className="base-tag" color="blue" key={index}>
                 {tag}
               </Tag>
             ))}
@@ -34,7 +34,7 @@ const ActionCard = ({ item, onNext }) => {
         </div>
       </div>
       <div className="actions">
-        <Button onClick={() => onNext(item)} size="small" type="primary">
+        <Button onClick={() => onNext(item)} type="primary">
           Details
         </Button>
       </div>
