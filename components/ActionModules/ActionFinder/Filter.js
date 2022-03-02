@@ -15,7 +15,7 @@ const Filter = (props) => {
     props.setProgress(0.3)
     props.goTo(props.nextKey)
   }
-  console.log(props)
+
   return (
     <div className="step">
       <Category
