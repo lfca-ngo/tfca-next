@@ -1,4 +1,4 @@
-import { Button, Col, Form, Row } from 'antd'
+import { Button } from 'antd'
 import React from 'react'
 
 import { Text, text } from '../../../utils/Text'
@@ -19,6 +19,14 @@ const Details = (props) => {
         title={text(props.blocks['category.title'])}
       />
       <DetailView cardLayout={cardLayout} item={item} />
+      <Button
+        block
+        onClick={() => props.goTo(props.nextKey)}
+        size="large"
+        type="primary"
+      >
+        Make it count
+      </Button>
     </div>
   )
 }

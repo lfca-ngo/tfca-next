@@ -28,10 +28,7 @@ const Success = (props) => {
           icon={props.icon}
           title={text(props.blocks['category.title'])}
         />
-        <h2>
-          High five! Planet Erde sagt Danke. Nominiere 3 Freunde und
-          verdreifache deinen Impact!
-        </h2>
+        <h2>{text(props.blocks['sharing.title'])}</h2>
 
         <CheckList data={benefits?.items} />
 
