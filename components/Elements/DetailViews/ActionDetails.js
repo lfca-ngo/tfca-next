@@ -7,7 +7,6 @@ import { Text, text } from '../../../utils/Text'
 import CallToAction from '../CallToAction'
 
 export const ActionDetails = ({ item }) => {
-  console.log(item)
   const levelTags =
     item.levelsCollection?.items?.map((level) => text(level.value)) || []
   const areaTags =
