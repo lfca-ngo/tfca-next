@@ -5,6 +5,7 @@ import { CopyToClipboard } from 'react-copy-to-clipboard'
 const { TextArea } = Input
 const { TabPane } = Tabs
 
+const BTN_WIDTH = '120px'
 const INVITE_TEXT = `My home is running on 100% renewables! I am nominating Tim, Christian and Boris for the energy challenge! It’s Earth Day, you 
 can afford  #5minForThePlanet`
 
@@ -21,23 +22,24 @@ export const Share = (props) => {
 
             <TextArea rows={4} value={INVITE_TEXT} />
 
-            <Input
-              addonAfter={
-                <CopyToClipboard
-                  onCopy={() => {
-                    message.success('Copied value')
-                  }}
-                  text={invite.shortLink}
-                >
-                  <Button block type="primary">
-                    Copy{' '}
-                  </Button>
-                </CopyToClipboard>
-              }
-              className="copy-input"
-              disabled
-              value={invite.shortLink}
-            />
+            <Input.Group compact>
+              <Input
+                className="copy-input"
+                disabled
+                style={{ width: `calc(100% - ${BTN_WIDTH})` }}
+                value={invite.shortLink}
+              />
+              <CopyToClipboard
+                onCopy={() => {
+                  message.success('Copied value')
+                }}
+                text={invite.shortLink}
+              >
+                <Button block style={{ width: BTN_WIDTH }} type="primary">
+                  Copy{' '}
+                </Button>
+              </CopyToClipboard>
+            </Input.Group>
           </TabPane>
         ))}
       </Tabs>
