@@ -205,6 +205,9 @@ export const ActionFragment = gql`
             label
             question
             renderAsStep
+            hint {
+              json
+            }
           }
         }
         itemsCollection(limit: 5) {

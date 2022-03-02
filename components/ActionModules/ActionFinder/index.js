@@ -4,7 +4,6 @@ import React, { useEffect, useMemo } from 'react'
 import { useChallenge } from '../../../hooks/useChallenge'
 import { useFlow } from '../../../hooks/useFlow'
 import { getFilterOptions } from '../../../utils'
-import { text } from '../../../utils/Text'
 import { Share } from '../helpers/Share'
 import Success from '../helpers/Success'
 import Details from './Details'
@@ -25,6 +24,7 @@ const ActionFinderFlow = (props) => {
       const options = getFilterOptions(items, collectionName)
       const filterElement = {
         fieldName,
+        hint: filter.hint,
         options,
         question: filter.question,
       }
@@ -58,7 +58,7 @@ const ActionFinderFlow = (props) => {
   const { customization, setProgress } = useChallenge()
 
   const stepsKeys = [...steps.keys()]
-  console.log(stepsKeys)
+
   return (
     <div className="steps-container">
       <Tabs

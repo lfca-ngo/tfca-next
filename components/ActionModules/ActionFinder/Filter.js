@@ -8,14 +8,14 @@ import Category from '../helpers/Category'
 const Filter = (props) => {
   // take the first filter for the intro screen
   const filterOption = props.filterElement || {}
-  console.log(props)
+
   const handleNext = (v) => {
     const value = v[filterOption?.fieldName]
     props.setStore({ ...props.store, [filterOption?.fieldName]: value })
     props.setProgress(0.3)
     props.goTo(props.nextKey)
   }
-
+  console.log(props)
   return (
     <div className="step">
       <Category
@@ -25,7 +25,7 @@ const Filter = (props) => {
         title={text(props.blocks['category.title'])}
       />
       <h2>{props.filterElement?.question}</h2>
-      <p>{text(props.blocks['intro.subtitle'])}</p>
+      <Text block={props.filterElement?.hint} />
       <Form initialValues={props.store} layout="vertical" onFinish={handleNext}>
         <Form.Item label="Choose 1 option" name={filterOption?.fieldName}>
           <MultiSelect items={filterOption?.options} singleMode />
