@@ -1,41 +1,46 @@
-import { Button, Input, Tabs, Tooltip } from 'antd'
+import { Button, Input, message, Tabs } from 'antd'
 import React from 'react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
-
-import { text } from '../../../utils/Text'
-import Category from './Category'
 
 const { TextArea } = Input
 const { TabPane } = Tabs
 
-export const Share = (props) => {
-  const { shareLink } = props
+const INVITE_TEXT = `My home is running on 100% renewables! I am nominating Tim, Christian and Boris for the energy challenge! It’s Earth Day, you 
+can afford  #5minForThePlanet`
 
-  const [hasCopied, setHasCopied] = React.useState(false)
+export const Share = (props) => {
+  const { invites } = props
 
   return (
     <div>
       <h2>Ready! Invite your friends</h2>
       <Tabs defaultActiveKey="1">
-        <TabPane key="1" tab="Tab 1">
-          Content of Tab Pane 1
-        </TabPane>
+        {invites.map((invite, i) => (
+          <TabPane key={`${i}`} tab={invite.name}>
+            <img alt={invite.name} src={invite.ogImageUrl} />
+
+            <TextArea rows={4} value={INVITE_TEXT} />
+
+            <Input
+              addonAfter={
+                <CopyToClipboard
+                  onCopy={() => {
+                    message.success('Copied value')
+                  }}
+                  text={invite.shortLink}
+                >
+                  <Button block type="primary">
+                    Copy{' '}
+                  </Button>
+                </CopyToClipboard>
+              }
+              className="copy-input"
+              disabled
+              value={invite.shortLink}
+            />
+          </TabPane>
+        ))}
       </Tabs>
-      {!shareLink ? (
-        <>
-          <h2>Something went wrong...</h2>
-          <button onClick={() => goTo('success')}>Go back</button>
-        </>
-      ) : (
-        <>
-          <TextArea autoSize={true} disabled={true} value={shareLink} />
-          <CopyToClipboard onCopy={() => setHasCopied(true)} text={shareLink}>
-            <Tooltip placement="topLeft" title="Copied" visible={hasCopied}>
-              <Button>Copy to clipboard with button</Button>
-            </Tooltip>
-          </CopyToClipboard>
-        </>
-      )}
     </div>
   )
 }

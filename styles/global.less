@@ -88,3 +88,42 @@ body {
     }
   }
 }
+
+.copy-input .ant-input-wrapper {
+  .ant-input-group-addon {
+    padding: 0;
+    .ant-btn {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+  }
+}
+
+.dynamic-form.ant-form {
+  > .ant-form-item {
+    margin-bottom: 0;
+    > .ant-form-item-control {
+      margin-bottom: 16px;
+      > .ant-form-item-control-input {
+        .ant-form-item-control-input-content {
+          display: flex;
+          > .ant-form-item {
+            flex: 1;
+            margin-bottom: 0;
+          }
+          > .anticon {
+            width: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: @secondary-color;
+          }
+          .ant-input-group-addon {
+            border-top-right-radius: @border-radius-base;
+            border-bottom-right-radius: @border-radius-base;
+          }
+        }
+      }
+    }
+  }
+}

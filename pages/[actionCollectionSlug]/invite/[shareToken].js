@@ -10,8 +10,6 @@ import {
   fetchAllStaticContent,
 } from '../../../services/contentful'
 
-const { Title } = Typography
-
 export default function InvitePage({ actions, ogImageUrl }) {
   return (
     <>

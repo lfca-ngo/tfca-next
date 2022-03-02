@@ -1,7 +1,11 @@
 import { LoadingOutlined } from '@ant-design/icons'
-import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons'
-import { Button, Drawer, Form } from 'antd'
-import React, { useEffect } from 'react'
+import {
+  MinusCircleOutlined,
+  PlusOutlined,
+  SendOutlined,
+} from '@ant-design/icons'
+import { Alert, Button, Drawer, Form } from 'antd'
+import React from 'react'
 
 import { useConfetti } from '../../../hooks/useChallenge'
 import { useIsMobile } from '../../../hooks/useIsClient'
@@ -12,20 +16,31 @@ import { NominateNameInput } from '../../Elements/NominateInput'
 import Category from './Category'
 import { Share } from './Share'
 
+const MAX_INVITES = 3
+
 const Success = (props) => {
   const isMobile = useIsMobile()
-  const { goTo, setProgress } = props
   const benefits = useLists('sharing.benefits')
   const [isGeneratingToken, setIsGeneratingToken] = React.useState(false)
   const [error, setError] = React.useState('')
   const [visible, setVisible] = React.useState('')
-  const [shareLink, setShareLink] = React.useState()
+  const [invites, setInvites] = React.useState([])
 
   useConfetti() // creates confetti
 
-  useEffect(() => {
-    setProgress(1)
-  }, [setProgress])
+  // create multiple invite links
+  // map of promises with infos
+  const createInvites = async (values) => {
+    const singleInvites = values.names.map((name) => () => createInvite([name]))
+    const allInvites = [...singleInvites, () => createInvite(values.names)]
+
+    setVisible(true)
+    setIsGeneratingToken(true)
+
+    const results = await Promise.all(allInvites.map((invite) => invite()))
+    setIsGeneratingToken(false)
+    setInvites(results)
+  }
 
   return (
     <>
@@ -38,16 +53,29 @@ const Success = (props) => {
 
         <CheckList data={benefits?.items} />
         <Form
+          className="dynamic-form"
           initialValues={{ names: [{ challenge: 'Energy', name: null }] }}
           layout="vertical"
           name="dynamic_invitees"
-          onFinish={(val) => console.log(val)}
-          onFinishFailed={(error) => console.log(error)}
+          onFinish={createInvites}
         >
-          <Form.List name="names">
+          <Form.List
+            name="names"
+            rules={[
+              {
+                validator: async (_, names) => {
+                  if (!names || names.length > MAX_INVITES) {
+                    return Promise.reject(
+                      new Error(`Max ${MAX_INVITES} invites`)
+                    )
+                  }
+                },
+              },
+            ]}
+          >
             {(fields, { add, remove }, { errors }) => (
               <>
-                {fields.map((field, index) => (
+                {fields.map((field) => (
                   <Form.Item key={field.key} required={false}>
                     <Form.Item
                       {...field}
@@ -72,33 +100,51 @@ const Success = (props) => {
                     ) : null}
                   </Form.Item>
                 ))}
-                <Form.Item>
-                  <Button
-                    icon={<PlusOutlined />}
-                    onClick={() => add()}
-                    style={{ width: '60%' }}
-                    type="dashed"
-                  >
-                    Add field
-                  </Button>
-                  <Form.ErrorList errors={errors} />
-                </Form.Item>
+
+                {fields.length >= MAX_INVITES ? (
+                  <Alert
+                    message={`You can nominate max. 3 friends personally but share a
+                  general link to invite even more!`}
+                    showIcon
+                    type="info"
+                  />
+                ) : (
+                  <Form.Item>
+                    <Button
+                      ghost
+                      icon={<PlusOutlined />}
+                      onClick={() => add()}
+                      style={{ width: '60%' }}
+                      type="dashed"
+                    >
+                      Add invitee
+                    </Button>
+                    <Form.ErrorList errors={errors} />
+                  </Form.Item>
+                )}
               </>
             )}
           </Form.List>
           <Form.Item>
-            <Button htmlType="submit" type="primary">
-              Submit
+            <Button
+              block
+              htmlType="submit"
+              icon={<SendOutlined />}
+              size="large"
+              style={{ marginTop: '20px' }}
+              type="primary"
+            >
+              Open invite dialog
             </Button>
           </Form.Item>
         </Form>
       </div>
 
-      {/* Loading modal while generating shareToken */}
+      {/* Show progress in drawer */}
       <Drawer
         className={`drawer-md`}
         footer={null}
-        onCancel={() => setError('')}
+        onClose={() => setVisible(false)}
         visible={visible}
         width={isMobile ? '100%' : '700px'}
       >
@@ -106,22 +152,20 @@ const Success = (props) => {
           <h3>{error}</h3>
         ) : (
           <div>
-            {isGeneratingToken && <LoadingOutlined />}
-            <Share shareLink={shareLink} />
+            {isGeneratingToken ? (
+              <LoadingOutlined />
+            ) : (
+              <Share invites={invites} />
+            )}
           </div>
         )}
       </Drawer>
     </>
   )
 
-  // create multiple invite links
-  // map of promises with infos
-  const createInvites = (invitees) => {
-    setVisible(true)
-    setIsGeneratingToken(true)
-  }
-
-  async function createInvite({ invitee1, invitee2, invitee3 }) {
+  async function createInvite(invitees) {
+    const [invitee1, invitee2, invitee3] = invitees
+    const multiInvite = invitees.length > 1
     // Gereate the share token
     const tokenPayload = {
       invitee1,
@@ -147,9 +191,13 @@ const Success = (props) => {
         method: 'POST',
       })
 
-      const { ogImage, shortLink } = await response.json()
+      const data = await response.json()
 
-      return { ogImage, shortLink }
+      return {
+        ...data,
+        challenge: multiInvite ? 'All' : invitee1?.challenge,
+        name: multiInvite ? 'All' : invitee1?.name,
+      }
     } catch (e) {
       setError('Failed to generate link')
     }
