@@ -49,9 +49,13 @@ const DataWorkFragment = gql`
     icon {
       url
     }
+    hero {
+      url
+    }
     description {
       json
     }
+    shortDescription
     actionsCollection(limit: 5) {
       items {
         ${CALL_TO_ACTION_FIELDS}
@@ -207,7 +211,7 @@ export const ActionFragment = gql`
             }
           }
         }
-        itemsCollection(limit: 5) {
+        itemsCollection(limit: 20) {
           items {
             ... on DataOrganization {
               ...DataOrganizationFragment
