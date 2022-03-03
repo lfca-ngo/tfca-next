@@ -13,11 +13,13 @@ export const fetchData = async (query, variables) => {
 
   let data
 
-  // Try getting the data from cache
-  try {
-    data = JSON.parse(fs.readFileSync(CACHE_PATH, 'utf8'))
-  } catch (error) {
-    // Nothing to do
+  if (!process.env.DISABLE_LFCA_SERVICE_CACHE) {
+    // Try getting the data from cache
+    try {
+      data = JSON.parse(fs.readFileSync(CACHE_PATH, 'utf8'))
+    } catch (error) {
+      // Nothing to do
+    }
   }
 
   if (!data) {
