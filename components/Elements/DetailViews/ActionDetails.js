@@ -6,20 +6,13 @@ import {
   QuestionCircleOutlined,
   ShareAltOutlined,
 } from '@ant-design/icons'
-import Icon from '@ant-design/icons'
-import { Button, Col, List, Row, Tag } from 'antd'
+import { Button, List } from 'antd'
 import React from 'react'
 
 import { Text, text } from '../../../utils/Text'
 import CallToAction from '../CallToAction'
 
 export const ActionDetails = ({ item }) => {
-  const levelTags =
-    item.levelsCollection?.items?.map((level) => text(level.value)) || []
-  const areaTags =
-    item.areasCollection?.items?.map((level) => text(level.value)) || []
-  const tagsTags =
-    item.tagsCollection?.items?.map((level) => text(level.value)) || []
   return (
     <div className="action-detail-view">
       <div className="hero-image">
@@ -66,24 +59,6 @@ export const ActionDetails = ({ item }) => {
       {item?.actionsCollection?.items?.map((action, i) => (
         <CallToAction key={`action-${i}`} {...action} />
       ))}
-
-      {/* <div className="tags">
-        {levelTags?.map((tag, index) => (
-          <Tag className="base-tag lila" key={index}>
-            {tag}
-          </Tag>
-        ))}
-        {areaTags?.map((tag, index) => (
-          <Tag className="base-tag blue" key={index}>
-            {tag}
-          </Tag>
-        ))}
-        {tagsTags?.map((tag, index) => (
-          <Tag className="base-tag green" key={index}>
-            {tag}
-          </Tag>
-        ))}
-      </div> */}
     </div>
   )
 }

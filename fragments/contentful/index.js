@@ -130,6 +130,19 @@ const DataBankFragment = gql`
       url
     }
     referralUrl
+    description {
+      json
+    }
+    pricePerMonth
+    currency
+    offersCollection(limit: 5) {
+      items {
+        value {
+          json
+        }
+        key
+      }
+    }
     sustainabilityCollection(limit: 8) {
       items {
         value {

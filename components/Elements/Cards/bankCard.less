@@ -2,54 +2,35 @@
 @import (reference) '../../../styles/fonts.less';
 
 .ant-card.bank-card {
+  display: flex;
+  flex-direction: column;
+  .ant-tabs {
+    text-align: center;
+    .ant-tabs-tab {
+      .ant-tabs-tab-btn {
+        color: fade(@black, 75%);
+      }
+      &.ant-tabs-tab-active {
+        .ant-tabs-tab-btn {
+          color: @black;
+        }
+      }
+    }
+  }
+
   .ant-card-body {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    color: @black;
-
-    @media @desktop {
-      flex-direction: row;
-      align-items: center;
-    }
-
-    .title {
-      font-size: 20px;
-      color: @black;
-      .font-semi();
-    }
-
-    .tags {
-      margin: 20px 0 0;
-    }
-
-    .body-content {
-      display: flex;
-      flex-direction: row;
-      width: 100%;
-      margin: 15px 0 0;
-      .actions {
-        margin: 0 0 0 auto;
-        display: flex;
-        align-items: center;
-        @media @desktop {
-          margin: 0 0 0 auto;
-        }
+    flex: 1;
+    .simple-list.summary {
+      .ant-list-item-meta-description {
+        color: fade(@black, 75%);
+        font-size: 16px;
       }
-      .hero-image {
-        width: 110px;
-        height: 65px;
-        border-radius: 12px;
-        // border: 1px solid #f4f4f4;
-        background-color: @white;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        align-self: flex-start;
-        @media @desktop {
-          align-self: center;
-        }
-      }
+    }
+    .actions {
+      margin-bottom: 0;
+      margin-top: auto;
     }
   }
 }

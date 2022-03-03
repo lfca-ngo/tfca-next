@@ -39,7 +39,7 @@ const Results = (props) => {
   const dataMain = props.data['main']
   const data = dataMain?.items || []
   const listGrid = dataMain?.listGrid || 'col-1'
-  console.log(LIST_GRIDS[listGrid])
+
   return (
     <div className="step">
       <Category
@@ -61,6 +61,7 @@ const Results = (props) => {
       />
 
       <List
+        className="simple-list equal-height"
         dataSource={data.filter(filterByAttributes)}
         grid={LIST_GRIDS[listGrid]}
         renderItem={(item) => (

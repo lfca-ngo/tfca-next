@@ -1,45 +1,58 @@
 require('./bankCard.less')
 
-import { Button, Card, Tag } from 'antd'
-import React from 'react'
+import { CheckCircleOutlined } from '@ant-design/icons'
+import { Button, Card, List, Tag } from 'antd'
+import React, { useState } from 'react'
 
 import { text } from '../../../utils/Text'
 
+const TABS_LIST = [
+  {
+    key: 'benefitsCollection',
+    tab: 'Benefits',
+  },
+  {
+    key: 'sustainabilityCollection',
+    tab: 'Sustainability',
+  },
+]
+
 const BankCard = ({ item, onNext }) => {
-  console.log(item)
-  const levelTags =
-    item.levelsCollection?.items?.map((level) => text(level.value)) || []
-  const typeTags =
-    item.tagsCollection?.items?.map((tag) => text(tag.value)) || []
+  const [activeTab, setActiveTab] = useState(TABS_LIST[0].key)
 
   const handleNext = () => onNext(item)
 
   return (
-    <Card className="action-card" onClick={handleNext}>
-      <div>
-        <div className="title">{item.name}</div>
-        <div className="tags">
-          {levelTags?.map((tag, index) => (
-            <Tag className="base-tag lila" key={index}>
-              {tag}
-            </Tag>
-          ))}
-          {typeTags?.map((tag, index) => (
-            <Tag className="base-tag blue" key={index}>
-              {tag}
-            </Tag>
-          ))}
+    <Card
+      activeTabKey={activeTab}
+      className="bank-card"
+      onTabChange={(key) => {
+        setActiveTab(key)
+      }}
+      tabList={TABS_LIST}
+      title={
+        <div className="logo">
+          <img src={item?.logo?.url} />
         </div>
-      </div>
-      <div className="body-content">
-        <div className="hero-image">
-          <img src={item.hero?.url} />
-        </div>
-        <div className="actions">
-          <Button onClick={handleNext} type="primary">
-            Details
-          </Button>
-        </div>
+      }
+    >
+      <List
+        className="simple-list summary"
+        dataSource={item[activeTab].items}
+        renderItem={(item) => (
+          <List.Item>
+            <List.Item.Meta
+              avatar={<CheckCircleOutlined />}
+              description={text(item.value)}
+            />
+          </List.Item>
+        )}
+      />
+
+      <div className="actions">
+        <Button block onClick={handleNext} type="primary">
+          Details
+        </Button>
       </div>
     </Card>
   )

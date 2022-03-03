@@ -3,6 +3,7 @@ import React from 'react'
 
 import { Text, text } from '../../../utils/Text'
 import { ActionDetails } from '../../Elements/DetailViews/ActionDetails'
+import { BankDetails } from '../../Elements/DetailViews/BankDetails'
 import Category from '../helpers/Category'
 
 const Details = (props) => {
@@ -35,6 +36,8 @@ const DetailView = (props) => {
   switch (props.cardLayout) {
     case 'action':
       return <ActionDetails item={props.item} />
+    case 'bank':
+      return <BankDetails item={props.item} />
     default:
       return null
   }

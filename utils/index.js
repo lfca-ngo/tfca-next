@@ -45,7 +45,7 @@ export const LIST_GRIDS = {
     md: 2,
     sm: 2,
     xl: 2,
-    xs: 2,
+    xs: 1,
     xxl: 2,
   },
 }
