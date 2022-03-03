@@ -44,15 +44,15 @@ export const OrganizationDetails = ({ item }) => {
         </div>
       </div>
 
-      <div className="benefits">
+      <div className="activities">
         <div className="section-title title">
           <PlusCircleOutlined />
-          Benefits
+          Activities
         </div>
 
         <List
           className="simple-list white"
-          dataSource={item?.benefitsCollection?.items}
+          dataSource={item?.activitiesCollection?.items}
           renderItem={(item) => (
             <List.Item>
               <List.Item.Meta
@@ -64,32 +64,9 @@ export const OrganizationDetails = ({ item }) => {
         />
       </div>
 
-      <div className="sustainability">
-        <div className="section-title title">
-          <PlusCircleOutlined />
-          Sustainability
-        </div>
-
-        <List
-          className="simple-list white"
-          dataSource={item?.sustainabilityCollection?.items}
-          renderItem={(item) => (
-            <List.Item>
-              <List.Item.Meta
-                avatar={<CheckOutlined />}
-                description={text(item.value)}
-              />
-            </List.Item>
-          )}
-        />
-      </div>
-
-      <CallToAction
-        block
-        text="Visit provider"
-        type="primary"
-        url={`https://google.de`}
-      />
+      {item?.actionsCollection?.items?.map((action, i) => (
+        <CallToAction key={`action-${i}`} {...action} />
+      ))}
     </div>
   )
 }
