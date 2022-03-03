@@ -67,7 +67,7 @@ export const ActionDetails = ({ item }) => {
         <CallToAction key={`action-${i}`} {...action} />
       ))}
 
-      <div className="tags">
+      {/* <div className="tags">
         {levelTags?.map((tag, index) => (
           <Tag className="base-tag lila" key={index}>
             {tag}
@@ -83,7 +83,7 @@ export const ActionDetails = ({ item }) => {
             {tag}
           </Tag>
         ))}
-      </div>
+      </div> */}
     </div>
   )
 }

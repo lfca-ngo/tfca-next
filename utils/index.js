@@ -49,3 +49,6 @@ export const LIST_GRIDS = {
     xxl: 2,
   },
 }
+
+export const SINGLE = 'single'
+export const MULTI = 'multi'

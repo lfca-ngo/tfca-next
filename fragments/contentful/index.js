@@ -5,6 +5,7 @@ const CALL_TO_ACTION_FIELDS = `
   type
   slug
   url
+  block
   size
   icon {
     url
@@ -156,6 +157,7 @@ const QuizFragment = gql`
   fragment QuizFragment on Quiz {
     question
     questionId
+    inputType
     result {
       json
     }
@@ -214,6 +216,7 @@ export const ActionFragment = gql`
             label
             question
             renderAsStep
+            filterMode
             hint {
               json
             }
