@@ -4,6 +4,7 @@ import React from 'react'
 import { LIST_GRIDS } from '../../../utils'
 import { text } from '../../../utils/Text'
 import ActionCard from '../../Elements/Cards/ActionCard'
+import BankCard from '../../Elements/Cards/BankCard'
 import { ScrollableFilters } from '../../Elements/ScrollableFilters'
 import Category from '../helpers/Category'
 import { StepHeader } from '../helpers/StepHeader'
@@ -37,7 +38,8 @@ const Results = (props) => {
 
   const dataMain = props.data['main']
   const data = dataMain?.items || []
-
+  const listGrid = dataMain?.listGrid || 'col-1'
+  console.log(LIST_GRIDS[listGrid])
   return (
     <div className="step">
       <Category
@@ -60,15 +62,30 @@ const Results = (props) => {
 
       <List
         dataSource={data.filter(filterByAttributes)}
-        grid={LIST_GRIDS['1-col']}
+        grid={LIST_GRIDS[listGrid]}
         renderItem={(item) => (
           <List.Item>
-            <ActionCard item={item} onNext={handleNext} />
+            <ItemCard
+              cardLayout={dataMain?.cardLayout}
+              item={item}
+              onNext={handleNext}
+            />
           </List.Item>
         )}
       />
     </div>
   )
+}
+
+const ItemCard = (props) => {
+  switch (props.cardLayout) {
+    case 'action':
+      return <ActionCard item={props.item} onNext={props.onNext} />
+    case 'bank':
+      return <BankCard item={props.item} onNext={props.onNext} />
+    default:
+      return null
+  }
 }
 
 export default Results

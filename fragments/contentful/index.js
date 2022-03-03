@@ -126,6 +126,26 @@ const DataOrganizationFragment = gql`
 const DataBankFragment = gql`
   fragment DataBankFragment on DataBank {
     name
+    logo {
+      url
+    }
+    referralUrl
+    sustainabilityCollection(limit: 8) {
+      items {
+        value {
+          json
+        }
+        key
+      }
+    }
+    benefitsCollection(limit: 8) {
+      items {
+        value {
+          json
+        }
+        key
+      }
+    }
     typeCollection(limit: 5) {
       items {
         value {
