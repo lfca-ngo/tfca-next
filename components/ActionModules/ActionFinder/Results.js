@@ -5,6 +5,7 @@ import { LIST_GRIDS } from '../../../utils'
 import { text } from '../../../utils/Text'
 import ActionCard from '../../Elements/Cards/ActionCard'
 import Category from '../helpers/Category'
+import { StepHeader } from '../helpers/StepHeader'
 
 const Results = (props) => {
   const availableFilters = props.availableFilters || []
@@ -47,8 +48,12 @@ const Results = (props) => {
         prev={() => props.goTo(props.prevKey)}
         title={text(props.blocks['category.title'])}
       />
-      <h2>{text(props.blocks['results.title'])}</h2>
-      <p>{text(props.blocks['results.subtitle'])}</p>
+
+      <StepHeader
+        subtitle={props.blocks['results.subtitle']}
+        title={props.blocks['results.title']}
+      />
+
       <Form
         className="scrollable-filters"
         initialValues={props.store}

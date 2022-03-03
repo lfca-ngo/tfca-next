@@ -34,7 +34,7 @@
 
   .step,
   p {
-    color: fade(@white, 75%);
+    color: fade(@white, 85%);
   }
 
   .ant-divider {
@@ -115,17 +115,21 @@
     }
   }
 
-  h2 {
-    .h2();
-    margin-bottom: 15px;
-    @media @desktop {
-      margin-bottom: 30px;
-    }
-  }
+  .step-header {
+    padding: 5px 0 15px;
 
-  p {
-    line-height: 1.4;
-    .font-regular();
+    h2 {
+      .h2();
+      margin-bottom: 25px;
+      @media @desktop {
+        margin-bottom: 35px;
+      }
+    }
+
+    p {
+      line-height: 1.4;
+      .font-regular();
+    }
   }
 
   .steps-container {
