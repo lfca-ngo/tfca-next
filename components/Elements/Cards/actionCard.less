@@ -1,0 +1,54 @@
+@import (reference) '../../../styles/vars.less';
+@import (reference) '../../../styles/fonts.less';
+
+.ant-card.action-card {
+  .ant-card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    @media @desktop {
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .body-content {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      .icon {
+        width: 65px;
+        height: 65px;
+        border-radius: 12px;
+        border: 1px solid #f4f4f4;
+        background-color: @white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        align-self: flex-start;
+        @media @desktop {
+          align-self: center;
+        }
+      }
+
+      .text {
+        padding: 0 20px;
+        flex: 1;
+        .title {
+          font-size: 19px;
+          .font-semi();
+        }
+
+        .tags {
+          margin: 10px 0 0;
+        }
+      }
+    }
+    .actions {
+      margin: 10px 0 10px auto;
+      @media @desktop {
+        margin: 10px 0 10px auto;
+      }
+    }
+  }
+}

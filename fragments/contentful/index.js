@@ -1,5 +1,17 @@
 import { gql } from 'graphql-request'
 
+const CALL_TO_ACTION_FIELDS = `
+  text
+  type
+  slug
+  url
+  size
+  icon {
+    url
+  }
+  ghost
+`
+
 export const AllNavsFragment = gql`
   fragment AllNavsFragment on NavigationCollection {
     items {
@@ -37,15 +49,30 @@ const DataWorkFragment = gql`
     icon {
       url
     }
+    hero {
+      url
+    }
     description {
       json
     }
+    shortDescription
     actionsCollection(limit: 5) {
       items {
-        text
+        ${CALL_TO_ACTION_FIELDS}
       }
     }
     levelsCollection(limit: 5) {
+      items {
+        value {
+          json
+        }
+        key
+        icon {
+          url
+        }
+      }
+    }
+    areasCollection(limit: 5) {
       items {
         value {
           json
@@ -117,22 +144,7 @@ const DataInputFragment = gql`
   }
 `
 
-const CallToActionFragment = gql`
-  fragment CallToActionFragment on CallToAction {
-    text
-    type
-    slug
-    url
-    size
-    icon {
-      url
-    }
-    ghost
-  }
-`
-
 const QuizFragment = gql`
-  ${CallToActionFragment}
   fragment QuizFragment on Quiz {
     question
     questionId
@@ -142,7 +154,7 @@ const QuizFragment = gql`
     resultActionsCollection(limit: 5) {
       items {
         ... on CallToAction {
-          ...CallToActionFragment
+          ${CALL_TO_ACTION_FIELDS}
         }
       }
     }
@@ -186,8 +198,20 @@ export const ActionFragment = gql`
     dataCollection(limit: $dataLimit) {
       items {
         listId
-        filterableAttributes
-        itemsCollection(limit: 5) {
+        cardLayout
+        listGrid
+        filtersCollection(limit: 3) {
+          items {
+            key
+            label
+            question
+            renderAsStep
+            hint {
+              json
+            }
+          }
+        }
+        itemsCollection(limit: 20) {
           items {
             ... on DataOrganization {
               ...DataOrganizationFragment

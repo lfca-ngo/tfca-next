@@ -1,7 +1,8 @@
-import { Button, Card, Col, Form, List, Row, Select } from 'antd'
+import { Form, List, Select } from 'antd'
 import React from 'react'
 
-import { Text, text } from '../../../utils/Text'
+import { LIST_GRIDS } from '../../../utils'
+import { text } from '../../../utils/Text'
 import ActionCard from '../../Elements/Cards/ActionCard'
 import Category from '../helpers/Category'
 
@@ -11,7 +12,7 @@ const Results = (props) => {
   const handleNext = (item) => {
     props.setStore({ ...props.store, item: item })
     props.setProgress(0.3)
-    props.goTo('details')
+    props.goTo(props.nextKey)
   }
   const handleValuesChange = (changedValues, allValues) => {
     props.setStore({ ...props.store, ...changedValues })
@@ -35,18 +36,19 @@ const Results = (props) => {
     return true
   }
 
-  const data = props.data['main']?.items || []
+  const dataMain = props.data['main']
+  const data = dataMain?.items || []
 
   return (
     <div className="step">
       <Category
         goBack
         icon={props.icon}
-        prev={() => props.goTo('intro')}
+        prev={() => props.goTo(props.prevKey)}
         title={text(props.blocks['category.title'])}
       />
-      <h2>{text(props.blocks['intro.title'])}</h2>
-
+      <h2>{text(props.blocks['results.title'])}</h2>
+      <p>{text(props.blocks['results.subtitle'])}</p>
       <Form
         className="scrollable-filters"
         initialValues={props.store}
@@ -77,6 +79,7 @@ const Results = (props) => {
 
       <List
         dataSource={data.filter(filterByAttributes)}
+        grid={LIST_GRIDS['1-col']}
         renderItem={(item) => (
           <List.Item>
             <ActionCard item={item} onNext={handleNext} />

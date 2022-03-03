@@ -1,9 +1,10 @@
 require('./styles.less')
 
 import Icon from '@ant-design/icons'
+import { CheckOutlined } from '@ant-design/icons'
 import React from 'react'
 
-import IconCheck from '../../../assets/icons/g-check.svg'
+// import IconCheck from '../../../assets/icons/g-check.svg'
 import { Text } from '../../../utils/Text'
 
 const CheckList = ({ data }) => {
@@ -14,7 +15,7 @@ const CheckList = ({ data }) => {
       {data.map((el, i) => {
         return (
           <div className="list-elem" key={`el-${i}`}>
-            <Icon component={IconCheck} />
+            <CheckOutlined />
             <div className="desc">
               <Text block={el?.value} />
             </div>

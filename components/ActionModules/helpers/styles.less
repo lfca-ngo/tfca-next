@@ -1,5 +1,6 @@
 @import (reference) '../../../styles/vars.less';
 @import (reference) '../../../styles/fonts.less';
+@import (reference) '../../../styles/mixins.less';
 
 .action-wrapper {
   align-items: center;
@@ -7,6 +8,10 @@
   overflow: hidden;
   min-height: 100vh;
   display: flex;
+
+  @media @desktop-xxl {
+    min-height: auto;
+  }
 
   h1,
   h2,
@@ -47,34 +52,34 @@
   }
 
   &.color-1 {
-    background: @blue;
+    background: darken(@blue, 5%);
     .stats-wrapper .ant-tag {
-      background: darken(@blue, 10%);
+      background: darken(@blue, 15%);
     }
   }
   &.color-2 {
-    background: @orange;
+    background: darken(@orange, 5%);
     .stats-wrapper .ant-tag {
-      background: darken(@orange, 10%);
+      background: darken(@orange, 15%);
     }
   }
   &.color-3 {
-    background: @green;
+    background: darken(@green, 5%);
     .stats-wrapper .ant-tag {
-      background: darken(@green, 10%);
+      background: darken(@green, 15%);
     }
   }
   &.color-4 {
-    background: @lila;
+    background: darken(@lila, 5%);
     .stats-wrapper .ant-tag {
-      background: darken(@lila, 10%);
+      background: darken(@lila, 15%);
     }
   }
 
   .action-body {
-    padding: 50px 0;
+    padding: 120px 0;
     @media @desktop {
-      padding: 80px 0 80px;
+      padding: 130px 0 50px;
     }
     .form-spacing {
       margin: 20px 0;
@@ -82,7 +87,7 @@
   }
 
   .footer {
-    padding: 0;
+    padding: 10px 0 30px;
     @media @desktop {
       padding: 15px 0 35px;
     }
@@ -167,11 +172,7 @@
     overflow-x: auto;
     overflow-y: hidden;
     white-space: nowrap;
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
-    &::-webkit-scrollbar {
-      display: none;
-    }
+    .hide-scrollbar();
     margin-right: -@default-section-padding;
     @media (min-width: @screen-lg) {
       margin-right: 0;

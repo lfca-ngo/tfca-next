@@ -1,10 +1,12 @@
 @import './vars.less';
 @import './reset.less';
 @import './fonts.less';
+@import './mixins.less';
 
 html,
 body {
   width: 100%;
+  .default-text();
   @media @desktop {
     height: 100%;
   }
@@ -25,12 +27,19 @@ body {
 .ant-form.scrollable-filters {
   display: flex;
   overflow-x: auto;
+  .hide-scrollbar();
   .ant-form-item {
     margin-right: 12px;
+    display: flex;
+    flex-direction: row;
+    @media @desktop {
+      flex-direction: column;
+    }
   }
 }
 
 .main-container {
+  width: 100%;
   max-width: @container-action-width;
   margin: 0;
   padding: 0 @default-section-padding;
@@ -52,4 +61,66 @@ body {
   height: 58px;
   line-height: 58px;
   padding: 0 34px;
+}
+
+.ant-row.btn-wrapper {
+  .ant-col:first-child {
+    margin-bottom: 12px;
+    @media @desktop {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.ant-tag {
+  &.base-tag {
+    padding: 4px 10px;
+  }
+}
+
+.ant-drawer.drawer-md {
+  .ant-drawer-content {
+    .ant-drawer-body {
+      padding: @default-section-padding;
+      @media @desktop {
+        padding: 50px;
+      }
+    }
+  }
+}
+
+.ant-input-group.ant-input-group-compact {
+  > *:last-child {
+    border-top-right-radius: @border-radius-base;
+    border-bottom-right-radius: @border-radius-base;
+  }
+}
+
+.dynamic-form.ant-form {
+  > .ant-form-item {
+    margin-bottom: 0;
+    > .ant-form-item-control {
+      margin-bottom: 16px;
+      > .ant-form-item-control-input {
+        .ant-form-item-control-input-content {
+          display: flex;
+          > .ant-form-item {
+            flex: 1;
+            margin-bottom: 0;
+          }
+          > .anticon {
+            width: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: @secondary-color;
+          }
+          .ant-input-group-addon {
+            border-top-right-radius: @border-radius-base;
+            border-bottom-right-radius: @border-radius-base;
+          }
+        }
+      }
+    }
+  }
 }

@@ -45,7 +45,7 @@ export const MultiSelect = ({
             <span className="label-wrapper">
               {item.iconUrl && (
                 <span className="icon">
-                  <Image height={20} src={item.iconUrl} width={20} />
+                  <Image height={25} src={item.iconUrl} width={25} />
                 </span>
               )}
               {item.label}

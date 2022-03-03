@@ -10,6 +10,7 @@ export const DisclosureDrawer = (props) => {
 
   return (
     <Drawer
+      className={`drawer-md`}
       onClose={onClose}
       placement="right"
       visible={visible}

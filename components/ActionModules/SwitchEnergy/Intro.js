@@ -22,7 +22,7 @@ const Intro = (props) => {
       />
       <h2>{text(props.blocks['intro.title'])}</h2>
 
-      <Row gutter={12} style={{ marginBottom: '15px' }}>
+      <Row className="btn-wrapper" gutter={12} style={{ marginBottom: '15px' }}>
         <Col md={12} xs={24}>
           <Button block onClick={handleNext} size="large" type="primary">
             <Text asString block={props.blocks['intro.button.primary']} />

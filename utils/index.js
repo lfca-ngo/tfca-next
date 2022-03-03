@@ -28,3 +28,24 @@ export const transformOption = (item, key) => ({
 export const checkAnswers = (arr1, arr2) => {
   return JSON.stringify(arr1) === JSON.stringify(arr2)
 }
+
+export const LIST_GRIDS = {
+  '1-col': {
+    gutter: 16,
+    lg: 1,
+    md: 1,
+    sm: 1,
+    xl: 1,
+    xs: 1,
+    xxl: 1,
+  },
+  '2-col': {
+    gutter: 16,
+    lg: 2,
+    md: 2,
+    sm: 1,
+    xl: 2,
+    xs: 1,
+    xxl: 2,
+  },
+}

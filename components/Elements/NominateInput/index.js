@@ -1,7 +1,8 @@
-import { Input, Select } from 'antd'
+import { Col, Input, Row, Select } from 'antd'
 import React from 'react'
 
 const { Option } = Select
+const SELECT_WIDTH = '140px'
 
 export const NominateNameInput = ({
   onChange,
@@ -13,24 +14,24 @@ export const NominateNameInput = ({
   const [challenge, setChallenge] = React.useState('Energy')
 
   return (
-    <Input
-      addonAfter={
-        <Select
-          onChange={onChallengeChange}
-          style={{ width: 120 }}
-          value={value.challenge || challenge}
-        >
-          <Option value="Energy">Energy</Option>
-          <Option value="Politics">Politics</Option>
-          <Option value="Banking">Banking</Option>
-        </Select>
-      }
-      onChange={onNameChange}
-      onFocus={onFocus}
-      placeholder={placeholder}
-      style={{ width: '100%' }}
-      value={'name' in value ? value.name : name}
-    />
+    <Input.Group compact>
+      <Input
+        onChange={onNameChange}
+        onFocus={onFocus}
+        placeholder={placeholder}
+        style={{ width: `calc(100% - ${SELECT_WIDTH})` }}
+        value={'name' in value ? value.name : name}
+      />
+      <Select
+        onChange={onChallengeChange}
+        style={{ width: SELECT_WIDTH }}
+        value={value.challenge || challenge}
+      >
+        <Option value="Energy">Energy</Option>
+        <Option value="Politics">Politics</Option>
+        <Option value="Banking">Banking</Option>
+      </Select>
+    </Input.Group>
   )
 
   function onNameChange(e) {

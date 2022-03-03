@@ -11,12 +11,13 @@
       align-items: center;
       flex-direction: row-reverse;
       width: 100%;
-      background: fade(@white, 30%);
+      background: fade(@white, 5%);
       margin-bottom: 10px;
       padding: 12px 18px;
       border-radius: @border-radius-base;
-      box-shadow: @box-shadow-base;
+      border: 1px solid @white;
       transition: all 0.3s ease;
+      color: @white;
 
       &:hover {
         transform: translateY(-2px);
@@ -27,6 +28,7 @@
 
       &.ant-checkbox-wrapper-checked {
         background: @white;
+        color: @black;
       }
 
       .ant-checkbox {

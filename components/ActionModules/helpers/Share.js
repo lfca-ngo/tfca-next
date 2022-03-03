@@ -1,41 +1,48 @@
-import { Button, Input, Tooltip } from 'antd'
+import { Button, Input, message, Tabs } from 'antd'
 import React from 'react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 
-import { text } from '../../../utils/Text'
-import Category from './Category'
-
 const { TextArea } = Input
+const { TabPane } = Tabs
+
+const BTN_WIDTH = '120px'
+const INVITE_TEXT = `My home is running on 100% renewables! I am nominating Tim, Christian and Boris for the energy challenge! It’s Earth Day, you 
+can afford  #5minForThePlanet`
 
 export const Share = (props) => {
-  const { goTo, store } = props
-  const { shareLink } = store
-
-  const [hasCopied, setHasCopied] = React.useState(false)
+  const { invites } = props
 
   return (
-    <div className="step">
-      <Category
-        icon={props.icon}
-        title={text(props.blocks['category.title'])}
-      />
-      {!shareLink ? (
-        <>
-          <h2>Something went wrong...</h2>
-          <button onClick={() => goTo('success')}>Go back</button>
-        </>
-      ) : (
-        <>
-          <h2>Share the link! Go go go!</h2>
+    <div>
+      <h2>Ready! Invite your friends</h2>
+      <Tabs defaultActiveKey="1">
+        {invites.map((invite, i) => (
+          <TabPane key={`${i}`} tab={invite.name}>
+            <img alt={invite.name} src={invite.ogImageUrl} />
 
-          <TextArea autoSize={true} disabled={true} value={shareLink} />
-          <CopyToClipboard onCopy={() => setHasCopied(true)} text={shareLink}>
-            <Tooltip placement="topLeft" title="Copied" visible={hasCopied}>
-              <Button>Copy to clipboard with button</Button>
-            </Tooltip>
-          </CopyToClipboard>
-        </>
-      )}
+            <TextArea rows={4} value={INVITE_TEXT} />
+
+            <Input.Group compact>
+              <Input
+                className="copy-input"
+                disabled
+                style={{ width: `calc(100% - ${BTN_WIDTH})` }}
+                value={invite.shortLink}
+              />
+              <CopyToClipboard
+                onCopy={() => {
+                  message.success('Copied value')
+                }}
+                text={invite.shortLink}
+              >
+                <Button block style={{ width: BTN_WIDTH }} type="primary">
+                  Copy{' '}
+                </Button>
+              </CopyToClipboard>
+            </Input.Group>
+          </TabPane>
+        ))}
+      </Tabs>
     </div>
   )
 }

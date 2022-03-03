@@ -1,0 +1,28 @@
+@import (reference) '../../../styles/vars.less';
+@import (reference) '../../../styles/fonts.less';
+
+.action-detail-view {
+  .hero {
+    img {
+      border-radius: 12px;
+    }
+  }
+  .header {
+    display: flex;
+    .title {
+      flex: 1;
+      .font-bold();
+      font-size: 28px;
+      @media @desktop {
+        font-size: 34px;
+      }
+    }
+    .actions {
+      margin-right: 0;
+      margin-left: auto;
+    }
+  }
+  .tags {
+    margin: 20px 0;
+  }
+}

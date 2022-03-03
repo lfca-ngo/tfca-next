@@ -5,25 +5,27 @@ import { Text, text } from '../../../utils/Text'
 import { MultiSelect } from '../../Elements/MultiSelect'
 import Category from '../helpers/Category'
 
-const Intro = (props) => {
+const Filter = (props) => {
   // take the first filter for the intro screen
-  const [filterOption] = props.availableFilters || []
+  const filterOption = props.filterElement || {}
 
   const handleNext = (v) => {
     const value = v[filterOption?.fieldName]
     props.setStore({ ...props.store, [filterOption?.fieldName]: value })
     props.setProgress(0.3)
-    props.goTo('results')
+    props.goTo(props.nextKey)
   }
 
   return (
     <div className="step">
       <Category
+        goBack={!!props.prevKey}
         icon={props.icon}
+        prev={() => props.goTo(props.prevKey)}
         title={text(props.blocks['category.title'])}
       />
-      <h2>{text(props.blocks['intro.title'])}</h2>
-
+      <h2>{props.filterElement?.question}</h2>
+      <Text block={props.filterElement?.hint} />
       <Form initialValues={props.store} layout="vertical" onFinish={handleNext}>
         <Form.Item label="Choose 1 option" name={filterOption?.fieldName}>
           <MultiSelect items={filterOption?.options} singleMode />
@@ -38,4 +40,4 @@ const Intro = (props) => {
   )
 }
 
-export default Intro
+export default Filter
