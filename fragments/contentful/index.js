@@ -56,6 +56,14 @@ const DataWorkFragment = gql`
       json
     }
     shortDescription
+    reasonsCollection(limit: 5) {
+      items {
+        value {
+          json
+        }
+        key
+      }
+    }
     actionsCollection(limit: 5) {
       items {
         ${CALL_TO_ACTION_FIELDS}

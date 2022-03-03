@@ -124,3 +124,19 @@ body {
     }
   }
 }
+
+.ant-list.simple-list {
+  &.white {
+    .ant-list-item-meta-avatar {
+      color: @secondary-color;
+    }
+    .ant-list-item {
+      border-color: fade(@white, 10%);
+    }
+    .ant-list-item-meta-content {
+      .ant-list-item-meta-description {
+        color: fade(@white, 75%);
+      }
+    }
+  }
+}
