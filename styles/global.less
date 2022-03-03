@@ -47,6 +47,14 @@ body {
     height: auto;
   }
   .hide-scrollbar();
+
+  .ant-form-item-control {
+    width: 140px;
+    @media @desktop {
+      width: 200px;
+    }
+  }
+
   .ant-form-item {
     margin-right: 12px;
     display: flex;
@@ -55,9 +63,8 @@ body {
       flex-direction: column;
     }
     .ant-select {
-      width: 130px;
-      @media @desktop {
-        width: 200px;
+      .ant-select-selection-overflow {
+        flex-wrap: initial;
       }
     }
     .ant-form-item-label > label {
