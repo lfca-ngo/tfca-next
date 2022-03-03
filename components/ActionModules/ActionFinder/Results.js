@@ -38,6 +38,7 @@ const Results = (props) => {
   const dataMain = props.data['main']
   const data = dataMain?.items || []
   const listGrid = dataMain?.listGrid || 'col-1'
+  const isEqualHeight = listGrid === 'col-2'
 
   return (
     <div className="step">
@@ -60,7 +61,7 @@ const Results = (props) => {
       />
 
       <List
-        className="simple-list equal-height"
+        className={`simple-list ${isEqualHeight && 'equal-height'}`}
         dataSource={data.filter(filterByAttributes)}
         grid={LIST_GRIDS[listGrid]}
         renderItem={(item) => (
