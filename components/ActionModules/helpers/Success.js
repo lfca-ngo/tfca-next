@@ -46,7 +46,9 @@ const Success = (props) => {
     <>
       <div className="step">
         <Category
+          goBack
           icon={props.icon}
+          prev={() => props.goTo(props.prevStep)}
           title={text(props.blocks['category.title'])}
         />
         <h2>{text(useBlocks('sharing.headline'))}</h2>

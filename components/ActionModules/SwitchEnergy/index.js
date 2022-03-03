@@ -31,6 +31,8 @@ const SwitchEnergyFlow = (props) => {
 
   const { customization, setProgress } = useChallenge()
 
+  const stepsKeys = [...steps.keys()]
+
   return (
     <div className="steps-container">
       <Tabs
@@ -39,8 +41,10 @@ const SwitchEnergyFlow = (props) => {
         destroyInactiveTabPane
         renderTabBar={() => null}
       >
-        {[...steps.keys()].map((key) => {
+        {[...steps.keys()].map((key, i) => {
           const Page = steps.get(key)
+          const nextKey = i <= stepsKeys.length ? stepsKeys[i + 1] : null
+          const prevKey = i > 0 ? stepsKeys[i - 1] : null
           return (
             <TabPane key={key} tab={`${props.name}`}>
               <Page
@@ -51,6 +55,8 @@ const SwitchEnergyFlow = (props) => {
                 icon={props.module?.icon?.url}
                 lists={props.module?.lists || {}}
                 name={props.name}
+                nextKey={nextKey}
+                prevKey={prevKey}
                 setProgress={setProgress}
                 setStore={setStore}
                 store={store}

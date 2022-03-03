@@ -194,3 +194,32 @@ body {
     }
   }
 }
+
+input.ant-input {
+  border-radius: calc(@border-radius-base / 2);
+}
+
+.ant-select-single.ant-select-lg:not(.ant-select-customize-input)
+  .ant-select-selector {
+  border-radius: calc(@border-radius-base / 2);
+}
+
+.form-group {
+  .form-group-inner {
+    .ant-form-item {
+      margin-bottom: 16px;
+    }
+    .ant-tabs-nav {
+      margin: 20px 0 30px;
+    }
+    .form-group-description {
+      margin: 10px 0 15px;
+      .default-text();
+    }
+    .form-group-label {
+      .font-semi();
+      font-size: 24px;
+      margin: 10px 0 15px;
+    }
+  }
+}
