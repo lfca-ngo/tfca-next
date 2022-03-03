@@ -5,7 +5,7 @@ import React from 'react'
 
 import { text } from '../../../utils/Text'
 
-const ActionCard = ({ item, onNext }) => {
+export const ActionCard = ({ item, onNext }) => {
   const levelTags =
     item.levelsCollection?.items?.map((level) => text(level.value)) || []
   const typeTags =
@@ -43,5 +43,3 @@ const ActionCard = ({ item, onNext }) => {
     </Card>
   )
 }
-
-export default ActionCard

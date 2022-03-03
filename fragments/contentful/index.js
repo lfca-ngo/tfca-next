@@ -109,6 +109,25 @@ const DataWorkFragment = gql`
 const DataOrganizationFragment = gql`
   fragment DataOrganizationFragment on DataOrganization {
     name
+    logo {
+      url
+    }
+    actionsCollection {
+      items {
+        ${CALL_TO_ACTION_FIELDS}
+      }
+    }
+    description {
+      json
+    }
+    activitiesCollection(limit: 5) {
+      items {
+        value {
+          json
+        }
+        key
+      }
+    }
     tagsCollection(limit: 5) {
       items {
         value {

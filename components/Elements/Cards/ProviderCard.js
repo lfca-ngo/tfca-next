@@ -46,7 +46,7 @@ const PriceGuarantee = ({ guarantee }) => {
   else return `Preisgarantie bis ${guarantee.date}`
 }
 
-const ProviderCard = ({ energyKwh, item, next }) => {
+export const ProviderCard = ({ energyKwh, item, next }) => {
   const [visible, setVisible] = useState(false)
   // const { trackEvent } = useAnalytics()
 
@@ -406,5 +406,3 @@ const ProviderCard = ({ energyKwh, item, next }) => {
     </Card>
   )
 }
-
-export default ProviderCard

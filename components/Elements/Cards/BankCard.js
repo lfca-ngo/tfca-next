@@ -17,7 +17,7 @@ const TABS_LIST = [
   },
 ]
 
-const BankCard = ({ item, onNext }) => {
+export const BankCard = ({ item, onNext }) => {
   const [activeTab, setActiveTab] = useState(TABS_LIST[0].key)
 
   const handleNext = () => onNext(item)
@@ -57,5 +57,3 @@ const BankCard = ({ item, onNext }) => {
     </Card>
   )
 }
-
-export default BankCard
