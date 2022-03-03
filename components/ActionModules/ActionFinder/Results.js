@@ -1,4 +1,4 @@
-import { Form, List, Select } from 'antd'
+import { Form, List, Select, Tag } from 'antd'
 import React from 'react'
 
 import { LIST_GRIDS } from '../../../utils'
@@ -63,11 +63,16 @@ const Results = (props) => {
         {availableFilters.map((filter) => (
           <Form.Item
             key={filter?.fieldName}
-            label="Job Type"
+            label={filter?.label}
             name={filter?.fieldName}
           >
             <Select
               allowClear
+              dropdownMatchSelectWidth={false}
+              maxTagCount={0}
+              maxTagPlaceholder={(omittedValues) =>
+                `${omittedValues.length} filters`
+              }
               mode="multiple"
               placeholder="Please select"
               size="small"
@@ -81,6 +86,7 @@ const Results = (props) => {
           </Form.Item>
         ))}
       </Form>
+      <div className="scrollable-filter-spacer" />
 
       <List
         dataSource={data.filter(filterByAttributes)}

@@ -10,13 +10,10 @@ import Icon from '@ant-design/icons'
 import { Button, Col, List, Row, Tag } from 'antd'
 import React from 'react'
 
-import IconHow from '../../../assets/icons/how.svg'
-import IconReasons from '../../../assets/icons/reasons.svg'
 import { Text, text } from '../../../utils/Text'
 import CallToAction from '../CallToAction'
 
 export const ActionDetails = ({ item }) => {
-  console.log(item)
   const levelTags =
     item.levelsCollection?.items?.map((level) => text(level.value)) || []
   const areaTags =
@@ -72,17 +69,17 @@ export const ActionDetails = ({ item }) => {
 
       <div className="tags">
         {levelTags?.map((tag, index) => (
-          <Tag className="base-tag" color="gold" key={index}>
+          <Tag className="base-tag lila" key={index}>
             {tag}
           </Tag>
         ))}
         {areaTags?.map((tag, index) => (
-          <Tag className="base-tag" color="blue" key={index}>
+          <Tag className="base-tag blue" key={index}>
             {tag}
           </Tag>
         ))}
         {tagsTags?.map((tag, index) => (
-          <Tag className="base-tag" color="blue" key={index}>
+          <Tag className="base-tag green" key={index}>
             {tag}
           </Tag>
         ))}

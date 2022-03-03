@@ -25,6 +25,7 @@ const ActionFinderFlow = (props) => {
       const filterElement = {
         fieldName,
         hint: filter.hint,
+        label: filter.label,
         options,
         question: filter.question,
       }

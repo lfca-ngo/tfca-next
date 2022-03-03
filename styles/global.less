@@ -24,9 +24,28 @@ body {
   align-items: center;
 }
 
+// @TODO: move to separate component
+@scrollable-filter-mobile-height: 100px;
+
+.scrollable-filter-spacer {
+  height: @scrollable-filter-mobile-height;
+  @media @desktop {
+    height: auto;
+  }
+}
+
 .ant-form.scrollable-filters {
   display: flex;
   overflow-x: auto;
+  margin-right: -25px;
+  position: absolute;
+  height: @scrollable-filter-mobile-height;
+
+  @media @desktop {
+    margin-right: 0;
+    position: initial;
+    height: auto;
+  }
   .hide-scrollbar();
   .ant-form-item {
     margin-right: 12px;
@@ -34,6 +53,18 @@ body {
     flex-direction: row;
     @media @desktop {
       flex-direction: column;
+    }
+    .ant-select {
+      width: 130px;
+      @media @desktop {
+        width: 200px;
+      }
+    }
+    .ant-form-item-label > label {
+      font-size: 14px;
+    }
+    .ant-select-multiple .ant-select-selection-item {
+      .tag-color(@lila);
     }
   }
 }
@@ -74,7 +105,23 @@ body {
 
 .ant-tag {
   &.base-tag {
-    padding: 4px 10px;
+    margin: 0 3px 3px 0;
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 12px;
+    .font-semi();
+    &.lila {
+      .tag-color(@lila);
+    }
+    &.blue {
+      .tag-color(@blue);
+    }
+    &.green {
+      .tag-color(@green);
+    }
+    &.orange {
+      .tag-color(@orange);
+    }
   }
 }
 
