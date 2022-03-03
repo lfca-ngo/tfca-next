@@ -1,4 +1,4 @@
-require('./bankDetails.less')
+require('./organizationDetails.less')
 
 import {
   CheckOutlined,
@@ -11,9 +11,9 @@ import React from 'react'
 import { Text, text } from '../../../utils/Text'
 import CallToAction from '../CallToAction'
 
-export const BankDetails = ({ item }) => {
+export const OrganizationDetails = ({ item }) => {
   return (
-    <div className="bank-detail-view">
+    <div className="organization-detail-view">
       <div className="header">
         <div className="text">
           <div className="title">{item.name}</div>

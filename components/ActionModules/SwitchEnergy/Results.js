@@ -8,7 +8,7 @@ import {
   useSwitchRates,
 } from '../../../services/switchforclimate'
 import { Text, text } from '../../../utils/Text'
-import ProviderCard from '../../Elements/Cards/ProviderCard'
+import { ProviderCard } from '../../Elements/Cards'
 import CheckList from '../../Elements/CheckList'
 import Category from '../helpers/Category'
 import { EnergyForm } from './Calculate'

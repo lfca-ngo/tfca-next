@@ -3,8 +3,7 @@ import React from 'react'
 
 import { LIST_GRIDS } from '../../../utils'
 import { text } from '../../../utils/Text'
-import ActionCard from '../../Elements/Cards/ActionCard'
-import BankCard from '../../Elements/Cards/BankCard'
+import { ActionCard, BankCard, OrganizationCard } from '../../Elements/Cards'
 import { ScrollableFilters } from '../../Elements/ScrollableFilters'
 import Category from '../helpers/Category'
 import { StepHeader } from '../helpers/StepHeader'
@@ -84,6 +83,8 @@ const ItemCard = (props) => {
       return <ActionCard item={props.item} onNext={props.onNext} />
     case 'bank':
       return <BankCard item={props.item} onNext={props.onNext} />
+    case 'organization':
+      return <OrganizationCard item={props.item} onNext={props.onNext} />
     default:
       return null
   }
