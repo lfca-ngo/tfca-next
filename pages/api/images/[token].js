@@ -19,19 +19,20 @@ export default async function handler(req, res) {
 
     const svgImage = Buffer.from(
       createShareSvg({
-        friendChallenge1: payload.friend1?.challenge || '',
-        friendChallenge2: payload.friend2?.challenge || '',
-        friendChallenge3: payload.friend3?.challenge || '',
-        friendName1: payload.friend1?.name || '',
-        friendName2: payload.friend2?.name || '',
-        friendName3: payload.friend3?.name || '',
-        ownName: payload?.self.name || 'Me',
+        friendChallenge1: payload.invitee1?.challenge || '',
+        friendChallenge2: payload.invitee2?.challenge || '',
+        friendChallenge3: payload.invitee3?.challenge || '',
+        friendName1: payload.invitee1?.name || '',
+        friendName2: payload.invitee2?.name || '',
+        friendName3: payload.invitee3?.name || '',
+        ownName: payload?.sender.name || 'Me',
       })
     )
 
     const jpeg = await sharp(svgImage).jpeg().toBuffer()
 
     res.setHeader('Content-Type', 'image/png')
+    // TODO: activate cache headers
     // res.setHeader('Cache-Control', 's-maxage=31536000') // 1 year
     res.send(jpeg)
   } catch (e) {

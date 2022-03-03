@@ -21,7 +21,7 @@ export default function SupporterPage({ actions, company }) {
 
 const allQualifiedCompaniesQuery = gql`
   ${QualifiedCompanyFragment}
-  query qualifiedCompany($input: QualifiedCompaniesInput) {
+  query qualifiedCompanies($input: QualifiedCompaniesInput) {
     qualifiedCompanies(input: $input) {
       ... on QualifiedCompanyItem {
         ...QualifiedCompanyFragment
