@@ -25,6 +25,7 @@ const Details = (props) => {
       <DetailView cardLayout={cardLayout} item={item} />
       <Button
         block
+        className="mt-30"
         onClick={() => props.goTo(props.nextKey)}
         size="large"
         type="primary"
