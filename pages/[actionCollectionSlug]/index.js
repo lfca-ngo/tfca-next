@@ -21,9 +21,7 @@ export async function getStaticProps({ locale, params }) {
   // we have the locale and can get
   // the correct translations in build
   // time by passing it to the query
-  // TODO: Use actionCollectionSlug from params
-  // const { actionCollectionSlug } = params
-  const actionCollectionSlug = 'iframe'
+  const { actionCollectionSlug } = params
 
   const actions = await fetchAllActions(locale, actionCollectionSlug)
   const content = await fetchAllStaticContent(locale)
