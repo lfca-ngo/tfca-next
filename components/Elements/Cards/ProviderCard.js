@@ -1,6 +1,7 @@
 require('./providerCard.less')
 
 import Icon, {
+  CheckCircleOutlined,
   EuroCircleOutlined,
   FileDoneOutlined,
   GlobalOutlined,
@@ -123,7 +124,7 @@ export const ProviderCard = ({ energyKwh, item, next }) => {
               renderItem={(item) => (
                 <List.Item>
                   <List.Item.Meta
-                    avatar={<Icon component={IconCheck} />}
+                    avatar={<CheckCircleOutlined />}
                     description={
                       <div dangerouslySetInnerHTML={{ __html: item }} />
                     }
@@ -132,7 +133,7 @@ export const ProviderCard = ({ energyKwh, item, next }) => {
               )}
             />
             <Button
-              className="details-btn"
+              className="no-padding"
               icon={<InfoCircleOutlined />}
               onClick={showDetails}
               type="link"
@@ -145,7 +146,7 @@ export const ProviderCard = ({ energyKwh, item, next }) => {
         <Divider />
 
         <Row style={{ margin: '6px 0' }}>
-          <Col md={{ offset: 3, span: 9 }} xs={{ span: 12 }}>
+          <Col md={12} xs={12}>
             <div className="labels">
               {item.labels.map((label, i) => (
                 <img
@@ -156,12 +157,7 @@ export const ProviderCard = ({ energyKwh, item, next }) => {
             </div>
           </Col>
 
-          <Col
-            xs={{
-              offset: 0,
-              span: 12,
-            }}
-          >
+          <Col xs={12}>
             <div className="actions">
               <Button block onClick={handleSwitch} type="primary">
                 Jetzt wechseln
