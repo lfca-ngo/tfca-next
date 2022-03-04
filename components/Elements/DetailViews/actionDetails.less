@@ -12,6 +12,11 @@
     left: 0;
     width: calc(100% + 2 * @image-overflow);
     padding-bottom: @image-ratio;
+    @media @desktop {
+      width: 100%;
+      margin: 0;
+      padding-bottom: 0;
+    }
     img {
       border-radius: 18px;
       position: absolute;
@@ -20,6 +25,12 @@
       max-width: none;
       left: -@image-overflow;
       right: -@image-overflow;
+      @media @desktop {
+        position: initial;
+        width: 100%;
+        left: 0;
+        right: 0;
+      }
     }
   }
 
