@@ -9,7 +9,7 @@ import {
   MetaDataFragment,
   MetaDataListsFragment,
 } from '../fragments/contentful'
-import { SETTINGS_ID } from '../utils'
+import { DEFAULT, SETTINGS_ID } from '../utils'
 
 const space = process.env.NEXT_PUBLIC_CF_SPACE_ID
 const accessToken = process.env.NEXT_PUBLIC_CF_ACCESS_TOKEN
@@ -178,6 +178,7 @@ export const fetchCollectionIds = async (locale, slug) => {
         where: { slug: $slug }
       ) {
         items {
+          layout
           actionsCollection(limit: 15) {
             items {
               ... on Action {
@@ -209,6 +210,8 @@ export const fetchCollectionIds = async (locale, slug) => {
   }
 
   const { actionsLocalCollection } = await fetchContent(query, variables)
+  const layout = actionsLocalCollection?.items[0]?.layout
+
   const ids = actionsLocalCollection?.items[0]?.actionsCollection?.items?.map(
     (item) => ({
       blocksLimit: item.blocksCollection.total,
@@ -218,7 +221,7 @@ export const fetchCollectionIds = async (locale, slug) => {
       quizLimit: item.quizCollection.total,
     })
   )
-  return ids
+  return { ids, layout: layout || DEFAULT }
 }
 
 // Fetch all action module related content
@@ -254,13 +257,16 @@ const fetchActionDataById = async (id, locale) => {
 }
 
 export const fetchAllActions = async (locale, actionCollectionSlug) => {
-  const collectionIds = await fetchCollectionIds(locale, actionCollectionSlug)
+  const { ids: collectionIds, layout } = await fetchCollectionIds(
+    locale,
+    actionCollectionSlug
+  )
   const promises = collectionIds.map((id) => fetchActionDataById(id, locale))
 
   const results = await Promise.all(promises)
   const transformed = transformResults(results)
 
-  return transformed
+  return { ...transformed, layout }
 }
 
 // Helper function to transform the results into key value pairs

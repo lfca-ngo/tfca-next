@@ -320,20 +320,6 @@ export const ActionFragment = gql`
   }
 `
 
-export const AllActionsFragment = gql`
-  ${ActionFragment}
-  fragment AllActionsFragment on ActionsLocalCollection {
-    items {
-      regionCode
-      actionsCollection(limit: 10) {
-        items {
-          ...ActionFragment
-        }
-      }
-    }
-  }
-`
-
 export const AllActionsDataFragment = gql`
   fragment AllActionsDataFragment on ActionsLocalCollection {
     items {

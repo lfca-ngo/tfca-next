@@ -52,3 +52,5 @@ export const LIST_GRIDS = {
 
 export const SINGLE = 'single'
 export const MULTI = 'multi'
+export const EMBED = 'embed'
+export const DEFAULT = 'default'
