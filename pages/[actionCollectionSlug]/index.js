@@ -48,7 +48,7 @@ export async function getStaticPaths({ locales }) {
   const { actionsLocalCollection } = await fetchContent(query)
   const paths = actionsLocalCollection.items.reduce((allPaths, item) => {
     // prevent old pages from being built
-    if (typeof item.layout === 'undefined') return allPaths
+    if (typeof item.layout !== 'string') return allPaths
 
     const pagePaths = locales.map((locale) => ({
       locale,
