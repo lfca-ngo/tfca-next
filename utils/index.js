@@ -43,9 +43,14 @@ export const LIST_GRIDS = {
     gutter: 16,
     lg: 2,
     md: 2,
-    sm: 1,
+    sm: 2,
     xl: 2,
     xs: 1,
     xxl: 2,
   },
 }
+
+export const SINGLE = 'single'
+export const MULTI = 'multi'
+export const EMBED = 'embed'
+export const DEFAULT = 'default'

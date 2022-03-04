@@ -11,20 +11,7 @@ const ActionCounter = (props) => {
 
   return (
     <small className="action-counter">
-      Mehr als{' '}
-      <Tag>
-        <Tag>
-          props.count
-          {/* {isMobile ? (
-            props.count
-          ) : (
-            <animated.span>
-              {timeAnimation.number.interpolate((el) => el.toFixed(0))}
-            </animated.span>
-          )} */}
-        </Tag>{' '}
-      </Tag>{' '}
-      haben das bereits gemacht
+      Mehr als <Tag>props.count</Tag> haben das bereits gemacht
     </small>
   )
 }

@@ -15,6 +15,7 @@ const replaceVars = (text, vars) => {
 
 export const Text = ({ asString, block, vars }) => {
   if (!block) return null
+  if (typeof block === 'string') return block
   const blockAsString = documentToPlainTextString(block.json)
   const blockAsHtmlString = documentToHtmlString(block.json)
 
@@ -30,5 +31,8 @@ export const Text = ({ asString, block, vars }) => {
 }
 
 // Sometimes we just need to get the plain text from a block
-export const text = (block, vars) =>
-  replaceVars(documentToPlainTextString(block?.json), vars) || ''
+export const text = (block, vars) => {
+  if (!block) return null
+  if (typeof block === 'string') return block
+  return replaceVars(documentToPlainTextString(block?.json), vars) || ''
+}

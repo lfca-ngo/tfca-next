@@ -24,16 +24,54 @@ body {
   align-items: center;
 }
 
+// @TODO: move to separate component
+@scrollable-filter-mobile-height: 100px;
+
+.scrollable-filter-spacer {
+  height: @scrollable-filter-mobile-height;
+  @media @desktop {
+    height: auto;
+  }
+}
+
 .ant-form.scrollable-filters {
   display: flex;
   overflow-x: auto;
+  margin-right: -25px;
+  position: absolute;
+  height: @scrollable-filter-mobile-height;
+
+  @media @desktop {
+    margin-right: 0;
+    position: initial;
+    height: auto;
+  }
   .hide-scrollbar();
+
+  .ant-form-item-control {
+    width: 140px;
+    @media @desktop {
+      width: 200px;
+    }
+  }
+
   .ant-form-item {
     margin-right: 12px;
     display: flex;
     flex-direction: row;
     @media @desktop {
       flex-direction: column;
+    }
+    .ant-select {
+      .ant-select-selection-overflow {
+        flex-wrap: initial;
+      }
+    }
+    .ant-form-item-label > label {
+      font-size: 14px;
+    }
+    .ant-select-multiple .ant-select-selection-item {
+      .tag-color(@lila);
     }
   }
 }
@@ -74,7 +112,23 @@ body {
 
 .ant-tag {
   &.base-tag {
-    padding: 4px 10px;
+    margin: 0 3px 3px 0;
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 12px;
+    .font-semi();
+    &.lila {
+      .tag-color(@lila);
+    }
+    &.blue {
+      .tag-color(@blue);
+    }
+    &.green {
+      .tag-color(@green);
+    }
+    &.orange {
+      .tag-color(@orange);
+    }
   }
 }
 
@@ -123,4 +177,63 @@ body {
       }
     }
   }
+}
+
+.ant-list.simple-list {
+  &.equal-height {
+    .ant-row > div {
+      display: flex;
+      .ant-col,
+      .ant-list-item,
+      .ant-card {
+        height: 100%;
+      }
+    }
+  }
+  &.white {
+    .ant-list-item-meta-avatar {
+      color: @secondary-color;
+    }
+    .ant-list-item {
+      border-color: fade(@white, 10%);
+    }
+    .ant-list-item-meta-content {
+      .ant-list-item-meta-description {
+        color: fade(@white, 75%);
+      }
+    }
+  }
+}
+
+input.ant-input {
+  border-radius: calc(@border-radius-base / 2);
+}
+
+.ant-select-single.ant-select-lg:not(.ant-select-customize-input)
+  .ant-select-selector {
+  border-radius: calc(@border-radius-base / 2);
+}
+
+.form-group {
+  .form-group-inner {
+    .ant-form-item {
+      margin-bottom: 16px;
+    }
+    .ant-tabs-nav {
+      margin: 20px 0 30px;
+    }
+    .form-group-description {
+      margin: 10px 0 15px;
+      .default-text();
+    }
+    .form-group-label {
+      .font-semi();
+      font-size: 24px;
+      margin: 10px 0 15px;
+    }
+  }
+}
+
+.mt-30 {
+  margin-top: 30px;
 }

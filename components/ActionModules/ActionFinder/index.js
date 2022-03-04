@@ -24,9 +24,8 @@ const ActionFinderFlow = (props) => {
       const options = getFilterOptions(items, collectionName)
       const filterElement = {
         fieldName,
-        hint: filter.hint,
         options,
-        question: filter.question,
+        ...filter,
       }
       parsedFilters.push(filterElement)
       // create pages for marked filters

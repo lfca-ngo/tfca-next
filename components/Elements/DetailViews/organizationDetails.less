@@ -1,0 +1,53 @@
+@import (reference) '../../../styles/vars.less';
+@import (reference) '../../../styles/fonts.less';
+@import (reference) '../../../styles/mixins.less';
+
+.organization-detail-view {
+  .header {
+    display: flex;
+    .text {
+      flex: 1;
+      @media @desktop {
+        padding-right: 60px;
+      }
+      .title {
+        font-size: 48px;
+        .font-semi();
+        margin: 0px 0 15px;
+      }
+    }
+    .info-wrapper {
+      margin-left: auto;
+      margin-right: 0;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      .logo-wrapper {
+        margin-bottom: 30px;
+        .logo-circle(140px, @white);
+      }
+    }
+  }
+
+  .check-list {
+    .list-elem {
+      .anticon {
+        color: @secondary-color;
+      }
+    }
+  }
+
+  .section-title {
+    .anticon {
+      margin-right: 16px;
+      color: @secondary-color;
+    }
+    .font-semi();
+    font-size: 20px;
+    margin: 40px 0 10px;
+  }
+
+  .tags {
+    margin: 20px 0;
+  }
+}

@@ -6,21 +6,41 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    color: @black;
 
     @media @desktop {
       flex-direction: row;
       align-items: center;
     }
 
+    .title {
+      font-size: 20px;
+      color: @black;
+      .font-semi();
+    }
+
+    .tags {
+      margin: 20px 0 0;
+    }
+
     .body-content {
       display: flex;
       flex-direction: row;
-      align-items: center;
-      .icon {
-        width: 65px;
+      width: 100%;
+      margin: 15px 0 0;
+      .actions {
+        margin: 0 0 0 auto;
+        display: flex;
+        align-items: center;
+        @media @desktop {
+          margin: 0 0 0 auto;
+        }
+      }
+      .hero-image {
+        width: 110px;
         height: 65px;
         border-radius: 12px;
-        border: 1px solid #f4f4f4;
+        // border: 1px solid #f4f4f4;
         background-color: @white;
         display: flex;
         align-items: center;
@@ -29,25 +49,6 @@
         @media @desktop {
           align-self: center;
         }
-      }
-
-      .text {
-        padding: 0 20px;
-        flex: 1;
-        .title {
-          font-size: 19px;
-          .font-semi();
-        }
-
-        .tags {
-          margin: 10px 0 0;
-        }
-      }
-    }
-    .actions {
-      margin: 10px 0 10px auto;
-      @media @desktop {
-        margin: 10px 0 10px auto;
       }
     }
   }

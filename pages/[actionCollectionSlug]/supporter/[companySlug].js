@@ -13,7 +13,7 @@ import { fetchData } from '../../../services/lfca'
 
 export default function SupporterPage({ actions, company }) {
   return (
-    <SplitLayout company={company} nav={actions?.nav}>
+    <SplitLayout company={company} layout={actions?.layout} nav={actions?.nav}>
       <ActionModules actions={actions?.items} />
     </SplitLayout>
   )

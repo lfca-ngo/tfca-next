@@ -18,19 +18,23 @@
   h3,
   h4,
   h5,
-  h6,
-  p {
+  h6 {
     color: @white;
   }
 
   .action-category,
-  .step,
-  .ant-form-vertical .ant-form-item-label > label,
+  .title,
   .form-group .form-group-label,
-  .form-group .form-group-description,
   .ant-tabs .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn,
   .ant-btn-link {
     color: @white;
+  }
+
+  .step,
+  .form-group .form-group-description,
+  .ant-form-vertical .ant-form-item-label > label,
+  p {
+    color: fade(@white, 85%);
   }
 
   .ant-divider {
@@ -111,17 +115,21 @@
     }
   }
 
-  h2 {
-    .h2();
-    margin-bottom: 15px;
-    @media @desktop {
-      margin-bottom: 30px;
-    }
-  }
+  .step-header {
+    padding: 5px 0 15px;
 
-  p {
-    line-height: 1.4;
-    .font-regular();
+    h2 {
+      .h2();
+      margin-bottom: 25px;
+      @media @desktop {
+        margin-bottom: 35px;
+      }
+    }
+
+    p {
+      line-height: 1.4;
+      .font-regular();
+    }
   }
 
   .steps-container {

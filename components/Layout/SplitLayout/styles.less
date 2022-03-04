@@ -26,4 +26,14 @@ body {
     width: calc(100% - @side-bar-width);
     overflow-y: auto;
   }
+  // when embedded, show full screen
+  &.embedded {
+    @media @desktop {
+      width: 100%;
+      overflow-y: auto;
+    }
+    .action-container {
+      margin: 0 auto;
+    }
+  }
 }

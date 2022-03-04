@@ -2,7 +2,11 @@ import { Button } from 'antd'
 import React from 'react'
 
 import { Text, text } from '../../../utils/Text'
-import { ActionDetails } from '../../Elements/DetailViews/ActionDetails'
+import {
+  ActionDetails,
+  BankDetails,
+  OrganizationDetails,
+} from '../../Elements/DetailViews'
 import Category from '../helpers/Category'
 
 const Details = (props) => {
@@ -21,6 +25,7 @@ const Details = (props) => {
       <DetailView cardLayout={cardLayout} item={item} />
       <Button
         block
+        className="mt-30"
         onClick={() => props.goTo(props.nextKey)}
         size="large"
         type="primary"
@@ -35,6 +40,10 @@ const DetailView = (props) => {
   switch (props.cardLayout) {
     case 'action':
       return <ActionDetails item={props.item} />
+    case 'bank':
+      return <BankDetails item={props.item} />
+    case 'organization':
+      return <OrganizationDetails item={props.item} />
     default:
       return null
   }

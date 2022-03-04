@@ -5,6 +5,7 @@ const CALL_TO_ACTION_FIELDS = `
   type
   slug
   url
+  block
   size
   icon {
     url
@@ -56,6 +57,14 @@ const DataWorkFragment = gql`
       json
     }
     shortDescription
+    reasonsCollection(limit: 5) {
+      items {
+        value {
+          json
+        }
+        key
+      }
+    }
     actionsCollection(limit: 5) {
       items {
         ${CALL_TO_ACTION_FIELDS}
@@ -100,6 +109,25 @@ const DataWorkFragment = gql`
 const DataOrganizationFragment = gql`
   fragment DataOrganizationFragment on DataOrganization {
     name
+    logo {
+      url
+    }
+    actionsCollection {
+      items {
+        ${CALL_TO_ACTION_FIELDS}
+      }
+    }
+    description {
+      json
+    }
+    activitiesCollection(limit: 5) {
+      items {
+        value {
+          json
+        }
+        key
+      }
+    }
     tagsCollection(limit: 5) {
       items {
         value {
@@ -117,6 +145,39 @@ const DataOrganizationFragment = gql`
 const DataBankFragment = gql`
   fragment DataBankFragment on DataBank {
     name
+    logo {
+      url
+    }
+    referralUrl
+    description {
+      json
+    }
+    pricePerMonth
+    currency
+    offersCollection(limit: 5) {
+      items {
+        value {
+          json
+        }
+        key
+      }
+    }
+    sustainabilityCollection(limit: 8) {
+      items {
+        value {
+          json
+        }
+        key
+      }
+    }
+    benefitsCollection(limit: 8) {
+      items {
+        value {
+          json
+        }
+        key
+      }
+    }
     typeCollection(limit: 5) {
       items {
         value {
@@ -148,6 +209,7 @@ const QuizFragment = gql`
   fragment QuizFragment on Quiz {
     question
     questionId
+    inputType
     result {
       json
     }
@@ -206,6 +268,7 @@ export const ActionFragment = gql`
             label
             question
             renderAsStep
+            filterMode
             hint {
               json
             }
@@ -251,20 +314,6 @@ export const ActionFragment = gql`
           value {
             json
           }
-        }
-      }
-    }
-  }
-`
-
-export const AllActionsFragment = gql`
-  ${ActionFragment}
-  fragment AllActionsFragment on ActionsLocalCollection {
-    items {
-      regionCode
-      actionsCollection(limit: 10) {
-        items {
-          ...ActionFragment
         }
       }
     }

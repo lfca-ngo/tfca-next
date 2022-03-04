@@ -1,10 +1,12 @@
-import { Form, List, Select } from 'antd'
+import { Form, List, Select, Tag } from 'antd'
 import React from 'react'
 
 import { LIST_GRIDS } from '../../../utils'
 import { text } from '../../../utils/Text'
-import ActionCard from '../../Elements/Cards/ActionCard'
+import { ActionCard, BankCard, OrganizationCard } from '../../Elements/Cards'
+import { ScrollableFilters } from '../../Elements/ScrollableFilters'
 import Category from '../helpers/Category'
+import { StepHeader } from '../helpers/StepHeader'
 
 const Results = (props) => {
   const availableFilters = props.availableFilters || []
@@ -13,9 +15,6 @@ const Results = (props) => {
     props.setStore({ ...props.store, item: item })
     props.setProgress(0.3)
     props.goTo(props.nextKey)
-  }
-  const handleValuesChange = (changedValues, allValues) => {
-    props.setStore({ ...props.store, ...changedValues })
   }
 
   const filterByAttributes = (item) => {
@@ -38,6 +37,8 @@ const Results = (props) => {
 
   const dataMain = props.data['main']
   const data = dataMain?.items || []
+  const listGrid = dataMain?.listGrid || '1-col'
+  const isEqualHeight = listGrid === '2-col'
 
   return (
     <div className="step">
@@ -47,47 +48,47 @@ const Results = (props) => {
         prev={() => props.goTo(props.prevKey)}
         title={text(props.blocks['category.title'])}
       />
-      <h2>{text(props.blocks['results.title'])}</h2>
-      <p>{text(props.blocks['results.subtitle'])}</p>
-      <Form
-        className="scrollable-filters"
-        initialValues={props.store}
-        layout="vertical"
-        onValuesChange={handleValuesChange}
-      >
-        {availableFilters.map((filter) => (
-          <Form.Item
-            key={filter?.fieldName}
-            label="Job Type"
-            name={filter?.fieldName}
-          >
-            <Select
-              allowClear
-              mode="multiple"
-              placeholder="Please select"
-              size="small"
-            >
-              {filter?.options.map((item) => (
-                <Select.Option key={item.value} value={item.value}>
-                  {item.label}
-                </Select.Option>
-              ))}
-            </Select>
-          </Form.Item>
-        ))}
-      </Form>
+
+      <StepHeader
+        subtitle={props.blocks['results.subtitle']}
+        title={props.blocks['results.title']}
+      />
+
+      <ScrollableFilters
+        availableFilters={availableFilters}
+        setStore={props.setStore}
+        store={props.store}
+      />
 
       <List
+        className={`simple-list ${isEqualHeight ? 'equal-height' : ''}`}
         dataSource={data.filter(filterByAttributes)}
-        grid={LIST_GRIDS['1-col']}
+        grid={LIST_GRIDS[listGrid]}
         renderItem={(item) => (
           <List.Item>
-            <ActionCard item={item} onNext={handleNext} />
+            <ItemCard
+              cardLayout={dataMain?.cardLayout}
+              item={item}
+              onNext={handleNext}
+            />
           </List.Item>
         )}
       />
     </div>
   )
+}
+
+const ItemCard = (props) => {
+  switch (props.cardLayout) {
+    case 'action':
+      return <ActionCard item={props.item} onNext={props.onNext} />
+    case 'bank':
+      return <BankCard item={props.item} onNext={props.onNext} />
+    case 'organization':
+      return <OrganizationCard item={props.item} onNext={props.onNext} />
+    default:
+      return null
+  }
 }
 
 export default Results

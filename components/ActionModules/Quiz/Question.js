@@ -1,7 +1,8 @@
 import { Button, Col, Form, Row } from 'antd'
 import React, { useMemo, useState } from 'react'
 
-import { checkAnswers, transformOption } from '../../../utils'
+import { useBlocks } from '../../../hooks/useTranslation'
+import { checkAnswers, SINGLE, transformOption } from '../../../utils'
 import { Text, text } from '../../../utils/Text'
 import { MultiSelect } from '../../Elements/MultiSelect'
 import Category from '../helpers/Category'
@@ -16,6 +17,9 @@ const Question = ({
   store,
 }) => {
   const [status, setStatus] = useState()
+  const isSingleMode = activeQuestion?.inputType === SINGLE
+  const labelSingleMode = text(useBlocks('label.singlemode'))
+  const labelMultiMode = text(useBlocks('label.multimode'))
 
   const answers = useMemo(() => {
     const correctAnswers = []
@@ -53,14 +57,14 @@ const Question = ({
       <Form initialValues={store} layout="vertical" onFinish={handleNext}>
         <Form.Item
           help={status === 'error' && 'Upps you are wrong!'}
-          label="Choose 1 option"
+          label={isSingleMode ? labelSingleMode : labelMultiMode}
           name={activeQuestion?.questionId}
           validateStatus={status}
         >
           <MultiSelect
             items={answers?.options}
             onSelect={() => setStatus(null)}
-            singleMode
+            singleMode={isSingleMode}
           />
         </Form.Item>
         <Form.Item>

@@ -1,0 +1,36 @@
+@import (reference) '../../../styles/vars.less';
+@import (reference) '../../../styles/fonts.less';
+
+.ant-card.bank-card {
+  display: flex;
+  flex-direction: column;
+  .ant-tabs {
+    text-align: center;
+    .ant-tabs-tab {
+      .ant-tabs-tab-btn {
+        color: fade(@black, 75%);
+      }
+      &.ant-tabs-tab-active {
+        .ant-tabs-tab-btn {
+          color: @black;
+        }
+      }
+    }
+  }
+
+  .ant-card-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    .simple-list.summary {
+      .ant-list-item-meta-description {
+        color: fade(@black, 75%);
+        font-size: 16px;
+      }
+    }
+    .actions {
+      margin-bottom: 0;
+      margin-top: auto;
+    }
+  }
+}

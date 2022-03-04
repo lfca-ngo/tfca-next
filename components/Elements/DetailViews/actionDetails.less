@@ -2,17 +2,46 @@
 @import (reference) '../../../styles/fonts.less';
 
 .action-detail-view {
-  .hero {
+  @image-ratio: 49%;
+  @image-overflow: 10px;
+
+  .hero-image {
+    margin: 0 -@image-overflow;
+    overflow: visible;
+    top: 0;
+    left: 0;
+    width: calc(100% + 2 * @image-overflow);
+    padding-bottom: @image-ratio;
+    @media @desktop {
+      width: 100%;
+      margin: 0;
+      padding-bottom: 0;
+    }
     img {
-      border-radius: 12px;
+      border-radius: 18px;
+      position: absolute;
+      z-index: 100;
+      width: calc(100% + 2 * @image-overflow);
+      max-width: none;
+      left: -@image-overflow;
+      right: -@image-overflow;
+      @media @desktop {
+        position: initial;
+        width: 100%;
+        left: 0;
+        right: 0;
+      }
     }
   }
+
   .header {
     display: flex;
+    margin: 40px 0 30px;
     .title {
       flex: 1;
-      .font-bold();
+      .font-semi();
       font-size: 28px;
+      padding-right: 20px;
       @media @desktop {
         font-size: 34px;
       }
@@ -22,6 +51,25 @@
       margin-left: auto;
     }
   }
+
+  .check-list {
+    .list-elem {
+      .anticon {
+        color: @secondary-color;
+      }
+    }
+  }
+
+  .section-title {
+    .anticon {
+      margin-right: 16px;
+      color: @secondary-color;
+    }
+    .font-semi();
+    font-size: 20px;
+    margin: 40px 0 10px;
+  }
+
   .tags {
     margin: 20px 0;
   }
