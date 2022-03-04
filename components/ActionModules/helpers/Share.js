@@ -18,9 +18,13 @@ export const Share = (props) => {
       <Tabs defaultActiveKey="1">
         {invites.map((invite, i) => (
           <TabPane key={`${i}`} tab={invite.name}>
-            <img alt={invite.name} src={invite.ogImageUrl} />
-
             <TextArea rows={4} value={INVITE_TEXT} />
+
+            <img
+              alt={invite.name}
+              src={invite.ogImageUrl}
+              style={{ margin: '20px 0', borderRadius: '12px' }}
+            />
 
             <Input.Group compact>
               <Input

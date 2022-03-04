@@ -89,10 +89,7 @@ const Success = (props) => {
                       ]}
                       validateTrigger={['onChange', 'onBlur']}
                     >
-                      <NominateNameInput
-                        placeholder="Name"
-                        style={{ width: '60%' }}
-                      />
+                      <NominateNameInput placeholder="Name" />
                     </Form.Item>
                     {fields.length > 1 ? (
                       <MinusCircleOutlined
@@ -113,10 +110,10 @@ const Success = (props) => {
                 ) : (
                   <Form.Item>
                     <Button
+                      block
                       ghost
                       icon={<PlusOutlined />}
                       onClick={() => add()}
-                      style={{ width: '60%' }}
                       type="dashed"
                     >
                       Add invitee
