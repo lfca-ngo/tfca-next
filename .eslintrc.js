@@ -25,6 +25,7 @@ module.exports = {
         allow: ['info', 'error'],
       },
     ],
+    'no-unused-vars': ['error'],
     'react-hooks/exhaustive-deps': 'warn',
     'react/jsx-sort-props': [
       'error',

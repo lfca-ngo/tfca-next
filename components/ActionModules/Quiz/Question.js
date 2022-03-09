@@ -1,9 +1,9 @@
-import { Button, Col, Form, Row } from 'antd'
+import { Button, Form } from 'antd'
 import React, { useMemo, useState } from 'react'
 
 import { useBlocks } from '../../../hooks/useTranslation'
 import { checkAnswers, SINGLE, transformOption } from '../../../utils'
-import { Text, text } from '../../../utils/Text'
+import { text } from '../../../utils/Text'
 import { MultiSelect } from '../../Elements/MultiSelect'
 import Category from '../helpers/Category'
 

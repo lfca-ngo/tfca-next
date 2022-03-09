@@ -15,9 +15,9 @@ import {
   Select,
   Tabs,
 } from 'antd'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
-import { Text, text } from '../../../utils/Text'
+import { text } from '../../../utils/Text'
 import CheckList from '../../Elements/CheckList'
 import Category from '../helpers/Category'
 

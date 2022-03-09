@@ -10,7 +10,7 @@ const LINKS = [
   { title: 'Impressum', url: '/imprint' },
 ]
 
-const SimpleFooter = (props) => {
+const SimpleFooter = () => {
   return (
     <footer className="footer">
       <div className="footer-content">

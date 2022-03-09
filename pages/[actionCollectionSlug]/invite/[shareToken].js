@@ -1,4 +1,3 @@
-import { Typography } from 'antd'
 import jwt from 'jsonwebtoken'
 import Head from 'next/head'
 import React from 'react'

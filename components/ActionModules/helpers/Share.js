@@ -23,7 +23,7 @@ export const Share = (props) => {
             <img
               alt={invite.name}
               src={invite.ogImageUrl}
-              style={{ margin: '20px 0', borderRadius: '12px' }}
+              style={{ borderRadius: '12px', margin: '20px 0' }}
             />
 
             <Input.Group compact>

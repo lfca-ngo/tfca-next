@@ -6,7 +6,7 @@ import React from 'react'
 import { useChallenge } from '../../../hooks/useChallenge'
 import { useIsMobile } from '../../../hooks/useIsClient'
 import { useBlocks } from '../../../hooks/useTranslation'
-import { Text, text } from '../../../utils/Text'
+import { text } from '../../../utils/Text'
 
 export const Hero = (props) => {
   const isMobile = useIsMobile()

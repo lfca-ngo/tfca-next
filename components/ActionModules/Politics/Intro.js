@@ -1,7 +1,6 @@
-import { Button, Col, Form, Row } from 'antd'
 import React from 'react'
 
-import { Text, text } from '../../../utils/Text'
+import { text } from '../../../utils/Text'
 import Category from '../helpers/Category'
 
 const Intro = (props) => {

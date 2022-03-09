@@ -1,7 +1,7 @@
 require('./bankCard.less')
 
 import { CheckCircleOutlined } from '@ant-design/icons'
-import { Button, Card, List, Tag } from 'antd'
+import { Button, Card, List } from 'antd'
 import React, { useState } from 'react'
 
 import { text } from '../../../utils/Text'

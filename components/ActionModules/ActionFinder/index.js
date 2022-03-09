@@ -1,5 +1,5 @@
 import { Tabs } from 'antd'
-import React, { useEffect, useMemo } from 'react'
+import React, { useMemo } from 'react'
 
 import { useChallenge } from '../../../hooks/useChallenge'
 import { useFlow } from '../../../hooks/useFlow'
@@ -46,6 +46,10 @@ const ActionFinderFlow = (props) => {
     ])
     return { availableFilters: parsedFilters, steps: dynamicSteps }
   }, [items, filters])
+
+  console.log('\n')
+  console.log(JSON.stringify(availableFilters))
+  console.log('\n')
 
   const [firstStep] = steps.keys()
 
