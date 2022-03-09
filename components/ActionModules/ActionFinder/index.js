@@ -47,15 +47,11 @@ const ActionFinderFlow = (props) => {
     return { availableFilters: parsedFilters, steps: dynamicSteps }
   }, [items, filters])
 
-  console.log('\n')
-  console.log(JSON.stringify(availableFilters))
-  console.log('\n')
-
   const [firstStep] = steps.keys()
 
   const { goTo, index, setStore, store } = useFlow({
     id: props.module?.id,
-    initial: firstStep,
+    initialIndex: firstStep,
   })
 
   const { customization, setProgress } = useChallenge()

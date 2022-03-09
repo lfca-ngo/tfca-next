@@ -2,9 +2,9 @@ import { useState } from 'react'
 
 // helper hook for managing the flow state of
 // the different action modules
-export const useFlow = ({ id, initial }) => {
-  const [store, setStore] = useState({})
-  const [index, set] = useState(initial)
+export const useFlow = ({ id, initialIndex, initialStore = {} }) => {
+  const [store, setStore] = useState(initialStore)
+  const [index, set] = useState(initialIndex)
 
   const scroll = (id) => {
     const section = document.querySelector(`#${id}`)
