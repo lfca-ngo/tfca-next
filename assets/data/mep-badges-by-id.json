@@ -1,22 +1,4 @@
 {
-  "D-AL": {
-    "DE": "Delegation für den Parlamentarischen Stabilitäts- und Assoziationsausschuss EU-AlbanienSitzungsdokumente",
-    "EN": "Delegation to the EU-Albania Stabilisation and Association Parliamentary CommitteeMeeting documents",
-    "ES": "Delegación en la Comisión Parlamentaria de Estabilización y Asociación UE-AlbaniaDocumentos de reunión",
-    "FR": "Délégation à la commission parlementaire de stabilisation et d'association UE-AlbanieDocuments de réunion"
-  },
-  "D-ME": {
-    "DE": "Delegation für den Parlamentarischen Stabilitäts- und Assoziationsausschuss EU-MontenegroSitzungsdokumente",
-    "EN": "Delegation to the EU-Montenegro Stabilisation and Association Parliamentary CommitteeMeeting documents",
-    "ES": "Delegación en la Comisión Parlamentaria de Estabilización y Asociación UE-MontenegroDocumentos de reunión",
-    "FR": "Délégation à la commission parlementaire de stabilisation et d'association UE-MonténégroDocuments de réunion"
-  },
-  "D-RS": {
-    "DE": "Delegation für den Parlamentarischen Stabilitäts- und Assoziationsausschuss EU-SerbienSitzungsdokumente",
-    "EN": "Delegation to the EU-Serbia Stabilisation and Association Parliamentary CommitteeMeeting documents",
-    "ES": "Delegación en la Comisión Parlamentaria de Estabilización y Asociación UE-SerbiaDocumentos de reunión",
-    "FR": "Délégation à la commission parlementaire de stabilisation et d'association UE-SerbieDocuments de réunion"
-  },
   "D-AF": {
     "DE": "Delegation für die Beziehungen zu AfghanistanSitzungsdokumente",
     "EN": "Delegation for relations with AfghanistanMeeting documents",
@@ -232,6 +214,24 @@
     "EN": "Delegation to the EU-Armenia Parliamentary Partnership Committee, the EU-Azerbaijan Parliamentary Cooperation Committee and the EU-Georgia Parliamentary Association CommitteeMeeting documents",
     "ES": "Delegación en la Comisión Parlamentaria de Asociación UE-Armenia, en la Comisión Parlamentaria de Cooperación UE-Azerbaiyán y en la Comisión Parlamentaria de Asociación UE-GeorgiaDocumentos de reunión",
     "FR": "Délégation au comité parlementaire de partenariat UE-Arménie, à la commission de coopération parlementaire UE-Azerbaïdjan et à la commission parlementaire d’association UE-GéorgieDocuments de réunion"
+  },
+  "D-AL": {
+    "DE": "Delegation im Parlamentarischen Stabilitäts- und Assoziationsausschuss EU-AlbanienSitzungsdokumente",
+    "EN": "Delegation to the EU-Albania Stabilisation and Association Parliamentary CommitteeMeeting documents",
+    "ES": "Delegación en la Comisión Parlamentaria de Estabilización y Asociación UE-AlbaniaDocumentos de reunión",
+    "FR": "Délégation à la commission parlementaire de stabilisation et d'association UE-AlbanieDocuments de réunion"
+  },
+  "D-ME": {
+    "DE": "Delegation im Parlamentarischen Stabilitäts- und Assoziationsausschuss EU-MontenegroSitzungsdokumente",
+    "EN": "Delegation to the EU-Montenegro Stabilisation and Association Parliamentary CommitteeMeeting documents",
+    "ES": "Delegación en la Comisión Parlamentaria de Estabilización y Asociación UE-MontenegroDocumentos de reunión",
+    "FR": "Délégation à la commission parlementaire de stabilisation et d'association UE-MonténégroDocuments de réunion"
+  },
+  "D-RS": {
+    "DE": "Delegation im Parlamentarischen Stabilitäts- und Assoziationsausschuss EU-SerbienSitzungsdokumente",
+    "EN": "Delegation to the EU-Serbia Stabilisation and Association Parliamentary CommitteeMeeting documents",
+    "ES": "Delegación en la Comisión Parlamentaria de Estabilización y Asociación UE-SerbiaDocumentos de reunión",
+    "FR": "Délégation à la commission parlementaire de stabilisation et d'association UE-SerbieDocuments de réunion"
   },
   "DCAS": {
     "DE": "Delegation in den Ausschüssen für parlamentarische Kooperation EU-Kasachstan,EU-Kirgisistan, EU-Usbekistan und EU-Tadschikistan sowie für die Beziehungen zuTurkmenistan und der MongoleiSitzungsdokumente",
