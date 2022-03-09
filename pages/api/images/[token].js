@@ -13,6 +13,10 @@ path.resolve(process.cwd(), 'fonts', 'Manrope-Bold.ttf')
 path.resolve(process.cwd(), 'fonts', 'Manrope-Regular.ttf')
 
 export default async function handler(req, res) {
+  if (req.method !== 'GET') {
+    return res.status(405).send({ message: 'Only GET requests allowed' })
+  }
+
   try {
     const { token } = req.query
     const payload = jwt.verify(token, process.env.JWT_TOKEN_PRIVATE_KEY)
