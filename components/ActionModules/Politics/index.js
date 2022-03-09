@@ -25,7 +25,7 @@ const PoliticsFlow = (props) => {
   const { locale } = useRouter()
   const { goTo, index, setStore, store } = useFlow({
     id: props.module?.id,
-    initialIndex: 'details',
+    initialIndex: 'countries',
     initialStore: {
       availableFilters: {
         badges: [],
