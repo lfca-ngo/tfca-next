@@ -2,6 +2,7 @@
 @import './reset.less';
 @import './fonts.less';
 @import './mixins.less';
+@import './variables-css.less';
 
 html,
 body {
@@ -16,6 +17,16 @@ body {
   width: 100%;
   @media @desktop {
     height: 100%;
+  }
+}
+
+.theme-dark {
+  background-color: var(--primary-color-bg--dark);
+  transition: all 0.5s;
+
+  body {
+    background-color: var(--primary-color-bg--dark);
+    transition: all 0.5s;
   }
 }
 
