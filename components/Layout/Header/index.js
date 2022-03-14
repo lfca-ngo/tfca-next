@@ -1,7 +1,9 @@
 require('./styles.less')
 import Icon from '@ant-design/icons'
 import { Button } from 'antd'
+import classNames from 'classnames'
 import { motion, useTransform, useViewportScroll } from 'framer-motion'
+import Image from 'next/image'
 import React, { useState } from 'react'
 
 import IconIdeas from '../../../assets/icons/ideas.svg'
@@ -10,7 +12,7 @@ import { useActiveAction, useIsMobile } from '../../../hooks/useIsClient'
 const SCROLL_RANGE = [0, 200]
 const SCROLL_RANGE_SHORT = [0, 60]
 
-export const Header = (props) => {
+export const Header = ({ actions, collapsed, setCollapsed }) => {
   const [open, setOpen] = useState(false)
   const isMobile = useIsMobile()
   // animations for mobile, the event does not fire on desktop
@@ -36,10 +38,13 @@ export const Header = (props) => {
   }
 
   return (
-    <motion.header className="header" style={{ boxShadow }}>
+    <motion.header
+      className={classNames('header', { collapsed })}
+      style={{ boxShadow }}
+    >
       <motion.div className="header-start" style={{ width: headerWidth }}>
         <motion.div className="logo" style={{ opacity, padding: logoPadding }}>
-          <img src="/images/logo.svg" />
+          <Image height={48} src="/images/logo.svg" width={48} />
         </motion.div>
         <button
           className={`hamburger hamburger--spin ${open && 'is-active'}`}
@@ -57,7 +62,7 @@ export const Header = (props) => {
         style={{ width: isMobile ? contentWidth : 'auto' }}
       >
         <ul>
-          {props.actions?.map((action) => (
+          {actions?.map((action) => (
             <li
               className={`action-element ${
                 activeAction === action.id ? 'active' : ''
@@ -75,8 +80,12 @@ export const Header = (props) => {
         </ul>
 
         <div className="header-bottom">
-          <Icon component={IconIdeas} />
-          More ideas?
+          {/* <Icon component={IconIdeas} />
+          More ideas? */}
+          <Button
+            icon={<Icon component={IconIdeas} />}
+            onClick={() => setCollapsed(!collapsed)}
+          />
         </div>
       </motion.div>
     </motion.header>

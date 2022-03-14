@@ -11,7 +11,7 @@ export const useDarkMode = () => {
   const themeValue = cookies[THEME_COOKIE]
   const isDarkMode = themeValue === CSS_THEME_DARK
 
-  const setDarkMode = useCallback((isDark) => {
+  const setDarkMode = (isDark) => {
     const htmlEl = document?.documentElement
     const shouldSetDark = CSS_THEME_DARK && htmlEl && isDark
 
@@ -26,10 +26,12 @@ export const useDarkMode = () => {
     return () => {
       htmlEl.classList.remove(CSS_THEME_DARK)
     }
-  }, [])
+  }
 
+  // Only on inital mount, set the cookie to the current theme
   useEffect(() => {
     setDarkMode(isDarkMode)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return [isDarkMode, setDarkMode]
