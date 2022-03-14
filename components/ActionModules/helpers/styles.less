@@ -23,15 +23,11 @@
   }
 
   .action-category,
+  .action-category .ant-btn-link,
   .title,
   .form-group .form-group-label,
   .ant-tabs .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn,
-  .multi-select
-    .ant-checkbox-group
-    .ant-checkbox-wrapper
-    .ant-checkbox
-    + span
-    .label-wrapper,
+  .check-list .list-elem .anticon,
   .ant-btn-link {
     color: @white;
   }
@@ -168,8 +164,12 @@
       border-top: none;
       margin: 0;
       .font-medium();
+      color: @white;
       font-size: 17px;
       padding: 0;
+      .anticon {
+        color: @white;
+      }
     }
     .icon {
       margin-right: 12px;

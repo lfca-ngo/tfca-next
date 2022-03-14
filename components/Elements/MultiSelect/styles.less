@@ -29,6 +29,12 @@
       &.ant-checkbox-wrapper-checked {
         background: @white;
         color: @black;
+        .ant-checkbox + span {
+          flex: 1;
+          .label-wrapper {
+            color: @black;
+          }
+        }
       }
 
       .ant-checkbox {
@@ -39,6 +45,7 @@
         .label-wrapper {
           display: flex;
           .font-medium();
+          color: @white;
           .icon {
             margin-right: 10px;
             align-items: center;
