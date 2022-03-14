@@ -13,8 +13,8 @@ import { Results } from './Results'
 const { TabPane } = Tabs
 
 const steps = new Map([
-  ['countries', Filter],
-  ['badges', Filter],
+  ['country', Filter],
+  ['topic', Filter],
   ['results', Results],
   ['details', Details],
   ['success', Success],
@@ -25,16 +25,29 @@ const PoliticsFlow = (props) => {
   const { locale } = useRouter()
   const { goTo, index, setStore, store } = useFlow({
     id: props.module?.id,
-    initialIndex: 'countries',
+    initialIndex: 'country',
     initialStore: {
       availableFilters: {
-        badges: [],
-        countries: [],
+        country:
+          props.module?.data.countries.items.map((item) => ({
+            iconUrl: item.icon?.url,
+            label: item.label,
+            value: item.valueString,
+          })) || [],
+        topic:
+          props.module?.data.topics.items.map((item) => ({
+            delegationsCommittees: item.delegationsCommittees,
+            label: item.label,
+            messages: item.messagesCollection.items,
+            value: item.label,
+          })) || [],
       },
-      badges: [],
-      countries: [getCountryFromLocale(locale)],
+      country: {
+        value: getCountryFromLocale(locale),
+      },
       item: {},
       items: [],
+      topic: undefined,
     },
   })
 
@@ -47,15 +60,14 @@ const PoliticsFlow = (props) => {
     async function fetchData() {
       try {
         setIsFetching(true)
-        const url = `/api/meps?locale=${locale}&filter.countries=${store.countries.join(
-          ','
-        )}&filter.badges=${store.badges.join(',')}`
+        const url = `/api/meps?locale=${locale}&filter.countries=${
+          store.country.value
+        }&filter.badges=${(store.topic?.delegationsCommittees || []).join(',')}`
         const resp = await fetch(url)
         const json = await resp.json()
 
         setStore((v) => ({
           ...v,
-          availableFilters: json.availableFilters,
           items: json.items.map((item) => ({
             email: item.email,
             imageUrl: item.imageUrl,
@@ -71,7 +83,7 @@ const PoliticsFlow = (props) => {
     }
 
     fetchData()
-  }, [locale, setStore, store.badges, store.countries])
+  }, [locale, setStore, store.topic, store.country])
 
   const stepsKeys = [...steps.keys()]
 

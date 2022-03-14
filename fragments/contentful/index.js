@@ -205,6 +205,23 @@ const DataInputFragment = gql`
   }
 `
 
+const DataPoliticalTopicFragment = gql`
+  fragment DataPoliticalTopicFragment on DataPoliticalTopic {
+    label
+    messagesCollection {
+      items {
+        ... on Block {
+          key
+          value {
+            json
+          }
+        }
+      }
+    }
+    delegationsCommittees
+  }
+`
+
 const QuizFragment = gql`
   fragment QuizFragment on Quiz {
     question
@@ -241,6 +258,7 @@ export const ActionFragment = gql`
   ${DataBankFragment}
   ${QuizFragment}
   ${DataInputFragment}
+  ${DataPoliticalTopicFragment}
   fragment ActionFragment on Action {
     id
     name
@@ -287,6 +305,9 @@ export const ActionFragment = gql`
             }
             ... on Input {
               ...DataInputFragment
+            }
+            ... on DataPoliticalTopic {
+              ...DataPoliticalTopicFragment
             }
           }
         }

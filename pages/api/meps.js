@@ -53,17 +53,6 @@ export default async function handler(req, res) {
         badges: badgesFilter,
         countries: countriesFilter,
       },
-      availableFilters: {
-        badges: Object.keys(MEPBadgesById).map((badgeId) => ({
-          label: MEPBadgesById[badgeId][locale],
-          value: badgeId,
-        })),
-        countries: MEPCountries.map((c) => ({
-          iconUrl: c.iconUrl,
-          label: c.label[locale],
-          value: c.countryCode,
-        })),
-      },
       items: allMEPs.filter((mep) => {
         const hasMatchingBadge = !badgesFilter.length
           ? true

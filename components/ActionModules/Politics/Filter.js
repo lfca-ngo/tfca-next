@@ -21,13 +21,16 @@ export const Filter = ({
 }) => {
   // take the first filter for the intro screen
   const filterOption = filter || {}
-  const initialValue = store[filterOption?.fieldName][0]
+  const initialValue = (store[filterOption?.fieldName] || {}).value
 
   const handleNext = (v) => {
     const value = v[filterOption?.fieldName]
-    // Even though we can only select 1 value with this UI element,
-    // the API is built to handle multi select which is why we wrap the value in an array
-    setStore({ ...store, [filterOption?.fieldName]: [value] })
+
+    const resolvedValue = filterOption.options.find(
+      (option) => option.value === value
+    )
+
+    setStore({ ...store, [filterOption?.fieldName]: resolvedValue })
     setProgress(0.3)
     goTo(nextKey)
   }
