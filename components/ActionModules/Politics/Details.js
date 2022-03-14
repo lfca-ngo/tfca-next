@@ -7,6 +7,8 @@ import Category from '../helpers/Category'
 import { StepHeader } from '../helpers/StepHeader'
 
 export const Details = ({ blocks, goTo, icon, nextKey, prevKey, store }) => {
+  const message = store.topic.messages[0]
+
   return (
     <div className="step">
       <Category
@@ -25,9 +27,9 @@ export const Details = ({ blocks, goTo, icon, nextKey, prevKey, store }) => {
       />
 
       <PoliticianDetails
-        initialMessage={text(blocks['message.body'], { name: store.item.name })}
+        initialMessage={text(message.text, { name: store.item.name })}
         item={store.item}
-        messageSubject={text(blocks['message.subject'], {
+        messageSubject={text(message.subject, {
           name: store.item.name,
         })}
         onFinish={() => goTo(nextKey)}

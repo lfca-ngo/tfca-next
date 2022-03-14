@@ -210,11 +210,9 @@ const DataPoliticalTopicFragment = gql`
     label
     messagesCollection {
       items {
-        ... on Block {
-          key
-          value {
-            json
-          }
+        ... on PrewrittenMessage {
+          text
+          subject
         }
       }
     }

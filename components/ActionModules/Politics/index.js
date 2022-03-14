@@ -4,6 +4,7 @@ import React from 'react'
 
 import { useChallenge } from '../../../hooks/useChallenge'
 import { useFlow } from '../../../hooks/useFlow'
+import { text } from '../../../utils/Text'
 import { Share } from '../helpers/Share'
 import Success from '../helpers/Success'
 import { Details } from './Details'
@@ -109,9 +110,13 @@ const PoliticsFlow = (props) => {
                 error={error}
                 filter={{
                   fieldName: stepsKey,
-                  hint: `Choose ${stepsKey} (how to localize?)`,
+                  hint: text(
+                    (props.module?.blocks || {})[`filter.${stepsKey}.hint`]
+                  ),
                   options: store.availableFilters[stepsKey] || [],
-                  question: `${stepsKey} (How to localize?)`,
+                  question: text(
+                    (props.module?.blocks || {})[`filter.${stepsKey}.title`]
+                  ),
                 }}
                 goTo={goTo}
                 icon={props.module?.icon?.url}
