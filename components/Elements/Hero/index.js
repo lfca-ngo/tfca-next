@@ -13,12 +13,12 @@ export const Hero = (props) => {
   const { customization } = useChallenge()
   const customHeaderText = (
     <span>
-      Hi <span>David</span>, ready to act?
+      Hi <span className="text-accent">David</span>, ready to act?
     </span>
   ) // useBlocks('header.title.custom')
   const headerText = (
     <span>
-      The time to act is <span>now</span>
+      The time to act is <span className="text-accent">now</span>
     </span>
   ) //useBlocks('header.title')
 

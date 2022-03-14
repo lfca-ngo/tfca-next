@@ -15,6 +15,7 @@ header.header {
   width: 100%;
   background: var(--body-background);
   height: @header-height-mini;
+  transition: @default-transition;
 
   @media @desktop {
     position: relative;
@@ -24,6 +25,7 @@ header.header {
     padding: 0;
     height: auto;
     transition: width 0.3s ease;
+
     &.collapsed {
       width: @side-bar-width-collapsed;
       transition: width 0.3s ease;
@@ -69,7 +71,7 @@ header.header {
     align-items: center;
     flex-direction: row;
     overflow: scroll;
-    background: var(--body-background);
+
     &::-webkit-scrollbar {
       display: none;
     }
