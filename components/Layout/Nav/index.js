@@ -1,8 +1,10 @@
 require('./styles.less')
-import { BulbOutlined, ThunderboltOutlined } from '@ant-design/icons'
+import Icon from '@ant-design/icons'
 import Link from 'next/link'
 import React, { useState } from 'react'
 
+import IconMoon from '../../../assets/icons/moon.svg'
+import IconSun from '../../../assets/icons/sun.svg'
 import { useDarkMode } from '../../../hooks/useDarkMode'
 import { DisclosureDrawer } from '../../Disclosure/DisclosureDrawer'
 import { IntlSelector } from '../../IntlSelector'
@@ -32,14 +34,14 @@ export const Nav = (props) => {
           <li onClick={toggle}>{props.company?.company?.name}</li>
         )}
         <li>
-          <IntlSelector />
+          {isDarkMode ? (
+            <Icon component={IconSun} onClick={() => setDarkMode(false)} />
+          ) : (
+            <Icon component={IconMoon} onClick={() => setDarkMode(true)} />
+          )}
         </li>
         <li>
-          {isDarkMode ? (
-            <BulbOutlined onClick={() => setDarkMode(false)} />
-          ) : (
-            <ThunderboltOutlined onClick={() => setDarkMode(true)} />
-          )}
+          <IntlSelector />
         </li>
       </ul>
       <DisclosureDrawer

@@ -1,5 +1,5 @@
 require('./styles.less')
-import Icon from '@ant-design/icons'
+
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons'
 import { Button } from 'antd'
 import classNames from 'classnames'
@@ -7,7 +7,6 @@ import { motion, useTransform, useViewportScroll } from 'framer-motion'
 import Image from 'next/image'
 import React, { useState } from 'react'
 
-import IconIdeas from '../../../assets/icons/ideas.svg'
 import { useActiveAction, useIsMobile } from '../../../hooks/useIsClient'
 
 const SCROLL_RANGE = [0, 200]
@@ -78,7 +77,7 @@ export const Header = ({ actions, collapsed, setCollapsed }) => {
                 type="link"
               >
                 <div className="icon">
-                  <img src={action.icon} />
+                  <Image height={30} src={action.icon} width={30} />
                 </div>
                 <div className="text">{action.name}</div>
               </Button>
