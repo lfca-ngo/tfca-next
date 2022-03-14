@@ -26,7 +26,7 @@ export async function getStaticProps() {
     {
       input: {
         filter: {
-          achievementContentIds: ['hasNewCampaignQualification'],
+          achievementContentIds: ['tfca2022Qualification'],
         },
       },
     }

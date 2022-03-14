@@ -49,7 +49,7 @@ export async function getStaticProps({ locale, params }) {
     {
       input: {
         filter: {
-          achievementContentIds: ['hasNewCampaignQualification'],
+          achievementContentIds: ['tfca2022Qualification'],
         },
       },
     }
@@ -90,7 +90,7 @@ export async function getStaticPaths({ locales }) {
     {
       input: {
         filter: {
-          achievementContentIds: ['hasNewCampaignQualification'],
+          achievementContentIds: ['tfca2022Qualification'],
         },
       },
     }
