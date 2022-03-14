@@ -12,7 +12,6 @@ const Template = ({ children }) => {
           <meta charSet="utf-8" />
           <link href="/favicon.ico" rel="icon" />
         </Head>
-
         <div className="siteContent">
           {children}
           <CookieConsent expires={60} />
