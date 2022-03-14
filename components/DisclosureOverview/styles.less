@@ -1,5 +1,6 @@
 @import (reference) '../../styles/vars.less';
 @import (reference) '../../styles/fonts.less';
+@import (reference) '../../styles/mixins.less';
 
 .disclosure-overview {
   background: @white;
@@ -107,6 +108,84 @@
       .content-wrapper {
         flex-grow: 1;
       }
+    }
+  }
+
+  .company-card {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border-color: #d9d9d9;
+    .ant-card-head-title {
+      text-align: center;
+      .logo-wrapper {
+        margin: 0 auto;
+      }
+    }
+    .ant-card-body {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: auto;
+      @media (min-width: @screen-md) {
+        height: 390px;
+      }
+      @media (min-width: @screen-lg) {
+        height: 390px;
+      }
+      @media (min-width: @screen-xxl) {
+        height: 520px;
+      }
+      .ant-btn {
+        @media (min-width: @screen-md) {
+          margin-bottom: 0 !important;
+          margin-top: auto !important;
+        }
+      }
+    }
+    .show-more {
+      text-align: center;
+      font-size: 14px;
+
+      color: rgba(0, 0, 0, 0.65);
+    }
+    .contributions {
+      font-size: 14px;
+      color: rgba(0, 0, 0, 0.65);
+      ul li {
+        font-size: 14px;
+        color: rgba(0, 0, 0, 0.65);
+      }
+
+      ul {
+        padding-inline-start: 20px;
+      }
+    }
+    .ant-tabs-tab-btn {
+      font-size: 14px;
+    }
+    .check-list {
+      margin: 0;
+      .list-elem .desc {
+        font-size: 14px;
+      }
+      color: rgba(0, 0, 0, 0.65);
+      .anticon {
+        margin-top: 4px;
+      }
+    }
+    .ant-tabs {
+      .ant-tabs-nav-list {
+        margin: 0 auto;
+      }
+      .ant-tabs-tab {
+        margin-right: 10px;
+        font-size: 14px;
+      }
+    }
+    .ant-btn-primary {
+      margin: 20px 0 0;
+      border-radius: 8px;
     }
   }
 }

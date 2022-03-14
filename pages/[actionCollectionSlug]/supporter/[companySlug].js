@@ -19,7 +19,7 @@ export default function SupporterPage({ actions, company }) {
   )
 }
 
-const allQualifiedCompaniesQuery = gql`
+const allParticipatingCompaniesQuery = gql`
   ${QualifiedCompanyFragment}
   query qualifiedCompanies($input: QualifiedCompaniesInput) {
     qualifiedCompanies(input: $input) {
@@ -44,7 +44,16 @@ export async function getStaticProps({ locale, params }) {
    * We fetch ALL companies once (already on `getStaticPaths`)
    * and re-use the result from cache
    */
-  const { qualifiedCompanies } = await fetchData(allQualifiedCompaniesQuery)
+  const { qualifiedCompanies } = await fetchData(
+    allParticipatingCompaniesQuery,
+    {
+      input: {
+        filter: {
+          achievementContentIds: ['tfca2022Qualification'],
+        },
+      },
+    }
+  )
   const company = qualifiedCompanies.find(
     ({ company }) => company.micrositeSlug === companySlug
   )
@@ -76,13 +85,21 @@ export async function getStaticPaths({ locales }) {
     actionsLocalCollectionQuery
   )
 
-  const { qualifiedCompanies } = await fetchData(allQualifiedCompaniesQuery)
+  const { qualifiedCompanies } = await fetchData(
+    allParticipatingCompaniesQuery,
+    {
+      input: {
+        filter: {
+          achievementContentIds: ['tfca2022Qualification'],
+        },
+      },
+    }
+  )
 
   return {
     fallback: false,
     /**
-     * TODO: Instead of using badge qualification:
-     * - Fetch all supporting companies
+     * TODO:
      * - Create paths for all possible combinations of
      *    - `locales`
      *    - `actionsLocalCollection`
