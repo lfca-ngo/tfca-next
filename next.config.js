@@ -39,7 +39,7 @@ const nextConfig = {
 }
 
 const pluginAntdLess = withAntdLess({
-  lessVarsFilePath: './styles/ant-default-vars.less',
+  lessVarsFilePath: './styles/variables.less',
   // lessVarsFilePathAppendToEndOfContent: false,
   // nextjs: {
   //   localIdentNameFollowDev: true,

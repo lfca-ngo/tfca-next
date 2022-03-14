@@ -3,7 +3,7 @@ const path = require('path')
 
 // Avoid too long formatting
 const vars = fs
-  .readFileSync(path.resolve(__dirname, './ant-default-vars.less'), 'utf-8')
+  .readFileSync(path.resolve(__dirname, './variables.less'), 'utf-8')
   .replace(/,\n/g, ',')
 
 const matchs = vars.match(/^@.*/gm)
@@ -13,7 +13,7 @@ const allVars = matchs.map((m) => {
   if (mv && mv[1]) return mv[1]
 })
 
-const HEADER = `@import (reference) './ant-default-vars.less';
+const HEADER = `@import (reference) './variables.less';
 :root {
 `
 

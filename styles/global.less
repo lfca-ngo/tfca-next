@@ -1,4 +1,4 @@
-@import './vars.less';
+@import './variables.less';
 @import './reset.less';
 @import './fonts.less';
 @import './mixins.less';
@@ -20,7 +20,11 @@ body {
   }
 }
 
-.theme-dark {
+.@{THEME--DARK} {
+  // override global variables for dark mode
+  --text-color: fade(@white, 85%);
+  --heading-color: @white;
+
   background-color: var(--primary-color-bg--dark);
   transition: all 0.5s;
 

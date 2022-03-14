@@ -1,27 +1,31 @@
-@import (reference) './vars.less';
+@import (reference) './variables.less';
 
 .font-bold() {
   font-family: 'Manrope', sans-serif;
   font-weight: 800 !important;
   font-style: normal;
+  color: var(--heading-color);
 }
 
 .font-semi() {
   font-family: 'Manrope', sans-serif;
   font-weight: 600;
   font-style: normal;
+  color: var(--heading-color);
 }
 
 .font-medium() {
   font-family: 'Manrope', sans-serif;
   font-weight: 400;
   font-style: normal;
+  color: var(--heading-color);
 }
 
 .font-regular() {
   font-family: 'Manrope', sans-serif;
   font-weight: 300;
   font-style: normal;
+  color: var(--text-color);
 }
 
 .h1() {
@@ -60,7 +64,7 @@
 }
 
 .default-text() {
-  color: fade(@black, 85%);
+  color: var(--text-color);
   font-weight: 300;
   line-height: 1.5;
 }
@@ -76,7 +80,7 @@ h1,
 h2,
 h3,
 h4 {
-  color: @black;
+  color: var(--heading-color);
 }
 
 h1 {
