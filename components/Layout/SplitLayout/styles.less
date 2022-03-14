@@ -20,8 +20,9 @@ body {
 #scroll-container {
   width: 100%;
   height: 100vh;
-
+  transition: all 0.3s ease;
   @media @desktop {
+    transition: all 0.3s ease;
     width: calc(100% - @side-bar-width);
     overflow-y: auto;
     &.collapsed {

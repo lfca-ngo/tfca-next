@@ -1,5 +1,6 @@
 require('./styles.less')
 import Icon from '@ant-design/icons'
+import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons'
 import { Button } from 'antd'
 import classNames from 'classnames'
 import { motion, useTransform, useViewportScroll } from 'framer-motion'
@@ -26,6 +27,8 @@ export const Header = ({ actions, collapsed, setCollapsed }) => {
     '0px 10px 10px rgba(0, 0, 0, 0.05)',
   ])
 
+  const logoStyles = isMobile ? { opacity, padding: logoPadding } : {}
+
   const { activeAction } = useActiveAction()
 
   const toggleMenu = () => {
@@ -43,7 +46,7 @@ export const Header = ({ actions, collapsed, setCollapsed }) => {
       style={{ boxShadow }}
     >
       <motion.div className="header-start" style={{ width: headerWidth }}>
-        <motion.div className="logo" style={{ opacity, padding: logoPadding }}>
+        <motion.div className="logo" style={logoStyles}>
           <Image height={48} src="/images/logo.svg" width={48} />
         </motion.div>
         <button
@@ -69,7 +72,11 @@ export const Header = ({ actions, collapsed, setCollapsed }) => {
               }`}
               key={action.id}
             >
-              <Button onClick={() => scroll(action.id)} type="link">
+              <Button
+                className="no-padding"
+                onClick={() => scroll(action.id)}
+                type="link"
+              >
                 <div className="icon">
                   <img src={action.icon} />
                 </div>
@@ -80,12 +87,14 @@ export const Header = ({ actions, collapsed, setCollapsed }) => {
         </ul>
 
         <div className="header-bottom">
-          {/* <Icon component={IconIdeas} />
-          More ideas? */}
           <Button
-            icon={<Icon component={IconIdeas} />}
+            className="no-padding"
             onClick={() => setCollapsed(!collapsed)}
-          />
+            type="link"
+          >
+            {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+            {collapsed ? '' : 'Collapse'}
+          </Button>
         </div>
       </motion.div>
     </motion.header>

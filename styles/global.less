@@ -22,11 +22,12 @@ body {
   }
 }
 
+// override global variables for dark mode
 .@{THEME--DARK} {
-  // override global variables for dark mode
   --text-color: fade(@white, 85%);
   --heading-color: @white;
-  --body-background: @black;
+  --body-background: @full-black;
+  --medium-grey: fade(@white, 25%);
 }
 
 .option-with-icon {
@@ -113,7 +114,12 @@ body {
 }
 
 .ant-btn.ant-btn-link.no-padding {
+  display: flex;
+  margin: 0;
   padding: 0;
+  line-height: normal;
+  height: auto;
+  align-items: center;
 }
 
 .ant-row.btn-wrapper {
