@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { isMobile as isMobileClient } from 'react-device-detect'
 
 const IsClientContext = React.createContext()
@@ -10,7 +10,7 @@ export const IsClientProvider = ({ children }) => {
   const key = isClient ? 'client' : 'server'
 
   // due to SSG we only know if it's mobile after first client side render
-  useLayoutEffect(() => {
+  useEffect(() => {
     setClient(true)
     setIsMobile(isMobileClient)
   }, [])

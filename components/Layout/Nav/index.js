@@ -19,6 +19,11 @@ export const Nav = (props) => {
   const [visible, setVisible] = useState(false)
   const toggle = () => setVisible(!visible)
 
+  const toggleDarkMode = () => {
+    console.log('toggleDarkMode', isDarkMode)
+    setDarkMode(!isDarkMode)
+  }
+
   return (
     <nav className={`${props.className} nav`}>
       <ul>
@@ -34,11 +39,10 @@ export const Nav = (props) => {
           <li onClick={toggle}>{props.company?.company?.name}</li>
         )}
         <li>
-          {isDarkMode ? (
-            <Icon component={IconSun} onClick={() => setDarkMode(false)} />
-          ) : (
-            <Icon component={IconMoon} onClick={() => setDarkMode(true)} />
-          )}
+          <Icon
+            component={isDarkMode ? IconSun : IconMoon}
+            onClick={toggleDarkMode}
+          />
         </li>
         <li>
           <IntlSelector />

@@ -30,6 +30,7 @@ body {
 // override global variables for dark mode
 .@{THEME--DARK} {
   --text-color: fade(@white, 85%);
+  --text-color-strong: fade(@white, 90%);
   --heading-color: @white;
   --body-background: @full-black;
   --medium-grey: fade(@white, 25%);
@@ -39,6 +40,7 @@ span.text-accent {
   background-color: @pink;
   background-image: linear-gradient(270deg, darken(@pink, 5%) 0%, @pink 100%);
   background-size: 100%;
+  background-clip: text;
   -webkit-background-clip: text;
   -moz-background-clip: text;
   -webkit-text-fill-color: transparent;

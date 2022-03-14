@@ -26,6 +26,12 @@
   .title,
   .form-group .form-group-label,
   .ant-tabs .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn,
+  .multi-select
+    .ant-checkbox-group
+    .ant-checkbox-wrapper
+    .ant-checkbox
+    + span
+    .label-wrapper,
   .ant-btn-link {
     color: @white;
   }
@@ -121,6 +127,7 @@
     h2 {
       .h2();
       margin-bottom: 25px;
+      color: @white;
       @media @desktop {
         margin-bottom: 35px;
       }
@@ -129,6 +136,7 @@
     p {
       line-height: 1.4;
       .font-regular();
+      color: fade(@white, 90%);
     }
   }
 
