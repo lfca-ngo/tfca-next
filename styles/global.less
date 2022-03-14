@@ -15,6 +15,8 @@ body {
 
 #__next {
   width: 100%;
+  background: var(--body-background);
+  transition: background 0.5s;
   @media @desktop {
     height: 100%;
   }
@@ -24,14 +26,7 @@ body {
   // override global variables for dark mode
   --text-color: fade(@white, 85%);
   --heading-color: @white;
-
-  background-color: var(--primary-color-bg--dark);
-  transition: all 0.5s;
-
-  body {
-    background-color: var(--primary-color-bg--dark);
-    transition: all 0.5s;
-  }
+  --body-background: @black;
 }
 
 .option-with-icon {
