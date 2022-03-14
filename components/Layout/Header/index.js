@@ -7,12 +7,14 @@ import { motion, useTransform, useViewportScroll } from 'framer-motion'
 import Image from 'next/image'
 import React, { useState } from 'react'
 
+import { useDarkMode } from '../../../hooks/useDarkMode'
 import { useActiveAction, useIsMobile } from '../../../hooks/useIsClient'
 
 const SCROLL_RANGE = [0, 200]
 const SCROLL_RANGE_SHORT = [0, 60]
 
 export const Header = ({ actions, collapsed, setCollapsed }) => {
+  const [isDarkMode] = useDarkMode()
   const [open, setOpen] = useState(false)
   const isMobile = useIsMobile()
   // animations for mobile, the event does not fire on desktop
@@ -27,6 +29,7 @@ export const Header = ({ actions, collapsed, setCollapsed }) => {
   ])
 
   const logoStyles = isMobile ? { opacity, padding: logoPadding } : {}
+  const logoSrc = isDarkMode ? '/images/logo_darkmode.svg' : '/images/logo.svg'
 
   const { activeAction } = useActiveAction()
 
@@ -46,7 +49,7 @@ export const Header = ({ actions, collapsed, setCollapsed }) => {
     >
       <motion.div className="header-start" style={{ width: headerWidth }}>
         <motion.div className="logo" style={logoStyles}>
-          <Image height={48} src="/images/logo.svg" width={48} />
+          <Image height={48} src={logoSrc} width={48} />
         </motion.div>
         <button
           className={`hamburger hamburger--spin ${open && 'is-active'}`}

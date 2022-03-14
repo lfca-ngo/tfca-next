@@ -19,10 +19,7 @@ export const Nav = (props) => {
   const [visible, setVisible] = useState(false)
   const toggle = () => setVisible(!visible)
 
-  const toggleDarkMode = () => {
-    console.log('toggleDarkMode', isDarkMode)
-    setDarkMode(!isDarkMode)
-  }
+  const toggleDarkMode = () => setDarkMode(!isDarkMode)
 
   return (
     <nav className={`${props.className} nav`}>
