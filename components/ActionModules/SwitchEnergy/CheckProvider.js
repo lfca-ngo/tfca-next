@@ -1,4 +1,4 @@
-import { FileDoneOutlined, LoadingOutlined } from '@ant-design/icons'
+import { FileDoneOutlined } from '@ant-design/icons'
 import { Alert, Button, ConfigProvider, Form, Select } from 'antd'
 import React, { useState } from 'react'
 
@@ -35,7 +35,6 @@ const customizeRenderEmpty = () => (
 
 const CheckProvider = (props) => {
   const [provider, setProvider] = useState()
-  const [loading, setLoading] = useState()
 
   const handleChange = (val) => {
     setProvider(val)
@@ -113,10 +112,7 @@ const CheckProvider = (props) => {
               onChange={handleChange}
               optionFilterProp="children"
               placeholder={
-                <span>
-                  {text(props.blocks['checkprovider.choose'])}
-                  {loading && <LoadingOutlined />}
-                </span>
+                <span>{text(props.blocks['checkprovider.choose'])}</span>
               }
               showSearch
               size="large"

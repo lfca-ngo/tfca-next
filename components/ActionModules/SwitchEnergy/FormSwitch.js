@@ -180,9 +180,9 @@ const EmailReminder = (props) => {
   const [loading, setLoading] = useState(false)
   // const { trackEvent } = useAnalytics()
 
-  const onFinish = async (values) => {
+  const onFinish = async () => {
     setLoading(true)
-    const res = { status: 200 } // await trackEvent('reminder_submit', values)
+    const res = { status: 200 }
     setLoading(false)
     if (res?.status === 200) {
       props.close()
@@ -213,9 +213,9 @@ const FormSwitch = (props) => {
   const [loading, setLoading] = useState(false)
   // const { trackEvent } = useAnalytics()
   const [form] = Form.useForm()
-  const onFinish = async (values) => {
+  const onFinish = async () => {
     setLoading(true)
-    const res = { status: 200 } // await trackEvent('form_submit', values)
+    const res = { status: 200 }
     setLoading(false)
     if (res?.status === 200) {
       props.goTo('success')

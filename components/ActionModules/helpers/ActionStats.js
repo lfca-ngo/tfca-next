@@ -1,6 +1,6 @@
 import Icon from '@ant-design/icons'
 import { Tag } from 'antd'
-import React, { useState } from 'react'
+import React from 'react'
 
 import IconTimer from '../../../assets/icons/counter.svg'
 import IconKg from '../../../assets/icons/kg.svg'
@@ -29,7 +29,6 @@ const minTwoDigits = (n) => {
 }
 
 const ActionStats = (props) => {
-  const [isFocus, setIsFocus] = useState(false)
   const minLeft = Math.floor(props.timeLeft / 60)
   const secondsLeft = props.timeLeft % 60
   const time = props.timeLeft ? `${minLeft}:${minTwoDigits(secondsLeft)}` : null
@@ -39,7 +38,7 @@ const ActionStats = (props) => {
       <Stat
         data={props.otherUsers}
         icon={IconUsers}
-        isFocus={isFocus}
+        isFocus={false}
         text={text(useBlocks('stats.usersdoingthis'))}
       />
 
