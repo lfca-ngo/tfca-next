@@ -84,7 +84,7 @@ export const EnergyForm = ({ blocks, data, initialValues, onFinish }) => {
 }
 
 const Calculate = (props) => {
-  const { data, setStore, store } = props
+  const { data, setStore } = props
 
   const handleFinish = (allValues) => {
     setStore({

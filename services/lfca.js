@@ -1,6 +1,6 @@
 import crypto from 'crypto'
 import fs from 'fs'
-import { gql, request } from 'graphql-request'
+import { request } from 'graphql-request'
 import path from 'path'
 
 export const fetchData = async (query, variables) => {

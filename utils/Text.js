@@ -33,6 +33,6 @@ export const Text = ({ asString, block, vars }) => {
 // Sometimes we just need to get the plain text from a block
 export const text = (block, vars) => {
   if (!block) return null
-  if (typeof block === 'string') return block
+  if (typeof block === 'string') return replaceVars(block, vars)
   return replaceVars(documentToPlainTextString(block?.json), vars) || ''
 }

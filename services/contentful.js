@@ -280,52 +280,54 @@ export const fetchAllActions = async (locale, actionCollectionSlug) => {
 // Helper function to transform the results into key value pairs
 const transformResults = (results) => {
   const nav = []
-  const transformed = results?.map((item) => {
-    // create a simple summary element, used in nav
-    nav.push({
-      icon: item.icon?.url || '',
-      id: item.id || '',
-      name: item.name || '',
-    })
+  const transformed = results?.map(
+    ({ blocksCollection, dataCollection, listsCollection, ...item }) => {
+      // create a simple summary element, used in nav
+      nav.push({
+        icon: item.icon?.url || '',
+        id: item.id || '',
+        name: item.name || '',
+      })
 
-    // transform blocks to key value pairs
-    const blocks = item.blocksCollection?.items.reduce((allBlocks, block) => {
-      const { key, value } = block
-      return { ...allBlocks, [key]: value }
-    }, {})
-    // transform lists to key value pairs
-    const lists = item.listsCollection?.items.reduce((allLists, list) => {
-      const { itemsCollection, listId } = list
-      return { ...allLists, [listId]: itemsCollection.items }
-    }, {})
-    // transform data to key value pairs
-    const data = item.dataCollection?.items.reduce((allData, data) => {
-      const {
-        cardLayout,
-        filtersCollection,
-        itemsCollection,
-        listGrid,
-        listId,
-      } = data
-      return {
-        ...allData,
-        [listId]: {
+      // transform blocks to key value pairs
+      const blocks = blocksCollection?.items.reduce((allBlocks, block) => {
+        const { key, value } = block
+        return { ...allBlocks, [key]: value }
+      }, {})
+      // transform lists to key value pairs
+      const lists = listsCollection?.items.reduce((allLists, list) => {
+        const { itemsCollection, listId } = list
+        return { ...allLists, [listId]: itemsCollection.items }
+      }, {})
+      // transform data to key value pairs
+      const data = dataCollection?.items.reduce((allData, data) => {
+        const {
           cardLayout,
-          filters: filtersCollection?.items || [],
-          items: itemsCollection?.items || [],
+          filtersCollection,
+          itemsCollection,
           listGrid,
-        },
+          listId,
+        } = data
+        return {
+          ...allData,
+          [listId]: {
+            cardLayout,
+            filters: filtersCollection?.items || [],
+            items: itemsCollection?.items || [],
+            listGrid,
+          },
+        }
+      }, {})
+      // replace transformed attributes
+      const transformedActions = {
+        ...item,
+        blocks,
+        data,
+        lists,
       }
-    }, {})
-    // replace transformed attributes
-    const transformedActions = {
-      ...item,
-      blocks,
-      data,
-      lists,
+      return transformedActions
     }
-    return transformedActions
-  })
+  )
 
   return {
     items: transformed,

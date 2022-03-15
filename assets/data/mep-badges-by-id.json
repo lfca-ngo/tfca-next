@@ -1,0 +1,434 @@
+{
+  "D-AF": {
+    "DE": "Delegation für die Beziehungen zu AfghanistanSitzungsdokumente",
+    "EN": "Delegation for relations with AfghanistanMeeting documents",
+    "ES": "Delegación para las Relaciones con AfganistánDocumentos de reunión",
+    "FR": "Délégation pour les relations avec l'AfghanistanDocuments de réunion"
+  },
+  "DANZ": {
+    "DE": "Delegation für die Beziehungen zu Australien und NeuseelandSitzungsdokumente",
+    "EN": "Delegation for relations with Australia and New ZealandMeeting documents",
+    "ES": "Delegación para las Relaciones con Australia y Nueva ZelandaDocumentos de reunión",
+    "FR": "Délégation pour les relations avec l'Australie et la Nouvelle-ZélandeDocuments de réunion"
+  },
+  "D-BY": {
+    "DE": "Delegation für die Beziehungen zu BelarusSitzungsdokumente",
+    "EN": "Delegation for relations with BelarusMeeting documents",
+    "ES": "Delegación para las Relaciones con BielorrusiaDocumentos de reunión",
+    "FR": "Délégation pour les relations avec la BiélorussieDocuments de réunion"
+  },
+  "DSEE": {
+    "DE": "Delegation für die Beziehungen zu Bosnien und Herzegowina und dem KosovoSitzungsdokumente",
+    "EN": "Delegation for relations with Bosnia and Herzegovina, and KosovoMeeting documents",
+    "ES": "Delegación para las Relaciones con Bosnia y Herzegovina y KosovoDocumentos de reunión",
+    "FR": "Délégation pour les relations avec la Bosnie-Herzégovine et le KosovoDocuments de réunion"
+  },
+  "D-IN": {
+    "DE": "Delegation für die Beziehungen zu IndienSitzungsdokumente",
+    "EN": "Delegation for relations with IndiaMeeting documents",
+    "ES": "Delegación para las Relaciones con la IndiaDocumentos de reunión",
+    "FR": "Délégation pour les relations avec l'IndeDocuments de réunion"
+  },
+  "D-IQ": {
+    "DE": "Delegation für die Beziehungen zu IrakSitzungsdokumente",
+    "EN": "Delegation for relations with IraqMeeting documents",
+    "ES": "Delegación para las Relaciones con IrakDocumentos de reunión",
+    "FR": "Délégation pour les relations avec l'IraqDocuments de réunion"
+  },
+  "D-IR": {
+    "DE": "Delegation für die Beziehungen zu IranSitzungsdokumente",
+    "EN": "Delegation for relations with IranMeeting documents",
+    "ES": "Delegación para las Relaciones con IránDocumentos de reunión",
+    "FR": "Délégation pour les relations avec l'IranDocuments de réunion"
+  },
+  "D-IL": {
+    "DE": "Delegation für die Beziehungen zu IsraelSitzungsdokumente",
+    "EN": "Delegation for relations with IsraelMeeting documents",
+    "ES": "Delegación para las Relaciones con IsraelDocumentos de reunión",
+    "FR": "Délégation pour les relations avec IsraëlDocuments de réunion"
+  },
+  "D-JP": {
+    "DE": "Delegation für die Beziehungen zu JapanSitzungsdokumente",
+    "EN": "Delegation for relations with JapanMeeting documents",
+    "ES": "Delegación para las Relaciones con JapónDocumentos de reunión",
+    "FR": "Délégation pour les relations avec le JaponDocuments de réunion"
+  },
+  "D-CA": {
+    "DE": "Delegation für die Beziehungen zu KanadaSitzungsdokumente",
+    "EN": "Delegation for relations with CanadaMeeting documents",
+    "ES": "Delegación para las Relaciones con CanadáDocumentos de reunión",
+    "FR": "Délégation pour les relations avec le CanadaDocuments de réunion"
+  },
+  "DPAL": {
+    "DE": "Delegation für die Beziehungen zu PalästinaSitzungsdokumente",
+    "EN": "Delegation for relations with PalestineMeeting documents",
+    "ES": "Delegación para las Relaciones con PalestinaDocumentos de reunión",
+    "FR": "Délégation pour les relations avec la PalestineDocuments de réunion"
+  },
+  "D-ZA": {
+    "DE": "Delegation für die Beziehungen zu SüdafrikaSitzungsdokumente",
+    "EN": "Delegation for relations with South AfricaMeeting documents",
+    "ES": "Delegación para las Relaciones con SudáfricaDocumentos de reunión",
+    "FR": "Délégation pour les relations avec l'Afrique du SudDocuments de réunion"
+  },
+  "DMER": {
+    "DE": "Delegation für die Beziehungen zu dem MercosurSitzungsdokumente",
+    "EN": "Delegation for relations with MercosurMeeting documents",
+    "ES": "Delegación para las Relaciones con MercosurDocumentos de reunión",
+    "FR": "Délégation pour les relations avec le MercosurDocuments de réunion"
+  },
+  "DCAM": {
+    "DE": "Delegation für die Beziehungen zu den Ländern MittelamerikasSitzungsdokumente",
+    "EN": "Delegation for relations with the countries of Central AmericaMeeting documents",
+    "ES": "Delegación para las Relaciones con los Países de la América CentralDocumentos de reunión",
+    "FR": "Délégation pour les relations avec les pays d'Amérique centraleDocuments de réunion"
+  },
+  "DSAS": {
+    "DE": "Delegation für die Beziehungen zu den Ländern SüdasiensSitzungsdokumente",
+    "EN": "Delegation for relations with the countries of South AsiaMeeting documents",
+    "ES": "Delegación para las Relaciones con los Países del Asia MeridionalDocumentos de reunión",
+    "FR": "Délégation pour les relations avec les pays de l'Asie du SudDocuments de réunion"
+  },
+  "DASE": {
+    "DE": "Delegation für die Beziehungen zu den Ländern Südostasiens und dem Verband südostasiatischer Nationen (ASEAN)Sitzungsdokumente",
+    "EN": "Delegation for relations with the countries of Southeast Asia and the Association of Southeast Asian Nations (ASEAN)Meeting documents",
+    "ES": "Delegación para las Relaciones con los Países del Sudeste Asiático y la Asociación de Naciones del Sudeste Asiático (ASEAN)Documentos de reunión",
+    "FR": "Délégation pour les relations avec les pays de l'Asie du Sud-Est et l'Association des nations de l'Asie du Sud-Est (ANASE)Documents de réunion"
+  },
+  "DAND": {
+    "DE": "Delegation für die Beziehungen zu den Ländern der AndengemeinschaftSitzungsdokumente",
+    "EN": "Delegation for relations with the countries of the Andean CommunityMeeting documents",
+    "ES": "Delegación para las Relaciones con los Países de la Comunidad AndinaDocumentos de reunión",
+    "FR": "Délégation pour les relations avec les pays de la Communauté andineDocuments de réunion"
+  },
+  "DMAG": {
+    "DE": "Delegation für die Beziehungen zu den Maghreb-Ländern und der Union des Arabischen Maghreb, unter anderem in den Gemischten Parlamentarischen Ausschüssen EU-Marokko, EU-Tunesien und EU-AlgerienSitzungsdokumente",
+    "EN": "Delegation for relations with the Maghreb countries and the Arab Maghreb Union, including the EU-Morocco, EU-Tunisia and EU-Algeria Joint Parliamentary CommitteesMeeting documents",
+    "ES": "Delegación para las Relaciones con los Países del Magreb y la Unión del Magreb Árabe, incluidas la Comisión Parlamentaria Mixta UE-Marruecos, la Comisión Parlamentaria Mixta UE-Túnez y la Comisión Parlamentaria Mixta UE-ArgeliaDocumentos de reunión",
+    "FR": "Délégation pour les relations avec les pays du Maghreb et l’Union du Maghreb arabe, y compris les commissions parlementaires mixtes UE-Maroc, UE-Tunisie et UE-AlgérieDocuments de réunion"
+  },
+  "DMAS": {
+    "DE": "Delegation für die Beziehungen zu den Maschrik-LändernSitzungsdokumente",
+    "EN": "Delegation for relations with the Mashreq countriesMeeting documents",
+    "ES": "Delegación para las Relaciones con los Países del MashreqDocumentos de reunión",
+    "FR": "Délégation pour les relations avec les pays du MachrekDocuments de réunion"
+  },
+  "D-US": {
+    "DE": "Delegation für die Beziehungen zu den Vereinigten StaatenSitzungsdokumente",
+    "EN": "Delegation for relations with the United StatesMeeting documents",
+    "ES": "Delegación para las Relaciones con los Estados UnidosDocumentos de reunión",
+    "FR": "Délégation pour les relations avec les États-UnisDocuments de réunion"
+  },
+  "DPAP": {
+    "DE": "Delegation für die Beziehungen zum Panafrikanischen ParlamentSitzungsdokumente",
+    "EN": "Delegation for relations with the Pan-African ParliamentMeeting documents",
+    "ES": "Delegación para las Relaciones con el Parlamento PanafricanoDocumentos de reunión",
+    "FR": "Délégation pour les relations avec le Parlement panafricainDocuments de réunion"
+  },
+  "DARP": {
+    "DE": "Delegation für die Beziehungen zur Arabischen HalbinselSitzungsdokumente",
+    "EN": "Delegation for relations with the Arab PeninsulaMeeting documents",
+    "ES": "Delegación para las Relaciones con la Península ArábigaDocumentos de reunión",
+    "FR": "Délégation pour les relations avec la péninsule arabiqueDocuments de réunion"
+  },
+  "D-BR": {
+    "DE": "Delegation für die Beziehungen zur Föderativen Republik BrasilienSitzungsdokumente",
+    "EN": "Delegation for relations with the Federative Republic of BrazilMeeting documents",
+    "ES": "Delegación para las Relaciones conla República Federativa de BrasilDocumentos de reunión",
+    "FR": "Délégation pour les relations avec la République fédérative du BrésilDocuments de réunion"
+  },
+  "DKOR": {
+    "DE": "Delegation für die Beziehungen zur Koreanischen HalbinselSitzungsdokumente",
+    "EN": "Delegation for relations with the Korean PeninsulaMeeting documents",
+    "ES": "Delegación para las Relaciones con la Península de CoreaDocumentos de reunión",
+    "FR": "Délégation pour les relations avec la Péninsule coréenneDocuments de réunion"
+  },
+  "DNAT": {
+    "DE": "Delegation für die Beziehungen zur Parlamentarischen Versammlung der NATOSitzungsdokumente",
+    "EN": "Delegation for relations with the NATO Parliamentary AssemblyMeeting documents",
+    "ES": "Delegación para las Relaciones con la Asamblea Parlamentaria de la OTANDocumentos de reunión",
+    "FR": "Délégation pour les relations avec l'Assemblée parlementaire de l'OTANDocuments de réunion"
+  },
+  "D-CN": {
+    "DE": "Delegation für die Beziehungen zur Volksrepublik ChinaSitzungsdokumente",
+    "EN": "Delegation for relations with the People's Republic of ChinaMeeting documents",
+    "ES": "Delegación para las Relaciones con la República Popular ChinaDocumentos de reunión",
+    "FR": "Délégation pour les relations avec la République populaire de ChineDocuments de réunion"
+  },
+  "DEEA": {
+    "DE": "Delegation für die Zusammenarbeit im Norden und für die Beziehungen zur Schweiz und zu Norwegen, im Gemischten Parlamentarischen Ausschuss EU-Island und im Gemischten Parlamentarischen Ausschuss Europäischer Wirtschaftsraum (EWR)Sitzungsdokumente",
+    "EN": "Delegation for Northern cooperation and for relations with Switzerland and Norway and to the EU-Iceland Joint Parliamentary Committee and the European Economic Area (EEA) Joint Parliamentary CommitteeMeeting documents",
+    "ES": "Delegación para la Cooperación Septentrional y para las Relaciones con Suiza y Noruega, en la Comisión Parlamentaria Mixta UE-Islandia y en la Comisión Parlamentaria Mixta del Espacio Económico Europeo (EEE)Documentos de reunión",
+    "FR": "Délégation pour la coopération septentrionale et pour les relations avec la Suisse et la Norvège, à la commission parlementaire mixte UE-Islande et à la commission parlementaire mixte de l’Espace économique européen (EEE)Documents de réunion"
+  },
+  "D-RU": {
+    "DE": "Delegation im Ausschuss für parlamentarische Kooperation EU-RusslandSitzungsdokumente",
+    "EN": "Delegation to the EU-Russia Parliamentary Cooperation CommitteeMeeting documents",
+    "ES": "Delegación en la Comisión Parlamentaria de Cooperación UE-RusiaDocumentos de reunión",
+    "FR": "Délégation à la commission de coopération parlementaire UE-RussieDocuments de réunion"
+  },
+  "D-CL": {
+    "DE": "Delegation im Gemischten Parlamentarischen Ausschuss EU-ChileSitzungsdokumente",
+    "EN": "Delegation to the EU-Chile Joint Parliamentary CommitteeMeeting documents",
+    "ES": "Delegación en la Comisión Parlamentaria Mixta UE-ChileDocumentos de reunión",
+    "FR": "Délégation à la commission parlementaire mixte UE-ChiliDocuments de réunion"
+  },
+  "D-MX": {
+    "DE": "Delegation im Gemischten Parlamentarischen Ausschuss EU-MexikoSitzungsdokumente",
+    "EN": "Delegation to the EU-Mexico Joint Parliamentary CommitteeMeeting documents",
+    "ES": "Delegación en la Comisión Parlamentaria Mixta UE-MéxicoDocumentos de reunión",
+    "FR": "Délégation à la commission parlementaire mixte UE-MexiqueDocuments de réunion"
+  },
+  "D-MK": {
+    "DE": "Delegation im Gemischten Parlamentarischen Ausschuss EU-NordmazedonienSitzungsdokumente",
+    "EN": "Delegation to the EU-North Macedonia Joint Parliamentary CommitteeMeeting documents",
+    "ES": "Delegación en la Comisión Parlamentaria Mixta UE-Macedonia del NorteDocumentos de reunión",
+    "FR": "Délégation à la commission parlementaire mixte UE-Macédoine du NordDocuments de réunion"
+  },
+  "D-TR": {
+    "DE": "Delegation im Gemischten Parlamentarischen Ausschuss EU-TürkeiSitzungsdokumente",
+    "EN": "Delegation to the EU-Turkey Joint Parliamentary CommitteeMeeting documents",
+    "ES": "Delegación en la Comisión Parlamentaria Mixta UE-TurquíaDocumentos de reunión",
+    "FR": "Délégation à la commission parlementaire mixte UE-TurquieDocuments de réunion"
+  },
+  "D-MD": {
+    "DE": "Delegation im Parlamentarischen Assoziationsausschuss EU-MoldauSitzungsdokumente",
+    "EN": "Delegation to the EU-Moldova Parliamentary Association CommitteeMeeting documents",
+    "ES": "Delegación en la Comisión Parlamentaria de Asociación UE-MoldaviaDocumentos de reunión",
+    "FR": "Délégation à la commission parlementaire d'association UE-MoldavieDocuments de réunion"
+  },
+  "D-UA": {
+    "DE": "Delegation im Parlamentarischen Assoziationsausschuss EU-UkraineSitzungsdokumente",
+    "EN": "Delegation to the EU-Ukraine Parliamentary Association CommitteeMeeting documents",
+    "ES": "Delegación en la Comisión Parlamentaria de Asociación UE-UcraniaDocumentos de reunión",
+    "FR": "Délégation à la commission parlementaire d'association UE-UkraineDocuments de réunion"
+  },
+  "DCAR": {
+    "DE": "Delegation im Parlamentarischen Ausschuss Cariforum-EUSitzungsdokumente",
+    "EN": "Delegation to the Cariforum-EU Parliamentary CommitteeMeeting documents",
+    "ES": "Delegación en la Comisión Parlamentaria Cariforum-UEDocumentos de reunión",
+    "FR": "Délégation à la commission parlementaire Cariforum-UEDocuments de réunion"
+  },
+  "DSCA": {
+    "DE": "Delegation im Parlamentarischen Partnerschaftsausschuss EU-Armenien, im Ausschuss für parlamentarische Kooperation EU-Aserbaidschan und im Parlamentarischen Assoziationsausschuss EU-GeorgienSitzungsdokumente",
+    "EN": "Delegation to the EU-Armenia Parliamentary Partnership Committee, the EU-Azerbaijan Parliamentary Cooperation Committee and the EU-Georgia Parliamentary Association CommitteeMeeting documents",
+    "ES": "Delegación en la Comisión Parlamentaria de Asociación UE-Armenia, en la Comisión Parlamentaria de Cooperación UE-Azerbaiyán y en la Comisión Parlamentaria de Asociación UE-GeorgiaDocumentos de reunión",
+    "FR": "Délégation au comité parlementaire de partenariat UE-Arménie, à la commission de coopération parlementaire UE-Azerbaïdjan et à la commission parlementaire d’association UE-GéorgieDocuments de réunion"
+  },
+  "D-AL": {
+    "DE": "Delegation im Parlamentarischen Stabilitäts- und Assoziationsausschuss EU-AlbanienSitzungsdokumente",
+    "EN": "Delegation to the EU-Albania Stabilisation and Association Parliamentary CommitteeMeeting documents",
+    "ES": "Delegación en la Comisión Parlamentaria de Estabilización y Asociación UE-AlbaniaDocumentos de reunión",
+    "FR": "Délégation à la commission parlementaire de stabilisation et d'association UE-AlbanieDocuments de réunion"
+  },
+  "D-ME": {
+    "DE": "Delegation im Parlamentarischen Stabilitäts- und Assoziationsausschuss EU-MontenegroSitzungsdokumente",
+    "EN": "Delegation to the EU-Montenegro Stabilisation and Association Parliamentary CommitteeMeeting documents",
+    "ES": "Delegación en la Comisión Parlamentaria de Estabilización y Asociación UE-MontenegroDocumentos de reunión",
+    "FR": "Délégation à la commission parlementaire de stabilisation et d'association UE-MonténégroDocuments de réunion"
+  },
+  "D-RS": {
+    "DE": "Delegation im Parlamentarischen Stabilitäts- und Assoziationsausschuss EU-SerbienSitzungsdokumente",
+    "EN": "Delegation to the EU-Serbia Stabilisation and Association Parliamentary CommitteeMeeting documents",
+    "ES": "Delegación en la Comisión Parlamentaria de Estabilización y Asociación UE-SerbiaDocumentos de reunión",
+    "FR": "Délégation à la commission parlementaire de stabilisation et d'association UE-SerbieDocuments de réunion"
+  },
+  "DCAS": {
+    "DE": "Delegation in den Ausschüssen für parlamentarische Kooperation EU-Kasachstan,EU-Kirgisistan, EU-Usbekistan und EU-Tadschikistan sowie für die Beziehungen zuTurkmenistan und der MongoleiSitzungsdokumente",
+    "EN": "Delegation to the EU-Kazakhstan, EU-Kyrgyzstan, EU-Uzbekistan and EU-Tajikistan Parliamentary Cooperation Committees and for relations with Turkmenistan and MongoliaMeeting documents",
+    "ES": "Delegación en las Comisiones Parlamentarias de Cooperación UE-Kazajistán, UE-Kirguistán, UE-Uzbekistán y UE-Tayikistán, y para las Relaciones con Turkmenistán y MongoliaDocumentos de reunión",
+    "FR": "Délégation aux commissions de coopération parlementaire UE-Kazakhstan, UE-Kirghizstan, UE-Ouzbékistan et UE-Tadjikistan, et pour les relations avec le Turkménistan et la MongolieDocuments de réunion"
+  },
+  "DACP": {
+    "DE": "Delegation in der Paritätischen Parlamentarischen Versammlung AKP-EUSitzungsdokumente",
+    "EN": "Delegation to the ACP-EU Joint Parliamentary AssemblyMeeting documents",
+    "ES": "Delegación en la Asamblea Parlamentaria Paritaria ACP-UEDocumentos de reunión",
+    "FR": "Délégation à l'Assemblée parlementaire paritaire ACP-UEDocuments de réunion"
+  },
+  "D-UK": {
+    "DE": "Delegation in der Parlamentarischen Partnerschaftsversammlung EU-Vereinigtes KönigreichSitzungsdokumente",
+    "EN": "Delegation to the EU-UK Parliamentary Partnership AssemblyMeeting documents",
+    "ES": "Delegación en la Asamblea Parlamentaria de Asociación UE-Reino UnidoDocumentos de reunión",
+    "FR": "Délégation à l’Assemblée parlementaire de partenariat UE-Royaume-UniDocuments de réunion"
+  },
+  "DEPA": {
+    "DE": "Delegation in der Parlamentarischen Versammlung EuronestSitzungsdokumente",
+    "EN": "Delegation to the Euronest Parliamentary AssemblyMeeting documents",
+    "ES": "Delegación en la Asamblea Parlamentaria EuronestDocumentos de reunión",
+    "FR": "Délégation à l'Assemblée parlementaire EuronestDocuments de réunion"
+  },
+  "DLAT": {
+    "DE": "Delegation in der Parlamentarischen Versammlung Europa-LateinamerikaSitzungsdokumente",
+    "EN": "Delegation to the Euro-Latin American Parliamentary AssemblyMeeting documents",
+    "ES": "Delegación en la Asamblea Parlamentaria Euro-LatinoamericanaDocumentos de reunión",
+    "FR": "Délégation à l'Assemblée parlementaire euro-latino-américaineDocuments de réunion"
+  },
+  "DMED": {
+    "DE": "Delegation in der Parlamentarischen Versammlung der Union für den MittelmeerraumSitzungsdokumente",
+    "EN": "Delegation to the Parliamentary Assembly of the Union for the MediterraneanMeeting documents",
+    "ES": "Delegación en la Asamblea Parlamentaria de la Unión por el MediterráneoDocumentos de reunión",
+    "FR": "Délégation à l'Assemblée parlementaire de l'Union pour la MéditerranéeDocuments de réunion"
+  },
+  "AFET": {
+    "DE": "Ausschuss für auswärtige Angelegenheiten",
+    "EN": "Committee on Foreign Affairs",
+    "ES": "Comisión de Asuntos Exteriores",
+    "FR": "Commission des affaires étrangères"
+  },
+  "DROI": {
+    "DE": "Unterausschuss Menschenrechte",
+    "EN": "Subcommittee on Human Rights",
+    "ES": "Subcomisión de Derechos Humanos",
+    "FR": "Sous-commission "
+  },
+  "SEDE": {
+    "DE": "Unterausschuss für Sicherheit und Verteidigung",
+    "EN": "Subcommittee on Security and Defence",
+    "ES": "Subcomisión de Seguridad y Defensa",
+    "FR": "Sous-commission "
+  },
+  "DEVE": {
+    "DE": "Entwicklungsausschuss",
+    "EN": "Committee on Development",
+    "ES": "Comisión de Desarrollo",
+    "FR": "Commission du développement"
+  },
+  "INTA": {
+    "DE": "Ausschuss für internationalen Handel",
+    "EN": "Committee on International Trade",
+    "ES": "Comisión de Comercio Internacional",
+    "FR": "Commission du commerce international"
+  },
+  "BUDG": {
+    "DE": "Haushaltsausschuss",
+    "EN": "Committee on Budgets",
+    "ES": "Comisión de Presupuestos",
+    "FR": "Commission des budgets"
+  },
+  "CONT": {
+    "DE": "Haushaltskontrollausschuss",
+    "EN": "Committee on Budgetary Control",
+    "ES": "Comisión de Control Presupuestario",
+    "FR": "Commission du contrôle budgétaire"
+  },
+  "ECON": {
+    "DE": "Ausschuss für Wirtschaft und Währung",
+    "EN": "Committee on Economic and Monetary Affairs",
+    "ES": "Comisión de Asuntos Económicos y Monetarios",
+    "FR": "Commission des affaires économiques et monétaires"
+  },
+  "FISC": {
+    "DE": "Unterausschuss für Steuerfragen",
+    "EN": "Subcommittee on Tax Matters",
+    "ES": "Subcomisión de Asuntos Fiscales",
+    "FR": "Sous-commission des affaires fiscales"
+  },
+  "EMPL": {
+    "DE": "Ausschuss für Beschäftigung und soziale Angelegenheiten",
+    "EN": "Committee on Employment and Social Affairs",
+    "ES": "Comisión de Empleo y Asuntos Sociales",
+    "FR": "Commission de l'emploi et des affaires sociales"
+  },
+  "ENVI": {
+    "DE": "Ausschuss für Umweltfragen, öffentliche Gesundheit und Lebensmittelsicherheit",
+    "EN": "Committee on the Environment, Public Health and Food Safety",
+    "ES": "Comisión de Medio Ambiente, Salud Pública y Seguridad Alimentaria",
+    "FR": "Commission de l'environnement, de la santé publique et de la sécurité alimentaire"
+  },
+  "ITRE": {
+    "DE": "Ausschuss für Industrie, Forschung und Energie",
+    "EN": "Committee on Industry, Research and Energy",
+    "ES": "Comisión de Industria, Investigación y Energía",
+    "FR": "Commission de l'industrie, de la recherche et de l'énergie"
+  },
+  "IMCO": {
+    "DE": "Ausschuss für Binnenmarkt und Verbraucherschutz",
+    "EN": "Committee on the Internal Market and Consumer Protection",
+    "ES": "Comisión de Mercado Interior y Protección del Consumidor",
+    "FR": "Commission du marché intérieur et de la protection des consommateurs"
+  },
+  "TRAN": {
+    "DE": "Ausschuss für Verkehr und Tourismus",
+    "EN": "Committee on Transport and Tourism",
+    "ES": "Comisión de Transportes y Turismo",
+    "FR": "Commission des transports et du tourisme"
+  },
+  "REGI": {
+    "DE": "Ausschuss für regionale Entwicklung",
+    "EN": "Committee on Regional Development",
+    "ES": "Comisión de Desarrollo Regional",
+    "FR": "Commission du développement régional"
+  },
+  "AGRI": {
+    "DE": "Ausschuss für Landwirtschaft und ländliche Entwicklung",
+    "EN": "Committee on Agriculture and Rural Development",
+    "ES": "Comisión de Agricultura y Desarrollo Rural",
+    "FR": "Commission de l'agriculture et du développement rural"
+  },
+  "PECH": {
+    "DE": "Fischereiausschuss",
+    "EN": "Committee on Fisheries",
+    "ES": "Comisión de Pesca",
+    "FR": "Commission de la pêche"
+  },
+  "CULT": {
+    "DE": "Ausschuss für Kultur und Bildung",
+    "EN": "Committee on Culture and Education",
+    "ES": "Comisión de Cultura y Educación",
+    "FR": "Commission de la culture et de l'éducation"
+  },
+  "JURI": {
+    "DE": "Rechtsausschuss",
+    "EN": "Committee on Legal Affairs",
+    "ES": "Comisión de Asuntos Jurídicos",
+    "FR": "Commission des affaires juridiques"
+  },
+  "LIBE": {
+    "DE": "Ausschuss für bürgerliche Freiheiten, Justiz und Inneres",
+    "EN": "Committee on Civil Liberties, Justice and Home Affairs",
+    "ES": "Comisión de Libertades Civiles, Justicia y Asuntos de Interior",
+    "FR": "Commission des libertés civiles, de la justice et des affaires intérieures"
+  },
+  "AFCO": {
+    "DE": "Ausschuss für konstitutionelle Fragen",
+    "EN": "Committee on Constitutional Affairs",
+    "ES": "Comisión de Asuntos Constitucionales",
+    "FR": "Commission des affaires constitutionnelles"
+  },
+  "FEMM": {
+    "DE": "Ausschuss für die Rechte der Frauen und die Gleichstellung der Geschlechter",
+    "EN": "Committee on Women’s Rights and Gender Equality",
+    "ES": "Comisión de Derechos de las Mujeres e Igualdad de Género",
+    "FR": "Commission des droits des femmes et de l'égalité des genres"
+  },
+  "PETI": {
+    "DE": "Petitionsausschuss",
+    "EN": "Committee on Petitions",
+    "ES": "Comisión de Peticiones",
+    "FR": "Commission des pétitions"
+  },
+  "BECA": {
+    "DE": "Sonderausschuss zu Krebsbekämpfung",
+    "EN": "Special Committee on Beating Cancer",
+    "ES": "Comisión Especial sobre Lucha contra el Cáncer",
+    "FR": "Commission spéciale sur la lutte contre le cancer"
+  },
+  "INGE": {
+    "DE": "Sonderausschuss zu Einflussnahme aus dem Ausland auf alle demokratischen Prozesse in der Europäischen Union, einschließlich Desinformation",
+    "EN": "Special Committee on Foreign Interference in all Democratic Processes in the European Union, including Disinformation",
+    "ES": "Comisión Especial sobre Injerencias Extranjeras en Todos los Procesos Democráticos de la Unión Europea, en particular la Desinformación",
+    "FR": "Commission spéciale sur l’ingérence étrangère dans l’ensemble des processus démocratiques de l’Union européenne, y compris la désinformation"
+  },
+  "AIDA": {
+    "DE": "Sonderausschuss zu künstlicher Intelligenz im digitalen Zeitalter",
+    "EN": "Special Committee on Artificial Intelligence in a Digital Age",
+    "ES": "Comisión Especial sobre Inteligencia Artificial en la Era Digital",
+    "FR": "Commission spéciale sur l’intelligence artificielle à l’ère du numérique"
+  },
+  "ANIT": {
+    "DE": "Untersuchungsausschuss im Zusammenhang mit dem Schutz von Tieren beim Transport",
+    "EN": "Committee of Inquiry on the Protection of Animals during Transport",
+    "ES": "Comisión de Investigación sobre Protección de los Animales durante el Transporte",
+    "FR": "Commission d’enquête sur la protection des animaux pendant le transport"
+  }
+}

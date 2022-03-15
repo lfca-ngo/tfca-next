@@ -1,5 +1,5 @@
 import { Tabs } from 'antd'
-import React, { useEffect, useMemo } from 'react'
+import React, { useMemo } from 'react'
 
 import { useChallenge } from '../../../hooks/useChallenge'
 import { useFlow } from '../../../hooks/useFlow'
@@ -51,7 +51,7 @@ const ActionFinderFlow = (props) => {
 
   const { goTo, index, setStore, store } = useFlow({
     id: props.module?.id,
-    initial: firstStep,
+    initialIndex: firstStep,
   })
 
   const { customization, setProgress } = useChallenge()
