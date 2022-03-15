@@ -3,11 +3,8 @@ import React from 'react'
 
 import ActionModules from '../../components/ActionModules'
 import SplitLayout from '../../components/Layout/SplitLayout'
-import {
-  fetchAllActions,
-  fetchAllStaticContent,
-  fetchContent,
-} from '../../services/contentful'
+import { fetchAllStaticData } from '../../services'
+import { fetchContent } from '../../services/contentful'
 
 export default function ActionCollectionPage({ actions }) {
   return (
@@ -22,14 +19,11 @@ export async function getStaticProps({ locale, params }) {
   // the correct translations in build
   // time by passing it to the query
   const { actionCollectionSlug } = params
-
-  const actions = await fetchAllActions(locale, actionCollectionSlug)
-  const content = await fetchAllStaticContent(locale)
+  const staticData = await fetchAllStaticData(locale, actionCollectionSlug)
 
   return {
     props: {
-      actions,
-      content,
+      ...staticData,
     },
   }
 }

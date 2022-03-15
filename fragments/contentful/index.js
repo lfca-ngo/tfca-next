@@ -262,7 +262,8 @@ export const ActionFragment = gql`
     name
     actionId
     carbonSaved
-    timeToImplement
+    impact
+    effort
     icon {
       url
     }

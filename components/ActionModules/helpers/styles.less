@@ -183,7 +183,15 @@
     }
     .stats-wrapper {
       display: flex;
-      margin-right: 20px;
+      margin-right: 30px;
+
+      .ant-progress-text {
+        display: none;
+      }
+
+      .ant-progress-steps-item-active {
+        background: @secondary-color;
+      }
 
       .stat {
         margin: 0;

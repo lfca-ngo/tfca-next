@@ -9,6 +9,8 @@ import React from 'react'
 import { useBlocks } from '../../../hooks/useTranslation'
 import { text } from '../../../utils/Text'
 
+const STEPS = 5
+
 const Stat = (props) => {
   return (
     <div className="stats-wrapper">
@@ -34,15 +36,27 @@ const ActionStats = (props) => {
       />
 
       <Stat
-        data={<Progress percent={100} steps={5} />}
+        data={
+          <Progress
+            percent={props.impact * (100 / STEPS)}
+            showInfo={false}
+            steps={STEPS}
+          />
+        }
         icon={<LikeOutlined />}
-        text={'Effort'}
+        text={text(useBlocks('stats.impact'))}
       />
 
       <Stat
-        data={<Progress percent={50} steps={5} />}
+        data={
+          <Progress
+            percent={props.effort * (100 / STEPS)}
+            showInfo={false}
+            steps={STEPS}
+          />
+        }
         icon={<CoffeeOutlined />}
-        text={'Impact'}
+        text={text(useBlocks('stats.effort'))}
       />
     </div>
   )

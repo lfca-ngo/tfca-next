@@ -26,13 +26,13 @@ const ActionModules = (props) => {
 
   return props.actions.map((action, i) => (
     <ActionWrapper
-      carbonSaved={action.carbonSaved}
       color={`color-${(i % 4) + 1}`}
+      effort={action.effort}
       id={action.id}
+      impact={action.impact}
       key={action.id}
       name={action.name}
       otherUsers={0}
-      timeToImplement={action.timeToImplement}
     >
       {renderAction(action, i)}
     </ActionWrapper>
