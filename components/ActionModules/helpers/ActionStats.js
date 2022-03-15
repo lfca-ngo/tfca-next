@@ -45,7 +45,7 @@ const ActionStats = (props) => {
       <Stat
         data={props.timeToImplement}
         icon={IconTimer}
-        isFocus={isFocus}
+        isFocus={false}
         overwriteData={time}
         text={text(useBlocks('stats.timetoimplement'))}
       />
@@ -53,7 +53,7 @@ const ActionStats = (props) => {
       <Stat
         data={props.carbonSaved}
         icon={IconKg}
-        isFocus={isFocus}
+        isFocus={false}
         text={text(useBlocks('stats.carbonsaved'))}
       />
     </div>

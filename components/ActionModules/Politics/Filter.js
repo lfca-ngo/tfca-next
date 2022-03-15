@@ -8,11 +8,9 @@ import { StepHeader } from '../helpers/StepHeader'
 
 export const Filter = ({
   blocks,
-  error,
   filter,
   goTo,
   icon,
-  isFetching,
   nextKey,
   prevKey,
   setProgress,
@@ -50,27 +48,14 @@ export const Filter = ({
       />
 
       <Form layout="vertical" onFinish={handleNext}>
-        <Form.Item
-          hasFeedback={!!error}
-          initialValue={initialValue}
-          name={filterOption?.fieldName}
-          validateStatus={(error && 'error') || undefined}
-        >
+        <Form.Item initialValue={initialValue} name={filterOption?.fieldName}>
           <Select
             items={filterOption?.options || []}
-            loading={isFetching}
             placeholder={`Select ${filterOption.fieldName}`}
           />
         </Form.Item>
         <Form.Item>
-          <Button
-            block
-            disabled={!!error}
-            htmlType="submit"
-            loading={isFetching}
-            size="large"
-            type="primary"
-          >
+          <Button block htmlType="submit" size="large" type="primary">
             Submit
           </Button>
         </Form.Item>

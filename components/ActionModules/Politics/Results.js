@@ -1,6 +1,7 @@
 import { List } from 'antd'
 import React from 'react'
 
+import { useMEPs } from '../../../services/meps'
 import { LIST_GRIDS } from '../../../utils'
 import { text } from '../../../utils/Text'
 import { PoliticianCard } from '../../Elements/Cards'
@@ -9,18 +10,23 @@ import { StepHeader } from '../helpers/StepHeader'
 
 export const Results = ({
   blocks,
-  error,
   goTo,
   icon,
-  isFetching,
   nextKey,
   prevKey,
   setProgress,
   setStore,
   store,
 }) => {
+  const { data, error, isLoading } = useMEPs(
+    store?.country,
+    store?.topic?.delegationsCommittees || []
+  )
+
+  console.log('data', data)
+
   const handleNext = (item) => {
-    setStore({ ...store, item: item })
+    setStore({ ...store, selectedItem: item })
     setProgress(0.3)
     goTo(nextKey)
   }
@@ -40,12 +46,19 @@ export const Results = ({
       />
 
       {error ? (
-        <h3>{error}</h3>
+        <h3>Something went wrong...</h3>
       ) : (
         <List
-          dataSource={store.items}
+          dataSource={(data?.items || []).map((item) => ({
+            email: item.email,
+            imageUrl: item.imageUrl,
+            name: item.fullName,
+            // TODO: Uncomment and use politicalParty again
+            // tags: [item.nationalPoliticalGroup, item.politicalGroup],
+            tags: item.badges,
+          }))}
           grid={LIST_GRIDS['1-col']}
-          loading={isFetching}
+          loading={isLoading}
           renderItem={(item) => (
             <List.Item>
               <PoliticianCard item={item} onNext={handleNext} />

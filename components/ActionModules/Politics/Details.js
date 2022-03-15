@@ -9,6 +9,8 @@ import { StepHeader } from '../helpers/StepHeader'
 export const Details = ({ blocks, goTo, icon, nextKey, prevKey, store }) => {
   const message = store.topic.messages[0]
 
+  const item = store?.selectedItem || {}
+
   return (
     <div className="step">
       <Category
@@ -22,15 +24,15 @@ export const Details = ({ blocks, goTo, icon, nextKey, prevKey, store }) => {
         subtitle={blocks['details.subtitle']}
         title={blocks['details.title']}
         vars={{
-          name: store.item?.name || '',
+          name: item.name || '',
         }}
       />
 
       <PoliticianDetails
-        initialMessage={text(message.text, { name: store.item.name })}
-        item={store.item}
+        initialMessage={text(message.text, { name: item.name })}
+        item={item}
         messageSubject={text(message.subject, {
-          name: store.item.name,
+          name: item.name,
         })}
         onFinish={() => goTo(nextKey)}
       />

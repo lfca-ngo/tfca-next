@@ -46,47 +46,12 @@ const PoliticsFlow = (props) => {
       country: {
         value: getCountryFromLocale(locale),
       },
-      item: {},
-      items: [],
+      selectedItem: {},
       topic: undefined,
     },
   })
 
   const { customization, setProgress } = useChallenge()
-
-  const [isFetching, setIsFetching] = React.useState(false)
-  const [error, setError] = React.useState('')
-
-  React.useEffect(() => {
-    async function fetchData() {
-      try {
-        setIsFetching(true)
-        const url = `/api/meps?&filter.countries=${
-          store.country.value
-        }&filter.badges=${(store.topic?.delegationsCommittees || []).join(',')}`
-        const resp = await fetch(url)
-        const json = await resp.json()
-
-        setStore((v) => ({
-          ...v,
-          items: json.items.map((item) => ({
-            email: item.email,
-            imageUrl: item.imageUrl,
-            name: item.fullName,
-            // TODO: Uncomment and use politicalParty again
-            // tags: [item.nationalPoliticalGroup, item.politicalGroup],
-            tags: item.badges,
-          })),
-        }))
-        setIsFetching(false)
-      } catch (e) {
-        setIsFetching(false)
-        setError(e.message || 'Unkown error')
-      }
-    }
-
-    fetchData()
-  }, [locale, setStore, store.topic, store.country])
 
   const stepsKeys = [...steps.keys()]
 
@@ -109,7 +74,6 @@ const PoliticsFlow = (props) => {
                 blocks={props.module?.blocks || {}}
                 customization={customization}
                 data={props.module?.data || {}}
-                error={error}
                 filter={{
                   fieldName: stepsKey,
                   hint: text(
@@ -122,7 +86,6 @@ const PoliticsFlow = (props) => {
                 }}
                 goTo={goTo}
                 icon={props.module?.icon?.url}
-                isFetching={isFetching}
                 nextKey={nextKey}
                 prevKey={prevKey}
                 setProgress={setProgress}
