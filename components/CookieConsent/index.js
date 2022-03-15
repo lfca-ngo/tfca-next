@@ -11,6 +11,7 @@ import IconCheck from '../../assets/icons/c-check.svg'
 import IconRemove from '../../assets/icons/c-remove.svg'
 import { useContent } from '../../hooks/useTranslation'
 import { isBrowser } from '../../utils'
+import { text } from '../../utils/Text'
 
 export const SAME_SITE_OPTIONS = {
   LAX: 'lax',
@@ -168,7 +169,7 @@ const CookieConsent = (props) => {
     return null
   }
 
-  const { disclaimer, title } = cookieBanner
+  const { body, title } = cookieBanner
   const buttonText = cookieBanner.acceptButton
   const declineButtonText = cookieBanner.denyButton
 
@@ -191,7 +192,7 @@ const CookieConsent = (props) => {
       >
         <div className="cookie-content">
           <div className="title">{title}</div>
-          <div className="description">{disclaimer}</div>
+          <div className="description">{text(body)}</div>
           <div className="consent">
             <ul>
               {cookieBanner.levelsCollection?.items.map((level, i) => {

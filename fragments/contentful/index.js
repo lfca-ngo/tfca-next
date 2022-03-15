@@ -450,7 +450,9 @@ export const MetaDataFragment = gql`
     cookieBanner {
       name
       title
-      disclaimer
+      body {
+        json
+      }
       acceptButton
       denyButton
       levelsCollection(limit: 5) {
