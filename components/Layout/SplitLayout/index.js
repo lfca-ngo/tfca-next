@@ -6,6 +6,7 @@ import React, { useState } from 'react'
 import { EMBED, scrollToId } from '../../../utils'
 import { Hero } from '../../Elements/Hero'
 import Template from '../'
+import { Footer } from '../Footer'
 import { Header } from '../Header'
 import { Nav } from '../Nav'
 import { TopBar } from '../TopBar'
@@ -29,6 +30,7 @@ const SplitLayout = ({ children, company, layout, nav }) => {
           <Nav className="hidden md" company={company} />
           <Hero onClick={() => scrollToId(nav[0]?.id)} />
           {children}
+          <Footer />
         </main>
       </div>
     </Template>
