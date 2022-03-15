@@ -73,7 +73,9 @@ const PoliticsFlow = (props) => {
             email: item.email,
             imageUrl: item.imageUrl,
             name: item.fullName,
-            sub: item.nationalPoliticalGroup,
+            // TODO: Uncomment and use politicalParty again
+            // tags: [item.nationalPoliticalGroup, item.politicalGroup],
+            tags: item.badges,
           })),
         }))
         setIsFetching(false)
