@@ -32,7 +32,7 @@ const ActionModules = (props) => {
       impact={action.impact}
       key={action.id}
       name={action.name}
-      otherUsers={0}
+      otherUsers={props.stats[action.id]}
     >
       {renderAction(action, i)}
     </ActionWrapper>

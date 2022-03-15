@@ -6,14 +6,14 @@ import ActionModules from '../../../components/ActionModules'
 import SplitLayout from '../../../components/Layout/SplitLayout'
 import { fetchAllStaticData } from '../../../services'
 
-export default function InvitePage({ actions, ogImageUrl }) {
+export default function InvitePage({ actions, ogImageUrl, stats }) {
   return (
     <>
       <Head>
         <meta content={ogImageUrl} property="og:image" />
       </Head>
       <SplitLayout layout={actions?.layout} nav={actions?.nav}>
-        <ActionModules actions={actions?.items} />
+        <ActionModules actions={actions?.items} stats={stats} />
       </SplitLayout>
     </>
   )

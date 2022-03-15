@@ -6,10 +6,10 @@ import SplitLayout from '../../components/Layout/SplitLayout'
 import { fetchAllStaticData } from '../../services'
 import { fetchContent } from '../../services/contentful'
 
-export default function ActionCollectionPage({ actions }) {
+export default function ActionCollectionPage({ actions, stats }) {
   return (
     <SplitLayout layout={actions?.layout} nav={actions?.nav}>
-      <ActionModules actions={actions?.items} />
+      <ActionModules actions={actions?.items} stats={stats} />
     </SplitLayout>
   )
 }

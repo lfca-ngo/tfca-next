@@ -7,10 +7,10 @@ import { QualifiedCompanyFragment } from '../../../fragments/contentful'
 import { fetchAllStaticData } from '../../../services'
 import { fetchData } from '../../../services/lfca'
 
-export default function SupporterPage({ actions, company }) {
+export default function SupporterPage({ actions, company, stats }) {
   return (
     <SplitLayout company={company} layout={actions?.layout} nav={actions?.nav}>
-      <ActionModules actions={actions?.items} />
+      <ActionModules actions={actions?.items} stats={stats} />
     </SplitLayout>
   )
 }
