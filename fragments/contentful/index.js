@@ -391,6 +391,9 @@ export const MetaDataListsFragment = gql`
               value {
                 json
               }
+              icon {
+                url
+              }
             }
             ... on QuestionAndAnswer {
               question

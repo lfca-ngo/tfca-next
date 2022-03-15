@@ -32,6 +32,11 @@ export const useBlocks = (key) => {
   return context.store?.metaData?.blocks?.[key] || ''
 }
 
+export const useNavs = (key) => {
+  const context = useContext(TranslationContext)
+  return context.store?.navs?.[key] || ''
+}
+
 export const useLists = (key) => {
   const context = useContext(TranslationContext)
   return context.store?.metaDataLists?.[key] || { items: [] }

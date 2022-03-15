@@ -86,7 +86,13 @@ export const fetchAllNavs = async (locale) => {
   }
 
   const { navigationCollection } = await fetchContent(query, variables)
-  return navigationCollection
+
+  const navsById = navigationCollection?.items.reduce((allNavs, nav) => {
+    const { navigationId, ...rest } = nav
+    return { ...allNavs, [navigationId]: { ...rest } }
+  }, {})
+
+  return navsById
 }
 
 export const fetchMetaData = async (locale, settingsId) => {

@@ -1,0 +1,54 @@
+@import (reference) '../../../styles/variables.less';
+@import (reference) '../../../styles/fonts.less';
+
+footer.footer {
+  background: darken(@blue, 15%);
+  padding: 100px 0 40px;
+
+  .copyright {
+    text-align: center;
+    font-size: 16px;
+    margin: 80px 0 0;
+    color: fade(@white, 90%);
+  }
+
+  .ant-collapse-borderless {
+    margin-bottom: 10px;
+    > .ant-collapse-item {
+      border-bottom: none;
+      > .ant-collapse-header .ant-collapse-arrow {
+        top: 16px;
+        font-size: @font-size-lg;
+        color: fade(@white, 90%);
+      }
+    }
+    background-color: transparent;
+    .ant-collapse-header {
+      .font-regular(fade(@white, 90%));
+      border-bottom: 1px solid fade(@white, 20%);
+    }
+    .ant-collapse-content {
+      padding: 20px 0;
+    }
+  }
+  .ant-collapse-content-box {
+    display: flex;
+    padding: 0;
+
+    .ant-list {
+      width: 100%;
+      .ant-list-item {
+        border-bottom: 1px solid @medium-grey;
+        font-size: @font-size-sm;
+      }
+    }
+
+    .partner {
+      margin-right: 10px;
+      img {
+        max-width: 90px;
+        max-height: 50px;
+      }
+    }
+  }
+}

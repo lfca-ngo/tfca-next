@@ -2,12 +2,13 @@
 @import (reference) '../../../styles/fonts.less';
 
 .hero {
-  padding: calc(50px + @header-height-mini) 25px 60px;
+  padding-top: calc(50px + @header-height-mini);
+  padding-bottom: 60px;
   text-align: left;
   @media @desktop {
-    padding: 120px @side-bar-width-collapsed 70px 0;
-    margin: 0 auto;
     text-align: center;
+    padding-top: calc(60px + @header-height-mini);
+    padding-bottom: 80px;
   }
   h1 {
     .h1-hero();
