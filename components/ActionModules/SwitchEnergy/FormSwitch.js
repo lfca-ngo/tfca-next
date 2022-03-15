@@ -234,15 +234,12 @@ const FormSwitch = (props) => {
         title={text(props.blocks['category.title'])}
       />
       <h2>Eine sehr gute Wahl. Du hast es fast geschafft!</h2>
-      {/* {renderAsHtml(props.module.stepAlreadyDoneText)} */}
-      {/* <CheckList data={ARGS_NOW(props.customization?.from)} /> */}
 
-      <div style={{ fontSize: '16px' }}>
+      <div>
         Gerade keine Zeit? Wir senden dir eine{' '}
         <Button
           icon={<MailOutlined />}
           onClick={() => setVisible(true)}
-          style={{ fontSize: '16px' }}
           type="link"
         >
           Erinnerungs-Email
