@@ -2,7 +2,7 @@ require('./styles.less')
 
 import { QuestionCircleOutlined } from '@ant-design/icons'
 import Icon from '@ant-design/icons'
-import { Button, Popover } from 'antd'
+import { Button, Col, Popover, Row } from 'antd'
 import { motion } from 'framer-motion'
 import React, { useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie'
@@ -121,7 +121,7 @@ const CookieConsent = (props) => {
     const expiresFromNow = new Date(new Date().valueOf() + expiresDays)
     let { cookieSecurity } = props
 
-    if (cookieSecurity === undefined && isBrowser) {
+    if (cookieSecurity === undefined && isBrowser()) {
       cookieSecurity = window.location
         ? window.location.protocol === 'https:'
         : true
@@ -213,29 +213,35 @@ const CookieConsent = (props) => {
           </div>
         </div>
 
-        <div className={`btn-wrapper`}>
-          <Button
-            key="acceptButton"
-            onClick={() => {
-              accept()
-            }}
-            size="large"
-            type="primary"
-          >
-            {buttonText}
-          </Button>
-          <Button
-            ghost
-            key="declineButton"
-            onClick={() => {
-              decline()
-            }}
-            size="large"
-            type="primary"
-          >
-            {declineButtonText}
-          </Button>
-        </div>
+        <Row className="btn-wrapper" gutter={10}>
+          <Col xs={12}>
+            <Button
+              block
+              key="acceptButton"
+              onClick={() => {
+                accept()
+              }}
+              size="large"
+              type="primary"
+            >
+              {buttonText}
+            </Button>
+          </Col>
+          <Col xs={12}>
+            <Button
+              block
+              ghost
+              key="declineButton"
+              onClick={() => {
+                decline()
+              }}
+              size="large"
+              type="primary"
+            >
+              {declineButtonText}
+            </Button>
+          </Col>
+        </Row>
       </motion.div>
     </ConditionalWrapper>
   )

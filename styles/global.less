@@ -1,7 +1,8 @@
-@import './vars.less';
+@import './variables.less';
 @import './reset.less';
 @import './fonts.less';
 @import './mixins.less';
+@import './variables-css.less';
 
 html,
 body {
@@ -14,9 +15,36 @@ body {
 
 #__next {
   width: 100%;
+  background: var(--body-background);
+  transition: background 0.5s;
   @media @desktop {
     height: 100%;
   }
+}
+
+// by default, icons should have text color
+body .anticon {
+  color: var(--text-color);
+}
+
+// override global variables for dark mode
+.@{THEME--DARK} {
+  --text-color: fade(@white, 85%);
+  --text-color-strong: fade(@white, 90%);
+  --heading-color: @white;
+  --body-background: @full-black;
+  --medium-grey: fade(@white, 25%);
+}
+
+span.text-accent {
+  background-color: @pink;
+  background-image: linear-gradient(270deg, darken(@pink, 5%) 0%, @pink 100%);
+  background-size: 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
 }
 
 .option-with-icon {
@@ -82,7 +110,7 @@ body {
   margin: 0;
   padding: 0 @default-section-padding;
   @media @desktop {
-    margin: 0 auto 0 75px;
+    margin: 0 auto;
     padding: 0 @default-section-padding;
   }
 }
@@ -97,13 +125,36 @@ body {
 
 // Buttons
 .ant-btn-xl.ant-btn {
-  height: 58px;
-  line-height: 58px;
-  padding: 0 34px;
+  padding: 0 32px;
+  font-size: 20px;
+  height: 56px;
+  line-height: 56px;
+  border-radius: 20px;
+  background-image: @pink-gradient;
+  @media @desktop {
+    height: 62px;
+    line-height: 62px;
+    padding: 0 38px;
+    font-size: 22px;
+  }
+}
+
+.ant-btn {
+  &.ant-btn-background-ghost .anticon {
+    color: @secondary-color;
+  }
+  &.ant-btn-primary .anticon {
+    color: @white;
+  }
 }
 
 .ant-btn.ant-btn-link.no-padding {
+  display: flex;
+  margin: 0;
   padding: 0;
+  line-height: normal;
+  height: auto;
+  align-items: center;
 }
 
 .ant-row.btn-wrapper {

@@ -1,17 +1,21 @@
-@import (reference) '../../../styles/vars.less';
+@import (reference) '../../../styles/variables.less';
 @import (reference) '../../../styles/fonts.less';
 
 nav.nav {
-  border-bottom: 1px solid @black;
+  border-bottom: 1px solid var(--medium-grey);
   ul {
     display: flex;
     justify-content: flex-end;
     margin: 0;
     li {
       padding: 12px 30px;
-      border-left: 1px solid @black;
+      border-left: 1px solid var(--medium-grey);
       align-items: center;
       display: flex;
+      font-size: @font-size-sm;
+      a {
+        color: var(--heading-color);
+      }
     }
   }
 }

@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 
 import { text } from '../../../utils/Text'
 import Category from '../helpers/Category'
+import { StepHeader } from '../helpers/StepHeader'
 
 const { Option } = Select
 
@@ -96,16 +97,13 @@ const CheckProvider = (props) => {
         prev={() => props.goTo('intro')}
         title={text(props.blocks['category.title'])}
       />
-      <h2>{`Wunderbar!  Überprüfe deinen Provider um die Challenge abzuschließen`}</h2>
-      {/* {renderAsHtml(props.module.stepAlreadyDoneText)} */}
-      <p>
-        Leider sind nicht alle Tarife auf denen “ökostrom” drauf steht, auch
-        echter Ökostrom. Unsere Datenbank enthält alle Ökostromanbieter die
-        höchsten Standards entsprechen.
-      </p>
+
+      <StepHeader
+        subtitle={props.blocks['checkprovider.description']}
+        title={props.blocks['checkprovider.title']}
+      />
 
       <Form>
-        {/* {ITEMS.postcode()} */}
         <Form.Item name="provider">
           <ConfigProvider renderEmpty={customizeRenderEmpty}>
             <Select
@@ -116,7 +114,8 @@ const CheckProvider = (props) => {
               optionFilterProp="children"
               placeholder={
                 <span>
-                  Wähle deinen Provider {loading && <LoadingOutlined />}
+                  {text(props.blocks['checkprovider.choose'])}
+                  {loading && <LoadingOutlined />}
                 </span>
               }
               showSearch

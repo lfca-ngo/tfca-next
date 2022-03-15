@@ -11,12 +11,20 @@ import { text } from '../../../utils/Text'
 export const Hero = (props) => {
   const isMobile = useIsMobile()
   const { customization } = useChallenge()
-  const customHeaderText = useBlocks('header.title.custom')
-  const headerText = useBlocks('header.title')
+  const customHeaderText = (
+    <span>
+      Hi <span className="text-accent">David</span>, ready to act?
+    </span>
+  ) // useBlocks('header.title.custom')
+  const headerText = (
+    <span>
+      The time to act is <span className="text-accent">now</span>
+    </span>
+  ) //useBlocks('header.title')
 
   const header = customization
-    ? text(customHeaderText, { name: customization.to })
-    : text(headerText)
+    ? customHeaderText // text(customHeaderText, { name: customization.to })
+    : headerText // text(headerText)
 
   return (
     <div className="hero content main-container">

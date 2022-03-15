@@ -1,4 +1,4 @@
-@import (reference) '../../../styles/vars.less';
+@import (reference) '../../../styles/variables.less';
 @import (reference) '../../../styles/fonts.less';
 
 body {
@@ -21,11 +21,14 @@ body {
   width: 100%;
   height: 100vh;
   position: relative;
-  // overflow-y: auto;
-
+  transition: @default-transition;
   @media @desktop {
+    transition: @default-transition;
     width: calc(100% - @side-bar-width);
     overflow-y: auto;
+    &.collapsed {
+      width: 100%;
+    }
   }
   // when embedded, show full screen
   &.embedded {

@@ -1,0 +1,34 @@
+@import (reference) '../../../styles/variables.less';
+@import (reference) '../../../styles/fonts.less';
+
+@topbar-font-size: 17px;
+
+.top-bar {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: @purple;
+  font-size: @topbar-font-size;
+  position: relative;
+  .font-medium(@purple-light);
+
+  &.hidden {
+    display: none;
+  }
+  .ant-btn.ant-btn-link {
+    margin-left: 10px;
+    text-decoration: underline;
+    font-size: @topbar-font-size;
+    .font-medium(@white);
+
+    .anticon {
+      color: @purple-light;
+      font-size: 15px;
+    }
+  }
+  .ant-btn.ant-btn-link.close-btn {
+    position: absolute;
+    right: 30px;
+  }
+}

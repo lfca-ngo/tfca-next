@@ -1,16 +1,21 @@
 require('./styles.less')
-import Icon from '@ant-design/icons'
+
+import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons'
 import { Button } from 'antd'
+import classNames from 'classnames'
 import { motion, useTransform, useViewportScroll } from 'framer-motion'
+import Image from 'next/image'
 import React, { useState } from 'react'
 
-import IconIdeas from '../../../assets/icons/ideas.svg'
+import { useDarkMode } from '../../../hooks/useDarkMode'
 import { useActiveAction, useIsMobile } from '../../../hooks/useIsClient'
+import { scrollToId } from '../../../utils'
 
 const SCROLL_RANGE = [0, 200]
 const SCROLL_RANGE_SHORT = [0, 60]
 
-export const Header = (props) => {
+export const Header = ({ actions, collapsed, setCollapsed }) => {
+  const [isDarkMode] = useDarkMode()
   const [open, setOpen] = useState(false)
   const isMobile = useIsMobile()
   // animations for mobile, the event does not fire on desktop
@@ -24,22 +29,23 @@ export const Header = (props) => {
     '0px 10px 10px rgba(0, 0, 0, 0.05)',
   ])
 
+  const logoStyles = isMobile ? { opacity, padding: logoPadding } : {}
+  const logoSrc = isDarkMode ? '/images/logo_darkmode.svg' : '/images/logo.svg'
+
   const { activeAction } = useActiveAction()
 
   const toggleMenu = () => {
     setOpen(!open)
   }
 
-  const scroll = (name) => {
-    const section = document.querySelector(`#${name}`)
-    section?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-  }
-
   return (
-    <motion.header className="header" style={{ boxShadow }}>
+    <motion.header
+      className={classNames('header', { collapsed })}
+      style={{ boxShadow }}
+    >
       <motion.div className="header-start" style={{ width: headerWidth }}>
-        <motion.div className="logo" style={{ opacity, padding: logoPadding }}>
-          <img src="/images/logo.svg" />
+        <motion.div className="logo" style={logoStyles}>
+          <Image height={48} src={logoSrc} width={48} />
         </motion.div>
         <button
           className={`hamburger hamburger--spin ${open && 'is-active'}`}
@@ -57,16 +63,20 @@ export const Header = (props) => {
         style={{ width: isMobile ? contentWidth : 'auto' }}
       >
         <ul>
-          {props.actions?.map((action) => (
+          {actions?.map((action) => (
             <li
               className={`action-element ${
                 activeAction === action.id ? 'active' : ''
               }`}
               key={action.id}
             >
-              <Button onClick={() => scroll(action.id)} type="link">
+              <Button
+                className="no-padding"
+                onClick={() => scrollToId(action.id)}
+                type="link"
+              >
                 <div className="icon">
-                  <img src={action.icon} />
+                  <Image height={30} src={action.icon} width={30} />
                 </div>
                 <div className="text">{action.name}</div>
               </Button>
@@ -75,8 +85,14 @@ export const Header = (props) => {
         </ul>
 
         <div className="header-bottom">
-          <Icon component={IconIdeas} />
-          More ideas?
+          <Button
+            className="no-padding"
+            onClick={() => setCollapsed(!collapsed)}
+            type="link"
+          >
+            {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+            {collapsed ? '' : 'Collapse'}
+          </Button>
         </div>
       </motion.div>
     </motion.header>

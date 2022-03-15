@@ -1,4 +1,4 @@
-@import (reference) '../../../styles/vars.less';
+@import (reference) '../../../styles/variables.less';
 @import (reference) '../../../styles/fonts.less';
 @import (reference) '../../../styles/mixins.less';
 
@@ -23,9 +23,11 @@
   }
 
   .action-category,
+  .action-category .ant-btn-link,
   .title,
   .form-group .form-group-label,
   .ant-tabs .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn,
+  .check-list .list-elem .anticon,
   .ant-btn-link {
     color: @white;
   }
@@ -56,28 +58,16 @@
   }
 
   &.color-1 {
-    background: darken(@blue, 5%);
-    .stats-wrapper .ant-tag {
-      background: darken(@blue, 15%);
-    }
+    .color-module(@blue);
   }
   &.color-2 {
-    background: darken(@green, 5%);
-    .stats-wrapper .ant-tag {
-      background: darken(@green, 15%);
-    }
+    .color-module(@green);
   }
   &.color-3 {
-    background: darken(@lila, 5%);
-    .stats-wrapper .ant-tag {
-      background: darken(@lila, 15%);
-    }
+    .color-module(@lila);
   }
   &.color-4 {
-    background: darken(@orange, 5%);
-    .stats-wrapper .ant-tag {
-      background: darken(@orange, 15%);
-    }
+    .color-module(@orange);
   }
 
   .action-body {
@@ -116,19 +106,18 @@
   }
 
   .step-header {
-    padding: 5px 0 15px;
-
     h2 {
       .h2();
-      margin-bottom: 25px;
+      margin-bottom: 20px;
+      color: @white;
       @media @desktop {
-        margin-bottom: 35px;
+        margin-bottom: 25px;
       }
     }
 
     p {
       line-height: 1.4;
-      .font-regular();
+      .font-regular(fade(@white, 90%));
     }
   }
 
@@ -159,9 +148,11 @@
       border-bottom: none;
       border-top: none;
       margin: 0;
-      .font-medium();
-      font-size: 17px;
+      .font-medium(@white);
       padding: 0;
+      .anticon {
+        color: @white;
+      }
     }
     .icon {
       margin-right: 12px;
