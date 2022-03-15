@@ -1,7 +1,7 @@
 import { Button } from 'antd'
 import React from 'react'
 
-import { Text, text } from '../../../utils/Text'
+import { text } from '../../../utils/Text'
 import {
   ActionDetails,
   BankDetails,

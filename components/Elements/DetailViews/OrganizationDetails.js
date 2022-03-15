@@ -5,7 +5,7 @@ import {
   PlusCircleOutlined,
   ShareAltOutlined,
 } from '@ant-design/icons'
-import { Button, Col, List, Space } from 'antd'
+import { Button, List, Space } from 'antd'
 import React from 'react'
 
 import { Text, text } from '../../../utils/Text'

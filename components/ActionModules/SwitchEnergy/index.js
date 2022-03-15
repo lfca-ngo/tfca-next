@@ -26,7 +26,7 @@ const steps = new Map([
 const SwitchEnergyFlow = (props) => {
   const { goTo, index, setStore, store } = useFlow({
     id: props.module?.id,
-    initial: 'intro',
+    initialIndex: 'intro',
   })
 
   const { customization, setProgress } = useChallenge()

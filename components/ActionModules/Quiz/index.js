@@ -1,9 +1,8 @@
 import { Tabs } from 'antd'
-import React, { cloneElement, useEffect, useMemo } from 'react'
+import React, { useMemo } from 'react'
 
 import { useChallenge } from '../../../hooks/useChallenge'
 import { useFlow } from '../../../hooks/useFlow'
-import { text } from '../../../utils/Text'
 import { Share } from '../helpers/Share'
 import Success from '../helpers/Success'
 import Answer from './Answer'
@@ -18,7 +17,7 @@ const QuizFlow = (props) => {
 
   const { goTo, index, setStore, store } = useFlow({
     id: props.module?.id,
-    initial: quizItems[0]?.questionId,
+    initialIndex: quizItems[0]?.questionId,
   })
 
   const { customization, setProgress } = useChallenge()
@@ -27,7 +26,7 @@ const QuizFlow = (props) => {
   // that can be accessed via "next" or by calling it's key
   // we store all the answers in the store
   const steps = useMemo(() => {
-    const quizSteps = quizItems.map((item, i) => [
+    const quizSteps = quizItems.map((item) => [
       [item.questionId, { activeQuestion: item, component: Question }],
       [
         `${item.questionId}${ANSWER_SUFFIX}`,

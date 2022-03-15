@@ -2,8 +2,7 @@ import jwt from 'jsonwebtoken'
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
-    res.status(400).send({ message: 'Only POST requests allowed' })
-    return
+    return res.status(405).send({ message: 'Only POST requests allowed' })
   }
 
   const { actionCollectionSlug, tokenPayload } = req.body

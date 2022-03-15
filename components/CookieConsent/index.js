@@ -4,15 +4,13 @@ import { QuestionCircleOutlined } from '@ant-design/icons'
 import Icon from '@ant-design/icons'
 import { Button, Col, Popover, Row } from 'antd'
 import { motion } from 'framer-motion'
-// import { initializeAndTrack } from 'gatsby-plugin-gdpr-cookies'
-// import { defaultOptions } from 'gatsby-plugin-gdpr-cookies/default-options'
 import React, { useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie'
 
 import IconCheck from '../../assets/icons/c-check.svg'
 import IconRemove from '../../assets/icons/c-remove.svg'
 import { useContent } from '../../hooks/useTranslation'
-import { isBrowser, renderAsHtml } from '../../utils'
+import { isBrowser } from '../../utils'
 
 export const SAME_SITE_OPTIONS = {
   LAX: 'lax',

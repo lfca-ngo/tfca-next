@@ -1,0 +1,272 @@
+[
+  {
+    "countryCode": "LU",
+    "iconUrl": "/images/countries/lu.svg",
+    "label": {
+      "DE": "Luxemburg",
+      "EN": "Luxembourg",
+      "ES": "Luxemburgo",
+      "FR": "Luxembourg"
+    }
+  },
+  {
+    "countryCode": "DE",
+    "iconUrl": "/images/countries/de.svg",
+    "label": {
+      "DE": "Deutschland",
+      "EN": "Germany",
+      "ES": "Alemania",
+      "FR": "Allemagne"
+    }
+  },
+  {
+    "countryCode": "ES",
+    "iconUrl": "/images/countries/es.svg",
+    "label": {
+      "DE": "Spanien",
+      "EN": "Spain",
+      "ES": "España",
+      "FR": "Espagne"
+    }
+  },
+  {
+    "countryCode": "FI",
+    "iconUrl": "/images/countries/fi.svg",
+    "label": {
+      "DE": "Finnland",
+      "EN": "Finland",
+      "ES": "Finlandia",
+      "FR": "Finlande"
+    }
+  },
+  {
+    "countryCode": "IT",
+    "iconUrl": "/images/countries/it.svg",
+    "label": {
+      "DE": "Italien",
+      "EN": "Italy",
+      "ES": "Italia",
+      "FR": "Italie"
+    }
+  },
+  {
+    "countryCode": "AT",
+    "iconUrl": "/images/countries/at.svg",
+    "label": {
+      "DE": "Österreich",
+      "EN": "Austria",
+      "ES": "Austria",
+      "FR": "Autriche"
+    }
+  },
+  {
+    "countryCode": "BE",
+    "iconUrl": "/images/countries/be.svg",
+    "label": {
+      "DE": "Belgien",
+      "EN": "Belgium",
+      "ES": "Bélgica",
+      "FR": "Belgique"
+    }
+  },
+  {
+    "countryCode": "NL",
+    "iconUrl": "/images/countries/nl.svg",
+    "label": {
+      "DE": "Niederlande",
+      "EN": "Netherlands",
+      "ES": "Países Bajos",
+      "FR": "Pays-Bas"
+    }
+  },
+  {
+    "countryCode": "FR",
+    "iconUrl": "/images/countries/fr.svg",
+    "label": {
+      "DE": "Frankreich",
+      "EN": "France",
+      "ES": "Francia",
+      "FR": "France"
+    }
+  },
+  {
+    "countryCode": "CZ",
+    "iconUrl": "/images/countries/cz.svg",
+    "label": {
+      "DE": "Tschechien",
+      "EN": "Czechia",
+      "ES": "Chequia",
+      "FR": "Tchéquie"
+    }
+  },
+  {
+    "countryCode": "PL",
+    "iconUrl": "/images/countries/pl.svg",
+    "label": {
+      "DE": "Polen",
+      "EN": "Poland",
+      "ES": "Polonia",
+      "FR": "Pologne"
+    }
+  },
+  {
+    "countryCode": "HU",
+    "iconUrl": "/images/countries/hu.svg",
+    "label": {
+      "DE": "Ungarn",
+      "EN": "Hungary",
+      "ES": "Hungría",
+      "FR": "Hongrie"
+    }
+  },
+  {
+    "countryCode": "SK",
+    "iconUrl": "/images/countries/sk.svg",
+    "label": {
+      "DE": "Slowakei",
+      "EN": "Slovakia",
+      "ES": "Eslovaquia",
+      "FR": "Slovaquie"
+    }
+  },
+  {
+    "countryCode": "CY",
+    "iconUrl": "/images/countries/cy.svg",
+    "label": {
+      "DE": "Zypern",
+      "EN": "Cyprus",
+      "ES": "Chipre",
+      "FR": "Chypre"
+    }
+  },
+  {
+    "countryCode": "MT",
+    "iconUrl": "/images/countries/mt.svg",
+    "label": {
+      "DE": "Malta",
+      "EN": "Malta",
+      "ES": "Malta",
+      "FR": "Malte"
+    }
+  },
+  {
+    "countryCode": "DK",
+    "iconUrl": "/images/countries/dk.svg",
+    "label": {
+      "DE": "Dänemark",
+      "EN": "Denmark",
+      "ES": "Dinamarca",
+      "FR": "Danemark"
+    }
+  },
+  {
+    "countryCode": "SI",
+    "iconUrl": "/images/countries/si.svg",
+    "label": {
+      "DE": "Slowenien",
+      "EN": "Slovenia",
+      "ES": "Eslovenia",
+      "FR": "Slovénie"
+    }
+  },
+  {
+    "countryCode": "GR",
+    "iconUrl": "/images/countries/gr.svg",
+    "label": {
+      "DE": "Griechenland",
+      "EN": "Greece",
+      "ES": "Grecia",
+      "FR": "Grèce"
+    }
+  },
+  {
+    "countryCode": "LV",
+    "iconUrl": "/images/countries/lv.svg",
+    "label": {
+      "DE": "Lettland",
+      "EN": "Latvia",
+      "ES": "Letonia",
+      "FR": "Lettonie"
+    }
+  },
+  {
+    "countryCode": "RO",
+    "iconUrl": "/images/countries/ro.svg",
+    "label": {
+      "DE": "Rumänien",
+      "EN": "Romania",
+      "ES": "Rumanía",
+      "FR": "Roumanie"
+    }
+  },
+  {
+    "countryCode": "PT",
+    "iconUrl": "/images/countries/pt.svg",
+    "label": {
+      "DE": "Portugal",
+      "EN": "Portugal",
+      "ES": "Portugal",
+      "FR": "Portugal"
+    }
+  },
+  {
+    "countryCode": "IE",
+    "iconUrl": "/images/countries/ie.svg",
+    "label": {
+      "DE": "Irland",
+      "EN": "Ireland",
+      "ES": "Irlanda",
+      "FR": "Irlande"
+    }
+  },
+  {
+    "countryCode": "LT",
+    "iconUrl": "/images/countries/lt.svg",
+    "label": {
+      "DE": "Litauen",
+      "EN": "Lithuania",
+      "ES": "Lituania",
+      "FR": "Lituanie"
+    }
+  },
+  {
+    "countryCode": "BG",
+    "iconUrl": "/images/countries/bg.svg",
+    "label": {
+      "DE": "Bulgarien",
+      "EN": "Bulgaria",
+      "ES": "Bulgaria",
+      "FR": "Bulgarie"
+    }
+  },
+  {
+    "countryCode": "HR",
+    "iconUrl": "/images/countries/hr.svg",
+    "label": {
+      "DE": "Kroatien",
+      "EN": "Croatia",
+      "ES": "Croacia",
+      "FR": "Croatie"
+    }
+  },
+  {
+    "countryCode": "SE",
+    "iconUrl": "/images/countries/se.svg",
+    "label": {
+      "DE": "Schweden",
+      "EN": "Sweden",
+      "ES": "Suecia",
+      "FR": "Suède"
+    }
+  },
+  {
+    "countryCode": "EE",
+    "iconUrl": "/images/countries/ee.svg",
+    "label": {
+      "DE": "Estland",
+      "EN": "Estonia",
+      "ES": "Estonia",
+      "FR": "Estonie"
+    }
+  }
+]

@@ -1,0 +1,27 @@
+{
+  "840": {
+    "badges": ["ITRE"],
+    "countryCode": "FR",
+    "fullName": "Charles Goerens"
+  },
+  "1917": {
+    "badges": ["TRAN"],
+    "countryCode": "FR",
+    "fullName": "Markus Ferber"
+  },
+  "1854": {
+    "badges": ["ENVI"],
+    "countryCode": "FR",
+    "fullName": "Constanze Krehl"
+  },
+  "1909": {
+    "badges": ["ECON"],
+    "countryCode": "FR",
+    "fullName": "Bernd Lange"
+  },
+  "1927": {
+    "badges": ["ITRE"],
+    "countryCode": "FR",
+    "fullName": "Peter Liese"
+  }
+}

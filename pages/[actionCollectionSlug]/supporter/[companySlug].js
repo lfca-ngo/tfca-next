@@ -7,7 +7,7 @@ import { QualifiedCompanyFragment } from '../../../fragments/contentful'
 import {
   fetchAllActions,
   fetchAllStaticContent,
-  fetchContent,
+  // fetchContent,
 } from '../../../services/contentful'
 import { fetchData } from '../../../services/lfca'
 
@@ -71,19 +71,23 @@ export async function getStaticProps({ locale, params }) {
   }
 }
 
-export async function getStaticPaths({ locales }) {
-  const actionsLocalCollectionQuery = gql`
-    query {
-      actionsLocalCollection(limit: 50) {
-        items {
-          slug
-        }
-      }
-    }
-  `
-  const { actionsLocalCollection } = await fetchContent(
-    actionsLocalCollectionQuery
-  )
+export async function getStaticPaths(
+  {
+    // locales
+  }
+) {
+  // const actionsLocalCollectionQuery = gql`
+  //   query {
+  //     actionsLocalCollection(limit: 50) {
+  //       items {
+  //         slug
+  //       }
+  //     }
+  //   }
+  // `
+  // const { actionsLocalCollection } = await fetchContent(
+  //   actionsLocalCollectionQuery
+  // )
 
   const { qualifiedCompanies } = await fetchData(
     allParticipatingCompaniesQuery,

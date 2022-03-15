@@ -1,8 +1,8 @@
-import { Form, List, Select, Tag } from 'antd'
+import { Form, Select } from 'antd'
 import React from 'react'
 
 export const ScrollableFilters = (props) => {
-  const handleValuesChange = (changedValues, allValues) => {
+  const handleValuesChange = (changedValues) => {
     props.setStore({ ...props.store, ...changedValues })
   }
 
