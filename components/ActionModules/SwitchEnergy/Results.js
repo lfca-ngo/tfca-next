@@ -103,7 +103,7 @@ const Results = ({
         <Col xs={12}>
           <RobinIcon />
         </Col>
-        <Col className="actions-bar" xs={12}>
+        <Col className="actions-bar" style={{ textAlign: 'right' }} xs={12}>
           <Space>
             <Button
               icon={<EditOutlined />}

@@ -7,8 +7,6 @@ import React, {
 } from 'react'
 import Confetti from 'react-confetti'
 
-import { useDarkMode } from './useDarkMode'
-
 export const ChallengeContext = createContext(null)
 
 // Provider to share all challenge specific data
@@ -18,8 +16,6 @@ export const ChallengeContext = createContext(null)
 export const ChallengeProvider = ({ children, customization = null }) => {
   const [showConfetti, setShowConfetti] = useState(false)
   const [progress, setProgress] = useState(0)
-
-  useDarkMode()
 
   return (
     <ChallengeContext.Provider

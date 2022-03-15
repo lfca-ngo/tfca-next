@@ -9,6 +9,7 @@ import React, { useState } from 'react'
 
 import { useDarkMode } from '../../../hooks/useDarkMode'
 import { useActiveAction, useIsMobile } from '../../../hooks/useIsClient'
+import { scrollToId } from '../../../utils'
 
 const SCROLL_RANGE = [0, 200]
 const SCROLL_RANGE_SHORT = [0, 60]
@@ -35,11 +36,6 @@ export const Header = ({ actions, collapsed, setCollapsed }) => {
 
   const toggleMenu = () => {
     setOpen(!open)
-  }
-
-  const scroll = (name) => {
-    const section = document.querySelector(`#${name}`)
-    section?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
 
   return (
@@ -76,7 +72,7 @@ export const Header = ({ actions, collapsed, setCollapsed }) => {
             >
               <Button
                 className="no-padding"
-                onClick={() => scroll(action.id)}
+                onClick={() => scrollToId(action.id)}
                 type="link"
               >
                 <div className="icon">

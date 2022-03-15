@@ -38,6 +38,11 @@ export const checkAnswers = (arr1, arr2) => {
   return JSON.stringify(arr1) === JSON.stringify(arr2)
 }
 
+export const scrollToId = (id) => {
+  const section = document.querySelector(`#${id}`)
+  section?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+}
+
 export const LIST_GRIDS = {
   '1-col': {
     gutter: 16,

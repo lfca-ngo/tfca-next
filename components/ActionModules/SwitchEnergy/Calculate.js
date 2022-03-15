@@ -6,6 +6,7 @@ import { isMobile } from 'react-device-detect'
 import { text } from '../../../utils/Text'
 import CheckList from '../../Elements/CheckList'
 import Category from '../helpers/Category'
+import { StepHeader } from '../helpers/StepHeader'
 
 export const ITEMS = {
   postcode: (blocks) => (
@@ -104,7 +105,7 @@ const Calculate = (props) => {
         title={text(props.blocks['category.title'])}
       />
 
-      <h2>{text(props.blocks['calculate.title'])}</h2>
+      <StepHeader title={props.blocks['calculate.title']} />
 
       <CheckList data={props.lists?.benefits} />
 
