@@ -2,13 +2,14 @@
 @import (reference) '../../../styles/fonts.less';
 
 footer.footer {
-  background: darken(@light-white, 5%);
-  padding: 60px 0;
+  background: darken(@blue, 15%);
+  padding: 100px 0 40px;
 
   .copyright {
     text-align: center;
     font-size: 16px;
-    margin: 40px 0 0;
+    margin: 80px 0 0;
+    color: fade(@white, 90%);
   }
 
   .ant-collapse-borderless {
@@ -18,13 +19,13 @@ footer.footer {
       > .ant-collapse-header .ant-collapse-arrow {
         top: 16px;
         font-size: @font-size-lg;
-        color: @black;
+        color: fade(@white, 90%);
       }
     }
     background-color: transparent;
     .ant-collapse-header {
-      .font-medium(@black);
-      border-bottom: 1px solid @medium-grey;
+      .font-regular(fade(@white, 90%));
+      border-bottom: 1px solid fade(@white, 20%);
     }
     .ant-collapse-content {
       padding: 20px 0;
@@ -45,7 +46,6 @@ footer.footer {
     .partner {
       margin-right: 10px;
       img {
-        // filter: grayscale(100%);
         max-width: 90px;
         max-height: 50px;
       }
