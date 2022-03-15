@@ -2,7 +2,7 @@ require('./styles.less')
 
 import { QuestionCircleOutlined } from '@ant-design/icons'
 import Icon from '@ant-design/icons'
-import { Button, Popover } from 'antd'
+import { Button, Col, Popover, Row } from 'antd'
 import { motion } from 'framer-motion'
 // import { initializeAndTrack } from 'gatsby-plugin-gdpr-cookies'
 // import { defaultOptions } from 'gatsby-plugin-gdpr-cookies/default-options'
@@ -215,29 +215,33 @@ const CookieConsent = (props) => {
           </div>
         </div>
 
-        <div className={`btn-wrapper`}>
-          <Button
-            key="acceptButton"
-            onClick={() => {
-              accept()
-            }}
-            size="large"
-            type="primary"
-          >
-            {buttonText}
-          </Button>
-          <Button
-            ghost
-            key="declineButton"
-            onClick={() => {
-              decline()
-            }}
-            size="large"
-            type="primary"
-          >
-            {declineButtonText}
-          </Button>
-        </div>
+        <Row className="btn-wrapper" gutter={16}>
+          <Col xs={12}>
+            <Button
+              key="acceptButton"
+              onClick={() => {
+                accept()
+              }}
+              size="large"
+              type="primary"
+            >
+              {buttonText}
+            </Button>
+          </Col>
+          <Col xs={12}>
+            <Button
+              ghost
+              key="declineButton"
+              onClick={() => {
+                decline()
+              }}
+              size="large"
+              type="primary"
+            >
+              {declineButtonText}
+            </Button>
+          </Col>
+        </Row>
       </motion.div>
     </ConditionalWrapper>
   )
