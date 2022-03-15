@@ -15,10 +15,6 @@ const allMEPs = Object.keys(MEPsById).reduce((acc, id) => {
 
 const allAvailableCountryCodes = MEPCountries.map((c) => c.countryCode)
 
-const availableLocales = Object.keys(
-  MEPBadgesById[Object.keys(MEPBadgesById)[0]]
-)
-
 const availableBadges = Object.keys(MEPBadgesById)
 
 export default async function handler(req, res) {
@@ -41,26 +37,44 @@ export default async function handler(req, res) {
       // Only keep valid badges in filter
       .filter((badge) => availableBadges.includes(badge))
 
-    const locale =
-      req.query.locale &&
-      availableLocales.includes(req.query.locale.toUpperCase())
-        ? req.query.locale.toUpperCase()
-        : DEFAULT_LOCALE
-
     // Filter the list of MEPs
     res.status(200).json({
-      appliedFilters: {
-        badges: badgesFilter,
-        countries: countriesFilter,
-      },
-      items: allMEPs.filter((mep) => {
-        const hasMatchingBadge = !badgesFilter.length
-          ? true
-          : mep.badges.filter((mepBadge) => badgesFilter.includes(mepBadge))
-              .length > 0
+      items: allMEPs
+        .filter((mep) => {
+          const hasMatchingBadge = !badgesFilter.length
+            ? true
+            : mep.badges.filter((mepBadge) => badgesFilter.includes(mepBadge))
+                .length > 0
 
-        return countriesFilter.includes(mep.countryCode) && hasMatchingBadge
-      }),
+          return countriesFilter.includes(mep.countryCode) && hasMatchingBadge
+        })
+        .sort((mepA, mepB) => {
+          // We sort the MEPs based on the badges we provide.
+          // MEPs who have the first provided badge will appear before someone who only has the second provided badge.
+          const firstMatchingBadgeIndexMepA = badgesFilter.findIndex(
+            (badgeId) => mepA.badges.includes(badgeId)
+          )
+          const fistMatchingBadgeIndexMepB = badgesFilter.findIndex((badgeId) =>
+            mepB.badges.includes(badgeId)
+          )
+
+          if (firstMatchingBadgeIndexMepA < fistMatchingBadgeIndexMepB)
+            return -1
+          if (firstMatchingBadgeIndexMepA > fistMatchingBadgeIndexMepB) return 1
+
+          // Both MEPs seem to have the same "lowest" badge index match.
+          // Let's in that case we sort based on the position the badge appears in the MEPs array.
+          const mostRelevantBadgeId = badgesFilter[firstMatchingBadgeIndexMepA]
+
+          const indexForMepA = mepA.badges.indexOf(mostRelevantBadgeId)
+          const indexForMepB = mepB.badges.indexOf(mostRelevantBadgeId)
+
+          if (indexForMepA < indexForMepB) return -1
+          if (indexForMepA > indexForMepB) return 1
+
+          return 0
+        })
+        .slice(0, 5),
     })
   } catch (e) {
     throw new Error(e.message || e)

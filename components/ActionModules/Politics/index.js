@@ -61,7 +61,7 @@ const PoliticsFlow = (props) => {
     async function fetchData() {
       try {
         setIsFetching(true)
-        const url = `/api/meps?locale=${locale}&filter.countries=${
+        const url = `/api/meps?&filter.countries=${
           store.country.value
         }&filter.badges=${(store.topic?.delegationsCommittees || []).join(',')}`
         const resp = await fetch(url)
