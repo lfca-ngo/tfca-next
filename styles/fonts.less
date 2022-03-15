@@ -1,31 +1,31 @@
 @import (reference) './variables.less';
 
-.font-bold() {
+.font-bold(@color: var(--heading-color)) {
   font-family: 'Manrope', sans-serif;
   font-weight: 800 !important;
   font-style: normal;
-  color: var(--heading-color);
+  color: @color;
 }
 
-.font-semi() {
+.font-semi(@color: var(--heading-color)) {
   font-family: 'Manrope', sans-serif;
   font-weight: 600;
   font-style: normal;
-  color: var(--heading-color);
+  color: @color;
 }
 
-.font-medium() {
+.font-medium(@color: var(--heading-color)) {
   font-family: 'Manrope', sans-serif;
   font-weight: 400;
   font-style: normal;
-  color: var(--heading-color);
+  color: @color;
 }
 
-.font-regular() {
+.font-regular(@color: var(--text-color)) {
   font-family: 'Manrope', sans-serif;
   font-weight: 300;
   font-style: normal;
-  color: var(--text-color);
+  color: @color;
 }
 
 .h1() {

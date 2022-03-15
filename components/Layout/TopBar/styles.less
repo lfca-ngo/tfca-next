@@ -11,8 +11,7 @@
   background: @purple;
   font-size: @topbar-font-size;
   position: relative;
-  .font-medium();
-  color: @purple-light;
+  .font-medium(@purple-light);
 
   &.hidden {
     display: none;
@@ -21,8 +20,8 @@
     margin-left: 10px;
     text-decoration: underline;
     font-size: @topbar-font-size;
-    .font-medium();
-    color: @white;
+    .font-medium(@white);
+
     .anticon {
       color: @purple-light;
       font-size: 15px;

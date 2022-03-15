@@ -117,8 +117,7 @@
 
     p {
       line-height: 1.4;
-      .font-regular();
-      color: fade(@white, 90%);
+      .font-regular(fade(@white, 90%));
     }
   }
 
@@ -149,9 +148,7 @@
       border-bottom: none;
       border-top: none;
       margin: 0;
-      .font-medium();
-      color: @white;
-      font-size: 17px;
+      .font-medium(@white);
       padding: 0;
       .anticon {
         color: @white;
