@@ -1,4 +1,4 @@
-import { Pie } from '@ant-design/plots'
+// import { Pie } from '@ant-design/plots'
 import React from 'react'
 
 const EnergyMix = (props) => {
@@ -28,7 +28,7 @@ const EnergyMix = (props) => {
     radius: 0.8,
   }
 
-  return <Pie {...config} />
+  return null // <Pie {...config} />
 }
 
 export default EnergyMix
