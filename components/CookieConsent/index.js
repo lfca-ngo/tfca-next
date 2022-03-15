@@ -215,9 +215,10 @@ const CookieConsent = (props) => {
           </div>
         </div>
 
-        <Row className="btn-wrapper" gutter={16}>
+        <Row className="btn-wrapper" gutter={10}>
           <Col xs={12}>
             <Button
+              block
               key="acceptButton"
               onClick={() => {
                 accept()
@@ -230,6 +231,7 @@ const CookieConsent = (props) => {
           </Col>
           <Col xs={12}>
             <Button
+              block
               ghost
               key="declineButton"
               onClick={() => {
