@@ -1,34 +1,24 @@
-import { Pie } from '@ant-design/plots'
 import React from 'react'
+import { PieChart } from 'react-minimal-pie-chart'
 
 const EnergyMix = (props) => {
-  const data = props.data.map((e) => ({ type: e.source, value: e.percent }))
-  const config = {
-    angleField: 'value',
-    appendPadding: 0,
-    autoFit: false,
-    colorField: 'type',
-    data,
-    height: 120,
-    interactions: [
-      {
-        enable: false,
-        type: 'legend-filter',
-      },
-    ],
-    label: {
-      content: null,
-      offset: '-30%',
-      style: {
-        fontSize: 14,
-        textAlign: 'center',
-      },
-      type: 'inner',
-    },
-    radius: 0.8,
-  }
+  const data = props.data.map((e, i) => ({
+    color: `rgba(202, 26, 124, ${1 / (i + 1)})`,
+    title: e.source,
+    value: e.percent,
+  }))
 
-  return <Pie {...config} />
+  return (
+    <PieChart
+      animate={true}
+      data={data}
+      label={({ dataEntry }) => dataEntry.title}
+      labelPosition={60}
+      labelStyle={{ fill: 'white', fontSize: '10px' }}
+      lineWidth={70}
+      viewBoxSize={[150, 150]}
+    />
+  )
 }
 
 export default EnergyMix

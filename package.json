@@ -9,9 +9,9 @@
     "lint:fix": "next lint"
   },
   "dependencies": {
-    "@ant-design/plots": "^1.0.9",
     "@contentful/rich-text-html-renderer": "^15.11.1",
     "@contentful/rich-text-plain-text-renderer": "^15.11.1",
+    "@next/bundle-analyzer": "^12.1.0",
     "antd": "4.18.7",
     "classnames": "^2.3.1",
     "framer-motion": "^6.2.6",
@@ -26,6 +26,7 @@
     "react-device-detect": "^2.1.2",
     "react-dom": "17.0.2",
     "react-intersection-observer": "^8.33.1",
+    "react-minimal-pie-chart": "^8.2.0",
     "react-query": "^3.34.15",
     "sharp": "^0.30.1",
     "snarkdown": "^2.0.0"
