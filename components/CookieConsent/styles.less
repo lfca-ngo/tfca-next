@@ -1,4 +1,4 @@
-@import (reference) '../../styles/vars.less';
+@import (reference) '../../styles/variables.less';
 @import (reference) '../../styles/fonts.less';
 
 .cookie-consent-banner {
@@ -40,9 +40,9 @@
         font-size: 13px;
         padding: 4px 0;
         &.active {
-          border-left: 3px solid @primary-color;
+          border-left: 3px solid var(--primary-color);
           .anticon {
-            color: @primary-color;
+            color: var(--primary-color);
           }
         }
         .text-wrapper {
@@ -64,17 +64,16 @@
     display: flex;
     width: 100%;
     .ant-btn.ant-btn-primary.ant-btn-lg {
-      width: 47%;
-      padding: 6px 0;
       font-size: 14px;
-      background: @primary-color;
-      border-color: @primary-color;
-      &:first-child {
-        margin-right: 5%;
-      }
+      background: var(--primary-color);
+      border-color: var(--primary-color);
+      height: auto;
+      padding: 12px 20px;
+
       &.ant-btn-background-ghost {
-        border: 1px solid @primary-color;
-        color: @primary-color;
+        border: 1px solid var(--primary-color);
+        background: transparent;
+        color: var(--primary-color);
       }
     }
   }

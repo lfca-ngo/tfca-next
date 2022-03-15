@@ -3,6 +3,7 @@ import React from 'react'
 
 import { Text, text } from '../../../utils/Text'
 import Category from '../helpers/Category'
+import { StepHeader } from '../helpers/StepHeader'
 
 const Intro = (props) => {
   const handleNext = () => {
@@ -20,7 +21,8 @@ const Intro = (props) => {
         icon={props.icon}
         title={text(props.blocks['category.title'])}
       />
-      <h2>{text(props.blocks['intro.title'])}</h2>
+
+      <StepHeader title={props.blocks['intro.title']} />
 
       <Row className="btn-wrapper" gutter={12} style={{ marginBottom: '15px' }}>
         <Col md={12} xs={24}>

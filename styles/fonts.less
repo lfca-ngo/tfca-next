@@ -1,27 +1,31 @@
-@import (reference) './vars.less';
+@import (reference) './variables.less';
 
-.font-bold() {
+.font-bold(@color: var(--heading-color)) {
   font-family: 'Manrope', sans-serif;
   font-weight: 800 !important;
   font-style: normal;
+  color: @color;
 }
 
-.font-semi() {
+.font-semi(@color: var(--heading-color)) {
   font-family: 'Manrope', sans-serif;
   font-weight: 600;
   font-style: normal;
+  color: @color;
 }
 
-.font-medium() {
+.font-medium(@color: var(--heading-color)) {
   font-family: 'Manrope', sans-serif;
   font-weight: 400;
   font-style: normal;
+  color: @color;
 }
 
-.font-regular() {
+.font-regular(@color: var(--text-color)) {
   font-family: 'Manrope', sans-serif;
   font-weight: 300;
   font-style: normal;
+  color: @color;
 }
 
 .h1() {
@@ -37,9 +41,9 @@
 .h2() {
   .font-bold();
   font-size: 36px;
-  line-height: 1.2;
+  line-height: 1.1;
   @media (min-width: @screen-sm) {
-    font-size: 48px;
+    font-size: 56px;
   }
 }
 
@@ -60,9 +64,21 @@
 }
 
 .default-text() {
-  color: fade(@black, 85%);
+  color: var(--text-color);
   font-weight: 300;
   line-height: 1.5;
+}
+
+.h1-hero() {
+  .font-bold();
+  font-size: 52px;
+  letter-spacing: -1px;
+  line-height: 1.05;
+  @media (min-width: @screen-sm) {
+    font-size: 102px;
+    letter-spacing: -2px;
+    line-height: 0.95;
+  }
 }
 
 .text-appear-wrapper {
@@ -76,7 +92,7 @@ h1,
 h2,
 h3,
 h4 {
-  color: @black;
+  color: var(--heading-color);
 }
 
 h1 {

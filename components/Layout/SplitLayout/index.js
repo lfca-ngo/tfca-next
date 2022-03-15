@@ -1,14 +1,17 @@
 require('./styles.less')
 
-import React from 'react'
+import classNames from 'classnames'
+import React, { useState } from 'react'
 
-import { EMBED } from '../../../utils'
+import { EMBED, scrollToId } from '../../../utils'
 import { Hero } from '../../Elements/Hero'
 import Template from '../'
 import { Header } from '../Header'
 import { Nav } from '../Nav'
+import { TopBar } from '../TopBar'
 
 const SplitLayout = ({ children, company, layout, nav }) => {
+  const [collapsed, setCollapsed] = useState(true)
   const isEmbed = layout === EMBED
   // for iframe integration return only the content
   if (isEmbed)
@@ -19,11 +22,12 @@ const SplitLayout = ({ children, company, layout, nav }) => {
     )
   return (
     <Template>
-      <Header actions={nav} />
-      <div id="scroll-container">
+      <Header actions={nav} collapsed={collapsed} setCollapsed={setCollapsed} />
+      <div className={classNames({ collapsed })} id="scroll-container">
         <main>
+          {/* <TopBar /> */}
           <Nav className="hidden md" company={company} />
-          <Hero />
+          <Hero onClick={() => scrollToId(nav[0]?.id)} />
           {children}
         </main>
       </div>

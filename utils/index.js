@@ -2,9 +2,18 @@ import { text } from './Text'
 export * from './create-share-svg'
 
 export const isDev = process.env.NODE_ENV === 'development'
-export const isBrowser = typeof window !== 'undefined'
+export const isBrowser = () => typeof window !== 'undefined'
 export const NAVBAR_HEIGHT_XS = 75
 export const SETTINGS_ID = '48AtzIK5THq8u72j19vKw1'
+
+const __CSS_THEME_DARK__ = 'theme-dark'
+
+// setting theme
+export const CSS_THEME_DARK = !isBrowser()
+  ? __CSS_THEME_DARK__
+  : getComputedStyle(document.documentElement)
+      ?.getPropertyValue('--THEME--DARK')
+      .trim() || __CSS_THEME_DARK__
 
 export const getFilterOptions = (items, fieldName) => {
   const types = items?.reduce((acc, action) => {
@@ -27,6 +36,11 @@ export const transformOption = (item, key) => ({
 
 export const checkAnswers = (arr1, arr2) => {
   return JSON.stringify(arr1) === JSON.stringify(arr2)
+}
+
+export const scrollToId = (id) => {
+  const section = document.querySelector(`#${id}`)
+  section?.scrollIntoView({ behavior: 'smooth', block: 'start' })
 }
 
 export const LIST_GRIDS = {
