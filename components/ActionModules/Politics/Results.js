@@ -23,8 +23,6 @@ export const Results = ({
     store?.topic?.delegationsCommittees || []
   )
 
-  console.log('data', data)
-
   const handleNext = (item) => {
     setStore({ ...store, selectedItem: item })
     setProgress(0.3)
