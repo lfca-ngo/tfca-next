@@ -36,3 +36,14 @@
   color: @color;
   border: 1px solid @color;
 }
+
+.color-module(@color) {
+  background-image: linear-gradient(
+    90deg,
+    darken(@color, 10%) 0%,
+    darken(@color, 5%) 100%
+  );
+  .stats-wrapper .ant-tag {
+    background: darken(@color, 15%);
+  }
+}
