@@ -6,6 +6,7 @@ import { checkAnswers, SINGLE, transformOption } from '../../../utils'
 import { Text, text } from '../../../utils/Text'
 import { MultiSelect } from '../../Elements/MultiSelect'
 import Category from '../helpers/Category'
+import { StepHeader } from '../helpers/StepHeader'
 
 const Question = ({
   activeQuestion,
@@ -52,7 +53,8 @@ const Question = ({
         prev={() => goTo(prevKey)}
         title={text(blocks['category.title'])}
       />
-      <h2>{activeQuestion.question}</h2>
+
+      <StepHeader title={activeQuestion.question} />
 
       <Form initialValues={store} layout="vertical" onFinish={handleNext}>
         <Form.Item
