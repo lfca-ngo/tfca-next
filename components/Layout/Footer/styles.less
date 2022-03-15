@@ -7,12 +7,8 @@ footer.footer {
 
   .copyright {
     text-align: center;
-    font-size: 14px;
+    font-size: 16px;
     margin: 40px 0 0;
-  }
-
-  .collapse-wrapper {
-    // border-bottom: 1px solid @medium-grey;
   }
 
   .ant-collapse-borderless {
@@ -37,6 +33,15 @@ footer.footer {
   .ant-collapse-content-box {
     display: flex;
     padding: 0;
+
+    .ant-list {
+      width: 100%;
+      .ant-list-item {
+        border-bottom: 1px solid @medium-grey;
+        font-size: @font-size-sm;
+      }
+    }
+
     .partner {
       margin-right: 10px;
       img {
