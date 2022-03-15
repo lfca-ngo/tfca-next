@@ -30,7 +30,7 @@ const ActionStats = (props) => {
   return (
     <div className="action-stats">
       <Stat
-        data={props.otherUsers}
+        data={props.otherUsers || 0}
         icon={<UsergroupAddOutlined />}
         text={text(useBlocks('stats.usersdoingthis'))}
       />
