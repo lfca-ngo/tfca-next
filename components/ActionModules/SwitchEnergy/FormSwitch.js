@@ -18,7 +18,6 @@ import {
 import React, { useState } from 'react'
 
 import { text } from '../../../utils/Text'
-import CheckList from '../../Elements/CheckList'
 import Category from '../helpers/Category'
 
 const { Option } = Select

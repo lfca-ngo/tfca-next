@@ -2,7 +2,6 @@ import MEPBadgesById from '../../assets/data/mep-badges-by-id.json'
 import MEPCountries from '../../assets/data/mep-countries.json'
 import MEPsById from '../../assets/data/meps-by-id.json'
 
-const DEFAULT_LOCALE = 'EN'
 const DEFAULT_COUNTRY_CODE = 'DE'
 
 const allMEPs = Object.keys(MEPsById).reduce((acc, id) => {

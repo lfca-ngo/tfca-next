@@ -5,7 +5,7 @@ import { Button } from 'antd'
 import classNames from 'classnames'
 import React, { useState } from 'react'
 
-export const TopBar = (props) => {
+export const TopBar = () => {
   const [hidden, setHidden] = useState(false)
   return (
     <div className={classNames('top-bar', { hidden })}>
