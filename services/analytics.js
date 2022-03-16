@@ -4,7 +4,7 @@ import axios from 'axios'
 import { useEffect } from 'react'
 import { useCookies } from 'react-cookie'
 
-import { CONSENT_COOKIE, getWindowUid, INTERNAL_COOKIE, isDev } from '../utils'
+import { getWindowUid, INTERNAL_COOKIE, isDev } from '../utils'
 
 export const COOKIE = 'userId'
 
@@ -70,7 +70,6 @@ export const useTrackEvent = (name, values) => {
   const [cookies] = useCookies()
   const userId = cookies[INTERNAL_COOKIE] || getWindowUid()
 
-  console.log('track', userId)
   useEffect(() => {
     trackEvent(name, userId, values)
     // eslint-disable-next-line react-hooks/exhaustive-deps

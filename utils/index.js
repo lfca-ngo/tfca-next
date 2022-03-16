@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from 'uuid'
+
 import { text } from './Text'
 export * from './create-share-svg'
 
@@ -77,4 +79,12 @@ export const SAME_SITE_OPTIONS = {
 
 export const INTERNAL_COOKIE = 'ui'
 export const CONSENT_COOKIE = 'ui_consent'
-export const getWindowUid = () => (isBrowser() ? window.ui : null)
+
+// gets & sets uid in window variable
+export const getWindowUid = () => {
+  if (!isBrowser()) return null
+  if (window.ui) return window.ui
+  const newUid = uuidv4()
+  window.ui = newUid
+  return newUid
+}

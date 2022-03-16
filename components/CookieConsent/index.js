@@ -4,11 +4,11 @@ import { Button, Col, Row } from 'antd'
 import { motion } from 'framer-motion'
 import React, { useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie'
-import { v4 as uuidv4 } from 'uuid'
 
 import { useContent } from '../../hooks/useTranslation'
 import {
   CONSENT_COOKIE,
+  getWindowUid,
   INTERNAL_COOKIE,
   isBrowser,
   SAME_SITE_OPTIONS,
@@ -96,8 +96,7 @@ const CookieConsent = (props) => {
     // if the user has already a decline cookie set, create a uuid
     // and expose via window variable
     if (hasDeniedCookies || isNewUser) {
-      const uuid = uuidv4()
-      window[INTERNAL_COOKIE] = uuid
+      getWindowUid()
     }
 
     // show consent banner: if the user accepts,
