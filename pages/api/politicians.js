@@ -49,8 +49,6 @@ export default async function handler(req, res) {
     const zipFilter =
       (countriesFilter.includes('DE') && req.query['filter.zip']) || undefined
 
-    console.log(zipFilter)
-
     const filteredMEPs = allMEPs
       .filter((mep) => {
         const hasMatchingBadge = !badgesFilter.length
