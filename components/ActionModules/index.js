@@ -1,6 +1,5 @@
 import React from 'react'
 
-import { useTrackEvent } from '../../services/analytics'
 import ActionFinderFlow from './ActionFinder'
 import ActionWrapper from './helpers/ActionWrapper'
 import Politics from './Politics'
@@ -8,8 +7,6 @@ import Quiz from './Quiz'
 import SwitchEnergy from './SwitchEnergy'
 
 const ActionModules = (props) => {
-  useTrackEvent('page_visit')
-
   if (!props.actions) return null
 
   const renderAction = (action) => {

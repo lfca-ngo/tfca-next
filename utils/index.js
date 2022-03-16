@@ -68,3 +68,13 @@ export const SINGLE = 'single'
 export const MULTI = 'multi'
 export const EMBED = 'embed'
 export const DEFAULT = 'default'
+
+export const SAME_SITE_OPTIONS = {
+  LAX: 'lax',
+  NONE: 'none',
+  STRICT: 'strict',
+}
+
+export const INTERNAL_COOKIE = 'ui'
+export const CONSENT_COOKIE = 'ui_consent'
+export const getWindowUid = () => (isBrowser() ? window.ui : null)

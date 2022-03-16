@@ -2,8 +2,9 @@
 // import { useCookies } from 'react-cookie'
 import axios from 'axios'
 import { useEffect } from 'react'
+import { useCookies } from 'react-cookie'
 
-import { isDev } from '../utils'
+import { CONSENT_COOKIE, getWindowUid, INTERNAL_COOKIE, isDev } from '../utils'
 
 export const COOKIE = 'userId'
 
@@ -43,10 +44,10 @@ const COLLECTION_ID = 'events'
 //   return { trackEvent }
 // }
 
-export const trackEvent = (name, values) => {
+export const trackEvent = (name, userId, values) => {
   const event = {
     Event: name,
-    User_ID: 1,
+    User_ID: userId,
     ...values,
   }
 
@@ -66,8 +67,12 @@ export const trackEvent = (name, values) => {
 }
 
 export const useTrackEvent = (name, values) => {
+  const [cookies] = useCookies()
+  const userId = cookies[INTERNAL_COOKIE] || getWindowUid()
+
+  console.log('track', userId)
   useEffect(() => {
-    trackEvent(name, values)
+    trackEvent(name, userId, values)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 }

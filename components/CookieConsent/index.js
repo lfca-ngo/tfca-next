@@ -7,18 +7,14 @@ import { useCookies } from 'react-cookie'
 import { v4 as uuidv4 } from 'uuid'
 
 import { useContent } from '../../hooks/useTranslation'
-import { isBrowser } from '../../utils'
+import {
+  CONSENT_COOKIE,
+  INTERNAL_COOKIE,
+  isBrowser,
+  SAME_SITE_OPTIONS,
+} from '../../utils'
 import { text } from '../../utils/Text'
 import { ConditionalWrapper, CookieSelector } from './helpers'
-
-export const SAME_SITE_OPTIONS = {
-  LAX: 'lax',
-  NONE: 'none',
-  STRICT: 'strict',
-}
-
-const INTERNAL_COOKIE = 'ui'
-const CONSENT_COOKIE = 'ui_consent'
 
 const INITIAL_COOKIE_STATE = {
   [`cookies.marketing`]: {
@@ -58,15 +54,6 @@ const CookieConsent = (props) => {
     setVisible(false)
   }
 
-  const getLegacyCookieName = (name) => {
-    return `${name}-legacy`
-  }
-
-  /**
-   * Function to set the consent cookie based on the provided variables
-   * Sets two cookies to handle incompatible browsers, more details:
-   * https://web.dev/samesite-cookie-recipes/#handling-incompatible-clients
-   */
   const setCookie = (cookieName, cookieValue) => {
     const { expires, extraCookieOptions, sameSite } = props
     const expiresDays = 1000 * 60 * 60 * 24 * expires
@@ -82,30 +69,15 @@ const CookieConsent = (props) => {
     const cookieOptions = {
       expires: expiresFromNow,
       ...extraCookieOptions,
-      sameSite,
+      sameSite: sameSite || SAME_SITE_OPTIONS.LAX,
       secure: cookieSecurity,
     }
 
-    // Fallback for older browsers where can not set SameSite=None, SEE: https://web.dev/samesite-cookie-recipes/#handling-incompatible-clients
-    if (sameSite === SAME_SITE_OPTIONS.NONE) {
-      setReactCookie(
-        getLegacyCookieName(cookieName),
-        cookieValue,
-        cookieOptions
-      )
-    }
-
-    // set the regular cookie
     setReactCookie(cookieName, cookieValue, cookieOptions)
   }
 
   const getCookieValue = (cookieName) => {
     let cookieValue = cookies[cookieName]
-
-    // if the cookieValue is undefined check for the legacy cookie
-    if (cookieValue === undefined) {
-      cookieValue = cookies[getLegacyCookieName(cookieName)]
-    }
 
     return cookieValue
   }
@@ -135,6 +107,7 @@ const CookieConsent = (props) => {
         setVisible(true)
       }, 1000)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   if (!visible) return null
