@@ -4,7 +4,7 @@ import axios from 'axios'
 import { useEffect } from 'react'
 import { useCookies } from 'react-cookie'
 
-import { getWindowUid, INTERNAL_COOKIE } from '../utils'
+import { getWindowUid, INITIAL_STATS, INTERNAL_COOKIE } from '../utils'
 
 export const COOKIE = 'userId'
 
@@ -81,7 +81,8 @@ export const fetchStats = () => {
     const { result } = data
 
     const asObject = result.reduce((acc, curr) => {
-      acc[curr.action_id] = curr.Count
+      // adding last year's stats
+      acc[curr.action_id] = curr.Count + INITIAL_STATS[curr.action_id]
       return acc
     }, {})
 

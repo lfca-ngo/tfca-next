@@ -88,3 +88,13 @@ export const getWindowUid = () => {
   window.ui = newUid
   return newUid
 }
+
+export const INITIAL_STATS = {
+  climate_activism: 1386,
+  ecosia: 1252,
+  green_finances: 746,
+  measure_reduce: 3805,
+  politics: 2781,
+  share_deck: 969,
+  switch_energy: 2218,
+}
