@@ -1,5 +1,7 @@
 // import axios from 'axios'
 // import { useCookies } from 'react-cookie'
+import axios from 'axios'
+import { useEffect } from 'react'
 
 import { isDev } from '../utils'
 
@@ -10,6 +12,7 @@ const BASE_API = isDev
   : process.env.NEXT_PUBLIC_ANALYTICS_API_URL
 
 const TRACKING = `apiUtilsTfca`
+const COLLECTION_ID = 'events'
 // const ANALYTICS = `apiUtilsAnalytics`
 
 // tracking can be manually disabled in development
@@ -39,6 +42,37 @@ const TRACKING = `apiUtilsTfca`
 
 //   return { trackEvent }
 // }
+
+export const trackEvent = (name, values) => {
+  const event = {
+    Event: name,
+    User_ID: 1,
+    ...values,
+  }
+
+  const payload = {
+    api_key: process.env.NEXT_PUBLIC_GRAPH_JSON_API_KEY,
+    collection: COLLECTION_ID,
+    json: JSON.stringify(event),
+    timestamp: Math.floor(new Date().getTime() / 1000),
+  }
+
+  axios({
+    data: payload,
+    headers: { 'Content-Type': 'application/json' },
+    method: 'post',
+    url: `${process.env.NEXT_PUBLIC_GRAPH_JSON_URL}`,
+  })
+}
+
+export const useTrackEvent = (name, values) => {
+  useEffect(() => {
+    trackEvent(name, values)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+}
+
+// DEPRECATED
 
 export const fetchStats = () => {
   const endpoint = `${BASE_API}/${TRACKING}`

@@ -1,17 +1,15 @@
 require('./styles.less')
 
-import { QuestionCircleOutlined } from '@ant-design/icons'
-import Icon from '@ant-design/icons'
-import { Button, Col, Popover, Row } from 'antd'
+import { Button, Col, Row } from 'antd'
 import { motion } from 'framer-motion'
 import React, { useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie'
+import { v4 as uuidv4 } from 'uuid'
 
-import IconCheck from '../../assets/icons/c-check.svg'
-import IconRemove from '../../assets/icons/c-remove.svg'
 import { useContent } from '../../hooks/useTranslation'
 import { isBrowser } from '../../utils'
 import { text } from '../../utils/Text'
+import { ConditionalWrapper, CookieSelector } from './helpers'
 
 export const SAME_SITE_OPTIONS = {
   LAX: 'lax',
@@ -19,28 +17,8 @@ export const SAME_SITE_OPTIONS = {
   STRICT: 'strict',
 }
 
-const ConditionalWrapper = ({ children, condition, wrapper }) => {
-  return condition ? wrapper(children) : children
-}
-
-const CookieSelector = (props) => {
-  return (
-    <li className={props.isActive ? 'active' : ''}>
-      <div>
-        <Icon
-          component={props.isActive ? IconCheck : IconRemove}
-          onClick={() => !props.disabled && props.toggleValue(!props.isActive)}
-        />{' '}
-        {props.title}
-        {props.showInfo && (
-          <Popover content={props.infoBox} overlayClassName={'simple-popover'}>
-            <QuestionCircleOutlined className="add-info" />
-          </Popover>
-        )}
-      </div>
-    </li>
-  )
-}
+const INTERNAL_COOKIE = 'ui'
+const CONSENT_COOKIE = 'ui_consent'
 
 const INITIAL_COOKIE_STATE = {
   [`cookies.marketing`]: {
@@ -58,8 +36,6 @@ const INITIAL_COOKIE_STATE = {
 
 const CookieConsent = (props) => {
   const cookieBanner = useContent()?.metaData?.cookieBanner
-  const gaCookieName = 'ga_cookie' // defaultOptions.googleAnalytics.cookieName
-  const fbCookieName = 'fb_cookie' // defaultOptions.facebookPixel.cookieName
   const [visible, setVisible] = useState(false)
   const [cookiesState, setCookiesState] = useState(INITIAL_COOKIE_STATE)
 
@@ -71,42 +47,17 @@ const CookieConsent = (props) => {
 
   const [cookies, setReactCookie] = useCookies()
 
-  useEffect(() => {
-    const { debug } = props
-
-    if (getCookieValue(gaCookieName) === undefined || debug) {
-      setTimeout(() => {
-        setVisible(true)
-      }, 1000)
-    }
-  }, [])
-
-  /**
-   * Set a persistent accept cookie
-   */
   const accept = () => {
-    setCookie(gaCookieName, 'true')
-    setCookie(fbCookieName, 'true')
+    setCookie(CONSENT_COOKIE, 'true')
+    setCookie(INTERNAL_COOKIE, window.ui || uuidv4())
     setVisible(false)
-    // init tracking
-    // initializeAndTrack(location)
   }
 
-  /**
-   * Set a persistent decline cookie
-   */
   const decline = () => {
-    setCookie(gaCookieName, 'false')
-    setCookie(fbCookieName, 'false')
+    setCookie(CONSENT_COOKIE, 'false')
     setVisible(false)
-    // init tracking
-    // initializeAndTrack(location)
   }
 
-  /**
-   * Get the legacy cookie name by the regular cookie name
-   * @param {string} name of cookie to get
-   */
   const getLegacyCookieName = (name) => {
     return `${name}-legacy`
   }
@@ -148,11 +99,6 @@ const CookieConsent = (props) => {
     setReactCookie(cookieName, cookieValue, cookieOptions)
   }
 
-  /**
-   * Returns the value of the consent cookie
-   * Retrieves the regular value first and if not found the legacy one according
-   * to: https://web.dev/samesite-cookie-recipes/#handling-incompatible-clients
-   */
   const getCookieValue = (cookieName) => {
     let cookieValue = cookies[cookieName]
 
@@ -164,19 +110,34 @@ const CookieConsent = (props) => {
     return cookieValue
   }
 
-  // // If the bar shouldn't be visible don't render anything.
-  if (!visible) {
-    return null
-  }
-
-  const { body, title } = cookieBanner
-  const buttonText = cookieBanner.acceptButton
-  const declineButtonText = cookieBanner.denyButton
-
   const variants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1 },
   }
+
+  // cookie states to handle
+  const isNewUser = getCookieValue(CONSENT_COOKIE) === undefined || props.debug
+  const hasDeniedCookies = getCookieValue(CONSENT_COOKIE) === 'false'
+
+  useEffect(() => {
+    // if the user has already an accept cookie set, do nothing
+    // if the user has already a decline cookie set, create a uuid
+    // and expose via window variable
+    if (hasDeniedCookies || isNewUser) {
+      const uuid = uuidv4()
+      window[INTERNAL_COOKIE] = uuid
+    }
+
+    // show consent banner: if the user accepts,
+    // use the window uuid to set the cookie
+    if (isNewUser) {
+      setTimeout(() => {
+        setVisible(true)
+      }, 1000)
+    }
+  }, [])
+
+  if (!visible) return null
 
   return (
     <ConditionalWrapper
@@ -191,15 +152,15 @@ const CookieConsent = (props) => {
         variants={variants}
       >
         <div className="cookie-content">
-          <div className="title">{title}</div>
-          <div className="description">{text(body)}</div>
+          <div className="title">{cookieBanner?.title}</div>
+          <div className="description">{text(cookieBanner?.body)}</div>
           <div className="consent">
             <ul>
-              {cookieBanner.levelsCollection?.items.map((level, i) => {
+              {cookieBanner?.levelsCollection?.items.map((level, i) => {
                 return (
                   <CookieSelector
                     disabled={cookiesState[level.key].disabled}
-                    infoBox={cookieBanner.infoboxStats}
+                    infoBox={cookieBanner?.infoboxStats}
                     isActive={cookiesState[level.key].value}
                     key={`level-${i}`}
                     showInfo={cookiesState[level.key].showInfo}
@@ -225,7 +186,7 @@ const CookieConsent = (props) => {
               size="large"
               type="primary"
             >
-              {buttonText}
+              {cookieBanner?.acceptButton}
             </Button>
           </Col>
           <Col xs={12}>
@@ -239,7 +200,7 @@ const CookieConsent = (props) => {
               size="large"
               type="primary"
             >
-              {declineButtonText}
+              {cookieBanner?.denyButton}
             </Button>
           </Col>
         </Row>

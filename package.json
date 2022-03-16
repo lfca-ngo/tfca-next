@@ -13,6 +13,7 @@
     "@contentful/rich-text-plain-text-renderer": "^15.11.1",
     "@next/bundle-analyzer": "^12.1.0",
     "antd": "4.18.7",
+    "axios": "^0.26.1",
     "classnames": "^2.3.1",
     "framer-motion": "^6.2.6",
     "graphql": "^16.3.0",
@@ -29,7 +30,8 @@
     "react-minimal-pie-chart": "^8.2.0",
     "react-query": "^3.34.15",
     "sharp": "^0.30.1",
-    "snarkdown": "^2.0.0"
+    "snarkdown": "^2.0.0",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "12.0.10",
