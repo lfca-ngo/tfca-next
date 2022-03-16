@@ -1,5 +1,3 @@
-// import axios from 'axios'
-// import { useCookies } from 'react-cookie'
 import axios from 'axios'
 import { useEffect } from 'react'
 import { useCookies } from 'react-cookie'
@@ -8,7 +6,7 @@ import { getWindowUid, INITIAL_STATS, INTERNAL_COOKIE } from '../utils'
 
 export const COOKIE = 'userId'
 
-const COLLECTION_ID = 'events'
+const COLLECTION_ID = 'base'
 const LOG = 'log'
 const VISUALIZE = 'visualize/data'
 const DEFAULT_HEADERS = { 'Content-Type': 'application/json' }
@@ -19,7 +17,7 @@ const DEFAULT_PAYLOAD = {
   collection: COLLECTION_ID,
 }
 
-export const trackEvent = (name, userId, values) => {
+export const trackEvent = ({ name, userId, values }) => {
   const event = {
     Event: name,
     User_ID: userId,
@@ -42,17 +40,20 @@ export const trackEvent = (name, userId, values) => {
 
 export const useTrackEvent = ({ name, values, withTrigger }) => {
   const [cookies] = useCookies()
+  const withConsent = Boolean(cookies[INTERNAL_COOKIE])
   const userId = cookies[INTERNAL_COOKIE] || getWindowUid()
+  const eventPayload = { consent: withConsent, name, userId, values }
 
+  // if a trigger is set do not track the event on mount
   useEffect(() => {
-    // if a trigger is set do not track the event on mount
     if (withTrigger) return
-    trackEvent(name, userId, values)
+    trackEvent(eventPayload)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  // custom trigger can add additional scoped values
   const triggerTrackEvent = ({ name, values }) => {
-    trackEvent(name, userId, values)
+    trackEvent({ ...eventPayload, name, values })
   }
 
   return triggerTrackEvent
@@ -64,7 +65,7 @@ export const fetchStats = () => {
     aggregation: 'Count',
     compare: null,
     end: 'now',
-    filters: [],
+    filters: [['Event', '=', 'action_completed']],
     graph_type: 'Table',
     IANA_time_zone: 'Europe/London',
     metric: null,
