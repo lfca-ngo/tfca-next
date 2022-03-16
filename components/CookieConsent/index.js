@@ -92,12 +92,9 @@ const CookieConsent = (props) => {
   const hasDeniedCookies = getCookieValue(CONSENT_COOKIE) === 'false'
 
   useEffect(() => {
-    // if the user has already an accept cookie set, do nothing
-    // if the user has already a decline cookie set, create a uuid
-    // and expose via window variable
-    if (hasDeniedCookies || isNewUser) {
-      getWindowUid()
-    }
+    // if the user has already a decline cookie set or is new
+    // make sure that a uid is generated and assigned to window var
+    if (hasDeniedCookies || isNewUser) getWindowUid()
 
     // show consent banner: if the user accepts,
     // use the window uuid to set the cookie

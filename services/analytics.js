@@ -4,45 +4,20 @@ import axios from 'axios'
 import { useEffect } from 'react'
 import { useCookies } from 'react-cookie'
 
-import { getWindowUid, INTERNAL_COOKIE, isDev } from '../utils'
+import { getWindowUid, INTERNAL_COOKIE } from '../utils'
 
 export const COOKIE = 'userId'
 
-const BASE_API = isDev
-  ? process.env.NEXT_PUBLIC_ANALYTICS_API_URL_DEV
-  : process.env.NEXT_PUBLIC_ANALYTICS_API_URL
-
-const TRACKING = `apiUtilsTfca`
 const COLLECTION_ID = 'events'
-// const ANALYTICS = `apiUtilsAnalytics`
+const LOG = 'log'
+const VISUALIZE = 'visualize/data'
+const DEFAULT_HEADERS = { 'Content-Type': 'application/json' }
+const POST = 'post'
 
-// tracking can be manually disabled in development
-// by setting TRACKING_DISABLED to true
-// const TRACKING_DISABLED = isDev && true
-
-// export const useAnalytics = () => {
-//   const [cookies, setReactCookie] = useCookies()
-//   const userId = cookies[COOKIE]
-
-//   const trackUser = async () => {
-//     const newUserId = await trackUserApi()
-//     setReactCookie(COOKIE, newUserId)
-//     return newUserId
-//   }
-
-//   const trackEvent = async (name, values) => {
-//     if (TRACKING_DISABLED) return { status: 200 }
-
-//     if (!userId) {
-//       const newUserId = await trackUser()
-//       return trackEventApi(newUserId, name, values)
-//     } else {
-//       return trackEventApi(userId, name, values)
-//     }
-//   }
-
-//   return { trackEvent }
-// }
+const DEFAULT_PAYLOAD = {
+  api_key: process.env.NEXT_PUBLIC_GRAPH_JSON_API_KEY,
+  collection: COLLECTION_ID,
+}
 
 export const trackEvent = (name, userId, values) => {
   const event = {
@@ -52,17 +27,16 @@ export const trackEvent = (name, userId, values) => {
   }
 
   const payload = {
-    api_key: process.env.NEXT_PUBLIC_GRAPH_JSON_API_KEY,
-    collection: COLLECTION_ID,
+    ...DEFAULT_PAYLOAD,
     json: JSON.stringify(event),
     timestamp: Math.floor(new Date().getTime() / 1000),
   }
 
   axios({
     data: payload,
-    headers: { 'Content-Type': 'application/json' },
-    method: 'post',
-    url: `${process.env.NEXT_PUBLIC_GRAPH_JSON_URL}`,
+    headers: DEFAULT_HEADERS,
+    method: POST,
+    url: `${process.env.NEXT_PUBLIC_GRAPH_JSON_URL}/${LOG}`,
   })
 }
 
@@ -76,41 +50,20 @@ export const useTrackEvent = (name, values) => {
   }, [])
 }
 
-// DEPRECATED
-
 export const fetchStats = () => {
-  const endpoint = `${BASE_API}/${TRACKING}`
-  return fetch(endpoint)
-    .then((response) => response.json())
-    .then((data) => data?.topics?.actions_count)
+  const payload = {
+    ...DEFAULT_PAYLOAD,
+    end: 'now',
+    filters: [['project', '=', 'callum_runs_prod']],
+    graph_type: 'Samples',
+    IANA_time_zone: 'Europe/London',
+    start: '1 day ago',
+  }
+
+  return axios({
+    data: payload,
+    headers: DEFAULT_HEADERS,
+    method: POST,
+    url: `${process.env.NEXT_PUBLIC_GRAPH_JSON_URL}/${VISUALIZE}`,
+  }).then(({ data }) => data || null)
 }
-
-// export const pushStat = (actionName, data) => {
-//   const config = {
-//     Accept: 'application/json',
-//     'Content-Type': 'application/json',
-//   }
-//   const endpoint = `${BASE_API}/${TRACKING}/${actionName}`
-//   return axios.post(endpoint, data, config)
-// }
-
-// const trackUserApi = async () => {
-//   const config = {
-//     Accept: 'application/json',
-//     'Content-Type': 'application/json',
-//   }
-//   const endpoint = `${BASE_API}/${ANALYTICS}`
-//   return axios.post(endpoint, {}, config).then((res) => {
-//     if (res.status === 200) return res.data?.userId
-//     else return null
-//   })
-// }
-
-// const trackEventApi = async (userId, name, values) => {
-//   const config = {
-//     Accept: 'application/json',
-//     'Content-Type': 'application/json',
-//   }
-//   const endpoint = `${BASE_API}/${ANALYTICS}/${userId}`
-//   return axios.post(endpoint, { data: values, name: name }, config)
-// }
