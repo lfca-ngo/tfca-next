@@ -19,7 +19,7 @@ export const ChallengeProvider = ({ children, customization = null }) => {
   const [showConfetti, setShowConfetti] = useState(false)
   const [progress, setProgress] = useState(0)
 
-  useTrackEvent('page_visit')
+  useTrackEvent({ name: 'page_visit' })
   return (
     <ChallengeContext.Provider
       value={{ customization, progress, setProgress, setShowConfetti }}

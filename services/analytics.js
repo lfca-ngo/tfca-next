@@ -40,14 +40,22 @@ export const trackEvent = (name, userId, values) => {
   })
 }
 
-export const useTrackEvent = (name, values) => {
+export const useTrackEvent = ({ name, values, withTrigger }) => {
   const [cookies] = useCookies()
   const userId = cookies[INTERNAL_COOKIE] || getWindowUid()
 
   useEffect(() => {
+    // if a trigger is set do not track the event on mount
+    if (withTrigger) return
     trackEvent(name, userId, values)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  const triggerTrackEvent = ({ name, values }) => {
+    trackEvent(name, userId, values)
+  }
+
+  return triggerTrackEvent
 }
 
 export const fetchStats = () => {
