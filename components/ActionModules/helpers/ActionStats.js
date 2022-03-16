@@ -1,60 +1,62 @@
-import Icon from '@ant-design/icons'
-import { Tag } from 'antd'
+import {
+  CoffeeOutlined,
+  LikeOutlined,
+  UsergroupAddOutlined,
+} from '@ant-design/icons'
+import { Progress, Tag } from 'antd'
 import React from 'react'
 
-import IconTimer from '../../../assets/icons/counter.svg'
-import IconKg from '../../../assets/icons/kg.svg'
-import IconUsers from '../../../assets/icons/users.svg'
 import { useBlocks } from '../../../hooks/useTranslation'
 import { text } from '../../../utils/Text'
+
+const STEPS = 5
 
 const Stat = (props) => {
   return (
     <div className="stats-wrapper">
       <div className="stat">
-        <Tag>
-          <Icon component={props.icon} /> {props.data}
-        </Tag>{' '}
+        <Tag>{props.icon}</Tag>{' '}
       </div>
 
       <div className="description-wrapper">
-        <div className="description">{props.text}</div>
+        <div className="label">{props.text}</div>
+        <div className="data">{props.data}</div>
       </div>
     </div>
   )
 }
 
-const minTwoDigits = (n) => {
-  return (n < 10 ? '0' : '') + n
-}
-
 const ActionStats = (props) => {
-  const minLeft = Math.floor(props.timeLeft / 60)
-  const secondsLeft = props.timeLeft % 60
-  const time = props.timeLeft ? `${minLeft}:${minTwoDigits(secondsLeft)}` : null
-
   return (
     <div className="action-stats">
       <Stat
-        data={props.otherUsers}
-        icon={IconUsers}
-        isFocus={false}
+        data={props.otherUsers || 0}
+        icon={<UsergroupAddOutlined />}
         text={text(useBlocks('stats.usersdoingthis'))}
       />
 
       <Stat
-        data={props.timeToImplement}
-        icon={IconTimer}
-        isFocus={false}
-        overwriteData={time}
-        text={text(useBlocks('stats.timetoimplement'))}
+        data={
+          <Progress
+            percent={props.impact * (100 / STEPS)}
+            showInfo={false}
+            steps={STEPS}
+          />
+        }
+        icon={<LikeOutlined />}
+        text={text(useBlocks('stats.impact'))}
       />
 
       <Stat
-        data={props.carbonSaved}
-        icon={IconKg}
-        isFocus={false}
-        text={text(useBlocks('stats.carbonsaved'))}
+        data={
+          <Progress
+            percent={props.effort * (100 / STEPS)}
+            showInfo={false}
+            steps={STEPS}
+          />
+        }
+        icon={<CoffeeOutlined />}
+        text={text(useBlocks('stats.effort'))}
       />
     </div>
   )

@@ -36,11 +36,11 @@ const ActionWrapper = (props) => {
         </div>
         <div className="footer">
           <ActionStats
-            carbonSaved={props.carbonSaved}
+            effort={props.effort}
+            impact={props.impact}
             name={props.name}
             otherUsers={props.otherUsers}
             timeLeft={null}
-            timeToImplement={props.timeToImplement}
           />
         </div>
       </motion.div>

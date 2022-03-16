@@ -4,17 +4,13 @@ import React from 'react'
 import ActionModules from '../../../components/ActionModules'
 import SplitLayout from '../../../components/Layout/SplitLayout'
 import { QualifiedCompanyFragment } from '../../../fragments/contentful'
-import {
-  fetchAllActions,
-  fetchAllStaticContent,
-  // fetchContent,
-} from '../../../services/contentful'
+import { fetchAllStaticData } from '../../../services'
 import { fetchData } from '../../../services/lfca'
 
-export default function SupporterPage({ actions, company }) {
+export default function SupporterPage({ actions, company, stats }) {
   return (
     <SplitLayout company={company} layout={actions?.layout} nav={actions?.nav}>
-      <ActionModules actions={actions?.items} />
+      <ActionModules actions={actions?.items} stats={stats} />
     </SplitLayout>
   )
 }
@@ -34,10 +30,8 @@ export async function getStaticProps({ locale, params }) {
   // we have the locale and can get
   // the correct translations in build
   // time by passing it to the query
-  const { actionCollection, companySlug } = params
-
-  const actions = await fetchAllActions(locale, actionCollection)
-  const content = await fetchAllStaticContent(locale)
+  const { actionCollectionSlug, companySlug } = params
+  const staticData = await fetchAllStaticData(locale, actionCollectionSlug)
 
   /**
    * NOTE:
@@ -60,9 +54,8 @@ export async function getStaticProps({ locale, params }) {
 
   return {
     props: {
-      actions,
+      ...staticData,
       company,
-      content,
       customization: {
         from: companySlug,
         to: 'YOU!',

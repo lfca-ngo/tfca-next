@@ -7,6 +7,8 @@ import React, {
 } from 'react'
 import Confetti from 'react-confetti'
 
+import { useTrackEvent } from '../services/analytics'
+
 export const ChallengeContext = createContext(null)
 
 // Provider to share all challenge specific data
@@ -17,6 +19,7 @@ export const ChallengeProvider = ({ children, customization = null }) => {
   const [showConfetti, setShowConfetti] = useState(false)
   const [progress, setProgress] = useState(0)
 
+  useTrackEvent({ name: 'page_visit' })
   return (
     <ChallengeContext.Provider
       value={{ customization, progress, setProgress, setShowConfetti }}

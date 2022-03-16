@@ -70,10 +70,15 @@
     .color-module(@orange);
   }
 
+  .action-container {
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+
   .action-body {
-    padding: 120px 0;
+    padding: 100px 0;
     @media @desktop {
-      padding: 130px 0 50px;
+      padding: 110px 0 50px;
     }
     .form-spacing {
       margin: 20px 0;
@@ -178,28 +183,44 @@
     }
     .stats-wrapper {
       display: flex;
+      margin-right: 30px;
 
-      white-space: normal;
-      flex: 0 0 46%;
-      @media (min-width: @screen-md) {
-        flex: 0 0 33%;
+      .ant-progress-text {
+        display: none;
       }
+
+      .ant-progress-steps-item-active {
+        background: @secondary-color;
+      }
+
       .stat {
         margin: 0;
       }
       .ant-tag {
-        padding: 4px 8px;
+        height: 40px;
+        width: 40px;
         white-space: nowrap;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 6px;
+        margin-right: 16px;
+        .anticon {
+          color: @white;
+          font-size: @font-size-lg;
+        }
       }
       .description-wrapper {
         position: relative;
         flex-grow: 1;
-        .description {
-          position: absolute;
-          padding: 0 10px 0 4px;
-          display: inline-block;
+
+        .label {
           font-size: 13px;
-          line-height: 1.1;
+          color: fade(@white, 85%);
+        }
+        .data {
+          .font-medium(@white);
+          font-size: 19px;
         }
       }
     }

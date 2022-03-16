@@ -6,9 +6,13 @@ import React from 'react'
 import { useChallenge } from '../../../hooks/useChallenge'
 import { useIsMobile } from '../../../hooks/useIsClient'
 import { useBlocks } from '../../../hooks/useTranslation'
+import { useTrackEvent } from '../../../services/analytics'
 import { text } from '../../../utils/Text'
 
-export const Hero = (props) => {
+export const Hero = () => {
+  // just for testing, TODO: remove
+  const trackEvent = useTrackEvent({ withTrigger: true })
+
   const isMobile = useIsMobile()
   const { customization } = useChallenge()
   const customHeaderText = (
@@ -40,7 +44,13 @@ export const Hero = (props) => {
       <div className="start-btn">
         <Button
           className="ant-btn-xl"
-          onClick={props.onClick}
+          // onClick={props.onClick}
+          onClick={() =>
+            trackEvent({
+              name: 'action_completed',
+              values: { action_id: 'climate_activism' },
+            })
+          }
           size="large"
           type="primary"
         >

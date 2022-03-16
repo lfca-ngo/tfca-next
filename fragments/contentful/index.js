@@ -262,7 +262,8 @@ export const ActionFragment = gql`
     name
     actionId
     carbonSaved
-    timeToImplement
+    impact
+    effort
     icon {
       url
     }
@@ -449,7 +450,9 @@ export const MetaDataFragment = gql`
     cookieBanner {
       name
       title
-      disclaimer
+      body {
+        json
+      }
       acceptButton
       denyButton
       levelsCollection(limit: 5) {

@@ -4,19 +4,16 @@ import React from 'react'
 
 import ActionModules from '../../../components/ActionModules'
 import SplitLayout from '../../../components/Layout/SplitLayout'
-import {
-  fetchAllActions,
-  fetchAllStaticContent,
-} from '../../../services/contentful'
+import { fetchAllStaticData } from '../../../services'
 
-export default function InvitePage({ actions, ogImageUrl }) {
+export default function InvitePage({ actions, ogImageUrl, stats }) {
   return (
     <>
       <Head>
         <meta content={ogImageUrl} property="og:image" />
       </Head>
       <SplitLayout layout={actions?.layout} nav={actions?.nav}>
-        <ActionModules actions={actions?.items} />
+        <ActionModules actions={actions?.items} stats={stats} />
       </SplitLayout>
     </>
   )
@@ -37,13 +34,11 @@ export async function getStaticProps(props) {
     } = jwt.verify(shareToken, process.env.JWT_TOKEN_PRIVATE_KEY)
 
     // Fetch content
-    const actions = await fetchAllActions(locale, actionCollectionSlug)
-    const content = await fetchAllStaticContent(locale)
+    const staticData = await fetchAllStaticData(locale, actionCollectionSlug)
 
     return {
       props: {
-        actions,
-        content,
+        ...staticData,
         customization: {
           from: sender.name,
           to: `${invitee1.name}, ${invitee2.name} and ${invitee3.name}`,

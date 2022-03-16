@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from 'uuid'
+
 import { text } from './Text'
 export * from './create-share-svg'
 
@@ -68,3 +70,31 @@ export const SINGLE = 'single'
 export const MULTI = 'multi'
 export const EMBED = 'embed'
 export const DEFAULT = 'default'
+
+export const SAME_SITE_OPTIONS = {
+  LAX: 'lax',
+  NONE: 'none',
+  STRICT: 'strict',
+}
+
+export const INTERNAL_COOKIE = 'ui'
+export const CONSENT_COOKIE = 'ui_consent'
+
+// gets & sets uid in window variable
+export const getWindowUid = () => {
+  if (!isBrowser()) return null
+  if (window.ui) return window.ui
+  const newUid = uuidv4()
+  window.ui = newUid
+  return newUid
+}
+
+export const INITIAL_STATS = {
+  climate_activism: 1386,
+  ecosia: 1252,
+  green_finances: 746,
+  measure_reduce: 3805,
+  politics: 2781,
+  share_deck: 969,
+  switch_energy: 2218,
+}

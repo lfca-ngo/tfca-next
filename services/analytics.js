@@ -1,73 +1,92 @@
 import axios from 'axios'
+import { useEffect } from 'react'
 import { useCookies } from 'react-cookie'
 
-import { isDev } from '../utils'
+import { getWindowUid, INITIAL_STATS, INTERNAL_COOKIE } from '../utils'
 
 export const COOKIE = 'userId'
 
-const BASE_API = isDev
-  ? process.env.NEXT_PUBLIC_ANALYTICS_API_URL
-  : process.env.NEXT_PUBLIC_ANALYTICS_API_URL_DEV
+const COLLECTION_ID = 'base'
+const LOG = 'log'
+const VISUALIZE = 'visualize/data'
+const DEFAULT_HEADERS = { 'Content-Type': 'application/json' }
+const POST = 'post'
 
-const TRACKING = `apiUtilsTfca`
-const ANALYTICS = `apiUtilsAnalytics`
-
-// tracking can be manually disabled in development
-// by setting TRACKING_DISABLED to true
-const TRACKING_DISABLED = isDev && true
-
-const useAnalytics = () => {
-  const [cookies, setReactCookie] = useCookies()
-  const userId = cookies[COOKIE]
-
-  const trackUser = async () => {
-    const newUserId = await trackUserApi()
-    setReactCookie(COOKIE, newUserId)
-    return newUserId
-  }
-
-  const trackEvent = async (name, values) => {
-    if (TRACKING_DISABLED) return { status: 200 }
-
-    if (!userId) {
-      const newUserId = await trackUser()
-      return trackEventApi(newUserId, name, values)
-    } else {
-      return trackEventApi(userId, name, values)
-    }
-  }
-
-  return { trackEvent }
+const DEFAULT_PAYLOAD = {
+  api_key: process.env.NEXT_PUBLIC_GRAPH_JSON_API_KEY,
+  collection: COLLECTION_ID,
 }
 
-export default useAnalytics
-
-export const pushStat = (actionName, data) => {
-  const config = {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
+export const trackEvent = ({ name, userId, values }) => {
+  const event = {
+    Event: name,
+    User_ID: userId,
+    ...values,
   }
-  const endpoint = `${BASE_API}/${TRACKING}/${actionName}`
-  return axios.post(endpoint, data, config)
-}
 
-const trackUserApi = async () => {
-  const config = {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
+  const payload = {
+    ...DEFAULT_PAYLOAD,
+    json: JSON.stringify(event),
+    timestamp: Math.floor(new Date().getTime() / 1000),
   }
-  const endpoint = `${BASE_API}/${ANALYTICS}`
-  return axios.post(endpoint, {}, config).then((res) => {
-    if (res.status === 200) return res.data?.userId
-    else return null
+
+  axios({
+    data: payload,
+    headers: DEFAULT_HEADERS,
+    method: POST,
+    url: `${process.env.NEXT_PUBLIC_GRAPH_JSON_URL}/${LOG}`,
   })
 }
 
-const trackEventApi = async (userId, name, values) => {
-  const config = {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
+export const useTrackEvent = ({ name, values, withTrigger }) => {
+  const [cookies] = useCookies()
+  const withConsent = Boolean(cookies[INTERNAL_COOKIE])
+  const userId = cookies[INTERNAL_COOKIE] || getWindowUid()
+  const eventPayload = { consent: withConsent, name, userId, values }
+
+  // if a trigger is set do not track the event on mount
+  useEffect(() => {
+    if (withTrigger) return
+    trackEvent(eventPayload)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  // custom trigger can add additional scoped values
+  const triggerTrackEvent = ({ name, values }) => {
+    trackEvent({ ...eventPayload, name, values })
   }
-  const endpoint = `${BASE_API}/${ANALYTICS}/${userId}`
-  return axios.post(endpoint, { data: values, name: name }, config)
+
+  return triggerTrackEvent
+}
+
+export const fetchStats = () => {
+  const payload = {
+    ...DEFAULT_PAYLOAD,
+    aggregation: 'Count',
+    compare: null,
+    end: 'now',
+    filters: [['Event', '=', 'action_completed']],
+    graph_type: 'Table',
+    IANA_time_zone: 'Europe/London',
+    metric: null,
+    split: 'action_id',
+    start: '03/14/2022 1:44 pm',
+  }
+
+  return axios({
+    data: payload,
+    headers: DEFAULT_HEADERS,
+    method: POST,
+    url: `${process.env.NEXT_PUBLIC_GRAPH_JSON_URL}/${VISUALIZE}`,
+  }).then(({ data }) => {
+    const { result } = data
+
+    const asObject = result.reduce((acc, curr) => {
+      // adding last year's stats
+      acc[curr.action_id] = curr.Count + INITIAL_STATS[curr.action_id]
+      return acc
+    }, {})
+
+    return asObject || null
+  })
 }
