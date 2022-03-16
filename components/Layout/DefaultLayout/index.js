@@ -1,12 +1,17 @@
 import React from 'react'
 
-const DefaultLayout = ({ children }) => {
+import { useNavs } from '../../../hooks/useTranslation'
+import Template from '../'
+import { DefaultNav } from '../DefaultNav'
+
+export const DefaultLayout = ({ children, title }) => {
+  const nav = useNavs('overview')
+
   return (
-    <div>
-      <div>I am normal Header - but what is normal?</div>
-      {children}
-    </div>
+    <Template>
+      <DefaultNav data={nav} />
+      <h1>{title}</h1>
+      <main>{children}</main>
+    </Template>
   )
 }
-
-export default DefaultLayout

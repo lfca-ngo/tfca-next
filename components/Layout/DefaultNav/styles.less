@@ -1,0 +1,21 @@
+@import (reference) '../../../styles/variables.less';
+@import (reference) '../../../styles/fonts.less';
+
+.default-nav {
+  display: flex;
+  justify-content: space-between;
+  nav {
+    .nav-items {
+      display: none;
+      @media @desktop {
+        display: block;
+      }
+    }
+    ul {
+      li {
+        display: inline;
+        padding: 12px 20px;
+      }
+    }
+  }
+}

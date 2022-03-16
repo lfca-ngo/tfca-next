@@ -153,6 +153,31 @@ export const fetchMetaDataLists = async (locale, settingsId) => {
   return lists
 }
 
+export const fetchPageBySlug = async (locale, slug) => {
+  const query = gql`
+    query ($locale: String, $slug: String) {
+      pageLocalCollection(limit: 1, locale: $locale, where: { slug: $slug }) {
+        items {
+          slug
+          layout
+          title
+          componentId
+        }
+      }
+    }
+  `
+
+  const variables = {
+    locale: locale,
+    slug: slug,
+  }
+
+  const { pageLocalCollection } = await fetchContent(query, variables)
+  const [pageData] = pageLocalCollection.items
+
+  return pageData
+}
+
 // collector function all contentful queries for the
 // translator provider that is used on every page
 // feeding non page related translations, e.g. navs
