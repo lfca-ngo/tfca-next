@@ -61,11 +61,15 @@ export const useTrackEvent = ({ name, values, withTrigger }) => {
 export const fetchStats = () => {
   const payload = {
     ...DEFAULT_PAYLOAD,
+    aggregation: 'Count',
+    compare: null,
     end: 'now',
-    filters: [['project', '=', 'callum_runs_prod']],
-    graph_type: 'Samples',
+    filters: [],
+    graph_type: 'Table',
     IANA_time_zone: 'Europe/London',
-    start: '1 day ago',
+    metric: null,
+    split: 'action_id',
+    start: '03/14/2022 1:44 pm',
   }
 
   return axios({
@@ -73,5 +77,14 @@ export const fetchStats = () => {
     headers: DEFAULT_HEADERS,
     method: POST,
     url: `${process.env.NEXT_PUBLIC_GRAPH_JSON_URL}/${VISUALIZE}`,
-  }).then(({ data }) => data || null)
+  }).then(({ data }) => {
+    const { result } = data
+
+    const asObject = result.reduce((acc, curr) => {
+      acc[curr.action_id] = curr.Count
+      return acc
+    }, {})
+
+    return asObject || null
+  })
 }

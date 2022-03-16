@@ -48,7 +48,7 @@ export const Hero = () => {
           onClick={() =>
             trackEvent({
               name: 'action_completed',
-              values: { action_id: 'green_finances' },
+              values: { action_id: 'climate_activism' },
             })
           }
           size="large"
