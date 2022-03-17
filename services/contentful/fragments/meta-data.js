@@ -12,7 +12,6 @@ export const MetaDataFragment = gql`
     regionsCollection(limit: 10) {
       items {
         name
-        isoCode
         icon {
           url
         }
