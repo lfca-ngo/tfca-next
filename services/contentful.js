@@ -161,7 +161,11 @@ export const fetchPageBySlug = async (locale, slug) => {
           slug
           layout
           title
+          subtitle
           componentId
+          body {
+            json
+          }
         }
       }
     }

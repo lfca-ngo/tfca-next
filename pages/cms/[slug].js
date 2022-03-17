@@ -10,6 +10,7 @@ import {
   fetchPageBySlug,
 } from '../../services/contentful'
 import { fetchData } from '../../services/lfca'
+import { Text } from '../../utils/Text'
 
 const DISCLOSURE_OVERVIEW = 'disclosureOverview'
 
@@ -23,9 +24,13 @@ const renderCustomComponent = (id, data) => {
 }
 
 export default function Page({ items, pageData }) {
-  console.log(pageData)
   return (
-    <DefaultLayout title={pageData?.title}>
+    <DefaultLayout subtitle={pageData?.subtitle} title={pageData?.title}>
+      {pageData?.body && (
+        <div className="page-body">
+          <Text block={pageData?.body} />
+        </div>
+      )}
       {renderCustomComponent(pageData?.componentId, items)}
     </DefaultLayout>
   )
@@ -52,9 +57,7 @@ export async function getStaticProps({ locale, params }) {
     pageData,
   }
 
-  // fetch qualified companies if requested
-  // not a wonderful solution but ok for now
-  // since layout will be the same on all of thse pages
+  // fetch qualified companies only if needed
   if (pageData?.componentId === DISCLOSURE_OVERVIEW) {
     const { qualifiedCompanies } = await fetchData(
       allParticipatingCompaniesQuery,
