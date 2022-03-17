@@ -5,6 +5,7 @@ import { text } from '../../../utils/Text'
 import {
   ActionDetails,
   BankDetails,
+  EnergyProviderDetails,
   OrganizationDetails,
 } from '../../Elements/DetailViews'
 import Category from '../helpers/Category'
@@ -44,6 +45,8 @@ const DetailView = (props) => {
       return <BankDetails item={props.item} />
     case 'organization':
       return <OrganizationDetails item={props.item} />
+    case 'energy-provider':
+      return <EnergyProviderDetails item={props.item} />
     default:
       return null
   }

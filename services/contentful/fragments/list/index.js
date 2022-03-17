@@ -3,6 +3,7 @@ import { gql } from 'graphql-request'
 import { BlockFragment } from '../block'
 import { CallToActionFragment } from '../call-to-action'
 import { DataBankFragment } from './data-bank'
+import { DataEnergyProviderFragment } from './data-energy-provider'
 import { DataOrganizationFragment } from './data-organization'
 import { DataPoliticalTopicFragment } from './data-political-topic'
 import { DataWorkFragment } from './data-work'
@@ -14,6 +15,7 @@ export const ListFragment = gql`
   ${BlockFragment}
   ${CallToActionFragment}
   ${DataBankFragment}
+  ${DataEnergyProviderFragment}
   ${DataOrganizationFragment}
   ${DataPoliticalTopicFragment}
   ${DataWorkFragment}
@@ -37,6 +39,7 @@ export const ListFragment = gql`
       items {
         ...BlockFragment
         ...DataBankFragment
+        ...DataEnergyProviderFragment
         ...DataOrganizationFragment
         ...DataPoliticalTopicFragment
         ...DataWorkFragment
