@@ -15,8 +15,8 @@ const ActionModules = (props) => {
         return <SwitchEnergy key={action.actionId} module={action} />
       case 'action_finder':
         return <ActionFinderFlow key={action.actionId} module={action} />
-      case 'politics':
-        return <Politics key={action.actionId} module={action} />
+      // case 'politics':
+      //   return <Politics key={action.actionId} module={action} />
       case 'quiz':
         return <Quiz key={action.actionId} module={action} />
       default:
