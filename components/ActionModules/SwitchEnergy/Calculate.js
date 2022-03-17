@@ -67,7 +67,7 @@ export const EnergyForm = ({ blocks, data, initialValues, onFinish }) => {
         <Input.Group>
           <Row gutter={8}>
             <Col xs={isMobile ? 12 : 10}>
-              {ITEMS.users(blocks, data?.input_users?.items)}
+              {ITEMS.users(blocks, data?.['input.users']?.items)}
             </Col>
             <Col xs={isMobile ? 12 : 14}>{ITEMS.postcode(blocks)}</Col>
           </Row>

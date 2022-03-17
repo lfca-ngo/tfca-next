@@ -97,7 +97,7 @@ const Results = ({
         }
       />
       <h2>{text(blocks['results.title'])}</h2>
-      <CheckList data={lists.comparison_benefits} />
+      <CheckList data={lists['comparison.benefits']} />
 
       <Row>
         <Col xs={12}>
