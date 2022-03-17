@@ -3,26 +3,23 @@ require('./styles.less')
 import Link from 'next/link'
 import React, { useState } from 'react'
 
+import { useNavs } from '../../../hooks/useTranslation'
 import { DisclosureDrawer } from '../../Disclosure/DisclosureDrawer'
 import { DarkModeSelector } from '../../Elements/DarkModeSelector'
 import { IntlSelector } from '../../IntlSelector'
 
-const LINKS = [
-  { title: 'Why act?', url: '/privacy' },
-  { title: 'Questions?', url: '/imprint' },
-]
-
 export const Nav = (props) => {
   const [visible, setVisible] = useState(false)
   const toggle = () => setVisible(!visible)
+  const mainNav = useNavs('mainHeaderNav')
 
   return (
     <nav className={`${props.className} nav`}>
       <ul>
-        {LINKS.map((link, i) => {
+        {mainNav?.elementsCollection?.items?.map((link, i) => {
           return (
             <li key={`link-${i}`}>
-              <Link href={link.url}>{link.title}</Link>
+              <Link href={link.slug || link.url || ''}>{link.title}</Link>
             </li>
           )
         })}
