@@ -34,11 +34,6 @@ export const EnergyProviderDetails = ({ item }) => {
                 shape="round"
                 type="primary"
               />
-              <Button block shape="round" type="primary">
-                {item?.pricePerMonth
-                  ? `${item?.pricePerMonth} ${item?.currency}`
-                  : 'Free'}
-              </Button>
             </Space>
           </div>
         </div>
@@ -53,26 +48,6 @@ export const EnergyProviderDetails = ({ item }) => {
         <List
           className="simple-list white"
           dataSource={item?.benefitsCollection?.items}
-          renderItem={(item) => (
-            <List.Item>
-              <List.Item.Meta
-                avatar={<CheckOutlined />}
-                description={text(item.value)}
-              />
-            </List.Item>
-          )}
-        />
-      </div>
-
-      <div className="sustainability">
-        <div className="section-title title">
-          <PlusCircleOutlined />
-          Sustainability
-        </div>
-
-        <List
-          className="simple-list white"
-          dataSource={item?.sustainabilityCollection?.items}
           renderItem={(item) => (
             <List.Item>
               <List.Item.Meta

@@ -27,7 +27,9 @@ export const ScrollableFilters = (props) => {
               maxTagPlaceholder={(omittedValues) =>
                 `${omittedValues.length} filters`
               }
-              mode="multiple"
+              mode={
+                filter?.filterMode?.indexOf('-multi') > -1 ? 'multiple' : null
+              }
               placeholder="Please select"
               size="small"
             >
