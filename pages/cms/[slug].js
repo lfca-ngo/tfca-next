@@ -3,13 +3,13 @@ import React from 'react'
 
 import { DisclosureOverview } from '../../components/DisclosureOverview'
 import { DefaultLayout } from '../../components/Layout/DefaultLayout'
-import { QualifiedCompanyFragment } from '../../fragments/contentful'
 import {
   fetchAllStaticContent,
   fetchContent,
   fetchPageBySlug,
 } from '../../services/contentful'
 import { fetchData } from '../../services/lfca'
+import { QualifiedCompanyItemFragment } from '../../services/lfca/fragments'
 import { Text } from '../../utils/Text'
 
 const DISCLOSURE_OVERVIEW = 'disclosureOverview'
@@ -41,11 +41,11 @@ export default function Page({ items, pageData }) {
 }
 
 const allParticipatingCompaniesQuery = gql`
-  ${QualifiedCompanyFragment}
+  ${QualifiedCompanyItemFragment}
   query qualifiedCompanies($input: QualifiedCompaniesInput) {
     qualifiedCompanies(input: $input) {
       ... on QualifiedCompanyItem {
-        ...QualifiedCompanyFragment
+        ...QualifiedCompanyItemFragment
       }
     }
   }

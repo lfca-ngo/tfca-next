@@ -3,7 +3,12 @@ import React from 'react'
 
 import { LIST_GRIDS } from '../../../utils'
 import { text } from '../../../utils/Text'
-import { ActionCard, BankCard, OrganizationCard } from '../../Elements/Cards'
+import {
+  ActionCard,
+  BankCard,
+  EnergyProviderCard,
+  OrganizationCard,
+} from '../../Elements/Cards'
 import { ScrollableFilters } from '../../Elements/ScrollableFilters'
 import Category from '../helpers/Category'
 import { StepHeader } from '../helpers/StepHeader'
@@ -26,11 +31,12 @@ const Results = (props) => {
       const itemValues = item?.[collectionName]?.items?.map((i) => i.key)
       const storeValues = props.store[fieldName]
       const isEmpty = !storeValues || storeValues?.length === 0
-
-      const matches = !isEmpty
+      const isArray = Array.isArray(storeValues)
+      const isMatch = isArray
         ? storeValues?.some((v) => itemValues?.includes(v))
-        : true
-      if (!matches) return false
+        : itemValues?.includes(storeValues)
+
+      if (!isMatch && !isEmpty) return false
     }
     return true
   }
@@ -86,6 +92,8 @@ const ItemCard = (props) => {
       return <BankCard item={props.item} onNext={props.onNext} />
     case 'organization':
       return <OrganizationCard item={props.item} onNext={props.onNext} />
+    case 'energy-provider':
+      return <EnergyProviderCard item={props.item} onNext={props.onNext} />
     default:
       return null
   }
