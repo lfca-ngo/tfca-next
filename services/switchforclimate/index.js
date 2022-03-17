@@ -1,7 +1,7 @@
 import { gql, request } from 'graphql-request'
 import { useQuery } from 'react-query'
 
-import { SwitchRateFragment } from '../fragments/switch-for-the-climate'
+import { SwitchRateFragment } from './fragments'
 
 // Graphql Layer
 export const fetchData = async (query, variables) => {

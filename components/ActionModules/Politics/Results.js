@@ -1,7 +1,7 @@
 import { List } from 'antd'
 import React from 'react'
 
-import { useMEPs } from '../../../services/meps'
+import { usePoliticians } from '../../../services/politicians'
 import { LIST_GRIDS } from '../../../utils'
 import { text } from '../../../utils/Text'
 import { PoliticianCard } from '../../Elements/Cards'
@@ -18,7 +18,7 @@ export const Results = ({
   setStore,
   store,
 }) => {
-  const { data, error, isLoading } = useMEPs(
+  const { data, error, isLoading } = usePoliticians(
     store?.country,
     store?.topic?.delegationsCommittees || []
   )
@@ -51,9 +51,7 @@ export const Results = ({
             email: item.email,
             imageUrl: item.imageUrl,
             name: item.fullName,
-            // TODO: Uncomment and use politicalParty again
-            // tags: [item.nationalPoliticalGroup, item.politicalGroup],
-            tags: item.badges,
+            tags: [item.nationalPoliticalGroup],
           }))}
           grid={LIST_GRIDS['1-col']}
           loading={isLoading}
