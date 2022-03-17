@@ -161,6 +161,7 @@ export const fetchPageBySlug = async (locale, slug) => {
           slug
           layout
           title
+          style
           subtitle
           componentId
           body {

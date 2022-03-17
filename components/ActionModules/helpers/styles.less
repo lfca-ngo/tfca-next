@@ -3,6 +3,8 @@
 @import (reference) '../../../styles/mixins.less';
 
 .action-wrapper {
+  .apply-color-scheme();
+
   align-items: center;
   position: relative;
   overflow: hidden;
@@ -55,19 +57,6 @@
       color: @white;
       border: none;
     }
-  }
-
-  &.color-1 {
-    .color-module(@blue);
-  }
-  &.color-2 {
-    .color-module(@green);
-  }
-  &.color-3 {
-    .color-module(@lila);
-  }
-  &.color-4 {
-    .color-module(@orange);
   }
 
   .action-container {

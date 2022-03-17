@@ -1,7 +1,10 @@
 @import (reference) '../../../styles/variables.less';
 @import (reference) '../../../styles/fonts.less';
+@import (reference) '../../../styles/mixins.less';
 
 .default-nav {
+  .apply-color-scheme();
+
   display: flex;
   justify-content: space-between;
   .logo {
@@ -18,7 +21,7 @@
         align-items: center;
         justify-items: center;
         padding-top: inherit !important;
-        color: var(--text-color);
+        color: @white;
         .ant-avatar {
           margin-right: 8px;
         }

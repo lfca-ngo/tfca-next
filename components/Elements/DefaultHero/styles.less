@@ -1,9 +1,25 @@
 @import (reference) '../../../styles/variables.less';
 @import (reference) '../../../styles/fonts.less';
+@import (reference) '../../../styles/mixins.less';
 
 .default-hero {
-  text-align: center;
-  max-width: @container-header-width;
-  margin: 0 auto;
-  padding: 80px 0 60px;
+  .apply-color-scheme();
+
+  .text-wrapper {
+    text-align: center;
+    max-width: @container-header-width;
+    margin: 0 auto;
+    padding: 80px 0 60px;
+    h1 {
+      color: @white;
+    }
+    h2 {
+      font-size: 19px;
+      margin-bottom: 30px;
+      .font-medium(fade(@white, 90%));
+      @media @desktop {
+        font-size: 26px;
+      }
+    }
+  }
 }

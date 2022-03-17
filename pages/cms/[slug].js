@@ -25,7 +25,11 @@ const renderCustomComponent = (id, data) => {
 
 export default function Page({ items, pageData }) {
   return (
-    <DefaultLayout subtitle={pageData?.subtitle} title={pageData?.title}>
+    <DefaultLayout
+      style={pageData?.style}
+      subtitle={pageData?.subtitle}
+      title={pageData?.title}
+    >
       {pageData?.body && (
         <div className="page-body">
           <Text block={pageData?.body} />
