@@ -3,6 +3,7 @@ require('./styles.less')
 import React from 'react'
 
 import { useNavs } from '../../../hooks/useTranslation'
+import { DefaultHero } from '../../Elements/DefaultHero'
 import Template from '../'
 import { DefaultNav } from '../DefaultNav'
 
@@ -12,12 +13,9 @@ export const DefaultLayout = ({ children, subtitle, title }) => {
   return (
     <Template className="default-layout">
       <DefaultNav data={nav} />
-      <header>
-        <h1>{title}</h1>
-        <h2>{subtitle}</h2>
-      </header>
+      <DefaultHero subtitle={subtitle} title={title} />
 
-      <main>{children}</main>
+      <main className="container">{children}</main>
     </Template>
   )
 }
