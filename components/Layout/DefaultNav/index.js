@@ -7,6 +7,7 @@ import React from 'react'
 
 import { useDarkMode } from '../../../hooks/useDarkMode'
 import { getLogoSrc } from '../../../utils'
+import { DarkModeSelector } from '../../Elements/DarkModeSelector'
 import { Hamburger } from '../../Elements/Hamburger'
 
 const NavElement = ({ icon, slug, title, type, url }) => {
@@ -38,6 +39,7 @@ const NavItems = ({ extra, items }) => {
           </li>
         )
       })}
+      {extra && <li>{extra}</li>}
     </ul>
   )
 }
@@ -52,7 +54,10 @@ export const DefaultNav = ({ data }) => {
       </div>
       <nav>
         <div className="nav-items">
-          <NavItems items={data.elementsCollection?.items} />
+          <NavItems
+            extra={<DarkModeSelector />}
+            items={data.elementsCollection?.items}
+          />
         </div>
 
         <Hamburger

@@ -1,4 +1,5 @@
 @import (reference) './variables.less';
+@import (reference) './variables-css.less';
 @import (reference) './mixins.less';
 @import (reference) './fonts.less';
 
@@ -23,15 +24,6 @@ body {
 // by default, icons should have text color
 body .anticon {
   color: var(--text-color);
-}
-
-// override global variables for dark mode
-.@{THEME--DARK} {
-  --text-color: fade(@white, 85%);
-  --text-color-strong: fade(@white, 90%);
-  --heading-color: @white;
-  --body-background: @full-black;
-  --medium-grey: fade(@white, 25%);
 }
 
 span.text-accent {

@@ -3,3 +3,12 @@
 @import './mixins.less';
 @import './variables-css.less';
 @import './fonts.less';
+
+// override global variables for dark mode
+.@{THEME--DARK} {
+  --text-color: fade(@white, 85%);
+  --text-color-strong: fade(@white, 90%);
+  --heading-color: @white;
+  --body-background: @full-black;
+  --medium-grey: fade(@white, 25%);
+}
