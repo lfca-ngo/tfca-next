@@ -18,22 +18,21 @@ const nextConfig = {
   async redirects() {
     /**
      * TODO:
-     * - change default actionCollection from `new` to `int` once content is ready
      * - change permanent redirect from `false` to `true`
      */
     return [
       {
-        destination: '/new',
+        destination: '/int',
         permanent: false,
         source: '/',
       },
       {
-        destination: '/new/supporter/:companySlug',
+        destination: '/int/supporter/:companySlug',
         permanent: false,
         source: '/supporter/:companySlug',
       },
       {
-        destination: '/new/invite/:shareToken',
+        destination: '/int/invite/:shareToken',
         permanent: false,
         source: '/invite/:shareToken',
       },

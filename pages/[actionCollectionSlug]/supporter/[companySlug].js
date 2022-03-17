@@ -102,7 +102,7 @@ export async function getStaticPaths(
      */
     paths: qualifiedCompanies.map(({ company }) => ({
       params: {
-        actionCollectionSlug: 'new',
+        actionCollectionSlug: 'int',
         companySlug: company.micrositeSlug,
       },
     })),

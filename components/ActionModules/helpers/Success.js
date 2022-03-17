@@ -181,7 +181,7 @@ const Success = (props) => {
       const response = await fetch('/api/create-shareable-link', {
         // TODO: Dynamically set actionCollectionSlug
         body: JSON.stringify({
-          actionCollectionSlug: 'new',
+          actionCollectionSlug: 'int',
           tokenPayload,
         }),
         headers: {
