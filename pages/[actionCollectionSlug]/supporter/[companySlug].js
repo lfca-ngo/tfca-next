@@ -3,9 +3,9 @@ import React from 'react'
 
 import ActionModules from '../../../components/ActionModules'
 import SplitLayout from '../../../components/Layout/SplitLayout'
-import { QualifiedCompanyFragment } from '../../../fragments/contentful'
 import { fetchAllStaticData } from '../../../services'
 import { fetchData } from '../../../services/lfca'
+import { QualifiedCompanyItemFragment } from '../../../services/lfca/fragments'
 
 export default function SupporterPage({ actions, company, stats }) {
   return (
@@ -16,12 +16,10 @@ export default function SupporterPage({ actions, company, stats }) {
 }
 
 const allParticipatingCompaniesQuery = gql`
-  ${QualifiedCompanyFragment}
+  ${QualifiedCompanyItemFragment}
   query qualifiedCompanies($input: QualifiedCompaniesInput) {
     qualifiedCompanies(input: $input) {
-      ... on QualifiedCompanyItem {
-        ...QualifiedCompanyFragment
-      }
+      ...QualifiedCompanyItemFragment
     }
   }
 `

@@ -3,13 +3,13 @@ import fs from 'fs'
 import { gql, request } from 'graphql-request'
 import path from 'path'
 
+import { DEFAULT, SETTINGS_ID } from '../../utils'
 import {
   ActionFragment,
-  AllNavsFragment,
   MetaDataFragment,
   MetaDataListsFragment,
-} from '../fragments/contentful'
-import { DEFAULT, SETTINGS_ID } from '../utils'
+  NavigationCollectionFragment,
+} from './fragments'
 
 const space = process.env.NEXT_PUBLIC_CF_SPACE_ID
 const accessToken = process.env.NEXT_PUBLIC_CF_ACCESS_TOKEN
@@ -72,12 +72,10 @@ export const fetchContent = async (query, variables) => {
 
 export const fetchAllNavs = async (locale) => {
   const query = gql`
-    ${AllNavsFragment}
+    ${NavigationCollectionFragment}
     query ($locale: String) {
       navigationCollection(locale: $locale, limit: 10) {
-        ... on NavigationCollection {
-          ...AllNavsFragment
-        }
+        ...NavigationCollectionFragment
       }
     }
   `
@@ -100,9 +98,7 @@ export const fetchMetaData = async (locale, settingsId) => {
     ${MetaDataFragment}
     query ($locale: String, $settingsId: String!) {
       settings(locale: $locale, id: $settingsId) {
-        ... on Settings {
-          ...MetaDataFragment
-        }
+        ...MetaDataFragment
       }
     }
   `
@@ -131,9 +127,7 @@ export const fetchMetaDataLists = async (locale, settingsId) => {
     ${MetaDataListsFragment}
     query ($locale: String, $settingsId: String!) {
       settings(locale: $locale, id: $settingsId) {
-        ... on Settings {
-          ...MetaDataListsFragment
-        }
+        ...MetaDataListsFragment
       }
     }
   `
@@ -275,9 +269,7 @@ const fetchActionDataById = async (id, locale) => {
       $quizLimit: Int
     ) {
       action(id: $id, locale: $locale) {
-        ... on Action {
-          ...ActionFragment
-        }
+        ...ActionFragment
       }
     }
   `

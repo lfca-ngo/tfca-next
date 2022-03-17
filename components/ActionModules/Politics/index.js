@@ -14,12 +14,12 @@ import { Results } from './Results'
 const { TabPane } = Tabs
 
 const steps = new Map([
-  ['country', Filter],
-  ['topic', Filter],
-  ['results', Results],
-  ['details', Details],
-  ['success', Success],
-  ['share', Share],
+  ['country', { component: Filter }],
+  ['topic', { component: Filter }],
+  ['results', { component: Results }],
+  ['details', { component: Details }],
+  ['success', { component: Success }],
+  ['share', { component: Share }],
 ])
 
 const PoliticsFlow = (props) => {
@@ -29,19 +29,21 @@ const PoliticsFlow = (props) => {
     initialIndex: 'country',
     initialStore: {
       availableFilters: {
-        country:
-          props.module?.data.countries.items.map((item) => ({
-            iconUrl: item.icon?.url,
-            label: item.label,
-            value: item.valueString,
-          })) || [],
-        topic:
-          props.module?.data.topics.items.map((item) => ({
-            delegationsCommittees: item.delegationsCommittees,
-            label: item.label,
-            messages: item.messagesCollection.items,
-            value: item.label,
-          })) || [],
+        country: [],
+        topic: [],
+        // country:
+        //   props.module?.data.countries.items.map((item) => ({
+        //     iconUrl: item.icon?.url,
+        //     label: item.label,
+        //     value: item.valueString,
+        //   })) || [],
+        // topic:
+        //   props.module?.data.topics.items.map((item) => ({
+        //     delegationsCommittees: item.delegationsCommittees,
+        //     label: item.label,
+        //     messages: item.messagesCollection.items,
+        //     value: item.label,
+        //   })) || [],
       },
       country: {
         value: getCountryFromLocale(locale),
@@ -63,25 +65,25 @@ const PoliticsFlow = (props) => {
         destroyInactiveTabPane
         renderTabBar={() => null}
       >
-        {stepsKeys.map((stepsKey, i) => {
+        {[...steps.keys()].map((key, i) => {
+          const { component: Page } = steps.get(key)
           const nextKey = i <= stepsKeys.length ? stepsKeys[i + 1] : null
           const prevKey = i > 0 ? stepsKeys[i - 1] : null
 
-          const Page = steps.get(stepsKey)
           return (
-            <TabPane key={stepsKey} tab={`${props.name}`}>
+            <TabPane key={key} tab={`${props.name}`}>
               <Page
                 blocks={props.module?.blocks || {}}
                 customization={customization}
                 data={props.module?.data || {}}
                 filter={{
-                  fieldName: stepsKey,
+                  fieldName: key,
                   hint: text(
-                    (props.module?.blocks || {})[`filter.${stepsKey}.hint`]
+                    (props.module?.blocks || {})[`filter.${key}.hint`]
                   ),
-                  options: store.availableFilters[stepsKey] || [],
+                  options: store.availableFilters[key] || [],
                   question: text(
-                    (props.module?.blocks || {})[`filter.${stepsKey}.title`]
+                    (props.module?.blocks || {})[`filter.${key}.title`]
                   ),
                 }}
                 goTo={goTo}
