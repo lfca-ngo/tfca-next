@@ -4,7 +4,25 @@
 .default-nav {
   display: flex;
   justify-content: space-between;
+  .logo {
+    padding: @default-logo-padding;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   nav {
+    .nav-element {
+      &.ant-btn {
+        display: flex;
+        align-items: center;
+        justify-items: center;
+        padding-top: inherit !important;
+        .ant-avatar {
+          margin-right: 8px;
+        }
+      }
+    }
     .nav-items {
       display: none;
       @media @desktop {
@@ -12,8 +30,8 @@
       }
     }
     ul {
+      display: flex;
       li {
-        display: inline;
         padding: 12px 20px;
       }
     }

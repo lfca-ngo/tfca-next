@@ -1,5 +1,6 @@
 require('./styles.less')
 
+import { Avatar, Button } from 'antd'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
@@ -8,13 +9,32 @@ import { useDarkMode } from '../../../hooks/useDarkMode'
 import { getLogoSrc } from '../../../utils'
 import { Hamburger } from '../../Elements/Hamburger'
 
-const NavItems = ({ items }) => {
+const NavElement = ({ icon, slug, title, type, url }) => {
+  return (
+    <Link href={slug || url} passHref>
+      <Button
+        className="nav-element"
+        ghost={type === 'button-ghost'}
+        icon={
+          icon ? (
+            <Avatar height={24} size="small" src={icon?.url} width={24} />
+          ) : null
+        }
+        type={type?.indexOf('button') > -1 ? 'primary' : 'link'}
+      >
+        <span>{title}</span>
+      </Button>
+    </Link>
+  )
+}
+
+const NavItems = ({ extra, items }) => {
   return (
     <ul>
       {items?.map((link, i) => {
         return (
           <li key={`link-${i}`}>
-            <Link href={link.slug || link.url}>{link.title}</Link>
+            <NavElement {...link} />
           </li>
         )
       })}

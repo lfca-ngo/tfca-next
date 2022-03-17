@@ -1,5 +1,15 @@
 import { gql } from 'graphql-request'
 
+const NAVIGATION_ELEMENT_FIELDS = `
+  title
+  url
+  slug
+  type
+  icon {
+    url
+  }
+`
+
 const CALL_TO_ACTION_FIELDS = `
   text
   type
@@ -26,17 +36,13 @@ export const AllNavsFragment = gql`
             elementsCollection(limit: 20) {
               items {
                 ... on NavigationElement {
-                  title
-                  url
-                  slug
+                  ${NAVIGATION_ELEMENT_FIELDS}
                 }
               }
             }
           }
           ... on NavigationElement {
-            title
-            url
-            slug
+            ${NAVIGATION_ELEMENT_FIELDS}
           }
         }
       }
