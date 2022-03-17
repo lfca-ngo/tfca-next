@@ -6,6 +6,7 @@ import path from 'path'
 import { DEFAULT, SETTINGS_ID } from '../../utils'
 import {
   ActionFragment,
+  ListFragment,
   MetaDataFragment,
   MetaDataListsFragment,
   NavigationCollectionFragment,
@@ -293,8 +294,27 @@ export const fetchAllActions = async (locale, actionCollectionSlug) => {
   )
   const promises = collectionIds.map((id) => fetchActionDataById(id, locale))
 
-  const results = await Promise.all(promises)
-  const transformed = transformResults(results)
+  const actionsResults = await Promise.all(promises)
+  // `listsCollection` and `dataCollection` (both only can conatin List type) are fetched separatly
+  const listsResults = await fetchAllLists(locale)
+
+  const listsById = listsResults.reduce((acc, curr) => {
+    acc[curr.sys.id] = curr
+    return acc
+  }, {})
+
+  // Enrich each action with the seperatly fetched `listsCollection` and `dataCollection`
+  const enrichedActions = actionsResults.map((action) => {
+    action.listsCollection.items = action.listsCollection.items.map(
+      (item) => listsById[item.sys.id]
+    )
+    action.dataCollection.items = action.dataCollection.items.map(
+      (item) => listsById[item.sys.id]
+    )
+    return action
+  })
+
+  const transformed = transformResults(enrichedActions)
 
   return { ...transformed, layout }
 }
@@ -355,4 +375,50 @@ const transformResults = (results) => {
     items: transformed,
     nav,
   }
+}
+
+export const fetchListIds = async () => {
+  const query = gql`
+    query {
+      listCollection {
+        items {
+          sys {
+            id
+          }
+        }
+      }
+    }
+  `
+
+  const { listCollection } = await fetchContent(query)
+
+  const ids = listCollection?.items?.map((item) => item.sys.id)
+  return ids
+}
+
+const fetchListDataById = async (id, locale) => {
+  const query = gql`
+    ${ListFragment}
+    query ($locale: String, $id: String!) {
+      list(id: $id, locale: $locale) {
+        ...ListFragment
+      }
+    }
+  `
+  const variables = {
+    id: id,
+    locale: locale,
+  }
+
+  const { list } = await fetchContent(query, variables)
+  return list
+}
+
+export const fetchAllLists = async (locale) => {
+  const listIds = await fetchListIds()
+  const promises = listIds.map((id) => fetchListDataById(id, locale))
+
+  const results = await Promise.all(promises)
+
+  return results
 }
