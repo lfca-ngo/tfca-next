@@ -1,27 +1,13 @@
 import { gql } from 'graphql-request'
 
-import { BlockFragment } from './block'
-import { CallToActionFragment } from './call-to-action'
-import { DataBankFragment } from './data-bank'
-import { DataOrganizationFragment } from './data-organization'
-import { DataPoliticalTopicFragment } from './data-political-topic'
-import { DataWorkFragment } from './data-work'
-import { FilterFragment } from './filter'
-import { InputFragment } from './input'
-import { PrewrittenMessageFragment } from './prewritten-message'
+import { BlockFragment } from '../block'
+import { CallToActionFragment } from '../call-to-action'
 import { QuizFragment } from './quiz'
 import { QuizAnswerFragment } from './quiz-answer'
 
 export const ActionFragment = gql`
   ${BlockFragment}
   ${CallToActionFragment}
-  ${DataBankFragment}
-  ${DataOrganizationFragment}
-  ${DataPoliticalTopicFragment}
-  ${DataWorkFragment}
-  ${FilterFragment}
-  ${InputFragment}
-  ${PrewrittenMessageFragment}
   ${QuizFragment}
   ${QuizAnswerFragment}
 
@@ -42,32 +28,17 @@ export const ActionFragment = gql`
     }
     listsCollection(limit: $listsLimit) {
       items {
-        listId
-        itemsCollection(limit: 5) {
-          items {
-            ...BlockFragment
-          }
+        # __typename === List => Will be fetched separatly which is why we only need the ID here to map
+        sys {
+          id
         }
       }
     }
     dataCollection(limit: $dataLimit) {
       items {
-        listId
-        cardLayout
-        listGrid
-        filtersCollection(limit: 3) {
-          items {
-            ...FilterFragment
-          }
-        }
-        itemsCollection(limit: 15) {
-          items {
-            ...DataOrganizationFragment
-            ...DataBankFragment
-            ...DataWorkFragment
-            ...InputFragment
-            ...DataPoliticalTopicFragment
-          }
+        # __typename === List => Will be fetched separatly which is why we only need the ID here to map
+        sys {
+          id
         }
       }
     }
