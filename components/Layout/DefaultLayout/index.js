@@ -1,12 +1,22 @@
+require('./styles.less')
+
 import React from 'react'
 
-const DefaultLayout = ({ children }) => {
+import { useNavs } from '../../../hooks/useTranslation'
+import { DefaultHero } from '../../Elements/DefaultHero'
+import Template from '../'
+import { DefaultNav } from '../DefaultNav'
+import { Footer } from '../Footer'
+
+export const DefaultLayout = ({ children, style, subtitle, title }) => {
+  const nav = useNavs('overview')
+
   return (
-    <div>
-      <div>I am normal Header - but what is normal?</div>
-      {children}
-    </div>
+    <Template className="default-layout">
+      <DefaultNav data={nav} style={style} />
+      <DefaultHero style={style} subtitle={subtitle} title={title} />
+      <main className="container">{children}</main>
+      <Footer />
+    </Template>
   )
 }
-
-export default DefaultLayout

@@ -46,4 +46,31 @@
   .stats-wrapper .ant-tag {
     background: darken(@color, 15%);
   }
+  .hamburger-inner,
+  .hamburger-inner::after {
+    background-color: @white;
+  }
+  .anticon {
+    path {
+      fill: @white;
+    }
+  }
+}
+
+.apply-color-scheme {
+  // default color
+  .color-module(@blue);
+
+  &.color-1 {
+    .color-module(@blue);
+  }
+  &.color-2 {
+    .color-module(@green);
+  }
+  &.color-3 {
+    .color-module(@lila);
+  }
+  &.color-4 {
+    .color-module(@orange);
+  }
 }

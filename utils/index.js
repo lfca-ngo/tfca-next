@@ -98,3 +98,6 @@ export const INITIAL_STATS = {
   share_deck: 969,
   switch_energy: 2218,
 }
+
+export const getLogoSrc = (isDarkMode) =>
+  isDarkMode ? '/images/logo_darkmode.svg' : '/images/logo.svg'
