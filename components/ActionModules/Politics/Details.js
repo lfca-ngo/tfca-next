@@ -7,7 +7,11 @@ import Category from '../helpers/Category'
 import { StepHeader } from '../helpers/StepHeader'
 
 export const Details = ({ blocks, goTo, icon, nextKey, prevKey, store }) => {
-  const message = store.topic.messages[0]
+  const messagesValueKey = store[store.messagesFilterKey]
+  const messages =
+    store.messagesByFilterValue[
+      Array.isArray(messagesValueKey) ? messagesValueKey[0] : messagesValueKey
+    ]
 
   const item = store?.selectedItem || {}
 
@@ -29,9 +33,9 @@ export const Details = ({ blocks, goTo, icon, nextKey, prevKey, store }) => {
       />
 
       <PoliticianDetails
-        initialMessage={text(message.text, { name: item.name })}
+        initialMessage={text(messages[0].text, { name: item.name })}
         item={item}
-        messageSubject={text(message.subject, {
+        messageSubject={text(messages[0].subject, {
           name: item.name,
         })}
         onFinish={() => goTo(nextKey)}

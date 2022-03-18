@@ -9,6 +9,7 @@ export const SelectWithOptionalInput = ({
   items = [],
   onChange,
   value = {},
+  placeholderOptionalInput,
 }) => {
   const [selectValue, setSelectValue] = React.useState()
   const [inputValue, setInputValue] = React.useState('')
@@ -54,6 +55,7 @@ export const SelectWithOptionalInput = ({
         <Input
           className="optional-input"
           onChange={onInputChange}
+          placeholder={placeholderOptionalInput}
           type="text"
           value={value.input || inputValue}
         />

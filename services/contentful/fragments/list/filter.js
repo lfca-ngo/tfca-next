@@ -7,6 +7,8 @@ export const FilterFragment = gql`
     question
     renderAsStep
     filterMode
+    placeholder
+    placeholderOptionalInput
     hint {
       json
     }

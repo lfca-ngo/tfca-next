@@ -46,6 +46,8 @@ export const Filter = ({
           <SelectFilter
             filterMode={filterOption?.filterMode}
             options={filterOption?.options || []}
+            placeholder={filterOption?.placeholder}
+            placeholderOptionalInput={filterOption?.placeholderOptionalInput}
           />
         </Form.Item>
         <Form.Item>

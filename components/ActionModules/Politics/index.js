@@ -17,11 +17,12 @@ const PoliticsFlow = (props) => {
 
   const { data = {} } = props.module || {}
 
-  const { availableFilters, messagesByTopicValue, steps } =
+  const { availableFilters, messagesByFilterValue, messagesFilterKey, steps } =
     React.useMemo(() => {
       const steps = []
       const parsedFilters = []
-      const messagesByTopicValue = {}
+      const messagesByFilterValue = {}
+      let messagesFilterKey = ''
 
       for (const dataKey of Object.keys(data)) {
         // Create a filter for each data entry
@@ -33,7 +34,9 @@ const PoliticsFlow = (props) => {
           if (option.delegationsCommittees) {
             value = option.delegationsCommittees.join(',')
             // The messages can be looked up by the joined value
-            messagesByTopicValue[value] = option.messagesCollection?.items || []
+            messagesByFilterValue[value] =
+              option.messagesCollection?.items || []
+            messagesFilterKey = filterMeta.key
           }
 
           return {
@@ -69,7 +72,8 @@ const PoliticsFlow = (props) => {
 
       return {
         availableFilters: parsedFilters,
-        messagesByTopicValue,
+        messagesByFilterValue,
+        messagesFilterKey,
         steps: dynamicSteps,
       }
     }, [data])
@@ -84,7 +88,8 @@ const PoliticsFlow = (props) => {
       'countries.zip': {
         select: getCountryFromLocale(locale),
       },
-      messagesByTopicValue,
+      messagesByFilterValue,
+      messagesFilterKey,
     },
   })
 
