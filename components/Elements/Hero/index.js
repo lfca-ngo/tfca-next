@@ -8,7 +8,7 @@ import { useIsMobile } from '../../../hooks/useIsClient'
 import { useBlocks } from '../../../hooks/useTranslation'
 import { text } from '../../../utils/Text'
 
-export const Hero = () => {
+export const Hero = ({ onClick }) => {
   const isMobile = useIsMobile()
   const { customization } = useChallenge()
   const customHeaderText = (
@@ -40,7 +40,7 @@ export const Hero = () => {
       <div className="start-btn">
         <Button
           className="ant-btn-xl"
-          onClick={props.onClick}
+          onClick={onClick}
           size="large"
           type="primary"
         >
