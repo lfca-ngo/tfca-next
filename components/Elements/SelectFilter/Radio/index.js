@@ -4,7 +4,7 @@ import { Checkbox } from 'antd'
 import Image from 'next/image'
 import React, { useState } from 'react'
 
-export const MultiSelect = ({
+export const Radio = ({
   value = [],
   onChange,
   items = [],

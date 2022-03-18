@@ -81,8 +81,8 @@ const PoliticsFlow = (props) => {
     initialIndex: firstStep,
     initialStore: {
       availableFilters,
-      country: {
-        value: getCountryFromLocale(locale),
+      'countries.zip': {
+        select: getCountryFromLocale(locale),
       },
       messagesByTopicValue,
     },

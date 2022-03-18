@@ -79,7 +79,12 @@ function createPoliticsFilter(store) {
         break
 
       case 'select-with-optional-input':
-        acc[fieldName] = value
+        // We expect the fieldname to have a '.' as delimiter
+        const [selectFieldName, inputFieldName] = fieldName.split('.')
+        acc[selectFieldName] = value.select
+        if (inputFieldName && value.input) {
+          acc[inputFieldName] = value.input
+        }
         break
       case 'select-single':
       default:

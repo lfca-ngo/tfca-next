@@ -2,7 +2,7 @@ import { Button, Form } from 'antd'
 import React from 'react'
 
 import { text } from '../../../utils/Text'
-import { Select } from '../../Elements/Select'
+import { SelectFilter } from '../../Elements/SelectFilter'
 import Category from '../helpers/Category'
 import { StepHeader } from '../helpers/StepHeader'
 
@@ -17,10 +17,11 @@ export const Filter = ({
   setStore,
   store,
 }) => {
-  const initialValue = (store[filterOption?.key] || {}).value
+  const initialValue = store[filterOption?.fieldName]
 
   const handleNext = (v) => {
     const value = v[filterOption?.fieldName]
+
     setStore({ ...store, [filterOption?.fieldName]: value })
     setProgress(0.3)
     goTo(nextKey)
@@ -42,7 +43,7 @@ export const Filter = ({
 
       <Form layout="vertical" onFinish={handleNext}>
         <Form.Item initialValue={initialValue} name={filterOption?.fieldName}>
-          <Select
+          <SelectFilter
             filterMode={filterOption?.filterMode}
             options={filterOption?.options || []}
           />

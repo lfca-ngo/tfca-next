@@ -4,7 +4,7 @@ import React from 'react'
 import { useBlocks } from '../../../hooks/useTranslation'
 import { SINGLE } from '../../../utils'
 import { text } from '../../../utils/Text'
-import { Select } from '../../Elements/Select'
+import { SelectFilter } from '../../Elements/SelectFilter'
 import Category from '../helpers/Category'
 import { StepHeader } from '../helpers/StepHeader'
 
@@ -22,7 +22,6 @@ const Filter = ({
   const isSingleMode = filterElement?.filterMode === SINGLE
   const labelSingleMode = text(useBlocks('label.singlemode'))
   const labelMultiMode = text(useBlocks('label.multimode'))
-  const filterMode = filterElement?.filterMode
   const filterOption = filterElement || {}
 
   const handleNext = (v) => {
@@ -51,7 +50,7 @@ const Filter = ({
           label={isSingleMode ? labelSingleMode : labelMultiMode}
           name={filterOption?.fieldName}
         >
-          <Select
+          <SelectFilter
             filterMode={filterOption?.filterMode}
             options={filterOption?.options || []}
           />

@@ -83,7 +83,6 @@ export default async function handler(req, res) {
 
         return 0
       })
-      .slice(0, 5)
 
     const filteredMdBs =
       (zipFilter &&
@@ -95,17 +94,20 @@ export default async function handler(req, res) {
     // Filter the list of MEPs
     res.status(200).json({
       // Only return the props that we need
-      items: filteredMdBs.concat(filteredMEPs).map((item) => ({
-        email: item.email,
-        facebook: item.facebook,
-        fullName: item.fullName,
-        imageUrl: item.imageUrl,
-        instagram: item.instagram,
-        linkedIn: item.linkedIn,
-        nationalPoliticalGroup: item.nationalPoliticalGroup,
-        parliament: item.badges ? 'EU' : 'DE',
-        twitter: item.twitter,
-      })),
+      items: filteredMdBs
+        .concat(filteredMEPs)
+        .slice(0, 5)
+        .map((item) => ({
+          email: item.email,
+          facebook: item.facebook,
+          fullName: item.fullName,
+          imageUrl: item.imageUrl,
+          instagram: item.instagram,
+          linkedIn: item.linkedIn,
+          nationalPoliticalGroup: item.nationalPoliticalGroup,
+          parliament: item.badges ? 'EU' : 'DE',
+          twitter: item.twitter,
+        })),
     })
   } catch (e) {
     throw new Error(e.message || e)
