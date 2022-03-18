@@ -18,10 +18,7 @@ export const Results = ({
   setStore,
   store,
 }) => {
-  const { data, error, isLoading } = usePoliticians(
-    store?.country,
-    store?.topic?.delegationsCommittees || []
-  )
+  const { data, error, isLoading } = usePoliticians(createPoliticsFilter(store))
 
   const handleNext = (item) => {
     setStore({ ...store, selectedItem: item })
@@ -64,4 +61,32 @@ export const Results = ({
       )}
     </div>
   )
+}
+
+function createPoliticsFilter(store) {
+  return (store.availableFilters || []).reduce((acc, curr) => {
+    const fieldName = curr.fieldName
+
+    const value = store[curr.fieldName]
+
+    switch (curr.filterMode) {
+      case 'radio-single':
+        acc[fieldName] = value[0]
+        break
+      case 'radio-multi':
+      case 'select-multi':
+        acc[fieldName] = value.join(',')
+        break
+
+      case 'select-with-optional-input':
+        acc[fieldName] = value
+        break
+      case 'select-single':
+      default:
+        acc[fieldName] = value
+        break
+    }
+
+    return acc
+  }, {})
 }

@@ -8,7 +8,7 @@ import { StepHeader } from '../helpers/StepHeader'
 
 export const Filter = ({
   blocks,
-  filter,
+  filterOption,
   goTo,
   icon,
   nextKey,
@@ -17,18 +17,11 @@ export const Filter = ({
   setStore,
   store,
 }) => {
-  // take the first filter for the intro screen
-  const filterOption = filter || {}
-  const initialValue = (store[filterOption?.fieldName] || {}).value
+  const initialValue = (store[filterOption?.key] || {}).value
 
   const handleNext = (v) => {
     const value = v[filterOption?.fieldName]
-
-    const resolvedValue = filterOption.options.find(
-      (option) => option.value === value
-    )
-
-    setStore({ ...store, [filterOption?.fieldName]: resolvedValue })
+    setStore({ ...store, [filterOption?.fieldName]: value })
     setProgress(0.3)
     goTo(nextKey)
   }
@@ -50,8 +43,8 @@ export const Filter = ({
       <Form layout="vertical" onFinish={handleNext}>
         <Form.Item initialValue={initialValue} name={filterOption?.fieldName}>
           <Select
-            items={filterOption?.options || []}
-            placeholder={`Select ${filterOption.fieldName}`}
+            filterMode={filterOption?.filterMode}
+            options={filterOption?.options || []}
           />
         </Form.Item>
         <Form.Item>

@@ -7,10 +7,8 @@ export const fetchData = async (queryString) => {
   return json
 }
 
-export const usePoliticians = (country, badges) => {
-  const queryString = `filter.countries=${country}&filter.badges=${badges.join(
-    ','
-  )}`
+export const usePoliticians = ({ country, topic, zip }) => {
+  const queryString = `filter.countries=${country}&filter.zip=${zip}&filter.badges=${topic}`
 
   return useQuery(['meps', queryString], async () => fetchData(queryString))
 }

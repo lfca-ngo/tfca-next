@@ -4,7 +4,6 @@ import React from 'react'
 
 import { useChallenge } from '../../../hooks/useChallenge'
 import { useFlow } from '../../../hooks/useFlow'
-import { text } from '../../../utils/Text'
 import { Share } from '../helpers/Share'
 import Success from '../helpers/Success'
 import { Details } from './Details'
@@ -13,43 +12,79 @@ import { Results } from './Results'
 
 const { TabPane } = Tabs
 
-const steps = new Map([
-  ['country', { component: Filter }],
-  ['topic', { component: Filter }],
-  ['results', { component: Results }],
-  ['details', { component: Details }],
-  ['success', { component: Success }],
-  ['share', { component: Share }],
-])
-
 const PoliticsFlow = (props) => {
   const { locale } = useRouter()
+
+  const { data = {} } = props.module || {}
+
+  const { availableFilters, messagesByTopicValue, steps } =
+    React.useMemo(() => {
+      const steps = []
+      const parsedFilters = []
+      const messagesByTopicValue = {}
+
+      for (const dataKey of Object.keys(data)) {
+        // Create a filter for each data entry
+        const dataItem = data[dataKey]
+        const filterMeta = dataItem.filters[0] || {}
+        const filterOptions = (dataItem.items || []).map((option) => {
+          let value = option.valueString
+          // For the topic data we use the joined badges as value
+          if (option.delegationsCommittees) {
+            value = option.delegationsCommittees.join(',')
+            // The messages can be looked up by the joined value
+            messagesByTopicValue[value] = option.messagesCollection?.items || []
+          }
+
+          return {
+            hasOptionalInput: option.hasOptionalInput,
+            iconUrl: option.icon?.url,
+            label: option.label,
+            value,
+          }
+        })
+        const filterOption = {
+          ...filterMeta,
+          fieldName: filterMeta.key,
+          options: filterOptions,
+        }
+        parsedFilters.push(filterOption)
+
+        // Create a page for each filter that is marked to render as step
+        if (filterOption.renderAsStep) {
+          steps.push([
+            `${filterOption.fieldName}`,
+            { component: Filter, filterOption },
+          ])
+        }
+      }
+
+      const dynamicSteps = new Map([
+        ...steps,
+        ['results', { component: Results }],
+        ['details', { component: Details }],
+        ['success', { component: Success }],
+        ['share', { component: Share }],
+      ])
+
+      return {
+        availableFilters: parsedFilters,
+        messagesByTopicValue,
+        steps: dynamicSteps,
+      }
+    }, [data])
+
+  const [firstStep] = steps.keys()
+
   const { goTo, index, setStore, store } = useFlow({
     id: props.module?.id,
-    initialIndex: 'country',
+    initialIndex: firstStep,
     initialStore: {
-      availableFilters: {
-        country: [],
-        topic: [],
-        // country:
-        //   props.module?.data.countries.items.map((item) => ({
-        //     iconUrl: item.icon?.url,
-        //     label: item.label,
-        //     value: item.valueString,
-        //   })) || [],
-        // topic:
-        //   props.module?.data.topics.items.map((item) => ({
-        //     delegationsCommittees: item.delegationsCommittees,
-        //     label: item.label,
-        //     messages: item.messagesCollection.items,
-        //     value: item.label,
-        //   })) || [],
-      },
+      availableFilters,
       country: {
         value: getCountryFromLocale(locale),
       },
-      selectedItem: {},
-      topic: undefined,
+      messagesByTopicValue,
     },
   })
 
@@ -66,7 +101,7 @@ const PoliticsFlow = (props) => {
         renderTabBar={() => null}
       >
         {[...steps.keys()].map((key, i) => {
-          const { component: Page } = steps.get(key)
+          const { component: Page, filterOption } = steps.get(key)
           const nextKey = i <= stepsKeys.length ? stepsKeys[i + 1] : null
           const prevKey = i > 0 ? stepsKeys[i - 1] : null
 
@@ -75,17 +110,7 @@ const PoliticsFlow = (props) => {
               <Page
                 blocks={props.module?.blocks || {}}
                 customization={customization}
-                data={props.module?.data || {}}
-                filter={{
-                  fieldName: key,
-                  hint: text(
-                    (props.module?.blocks || {})[`filter.${key}.hint`]
-                  ),
-                  options: store.availableFilters[key] || [],
-                  question: text(
-                    (props.module?.blocks || {})[`filter.${key}.title`]
-                  ),
-                }}
+                filterOption={filterOption}
                 goTo={goTo}
                 icon={props.module?.icon?.url}
                 id={props.id}
