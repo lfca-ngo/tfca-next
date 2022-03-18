@@ -4,7 +4,7 @@ import React, { useMemo, useState } from 'react'
 import { useBlocks } from '../../../hooks/useTranslation'
 import { checkAnswers, SINGLE, transformOption } from '../../../utils'
 import { text } from '../../../utils/Text'
-import { MultiSelect } from '../../Elements/MultiSelect'
+import { Select } from '../../Elements/Select'
 import Category from '../helpers/Category'
 import { StepHeader } from '../helpers/StepHeader'
 
@@ -63,10 +63,10 @@ const Question = ({
           name={activeQuestion?.questionId}
           validateStatus={status}
         >
-          <MultiSelect
+          <Select
+            filterMode="radio-single"
             items={answers?.options}
             onSelect={() => setStatus(null)}
-            singleMode={isSingleMode}
           />
         </Form.Item>
         <Form.Item>
