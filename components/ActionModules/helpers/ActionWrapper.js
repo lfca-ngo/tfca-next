@@ -31,6 +31,7 @@ const ActionWrapper = (props) => {
         <div className="action-body">
           {React.cloneElement(props.children, {
             color: props.color,
+            id: props.id,
             name: props.name,
           })}
         </div>

@@ -88,6 +88,7 @@ const PoliticsFlow = (props) => {
                 }}
                 goTo={goTo}
                 icon={props.module?.icon?.url}
+                id={props.id}
                 nextKey={nextKey}
                 prevKey={prevKey}
                 setProgress={setProgress}

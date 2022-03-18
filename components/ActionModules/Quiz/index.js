@@ -65,6 +65,7 @@ const QuizFlow = (props) => {
                 data={props.module?.data || {}}
                 goTo={goTo}
                 icon={props.module?.icon?.url}
+                id={props.id}
                 lists={props.module?.lists || {}}
                 name={props.name}
                 nextKey={nextKey}

@@ -10,6 +10,7 @@ import React from 'react'
 import { useConfetti } from '../../../hooks/useChallenge'
 import { useIsMobile } from '../../../hooks/useIsClient'
 import { useBlocks, useLists } from '../../../hooks/useTranslation'
+import { useTrackEvent } from '../../../services/analytics'
 import { text } from '../../../utils/Text'
 import CheckList from '../../Elements/CheckList'
 import { NominateNameInput } from '../../Elements/NominateInput'
@@ -26,7 +27,8 @@ const Success = (props) => {
   const [visible, setVisible] = React.useState('')
   const [invites, setInvites] = React.useState([])
 
-  useConfetti() // creates confetti
+  useConfetti()
+  useTrackEvent({ name: 'action_completed', values: { action_id: props.id } })
 
   // create multiple invite links
   // map of promises with infos
