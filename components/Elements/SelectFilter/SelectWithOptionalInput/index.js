@@ -1,6 +1,7 @@
 require('./styles.less')
 
 import { Input } from 'antd'
+import classNames from 'classnames'
 import React from 'react'
 
 import { Select } from '../Select'
@@ -44,7 +45,12 @@ export const SelectWithOptionalInput = ({
   const shouldShowInput = !!selectedItem?.hasOptionalInput
 
   return (
-    <div className="select-with-optional-input">
+    <Input.Group
+      className={classNames('select-with-optional-input', {
+        'with-optional-input': shouldShowInput,
+      })}
+      compact
+    >
       <Select
         items={items}
         onChange={onSelectChange}
@@ -60,6 +66,6 @@ export const SelectWithOptionalInput = ({
           value={value.input || inputValue}
         />
       )}
-    </div>
+    </Input.Group>
   )
 }

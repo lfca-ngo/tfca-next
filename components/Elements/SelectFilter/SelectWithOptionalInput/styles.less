@@ -1,13 +1,16 @@
 @import (reference) '../../../../styles/variables.less';
 @import (reference) '../../../../styles/fonts.less';
 
-.select-with-optional-input {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-
-  .optional-input {
-    margin-left: 20px;
+.ant-input-group.select-with-optional-input {
+  > .ant-select {
+    width: 100%;
+  }
+  &.with-optional-input {
+    > .ant-select {
+      width: 50%;
+    }
+    .optional-input {
+      width: 50%;
+    }
   }
 }

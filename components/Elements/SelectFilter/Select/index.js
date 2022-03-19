@@ -14,13 +14,11 @@ export const Select = ({ items = [], mode, ...props }) => {
     >
       {items.map((option) => (
         <AntdSelect key={option.value} value={option.value}>
-          <span className="label-wrapper">
+          <span className="option-with-icon">
             {option.iconUrl && (
-              <span className="icon">
-                <Image height={25} src={option.iconUrl} width={25} />
-              </span>
+              <Image height={32} src={option.iconUrl} width={32} />
             )}
-            {option.label}
+            <span className="option-label">{option.label}</span>
           </span>
         </AntdSelect>
       ))}

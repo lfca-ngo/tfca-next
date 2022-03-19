@@ -50,9 +50,12 @@ export const ITEMS = {
       >
         {usersInput.map((user, i) => (
           <Select.Option key={i} label={user.label} value={user.valueNumber}>
-            <div className="option-with-icon">
-              <Image height={32} src={user.icon.url} width={32} /> {user.label}
-            </div>
+            <span className="option-with-icon">
+              {option.icon?.url && (
+                <Image height={32} src={user.icon.url} width={32} />
+              )}
+              <span className="option-label">{user.label}</span>
+            </span>
           </Select.Option>
         ))}
       </Select>
