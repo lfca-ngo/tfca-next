@@ -1,21 +1,22 @@
 require('./politicianDetails.less')
 
 import { CopyOutlined, MailOutlined } from '@ant-design/icons'
-import { Button, Input, message } from 'antd'
+import { Button, Input, message, Select } from 'antd'
 import React from 'react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 
-import { PoliticianCard } from '../Cards'
+import { ScrollableFilters } from '../ScrollableFilters'
 
 const TextArea = Input.TextArea
 
-export const PoliticianDetails = ({
-  initialMessage,
-  item,
-  messageSubject,
-  onFinish,
-}) => {
-  const [text, setText] = React.useState(initialMessage)
+export const PoliticianDetails = ({ item, onFinish, setStore, store }) => {
+  const [text, setText] = React.useState('')
+
+  const messagesValueKey = store[store.messagesFilterKey]
+  const messages =
+    store.messagesByFilterValue[
+      Array.isArray(messagesValueKey) ? messagesValueKey[0] : messagesValueKey
+    ]
 
   const handleSend = () => {
     onFinish()
@@ -27,9 +28,21 @@ export const PoliticianDetails = ({
     window.location.href = mailToLink
   }
 
+  const messagesSelect = {
+    fieldName: 'messagesFilterKey',
+    filterMode: 'select-single',
+    label: 'Message',
+    options: messages.map((m, i) => ({ label: `Message ${i}`, value: i })),
+    placeholder: 'Please select',
+  }
+
   return (
     <div className="politician-detail-view">
-      <PoliticianCard item={item} />
+      <ScrollableFilters
+        availableFilters={[...store?.availableFilters, messagesSelect]}
+        setStore={setStore}
+        store={store}
+      />
 
       <TextArea
         onChange={(e) => setText(e.target.value)}

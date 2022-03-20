@@ -24,5 +24,15 @@ export const DataOrganizationFragment = gql`
         ...BlockFragment
       }
     }
+    needsCollection(limit: 5) {
+      items {
+        ...BlockFragment
+      }
+    }
+    areasCollection(limit: 5) {
+      items {
+        ...BlockFragment
+      }
+    }
   }
 `

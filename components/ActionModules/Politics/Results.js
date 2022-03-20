@@ -1,4 +1,4 @@
-import { List } from 'antd'
+import { Button, List } from 'antd'
 import classNames from 'classnames'
 import React from 'react'
 
@@ -15,15 +15,13 @@ export const Results = ({
   icon,
   nextKey,
   prevKey,
-  setProgress,
   setStore,
   store,
 }) => {
   const { data, error, isLoading } = usePoliticians(createPoliticsFilter(store))
+  const countSelected = store?.selectedItems?.length || 0
 
-  const handleNext = (item) => {
-    setStore({ ...store, selectedItem: item })
-    setProgress(0.3)
+  const handleNext = () => {
     goTo(nextKey)
   }
 
@@ -37,7 +35,6 @@ export const Results = ({
     setStore({ ...store, selectedItems: newSelectedItems })
   }
 
-  console.log(store?.selectedItems, data?.items)
   return (
     <div className="step">
       <Category
@@ -51,6 +48,12 @@ export const Results = ({
         subtitle={blocks['results.subtitle']}
         title={blocks['results.title']}
       />
+
+      {countSelected > 0 && (
+        <Button block onClick={handleNext} type="primary">
+          Continue {countSelected}
+        </Button>
+      )}
 
       {error ? (
         <h3>Something went wrong...</h3>

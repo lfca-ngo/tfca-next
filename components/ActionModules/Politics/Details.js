@@ -1,19 +1,33 @@
-import { Button } from 'antd'
-import React from 'react'
+import { Button, Carousel } from 'antd'
+import React, { useEffect, useRef } from 'react'
 
 import { text } from '../../../utils/Text'
+import { PoliticianCard } from '../../Elements/Cards'
 import { PoliticianDetails } from '../../Elements/DetailViews'
 import Category from '../helpers/Category'
 import { StepHeader } from '../helpers/StepHeader'
 
-export const Details = ({ blocks, goTo, icon, nextKey, prevKey, store }) => {
-  const messagesValueKey = store[store.messagesFilterKey]
-  const messages =
-    store.messagesByFilterValue[
-      Array.isArray(messagesValueKey) ? messagesValueKey[0] : messagesValueKey
-    ]
+export const Details = ({
+  blocks,
+  goTo,
+  icon,
+  nextKey,
+  prevKey,
+  setStore,
+  store,
+}) => {
+  const activeIndex = store.slideIndex
+  const sliderRef = useRef()
 
-  const item = store?.selectedItem || {}
+  const selectedPoliticians = store?.selectedItems || []
+  const activePolitician = selectedPoliticians[activeIndex]
+  const availableMessages = store?.availableFilters?.find(
+    (f) => f.fieldName === 'badges'
+  )
+  // console.log(messages, messagesValueKey, store?.messagesByFilterValue)
+
+  // walk through all selected items
+  // once email is sent, remove the item from the list
 
   return (
     <div className="step">
@@ -27,24 +41,38 @@ export const Details = ({ blocks, goTo, icon, nextKey, prevKey, store }) => {
       <StepHeader
         subtitle={blocks['details.subtitle']}
         title={blocks['details.title']}
-        vars={{
-          name: item.name || '',
-        }}
       />
 
+      <Carousel
+        arrows
+        beforeChange={(curr, next) => setStore({ ...store, slideIndex: next })}
+        className="custom-slider"
+        infinite={false}
+        ref={sliderRef}
+        slidesToShow={1}
+        variableWidth
+      >
+        {selectedPoliticians.map((politician) => (
+          <div
+            key={politician.id}
+            style={{ marginRight: '20px', width: '600px' }}
+          >
+            <PoliticianCard item={politician} />
+          </div>
+        ))}
+      </Carousel>
+
       <PoliticianDetails
-        initialMessage={text(messages[0].text, { name: item.name })}
-        item={item}
-        messageSubject={text(messages[0].subject, {
-          name: item.name,
-        })}
+        item={activePolitician}
         onFinish={() => goTo(nextKey)}
+        setStore={setStore}
+        store={store}
       />
 
       <Button
         block
         className="mt-30"
-        onClick={() => goTo(nextKey)}
+        onClick={() => sliderRef.current.goTo(0)}
         size="large"
         type="primary"
       >

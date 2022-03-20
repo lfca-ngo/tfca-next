@@ -90,6 +90,7 @@ const PoliticsFlow = (props) => {
       },
       messagesByFilterValue,
       messagesFilterKey,
+      slideIndex: 0,
     },
   })
 
