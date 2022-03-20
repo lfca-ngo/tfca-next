@@ -26,6 +26,17 @@ export const Results = ({
     goTo(nextKey)
   }
 
+  const toggleSelect = (item) => {
+    const selectedItems = store.selectedItems || []
+    const isSelected = selectedItems.find((i) => i.id === item.id)
+    const newSelectedItems = isSelected
+      ? selectedItems.filter((i) => i.id !== item.id)
+      : [...selectedItems, item]
+
+    setStore({ ...store, selectedItems: newSelectedItems })
+  }
+
+  console.log(store?.selectedItems, data?.items)
   return (
     <div className="step">
       <Category
@@ -46,6 +57,7 @@ export const Results = ({
         <List
           dataSource={(data?.items || []).map((item) => ({
             email: item.email,
+            id: item.id,
             imageUrl: item.imageUrl,
             name: item.fullName,
             tags: [item.nationalPoliticalGroup],
@@ -54,7 +66,7 @@ export const Results = ({
           loading={isLoading}
           renderItem={(item) => (
             <List.Item>
-              <PoliticianCard item={item} onNext={handleNext} />
+              <PoliticianCard item={item} onNext={toggleSelect} />
             </List.Item>
           )}
         />

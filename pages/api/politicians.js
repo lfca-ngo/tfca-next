@@ -8,7 +8,7 @@ const DEFAULT_COUNTRY_CODE = 'DE'
 const allMEPs = Object.keys(MEPsById).reduce((acc, id) => {
   const MEP = MEPsById[id]
 
-  acc.push(MEP)
+  acc.push({ ...MEP, uid: `mep_${id}` })
 
   return acc
 }, [])
@@ -16,7 +16,7 @@ const allMEPs = Object.keys(MEPsById).reduce((acc, id) => {
 const allMdBs = Object.keys(MdBsById).reduce((acc, id) => {
   const MdB = MdBsById[id]
 
-  acc.push(MdB)
+  acc.push({ ...MdB, uid: `mdb_${id}` })
 
   return acc
 }, [])
@@ -101,6 +101,7 @@ export default async function handler(req, res) {
           email: item.email,
           facebook: item.facebook,
           fullName: item.fullName,
+          id: item.uid,
           imageUrl: item.imageUrl,
           instagram: item.instagram,
           linkedIn: item.linkedIn,
