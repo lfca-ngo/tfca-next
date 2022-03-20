@@ -1,4 +1,5 @@
 import { List } from 'antd'
+import classNames from 'classnames'
 import React from 'react'
 
 import { usePoliticians } from '../../../services/politicians'
@@ -64,11 +65,20 @@ export const Results = ({
           }))}
           grid={LIST_GRIDS['1-col']}
           loading={isLoading}
-          renderItem={(item) => (
-            <List.Item>
-              <PoliticianCard item={item} onNext={toggleSelect} />
-            </List.Item>
-          )}
+          renderItem={(item) => {
+            const isSelected =
+              (store.selectedItems || []).findIndex((i) => i.id === item.id) >
+              -1
+            return (
+              <List.Item
+                className={classNames('multi-select-list-item', {
+                  'is-selected': isSelected,
+                })}
+              >
+                <PoliticianCard item={item} onNext={toggleSelect} />
+              </List.Item>
+            )
+          }}
         />
       )}
     </div>
