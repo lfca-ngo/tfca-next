@@ -36,8 +36,8 @@ export const Results = ({
       />
 
       <StepHeader
-        subtitle={blocks['message.subtitle']}
-        title={blocks['message.title']}
+        subtitle={blocks['results.subtitle']}
+        title={blocks['results.title']}
       />
 
       {error ? (
