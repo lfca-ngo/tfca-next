@@ -1,6 +1,20 @@
 @import (reference) '../../../styles/variables.less';
 @import (reference) '../../../styles/fonts.less';
 
+.ant-list-item.multi-select-list-item.is-selected {
+  .ant-card.politician-card {
+    .ant-card-body {
+      .name {
+        color: @white;
+      }
+      .ant-tag.base-tag {
+        color: fade(@white, 85%);
+        border-color: fade(@white, 85%);
+      }
+    }
+  }
+}
+
 .ant-card.politician-card {
   .ant-card-body {
     display: flex;

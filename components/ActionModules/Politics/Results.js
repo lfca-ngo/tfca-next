@@ -1,4 +1,4 @@
-import { Button, List } from 'antd'
+import { Badge, Button, List } from 'antd'
 import classNames from 'classnames'
 import React from 'react'
 
@@ -50,8 +50,12 @@ export const Results = ({
       />
 
       {countSelected > 0 && (
-        <Button block onClick={handleNext} type="primary">
-          Continue {countSelected}
+        <Button block className="mb-30" onClick={handleNext} type="primary">
+          <Badge
+            count={countSelected}
+            style={{ background: 'transparent', marginRight: '12px' }}
+          />
+          Continue
         </Button>
       )}
 

@@ -240,7 +240,9 @@ span.text-accent {
 .ant-list .multi-select-list-item {
   &.is-selected {
     .ant-card {
-      background: red;
+      background-color: fade(@white, 10%);
+      color: @white;
+      border: 2px solid @secondary-color;
     }
   }
 }
@@ -294,6 +296,10 @@ span.text-accent {
 
 .mt-30 {
   margin-top: 30px;
+}
+
+.mb-30 {
+  margin-bottom: 30px;
 }
 
 .slick-slider.custom-slider {
