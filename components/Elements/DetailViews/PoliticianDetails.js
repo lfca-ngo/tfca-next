@@ -20,7 +20,8 @@ export const PoliticianDetails = ({ item, onFinish, setStore, store }) => {
   const [text, setText] = React.useState('')
 
   useEffect(() => {
-    const withVars = replaceVars(activeMessage.text, { name: item.name })
+    const withVars = replaceVars(activeMessage.body, { name: item.name })
+    console.log('withVars', withVars)
     setText(withVars)
   }, [activeMessageIndex, badges, activeMessage, item])
 
