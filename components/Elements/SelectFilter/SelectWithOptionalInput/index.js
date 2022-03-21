@@ -62,9 +62,11 @@ export const SelectWithOptionalInput = ({
       {shouldShowInput && (
         <Input
           className="optional-input"
+          inputMode="numeric"
           onChange={onInputChange}
+          pattern="[0-9]*"
           placeholder={placeholderOptionalInput}
-          type="text"
+          type="number"
           value={value.input || inputValue}
         />
       )}

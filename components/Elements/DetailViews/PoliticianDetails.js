@@ -30,12 +30,11 @@ export const PoliticianDetails = ({ item, onFinish, setStore, store }) => {
       { name: item.name }
     )}&cc=politics@lfca.earth&body=${encodeURIComponent(text)}`
     window.location.href = mailToLink
-    // count up for politicians sent
-    // remove selectedItem aka politician from store
-    // and add to sentItems
+    // remove selectedItem aka politician
+    // from store and add to sentItems
     const { selectedItems, sentItems } = store
     const newSentItems = [...sentItems, item]
-    selectedItems.splice(store?.slideIndex, 1) // modifies the original array
+    selectedItems.splice(store?.slideIndex, 1)
     setStore({
       ...store,
       selectedItems,
@@ -45,31 +44,25 @@ export const PoliticianDetails = ({ item, onFinish, setStore, store }) => {
     if (selectedItems.length === 0) onFinish()
   }
 
-  const messagesSelect = {
-    fieldName: 'activeMessageIndex',
-    filterMode: 'select-single',
-    label: 'Message',
-    options: messages.map((m, i) => ({ label: `Message ${i + 1}`, value: i })),
-    placeholder: 'Please select',
-  }
+  const messagesOptions = messages.map((m, i) => ({
+    label: `Message ${i + 1}`,
+    value: i,
+  }))
 
   return (
     <div className="politician-detail-view">
       <ScrollableFilters
         additionalItems={[
-          <Form.Item
-            key={messagesSelect.fieldName}
-            label={messagesSelect.label}
-          >
+          <Form.Item key={'activeMessageIndex'} label={'Message'}>
             <Select
               onChange={(val) =>
                 setStore({ ...store, activeMessageIndex: val })
               }
-              placeholder={messagesSelect.placeholder}
+              placeholder={'Please select'}
               size="small"
               value={store?.activeMessageIndex}
             >
-              {messagesSelect?.options.map((item) => (
+              {messagesOptions.map((item) => (
                 <Select.Option key={item.value} value={item.value}>
                   {item.label}
                 </Select.Option>
