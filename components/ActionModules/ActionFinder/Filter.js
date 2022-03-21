@@ -1,7 +1,7 @@
 import { Button, Form } from 'antd'
 import React from 'react'
 
-import { useBlocks } from '../../../hooks/useTranslation'
+import { useContentBlocks } from '../../../hooks'
 import { SINGLE } from '../../../utils'
 import { text } from '../../../utils/Text'
 import { SelectFilter } from '../../Elements/SelectFilter'
@@ -20,8 +20,8 @@ const Filter = ({
   store,
 }) => {
   const isSingleMode = filterElement?.filterMode === SINGLE
-  const labelSingleMode = text(useBlocks('label.singlemode'))
-  const labelMultiMode = text(useBlocks('label.multimode'))
+  const labelSingleMode = text(useContentBlocks('label.singlemode'))
+  const labelMultiMode = text(useContentBlocks('label.multimode'))
   const filterOption = filterElement || {}
 
   const handleNext = (v) => {

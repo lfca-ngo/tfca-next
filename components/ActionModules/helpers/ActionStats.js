@@ -6,7 +6,7 @@ import {
 import { Progress, Tag } from 'antd'
 import React from 'react'
 
-import { useBlocks } from '../../../hooks/useTranslation'
+import { useContentBlocks } from '../../../hooks'
 import { text } from '../../../utils/Text'
 
 const STEPS = 5
@@ -32,7 +32,7 @@ const ActionStats = (props) => {
       <Stat
         data={props.otherUsers || 0}
         icon={<UsergroupAddOutlined />}
-        text={text(useBlocks('stats.usersdoingthis'))}
+        text={text(useContentBlocks('stats.usersdoingthis'))}
       />
 
       <Stat
@@ -44,7 +44,7 @@ const ActionStats = (props) => {
           />
         }
         icon={<LikeOutlined />}
-        text={text(useBlocks('stats.impact'))}
+        text={text(useContentBlocks('stats.impact'))}
       />
 
       <Stat
@@ -56,7 +56,7 @@ const ActionStats = (props) => {
           />
         }
         icon={<CoffeeOutlined />}
-        text={text(useBlocks('stats.effort'))}
+        text={text(useContentBlocks('stats.effort'))}
       />
     </div>
   )

@@ -27,7 +27,7 @@ export const useDarkMode = () => {
     setCookie(THEME_COOKIE, shouldSetDark ? CSS_THEME_DARK : LIGHT_THEME)
   }
 
-  // Only on inital mount, set the them based on the cookie
+  // Only on inital mount, set the theme based on the cookie
   useEffect(() => {
     setDarkMode(isDarkMode)
 

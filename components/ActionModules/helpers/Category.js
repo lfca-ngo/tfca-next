@@ -2,11 +2,11 @@ import { ArrowLeftOutlined } from '@ant-design/icons'
 import { Button } from 'antd'
 import React from 'react'
 
-import { useBlocks } from '../../../hooks/useTranslation'
+import { useContentBlocks } from '../../../hooks'
 import { text } from '../../../utils/Text'
 
 const Category = (props) => {
-  const backString = useBlocks('nav.back')
+  const backString = useContentBlocks('nav.back')
   if (props.goBack) {
     return (
       <div className="action-category">

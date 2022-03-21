@@ -7,8 +7,7 @@ import { motion, useTransform, useViewportScroll } from 'framer-motion'
 import Image from 'next/image'
 import React from 'react'
 
-import { useDarkMode } from '../../../hooks/useDarkMode'
-import { useActiveAction, useIsMobile } from '../../../hooks/useIsClient'
+import { useActiveAction, useDarkMode, useIsMobile } from '../../../hooks'
 import { getLogoSrc, scrollToId } from '../../../utils'
 import { Hamburger } from '../../Elements/Hamburger'
 

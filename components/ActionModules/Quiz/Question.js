@@ -1,7 +1,7 @@
 import { Button, Form } from 'antd'
 import React, { useMemo, useState } from 'react'
 
-import { useBlocks } from '../../../hooks/useTranslation'
+import { useContentBlocks } from '../../../hooks'
 import { checkAnswers, SINGLE, transformOption } from '../../../utils'
 import { text } from '../../../utils/Text'
 import { SelectFilter } from '../../Elements/SelectFilter'
@@ -19,8 +19,8 @@ const Question = ({
 }) => {
   const [status, setStatus] = useState()
   const isSingleMode = activeQuestion?.inputType === SINGLE
-  const labelSingleMode = text(useBlocks('label.singlemode'))
-  const labelMultiMode = text(useBlocks('label.multimode'))
+  const labelSingleMode = text(useContentBlocks('label.singlemode'))
+  const labelMultiMode = text(useContentBlocks('label.multimode'))
 
   const answers = useMemo(() => {
     const correctAnswers = []

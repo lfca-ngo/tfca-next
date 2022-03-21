@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 import React from 'react'
 import { isMobile } from 'react-device-detect'
 
-import { useContent } from '../../hooks/useTranslation'
+import { useContent } from '../../hooks'
 
 export const IntlSelector = () => {
   const router = useRouter()

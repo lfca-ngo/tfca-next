@@ -1,8 +1,7 @@
 import { Tabs } from 'antd'
 import React, { useMemo } from 'react'
 
-import { useChallenge } from '../../../hooks/useChallenge'
-import { useFlow } from '../../../hooks/useFlow'
+import { useApp, useFlow } from '../../../hooks'
 import { getFilterOptions } from '../../../utils'
 import { Share } from '../helpers/Share'
 import Success from '../helpers/Success'
@@ -54,7 +53,7 @@ const ActionFinderFlow = (props) => {
     initialIndex: firstStep,
   })
 
-  const { customization, setProgress } = useChallenge()
+  const { customization, setProgress } = useApp()
 
   const stepsKeys = [...steps.keys()]
 

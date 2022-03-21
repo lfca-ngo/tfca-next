@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'
 import React, { useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie'
 
-import { useContent } from '../../hooks/useTranslation'
+import { useContent } from '../../hooks'
 import {
   CONSENT_COOKIE,
   getWindowUid,
