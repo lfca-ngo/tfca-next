@@ -3,6 +3,7 @@ require('./styles.less')
 import { Form } from 'antd'
 import React from 'react'
 
+import { MULTI } from '../../../utils'
 import { SelectFilter } from '../SelectFilter'
 
 export const ScrollableFilters = (props) => {
@@ -19,7 +20,7 @@ export const ScrollableFilters = (props) => {
         onValuesChange={handleValuesChange}
       >
         {props.availableFilters.map((filter) => {
-          const isMultiple = filter?.filterMode.indexOf('multi') > -1
+          const isMultiple = filter?.filterMode.indexOf(MULTI) > -1
           return (
             <Form.Item
               key={filter?.fieldName}

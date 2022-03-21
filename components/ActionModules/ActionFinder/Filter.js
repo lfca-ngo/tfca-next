@@ -19,7 +19,7 @@ const Filter = ({
   setStore,
   store,
 }) => {
-  const isSingleMode = filterElement?.filterMode === SINGLE
+  const isSingleMode = filterElement?.filterMode.indexOf(SINGLE) > -1
   const labelSingleMode = text(useContentBlocks('label.singlemode'))
   const labelMultiMode = text(useContentBlocks('label.multimode'))
   const filterOption = filterElement || {}
