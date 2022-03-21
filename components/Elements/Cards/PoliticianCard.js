@@ -6,7 +6,7 @@ import React from 'react'
 export const PoliticianCard = ({ item, onNext }) => {
   const handleNext = onNext ? () => onNext(item) : undefined
   return (
-    <Card className="politician-card" onClick={() => onNext(item)}>
+    <Card className="politician-card" onClick={() => onNext && onNext(item)}>
       <img className="image" src={item.imageUrl} />
 
       <div>
