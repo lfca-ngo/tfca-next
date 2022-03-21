@@ -1,14 +1,12 @@
 require('./politicianDetails.less')
 
-import { CopyOutlined, MailOutlined } from '@ant-design/icons'
-import { Button, Form, Input, message, Select } from 'antd'
+import { MailOutlined } from '@ant-design/icons'
+import { Button, Form, Select, Space } from 'antd'
 import React, { useEffect } from 'react'
-import { CopyToClipboard } from 'react-copy-to-clipboard'
 
 import { text as replaceVars } from '../../../utils/Text'
+import { CopyTextArea } from '../CopyTextArea'
 import { ScrollableFilters } from '../ScrollableFilters'
-
-const TextArea = Input.TextArea
 
 export const PoliticianDetails = ({ item, onFinish, setStore, store }) => {
   const {
@@ -89,40 +87,19 @@ export const PoliticianDetails = ({ item, onFinish, setStore, store }) => {
         store={store}
       />
 
-      <TextArea
-        onChange={(e) => setText(e.target.value)}
-        rows={10}
-        style={{ margin: '20px 0 10px' }}
-        value={text}
-      />
+      <Space direction="vertical" size="middle" style={{ width: '100%' }}>
+        <CopyTextArea setText={setText} text={text} />
 
-      <CopyToClipboard
-        onCopy={() => {
-          message.success('Copied value')
-        }}
-        text={text}
-      >
         <Button
           block
-          className="mt-30"
-          icon={<CopyOutlined />}
+          icon={<MailOutlined />}
+          onClick={handleSend}
           size="large"
-          type="default"
+          type="primary"
         >
-          Copy
+          E-Mail
         </Button>
-      </CopyToClipboard>
-
-      <Button
-        block
-        className="mt-30"
-        icon={<MailOutlined />}
-        onClick={handleSend}
-        size="large"
-        type="default"
-      >
-        E-Mail
-      </Button>
+      </Space>
     </div>
   )
 }

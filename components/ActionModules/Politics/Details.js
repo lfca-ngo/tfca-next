@@ -65,16 +65,6 @@ export const Details = ({
       ) : (
         <div>No politicians selected, go back</div>
       )}
-
-      <Button
-        block
-        className="mt-30"
-        onClick={() => sliderRef.current.goTo(0)}
-        size="large"
-        type="primary"
-      >
-        Make it count
-      </Button>
     </div>
   )
 }
