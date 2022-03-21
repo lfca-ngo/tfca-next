@@ -66,7 +66,7 @@ export const ActionFinderFlow = ({ module }) => {
           const nextKey = i <= stepsKeys.length ? stepsKeys[i + 1] : null
           const prevKey = i > 0 ? stepsKeys[i - 1] : null
           return (
-            <TabPane key={key} tab={`${props.name}`}>
+            <TabPane key={key} tab={key}>
               <Page
                 availableFilters={availableFilters}
                 filterElement={filterElement}
@@ -74,8 +74,7 @@ export const ActionFinderFlow = ({ module }) => {
                   // TODO: Update progress
                   goTo(key)
                 }}
-                icon={props.module?.icon?.url}
-                id={props.id}
+                icon={module?.icon?.url}
                 moduleBlocks={module?.blocks || {}}
                 moduleData={module?.data || {}}
                 nextKey={nextKey}

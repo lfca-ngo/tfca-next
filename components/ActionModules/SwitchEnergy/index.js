@@ -22,9 +22,9 @@ const steps = new Map([
   ['share', Share],
 ])
 
-export const SwitchEnergy = (props) => {
+export const SwitchEnergy = ({ module }) => {
   const { goTo, index, setStore, store } = useFlow({
-    id: props.module?.id,
+    id: module?.id,
     initialIndex: 'intro',
   })
 
@@ -44,17 +44,16 @@ export const SwitchEnergy = (props) => {
           const prevKey = i > 0 ? stepsKeys[i - 1] : null
 
           return (
-            <TabPane key={key} tab={`${props.name}`}>
+            <TabPane key={key} tab={key}>
               <Page
                 goTo={(key) => {
                   // TODO: Update progress
                   goTo(key)
                 }}
-                icon={props.module?.icon?.url}
-                id={props.id}
-                moduleBlocks={props.module?.blocks || {}}
-                moduleData={props.module?.data || {}}
-                moduleLists={props.module?.lists || {}}
+                icon={module?.icon?.url}
+                moduleBlocks={module?.blocks || {}}
+                moduleData={module?.data || {}}
+                moduleLists={module?.lists || {}}
                 nextKey={nextKey}
                 prevKey={prevKey}
                 setStore={setStore}

@@ -11,11 +11,11 @@ const { TabPane } = Tabs
 
 export const ANSWER_SUFFIX = '_answer'
 
-export const Quiz = (props) => {
-  const quizItems = props.module?.quizCollection?.items
+export const Quiz = ({ module }) => {
+  const quizItems = module?.quizCollection?.items
 
   const { goTo, index, setStore, store } = useFlow({
-    id: props.module?.id,
+    id: module?.id,
     initialIndex: quizItems[0]?.questionId,
   })
 
@@ -54,15 +54,14 @@ export const Quiz = (props) => {
           const prevKey = i > 0 ? stepsKeys[i - 1] : null
 
           return (
-            <TabPane key={key} tab={`${props.name}`}>
+            <TabPane key={key} tab={key}>
               <Page
                 activeQuestion={activeQuestion}
                 goTo={(key) => {
                   // TODO: Update progress
                   goTo(key)
                 }}
-                icon={props.module?.icon?.url}
-                id={props.id}
+                icon={module?.icon?.url}
                 moduleBlocks={module?.blocks || {}}
                 nextKey={nextKey}
                 prevKey={prevKey}

@@ -11,10 +11,10 @@ import { Results } from './Results'
 
 const { TabPane } = Tabs
 
-export const Politics = (props) => {
+export const Politics = ({ module }) => {
   const { locale } = useRouter()
 
-  const { data = {} } = props.module || {}
+  const { data = {} } = module || {}
 
   const { availableFilters, messagesByFilterValue, messagesFilterKey, steps } =
     React.useMemo(() => {
@@ -80,7 +80,7 @@ export const Politics = (props) => {
   const stepsKeys = [...steps.keys()]
 
   const { goTo, index, setStore, store } = useFlow({
-    id: props.module?.id,
+    id: module?.id,
     initialIndex: stepsKeys[0],
     initialStore: {
       activeMessageIndex: 0,
@@ -107,7 +107,7 @@ export const Politics = (props) => {
           const prevKey = i > 0 ? stepsKeys[i - 1] : null
 
           return (
-            <TabPane key={key} tab={`${props.name}`}>
+            <TabPane key={key} tab={key}>
               <Page
                 availableFilters={availableFilters}
                 filterOption={filterOption}
@@ -115,8 +115,7 @@ export const Politics = (props) => {
                   // TODO: Update progress
                   goTo(key)
                 }}
-                icon={props.module?.icon?.url}
-                id={props.id}
+                icon={module?.icon?.url}
                 messagesByFilterValue={messagesByFilterValue}
                 messagesFilterKey={messagesFilterKey}
                 moduleBlocks={module?.blocks || {}}
