@@ -1,14 +1,46 @@
 import { Tabs } from 'antd'
+import dynamic from 'next/dynamic'
 import React from 'react'
 
 import { useApp, useFlow } from '../../../hooks'
-import { Share } from '../helpers/Share'
-import Success from '../helpers/Success'
-import Calculate from './Calculate'
-import CheckProvider from './CheckProvider'
-import FormSwitch from './FormSwitch'
-import Intro from './Intro'
-import Results from './Results'
+import { ComponentPlaceholder } from '../../Elements/ComponentPlaceholder'
+
+const Calculate = dynamic(
+  () => import('./Calculate').then((mod) => mod.Calculate),
+  {
+    loading: ComponentPlaceholder,
+  }
+)
+const CheckProvider = dynamic(
+  () => import('./CheckProvider').then((mod) => mod.CheckProvider),
+  {
+    loading: ComponentPlaceholder,
+  }
+)
+const FormSwitch = dynamic(
+  () => import('./FormSwitch').then((mod) => mod.FormSwitch),
+  {
+    loading: ComponentPlaceholder,
+  }
+)
+const Intro = dynamic(() => import('./Intro').then((mod) => mod.Intro), {
+  loading: ComponentPlaceholder,
+})
+const Results = dynamic(() => import('./Results').then((mod) => mod.Results), {
+  loading: ComponentPlaceholder,
+})
+const Success = dynamic(
+  () => import('../helpers/Success').then((mod) => mod.Success),
+  {
+    loading: ComponentPlaceholder,
+  }
+)
+const Share = dynamic(
+  () => import('../helpers/Share').then((mod) => mod.Share),
+  {
+    loading: ComponentPlaceholder,
+  }
+)
 
 const { TabPane } = Tabs
 
@@ -22,7 +54,7 @@ const steps = new Map([
   ['share', Share],
 ])
 
-const SwitchEnergyFlow = (props) => {
+export const SwitchEnergy = (props) => {
   const { goTo, index, setStore, store } = useFlow({
     id: props.module?.id,
     initialIndex: 'intro',
@@ -68,5 +100,3 @@ const SwitchEnergyFlow = (props) => {
     </div>
   )
 }
-
-export default SwitchEnergyFlow

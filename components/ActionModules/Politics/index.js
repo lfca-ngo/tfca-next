@@ -1,17 +1,36 @@
 import { Tabs } from 'antd'
+import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import React from 'react'
 
 import { useApp, useFlow } from '../../../hooks'
-import { Share } from '../helpers/Share'
-import Success from '../helpers/Success'
-import { Details } from './Details'
-import { Filter } from './Filter'
-import { Results } from './Results'
+import { ComponentPlaceholder } from '../../Elements/ComponentPlaceholder'
+
+const Details = dynamic(() => import('./Details').then((mod) => mod.Details), {
+  loading: ComponentPlaceholder,
+})
+const Filter = dynamic(() => import('./Filter').then((mod) => mod.Filter), {
+  loading: ComponentPlaceholder,
+})
+const Results = dynamic(() => import('./Results').then((mod) => mod.Results), {
+  loading: ComponentPlaceholder,
+})
+const Share = dynamic(
+  () => import('../helpers/Share').then((mod) => mod.Share),
+  {
+    loading: ComponentPlaceholder,
+  }
+)
+const Success = dynamic(
+  () => import('../helpers/Success').then((mod) => mod.Success),
+  {
+    loading: ComponentPlaceholder,
+  }
+)
 
 const { TabPane } = Tabs
 
-const PoliticsFlow = (props) => {
+export const Politics = (props) => {
   const { locale } = useRouter()
 
   const { data = {} } = props.module || {}
@@ -148,5 +167,3 @@ function getCountryFromLocale(locale) {
       return undefined
   }
 }
-
-export default PoliticsFlow

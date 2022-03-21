@@ -1,17 +1,37 @@
 import { Tabs } from 'antd'
+import dynamic from 'next/dynamic'
 import React, { useMemo } from 'react'
 
 import { useApp, useFlow } from '../../../hooks'
-import { Share } from '../helpers/Share'
-import Success from '../helpers/Success'
-import Answer from './Answer'
-import Question from './Question'
+import { ComponentPlaceholder } from '../../Elements/ComponentPlaceholder'
 
-export const ANSWER_SUFFIX = '_answer'
+const Answer = dynamic(() => import('./Answer').then((mod) => mod.Answer), {
+  loading: ComponentPlaceholder,
+})
+const Question = dynamic(
+  () => import('./Question').then((mod) => mod.Question),
+  {
+    loading: ComponentPlaceholder,
+  }
+)
+const Share = dynamic(
+  () => import('../helpers/Share').then((mod) => mod.Share),
+  {
+    loading: ComponentPlaceholder,
+  }
+)
+const Success = dynamic(
+  () => import('../helpers/Success').then((mod) => mod.Success),
+  {
+    loading: ComponentPlaceholder,
+  }
+)
 
 const { TabPane } = Tabs
 
-const QuizFlow = (props) => {
+export const ANSWER_SUFFIX = '_answer'
+
+export const Quiz = (props) => {
   const quizItems = props.module?.quizCollection?.items
 
   const { goTo, index, setStore, store } = useFlow({
@@ -81,5 +101,3 @@ const QuizFlow = (props) => {
     </div>
   )
 }
-
-export default QuizFlow

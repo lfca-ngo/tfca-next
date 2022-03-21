@@ -33,7 +33,7 @@ const customizeRenderEmpty = () => (
   </div>
 )
 
-const CheckProvider = (props) => {
+export const CheckProvider = (props) => {
   const [provider, setProvider] = useState()
 
   const handleChange = (val) => {
@@ -137,5 +137,3 @@ const CheckProvider = (props) => {
     </div>
   )
 }
-
-export default CheckProvider
