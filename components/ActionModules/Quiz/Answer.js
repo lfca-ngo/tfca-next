@@ -9,9 +9,9 @@ export const Answer = ({
   activeQuestion,
   goTo,
   icon,
+  moduleBlocks,
   nextKey,
   prevKey,
-  store,
 }) => {
   const actions = activeQuestion?.resultActionsCollection
 
@@ -20,7 +20,7 @@ export const Answer = ({
       <Category
         goBack={prevKey ? () => goTo(prevKey) : undefined}
         icon={icon}
-        title={text(store.blocks['category.title'])}
+        title={text(moduleBlocks['category.title'])}
       />
       <Text block={activeQuestion?.result} />
 

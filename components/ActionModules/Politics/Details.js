@@ -9,8 +9,10 @@ import Category from '../helpers/Category'
 import { StepHeader } from '../helpers/StepHeader'
 
 export const Details = ({
+  availableFilters,
   goTo,
   icon,
+  messagesByFilterValue,
   moduleBlocks,
   nextKey,
   prevKey,
@@ -56,7 +58,9 @@ export const Details = ({
 
       {activePolitician ? (
         <PoliticianDetails
+          availableFilters={availableFilters}
           item={activePolitician}
+          messagesByFilterValue={messagesByFilterValue}
           onFinish={() => goTo(nextKey)}
           setStore={setStore}
           store={store}

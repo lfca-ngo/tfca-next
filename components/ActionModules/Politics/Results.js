@@ -13,6 +13,7 @@ export const Results = ({
   availableFilters,
   goTo,
   icon,
+  moduleBlocks,
   nextKey,
   prevKey,
   setStore,

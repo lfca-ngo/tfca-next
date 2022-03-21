@@ -126,7 +126,6 @@ export const Results = ({
             item={item}
             key={`card-${i}`}
             next={() => {
-              setProgress(0.75)
               goTo('form-switch')
             }}
           />
@@ -138,6 +137,7 @@ export const Results = ({
           data={moduleData}
           initialValues={{ postcode: store?.postcode, users: store?.users }}
           moduleBlocks={moduleBlocks}
+          moduleData={moduleData}
           onFinish={updateProviders}
         />
       </Modal>

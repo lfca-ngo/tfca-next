@@ -8,13 +8,15 @@ import { text as replaceVars } from '../../../utils/Text'
 import { CopyTextArea } from '../CopyTextArea'
 import { ScrollableFilters } from '../ScrollableFilters'
 
-export const PoliticianDetails = ({ item, onFinish, setStore, store }) => {
-  const {
-    activeMessageIndex,
-    availableFilters,
-    badges,
-    messagesByFilterValue,
-  } = store
+export const PoliticianDetails = ({
+  availableFilters,
+  item,
+  messagesByFilterValue,
+  onFinish,
+  setStore,
+  store,
+}) => {
+  const { activeMessageIndex, badges } = store
   const messages = messagesByFilterValue[badges]
   const activeMessage = messages[activeMessageIndex]
   const [text, setText] = React.useState('')

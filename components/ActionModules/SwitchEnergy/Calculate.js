@@ -33,46 +33,56 @@ export const ITEMS = {
       />
     </Form.Item>
   ),
-  users: (blocks, usersInput) => (
-    <Form.Item
-      name="users"
-      rules={[
-        {
-          message: text(blocks['form.users.message']),
-          required: true,
-        },
-      ]}
-    >
-      <Select
-        className="site-input-left"
-        size="large"
-        style={{ width: '100%' }}
+  users: (blocks, usersInput) =>
+    console.log('usersInput', usersInput) || (
+      <Form.Item
+        name="users"
+        rules={[
+          {
+            message: text(blocks['form.users.message']),
+            required: true,
+          },
+        ]}
       >
-        {usersInput.map((user, i) => (
-          <Select.Option key={i} label={user.label} value={user.valueNumber}>
-            <span className="option-with-icon">
-              {option.icon?.url && (
-                <Image height={32} src={user.icon.url} width={32} />
-              )}
-              <span className="option-label">{user.label}</span>
-            </span>
-          </Select.Option>
-        ))}
-      </Select>
-    </Form.Item>
-  ),
+        <Select
+          className="site-input-left"
+          size="large"
+          style={{ width: '100%' }}
+        >
+          {usersInput.map((option, i) => (
+            <Select.Option
+              key={i}
+              label={option.label}
+              value={option.valueNumber}
+            >
+              <span className="option-with-icon">
+                {option.icon?.url && (
+                  <Image height={32} src={option.icon.url} width={32} />
+                )}
+                <span className="option-label">{option.label}</span>
+              </span>
+            </Select.Option>
+          ))}
+        </Select>
+      </Form.Item>
+    ),
 }
 
-export const EnergyForm = ({ blocks, data, initialValues, onFinish }) => {
+export const EnergyForm = ({
+  initialValues,
+  moduleBlocks,
+  moduleData,
+  onFinish,
+}) => {
   return (
     <Form initialValues={initialValues} onFinish={onFinish}>
       <Row className="site-input-group-wrapper form-spacing">
         <Input.Group>
           <Row gutter={8}>
             <Col xs={isMobile ? 12 : 10}>
-              {ITEMS.users(blocks, data?.['input.users']?.items)}
+              {ITEMS.users(moduleBlocks, moduleData?.['input.users']?.items)}
             </Col>
-            <Col xs={isMobile ? 12 : 14}>{ITEMS.postcode(blocks)}</Col>
+            <Col xs={isMobile ? 12 : 14}>{ITEMS.postcode(moduleBlocks)}</Col>
           </Row>
         </Input.Group>
 
@@ -88,10 +98,12 @@ export const EnergyForm = ({ blocks, data, initialValues, onFinish }) => {
 
 export const Calculate = ({
   goTo,
+  icon,
   moduleBlocks,
   moduleData,
   moduleLists,
   setStore,
+  store,
 }) => {
   const handleFinish = (allValues) => {
     setStore({
@@ -105,7 +117,7 @@ export const Calculate = ({
     <div className="step">
       <Category
         goBack={() => goTo('intro')}
-        icon={props.icon}
+        icon={icon}
         title={text(moduleBlocks['category.title'])}
       />
 
@@ -114,10 +126,13 @@ export const Calculate = ({
       <CheckList data={moduleLists?.benefits} />
 
       <EnergyForm
-        {...props}
         initialValues={{
-          users: moduleData?.input_users?.items[0]?.valueNumber,
+          postcode: store?.postcode,
+          users:
+            store?.users || moduleData?.['input.users']?.items[0]?.valueNumber,
         }}
+        moduleBlocks={moduleBlocks}
+        moduleData={moduleData}
         onFinish={handleFinish}
       />
     </div>
