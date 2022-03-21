@@ -4,6 +4,9 @@
 .ant-list-item.multi-select-list-item.is-selected {
   .ant-card.politician-card {
     .ant-card-body {
+      header {
+        border-bottom: 1px solid fade(@white, 20%);
+      }
       .name {
         color: @white;
       }
@@ -16,26 +19,27 @@
 }
 
 .ant-card.politician-card {
+  &.minimal {
+    .ant-card-body {
+      header {
+        border-bottom: none;
+        padding-bottom: 0;
+        margin-bottom: 0;
+      }
+    }
+  }
   .ant-card-body {
     display: flex;
     flex-direction: column;
     align-items: center;
     color: @black;
 
-    @media @desktop {
-      flex-direction: row;
-    }
-
     header {
       display: flex;
       width: 100%;
-      border-bottom: 1px solid #e5e5e5;
+      border-bottom: 1px solid fade(@black, 20%);
       padding-bottom: 15px;
-      @media @desktop {
-        width: auto;
-        border-bottom: none;
-        padding-bottom: 0;
-      }
+
       .image {
         margin-right: 12px;
         @media @desktop {
@@ -69,18 +73,15 @@
       }
     }
 
-    .desc {
-      margin-left: 0;
-      margin-right: auto;
-    }
-    .actions {
-      margin-right: 0;
-      margin-left: auto;
-    }
+    footer {
+      flex: 1;
+      display: flex;
+      width: 100%;
+      padding-top: 15px;
 
-    .button {
-      @media @desktop {
-        margin: 0 0 0 auto;
+      .actions {
+        margin-right: 0;
+        margin-left: auto;
       }
     }
   }

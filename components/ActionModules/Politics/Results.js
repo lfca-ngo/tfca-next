@@ -83,7 +83,11 @@ export const Results = ({
                   'is-selected': isSelected,
                 })}
               >
-                <PoliticianCard item={item} onNext={toggleSelect} />
+                <PoliticianCard
+                  isSelected={isSelected}
+                  item={item}
+                  onNext={toggleSelect}
+                />
               </List.Item>
             )
           }}

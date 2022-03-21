@@ -50,7 +50,7 @@ export const Details = ({
       >
         {selectedPoliticians.map((politician) => (
           <div className="fixed-width-wrapper" key={politician.id}>
-            <PoliticianCard item={politician} />
+            <PoliticianCard item={politician} minimal />
           </div>
         ))}
       </Carousel>

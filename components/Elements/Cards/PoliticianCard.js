@@ -1,6 +1,7 @@
 require('./politicianCard.less')
 
 import { Button, Card, Tag } from 'antd'
+import classNames from 'classnames'
 import React from 'react'
 
 import IconEurope from '../../../assets/icons/eu.svg'
@@ -18,12 +19,15 @@ const MAP_PARLIAMENT = {
   },
 }
 
-export const PoliticianCard = ({ item, onNext }) => {
+export const PoliticianCard = ({ isSelected, item, minimal, onNext }) => {
   const handleNext = onNext ? () => onNext(item) : undefined
   const parliamentInfo = MAP_PARLIAMENT[item?.parliament]
 
   return (
-    <Card className="politician-card" onClick={() => onNext && onNext(item)}>
+    <Card
+      className={classNames('politician-card', { minimal })}
+      onClick={() => onNext && onNext(item)}
+    >
       <header>
         <div className="image">
           <CircleImage size={65} src={item.imageUrl} />
@@ -38,26 +42,31 @@ export const PoliticianCard = ({ item, onNext }) => {
         </div>
       </header>
 
-      <div className="desc">
-        {item.tags.map((tag) => (
-          <Tag className="base-tag lila" key={tag}>
-            {tag}
-          </Tag>
-        ))}
-      </div>
+      {!minimal && (
+        <footer>
+          <div className="desc">
+            {item.tags.map((tag) => (
+              <Tag className="base-tag lila" key={tag}>
+                {tag}
+              </Tag>
+            ))}
+          </div>
 
-      <div className="actions">
-        {handleNext && (
-          <Button
-            className="button"
-            onClick={handleNext}
-            size="small"
-            type="primary"
-          >
-            Select
-          </Button>
-        )}
-      </div>
+          <div className="actions">
+            {handleNext && (
+              <Button
+                className="button"
+                ghost={isSelected}
+                onClick={handleNext}
+                size="small"
+                type="primary"
+              >
+                {isSelected ? 'Unselect' : 'Select'}
+              </Button>
+            )}
+          </div>
+        </footer>
+      )}
     </Card>
   )
 }
