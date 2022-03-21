@@ -40,6 +40,11 @@ span.text-accent {
 .option-with-icon {
   display: flex;
   align-items: center;
+  .option-label {
+    &:not(:first-child) {
+      margin-left: 12px;
+    }
+  }
 }
 
 // @TODO: move to separate component
@@ -232,6 +237,16 @@ span.text-accent {
   }
 }
 
+.ant-list .multi-select-list-item {
+  &.is-selected {
+    .ant-card {
+      background-color: fade(@white, 10%);
+      color: @white;
+      border: 2px solid @secondary-color;
+    }
+  }
+}
+
 .ant-list.simple-list {
   &.equal-height {
     .ant-row > div {
@@ -259,15 +274,6 @@ span.text-accent {
   }
 }
 
-input.ant-input {
-  border-radius: calc(@border-radius-base / 2);
-}
-
-.ant-select-single.ant-select-lg:not(.ant-select-customize-input)
-  .ant-select-selector {
-  border-radius: calc(@border-radius-base / 2);
-}
-
 .form-group {
   .form-group-inner {
     .ant-form-item {
@@ -290,4 +296,38 @@ input.ant-input {
 
 .mt-30 {
   margin-top: 30px;
+}
+
+.mb-30 {
+  margin-bottom: 30px;
+}
+
+.slick-slider.custom-slider {
+  @arrow-size: 44px;
+  .slick-next,
+  .slick-prev {
+    z-index: 100;
+    width: @arrow-size;
+    height: @arrow-size;
+    margin-top: calc(-@arrow-size / 2);
+    .ant-btn {
+      background: @secondary-color;
+      border: none;
+      box-shadow: @box-shadow-base;
+    }
+    &.slick-disabled {
+      opacity: 0;
+    }
+  }
+  .slick-next {
+    right: 50px;
+  }
+  .slick-prev {
+    left: 50px;
+  }
+  .slick-arrow-btn.slick-arrow {
+    display: flex;
+    align-items: center;
+    justify-self: center;
+  }
 }

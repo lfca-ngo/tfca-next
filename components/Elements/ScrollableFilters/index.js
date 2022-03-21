@@ -41,6 +41,7 @@ export const ScrollableFilters = (props) => {
             </Select>
           </Form.Item>
         ))}
+        {(props.additionalItems || []).map((item) => item)}
       </Form>
       <div className="scrollable-filter-spacer" />
     </>

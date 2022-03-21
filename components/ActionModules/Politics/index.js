@@ -84,12 +84,15 @@ const PoliticsFlow = (props) => {
     id: props.module?.id,
     initialIndex: firstStep,
     initialStore: {
+      activeMessageIndex: 0,
       availableFilters,
       'countries.zip': {
         select: getCountryFromLocale(locale),
       },
       messagesByFilterValue,
       messagesFilterKey,
+      sentItems: [],
+      slideIndex: 0,
     },
   })
 

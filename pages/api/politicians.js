@@ -101,6 +101,7 @@ export default async function handler(req, res) {
           email: item.email,
           facebook: item.facebook,
           fullName: item.fullName,
+          id: item.id.toString(),
           imageUrl: item.imageUrl,
           instagram: item.instagram,
           linkedIn: item.linkedIn,

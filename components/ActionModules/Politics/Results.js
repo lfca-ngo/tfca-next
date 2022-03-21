@@ -1,4 +1,5 @@
-import { List } from 'antd'
+import { Badge, Button, List } from 'antd'
+import classNames from 'classnames'
 import React from 'react'
 
 import { usePoliticians } from '../../../services/politicians'
@@ -14,16 +15,24 @@ export const Results = ({
   icon,
   nextKey,
   prevKey,
-  setProgress,
   setStore,
   store,
 }) => {
   const { data, error, isLoading } = usePoliticians(createPoliticsFilter(store))
+  const countSelected = store?.selectedItems?.length || 0
 
-  const handleNext = (item) => {
-    setStore({ ...store, selectedItem: item })
-    setProgress(0.3)
+  const handleNext = () => {
     goTo(nextKey)
+  }
+
+  const toggleSelect = (item) => {
+    const selectedItems = store.selectedItems || []
+    const isSelected = selectedItems.find((i) => i.id === item.id)
+    const newSelectedItems = isSelected
+      ? selectedItems.filter((i) => i.id !== item.id)
+      : [...selectedItems, item]
+
+    setStore({ ...store, selectedItems: newSelectedItems, slideIndex: 0 })
   }
 
   return (
@@ -36,9 +45,19 @@ export const Results = ({
       />
 
       <StepHeader
-        subtitle={blocks['message.subtitle']}
-        title={blocks['message.title']}
+        subtitle={blocks['results.subtitle']}
+        title={blocks['results.title']}
       />
+
+      {countSelected > 0 && (
+        <Button block className="mb-30" onClick={handleNext} type="primary">
+          <Badge
+            count={countSelected}
+            style={{ background: 'transparent', marginRight: '12px' }}
+          />
+          Continue
+        </Button>
+      )}
 
       {error ? (
         <h3>Something went wrong...</h3>
@@ -46,17 +65,27 @@ export const Results = ({
         <List
           dataSource={(data?.items || []).map((item) => ({
             email: item.email,
+            id: item.id,
             imageUrl: item.imageUrl,
             name: item.fullName,
             tags: [item.nationalPoliticalGroup],
           }))}
           grid={LIST_GRIDS['1-col']}
           loading={isLoading}
-          renderItem={(item) => (
-            <List.Item>
-              <PoliticianCard item={item} onNext={handleNext} />
-            </List.Item>
-          )}
+          renderItem={(item) => {
+            const isSelected =
+              (store.selectedItems || []).findIndex((i) => i.id === item.id) >
+              -1
+            return (
+              <List.Item
+                className={classNames('multi-select-list-item', {
+                  'is-selected': isSelected,
+                })}
+              >
+                <PoliticianCard item={item} onNext={toggleSelect} />
+              </List.Item>
+            )
+          }}
         />
       )}
     </div>

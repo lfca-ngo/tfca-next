@@ -9,9 +9,9 @@ export const TopBar = () => {
   const [hidden, setHidden] = useState(false)
   return (
     <div className={classNames('top-bar', { hidden })}>
-      <div className="text">{`It's Time for Climate Action`}</div>
+      <div className="text">{`This is a BETA version`}</div>
       <Button className="no-padding" type="link">
-        Take #5minForThePlanet
+        Most modules are not ready yet
       </Button>
       <Button
         className="no-padding close-btn"

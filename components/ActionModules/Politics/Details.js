@@ -1,19 +1,27 @@
-import { Button } from 'antd'
-import React from 'react'
+import { Carousel } from 'antd'
+import React, { useRef } from 'react'
 
 import { text } from '../../../utils/Text'
+import { ArrowButton } from '../../Elements/ArrowButton'
+import { PoliticianCard } from '../../Elements/Cards'
 import { PoliticianDetails } from '../../Elements/DetailViews'
 import Category from '../helpers/Category'
 import { StepHeader } from '../helpers/StepHeader'
 
-export const Details = ({ blocks, goTo, icon, nextKey, prevKey, store }) => {
-  const messagesValueKey = store[store.messagesFilterKey]
-  const messages =
-    store.messagesByFilterValue[
-      Array.isArray(messagesValueKey) ? messagesValueKey[0] : messagesValueKey
-    ]
+export const Details = ({
+  blocks,
+  goTo,
+  icon,
+  nextKey,
+  prevKey,
+  setStore,
+  store,
+}) => {
+  const activeIndex = store.slideIndex
+  const sliderRef = useRef()
 
-  const item = store?.selectedItem || {}
+  const selectedPoliticians = store?.selectedItems || []
+  const activePolitician = selectedPoliticians[activeIndex]
 
   return (
     <div className="step">
@@ -27,29 +35,36 @@ export const Details = ({ blocks, goTo, icon, nextKey, prevKey, store }) => {
       <StepHeader
         subtitle={blocks['details.subtitle']}
         title={blocks['details.title']}
-        vars={{
-          name: item.name || '',
-        }}
       />
 
-      <PoliticianDetails
-        initialMessage={text(messages[0].text, { name: item.name })}
-        item={item}
-        messageSubject={text(messages[0].subject, {
-          name: item.name,
-        })}
-        onFinish={() => goTo(nextKey)}
-      />
-
-      <Button
-        block
-        className="mt-30"
-        onClick={() => goTo(nextKey)}
-        size="large"
-        type="primary"
+      <Carousel
+        arrows
+        beforeChange={(_, next) => setStore({ ...store, slideIndex: next })}
+        className="custom-slider"
+        infinite={false}
+        nextArrow={<ArrowButton />}
+        prevArrow={<ArrowButton />}
+        ref={sliderRef}
+        slidesToShow={1}
+        variableWidth
       >
-        Make it count
-      </Button>
+        {selectedPoliticians.map((politician) => (
+          <div className="fixed-width-wrapper" key={politician.id}>
+            <PoliticianCard item={politician} />
+          </div>
+        ))}
+      </Carousel>
+
+      {activePolitician ? (
+        <PoliticianDetails
+          item={activePolitician}
+          onFinish={() => goTo(nextKey)}
+          setStore={setStore}
+          store={store}
+        />
+      ) : (
+        <div>No politicians selected, go back</div>
+      )}
     </div>
   )
 }
