@@ -49,10 +49,7 @@ export const Details = ({
         variableWidth
       >
         {selectedPoliticians.map((politician) => (
-          <div
-            key={politician.id}
-            style={{ marginRight: '20px', width: '600px' }}
-          >
+          <div className="fixed-width-wrapper" key={politician.id}>
             <PoliticianCard item={politician} />
           </div>
         ))}
