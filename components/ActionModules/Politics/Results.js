@@ -10,7 +10,7 @@ import Category from '../helpers/Category'
 import { StepHeader } from '../helpers/StepHeader'
 
 export const Results = ({
-  blocks,
+  availableFilters,
   goTo,
   icon,
   nextKey,
@@ -18,12 +18,10 @@ export const Results = ({
   setStore,
   store,
 }) => {
-  const { data, error, isLoading } = usePoliticians(createPoliticsFilter(store))
+  const { data, error, isLoading } = usePoliticians(
+    createPoliticsFilter(availableFilters, store)
+  )
   const countSelected = store?.selectedItems?.length || 0
-
-  const handleNext = () => {
-    goTo(nextKey)
-  }
 
   const toggleSelect = (item) => {
     const selectedItems = store.selectedItems || []
@@ -38,19 +36,23 @@ export const Results = ({
   return (
     <div className="step">
       <Category
-        goBack
+        goBack={prevKey ? () => goTo(prevKey) : undefined}
         icon={icon}
-        prev={() => goTo(prevKey)}
-        title={text(blocks['category.title'])}
+        title={text(moduleBlocks['category.title'])}
       />
 
       <StepHeader
-        subtitle={blocks['results.subtitle']}
-        title={blocks['results.title']}
+        subtitle={moduleBlocks['results.subtitle']}
+        title={moduleBlocks['results.title']}
       />
 
       {countSelected > 0 && (
-        <Button block className="mb-30" onClick={handleNext} type="primary">
+        <Button
+          block
+          className="mb-30"
+          onClick={() => goTo(nextKey)}
+          type="primary"
+        >
           <Badge
             count={countSelected}
             style={{ background: 'transparent', marginRight: '12px' }}
@@ -92,11 +94,10 @@ export const Results = ({
   )
 }
 
-function createPoliticsFilter(store) {
-  return (store.availableFilters || []).reduce((acc, curr) => {
+function createPoliticsFilter(availableFilters, store) {
+  return (availableFilters || []).reduce((acc, curr) => {
     const fieldName = curr.fieldName
-
-    const value = store[curr.fieldName]
+    const value = store[fieldName]
 
     switch (curr.filterMode) {
       case 'radio-single':

@@ -17,7 +17,6 @@ const AppContext = createContext()
 export const AppProvider = ({ children, content, customization = null }) => {
   const [activeAction, setActiveAction] = useState()
   const [showConfetti, setShowConfetti] = useState(false)
-  const [progress, setProgress] = useState(0)
   const [isMobile, setIsMobile] = useState(false)
   const [isClient, setClient] = useState(false)
 
@@ -40,9 +39,7 @@ export const AppProvider = ({ children, content, customization = null }) => {
         isClient,
         isMobile,
         key,
-        progress,
         setActiveAction,
-        setProgress,
         setShowConfetti,
       }}
     >
@@ -52,9 +49,9 @@ export const AppProvider = ({ children, content, customization = null }) => {
   )
 }
 
-export const useApp = () => {
+export const useCustomization = () => {
   const context = useContext(AppContext)
-  return context
+  return context.customization
 }
 
 export const useActiveAction = () => {

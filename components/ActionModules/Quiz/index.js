@@ -1,7 +1,7 @@
 import { Tabs } from 'antd'
 import React, { useMemo } from 'react'
 
-import { useApp, useFlow } from '../../../hooks'
+import { useFlow } from '../../../hooks'
 import { Share } from '../helpers/Share'
 import { Success } from '../helpers/Success'
 import { Answer } from './Answer'
@@ -18,8 +18,6 @@ export const Quiz = (props) => {
     id: props.module?.id,
     initialIndex: quizItems[0]?.questionId,
   })
-
-  const { customization, setProgress } = useApp()
 
   // for every question and answer pair we create one page component
   // that can be accessed via "next" or by calling it's key
@@ -59,18 +57,15 @@ export const Quiz = (props) => {
             <TabPane key={key} tab={`${props.name}`}>
               <Page
                 activeQuestion={activeQuestion}
-                blocks={props.module?.blocks || {}}
-                customization={customization}
-                data={props.module?.data || {}}
-                goTo={goTo}
+                goTo={(key) => {
+                  // TODO: Update progress
+                  goTo(key)
+                }}
                 icon={props.module?.icon?.url}
                 id={props.id}
-                lists={props.module?.lists || {}}
-                name={props.name}
+                moduleBlocks={module?.blocks || {}}
                 nextKey={nextKey}
                 prevKey={prevKey}
-                quizItems={quizItems}
-                setProgress={setProgress}
                 setStore={setStore}
                 store={store}
               />

@@ -10,9 +10,9 @@ import { StepHeader } from '../helpers/StepHeader'
 
 export const Question = ({
   activeQuestion,
-  blocks,
   goTo,
   icon,
+  moduleBlocks,
   nextKey,
   prevKey,
   store,
@@ -48,10 +48,9 @@ export const Question = ({
   return (
     <div className="step">
       <Category
-        goBack={!!prevKey}
+        goBack={prevKey ? () => goTo(prevKey) : undefined}
         icon={icon}
-        prev={() => goTo(prevKey)}
-        title={text(blocks['category.title'])}
+        title={text(moduleBlocks['category.title'])}
       />
 
       <StepHeader title={activeQuestion.question} />

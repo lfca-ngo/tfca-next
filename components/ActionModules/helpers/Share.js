@@ -9,9 +9,7 @@ const BTN_WIDTH = '120px'
 const INVITE_TEXT = `My home is running on 100% renewables! I am nominating Tim, Christian and Boris for the energy challenge! It’s Earth Day, you 
 can afford  #5minForThePlanet`
 
-export const Share = (props) => {
-  const { invites } = props
-
+export const Share = ({ invites }) => {
   return (
     <div>
       <h2>Ready! Invite your friends</h2>

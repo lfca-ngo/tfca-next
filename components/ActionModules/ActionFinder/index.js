@@ -1,7 +1,7 @@
 import { Tabs } from 'antd'
 import React, { useMemo } from 'react'
 
-import { useApp, useFlow } from '../../../hooks'
+import { useFlow } from '../../../hooks'
 import { getFilterOptions } from '../../../utils'
 import { Share } from '../helpers/Share'
 import { Success } from '../helpers/Success'
@@ -11,8 +11,8 @@ import { Results } from './Results'
 
 const { TabPane } = Tabs
 
-export const ActionFinderFlow = (props) => {
-  const { filters, items } = props.module?.data['main'] || {}
+export const ActionFinderFlow = ({ module }) => {
+  const { filters, items } = module?.data['main'] || {}
 
   const { availableFilters, steps } = useMemo(() => {
     const steps = []
@@ -46,16 +46,12 @@ export const ActionFinderFlow = (props) => {
     return { availableFilters: parsedFilters, steps: dynamicSteps }
   }, [items, filters])
 
-  const [firstStep] = steps.keys()
+  const stepsKeys = [...steps.keys()]
 
   const { goTo, index, setStore, store } = useFlow({
-    id: props.module?.id,
-    initialIndex: firstStep,
+    id: module?.id,
+    initialIndex: stepsKeys[0],
   })
-
-  const { customization, setProgress } = useApp()
-
-  const stepsKeys = [...steps.keys()]
 
   return (
     <div className="steps-container">
@@ -65,7 +61,7 @@ export const ActionFinderFlow = (props) => {
         destroyInactiveTabPane
         renderTabBar={() => null}
       >
-        {[...steps.keys()].map((key, i) => {
+        {stepsKeys.map((key, i) => {
           const { component: Page, filterElement } = steps.get(key)
           const nextKey = i <= stepsKeys.length ? stepsKeys[i + 1] : null
           const prevKey = i > 0 ? stepsKeys[i - 1] : null
@@ -73,18 +69,17 @@ export const ActionFinderFlow = (props) => {
             <TabPane key={key} tab={`${props.name}`}>
               <Page
                 availableFilters={availableFilters}
-                blocks={props.module?.blocks || {}}
-                customization={customization}
-                data={props.module?.data || {}}
                 filterElement={filterElement}
-                goTo={goTo}
+                goTo={(key) => {
+                  // TODO: Update progress
+                  goTo(key)
+                }}
                 icon={props.module?.icon?.url}
                 id={props.id}
-                lists={props.module?.lists || {}}
-                name={props.name}
+                moduleBlocks={module?.blocks || {}}
+                moduleData={module?.data || {}}
                 nextKey={nextKey}
                 prevKey={prevKey}
-                setProgress={setProgress}
                 setStore={setStore}
                 store={store}
               />

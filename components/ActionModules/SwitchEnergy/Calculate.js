@@ -86,35 +86,38 @@ export const EnergyForm = ({ blocks, data, initialValues, onFinish }) => {
   )
 }
 
-export const Calculate = (props) => {
-  const { data, setStore } = props
-
+export const Calculate = ({
+  goTo,
+  moduleBlocks,
+  moduleData,
+  moduleLists,
+  setStore,
+}) => {
   const handleFinish = (allValues) => {
     setStore({
       postcode: allValues.postcode,
       users: allValues.users,
     })
-
-    props.setProgress(0.5)
-    props.goTo('results')
+    goTo('results')
   }
 
   return (
     <div className="step">
       <Category
-        goBack
+        goBack={() => goTo('intro')}
         icon={props.icon}
-        prev={() => props.goTo('intro')}
-        title={text(props.blocks['category.title'])}
+        title={text(moduleBlocks['category.title'])}
       />
 
-      <StepHeader title={props.blocks['calculate.title']} />
+      <StepHeader title={moduleBlocks['calculate.title']} />
 
-      <CheckList data={props.lists?.benefits} />
+      <CheckList data={moduleLists?.benefits} />
 
       <EnergyForm
         {...props}
-        initialValues={{ users: data?.input_users?.items[0]?.valueNumber }}
+        initialValues={{
+          users: moduleData?.input_users?.items[0]?.valueNumber,
+        }}
         onFinish={handleFinish}
       />
     </div>

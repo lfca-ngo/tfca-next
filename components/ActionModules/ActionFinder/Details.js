@@ -10,24 +10,31 @@ import {
 } from '../../Elements/DetailViews'
 import Category from '../helpers/Category'
 
-export const Details = (props) => {
-  const cardLayout = props.data?.main?.cardLayout || 'action'
-  const item = props.store?.item
+export const Details = ({
+  goTo,
+  icon,
+  moduleBlocks,
+  moduleData,
+  nextKey,
+  prevKey,
+  store,
+}) => {
+  const cardLayout = moduleData?.main?.cardLayout || 'action'
+  const item = store.item
   if (!item) return null
 
   return (
     <div className="step">
       <Category
-        goBack
-        icon={props.icon}
-        prev={() => props.goTo(props.prevKey)}
-        title={text(props.blocks['category.title'])}
+        goBack={prevKey ? () => goTo(prevKey) : undefined}
+        icon={icon}
+        title={text(moduleBlocks['category.title'])}
       />
       <DetailView cardLayout={cardLayout} item={item} />
       <Button
         block
         className="mt-30"
-        onClick={() => props.goTo(props.nextKey)}
+        onClick={() => goTo(nextKey)}
         size="large"
         type="primary"
       >

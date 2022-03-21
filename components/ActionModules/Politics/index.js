@@ -2,7 +2,7 @@ import { Tabs } from 'antd'
 import { useRouter } from 'next/router'
 import React from 'react'
 
-import { useApp, useFlow } from '../../../hooks'
+import { useFlow } from '../../../hooks'
 import { Share } from '../helpers/Share'
 import { Success } from '../helpers/Success'
 import { Details } from './Details'
@@ -77,27 +77,21 @@ export const Politics = (props) => {
       }
     }, [data])
 
-  const [firstStep] = steps.keys()
+  const stepsKeys = [...steps.keys()]
 
   const { goTo, index, setStore, store } = useFlow({
     id: props.module?.id,
-    initialIndex: firstStep,
+    initialIndex: stepsKeys[0],
     initialStore: {
       activeMessageIndex: 0,
-      availableFilters,
       'countries.zip': {
         select: getCountryFromLocale(locale),
       },
-      messagesByFilterValue,
-      messagesFilterKey,
+      selectedItems: [],
       sentItems: [],
       slideIndex: 0,
     },
   })
-
-  const { customization, setProgress } = useApp()
-
-  const stepsKeys = [...steps.keys()]
 
   return (
     <div className="steps-container">
@@ -107,7 +101,7 @@ export const Politics = (props) => {
         destroyInactiveTabPane
         renderTabBar={() => null}
       >
-        {[...steps.keys()].map((key, i) => {
+        {stepsKeys.map((key, i) => {
           const { component: Page, filterOption } = steps.get(key)
           const nextKey = i <= stepsKeys.length ? stepsKeys[i + 1] : null
           const prevKey = i > 0 ? stepsKeys[i - 1] : null
@@ -115,15 +109,19 @@ export const Politics = (props) => {
           return (
             <TabPane key={key} tab={`${props.name}`}>
               <Page
-                blocks={props.module?.blocks || {}}
-                customization={customization}
+                availableFilters={availableFilters}
                 filterOption={filterOption}
-                goTo={goTo}
+                goTo={(key) => {
+                  // TODO: Update progress
+                  goTo(key)
+                }}
                 icon={props.module?.icon?.url}
                 id={props.id}
+                messagesByFilterValue={messagesByFilterValue}
+                messagesFilterKey={messagesFilterKey}
+                moduleBlocks={module?.blocks || {}}
                 nextKey={nextKey}
                 prevKey={prevKey}
-                setProgress={setProgress}
                 setStore={setStore}
                 store={store}
               />
