@@ -4,8 +4,6 @@ export const PrewrittenMessageFragment = gql`
   fragment PrewrittenMessageFragment on PrewrittenMessage {
     name
     subject
-    body {
-      json
-    }
+    text
   }
 `
