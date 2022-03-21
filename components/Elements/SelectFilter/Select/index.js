@@ -13,7 +13,7 @@ export const Select = ({ items = [], mode, ...props }) => {
       getPopupContainer={() => document.getElementById('scroll-container')}
     >
       {items.map((option) => (
-        <AntdSelect key={option.value} value={option.value}>
+        <AntdSelect.Option key={option.value} value={option.value}>
           <span className="label-wrapper">
             {option.iconUrl && (
               <span className="icon">
@@ -22,7 +22,7 @@ export const Select = ({ items = [], mode, ...props }) => {
             )}
             {option.label}
           </span>
-        </AntdSelect>
+        </AntdSelect.Option>
       ))}
     </AntdSelect>
   )

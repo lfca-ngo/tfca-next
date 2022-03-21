@@ -69,8 +69,12 @@ export const DisclosureOverview = ({ items }) => {
             const actionsList = item.completedCompanyActions.map((action) => ({
               value: action.title,
             }))
-            // TODO: Re-add campaign info
-            // const campaign = getMarkdown(item.campaignContribution, 'en')
+
+            // We only show the participation packages where the company checked at least one objective
+            const contributionList = Object.keys(
+              item.company.campaignParticipationPackages
+            ).map((c) => ({ value: c }))
+
             return (
               <List.Item className="contribution-item">
                 <Card
@@ -92,12 +96,12 @@ export const DisclosureOverview = ({ items }) => {
                       )}
                     </TabPane>
                     <TabPane key="b" tab={'Contribution'}>
-                      {/* <div
-                          className="contributions"
-                          dangerouslySetInnerHTML={{
-                            __html: snarkdown(campaign),
-                          }}
-                        /> */}
+                      <CheckList data={contributionList} limit={3} />
+                      {contributionList.length > 3 && (
+                        <div className="show-more">
+                          ...click view to show all
+                        </div>
+                      )}
                     </TabPane>
                     {/* {item.campaignImages && (
                         <TabPane key="c" tab={'Material'}>
