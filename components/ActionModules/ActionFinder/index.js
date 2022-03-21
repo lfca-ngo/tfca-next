@@ -58,7 +58,6 @@ const ActionFinderFlow = (props) => {
 
   const stepsKeys = [...steps.keys()]
 
-  console.log(availableFilters)
   return (
     <div className="steps-container">
       <Tabs
