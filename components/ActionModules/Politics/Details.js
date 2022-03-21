@@ -21,13 +21,6 @@ export const Details = ({
 
   const selectedPoliticians = store?.selectedItems || []
   const activePolitician = selectedPoliticians[activeIndex]
-  const availableMessages = store?.availableFilters?.find(
-    (f) => f.fieldName === 'badges'
-  )
-  // console.log(messages, messagesValueKey, store?.messagesByFilterValue)
-
-  // walk through all selected items
-  // once email is sent, remove the item from the list
 
   return (
     <div className="step">

@@ -1,8 +1,8 @@
 require('./politicianDetails.less')
 
 import { CopyOutlined, MailOutlined } from '@ant-design/icons'
-import { Button, Input, message, Select } from 'antd'
-import React from 'react'
+import { Button, Form, Input, message, Select } from 'antd'
+import React, { useEffect } from 'react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 
 import { ScrollableFilters } from '../ScrollableFilters'
@@ -10,13 +10,19 @@ import { ScrollableFilters } from '../ScrollableFilters'
 const TextArea = Input.TextArea
 
 export const PoliticianDetails = ({ item, onFinish, setStore, store }) => {
+  const {
+    activeMessageIndex,
+    availableFilters,
+    badges,
+    messagesByFilterValue,
+  } = store
+  const messages = messagesByFilterValue[badges]
+  const activeMessage = messages[activeMessageIndex]
   const [text, setText] = React.useState('')
 
-  const messagesValueKey = store[store.messagesFilterKey]
-  const messages =
-    store.messagesByFilterValue[
-      Array.isArray(messagesValueKey) ? messagesValueKey[0] : messagesValueKey
-    ]
+  useEffect(() => {
+    setText(activeMessage?.text)
+  }, [activeMessageIndex, badges, activeMessage])
 
   const handleSend = () => {
     onFinish()
@@ -29,18 +35,44 @@ export const PoliticianDetails = ({ item, onFinish, setStore, store }) => {
   }
 
   const messagesSelect = {
-    fieldName: 'messagesFilterKey',
+    fieldName: 'activeMessageIndex',
     filterMode: 'select-single',
     label: 'Message',
-    options: messages.map((m, i) => ({ label: `Message ${i}`, value: i })),
+    options: messages.map((m, i) => ({ label: `Message ${i + 1}`, value: i })),
     placeholder: 'Please select',
   }
 
   return (
     <div className="politician-detail-view">
       <ScrollableFilters
-        availableFilters={[...store?.availableFilters, messagesSelect]}
-        setStore={setStore}
+        additionalItems={[
+          <Form.Item
+            key={messagesSelect.fieldName}
+            label={messagesSelect.label}
+          >
+            <Select
+              onChange={(val) =>
+                setStore({ ...store, activeMessageIndex: val })
+              }
+              placeholder={messagesSelect.placeholder}
+              size="small"
+              value={store?.activeMessageIndex}
+            >
+              {messagesSelect?.options.map((item) => (
+                <Select.Option key={item.value} value={item.value}>
+                  {item.label}
+                </Select.Option>
+              ))}
+            </Select>
+          </Form.Item>,
+        ]}
+        availableFilters={availableFilters.filter(
+          (f) => f.fieldName === 'badges'
+        )}
+        setStore={(store) => {
+          // reset the active message when changing the filter
+          setStore({ ...store, activeMessageIndex: 0 })
+        }}
         store={store}
       />
 
