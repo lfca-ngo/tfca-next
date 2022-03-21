@@ -2,9 +2,7 @@
 @import (reference) '../../../styles/fonts.less';
 @import (reference) '../../../styles/mixins.less';
 
-@scrollable-filter-mobile-height: 100px;
-
-.scrollable-filter-spacer {
+.scrollable-filters-spacer {
   height: @scrollable-filter-mobile-height;
   @media @desktop {
     height: auto;
@@ -24,6 +22,10 @@
     height: auto;
   }
   .hide-scrollbar();
+
+  .ant-form-item-label {
+    padding-bottom: 2px;
+  }
 
   .ant-select:not(.ant-select-customize-input) {
     @mobile-height: 38px;
@@ -56,6 +58,11 @@
       }
       .ant-select-clear {
         background: transparent;
+      }
+    }
+    &:hover {
+      .ant-select-selector {
+        border-color: @white;
       }
     }
   }

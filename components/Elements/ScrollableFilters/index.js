@@ -35,13 +35,14 @@ export const ScrollableFilters = (props) => {
                   `${omittedValues.length} filters`
                 }
                 options={filter?.options || []}
+                placeholder={filter?.placeholder}
               />
             </Form.Item>
           )
         })}
         {(props.additionalItems || []).map((item) => item)}
       </Form>
-      <div className="scrollable-filter-spacer" />
+      <div className="scrollable-filters-spacer" />
     </>
   )
 }

@@ -41,6 +41,7 @@ export const Details = ({
         arrows
         beforeChange={(_, next) => setStore({ ...store, slideIndex: next })}
         className="custom-slider"
+        dots={false}
         infinite={false}
         nextArrow={<ArrowButton />}
         prevArrow={<ArrowButton />}

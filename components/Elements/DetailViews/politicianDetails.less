@@ -2,7 +2,17 @@
 @import (reference) '../../../styles/fonts.less';
 
 .politician-detail-view {
+  @margin-top: 20px;
+  @margin-bottom: 10px;
   .scrollable-filters {
-    margin: 20px 0 0;
+    margin: @margin-top 0 @margin-bottom;
+  }
+  .scrollable-filters-spacer {
+    height: calc(
+      @scrollable-filter-mobile-height + @margin-top + @margin-bottom
+    );
+    @media @desktop {
+      height: auto;
+    }
   }
 }
