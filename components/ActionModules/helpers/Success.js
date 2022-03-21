@@ -7,9 +7,12 @@ import {
 import { Alert, Button, Drawer, Form } from 'antd'
 import React from 'react'
 
-import { useConfetti } from '../../../hooks/useChallenge'
-import { useIsMobile } from '../../../hooks/useIsClient'
-import { useBlocks, useLists } from '../../../hooks/useTranslation'
+import {
+  useConfetti,
+  useContentBlocks,
+  useContentLists,
+  useIsMobile,
+} from '../../../hooks'
 import { useTrackEvent } from '../../../services/analytics'
 import { text } from '../../../utils/Text'
 import CheckList from '../../Elements/CheckList'
@@ -21,7 +24,7 @@ const MAX_INVITES = 3
 
 const Success = (props) => {
   const isMobile = useIsMobile()
-  const benefits = useLists('sharing.benefits')
+  const benefits = useContentLists('sharing.benefits')
   const [isGeneratingToken, setIsGeneratingToken] = React.useState(false)
   const [error, setError] = React.useState('')
   const [visible, setVisible] = React.useState('')
@@ -53,7 +56,7 @@ const Success = (props) => {
           prev={() => props.goTo(props.prevStep)}
           title={text(props.blocks['category.title'])}
         />
-        <h2>{text(useBlocks('sharing.headline'))}</h2>
+        <h2>{text(useContentBlocks('sharing.headline'))}</h2>
 
         <CheckList data={benefits?.items} />
         <Form

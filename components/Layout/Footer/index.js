@@ -5,7 +5,11 @@ import { Col, Collapse, List, Row } from 'antd'
 import Link from 'next/link'
 import React from 'react'
 
-import { useBlocks, useLists, useNavs } from '../../../hooks/useTranslation'
+import {
+  useContentBlocks,
+  useContentLists,
+  useContentNavs,
+} from '../../../hooks'
 import { text } from '../../../utils/Text'
 
 const { Panel } = Collapse
@@ -13,20 +17,20 @@ const { Panel } = Collapse
 export const Footer = () => {
   const partnersList = [
     {
-      data: useLists('partners.core')?.items,
-      title: text(useBlocks(['partners.core'])),
+      data: useContentLists('partners.core')?.items,
+      title: text(useContentBlocks(['partners.core'])),
     },
     {
-      data: useLists('partners.ecosystem')?.items,
-      title: text(useBlocks(['partners.ecosystem'])),
+      data: useContentLists('partners.ecosystem')?.items,
+      title: text(useContentBlocks(['partners.ecosystem'])),
     },
     {
-      data: useLists('partners.other')?.items,
-      title: text(useBlocks(['partners.other'])),
+      data: useContentLists('partners.other')?.items,
+      title: text(useContentBlocks(['partners.other'])),
     },
   ]
 
-  const footerLegal = useNavs('footerLegal')
+  const footerLegal = useContentNavs('footerLegal')
 
   return (
     <footer className="footer">

@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import React, { useEffect } from 'react'
 import { useInView } from 'react-intersection-observer'
 
-import { useActiveAction } from '../../../hooks/useIsClient'
+import { useActiveAction } from '../../../hooks'
 import { appear } from '../../../utils/animations'
 import ActionStats from './ActionStats'
 

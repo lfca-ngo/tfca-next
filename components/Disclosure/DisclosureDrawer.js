@@ -1,7 +1,7 @@
 import { Drawer } from 'antd'
 import React from 'react'
 
-import { useIsMobile } from '../../hooks/useIsClient'
+import { useIsMobile } from '../../hooks'
 import Disclosure from '.'
 
 export const DisclosureDrawer = (props) => {

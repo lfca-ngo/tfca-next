@@ -2,8 +2,7 @@ import { Tabs } from 'antd'
 import { useRouter } from 'next/router'
 import React from 'react'
 
-import { useChallenge } from '../../../hooks/useChallenge'
-import { useFlow } from '../../../hooks/useFlow'
+import { useApp, useFlow } from '../../../hooks'
 import { Share } from '../helpers/Share'
 import Success from '../helpers/Success'
 import { Details } from './Details'
@@ -93,7 +92,7 @@ const PoliticsFlow = (props) => {
     },
   })
 
-  const { customization, setProgress } = useChallenge()
+  const { customization, setProgress } = useApp()
 
   const stepsKeys = [...steps.keys()]
 

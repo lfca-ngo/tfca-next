@@ -3,7 +3,7 @@ require('./styles.less')
 import Link from 'next/link'
 import React, { useState } from 'react'
 
-import { useNavs } from '../../../hooks/useTranslation'
+import { useContentNavs } from '../../../hooks'
 import { DisclosureDrawer } from '../../Disclosure/DisclosureDrawer'
 import { DarkModeSelector } from '../../Elements/DarkModeSelector'
 import { IntlSelector } from '../../IntlSelector'
@@ -11,7 +11,7 @@ import { IntlSelector } from '../../IntlSelector'
 export const Nav = (props) => {
   const [visible, setVisible] = useState(false)
   const toggle = () => setVisible(!visible)
-  const mainNav = useNavs('mainHeaderNav')
+  const mainNav = useContentNavs('mainHeaderNav')
 
   return (
     <nav className={`${props.className} nav`}>

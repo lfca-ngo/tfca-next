@@ -2,14 +2,14 @@ require('./styles.less')
 
 import React from 'react'
 
-import { useNavs } from '../../../hooks/useTranslation'
+import { useContentNavs } from '../../../hooks'
 import { DefaultHero } from '../../Elements/DefaultHero'
 import Template from '../'
 import { DefaultNav } from '../DefaultNav'
 import { Footer } from '../Footer'
 
 export const DefaultLayout = ({ children, style, subtitle, title }) => {
-  const nav = useNavs('overview')
+  const nav = useContentNavs('overview')
 
   return (
     <Template className="default-layout">

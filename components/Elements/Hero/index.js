@@ -3,24 +3,22 @@ require('./styles.less')
 import { Button, Typography } from 'antd'
 import React from 'react'
 
-import { useChallenge } from '../../../hooks/useChallenge'
-import { useIsMobile } from '../../../hooks/useIsClient'
-import { useBlocks } from '../../../hooks/useTranslation'
+import { useApp, useContentBlocks, useIsMobile } from '../../../hooks'
 import { text } from '../../../utils/Text'
 
 export const Hero = ({ onClick }) => {
   const isMobile = useIsMobile()
-  const { customization } = useChallenge()
+  const { customization } = useApp()
   const customHeaderText = (
     <span>
       Hi <span className="text-accent">David</span>, ready to act?
     </span>
-  ) // useBlocks('header.title.custom')
+  ) // useContentBlocks('header.title.custom')
   const headerText = (
     <span>
       The time to act is <span className="text-accent">now</span>
     </span>
-  ) //useBlocks('header.title')
+  ) //useContentBlocks('header.title')
 
   const header = customization
     ? customHeaderText // text(customHeaderText, { name: customization.to })
@@ -33,7 +31,9 @@ export const Hero = ({ onClick }) => {
       </Typography.Title>
       <p>
         <span>
-          {text(useBlocks('header.body'), { emoji: isMobile ? ` 👇` : ` 👉` })}
+          {text(useContentBlocks('header.body'), {
+            emoji: isMobile ? ` 👇` : ` 👉`,
+          })}
         </span>
       </p>
 
@@ -44,7 +44,7 @@ export const Hero = ({ onClick }) => {
           size="large"
           type="primary"
         >
-          {text(useBlocks('header.button.primary'))}
+          {text(useContentBlocks('header.button.primary'))}
         </Button>
       </div>
     </div>

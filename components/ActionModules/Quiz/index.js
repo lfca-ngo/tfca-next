@@ -1,8 +1,7 @@
 import { Tabs } from 'antd'
 import React, { useMemo } from 'react'
 
-import { useChallenge } from '../../../hooks/useChallenge'
-import { useFlow } from '../../../hooks/useFlow'
+import { useApp, useFlow } from '../../../hooks'
 import { Share } from '../helpers/Share'
 import Success from '../helpers/Success'
 import Answer from './Answer'
@@ -20,7 +19,7 @@ const QuizFlow = (props) => {
     initialIndex: quizItems[0]?.questionId,
   })
 
-  const { customization, setProgress } = useChallenge()
+  const { customization, setProgress } = useApp()
 
   // for every question and answer pair we create one page component
   // that can be accessed via "next" or by calling it's key
