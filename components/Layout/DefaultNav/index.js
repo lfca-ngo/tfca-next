@@ -49,8 +49,10 @@ export const DefaultNav = ({ data, style }) => {
   return (
     <div className={classNames('default-nav', style)}>
       <div className="logo">
-        <Link href="/" passHref>
-          <Image height={48} src={logoSrc} width={48} />
+        <Link href="/">
+          <a>
+            <Image height={48} src={logoSrc} width={48} />
+          </a>
         </Link>
       </div>
       <nav>

@@ -99,11 +99,21 @@ export const IntlSelector = () => {
         <div className="intl-icon">
           <div
             className="intl-icon-half left"
-            style={{ backgroundImage: `url(${activeRegion?.icon.url})` }}
+            style={
+              (activeRegion?.icon.url && {
+                backgroundImage: `url(${activeRegion.icon.url})`,
+              }) ||
+              undefined
+            }
           />
           <div
             className="intl-icon-half right"
-            style={{ backgroundImage: `url(${activeLanguage?.icon.url})` }}
+            style={
+              (activeLanguage?.icon.url && {
+                backgroundImage: `url(${activeLanguage.icon.url})`,
+              }) ||
+              undefined
+            }
           />
         </div>
       </Popover>

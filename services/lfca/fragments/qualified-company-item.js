@@ -3,10 +3,13 @@ import { gql } from 'graphql-request'
 export const QualifiedCompanyItemFragment = gql`
   fragment QualifiedCompanyItemFragment on QualifiedCompanyItem {
     company {
+      campaignGoalSetting
+      campaignParticipationPackages
+      campaignGoals
       id
-      name
-      micrositeSlug
       logoUrl
+      micrositeSlug
+      name
     }
     completedCompanyActions {
       contentId

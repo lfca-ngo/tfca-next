@@ -8,6 +8,7 @@ const { Panel } = Collapse
 
 const Disclosure = ({ data }) => {
   const actionsList = data?.completedCompanyActions
+  const campaignContributionMap = data.company.campaignParticipationPackages
 
   return (
     <div className="disclosure">
@@ -25,6 +26,49 @@ const Disclosure = ({ data }) => {
       </header>
 
       <section>
+        <h4>Campaign contribution</h4>
+        <p>{data.company.campaignGoals}</p>
+        <Collapse
+          accordion
+          className="actions-wrapper"
+          expandIcon={({ isActive }) => (
+            <ArrowDownOutlined rotate={isActive ? 180 : 0} />
+          )}
+          expandIconPosition="right"
+        >
+          {campaignContributionMap &&
+            Object.keys(campaignContributionMap).map((participationPackage) => {
+              const objectives = campaignContributionMap[participationPackage]
+              return (
+                <Panel
+                  className="actions-container"
+                  header={
+                    <span className="action">
+                      <div className="icon">
+                        <CheckCircleFilled />
+                      </div>
+                      <div className="inline">{participationPackage}</div>
+                    </span>
+                  }
+                  key={participationPackage}
+                >
+                  {objectives && (
+                    <div>
+                      <h5>Objectives</h5>
+                      <ul className="green-list">
+                        {objectives.map((objective) => {
+                          return <li key={objective}>{objective}</li>
+                        })}
+                      </ul>
+                    </div>
+                  )}
+                </Panel>
+              )
+            })}
+        </Collapse>
+      </section>
+
+      <section>
         <h4>Reduction Actions</h4>
         <p>
           The requirements mentioned for each of the actions are a general
@@ -40,7 +84,7 @@ const Disclosure = ({ data }) => {
           expandIconPosition="right"
         >
           {actionsList &&
-            actionsList.map((action, i) => {
+            actionsList.map((action) => {
               return (
                 <Panel
                   className="actions-container"
@@ -52,16 +96,21 @@ const Disclosure = ({ data }) => {
                       <div className="inline">{action.title}</div>
                     </span>
                   }
-                  key={i}
+                  key={action.contentId}
                 >
+                  {/* TODO: Replace the fallback */}
                   {action.description && <div>action.description</div>}
 
                   {action.requirements && (
                     <div>
                       <h5>Requirements</h5>
                       <ul className="green-list">
-                        {action.requirements.map((requirement, i) => {
-                          return <li key={`list-${i}`}>{requirement.title}</li>
+                        {action.requirements.map((requirement) => {
+                          return (
+                            <li key={requirement.contentId}>
+                              {requirement.title}
+                            </li>
+                          )
                         })}
                       </ul>
                     </div>
