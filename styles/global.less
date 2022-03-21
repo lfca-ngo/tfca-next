@@ -303,15 +303,31 @@ span.text-accent {
 }
 
 .slick-slider.custom-slider {
+  @arrow-size: 44px;
   .slick-next,
   .slick-prev {
-    background: @lila;
     z-index: 100;
+    width: @arrow-size;
+    height: @arrow-size;
+    margin-top: calc(-@arrow-size / 2);
+    .ant-btn {
+      background: @secondary-color;
+      border: none;
+      box-shadow: @box-shadow-base;
+    }
+    &.slick-disabled {
+      opacity: 0;
+    }
   }
   .slick-next {
-    right: 45px;
+    right: 50px;
   }
   .slick-prev {
-    left: 45px;
+    left: 50px;
+  }
+  .slick-arrow-btn.slick-arrow {
+    display: flex;
+    align-items: center;
+    justify-self: center;
   }
 }

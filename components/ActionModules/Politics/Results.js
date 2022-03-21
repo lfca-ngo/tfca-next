@@ -32,7 +32,7 @@ export const Results = ({
       ? selectedItems.filter((i) => i.id !== item.id)
       : [...selectedItems, item]
 
-    setStore({ ...store, selectedItems: newSelectedItems })
+    setStore({ ...store, selectedItems: newSelectedItems, slideIndex: 0 })
   }
 
   return (

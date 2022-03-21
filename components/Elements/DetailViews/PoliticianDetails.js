@@ -27,9 +27,10 @@ export const PoliticianDetails = ({ item, onFinish, setStore, store }) => {
   }, [activeMessageIndex, badges, activeMessage, item])
 
   const handleSend = () => {
-    const mailToLink = `mailto:${item.email}?subject=${
-      activeMessage?.messageSubject
-    }&cc=politics@lfca.earth&body=${encodeURIComponent(text)}`
+    const mailToLink = `mailto:${item.email}?subject=${replaceVars(
+      activeMessage.subject,
+      { name: item.name }
+    )}&cc=politics@lfca.earth&body=${encodeURIComponent(text)}`
     window.location.href = mailToLink
     // count up for politicians sent
     // remove selectedItem aka politician from store
@@ -42,6 +43,8 @@ export const PoliticianDetails = ({ item, onFinish, setStore, store }) => {
       selectedItems,
       sentItems: newSentItems,
     })
+    // once all politicians are sent, go to next step
+    if (selectedItems.length === 0) onFinish()
   }
 
   const messagesSelect = {

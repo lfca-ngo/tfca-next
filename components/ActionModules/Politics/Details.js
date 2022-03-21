@@ -2,6 +2,7 @@ import { Button, Carousel } from 'antd'
 import React, { useRef } from 'react'
 
 import { text } from '../../../utils/Text'
+import { ArrowButton } from '../../Elements/ArrowButton'
 import { PoliticianCard } from '../../Elements/Cards'
 import { PoliticianDetails } from '../../Elements/DetailViews'
 import Category from '../helpers/Category'
@@ -41,6 +42,8 @@ export const Details = ({
         beforeChange={(curr, next) => setStore({ ...store, slideIndex: next })}
         className="custom-slider"
         infinite={false}
+        nextArrow={<ArrowButton />}
+        prevArrow={<ArrowButton />}
         ref={sliderRef}
         slidesToShow={1}
         variableWidth
@@ -63,7 +66,7 @@ export const Details = ({
           store={store}
         />
       ) : (
-        <div>Ready!</div>
+        <div>No politicians selected, go back</div>
       )}
 
       <Button
