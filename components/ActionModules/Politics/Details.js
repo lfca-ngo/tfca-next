@@ -1,4 +1,4 @@
-import { Button, Carousel } from 'antd'
+import { Carousel } from 'antd'
 import React, { useRef } from 'react'
 
 import { text } from '../../../utils/Text'
@@ -39,7 +39,7 @@ export const Details = ({
 
       <Carousel
         arrows
-        beforeChange={(curr, next) => setStore({ ...store, slideIndex: next })}
+        beforeChange={(_, next) => setStore({ ...store, slideIndex: next })}
         className="custom-slider"
         infinite={false}
         nextArrow={<ArrowButton />}
