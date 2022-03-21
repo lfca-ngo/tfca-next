@@ -26,22 +26,56 @@
       flex-direction: row;
     }
 
-    .name {
-      font-size: 20px;
-      color: @black;
-      .font-semi();
-      text-align: center;
+    header {
+      display: flex;
+      width: 100%;
+      border-bottom: 1px solid #e5e5e5;
+      padding-bottom: 15px;
       @media @desktop {
-        text-align: left;
+        width: auto;
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+      .image {
+        margin-right: 12px;
+        @media @desktop {
+          margin-right: 24px;
+        }
+      }
+      .info {
+        flex: 1;
+        .name {
+          font-size: 20px;
+          color: @black;
+          .font-semi();
+        }
+        .parliament {
+          display: flex;
+          align-items: center;
+          .icon {
+            margin-right: 8px;
+            width: 32px;
+            display: flex;
+            align-items: center;
+          }
+          .name {
+            flex: 1;
+            font-size: 12px;
+            .font-regular(fade(@black, 75%));
+            max-width: 100px;
+            line-height: 1.1;
+          }
+        }
       }
     }
 
-    .image {
-      height: 100px;
-      border-radius: 12px;
-      @media @desktop {
-        margin-right: 20px;
-      }
+    .desc {
+      margin-left: 0;
+      margin-right: auto;
+    }
+    .actions {
+      margin-right: 0;
+      margin-left: auto;
     }
 
     .button {

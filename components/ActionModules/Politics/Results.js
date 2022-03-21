@@ -68,6 +68,7 @@ export const Results = ({
             id: item.id,
             imageUrl: item.imageUrl,
             name: item.fullName,
+            parliament: item.parliament,
             tags: [item.nationalPoliticalGroup],
           }))}
           grid={LIST_GRIDS['1-col']}

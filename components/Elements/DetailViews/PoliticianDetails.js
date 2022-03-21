@@ -90,7 +90,7 @@ export const PoliticianDetails = ({ item, onFinish, setStore, store }) => {
           size="large"
           type="primary"
         >
-          E-Mail
+          Open E-Mail
         </Button>
       </Space>
     </div>
