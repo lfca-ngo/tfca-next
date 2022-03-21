@@ -1,31 +1,11 @@
 import { Tabs } from 'antd'
-import dynamic from 'next/dynamic'
 import React, { useMemo } from 'react'
 
 import { useApp, useFlow } from '../../../hooks'
-import { ComponentPlaceholder } from '../../Elements/ComponentPlaceholder'
-
-const Answer = dynamic(() => import('./Answer').then((mod) => mod.Answer), {
-  loading: ComponentPlaceholder,
-})
-const Question = dynamic(
-  () => import('./Question').then((mod) => mod.Question),
-  {
-    loading: ComponentPlaceholder,
-  }
-)
-const Share = dynamic(
-  () => import('../helpers/Share').then((mod) => mod.Share),
-  {
-    loading: ComponentPlaceholder,
-  }
-)
-const Success = dynamic(
-  () => import('../helpers/Success').then((mod) => mod.Success),
-  {
-    loading: ComponentPlaceholder,
-  }
-)
+import { Share } from '../helpers/Share'
+import { Success } from '../helpers/Success'
+import { Answer } from './Answer'
+import { Question } from './Question'
 
 const { TabPane } = Tabs
 
