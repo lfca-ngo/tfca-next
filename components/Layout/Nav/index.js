@@ -16,10 +16,10 @@ export const Nav = (props) => {
   return (
     <nav className={`${props.className} nav`}>
       <ul>
-        {mainNav?.elementsCollection?.items?.map((link, i) => {
+        {mainNav?.elementsCollection?.items?.map((link) => {
           return (
-            <li key={`link-${i}`}>
-              <Link href={link.slug || link.url || ''}>{link.title}</Link>
+            <li key={`link-${link.slug}`}>
+              <Link href={link.slug || link.url || '/'}>{link.title}</Link>
             </li>
           )
         })}
