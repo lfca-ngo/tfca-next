@@ -1,17 +1,10 @@
-require('./styles.less')
-
 import { Select as AntdSelect } from 'antd'
 import Image from 'next/image'
 import React from 'react'
 
 export const Select = ({ items = [], mode, ...props }) => {
   return (
-    <AntdSelect
-      className="select-filter-select"
-      mode={mode}
-      {...props}
-      getPopupContainer={() => document.getElementById('scroll-container')}
-    >
+    <AntdSelect mode={mode} {...props}>
       {items.map((option) => (
         <AntdSelect.Option key={option.value} value={option.value}>
           <span className="option-with-icon">

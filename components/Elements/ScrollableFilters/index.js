@@ -1,5 +1,9 @@
-import { Form, Select } from 'antd'
+require('./styles.less')
+
+import { Form } from 'antd'
 import React from 'react'
+
+import { SelectFilter } from '../SelectFilter'
 
 export const ScrollableFilters = (props) => {
   const handleValuesChange = (changedValues) => {
@@ -15,30 +19,23 @@ export const ScrollableFilters = (props) => {
         onValuesChange={handleValuesChange}
       >
         {props.availableFilters.map((filter) => {
-          const isMultiSelect = filter?.filterMode?.indexOf('-multi') > -1
+          const isMultiple = filter?.filterMode.indexOf('multi') > -1
           return (
             <Form.Item
               key={filter?.fieldName}
               label={filter?.label}
               name={filter?.fieldName}
             >
-              <Select
-                allowClear={isMultiSelect}
+              <SelectFilter
+                allowClear={isMultiple}
                 dropdownMatchSelectWidth={false}
+                filterMode={isMultiple ? 'select-multi' : 'select-single'}
                 maxTagCount={0}
                 maxTagPlaceholder={(omittedValues) =>
                   `${omittedValues.length} filters`
                 }
-                mode={isMultiSelect ? 'multiple' : null}
-                placeholder="Please select"
-                size="small"
-              >
-                {filter?.options.map((item) => (
-                  <Select.Option key={item.value} value={item.value}>
-                    {item.label}
-                  </Select.Option>
-                ))}
-              </Select>
+                options={filter?.options || []}
+              />
             </Form.Item>
           )
         })}
