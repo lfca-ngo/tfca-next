@@ -3,12 +3,12 @@ import React from 'react'
 
 import { useApp, useFlow } from '../../../hooks'
 import { Share } from '../helpers/Share'
-import Success from '../helpers/Success'
-import Calculate from './Calculate'
-import CheckProvider from './CheckProvider'
-import FormSwitch from './FormSwitch'
-import Intro from './Intro'
-import Results from './Results'
+import { Success } from '../helpers/Success'
+import { Calculate } from './Calculate'
+import { CheckProvider } from './CheckProvider'
+import { FormSwitch } from './FormSwitch'
+import { Intro } from './Intro'
+import { Results } from './Results'
 
 const { TabPane } = Tabs
 
@@ -22,7 +22,7 @@ const steps = new Map([
   ['share', Share],
 ])
 
-const SwitchEnergyFlow = (props) => {
+export const SwitchEnergy = (props) => {
   const { goTo, index, setStore, store } = useFlow({
     id: props.module?.id,
     initialIndex: 'intro',
@@ -68,5 +68,3 @@ const SwitchEnergyFlow = (props) => {
     </div>
   )
 }
-
-export default SwitchEnergyFlow

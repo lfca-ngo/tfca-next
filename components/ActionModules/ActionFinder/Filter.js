@@ -8,7 +8,7 @@ import { SelectFilter } from '../../Elements/SelectFilter'
 import Category from '../helpers/Category'
 import { StepHeader } from '../helpers/StepHeader'
 
-const Filter = ({
+export const Filter = ({
   blocks,
   filterElement,
   goTo,
@@ -64,5 +64,3 @@ const Filter = ({
     </div>
   )
 }
-
-export default Filter

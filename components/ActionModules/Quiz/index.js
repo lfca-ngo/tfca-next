@@ -3,15 +3,15 @@ import React, { useMemo } from 'react'
 
 import { useApp, useFlow } from '../../../hooks'
 import { Share } from '../helpers/Share'
-import Success from '../helpers/Success'
-import Answer from './Answer'
-import Question from './Question'
-
-export const ANSWER_SUFFIX = '_answer'
+import { Success } from '../helpers/Success'
+import { Answer } from './Answer'
+import { Question } from './Question'
 
 const { TabPane } = Tabs
 
-const QuizFlow = (props) => {
+export const ANSWER_SUFFIX = '_answer'
+
+export const Quiz = (props) => {
   const quizItems = props.module?.quizCollection?.items
 
   const { goTo, index, setStore, store } = useFlow({
@@ -81,5 +81,3 @@ const QuizFlow = (props) => {
     </div>
   )
 }
-
-export default QuizFlow

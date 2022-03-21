@@ -10,7 +10,7 @@ import {
 } from '../../Elements/DetailViews'
 import Category from '../helpers/Category'
 
-const Details = (props) => {
+export const Details = (props) => {
   const cardLayout = props.data?.main?.cardLayout || 'action'
   const item = props.store?.item
   if (!item) return null
@@ -51,5 +51,3 @@ const DetailView = (props) => {
       return null
   }
 }
-
-export default Details

@@ -22,7 +22,7 @@ import { Share } from './Share'
 
 const MAX_INVITES = 3
 
-const Success = (props) => {
+export const Success = (props) => {
   const isMobile = useIsMobile()
   const benefits = useContentLists('sharing.benefits')
   const [isGeneratingToken, setIsGeneratingToken] = React.useState(false)
@@ -207,5 +207,3 @@ const Success = (props) => {
     }
   }
 }
-
-export default Success

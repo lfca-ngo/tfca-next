@@ -5,7 +5,7 @@ import { Text, text } from '../../../utils/Text'
 import CallToAction from '../../Elements/CallToAction'
 import Category from '../helpers/Category'
 
-const Answer = (props) => {
+export const Answer = (props) => {
   const actions = props.activeQuestion?.resultActionsCollection
 
   const handleNext = () => {
@@ -33,5 +33,3 @@ const Answer = (props) => {
     </div>
   )
 }
-
-export default Answer

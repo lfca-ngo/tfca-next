@@ -23,7 +23,7 @@ const SORT = [
 export const getFullPrice = (item, kwh) =>
   item.price.workingPrice * kwh + item.price.basePrice || 0
 
-const Results = ({
+export const Results = ({
   blocks,
   data,
   goTo,
@@ -146,5 +146,3 @@ const Results = ({
     </div>
   )
 }
-
-export default Results

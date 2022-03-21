@@ -208,7 +208,7 @@ const EmailReminder = (props) => {
   )
 }
 
-const FormSwitch = (props) => {
+export const FormSwitch = (props) => {
   const [visible, setVisible] = useState(false)
   const [loading, setLoading] = useState(false)
   // const { trackEvent } = useAnalytics()
@@ -332,5 +332,3 @@ const FormSwitch = (props) => {
     </div>
   )
 }
-
-export default FormSwitch

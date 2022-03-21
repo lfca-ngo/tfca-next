@@ -4,14 +4,14 @@ import React, { useMemo } from 'react'
 import { useApp, useFlow } from '../../../hooks'
 import { getFilterOptions } from '../../../utils'
 import { Share } from '../helpers/Share'
-import Success from '../helpers/Success'
-import Details from './Details'
-import Filter from './Filter'
-import Results from './Results'
+import { Success } from '../helpers/Success'
+import { Details } from './Details'
+import { Filter } from './Filter'
+import { Results } from './Results'
 
 const { TabPane } = Tabs
 
-const ActionFinderFlow = (props) => {
+export const ActionFinderFlow = (props) => {
   const { filters, items } = props.module?.data['main'] || {}
 
   const { availableFilters, steps } = useMemo(() => {
@@ -95,5 +95,3 @@ const ActionFinderFlow = (props) => {
     </div>
   )
 }
-
-export default ActionFinderFlow

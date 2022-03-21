@@ -8,7 +8,7 @@ import { SelectFilter } from '../../Elements/SelectFilter'
 import Category from '../helpers/Category'
 import { StepHeader } from '../helpers/StepHeader'
 
-const Question = ({
+export const Question = ({
   activeQuestion,
   blocks,
   goTo,
@@ -78,5 +78,3 @@ const Question = ({
     </div>
   )
 }
-
-export default Question

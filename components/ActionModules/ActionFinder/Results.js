@@ -13,7 +13,7 @@ import { ScrollableFilters } from '../../Elements/ScrollableFilters'
 import Category from '../helpers/Category'
 import { StepHeader } from '../helpers/StepHeader'
 
-const Results = (props) => {
+export const Results = (props) => {
   const availableFilters = props.availableFilters || []
 
   const handleNext = (item) => {
@@ -98,5 +98,3 @@ const ItemCard = (props) => {
       return null
   }
 }
-
-export default Results

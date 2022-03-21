@@ -1,10 +1,10 @@
 import React from 'react'
 
-import ActionFinderFlow from './ActionFinder'
-import ActionWrapper from './helpers/ActionWrapper'
-import Politics from './Politics'
-import Quiz from './Quiz'
-import SwitchEnergy from './SwitchEnergy'
+import { ActionFinderFlow } from './ActionFinder'
+import { ActionWrapper } from './helpers/ActionWrapper'
+import { Politics } from './Politics'
+import { Quiz } from './Quiz'
+import { SwitchEnergy } from './SwitchEnergy'
 
 const ActionModules = (props) => {
   if (!props.actions) return null

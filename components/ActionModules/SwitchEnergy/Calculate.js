@@ -86,7 +86,7 @@ export const EnergyForm = ({ blocks, data, initialValues, onFinish }) => {
   )
 }
 
-const Calculate = (props) => {
+export const Calculate = (props) => {
   const { data, setStore } = props
 
   const handleFinish = (allValues) => {
@@ -120,5 +120,3 @@ const Calculate = (props) => {
     </div>
   )
 }
-
-export default Calculate

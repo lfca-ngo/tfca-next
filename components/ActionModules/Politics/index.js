@@ -4,14 +4,14 @@ import React from 'react'
 
 import { useApp, useFlow } from '../../../hooks'
 import { Share } from '../helpers/Share'
-import Success from '../helpers/Success'
+import { Success } from '../helpers/Success'
 import { Details } from './Details'
 import { Filter } from './Filter'
 import { Results } from './Results'
 
 const { TabPane } = Tabs
 
-const PoliticsFlow = (props) => {
+export const Politics = (props) => {
   const { locale } = useRouter()
 
   const { data = {} } = props.module || {}
@@ -148,5 +148,3 @@ function getCountryFromLocale(locale) {
       return undefined
   }
 }
-
-export default PoliticsFlow

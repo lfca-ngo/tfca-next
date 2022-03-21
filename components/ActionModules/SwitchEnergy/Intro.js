@@ -5,7 +5,7 @@ import { Text, text } from '../../../utils/Text'
 import Category from '../helpers/Category'
 import { StepHeader } from '../helpers/StepHeader'
 
-const Intro = (props) => {
+export const Intro = (props) => {
   const handleNext = () => {
     props.setProgress(0.3)
     props.goTo('calculate')
@@ -51,5 +51,3 @@ const Intro = (props) => {
     </div>
   )
 }
-
-export default Intro
