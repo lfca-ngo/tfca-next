@@ -91,6 +91,7 @@ const PoliticsFlow = (props) => {
       },
       messagesByFilterValue,
       messagesFilterKey,
+      sentItems: [],
       slideIndex: 0,
     },
   })

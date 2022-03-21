@@ -1,5 +1,5 @@
 import { Button, Carousel } from 'antd'
-import React, { useEffect, useRef } from 'react'
+import React, { useRef } from 'react'
 
 import { text } from '../../../utils/Text'
 import { PoliticianCard } from '../../Elements/Cards'
@@ -55,12 +55,16 @@ export const Details = ({
         ))}
       </Carousel>
 
-      <PoliticianDetails
-        item={activePolitician}
-        onFinish={() => goTo(nextKey)}
-        setStore={setStore}
-        store={store}
-      />
+      {activePolitician ? (
+        <PoliticianDetails
+          item={activePolitician}
+          onFinish={() => goTo(nextKey)}
+          setStore={setStore}
+          store={store}
+        />
+      ) : (
+        <div>Ready!</div>
+      )}
 
       <Button
         block

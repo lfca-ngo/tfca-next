@@ -5,6 +5,7 @@ import { Button, Form, Input, message, Select } from 'antd'
 import React, { useEffect } from 'react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 
+import { text as replaceVars } from '../../../utils/Text'
 import { ScrollableFilters } from '../ScrollableFilters'
 
 const TextArea = Input.TextArea
@@ -21,17 +22,26 @@ export const PoliticianDetails = ({ item, onFinish, setStore, store }) => {
   const [text, setText] = React.useState('')
 
   useEffect(() => {
-    setText(activeMessage?.text)
-  }, [activeMessageIndex, badges, activeMessage])
+    const withVars = replaceVars(activeMessage.text, { name: item.name })
+    setText(withVars)
+  }, [activeMessageIndex, badges, activeMessage, item])
 
   const handleSend = () => {
-    onFinish()
-    const mailToLink = `mailto:${
-      item.email
-    }?subject=${messageSubject}&cc=politics@lfca.earth&body=${encodeURIComponent(
-      text
-    )}`
+    const mailToLink = `mailto:${item.email}?subject=${
+      activeMessage?.messageSubject
+    }&cc=politics@lfca.earth&body=${encodeURIComponent(text)}`
     window.location.href = mailToLink
+    // count up for politicians sent
+    // remove selectedItem aka politician from store
+    // and add to sentItems
+    const { selectedItems, sentItems } = store
+    const newSentItems = [...sentItems, item]
+    selectedItems.splice(store?.slideIndex, 1) // modifies the original array
+    setStore({
+      ...store,
+      selectedItems,
+      sentItems: newSentItems,
+    })
   }
 
   const messagesSelect = {
