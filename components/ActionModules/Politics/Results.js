@@ -22,16 +22,19 @@ export const Results = ({
   const { data, error, isLoading } = usePoliticians(
     createPoliticsFilter(availableFilters, store)
   )
-  const countSelected = store?.selectedItems?.length || 0
+  const countSelected = store?.selectedPoliticians?.length || 0
 
-  const toggleSelect = (item) => {
-    const selectedItems = store.selectedItems || []
-    const isSelected = selectedItems.find((i) => i.id === item.id)
-    const newSelectedItems = isSelected
-      ? selectedItems.filter((i) => i.id !== item.id)
-      : [...selectedItems, item]
+  const toggleSelect = (isSelected, item) => {
+    const selectedPoliticians = store.selectedPoliticians || []
+    const newSelectedPoliticians = isSelected
+      ? selectedPoliticians.filter((i) => i.id !== item.id)
+      : [...selectedPoliticians, item]
 
-    setStore({ ...store, selectedItems: newSelectedItems, slideIndex: 0 })
+    setStore({
+      ...store,
+      politicianSlideIndex: 0,
+      selectedPoliticians: newSelectedPoliticians,
+    })
   }
 
   return (
@@ -77,15 +80,19 @@ export const Results = ({
           loading={isLoading}
           renderItem={(item) => {
             const isSelected =
-              (store.selectedItems || []).findIndex((i) => i.id === item.id) >
-              -1
+              (store.selectedPoliticians || []).findIndex(
+                (i) => i.id === item.id
+              ) > -1
             return (
               <List.Item
                 className={classNames('multi-select-list-item', {
                   'is-selected': isSelected,
                 })}
               >
-                <PoliticianCard item={item} onNext={toggleSelect} />
+                <PoliticianCard
+                  item={item}
+                  onSelect={(item) => toggleSelect(isSelected, item)}
+                />
               </List.Item>
             )
           }}

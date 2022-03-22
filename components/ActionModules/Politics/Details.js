@@ -13,17 +13,17 @@ export const Details = ({
   goTo,
   icon,
   messagesByFilterValue,
+  messagesRelatedFilterKey,
   moduleBlocks,
   nextKey,
   prevKey,
   setStore,
   store,
 }) => {
-  const activeIndex = store.slideIndex
   const sliderRef = useRef()
 
-  const selectedPoliticians = store?.selectedItems || []
-  const activePolitician = selectedPoliticians[activeIndex]
+  const selectedPoliticians = store?.selectedPoliticians || []
+  const activePolitician = selectedPoliticians[store.politicianSlideIndex]
 
   return (
     <div className="step">
@@ -40,7 +40,9 @@ export const Details = ({
 
       <Carousel
         arrows
-        beforeChange={(_, next) => setStore({ ...store, slideIndex: next })}
+        beforeChange={(_, next) =>
+          setStore({ ...store, politicianSlideIndex: next })
+        }
         className="custom-slider"
         infinite={false}
         nextArrow={<ArrowButton />}
@@ -58,9 +60,11 @@ export const Details = ({
 
       {activePolitician ? (
         <PoliticianDetails
+          activeMessageIndex={store.activeMessageIndex}
           availableFilters={availableFilters}
           item={activePolitician}
-          messagesByFilterValue={messagesByFilterValue}
+          messages={messagesByFilterValue[store[messagesRelatedFilterKey]]}
+          messagesRelatedFilterKey={messagesRelatedFilterKey}
           onFinish={() => goTo(nextKey)}
           setStore={setStore}
           store={store}

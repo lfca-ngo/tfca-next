@@ -3,10 +3,10 @@ require('./politicianCard.less')
 import { Button, Card, Tag } from 'antd'
 import React from 'react'
 
-export const PoliticianCard = ({ item, onNext }) => {
-  const handleNext = onNext ? () => onNext(item) : undefined
+export const PoliticianCard = ({ item, onSelect }) => {
+  const handleSelect = onSelect ? () => onSelect(item) : undefined
   return (
-    <Card className="politician-card" onClick={() => onNext && onNext(item)}>
+    <Card className="politician-card" onClick={handleSelect}>
       <img className="image" src={item.imageUrl} />
 
       <div>
@@ -18,8 +18,8 @@ export const PoliticianCard = ({ item, onNext }) => {
         ))}
       </div>
 
-      {handleNext && (
-        <Button className="button" onClick={handleNext} type="primary">
+      {handleSelect && (
+        <Button className="button" onClick={handleSelect} type="primary">
           Select
         </Button>
       )}

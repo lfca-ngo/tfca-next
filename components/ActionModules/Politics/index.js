@@ -16,66 +16,69 @@ export const Politics = ({ module }) => {
 
   const { data = {} } = module || {}
 
-  const { availableFilters, messagesByFilterValue, messagesFilterKey, steps } =
-    React.useMemo(() => {
-      const steps = []
-      const parsedFilters = []
-      const messagesByFilterValue = {}
-      let messagesFilterKey = ''
+  const {
+    availableFilters,
+    messagesByFilterValue,
+    messagesRelatedFilterKey,
+    steps,
+  } = React.useMemo(() => {
+    const steps = []
+    const parsedFilters = []
+    const messagesByFilterValue = {}
+    let messagesRelatedFilterKey = ''
 
-      for (const dataKey of Object.keys(data)) {
-        // Create a filter for each data entry
-        const dataItem = data[dataKey]
-        const filterMeta = dataItem.filters[0] || {}
-        const filterOptions = (dataItem.items || []).map((option) => {
-          let value = option.valueString
-          // For the topic data we use the joined badges as value
-          if (option.delegationsCommittees) {
-            value = option.delegationsCommittees.join(',')
-            // The messages can be looked up by the joined value
-            messagesByFilterValue[value] =
-              option.messagesCollection?.items || []
-            messagesFilterKey = filterMeta.key
-          }
-
-          return {
-            hasOptionalInput: option.hasOptionalInput,
-            iconUrl: option.icon?.url,
-            label: option.label,
-            value,
-          }
-        })
-        const filterOption = {
-          ...filterMeta,
-          fieldName: filterMeta.key,
-          options: filterOptions,
+    for (const dataKey of Object.keys(data)) {
+      // Create a filter for each data entry
+      const dataItem = data[dataKey]
+      const filterMeta = dataItem.filters[0] || {}
+      const filterOptions = (dataItem.items || []).map((option) => {
+        let value = option.valueString
+        // For the topic data we use the joined badges as value
+        if (option.delegationsCommittees) {
+          value = option.delegationsCommittees.join(',')
+          // The messages can be looked up by the joined value
+          messagesByFilterValue[value] = option.messagesCollection?.items || []
+          messagesRelatedFilterKey = filterMeta.key
         }
-        parsedFilters.push(filterOption)
 
-        // Create a page for each filter that is marked to render as step
-        if (filterOption.renderAsStep) {
-          steps.push([
-            `${filterOption.fieldName}`,
-            { component: Filter, filterOption },
-          ])
+        return {
+          hasOptionalInput: option.hasOptionalInput,
+          iconUrl: option.icon?.url,
+          label: option.label,
+          value,
         }
+      })
+      const filterOption = {
+        ...filterMeta,
+        fieldName: filterMeta.key,
+        options: filterOptions,
       }
+      parsedFilters.push(filterOption)
 
-      const dynamicSteps = new Map([
-        ...steps,
-        ['results', { component: Results }],
-        ['details', { component: Details }],
-        ['success', { component: Success }],
-        ['share', { component: Share }],
-      ])
-
-      return {
-        availableFilters: parsedFilters,
-        messagesByFilterValue,
-        messagesFilterKey,
-        steps: dynamicSteps,
+      // Create a page for each filter that is marked to render as step
+      if (filterOption.renderAsStep) {
+        steps.push([
+          `${filterOption.fieldName}`,
+          { component: Filter, filterOption },
+        ])
       }
-    }, [data])
+    }
+
+    const dynamicSteps = new Map([
+      ...steps,
+      ['results', { component: Results }],
+      ['details', { component: Details }],
+      ['success', { component: Success }],
+      ['share', { component: Share }],
+    ])
+
+    return {
+      availableFilters: parsedFilters,
+      messagesByFilterValue,
+      messagesRelatedFilterKey,
+      steps: dynamicSteps,
+    }
+  }, [data])
 
   const stepsKeys = [...steps.keys()]
 
@@ -87,9 +90,9 @@ export const Politics = ({ module }) => {
       'countries.zip': {
         select: getCountryFromLocale(locale),
       },
-      selectedItems: [],
+      politicianSlideIndex: 0,
+      selectedPoliticians: [],
       sentItems: [],
-      slideIndex: 0,
     },
   })
 
@@ -117,7 +120,7 @@ export const Politics = ({ module }) => {
                 }}
                 icon={module?.icon?.url}
                 messagesByFilterValue={messagesByFilterValue}
-                messagesFilterKey={messagesFilterKey}
+                messagesRelatedFilterKey={messagesRelatedFilterKey}
                 moduleBlocks={module?.blocks || {}}
                 nextKey={nextKey}
                 prevKey={prevKey}

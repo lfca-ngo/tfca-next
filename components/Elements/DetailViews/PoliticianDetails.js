@@ -9,41 +9,47 @@ import { CopyTextArea } from '../CopyTextArea'
 import { ScrollableFilters } from '../ScrollableFilters'
 
 export const PoliticianDetails = ({
+  activeMessageIndex,
   availableFilters,
   item,
-  messagesByFilterValue,
+  messages,
+  messagesRelatedFilterKey,
   onFinish,
   setStore,
   store,
 }) => {
-  const { activeMessageIndex, badges } = store
-  const messages = messagesByFilterValue[badges]
-  const activeMessage = messages[activeMessageIndex]
+  const [subject, setSubject] = React.useState('')
   const [text, setText] = React.useState('')
 
   useEffect(() => {
-    const withVars = replaceVars(activeMessage.text, { name: item.name })
-    setText(withVars)
-  }, [activeMessageIndex, badges, activeMessage, item])
+    const activeMessage = messages[activeMessageIndex]
+    setSubject(
+      replaceVars(activeMessage.subject, {
+        name: item.name,
+      })
+    )
+    setText(replaceVars(activeMessage.text, { name: item.name }))
+  }, [messages, activeMessageIndex, item])
 
   const handleSend = () => {
-    const mailToLink = `mailto:${item.email}?subject=${replaceVars(
-      activeMessage.subject,
-      { name: item.name }
-    )}&cc=politics@lfca.earth&body=${encodeURIComponent(text)}`
+    const mailToLink = `mailto:${
+      item.email
+    }?subject=${subject}&cc=politics@lfca.earth&body=${encodeURIComponent(
+      text
+    )}`
     window.location.href = mailToLink
     // remove selectedItem aka politician
     // from store and add to sentItems
-    const { selectedItems, sentItems } = store
+    const { selectedPoliticians, sentItems } = store
     const newSentItems = [...sentItems, item]
-    selectedItems.splice(store?.slideIndex, 1)
+    selectedPoliticians.splice(store?.politicianSlideIndex, 1)
     setStore({
       ...store,
-      selectedItems,
+      selectedPoliticians,
       sentItems: newSentItems,
     })
     // once all politicians are sent, go to next step
-    if (selectedItems.length === 0) onFinish()
+    if (selectedPoliticians.length === 0) onFinish()
   }
 
   const messagesOptions = messages.map((m, i) => ({
@@ -73,7 +79,7 @@ export const PoliticianDetails = ({
           </Form.Item>,
         ]}
         availableFilters={availableFilters.filter(
-          (f) => f.fieldName === 'badges'
+          (f) => f.fieldName === messagesRelatedFilterKey
         )}
         setStore={(store) => {
           // reset the active message when changing the filter

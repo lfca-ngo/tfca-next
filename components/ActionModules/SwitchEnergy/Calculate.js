@@ -33,39 +33,38 @@ export const ITEMS = {
       />
     </Form.Item>
   ),
-  users: (blocks, usersInput) =>
-    console.log('usersInput', usersInput) || (
-      <Form.Item
-        name="users"
-        rules={[
-          {
-            message: text(blocks['form.users.message']),
-            required: true,
-          },
-        ]}
+  users: (blocks, usersInput) => (
+    <Form.Item
+      name="users"
+      rules={[
+        {
+          message: text(blocks['form.users.message']),
+          required: true,
+        },
+      ]}
+    >
+      <Select
+        className="site-input-left"
+        size="large"
+        style={{ width: '100%' }}
       >
-        <Select
-          className="site-input-left"
-          size="large"
-          style={{ width: '100%' }}
-        >
-          {usersInput.map((option, i) => (
-            <Select.Option
-              key={i}
-              label={option.label}
-              value={option.valueNumber}
-            >
-              <span className="option-with-icon">
-                {option.icon?.url && (
-                  <Image height={32} src={option.icon.url} width={32} />
-                )}
-                <span className="option-label">{option.label}</span>
-              </span>
-            </Select.Option>
-          ))}
-        </Select>
-      </Form.Item>
-    ),
+        {usersInput.map((option, i) => (
+          <Select.Option
+            key={i}
+            label={option.label}
+            value={option.valueNumber}
+          >
+            <span className="option-with-icon">
+              {option.icon?.url && (
+                <Image height={32} src={option.icon.url} width={32} />
+              )}
+              <span className="option-label">{option.label}</span>
+            </span>
+          </Select.Option>
+        ))}
+      </Select>
+    </Form.Item>
+  ),
 }
 
 export const EnergyForm = ({
