@@ -1,4 +1,4 @@
-import { Progress, Tabs } from 'antd'
+import { Tabs } from 'antd'
 import { useRouter } from 'next/router'
 import React from 'react'
 
@@ -80,7 +80,7 @@ export const Politics = ({ module }) => {
 
   const stepsKeys = [...steps.keys()]
 
-  const { goTo, index, progress, setProgress, setStore, store } = useFlow({
+  const { goTo, index, setProgress, setStore, store } = useFlow({
     id: module?.id,
     initialIndex: stepsKeys[0],
     initialStore: {
@@ -103,8 +103,6 @@ export const Politics = ({ module }) => {
 
   return (
     <div className="steps-container">
-      <Progress percent={progress * 100} showInfo={false} />
-
       <Tabs
         activeKey={index}
         animated={{ inkBar: false, tabPane: true }}

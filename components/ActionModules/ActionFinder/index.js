@@ -60,8 +60,6 @@ export const ActionFinderFlow = ({ module }) => {
 
   return (
     <div className="steps-container">
-      {/* <Progress percent={progress * 100} showInfo={false} /> */}
-
       <Tabs
         activeKey={index}
         animated={{ inkBar: false, tabPane: true }}

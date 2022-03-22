@@ -23,12 +23,16 @@ export const Results = ({
 }) => {
   const [visible, setVisible] = useState(false)
   const isMobile = useIsMobile()
-  const detailViewType = props.data?.main?.detailViewType || 'page'
+  const detailViewType = moduleData?.main?.detailViewType || 'page'
   const isDrawerView = detailViewType === 'drawer'
 
   const handleNext = (item) => {
     setStore({ ...store, item: item })
-    goTo(nextKey)
+    if (isDrawerView) {
+      setVisible(true)
+    } else {
+      goTo(nextKey)
+    }
   }
 
   const filterByAttributes = (item) => {
@@ -99,9 +103,9 @@ export const Results = ({
           width={isMobile ? '100%' : MODAL_WIDTH_MD}
         >
           <DetailView
-            item={props.store?.item}
+            item={store?.item}
             layout={dataMain?.cardLayout}
-            onNext={() => props.goTo('success')}
+            onNext={() => goTo('success')}
           />
         </Drawer>
       )}
