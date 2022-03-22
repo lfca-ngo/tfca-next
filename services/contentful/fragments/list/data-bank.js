@@ -32,5 +32,10 @@ export const DataBankFragment = gql`
         ...BlockFragment
       }
     }
+    tagsCollection(limit: 5) {
+      items {
+        ...BlockFragment
+      }
+    }
   }
 `

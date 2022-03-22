@@ -1,0 +1,56 @@
+@import (reference) '../../../styles/variables.less';
+@import (reference) '../../../styles/fonts.less';
+@import (reference) '../../../styles/mixins.less';
+
+.detail-view {
+  // generic styles that apply to all detail views
+  font-size: @font-size-sm;
+  .ant-list {
+    .ant-list-item-meta-description {
+      font-size: @font-size-sm;
+    }
+  }
+  .header {
+    .title {
+      .font-semi(var(--heading-color));
+      font-size: 28px;
+      @media @desktop {
+        font-size: 34px;
+      }
+    }
+  }
+
+  .ant-list {
+    .ant-list-item {
+      border-color: @medium-grey;
+    }
+    .ant-list-item-meta-avatar {
+      .anticon {
+        color: @secondary-color;
+        path {
+          fill: @secondary-color;
+        }
+      }
+    }
+    .ant-list-item-meta-description {
+      color: var(--text-color);
+    }
+  }
+
+  .ant-divider {
+    border-color: @medium-grey;
+  }
+
+  .section-title {
+    .anticon {
+      margin-right: 16px;
+      color: @secondary-color;
+      path {
+        fill: @secondary-color;
+      }
+    }
+    .font-semi(var(--heading-color));
+    font-size: 20px;
+    margin: 40px 0 10px;
+  }
+}

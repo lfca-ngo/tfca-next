@@ -1,5 +1,10 @@
-import { Form, Select } from 'antd'
+require('./styles.less')
+
+import { Form } from 'antd'
 import React from 'react'
+
+import { MULTI } from '../../../utils'
+import { SelectFilter } from '../SelectFilter'
 
 export const ScrollableFilters = (props) => {
   const handleValuesChange = (changedValues) => {
@@ -14,36 +19,31 @@ export const ScrollableFilters = (props) => {
         layout="vertical"
         onValuesChange={handleValuesChange}
       >
-        {props.availableFilters.map((filter) => (
-          <Form.Item
-            key={filter?.fieldName}
-            label={filter?.label}
-            name={filter?.fieldName}
-          >
-            <Select
-              allowClear
-              dropdownMatchSelectWidth={false}
-              maxTagCount={0}
-              maxTagPlaceholder={(omittedValues) =>
-                `${omittedValues.length} filters`
-              }
-              mode={
-                filter?.filterMode?.indexOf('-multi') > -1 ? 'multiple' : null
-              }
-              placeholder="Please select"
-              size="small"
+        {props.availableFilters.map((filter) => {
+          const isMultiple = filter?.filterMode.indexOf(MULTI) > -1
+          return (
+            <Form.Item
+              key={filter?.fieldName}
+              label={filter?.label}
+              name={filter?.fieldName}
             >
-              {filter?.options.map((item) => (
-                <Select.Option key={item.value} value={item.value}>
-                  {item.label}
-                </Select.Option>
-              ))}
-            </Select>
-          </Form.Item>
-        ))}
+              <SelectFilter
+                allowClear={isMultiple}
+                dropdownMatchSelectWidth={false}
+                filterMode={isMultiple ? 'select-multi' : 'select-single'}
+                maxTagCount={0}
+                maxTagPlaceholder={(omittedValues) =>
+                  `${omittedValues.length} filters`
+                }
+                options={filter?.options || []}
+                placeholder={filter?.placeholder}
+              />
+            </Form.Item>
+          )
+        })}
         {(props.additionalItems || []).map((item) => item)}
       </Form>
-      <div className="scrollable-filter-spacer" />
+      <div className="scrollable-filters-spacer" />
     </>
   )
 }

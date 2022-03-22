@@ -1,5 +1,9 @@
 // Hamburger
 .hamburger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
   padding: 0 20px;
   cursor: pointer;
   transition-property: opacity, filter;
@@ -32,7 +36,7 @@
   .hamburger-inner {
     display: block;
     top: 50%;
-    margin-top: -4px;
+    margin-top: -5px;
   }
 
   .hamburger-inner,
@@ -44,7 +48,7 @@
     transition-property: transform;
     transition-duration: 0.15s;
     transition-timing-function: ease;
-    background-color: @black;
+    background-color: var(--heading-color);
   }
 
   .hamburger-inner::after {
@@ -89,6 +93,16 @@
       transform: rotate(-90deg);
       transition: bottom 0.1s ease-out,
         transform 0.22s 0.12s cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+  }
+}
+
+// Drawer
+.ant-drawer.hamburger-drawer {
+  .ant-drawer-content {
+    background: var(--body-background);
+    .ant-drawer-header {
+      background: var(--body-background);
     }
   }
 }

@@ -2,52 +2,38 @@
 @import (reference) '../../../styles/fonts.less';
 @import (reference) '../../../styles/mixins.less';
 
-.bank-detail-view {
-  .header {
+.detail-view.bank {
+  header {
     display: flex;
-    .text {
-      flex: 1;
-      @media @desktop {
-        padding-right: 60px;
-      }
-      .title {
-        font-size: 48px;
-        .font-semi(@white);
-        margin: 0px 0 15px;
-      }
-    }
-    .info-wrapper {
-      margin-left: auto;
-      margin-right: 0;
+    flex-direction: column;
+    text-align: center;
+
+    .logo {
       display: flex;
       align-items: center;
-      flex-direction: column;
+      justify-items: center;
       .logo-wrapper {
-        margin-bottom: 30px;
-        .logo-circle(140px, @white);
+        border-radius: @border-radius-base;
+        overflow: hidden;
+        display: flex;
+        margin: 0 auto;
       }
     }
-  }
 
-  .check-list {
-    .list-elem {
-      .anticon {
-        color: @secondary-color;
+    .tags {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      .tag-wrapper {
+        margin: 0 2px;
       }
     }
-  }
 
-  .section-title {
-    .anticon {
-      margin-right: 16px;
-      color: @secondary-color;
+    .actions {
+      width: 100%;
+      text-align: center;
+      margin-top: 20px;
     }
-    .font-semi(@white);
-    font-size: 20px;
-    margin: 40px 0 10px;
-  }
-
-  .tags {
-    margin: 20px 0;
   }
 }

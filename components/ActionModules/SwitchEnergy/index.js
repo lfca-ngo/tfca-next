@@ -1,4 +1,4 @@
-import { Progress, Tabs } from 'antd'
+import { Tabs } from 'antd'
 import React from 'react'
 
 import { useFlow } from '../../../hooks'
@@ -23,7 +23,7 @@ const steps = new Map([
 export const SwitchEnergy = ({ module }) => {
   const stepsKeys = [...steps.keys()]
 
-  const { goTo, index, progress, setProgress, setStore, store } = useFlow({
+  const { goTo, index, setProgress, setStore, store } = useFlow({
     id: module?.id,
     initialIndex: stepsKeys[0],
   })
@@ -37,8 +37,6 @@ export const SwitchEnergy = ({ module }) => {
 
   return (
     <div className="steps-container">
-      <Progress percent={progress * 100} showInfo={false} />
-
       <Tabs
         activeKey={index}
         animated={{ inkBar: false, tabPane: true }}

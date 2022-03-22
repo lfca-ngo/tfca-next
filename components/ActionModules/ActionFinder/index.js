@@ -1,4 +1,4 @@
-import { Progress, Tabs } from 'antd'
+import { Tabs } from 'antd'
 import React, { useMemo } from 'react'
 
 import { useFlow } from '../../../hooks'
@@ -46,7 +46,7 @@ export const ActionFinderFlow = ({ module }) => {
 
   const stepsKeys = [...steps.keys()]
 
-  const { goTo, index, progress, setProgress, setStore, store } = useFlow({
+  const { goTo, index, setProgress, setStore, store } = useFlow({
     id: module?.id,
     initialIndex: stepsKeys[0],
   })
@@ -60,8 +60,6 @@ export const ActionFinderFlow = ({ module }) => {
 
   return (
     <div className="steps-container">
-      <Progress percent={progress * 100} showInfo={false} />
-
       <Tabs
         activeKey={index}
         animated={{ inkBar: false, tabPane: true }}

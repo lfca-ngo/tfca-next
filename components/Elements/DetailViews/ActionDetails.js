@@ -7,6 +7,7 @@ import {
   ShareAltOutlined,
 } from '@ant-design/icons'
 import { Button, List } from 'antd'
+import Image from 'next/image'
 import React from 'react'
 
 import { Text, text } from '../../../utils/Text'
@@ -14,9 +15,9 @@ import CallToAction from '../CallToAction'
 
 export const ActionDetails = ({ item }) => {
   return (
-    <div className="action-detail-view">
+    <div className="detail-view action">
       <div className="hero-image">
-        <img src={item.hero?.url} />
+        <Image height={304} src={item.hero?.url} width={665} />
       </div>
 
       <div className="header">
@@ -35,7 +36,7 @@ export const ActionDetails = ({ item }) => {
         </div>
 
         <List
-          className="simple-list white"
+          className="simple-list"
           dataSource={item?.reasonsCollection?.items}
           renderItem={(item) => (
             <List.Item>

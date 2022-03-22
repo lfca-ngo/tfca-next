@@ -13,7 +13,7 @@ import CallToAction from '../CallToAction'
 
 export const EnergyProviderDetails = ({ item }) => {
   return (
-    <div className="energy-provider-detail-view">
+    <div className="detail-view energy-provider">
       <div className="header">
         <div className="text">
           <div className="title">{item.name}</div>

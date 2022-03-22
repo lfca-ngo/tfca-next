@@ -12,7 +12,11 @@ const nextConfig = {
     locales: ['de', 'en', 'en-US'],
   },
   images: {
-    domains: ['images.ctfassets.net'],
+    domains: [
+      'images.ctfassets.net',
+      'www.bundestag.de',
+      'www.europarl.europa.eu',
+    ],
   },
   async redirects() {
     /**

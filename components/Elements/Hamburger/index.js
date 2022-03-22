@@ -23,7 +23,7 @@ export const Hamburger = (props) => {
       </button>
 
       <Drawer
-        closable={false}
+        className="hamburger-drawer"
         onClose={toggleMenu}
         placement="right"
         title={props.title}

@@ -1,27 +1,71 @@
 require('./politicianCard.less')
 
 import { Button, Card, Tag } from 'antd'
+import classNames from 'classnames'
 import React from 'react'
 
-export const PoliticianCard = ({ item, onSelect }) => {
+import IconEurope from '../../../assets/icons/eu.svg'
+import IconGermany from '../../../assets/icons/germany.svg'
+import { CircleImage } from '../CircleImage'
+
+const MAP_PARLIAMENT = {
+  DE: {
+    icon: <IconGermany />,
+    name: 'Deutscher Bundestag',
+  },
+  EU: {
+    icon: <IconEurope />,
+    name: 'European Parliament',
+  },
+}
+
+export const PoliticianCard = ({ isSelected, item, minimal, onSelect }) => {
   const handleSelect = onSelect ? () => onSelect(item) : undefined
+  const parliamentInfo = MAP_PARLIAMENT[item?.parliament]
+
   return (
-    <Card className="politician-card" onClick={handleSelect}>
-      <img className="image" src={item.imageUrl} />
+    <Card
+      className={classNames('politician-card', { minimal })}
+      onClick={() => onNext && onNext(item)}
+    >
+      <header>
+        <div className="image">
+          <CircleImage size={65} src={item.imageUrl} />
+        </div>
 
-      <div>
-        <div className="name">{item.name}</div>
-        {item.tags.map((tag) => (
-          <Tag className="base-tag lila" key={tag}>
-            {tag}
-          </Tag>
-        ))}
-      </div>
+        <div className="info">
+          <div className="name">{item.name}</div>
+          <div className="parliament">
+            <div className="icon">{parliamentInfo?.icon}</div>
+            <div className="name">{parliamentInfo?.name}</div>
+          </div>
+        </div>
+      </header>
 
-      {handleSelect && (
-        <Button className="button" onClick={handleSelect} type="primary">
-          Select
-        </Button>
+      {!minimal && (
+        <footer>
+          <div className="desc">
+            {item.tags.map((tag) => (
+              <Tag className="base-tag lila" key={tag}>
+                {tag}
+              </Tag>
+            ))}
+          </div>
+
+          <div className="actions">
+            {handleSelect && (
+              <Button
+                className="button"
+                ghost={isSelected}
+                onClick={handleSelect}
+                size="small"
+                type="primary"
+              >
+                {isSelected ? 'Unselect' : 'Select'}
+              </Button>
+            )}
+          </div>
+        </footer>
       )}
     </Card>
   )

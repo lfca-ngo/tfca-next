@@ -2,6 +2,7 @@ require('./bankCard.less')
 
 import { CheckCircleOutlined } from '@ant-design/icons'
 import { Button, Card, List } from 'antd'
+import Image from 'next/image'
 import React, { useState } from 'react'
 
 import { text } from '../../../utils/Text'
@@ -31,9 +32,19 @@ export const BankCard = ({ item, onNext }) => {
       }}
       tabList={TABS_LIST}
       title={
-        <div className="logo">
-          <img src={item?.logo?.url} />
-        </div>
+        <header>
+          <div className="logo">
+            <Image height={117} src={item?.logo?.url} width={221} />
+          </div>
+
+          <div className="tags">
+            {item.tagsCollection?.items?.map((tag, i) => (
+              <div className="tag-wrapper" key={`tag-${i}`}>
+                <Image height={28} src={tag?.icon?.url} width={49} />
+              </div>
+            ))}
+          </div>
+        </header>
       }
     >
       <List
@@ -51,7 +62,7 @@ export const BankCard = ({ item, onNext }) => {
 
       <div className="actions">
         <Button block onClick={handleNext} type="primary">
-          Details
+          Show details
         </Button>
       </div>
     </Card>

@@ -3,17 +3,15 @@ import React, { useRef } from 'react'
 
 import { text } from '../../../utils/Text'
 import { ArrowButton } from '../../Elements/ArrowButton'
-import { PoliticianCard } from '../../Elements/Cards'
-import { PoliticianDetails } from '../../Elements/DetailViews'
+import { CardView } from '../../Elements/Cards'
+import { DetailView } from '../../Elements/DetailViews'
 import Category from '../helpers/Category'
 import { StepHeader } from '../helpers/StepHeader'
 
 export const Details = ({
-  availableFilters,
   goTo,
   icon,
-  messagesByFilterValue,
-  messagesRelatedFilterKey,
+
   moduleBlocks,
   nextKey,
   prevKey,
@@ -44,6 +42,7 @@ export const Details = ({
           setStore({ ...store, politicianSlideIndex: next })
         }
         className="custom-slider"
+        dots={false}
         infinite={false}
         nextArrow={<ArrowButton />}
         prevArrow={<ArrowButton />}
@@ -53,18 +52,15 @@ export const Details = ({
       >
         {selectedPoliticians.map((politician) => (
           <div className="fixed-width-wrapper" key={politician.id}>
-            <PoliticianCard item={politician} />
+            <CardView item={politician} layout="politician" minimal />
           </div>
         ))}
       </Carousel>
 
       {activePolitician ? (
-        <PoliticianDetails
-          activeMessageIndex={store.activeMessageIndex}
-          availableFilters={availableFilters}
+        <DetailView
           item={activePolitician}
-          messages={messagesByFilterValue[store[messagesRelatedFilterKey]]}
-          messagesRelatedFilterKey={messagesRelatedFilterKey}
+          layout="politician"
           onFinish={() => goTo(nextKey)}
           setStore={setStore}
           store={store}

@@ -58,7 +58,7 @@ export const PoliticianDetails = ({
   }))
 
   return (
-    <div className="politician-detail-view">
+    <div className="detail-view politician">
       <ScrollableFilters
         additionalItems={[
           <Form.Item key={'activeMessageIndex'} label={'Message'}>
@@ -98,7 +98,7 @@ export const PoliticianDetails = ({
           size="large"
           type="primary"
         >
-          E-Mail
+          Open E-Mail
         </Button>
       </Space>
     </div>

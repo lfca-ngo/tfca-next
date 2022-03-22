@@ -5,44 +5,55 @@ import {
   PlusCircleOutlined,
   ShareAltOutlined,
 } from '@ant-design/icons'
-import { Button, List, Space } from 'antd'
-import React from 'react'
+import { Button, Divider, List, Space } from 'antd'
+import Image from 'next/image'
+import React, { useState } from 'react'
 
 import { Text, text } from '../../../utils/Text'
-import CallToAction from '../CallToAction'
+import { LeavePage } from '../../ActionModules/helpers/LeavePage'
+import { BasicModal } from '../BasicModal'
 
-export const BankDetails = ({ item }) => {
+export const BankDetails = ({ item, onNext }) => {
+  const [visible, setVisible] = useState(false)
+
   return (
-    <div className="bank-detail-view">
-      <div className="header">
-        <div className="text">
-          <div className="title">{item.name}</div>
-          <div className="description">
-            <Text block={item?.description} />
+    <div className="detail-view bank">
+      <header>
+        <div className="logo">
+          <div className="logo-wrapper">
+            <Image height={175} src={item?.logo?.url} width={331} />
           </div>
         </div>
 
-        <div className="info-wrapper">
-          <div className="logo-wrapper">
-            <img src={item.logo?.url} />
-          </div>
-          <div className="actions">
-            <Space direction="vertical" style={{ width: '100%' }}>
-              <Button
-                block
-                icon={<ShareAltOutlined />}
-                shape="round"
-                type="primary"
-              />
-              <Button block shape="round" type="primary">
-                {item?.pricePerMonth
-                  ? `${item?.pricePerMonth} ${item?.currency}`
-                  : 'Free'}
-              </Button>
-            </Space>
-          </div>
+        <div className="tags">
+          {item.tagsCollection?.items?.map((tag, i) => (
+            <div className="tag-wrapper" key={`tag-${i}`}>
+              <Image height={28} src={tag?.icon?.url} width={49} />
+            </div>
+          ))}
         </div>
-      </div>
+
+        <div className="actions">
+          <Space align="center">
+            <Button
+              block
+              onClick={() => setVisible(true)}
+              shape="round"
+              type="primary"
+            >
+              Switch now
+            </Button>
+            <Button
+              block
+              icon={<ShareAltOutlined />}
+              shape="round"
+              type="primary"
+            />
+          </Space>
+        </div>
+      </header>
+
+      <Divider />
 
       <div className="benefits">
         <div className="section-title title">
@@ -51,7 +62,7 @@ export const BankDetails = ({ item }) => {
         </div>
 
         <List
-          className="simple-list white"
+          className="simple-list"
           dataSource={item?.benefitsCollection?.items}
           renderItem={(item) => (
             <List.Item>
@@ -71,7 +82,7 @@ export const BankDetails = ({ item }) => {
         </div>
 
         <List
-          className="simple-list white"
+          className="simple-list"
           dataSource={item?.sustainabilityCollection?.items}
           renderItem={(item) => (
             <List.Item>
@@ -84,11 +95,18 @@ export const BankDetails = ({ item }) => {
         />
       </div>
 
-      <CallToAction
-        block
-        text="Visit provider"
-        type="primary"
-        url={`https://google.de`}
+      <div className="text">
+        <div className="title">{item.name}</div>
+        <div className="description">
+          <Text block={item?.description} />
+        </div>
+      </div>
+
+      <BasicModal
+        content={<LeavePage onNext={onNext} />}
+        setVisible={setVisible}
+        title={null}
+        visible={visible}
       />
     </div>
   )

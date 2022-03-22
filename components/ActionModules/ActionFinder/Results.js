@@ -1,14 +1,11 @@
-import { List } from 'antd'
-import React from 'react'
+import { Drawer, List } from 'antd'
+import React, { useState } from 'react'
 
-import { LIST_GRIDS } from '../../../utils'
+import { useIsMobile } from '../../../hooks'
+import { LIST_GRIDS, MODAL_WIDTH_MD } from '../../../utils'
 import { text } from '../../../utils/Text'
-import {
-  ActionCard,
-  BankCard,
-  EnergyProviderCard,
-  OrganizationCard,
-} from '../../Elements/Cards'
+import { CardView } from '../../Elements/Cards'
+import { DetailView } from '../../Elements/DetailViews'
 import { ScrollableFilters } from '../../Elements/ScrollableFilters'
 import Category from '../helpers/Category'
 import { StepHeader } from '../helpers/StepHeader'
@@ -24,9 +21,18 @@ export const Results = ({
   store,
   availableFilters = [],
 }) => {
+  const [visible, setVisible] = useState(false)
+  const isMobile = useIsMobile()
+  const detailViewType = moduleData?.main?.detailViewType || 'page'
+  const isDrawerView = detailViewType === 'drawer'
+
   const handleNext = (item) => {
     setStore({ ...store, item: item })
-    goTo(nextKey)
+    if (isDrawerView) {
+      setVisible(true)
+    } else {
+      goTo(nextKey)
+    }
   }
 
   const filterByAttributes = (item) => {
@@ -78,29 +84,33 @@ export const Results = ({
         grid={LIST_GRIDS[dataListGrid]}
         renderItem={(item) => (
           <List.Item>
-            <ItemCard
-              cardLayout={dataMain?.cardLayout}
+            <CardView
               item={item}
+              layout={dataMain?.cardLayout}
               onNext={handleNext}
             />
           </List.Item>
         )}
       />
+
+      {isDrawerView && (
+        <Drawer
+          className={`drawer-md`}
+          destroyOnClose
+          footer={null}
+          onClose={() => setVisible(false)}
+          visible={visible}
+          width={isMobile ? '100%' : MODAL_WIDTH_MD}
+        >
+          <DetailView
+            item={store?.item}
+            layout={dataMain?.cardLayout}
+            onNext={() => goTo('success')}
+          />
+        </Drawer>
+      )}
     </div>
   )
 }
 
-const ItemCard = (props) => {
-  switch (props.cardLayout) {
-    case 'action':
-      return <ActionCard item={props.item} onNext={props.onNext} />
-    case 'bank':
-      return <BankCard item={props.item} onNext={props.onNext} />
-    case 'organization':
-      return <OrganizationCard item={props.item} onNext={props.onNext} />
-    case 'energy-provider':
-      return <EnergyProviderCard item={props.item} onNext={props.onNext} />
-    default:
-      return null
-  }
-}
+export default Results
