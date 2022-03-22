@@ -62,7 +62,7 @@ export const BankCard = ({ item, onNext }) => {
 
       <div className="actions">
         <Button block onClick={handleNext} type="primary">
-          Details
+          Show details
         </Button>
       </div>
     </Card>

@@ -345,6 +345,7 @@ const transformResults = (results) => {
       const data = dataCollection?.items.reduce((allData, data) => {
         const {
           cardLayout,
+          detailViewType,
           filtersCollection,
           itemsCollection,
           listGrid,
@@ -354,6 +355,7 @@ const transformResults = (results) => {
           ...allData,
           [listId]: {
             cardLayout,
+            detailViewType,
             filters: filtersCollection?.items || [],
             items: itemsCollection?.items || [],
             listGrid,

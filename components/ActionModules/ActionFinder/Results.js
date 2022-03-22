@@ -1,20 +1,30 @@
-import { List } from 'antd'
-import React from 'react'
+import { Drawer, List } from 'antd'
+import React, { useState } from 'react'
 
+import { useIsMobile } from '../../../hooks'
 import { LIST_GRIDS } from '../../../utils'
 import { text } from '../../../utils/Text'
 import { CardView } from '../../Elements/Cards'
+import { DetailView } from '../../Elements/DetailViews'
 import { ScrollableFilters } from '../../Elements/ScrollableFilters'
 import Category from '../helpers/Category'
 import { StepHeader } from '../helpers/StepHeader'
 
 const Results = (props) => {
+  const [visible, setVisible] = useState(false)
+  const isMobile = useIsMobile()
+  const detailViewType = props.data?.main?.detailViewType || 'page'
+  const isDrawerView = detailViewType === 'drawer'
   const availableFilters = props.availableFilters || []
 
   const handleNext = (item) => {
     props.setStore({ ...props.store, item: item })
     props.setProgress(0.3)
-    props.goTo(props.nextKey)
+    if (isDrawerView) {
+      setVisible(true)
+    } else {
+      props.goTo(props.nextKey)
+    }
   }
 
   const filterByAttributes = (item) => {
@@ -75,6 +85,23 @@ const Results = (props) => {
           </List.Item>
         )}
       />
+
+      {isDrawerView && (
+        <Drawer
+          className={`drawer-md`}
+          destroyOnClose
+          footer={null}
+          onClose={() => setVisible(false)}
+          visible={visible}
+          width={isMobile ? '100%' : '700px'}
+        >
+          <DetailView
+            item={props.store?.item}
+            layout={dataMain?.cardLayout}
+            onNext={() => props.goTo('success')}
+          />
+        </Drawer>
+      )}
     </div>
   )
 }

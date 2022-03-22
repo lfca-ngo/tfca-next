@@ -30,6 +30,7 @@ export const ListFragment = gql`
     listId
     cardLayout
     listGrid
+    detailViewType
     filtersCollection(limit: 5) {
       items {
         ...FilterFragment
