@@ -20,14 +20,11 @@ const MAP_PARLIAMENT = {
 }
 
 export const PoliticianCard = ({ isSelected, item, minimal, onSelect }) => {
-  const handleSelect = onSelect ? () => onSelect(item) : undefined
+  const handleSelect = onSelect ? () => onSelect(isSelected, item) : undefined
   const parliamentInfo = MAP_PARLIAMENT[item?.parliament]
 
   return (
-    <Card
-      className={classNames('politician-card', { minimal })}
-      onClick={() => onNext && onNext(item)}
-    >
+    <Card className={classNames('politician-card', { minimal })}>
       <header>
         <div className="image">
           <CircleImage size={65} src={item.imageUrl} />
