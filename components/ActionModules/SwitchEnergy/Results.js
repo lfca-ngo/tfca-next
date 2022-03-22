@@ -1,15 +1,18 @@
 import { EditOutlined, LoadingOutlined } from '@ant-design/icons'
-import { Button, Col, List, Modal, Row, Select, Space } from 'antd'
+import { Button, Col, Drawer, List, Modal, Row, Select, Space } from 'antd'
 import React, { useMemo, useState } from 'react'
 
 import RobinIcon from '../../../assets/icons/robin.svg'
+import { useIsMobile } from '../../../hooks'
 import {
   useOperatorId,
   useSwitchRates,
 } from '../../../services/switchforclimate'
+import { MODAL_WIDTH_MD } from '../../../utils'
 import { text } from '../../../utils/Text'
 import { CardView } from '../../Elements/Cards'
 import CheckList from '../../Elements/CheckList'
+import { DetailView } from '../../Elements/DetailViews'
 import Category from '../helpers/Category'
 import { EnergyForm } from './Calculate'
 
@@ -29,10 +32,13 @@ export const Results = ({
   moduleBlocks,
   moduleData,
   moduleLists,
+  nextKey,
   setStore,
   store,
 }) => {
+  const isMobile = useIsMobile()
   const [visible, setVisible] = useState(false)
+  const [drawerVisible, setDrawerVisible] = useState(false)
   const [sorting, setSorting] = useState(SORT[0].type)
 
   const changeSorting = (value) => {
@@ -42,9 +48,14 @@ export const Results = ({
   const updateProviders = (values) => {
     setVisible(false)
     setStore({
-      postcode: values.postcode,
-      users: values.users,
+      energy: values?.postcodeEnergy?.energy,
+      postcode: values?.postcodeEnergy?.postcode,
     })
+  }
+
+  const showDetails = (item) => {
+    setStore({ ...store, item: item })
+    setDrawerVisible(true)
   }
 
   const getFirstOperatorId = (o) => (o ? Object.keys(o)[0] : null)
@@ -57,7 +68,7 @@ export const Results = ({
   const { data: rates, isLoading: fetchingRates } = useSwitchRates(
     store?.postcode,
     city,
-    store?.users,
+    store?.energy,
     firstOperatorId
   )
 
@@ -67,8 +78,8 @@ export const Results = ({
     if (!switchRates) return []
     if (sorting === 'price') {
       return switchRates.sort((a, b) => {
-        const priceA = getFullPrice(a, store?.users)
-        const priceB = getFullPrice(b, store?.users)
+        const priceA = getFullPrice(a, store?.energy)
+        const priceB = getFullPrice(b, store?.energy)
         return priceA - priceB
       })
     } else {
@@ -78,7 +89,7 @@ export const Results = ({
           a.rating.contributionByConsumption
       )
     }
-  }, [sorting, store?.users, switchRates])
+  }, [sorting, store?.energy, switchRates])
 
   const loading = fetchingOperators || fetchingRates
 
@@ -122,21 +133,40 @@ export const Results = ({
         loading={loading}
         renderItem={(item, i) => (
           <CardView
-            energyKwh={store?.users}
+            energyKwh={store?.energy}
             item={item}
             key={`card-${i}`}
             layout="provider"
-            next={() => {
-              goTo('form-switch')
-            }}
+            onNext={() => goTo(nextKey)}
+            showDetails={showDetails}
           />
         )}
       />
 
+      <Drawer
+        className={`drawer-md`}
+        destroyOnClose
+        footer={null}
+        onClose={() => setDrawerVisible(false)}
+        visible={drawerVisible}
+        width={isMobile ? '100%' : MODAL_WIDTH_MD}
+      >
+        <DetailView
+          energyKwh={store?.energy}
+          item={store?.item}
+          layout="provider"
+          onNext={() => goTo(nextKey)}
+        />
+      </Drawer>
+
       <Modal footer={null} onCancel={() => setVisible(false)} visible={visible}>
         <EnergyForm
-          data={moduleData}
-          initialValues={{ postcode: store?.postcode, users: store?.users }}
+          initialValues={{
+            postcodeEnergy: {
+              energy: store?.energy,
+              postcode: store?.postcode,
+            },
+          }}
           moduleBlocks={moduleBlocks}
           moduleData={moduleData}
           onFinish={updateProviders}

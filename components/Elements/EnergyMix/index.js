@@ -1,7 +1,7 @@
 import React from 'react'
 import { PieChart } from 'react-minimal-pie-chart'
 
-const EnergyMix = (props) => {
+export const EnergyMix = (props) => {
   const data = props.data.map((e, i) => ({
     color: `rgba(202, 26, 124, ${1 / (i + 1)})`,
     title: e.source,
@@ -20,5 +20,3 @@ const EnergyMix = (props) => {
     />
   )
 }
-
-export default EnergyMix

@@ -1,71 +1,11 @@
-import { Button, Col, Form, Input, Row, Select } from 'antd'
-import Image from 'next/image'
+import { Button, Form } from 'antd'
 import React from 'react'
-import { isMobile } from 'react-device-detect'
 
 import { text } from '../../../utils/Text'
 import CheckList from '../../Elements/CheckList'
 import Category from '../helpers/Category'
 import { StepHeader } from '../helpers/StepHeader'
-
-export const ITEMS = {
-  postcode: (blocks) => (
-    <Form.Item
-      name="postcode"
-      rules={[
-        {
-          message: text(blocks['form.postcode.message']),
-          required: true,
-        },
-        {
-          message: text(blocks['form.postcode.pattern.message']),
-          pattern: new RegExp(/^(?!01000|99999)(0[1-9]\d{3}|[1-9]\d{4})$/g),
-        },
-      ]}
-    >
-      <Input
-        className="site-input-right"
-        inputMode="numeric"
-        pattern="[0-9]*"
-        placeholder={text(blocks['form.postcode.placeholder'])}
-        size="large"
-        type="number"
-      />
-    </Form.Item>
-  ),
-  users: (blocks, usersInput) => (
-    <Form.Item
-      name="users"
-      rules={[
-        {
-          message: text(blocks['form.users.message']),
-          required: true,
-        },
-      ]}
-    >
-      <Select
-        className="site-input-left"
-        size="large"
-        style={{ width: '100%' }}
-      >
-        {usersInput.map((option, i) => (
-          <Select.Option
-            key={i}
-            label={option.label}
-            value={option.valueNumber}
-          >
-            <span className="option-with-icon">
-              {option.icon?.url && (
-                <Image height={32} src={option.icon.url} width={32} />
-              )}
-              <span className="option-label">{option.label}</span>
-            </span>
-          </Select.Option>
-        ))}
-      </Select>
-    </Form.Item>
-  ),
-}
+import { SelectPostcodeEnergy } from './SelectPostcodeEnergy'
 
 export const EnergyForm = ({
   initialValues,
@@ -73,24 +13,35 @@ export const EnergyForm = ({
   moduleData,
   onFinish,
 }) => {
+  const checkPostcode = (_, value) => {
+    if (value.postcode?.length <= 5) {
+      return Promise.resolve()
+    }
+
+    return Promise.reject(new Error('Postcode must be 5 digits'))
+  }
+
   return (
     <Form initialValues={initialValues} onFinish={onFinish}>
-      <Row className="site-input-group-wrapper form-spacing">
-        <Input.Group>
-          <Row gutter={8}>
-            <Col xs={isMobile ? 12 : 10}>
-              {ITEMS.users(moduleBlocks, moduleData?.['input.users']?.items)}
-            </Col>
-            <Col xs={isMobile ? 12 : 14}>{ITEMS.postcode(moduleBlocks)}</Col>
-          </Row>
-        </Input.Group>
-
-        <Col xs={24}>
-          <Button block htmlType="submit" size="large" type="primary">
-            Finde passende Tarife
-          </Button>
-        </Col>
-      </Row>
+      <Form.Item
+        name="postcodeEnergy"
+        rules={[
+          {
+            validator: checkPostcode,
+          },
+        ]}
+      >
+        <SelectPostcodeEnergy
+          items={moduleData?.['input.energy']?.items}
+          placeholderInput={text(moduleBlocks['form.postcode.placeholder'])}
+          placeholderSelect="Please select"
+        />
+      </Form.Item>
+      <Form.Item>
+        <Button block htmlType="submit" size="large" type="primary">
+          Finde passende Tarife
+        </Button>
+      </Form.Item>
     </Form>
   )
 }
@@ -104,10 +55,13 @@ export const Calculate = ({
   setStore,
   store,
 }) => {
+  const inputEnergyOptions = moduleData?.['input.energy']?.items
+  const inputEnergyFirstValue = inputEnergyOptions?.[0]?.valueNumber
+
   const handleFinish = (allValues) => {
     setStore({
-      postcode: allValues.postcode,
-      users: allValues.users,
+      energy: allValues.postcodeEnergy?.energy,
+      postcode: allValues.postcodeEnergy?.postcode,
     })
     goTo('results')
   }
@@ -126,9 +80,10 @@ export const Calculate = ({
 
       <EnergyForm
         initialValues={{
-          postcode: store?.postcode,
-          users:
-            store?.users || moduleData?.['input.users']?.items[0]?.valueNumber,
+          postcodeEnergy: {
+            energy: store?.energy || inputEnergyFirstValue,
+            postcode: store?.postcode,
+          },
         }}
         moduleBlocks={moduleBlocks}
         moduleData={moduleData}

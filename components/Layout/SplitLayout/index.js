@@ -9,7 +9,7 @@ import Template from '../'
 import { Footer } from '../Footer'
 import { Header } from '../Header'
 import { Nav } from '../Nav'
-// import { TopBar } from '../TopBar'
+import { TopBar } from '../TopBar'
 
 const SplitLayout = ({ children, company, layout, nav }) => {
   const [collapsed, setCollapsed] = useState(true)
@@ -26,9 +26,10 @@ const SplitLayout = ({ children, company, layout, nav }) => {
       <Header actions={nav} collapsed={collapsed} setCollapsed={setCollapsed} />
       <div className={classNames({ collapsed })} id="scroll-container">
         <main>
-          {/* <TopBar /> */}
           <Nav className="hidden md" company={company} />
+
           <Hero onClick={() => scrollToId(nav[0]?.id)} />
+          <TopBar />
           {children}
           <Footer />
         </main>

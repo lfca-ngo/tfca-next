@@ -11,7 +11,7 @@ export const BasicModal = ({ content, setVisible, title, visible }) => {
         </Button>,
       ]}
       onCancel={() => setVisible(false)}
-      title={{ title }}
+      title={title}
       visible={visible}
       wrapClassName={`modal-md has-top`}
     >

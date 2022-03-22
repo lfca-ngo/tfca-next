@@ -52,6 +52,16 @@ export const MetaDataFragment = gql`
         }
       }
     }
+    topbar {
+      active
+      text
+      mobileText
+      link {
+        title
+        url
+        slug
+      }
+    }
     resourcesCollection(limit: 100) {
       items {
         ... on Block {

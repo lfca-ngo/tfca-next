@@ -26,7 +26,7 @@ export const BankCard = ({ item, onNext }) => {
   return (
     <Card
       activeTabKey={activeTab}
-      className="bank-card"
+      className="content-card bank"
       onTabChange={(key) => {
         setActiveTab(key)
       }}

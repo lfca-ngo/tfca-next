@@ -11,6 +11,7 @@
   background: @purple;
   font-size: @topbar-font-size;
   position: relative;
+  padding: 0 @default-section-padding;
   .font-medium(@purple-light);
 
   &.hidden {
@@ -30,5 +31,9 @@
   .ant-btn.ant-btn-link.close-btn {
     position: absolute;
     right: 30px;
+    display: none;
+    @media @desktop {
+      display: block;
+    }
   }
 }

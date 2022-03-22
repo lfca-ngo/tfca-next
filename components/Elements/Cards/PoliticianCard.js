@@ -24,7 +24,7 @@ export const PoliticianCard = ({ isSelected, item, minimal, onSelect }) => {
   const parliamentInfo = MAP_PARLIAMENT[item?.parliament]
 
   return (
-    <Card className={classNames('politician-card', { minimal })}>
+    <Card className={classNames('content-card politician', { minimal })}>
       <header>
         <div className="image">
           <CircleImage size={65} src={item.imageUrl} />

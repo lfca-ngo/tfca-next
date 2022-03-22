@@ -64,6 +64,11 @@ export const useContent = () => {
   return context.content
 }
 
+export const useTopbar = () => {
+  const context = useContext(AppContext)
+  return context.content?.metaData?.topbar
+}
+
 export const useContentBlocks = (key) => {
   const context = useContext(AppContext)
   return context.content?.metaData?.blocks?.[key] || ''

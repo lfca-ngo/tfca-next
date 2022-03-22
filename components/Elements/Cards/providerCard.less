@@ -1,189 +1,110 @@
 @import (reference) '../../../styles/variables.less';
 @import (reference) '../../../styles/fonts.less';
+@import (reference) '../../../styles/variables-css.less';
 
-.tariff-modal.ant-modal-wrap.modal-md.has-top .ant-modal {
-  .ant-modal-header {
-    background: @secondary-color;
-    position: relative;
-    height: 150px;
-    .provider-logo-container {
-      .logo-wrapper {
-        @logo-wrapper-height: 90px;
-        position: absolute;
-        bottom: -@logo-wrapper-height / 2;
-        height: @logo-wrapper-height;
-        max-width: 240px;
-        background: @white;
-        box-shadow: 0 2px 4px 0 rgba(177, 177, 177, 0.5);
-        border-radius: @logo-wrapper-height / 2;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 15px 30px;
-        .logo {
-          position: relative;
-          height: 100%;
-          width: 100%;
-          display: flex;
-        }
-        img {
-          max-height: 100%;
-          max-width: 100%;
-        }
-      }
+.content-card.provider {
+  margin: 20px 0;
+
+  header {
+    display: flex;
+    .price {
+      margin-right: 0;
+      margin-left: auto;
     }
   }
-  .ant-modal-close-x {
-    color: @white;
-  }
-  .ant-modal-body {
-    padding-top: 80px;
-  }
-  .ant-divider-horizontal {
-    margin: 16px 0;
-  }
-  .labels {
-    margin: 20px 0 10px;
-    img {
-      height: 46px;
-      margin-right: 10px;
-      margin-bottom: 6px;
-    }
-  }
-  .section-title {
-    .font-bold();
-    font-size: 19px;
-    .anticon {
+
+  main {
+    .ant-btn-link {
       color: @secondary-color;
-      margin-right: 8px;
-    }
-  }
-  .section-body {
-    font-size: 14px;
-    margin-top: 10px;
-    @media @desktop {
+      margin: 12px 0 10px;
       font-size: 16px;
-    }
-  }
-  .price {
-    padding: 0;
-    line-height: 1.3;
-
-    .ant-tag {
-      height: auto;
-      font-size: 12px;
-      width: 100%;
-      text-align: center;
-      margin-bottom: 4px;
-    }
-    .font-medium(@black);
-    .main-price {
-      color: @black;
-      .ant-tag {
-        font-size: 18px;
-        margin-top: 12px;
-        .font-semi(@black);
-        height: auto;
-        padding: 8px 6px;
-        @media (min-width: @screen-sm) {
-          font-size: 20px;
-          margin-top: 0;
-        }
-        .label {
-          font-size: 11px;
-          .font-regular();
-          line-height: 1;
+      .anticon {
+        color: @secondary-color;
+        path {
+          fill: @secondary-color;
         }
       }
     }
-    .price-per-kwh,
-    .base-price {
-      line-height: 1.2;
-      font-size: 13px;
-      .font-regular(@black);
-    }
-  }
-  .ant-list-item {
-    .anticon {
-      color: @secondary-color;
-      g {
-        fill: @secondary-color;
-      }
-    }
-  }
 
-  .conditions {
-    .ant-list-item {
-      padding: 7px 0;
-    }
-    font-size: 14px;
-    .ant-list-item-meta-description {
-      font-size: 14px;
-      color: @black !important;
-      margin: 0;
-    }
-  }
-  .ant-tabs {
-    .ant-tabs-tab-btn {
-      font-size: 14px;
-    }
-    .ant-tabs-content {
-      font-size: 14px;
-      .font-regular();
-      h1,
-      h2,
-      h3,
-      h4,
-      h5,
-      h6 {
-        font-size: 20px;
+    .ant-list.simple-list {
+      .ant-list-item {
+        border-bottom: 1px solid @medium-grey;
+      }
+      .anticon {
+        color: @secondary-color;
+        path {
+          fill: @secondary-color;
+        }
       }
       p {
+        font-size: 14px;
+        color: @black !important;
         margin: 0;
+        @media @desktop {
+          font-size: 16px;
+        }
       }
     }
   }
-}
 
-.basic-tarif-info {
-  .tariff {
-    font-size: 14px;
-    margin-top: 4px;
-    > span {
-      opacity: 0.6;
-      .font-regular();
+  footer {
+    display: flex;
+
+    .actions {
+      width: 50%;
+      margin-right: 0;
+      margin-left: auto;
+      text-align: right;
     }
-    .tariff-name {
+  }
+
+  .ant-card-body {
+    padding: 28px;
+    @media (min-width: @screen-md) {
+      padding: 40px;
+    }
+  }
+
+  .ant-divider {
+    margin: 12px 0;
+    background: #ecedf1;
+  }
+
+  .basic-tarif-info {
+    .tariff {
+      font-size: 14px;
+      margin-top: 4px;
+      > span {
+        opacity: 0.6;
+        .font-regular();
+      }
+      .tariff-name {
+        .font-semi();
+        opacity: 0.9;
+      }
+    }
+    .logo {
+      position: relative;
+      height: 52px;
+      width: 160px;
+      margin-bottom: 10px;
+    }
+    .align-right {
+      text-align: right;
+    }
+    .title {
       .font-semi();
-      opacity: 0.9;
-    }
-  }
-  .logo-wrapper {
-    height: 29px;
-  }
-  .logo {
-    max-width: 100%;
-    height: 30px;
-    margin-top: 0;
-    @media (min-width: @screen-sm) {
-      margin-top: -5px;
-      height: 45px;
-    }
-  }
-  .align-right {
-    text-align: right;
-  }
-  .title {
-    .font-semi();
-    line-height: 1.2;
-    padding-left: 0;
-    margin-top: 3px;
+      line-height: 1.2;
+      padding-left: 0;
+      margin-top: 3px;
 
-    @media (min-width: @screen-sm) {
-      padding-left: 6px;
-      margin-top: 0;
+      @media (min-width: @screen-sm) {
+        padding-left: 6px;
+        margin-top: 0;
+      }
     }
   }
+
   .price {
     padding: 0;
     line-height: 1.3;
@@ -217,101 +138,6 @@
       margin-top: -4px;
       @media (min-width: @screen-sm) {
         margin-top: 0;
-      }
-    }
-  }
-}
-
-.provider-card {
-  border-radius: 6px;
-  transition: all 0.2s ease-in-out;
-  margin: 6px 0 16px;
-
-  @media (min-width: @screen-sm) {
-    margin: 10px 0 15px;
-  }
-
-  button.ant-btn-link {
-    color: @pink;
-  }
-
-  .ant-card-body {
-    padding: 28px;
-    @media (min-width: @screen-md) {
-      padding: 40px;
-    }
-  }
-
-  &:hover {
-    box-shadow: 4px 5px 10px rgba(0, 0, 0, 0.2);
-    transform: translateY(-1px);
-  }
-  .ant-list.advantages {
-    .anticon {
-      color: @secondary-color;
-      path {
-        fill: @secondary-color;
-      }
-    }
-    p {
-      font-size: 14px;
-      color: @black !important;
-      margin: 0;
-      @media @desktop {
-        font-size: 16px;
-      }
-    }
-  }
-
-  .ant-divider {
-    margin: 12px 0;
-    background: #ecedf1;
-  }
-
-  .ant-btn-link {
-    &.no-padding {
-      font-size: 16px;
-    }
-  }
-
-  .list-small {
-    .labels {
-      img {
-        margin-right: 6px;
-        margin-bottom: 6px;
-        height: 28px;
-        @media (min-width: @screen-sm) {
-          height: 38px;
-          margin-right: 10px;
-        }
-        // .scale-height(44px);
-      }
-    }
-    .description {
-      .check-list {
-        margin: 0 0 10px;
-        .desc,
-        .anticon {
-          font-size: 14px;
-          @media @desktop {
-            font-size: 16px;
-          }
-        }
-      }
-    }
-    .actions {
-      flex: 1;
-      .ant-btn-primary {
-        height: auto;
-        padding: 6px 8px;
-        font-size: 13px;
-        margin: 0;
-        border-radius: @border-radius-lg;
-        @media (min-width: @screen-sm) {
-          padding: 8px 10px;
-          font-size: 16px;
-        }
-        // .scale-text(16px);
       }
     }
   }
