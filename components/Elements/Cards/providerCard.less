@@ -3,14 +3,69 @@
 @import (reference) '../../../styles/variables-css.less';
 
 .content-card.provider {
-  margin: 6px 0 16px;
+  margin: 20px 0;
 
-  @media (min-width: @screen-sm) {
-    margin: 10px 0 15px;
+  header {
+    display: flex;
+    .price {
+      margin-right: 0;
+      margin-left: auto;
+    }
   }
 
-  button.ant-btn-link {
-    color: @pink;
+  main {
+    .ant-btn-link {
+      color: @secondary-color;
+      margin: 12px 0 10px;
+      font-size: 16px;
+      .anticon {
+        color: @secondary-color;
+        path {
+          fill: @secondary-color;
+        }
+      }
+    }
+
+    .ant-list.simple-list {
+      .ant-list-item {
+        border-bottom: 1px solid @medium-grey;
+      }
+      .anticon {
+        color: @secondary-color;
+        path {
+          fill: @secondary-color;
+        }
+      }
+      p {
+        font-size: 14px;
+        color: @black !important;
+        margin: 0;
+        @media @desktop {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+
+  footer {
+    display: flex;
+
+    .labels {
+      display: flex;
+      .label {
+        position: relative;
+        height: 40px;
+        width: 45px;
+        margin-right: 6px;
+      }
+    }
+
+    .actions {
+      width: 50%;
+      margin-right: 0;
+      margin-left: auto;
+      text-align: right;
+    }
   }
 
   .ant-card-body {
@@ -20,75 +75,9 @@
     }
   }
 
-  .ant-list.simple-list {
-    .ant-list-item {
-      border-bottom: 1px solid @medium-grey;
-    }
-    .anticon {
-      color: @secondary-color;
-      path {
-        fill: @secondary-color;
-      }
-    }
-    p {
-      font-size: 14px;
-      color: @black !important;
-      margin: 0;
-      @media @desktop {
-        font-size: 16px;
-      }
-    }
-  }
-
   .ant-divider {
     margin: 12px 0;
     background: #ecedf1;
-  }
-
-  .ant-btn-link {
-    &.no-padding {
-      font-size: 16px;
-    }
-  }
-
-  .list-small {
-    .labels {
-      img {
-        margin-right: 6px;
-        margin-bottom: 6px;
-        height: 28px;
-        @media (min-width: @screen-sm) {
-          height: 38px;
-          margin-right: 10px;
-        }
-      }
-    }
-    .description {
-      .check-list {
-        margin: 0 0 10px;
-        .desc,
-        .anticon {
-          font-size: 14px;
-          @media @desktop {
-            font-size: 16px;
-          }
-        }
-      }
-    }
-    .actions {
-      flex: 1;
-      .ant-btn-primary {
-        height: auto;
-        padding: 6px 8px;
-        font-size: 13px;
-        margin: 0;
-        border-radius: @border-radius-lg;
-        @media (min-width: @screen-sm) {
-          padding: 8px 10px;
-          font-size: 16px;
-        }
-      }
-    }
   }
 
   .basic-tarif-info {
@@ -124,40 +113,41 @@
         margin-top: 0;
       }
     }
-    .price {
-      padding: 0;
-      line-height: 1.3;
-      .ant-tag {
-        height: auto;
-        font-size: 12px;
-        margin: 8px 0;
-      }
-      .font-medium(@black);
-      .main-price {
-        font-size: 18px;
-        margin-top: 2px;
-        margin-bottom: 4px;
-        .font-semi(@black);
+  }
 
-        @media (min-width: @screen-sm) {
-          font-size: 20px;
-          margin-top: 0;
-        }
+  .price {
+    padding: 0;
+    line-height: 1.3;
+    .ant-tag {
+      height: auto;
+      font-size: 12px;
+      margin: 8px 0;
+    }
+    .font-medium(@black);
+    .main-price {
+      font-size: 18px;
+      margin-top: 2px;
+      margin-bottom: 4px;
+      .font-semi(@black);
+
+      @media (min-width: @screen-sm) {
+        font-size: 20px;
+        margin-top: 0;
       }
-      .price-per-kwh,
-      .base-price {
-        line-height: 1.2;
-        font-size: 11px;
-        .font-regular(@black);
-        @media (min-width: @screen-sm) {
-          font-size: 12px;
-        }
+    }
+    .price-per-kwh,
+    .base-price {
+      line-height: 1.2;
+      font-size: 11px;
+      .font-regular(@black);
+      @media (min-width: @screen-sm) {
+        font-size: 12px;
       }
-      .base-price {
-        margin-top: -4px;
-        @media (min-width: @screen-sm) {
-          margin-top: 0;
-        }
+    }
+    .base-price {
+      margin-top: -4px;
+      @media (min-width: @screen-sm) {
+        margin-top: 0;
       }
     }
   }

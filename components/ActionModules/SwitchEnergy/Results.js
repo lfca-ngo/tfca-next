@@ -12,6 +12,7 @@ import { MODAL_WIDTH_MD } from '../../../utils'
 import { text } from '../../../utils/Text'
 import { CardView } from '../../Elements/Cards'
 import CheckList from '../../Elements/CheckList'
+import { DetailView } from '../../Elements/DetailViews'
 import Category from '../helpers/Category'
 import { EnergyForm } from './Calculate'
 
@@ -31,6 +32,7 @@ export const Results = ({
   moduleBlocks,
   moduleData,
   moduleLists,
+  nextKey,
   setStore,
   store,
 }) => {
@@ -49,6 +51,11 @@ export const Results = ({
       postcode: values.postcode,
       users: values.users,
     })
+  }
+
+  const showDetails = (item) => {
+    setStore({ ...store, item: item })
+    setDrawerVisible(true)
   }
 
   const getFirstOperatorId = (o) => (o ? Object.keys(o)[0] : null)
@@ -130,9 +137,8 @@ export const Results = ({
             item={item}
             key={`card-${i}`}
             layout="provider"
-            next={() => {
-              goTo('form-switch')
-            }}
+            onNext={() => goTo(nextKey)}
+            showDetails={showDetails}
           />
         )}
       />
@@ -145,7 +151,11 @@ export const Results = ({
         visible={drawerVisible}
         width={isMobile ? '100%' : MODAL_WIDTH_MD}
       >
-        Something
+        <DetailView
+          energyKwh={store?.energyKwh}
+          item={store?.item}
+          layout="provider"
+        />
       </Drawer>
 
       <Modal footer={null} onCancel={() => setVisible(false)} visible={visible}>
