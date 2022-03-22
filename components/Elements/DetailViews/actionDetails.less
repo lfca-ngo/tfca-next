@@ -2,35 +2,11 @@
 @import (reference) '../../../styles/fonts.less';
 
 .action-detail-view {
-  @image-ratio: 49%;
-  @image-overflow: 10px;
-
   .hero-image {
-    margin: 0 -@image-overflow;
-    overflow: visible;
-    top: 0;
-    left: 0;
-    width: calc(100% + 2 * @image-overflow);
-    padding-bottom: @image-ratio;
-    @media @desktop {
-      width: 100%;
-      margin: 0;
-      padding-bottom: 0;
-    }
+    width: 100%;
     img {
       border-radius: 18px;
-      position: absolute;
-      z-index: 100;
-      width: calc(100% + 2 * @image-overflow);
-      max-width: none;
-      left: -@image-overflow;
-      right: -@image-overflow;
-      @media @desktop {
-        position: initial;
-        width: 100%;
-        left: 0;
-        right: 0;
-      }
+      width: 100%;
     }
   }
 
