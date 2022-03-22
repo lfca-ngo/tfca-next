@@ -18,6 +18,7 @@ import Image from 'next/image'
 import React from 'react'
 
 import IconCheck from '../../../assets/icons/g-check.svg'
+import { Labels } from '../EnergyLabels'
 import { EnergyMix } from '../EnergyMix'
 import ShowMore from '../ShowMore'
 
@@ -198,14 +199,7 @@ export const ProviderDetails = ({ energyKwh, item }) => {
             <TagOutlined /> Labels
           </div>
 
-          <div className="labels">
-            {item.labels.map((label, i) => (
-              <img
-                key={`label-${i}`}
-                src={`${IMG_BASE_URL}${label.image.url}`}
-              />
-            ))}
-          </div>
+          <Labels labels={item.labels} />
         </div>
       )}
 

@@ -4,6 +4,8 @@ import { CheckCircleOutlined, InfoCircleOutlined } from '@ant-design/icons'
 import { Button, Card, List, Tag } from 'antd'
 import Image from 'next/image'
 import React from 'react'
+
+import { Labels } from '../EnergyLabels'
 const IMG_BASE_URL = process.env.NEXT_PUBLIC_SWITCH_CLIMATE_IMG_URL
 
 export const ProviderCard = ({ energyKwh, item, onNext, showDetails }) => {
@@ -73,18 +75,8 @@ export const ProviderCard = ({ energyKwh, item, onNext, showDetails }) => {
       </main>
 
       <footer>
-        <div className="labels">
-          {item.labels.map((label, i) => (
-            <div className="label" key={`label-${i}`}>
-              <Image
-                layout="fill"
-                objectFit="contain"
-                objectPosition={'0 0'}
-                src={`${IMG_BASE_URL}${label.image.url}`}
-              />
-            </div>
-          ))}
-        </div>
+        <Labels labels={item.labels} />
+
         <div className="actions">
           <Button onClick={handleSwitch} size="small" type="primary">
             Jetzt wechseln

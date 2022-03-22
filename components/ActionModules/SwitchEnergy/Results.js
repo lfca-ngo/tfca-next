@@ -152,7 +152,7 @@ export const Results = ({
         width={isMobile ? '100%' : MODAL_WIDTH_MD}
       >
         <DetailView
-          energyKwh={store?.energyKwh}
+          energyKwh={store?.users}
           item={store?.item}
           layout="provider"
         />
