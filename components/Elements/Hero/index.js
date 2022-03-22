@@ -3,12 +3,12 @@ require('./styles.less')
 import { Button, Typography } from 'antd'
 import React from 'react'
 
-import { useApp, useContentBlocks, useIsMobile } from '../../../hooks'
+import { useContentBlocks, useCustomization, useIsMobile } from '../../../hooks'
 import { text } from '../../../utils/Text'
 
 export const Hero = ({ onClick }) => {
   const isMobile = useIsMobile()
-  const { customization } = useApp()
+  const customization = useCustomization()
   const customHeaderText = (
     <span>
       Hi <span className="text-accent">David</span>, ready to act?

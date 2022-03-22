@@ -33,14 +33,12 @@ const customizeRenderEmpty = () => (
   </div>
 )
 
-export const CheckProvider = (props) => {
+export const CheckProvider = ({ goTo, icon, moduleBlocks }) => {
   const [provider, setProvider] = useState()
 
   const handleChange = (val) => {
     setProvider(val)
   }
-
-  const handleNext = () => props.goTo('success')
 
   const isVerified = provider !== '-'
   const infoAlert = isVerified ? (
@@ -69,7 +67,7 @@ export const CheckProvider = (props) => {
     <Button
       block
       disabled={!provider}
-      onClick={handleNext}
+      onClick={() => goTo('success')}
       size="large"
       style={{ marginTop: '15px' }}
       type="primary"
@@ -79,7 +77,7 @@ export const CheckProvider = (props) => {
   ) : (
     <Button
       block
-      onClick={() => props.goTo('calculate')}
+      onClick={() => goTo('calculate')}
       size="large"
       style={{ marginTop: '15px' }}
       type="primary"
@@ -91,15 +89,14 @@ export const CheckProvider = (props) => {
   return (
     <div className="step">
       <Category
-        goBack
-        icon={props.icon}
-        prev={() => props.goTo('intro')}
-        title={text(props.blocks['category.title'])}
+        goBack={() => goTo('intro')}
+        icon={icon}
+        title={text(moduleBlocks['category.title'])}
       />
 
       <StepHeader
-        subtitle={props.blocks['checkprovider.description']}
-        title={props.blocks['checkprovider.title']}
+        subtitle={moduleBlocks['checkprovider.description']}
+        title={moduleBlocks['checkprovider.title']}
       />
 
       <Form>
@@ -112,7 +109,7 @@ export const CheckProvider = (props) => {
               onChange={handleChange}
               optionFilterProp="children"
               placeholder={
-                <span>{text(props.blocks['checkprovider.choose'])}</span>
+                <span>{text(moduleBlocks['checkprovider.choose'])}</span>
               }
               showSearch
               size="large"

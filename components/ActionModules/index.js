@@ -34,7 +34,7 @@ const ActionModules = (props) => {
       name={action.name}
       otherUsers={props.stats[action.id]}
     >
-      {renderAction(action, i)}
+      {renderAction(action)}
     </ActionWrapper>
   ))
 }

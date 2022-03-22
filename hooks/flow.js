@@ -5,8 +5,9 @@ import { scrollToId } from '../utils'
 // helper hook for managing the flow state of
 // the different action modules
 export const useFlow = ({ id, initialIndex, initialStore = {} }) => {
-  const [store, setStore] = useState(initialStore)
   const [index, set] = useState(initialIndex)
+  const [progress, setProgress] = useState(0)
+  const [store, setStore] = useState(initialStore)
 
   const goTo = (page) => {
     set(page)
@@ -14,10 +15,12 @@ export const useFlow = ({ id, initialIndex, initialStore = {} }) => {
   }
 
   return {
-    goTo: goTo,
-    index: index,
-    set: set,
-    setStore: setStore,
-    store: store,
+    goTo,
+    index,
+    progress,
+    set,
+    setProgress,
+    setStore,
+    store,
   }
 }

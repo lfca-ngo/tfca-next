@@ -1,9 +1,8 @@
-import { Tabs } from 'antd'
+import { Progress, Tabs } from 'antd'
 import { useRouter } from 'next/router'
 import React from 'react'
 
-import { useApp, useFlow } from '../../../hooks'
-import { Share } from '../helpers/Share'
+import { useFlow } from '../../../hooks'
 import { Success } from '../helpers/Success'
 import { Details } from './Details'
 import { Filter } from './Filter'
@@ -11,119 +10,124 @@ import { Results } from './Results'
 
 const { TabPane } = Tabs
 
-export const Politics = (props) => {
+export const Politics = ({ module }) => {
   const { locale } = useRouter()
 
-  const { data = {} } = props.module || {}
+  const { data = {} } = module || {}
 
-  const { availableFilters, messagesByFilterValue, messagesFilterKey, steps } =
-    React.useMemo(() => {
-      const steps = []
-      const parsedFilters = []
-      const messagesByFilterValue = {}
-      let messagesFilterKey = ''
+  const {
+    availableFilters,
+    messagesByFilterValue,
+    messagesRelatedFilterKey,
+    steps,
+  } = React.useMemo(() => {
+    const steps = []
+    const parsedFilters = []
+    const messagesByFilterValue = {}
+    let messagesRelatedFilterKey = ''
 
-      for (const dataKey of Object.keys(data)) {
-        // Create a filter for each data entry
-        const dataItem = data[dataKey]
-        const filterMeta = dataItem.filters[0] || {}
-        const filterOptions = (dataItem.items || []).map((option) => {
-          let value = option.valueString
-          // For the topic data we use the joined badges as value
-          if (option.delegationsCommittees) {
-            value = option.delegationsCommittees.join(',')
-            // The messages can be looked up by the joined value
-            messagesByFilterValue[value] =
-              option.messagesCollection?.items || []
-            messagesFilterKey = filterMeta.key
-          }
-
-          return {
-            hasOptionalInput: option.hasOptionalInput,
-            iconUrl: option.icon?.url,
-            label: option.label,
-            value,
-          }
-        })
-        const filterOption = {
-          ...filterMeta,
-          fieldName: filterMeta.key,
-          options: filterOptions,
+    for (const dataKey of Object.keys(data)) {
+      // Create a filter for each data entry
+      const dataItem = data[dataKey]
+      const filterMeta = dataItem.filters[0] || {}
+      const filterOptions = (dataItem.items || []).map((option) => {
+        let value = option.valueString
+        // For the topic data we use the joined badges as value
+        if (option.delegationsCommittees) {
+          value = option.delegationsCommittees.join(',')
+          // The messages can be looked up by the joined value
+          messagesByFilterValue[value] = option.messagesCollection?.items || []
+          messagesRelatedFilterKey = filterMeta.key
         }
-        parsedFilters.push(filterOption)
 
-        // Create a page for each filter that is marked to render as step
-        if (filterOption.renderAsStep) {
-          steps.push([
-            `${filterOption.fieldName}`,
-            { component: Filter, filterOption },
-          ])
+        return {
+          hasOptionalInput: option.hasOptionalInput,
+          iconUrl: option.icon?.url,
+          label: option.label,
+          value,
         }
+      })
+      const filterOption = {
+        ...filterMeta,
+        fieldName: filterMeta.key,
+        options: filterOptions,
       }
+      parsedFilters.push(filterOption)
 
-      const dynamicSteps = new Map([
-        ...steps,
-        ['results', { component: Results }],
-        ['details', { component: Details }],
-        ['success', { component: Success }],
-        ['share', { component: Share }],
-      ])
-
-      return {
-        availableFilters: parsedFilters,
-        messagesByFilterValue,
-        messagesFilterKey,
-        steps: dynamicSteps,
+      // Create a page for each filter that is marked to render as step
+      if (filterOption.renderAsStep) {
+        steps.push([
+          `${filterOption.fieldName}`,
+          { component: Filter, filterOption },
+        ])
       }
-    }, [data])
+    }
 
-  const [firstStep] = steps.keys()
+    const dynamicSteps = new Map([
+      ...steps,
+      ['results', { component: Results }],
+      ['details', { component: Details }],
+      ['success', { component: Success }],
+    ])
 
-  const { goTo, index, setStore, store } = useFlow({
-    id: props.module?.id,
-    initialIndex: firstStep,
-    initialStore: {
-      activeMessageIndex: 0,
-      availableFilters,
-      'countries.zip': {
-        select: getCountryFromLocale(locale),
-      },
+    return {
+      availableFilters: parsedFilters,
       messagesByFilterValue,
-      messagesFilterKey,
-      sentItems: [],
-      slideIndex: 0,
-    },
-  })
-
-  const { customization, setProgress } = useApp()
+      messagesRelatedFilterKey,
+      steps: dynamicSteps,
+    }
+  }, [data])
 
   const stepsKeys = [...steps.keys()]
 
+  const { goTo, index, progress, setProgress, setStore, store } = useFlow({
+    id: module?.id,
+    initialIndex: stepsKeys[0],
+    initialStore: {
+      activeMessageIndex: 0,
+      'countries.zip': {
+        select: getCountryFromLocale(locale),
+      },
+      politicianSlideIndex: 0,
+      selectedPoliticians: [],
+      sentItems: [],
+    },
+  })
+
+  const handleGoTo = (key) => {
+    const keyIndex = stepsKeys.indexOf(key)
+    const progress = keyIndex / (stepsKeys.length - 1)
+    setProgress(progress)
+    goTo(key)
+  }
+
   return (
     <div className="steps-container">
+      <Progress percent={progress * 100} showInfo={false} />
+
       <Tabs
         activeKey={index}
         animated={{ inkBar: false, tabPane: true }}
         destroyInactiveTabPane
         renderTabBar={() => null}
       >
-        {[...steps.keys()].map((key, i) => {
+        {stepsKeys.map((key, i) => {
           const { component: Page, filterOption } = steps.get(key)
           const nextKey = i <= stepsKeys.length ? stepsKeys[i + 1] : null
           const prevKey = i > 0 ? stepsKeys[i - 1] : null
 
           return (
-            <TabPane key={key} tab={`${props.name}`}>
+            <TabPane key={key} tab={key}>
               <Page
-                blocks={props.module?.blocks || {}}
-                customization={customization}
+                availableFilters={availableFilters}
                 filterOption={filterOption}
-                goTo={goTo}
-                icon={props.module?.icon?.url}
-                id={props.id}
+                goTo={handleGoTo}
+                icon={module?.icon?.url}
+                messagesByFilterValue={messagesByFilterValue}
+                messagesRelatedFilterKey={messagesRelatedFilterKey}
+                moduleBlocks={module?.blocks || {}}
                 nextKey={nextKey}
                 prevKey={prevKey}
-                setProgress={setProgress}
                 setStore={setStore}
                 store={store}
               />

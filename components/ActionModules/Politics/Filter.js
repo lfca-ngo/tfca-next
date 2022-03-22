@@ -7,13 +7,12 @@ import Category from '../helpers/Category'
 import { StepHeader } from '../helpers/StepHeader'
 
 export const Filter = ({
-  blocks,
   filterOption,
   goTo,
   icon,
+  moduleBlocks,
   nextKey,
   prevKey,
-  setProgress,
   setStore,
   store,
 }) => {
@@ -23,17 +22,15 @@ export const Filter = ({
     const value = v[filterOption?.fieldName]
 
     setStore({ ...store, [filterOption?.fieldName]: value })
-    setProgress(0.3)
     goTo(nextKey)
   }
 
   return (
     <div className="step">
       <Category
-        goBack={!!prevKey}
+        goBack={prevKey ? () => goTo(prevKey) : undefined}
         icon={icon}
-        prev={() => goTo(prevKey)}
-        title={text(blocks['category.title'])}
+        title={text(moduleBlocks['category.title'])}
       />
 
       <StepHeader

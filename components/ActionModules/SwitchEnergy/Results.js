@@ -24,13 +24,11 @@ export const getFullPrice = (item, kwh) =>
   item.price.workingPrice * kwh + item.price.basePrice || 0
 
 export const Results = ({
-  blocks,
-  data,
   goTo,
   icon,
-
-  lists,
-  setProgress,
+  moduleBlocks,
+  moduleData,
+  moduleLists,
   setStore,
   store,
 }) => {
@@ -87,17 +85,17 @@ export const Results = ({
   return (
     <div className="step">
       <Category
-        goBack
+        goBack={() => goTo('calculate')}
         icon={icon}
-        prev={() => goTo('calculate')}
         title={
           <span>
-            {text(blocks['category.title'])} {loading && <LoadingOutlined />}{' '}
+            {text(moduleBlocks['category.title'])}{' '}
+            {loading && <LoadingOutlined />}{' '}
           </span>
         }
       />
-      <h2>{text(blocks['results.title'])}</h2>
-      <CheckList data={lists['comparison.benefits']} />
+      <h2>{text(moduleBlocks['results.title'])}</h2>
+      <CheckList data={moduleLists['comparison.benefits']} />
 
       <Row>
         <Col xs={12}>
@@ -128,7 +126,6 @@ export const Results = ({
             item={item}
             key={`card-${i}`}
             next={() => {
-              setProgress(0.75)
               goTo('form-switch')
             }}
           />
@@ -137,9 +134,10 @@ export const Results = ({
 
       <Modal footer={null} onCancel={() => setVisible(false)} visible={visible}>
         <EnergyForm
-          blocks={blocks}
-          data={data}
+          data={moduleData}
           initialValues={{ postcode: store?.postcode, users: store?.users }}
+          moduleBlocks={moduleBlocks}
+          moduleData={moduleData}
           onFinish={updateProviders}
         />
       </Modal>
