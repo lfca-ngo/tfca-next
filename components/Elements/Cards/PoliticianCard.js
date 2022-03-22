@@ -19,8 +19,8 @@ const MAP_PARLIAMENT = {
   },
 }
 
-export const PoliticianCard = ({ isSelected, item, minimal, onNext }) => {
-  const handleNext = onNext ? () => onNext(item) : undefined
+export const PoliticianCard = ({ isSelected, item, minimal, onSelect }) => {
+  const handleSelect = onSelect ? () => onSelect(item) : undefined
   const parliamentInfo = MAP_PARLIAMENT[item?.parliament]
 
   return (
@@ -53,11 +53,11 @@ export const PoliticianCard = ({ isSelected, item, minimal, onNext }) => {
           </div>
 
           <div className="actions">
-            {handleNext && (
+            {handleSelect && (
               <Button
                 className="button"
                 ghost={isSelected}
-                onClick={handleNext}
+                onClick={handleSelect}
                 size="small"
                 type="primary"
               >

@@ -1,18 +1,17 @@
-import { Tabs } from 'antd'
+import { Progress, Tabs } from 'antd'
 import React, { useMemo } from 'react'
 
-import { useApp, useFlow } from '../../../hooks'
+import { useFlow } from '../../../hooks'
 import { getFilterOptions } from '../../../utils'
-import { Share } from '../helpers/Share'
-import Success from '../helpers/Success'
-import Details from './Details'
-import Filter from './Filter'
-import Results from './Results'
+import { Success } from '../helpers/Success'
+import { Details } from './Details'
+import { Filter } from './Filter'
+import { Results } from './Results'
 
 const { TabPane } = Tabs
 
-const ActionFinderFlow = (props) => {
-  const { filters, items } = props.module?.data['main'] || {}
+export const ActionFinderFlow = ({ module }) => {
+  const { filters, items } = module?.data['main'] || {}
 
   const { availableFilters, steps } = useMemo(() => {
     const steps = []
@@ -41,50 +40,49 @@ const ActionFinderFlow = (props) => {
       ['results', { component: Results }],
       ['details', { component: Details }],
       ['success', { component: Success }],
-      ['share', { component: Share }],
     ])
     return { availableFilters: parsedFilters, steps: dynamicSteps }
   }, [items, filters])
 
-  const [firstStep] = steps.keys()
+  const stepsKeys = [...steps.keys()]
 
-  const { goTo, index, setStore, store } = useFlow({
-    id: props.module?.id,
-    initialIndex: firstStep,
+  const { goTo, index, progress, setProgress, setStore, store } = useFlow({
+    id: module?.id,
+    initialIndex: stepsKeys[0],
   })
 
-  const { customization, setProgress } = useApp()
-
-  const stepsKeys = [...steps.keys()]
+  const handleGoTo = (key) => {
+    const keyIndex = stepsKeys.indexOf(key)
+    const progress = keyIndex / (stepsKeys.length - 1)
+    setProgress(progress)
+    goTo(key)
+  }
 
   return (
     <div className="steps-container">
+      <Progress percent={progress * 100} showInfo={false} />
+
       <Tabs
         activeKey={index}
         animated={{ inkBar: false, tabPane: true }}
         destroyInactiveTabPane
         renderTabBar={() => null}
       >
-        {[...steps.keys()].map((key, i) => {
+        {stepsKeys.map((key, i) => {
           const { component: Page, filterElement } = steps.get(key)
           const nextKey = i <= stepsKeys.length ? stepsKeys[i + 1] : null
           const prevKey = i > 0 ? stepsKeys[i - 1] : null
           return (
-            <TabPane key={key} tab={`${props.name}`}>
+            <TabPane key={key} tab={key}>
               <Page
                 availableFilters={availableFilters}
-                blocks={props.module?.blocks || {}}
-                customization={customization}
-                data={props.module?.data || {}}
                 filterElement={filterElement}
-                goTo={goTo}
-                icon={props.module?.icon?.url}
-                id={props.id}
-                lists={props.module?.lists || {}}
-                name={props.name}
+                goTo={handleGoTo}
+                icon={module?.icon?.url}
+                moduleBlocks={module?.blocks || {}}
+                moduleData={module?.data || {}}
                 nextKey={nextKey}
                 prevKey={prevKey}
-                setProgress={setProgress}
                 setStore={setStore}
                 store={store}
               />
@@ -95,5 +93,3 @@ const ActionFinderFlow = (props) => {
     </div>
   )
 }
-
-export default ActionFinderFlow

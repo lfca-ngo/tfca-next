@@ -9,37 +9,38 @@ import Category from '../helpers/Category'
 import { StepHeader } from '../helpers/StepHeader'
 
 export const Details = ({
-  blocks,
   goTo,
   icon,
+
+  moduleBlocks,
   nextKey,
   prevKey,
   setStore,
   store,
 }) => {
-  const activeIndex = store.slideIndex
   const sliderRef = useRef()
 
-  const selectedPoliticians = store?.selectedItems || []
-  const activePolitician = selectedPoliticians[activeIndex]
+  const selectedPoliticians = store?.selectedPoliticians || []
+  const activePolitician = selectedPoliticians[store.politicianSlideIndex]
 
   return (
     <div className="step">
       <Category
-        goBack
+        goBack={prevKey ? () => goTo(prevKey) : undefined}
         icon={icon}
-        prev={() => goTo(prevKey)}
-        title={text(blocks['details.title'])}
+        title={text(moduleBlocks['details.title'])}
       />
 
       <StepHeader
-        subtitle={blocks['details.subtitle']}
-        title={blocks['details.title']}
+        subtitle={moduleBlocks['details.subtitle']}
+        title={moduleBlocks['details.title']}
       />
 
       <Carousel
         arrows
-        beforeChange={(_, next) => setStore({ ...store, slideIndex: next })}
+        beforeChange={(_, next) =>
+          setStore({ ...store, politicianSlideIndex: next })
+        }
         className="custom-slider"
         dots={false}
         infinite={false}

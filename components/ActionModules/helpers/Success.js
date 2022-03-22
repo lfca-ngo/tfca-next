@@ -23,7 +23,7 @@ import { Share } from './Share'
 
 const MAX_INVITES = 3
 
-const Success = (props) => {
+export const Success = ({ goTo, icon, id, moduleBlocks, prevKey }) => {
   const isMobile = useIsMobile()
   const benefits = useContentLists('sharing.benefits')
   const [isGeneratingToken, setIsGeneratingToken] = React.useState(false)
@@ -32,7 +32,7 @@ const Success = (props) => {
   const [invites, setInvites] = React.useState([])
 
   useConfetti()
-  useTrackEvent({ name: 'action_completed', values: { action_id: props.id } })
+  useTrackEvent({ name: 'action_completed', values: { action_id: id } })
 
   // create multiple invite links
   // map of promises with infos
@@ -52,10 +52,9 @@ const Success = (props) => {
     <>
       <div className="step">
         <Category
-          goBack
-          icon={props.icon}
-          prev={() => props.goTo(props.prevStep)}
-          title={text(props.blocks['category.title'])}
+          goBack={prevKey ? () => goTo(prevKey) : undefined}
+          icon={icon}
+          title={text(moduleBlocks['category.title'])}
         />
         <h2>{text(useContentBlocks('sharing.headline'))}</h2>
 
@@ -208,5 +207,3 @@ const Success = (props) => {
     }
   }
 }
-
-export default Success

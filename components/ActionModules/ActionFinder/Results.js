@@ -10,21 +10,25 @@ import { ScrollableFilters } from '../../Elements/ScrollableFilters'
 import Category from '../helpers/Category'
 import { StepHeader } from '../helpers/StepHeader'
 
-const Results = (props) => {
+export const Results = ({
+  goTo,
+  prevKey,
+  nextKey,
+  icon,
+  setStore,
+  moduleData,
+  moduleBlocks,
+  store,
+  availableFilters = [],
+}) => {
   const [visible, setVisible] = useState(false)
   const isMobile = useIsMobile()
   const detailViewType = props.data?.main?.detailViewType || 'page'
   const isDrawerView = detailViewType === 'drawer'
-  const availableFilters = props.availableFilters || []
 
   const handleNext = (item) => {
-    props.setStore({ ...props.store, item: item })
-    props.setProgress(0.3)
-    if (isDrawerView) {
-      setVisible(true)
-    } else {
-      props.goTo(props.nextKey)
-    }
+    setStore({ ...store, item: item })
+    goTo(nextKey)
   }
 
   const filterByAttributes = (item) => {
@@ -34,7 +38,7 @@ const Results = (props) => {
       const { fieldName } = availableFilter
       const collectionName = `${fieldName}Collection`
       const itemValues = item?.[collectionName]?.items?.map((i) => i.key)
-      const storeValues = props.store[fieldName]
+      const storeValues = store[fieldName]
       const isEmpty = !storeValues || storeValues?.length === 0
       const isArray = Array.isArray(storeValues)
       const isMatch = isArray
@@ -46,35 +50,34 @@ const Results = (props) => {
     return true
   }
 
-  const dataMain = props.data['main']
-  const data = dataMain?.items || []
-  const listGrid = dataMain?.listGrid || '1-col'
-  const isEqualHeight = listGrid === '2-col'
+  const dataMain = moduleData['main']
+  const dataItems = dataMain?.items || []
+  const dataListGrid = dataMain?.listGrid || '1-col'
+  const isEqualHeight = dataListGrid === '2-col'
 
   return (
     <div className="step">
       <Category
-        goBack
-        icon={props.icon}
-        prev={() => props.goTo(props.prevKey)}
-        title={text(props.blocks['category.title'])}
+        goBack={prevKey ? () => goTo(prevKey) : undefined}
+        icon={icon}
+        title={text(moduleBlocks['category.title'])}
       />
 
       <StepHeader
-        subtitle={props.blocks['results.subtitle']}
-        title={props.blocks['results.title']}
+        subtitle={moduleBlocks['results.subtitle']}
+        title={moduleBlocks['results.title']}
       />
 
       <ScrollableFilters
         availableFilters={availableFilters}
-        setStore={props.setStore}
-        store={props.store}
+        setStore={setStore}
+        store={store}
       />
 
       <List
         className={`simple-list ${isEqualHeight ? 'equal-height' : ''}`}
-        dataSource={data.filter(filterByAttributes)}
-        grid={LIST_GRIDS[listGrid]}
+        dataSource={dataItems.filter(filterByAttributes)}
+        grid={LIST_GRIDS[dataListGrid]}
         renderItem={(item) => (
           <List.Item>
             <CardView

@@ -1,8 +1,7 @@
-const withPlugins = require('next-compose-plugins')
 const withAntdLess = require('next-plugin-antd-less')
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
-  enabled: process.env.ANALYZE === 'true',
-})
+const withBundleAnalyzer = require('@next/bundle-analyzer')
+const withPlugins = require('next-compose-plugins')
+const withPWA = require('next-pwa')
 
 const nextConfig = {
   i18n: {
@@ -44,24 +43,41 @@ const nextConfig = {
   },
 }
 
-const pluginAntdLess = withAntdLess({
-  lessVarsFilePath: './styles/variables.less',
-  // lessVarsFilePathAppendToEndOfContent: false,
-  // nextjs: {
-  //   localIdentNameFollowDev: true,
-  // },
-  webpack: (config) => {
-    config.module.rules.push({
-      issuer: /\.[jt]sx?$/,
-      test: /\.svg$/i,
-      use: ['@svgr/webpack'],
-    })
-
-    return config
-  },
-})
-
 module.exports = withPlugins(
-  [[pluginAntdLess], [withBundleAnalyzer]],
+  [
+    [
+      withAntdLess,
+      {
+        lessVarsFilePath: './styles/variables.less',
+        // lessVarsFilePathAppendToEndOfContent: false,
+        // nextjs: {
+        //   localIdentNameFollowDev: true,
+        // },
+        webpack: (config) => {
+          config.module.rules.push({
+            issuer: /\.[jt]sx?$/,
+            test: /\.svg$/i,
+            use: ['@svgr/webpack'],
+          })
+
+          return config
+        },
+      },
+    ],
+    [
+      withBundleAnalyzer,
+      {
+        enabled: process.env.ANALYZE === 'true',
+      },
+    ],
+    [
+      withPWA,
+      {
+        pwa: {
+          dest: 'public',
+        },
+      },
+    ],
+  ],
   nextConfig
 )

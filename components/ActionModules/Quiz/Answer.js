@@ -5,33 +5,32 @@ import { Text, text } from '../../../utils/Text'
 import CallToAction from '../../Elements/CallToAction'
 import Category from '../helpers/Category'
 
-const Answer = (props) => {
-  const actions = props.activeQuestion?.resultActionsCollection
-
-  const handleNext = () => {
-    props.setProgress(0.3)
-    props.goTo(props.nextKey)
-  }
+export const Answer = ({
+  activeQuestion,
+  goTo,
+  icon,
+  moduleBlocks,
+  nextKey,
+  prevKey,
+}) => {
+  const actions = activeQuestion?.resultActionsCollection
 
   return (
     <div className="step">
       <Category
-        goBack={!!props.prevKey}
-        icon={props.icon}
-        prev={() => props.goTo(props.prevKey)}
-        title={text(props.blocks['category.title'])}
+        goBack={prevKey ? () => goTo(prevKey) : undefined}
+        icon={icon}
+        title={text(moduleBlocks['category.title'])}
       />
-      <Text block={props.activeQuestion?.result} />
+      <Text block={activeQuestion?.result} />
 
       {actions?.items?.map((action, i) => (
         <CallToAction key={`action-${i}`} {...action} />
       ))}
 
-      <Button block onClick={handleNext} size="large" type="primary">
+      <Button block onClick={() => goTo(nextKey)} size="large" type="primary">
         Continue
       </Button>
     </div>
   )
 }
-
-export default Answer

@@ -8,7 +8,7 @@ import { useActiveAction } from '../../../hooks'
 import { appear } from '../../../utils/animations'
 import ActionStats from './ActionStats'
 
-const ActionWrapper = (props) => {
+export const ActionWrapper = (props) => {
   const { inView, ref } = useInView({ threshold: 0.5 })
   const { setActiveAction } = useActiveAction()
 
@@ -48,5 +48,3 @@ const ActionWrapper = (props) => {
     </div>
   )
 }
-
-export default ActionWrapper

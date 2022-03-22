@@ -10,47 +10,53 @@ import Category from '../helpers/Category'
 import { StepHeader } from '../helpers/StepHeader'
 
 export const Results = ({
-  blocks,
+  availableFilters,
   goTo,
   icon,
+  moduleBlocks,
   nextKey,
   prevKey,
   setStore,
   store,
 }) => {
-  const { data, error, isLoading } = usePoliticians(createPoliticsFilter(store))
-  const countSelected = store?.selectedItems?.length || 0
+  const { data, error, isLoading } = usePoliticians(
+    createPoliticsFilter(availableFilters, store)
+  )
+  const countSelected = store?.selectedPoliticians?.length || 0
 
-  const handleNext = () => {
-    goTo(nextKey)
-  }
+  const toggleSelect = (isSelected, item) => {
+    const selectedPoliticians = store.selectedPoliticians || []
+    const newSelectedPoliticians = isSelected
+      ? selectedPoliticians.filter((i) => i.id !== item.id)
+      : [...selectedPoliticians, item]
 
-  const toggleSelect = (item) => {
-    const selectedItems = store.selectedItems || []
-    const isSelected = selectedItems.find((i) => i.id === item.id)
-    const newSelectedItems = isSelected
-      ? selectedItems.filter((i) => i.id !== item.id)
-      : [...selectedItems, item]
-
-    setStore({ ...store, selectedItems: newSelectedItems, slideIndex: 0 })
+    setStore({
+      ...store,
+      politicianSlideIndex: 0,
+      selectedPoliticians: newSelectedPoliticians,
+    })
   }
 
   return (
     <div className="step">
       <Category
-        goBack
+        goBack={prevKey ? () => goTo(prevKey) : undefined}
         icon={icon}
-        prev={() => goTo(prevKey)}
-        title={text(blocks['category.title'])}
+        title={text(moduleBlocks['category.title'])}
       />
 
       <StepHeader
-        subtitle={blocks['results.subtitle']}
-        title={blocks['results.title']}
+        subtitle={moduleBlocks['results.subtitle']}
+        title={moduleBlocks['results.title']}
       />
 
       {countSelected > 0 && (
-        <Button block className="mb-30" onClick={handleNext} type="primary">
+        <Button
+          block
+          className="mb-30"
+          onClick={() => goTo(nextKey)}
+          type="primary"
+        >
           <Badge
             count={countSelected}
             style={{ background: 'transparent', marginRight: '12px' }}
@@ -75,8 +81,9 @@ export const Results = ({
           loading={isLoading}
           renderItem={(item) => {
             const isSelected =
-              (store.selectedItems || []).findIndex((i) => i.id === item.id) >
-              -1
+              (store.selectedPoliticians || []).findIndex(
+                (i) => i.id === item.id
+              ) > -1
             return (
               <List.Item
                 className={classNames('multi-select-list-item', {
@@ -87,7 +94,7 @@ export const Results = ({
                   isSelected={isSelected}
                   item={item}
                   layout="politician"
-                  onNext={toggleSelect}
+                  onSelect={toggleSelect}
                 />
               </List.Item>
             )
@@ -98,11 +105,10 @@ export const Results = ({
   )
 }
 
-function createPoliticsFilter(store) {
-  return (store.availableFilters || []).reduce((acc, curr) => {
+function createPoliticsFilter(availableFilters, store) {
+  return (availableFilters || []).reduce((acc, curr) => {
     const fieldName = curr.fieldName
-
-    const value = store[curr.fieldName]
+    const value = store[fieldName]
 
     switch (curr.filterMode) {
       case 'radio-single':

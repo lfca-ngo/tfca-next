@@ -11,10 +11,9 @@ import Image from 'next/image'
 import React from 'react'
 
 import { Text, text } from '../../../utils/Text'
-// import { BasicModal } from '../BasicModal'
 import CallToAction from '../CallToAction'
 
-export const ActionDetails = ({ item, onNext }) => {
+export const ActionDetails = ({ item }) => {
   return (
     <div className="detail-view action">
       <div className="hero-image">
@@ -61,13 +60,6 @@ export const ActionDetails = ({ item, onNext }) => {
       {item?.actionsCollection?.items?.map((action, i) => (
         <CallToAction key={`action-${i}`} {...action} />
       ))}
-
-      {/* <BasicModal
-        content={<div>Do you want to do more than this action?</div>}
-        setVisible={setVisible}
-        title={null}
-        visible={visible}
-      /> */}
     </div>
   )
 }

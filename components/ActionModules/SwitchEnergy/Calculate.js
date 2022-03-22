@@ -48,13 +48,17 @@ export const ITEMS = {
         size="large"
         style={{ width: '100%' }}
       >
-        {usersInput.map((user, i) => (
-          <Select.Option key={i} label={user.label} value={user.valueNumber}>
+        {usersInput.map((option, i) => (
+          <Select.Option
+            key={i}
+            label={option.label}
+            value={option.valueNumber}
+          >
             <span className="option-with-icon">
               {option.icon?.url && (
-                <Image height={32} src={user.icon.url} width={32} />
+                <Image height={32} src={option.icon.url} width={32} />
               )}
-              <span className="option-label">{user.label}</span>
+              <span className="option-label">{option.label}</span>
             </span>
           </Select.Option>
         ))}
@@ -63,16 +67,21 @@ export const ITEMS = {
   ),
 }
 
-export const EnergyForm = ({ blocks, data, initialValues, onFinish }) => {
+export const EnergyForm = ({
+  initialValues,
+  moduleBlocks,
+  moduleData,
+  onFinish,
+}) => {
   return (
     <Form initialValues={initialValues} onFinish={onFinish}>
       <Row className="site-input-group-wrapper form-spacing">
         <Input.Group>
           <Row gutter={8}>
             <Col xs={isMobile ? 12 : 10}>
-              {ITEMS.users(blocks, data?.['input.users']?.items)}
+              {ITEMS.users(moduleBlocks, moduleData?.['input.users']?.items)}
             </Col>
-            <Col xs={isMobile ? 12 : 14}>{ITEMS.postcode(blocks)}</Col>
+            <Col xs={isMobile ? 12 : 14}>{ITEMS.postcode(moduleBlocks)}</Col>
           </Row>
         </Input.Group>
 
@@ -86,39 +95,45 @@ export const EnergyForm = ({ blocks, data, initialValues, onFinish }) => {
   )
 }
 
-const Calculate = (props) => {
-  const { data, setStore } = props
-
+export const Calculate = ({
+  goTo,
+  icon,
+  moduleBlocks,
+  moduleData,
+  moduleLists,
+  setStore,
+  store,
+}) => {
   const handleFinish = (allValues) => {
     setStore({
       postcode: allValues.postcode,
       users: allValues.users,
     })
-
-    props.setProgress(0.5)
-    props.goTo('results')
+    goTo('results')
   }
 
   return (
     <div className="step">
       <Category
-        goBack
-        icon={props.icon}
-        prev={() => props.goTo('intro')}
-        title={text(props.blocks['category.title'])}
+        goBack={() => goTo('intro')}
+        icon={icon}
+        title={text(moduleBlocks['category.title'])}
       />
 
-      <StepHeader title={props.blocks['calculate.title']} />
+      <StepHeader title={moduleBlocks['calculate.title']} />
 
-      <CheckList data={props.lists?.benefits} />
+      <CheckList data={moduleLists?.benefits} />
 
       <EnergyForm
-        {...props}
-        initialValues={{ users: data?.input_users?.items[0]?.valueNumber }}
+        initialValues={{
+          postcode: store?.postcode,
+          users:
+            store?.users || moduleData?.['input.users']?.items[0]?.valueNumber,
+        }}
+        moduleBlocks={moduleBlocks}
+        moduleData={moduleData}
         onFinish={handleFinish}
       />
     </div>
   )
 }
-
-export default Calculate

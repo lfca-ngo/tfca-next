@@ -23,15 +23,15 @@ import Category from '../helpers/Category'
 const { Option } = Select
 const { TabPane } = Tabs
 
-const GroupWrapper = (props) => {
+const GroupWrapper = ({ children, description, label }) => {
   return (
     <div className="form-group">
       <div className="form-group-inner">
-        {props.label && <div className="form-group-label">{props.label}</div>}
-        {props.description && (
-          <div className="form-group-description">{props.description}</div>
+        {label && <div className="form-group-label">{label}</div>}
+        {description && (
+          <div className="form-group-description">{description}</div>
         )}
-        {props.children}
+        {children}
       </div>
     </div>
   )
@@ -176,7 +176,7 @@ const ITEMS = {
   ),
 }
 
-const EmailReminder = (props) => {
+const EmailReminder = ({ onClose }) => {
   const [loading, setLoading] = useState(false)
   // const { trackEvent } = useAnalytics()
 
@@ -185,7 +185,7 @@ const EmailReminder = (props) => {
     const res = { status: 200 }
     setLoading(false)
     if (res?.status === 200) {
-      props.close()
+      onClose && onClose()
     } else {
       alert('Etwas ist schiefgelaufen. Bitte melde dich bei timo@lfca.earth')
     }
@@ -208,7 +208,7 @@ const EmailReminder = (props) => {
   )
 }
 
-const FormSwitch = (props) => {
+export const FormSwitch = ({ goTo, icon, moduleBlocks }) => {
   const [visible, setVisible] = useState(false)
   const [loading, setLoading] = useState(false)
   // const { trackEvent } = useAnalytics()
@@ -218,7 +218,7 @@ const FormSwitch = (props) => {
     const res = { status: 200 }
     setLoading(false)
     if (res?.status === 200) {
-      props.goTo('success')
+      goTo('success')
     } else {
       alert('Etwas ist schiefgelaufen. Bitte melde dich bei timo@lfca.earth')
     }
@@ -227,10 +227,9 @@ const FormSwitch = (props) => {
   return (
     <div className="step">
       <Category
-        goBack
-        icon={props.icon}
-        prev={() => props.goTo('results')}
-        title={text(props.blocks['category.title'])}
+        goBack={() => goTo('results')}
+        icon={icon}
+        title={text(moduleBlocks['category.title'])}
       />
       <h2>Eine sehr gute Wahl. Du hast es fast geschafft!</h2>
 
@@ -327,10 +326,8 @@ const FormSwitch = (props) => {
         </Form>
       </div>
       <Modal footer={null} onCancel={() => setVisible(false)} visible={visible}>
-        <EmailReminder close={() => setVisible(false)} />
+        <EmailReminder onClose={() => setVisible(false)} />
       </Modal>
     </div>
   )
 }
-
-export default FormSwitch
