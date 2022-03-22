@@ -3,19 +3,23 @@
 @import (reference) '../../../styles/mixins.less';
 
 .detail-view.bank {
-  padding: @default-section-padding;
-  background: @white;
-  color: @black;
-  border-radius: 20px;
-
-  .ant-divider {
-    border-color: @medium-grey;
-  }
-
   header {
     display: flex;
     flex-direction: column;
     text-align: center;
+
+    .logo {
+      display: flex;
+      align-items: center;
+      justify-items: center;
+      .logo-wrapper {
+        border-radius: @border-radius-base;
+        overflow: hidden;
+        display: flex;
+        margin: 0 auto;
+      }
+    }
+
     .tags {
       display: flex;
       align-items: center;
@@ -25,46 +29,10 @@
         margin: 0 2px;
       }
     }
-    .logo {
-    }
 
     .actions {
       width: 100%;
       text-align: center;
     }
-  }
-
-  .ant-list {
-    .ant-list-item {
-      border-color: @medium-grey;
-    }
-    .ant-list-item-meta-avatar {
-      .anticon {
-        color: @secondary-color;
-        path {
-          fill: @secondary-color;
-        }
-      }
-    }
-    .ant-list-item-meta-description {
-      color: @black;
-    }
-  }
-
-  .section-title {
-    .anticon {
-      margin-right: 16px;
-      color: @secondary-color;
-      path {
-        fill: @secondary-color;
-      }
-    }
-    .font-semi(@black);
-    font-size: 20px;
-    margin: 40px 0 10px;
-  }
-
-  .tags {
-    margin: 20px 0;
   }
 }

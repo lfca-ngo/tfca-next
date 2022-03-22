@@ -48,7 +48,7 @@ export const OrganizationDetails = ({ item }) => {
         </div>
 
         <List
-          className="simple-list white"
+          className="simple-list"
           dataSource={item?.activitiesCollection?.items}
           renderItem={(item) => (
             <List.Item>

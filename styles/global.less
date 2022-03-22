@@ -140,10 +140,16 @@ span.text-accent {
 
 .ant-drawer.drawer-md {
   .ant-drawer-content {
+    .ant-drawer-header {
+      background: var(--body-background);
+      border-radius: 0;
+    }
     .ant-drawer-body {
       padding: @default-section-padding;
+      color: var(--text-color);
+      background: var(--body-background);
       @media @desktop {
-        padding: 50px;
+        padding: 40px 80px;
       }
     }
   }
@@ -196,6 +202,13 @@ span.text-accent {
 }
 
 .ant-list.simple-list {
+  .ant-list-item {
+    .ant-list-item-meta-content {
+      .ant-list-item-meta-description {
+        color: var(--text-color);
+      }
+    }
+  }
   &.equal-height {
     .ant-row > div {
       display: flex;

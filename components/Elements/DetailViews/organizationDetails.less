@@ -14,6 +14,7 @@
       .title {
         margin: 0px 0 25px;
         font-size: 36px;
+        color: var(--heading-color);
         @media @desktop {
           font-size: 48px;
         }
@@ -23,7 +24,7 @@
       @logo-wrapper-width: 140px;
       @logo-wrapper-height: 90px;
       display: flex;
-      align-items: start;
+      align-items: flex-start;
       flex-direction: row;
       .logo-wrapper {
         padding: 12px;
@@ -35,6 +36,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        box-shadow: @box-shadow-base;
         @media @desktop {
           padding: 20px;
           width: calc(@logo-wrapper-width * 1.3);
@@ -45,27 +47,5 @@
         padding-left: 12px;
       }
     }
-  }
-
-  .check-list {
-    .list-elem {
-      .anticon {
-        color: @secondary-color;
-      }
-    }
-  }
-
-  .section-title {
-    .anticon {
-      margin-right: 16px;
-      color: @secondary-color;
-    }
-    .font-semi();
-    font-size: 20px;
-    margin: 20px 0 10px;
-  }
-
-  .tags {
-    margin: 20px 0;
   }
 }

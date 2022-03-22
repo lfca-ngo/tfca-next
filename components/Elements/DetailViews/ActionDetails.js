@@ -35,7 +35,7 @@ export const ActionDetails = ({ item }) => {
         </div>
 
         <List
-          className="simple-list white"
+          className="simple-list"
           dataSource={item?.reasonsCollection?.items}
           renderItem={(item) => (
             <List.Item>

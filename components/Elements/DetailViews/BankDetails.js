@@ -19,7 +19,9 @@ export const BankDetails = ({ item, onNext }) => {
     <div className="detail-view bank">
       <header>
         <div className="logo">
-          <Image height={175} src={item?.logo?.url} width={331} />
+          <div className="logo-wrapper">
+            <Image height={175} src={item?.logo?.url} width={331} />
+          </div>
         </div>
 
         <div className="tags">

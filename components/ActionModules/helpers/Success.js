@@ -14,6 +14,7 @@ import {
   useIsMobile,
 } from '../../../hooks'
 import { useTrackEvent } from '../../../services/analytics'
+import { MODAL_WIDTH_MD } from '../../../utils'
 import { text } from '../../../utils/Text'
 import CheckList from '../../Elements/CheckList'
 import { NominateNameInput } from '../../Elements/NominateInput'
@@ -150,7 +151,7 @@ const Success = (props) => {
         footer={null}
         onClose={() => setVisible(false)}
         visible={visible}
-        width={isMobile ? '100%' : '700px'}
+        width={isMobile ? '100%' : MODAL_WIDTH_MD}
       >
         {error ? (
           <h3>{error}</h3>
