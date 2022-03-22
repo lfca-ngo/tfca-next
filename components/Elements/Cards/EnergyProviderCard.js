@@ -2,6 +2,7 @@ require('./energyProviderCard.less')
 
 import { CheckCircleOutlined } from '@ant-design/icons'
 import { Button, Card, Col, Divider, List, Row } from 'antd'
+import Image from 'next/image'
 import React from 'react'
 
 export const EnergyProviderCard = ({ item, onNext }) => {
@@ -18,7 +19,13 @@ export const EnergyProviderCard = ({ item, onNext }) => {
             <Row>
               <Col xs={20}>
                 <div className="logo">
-                  <img className="logo" src={`${item?.logo?.url}`} />
+                  <Image
+                    className="logo"
+                    height={50}
+                    layout="intrinsic"
+                    src={`${item?.logo?.url}`}
+                    width={100}
+                  />
                 </div>
               </Col>
             </Row>

@@ -6,6 +6,7 @@ import {
   ShareAltOutlined,
 } from '@ant-design/icons'
 import { Button, List, Space } from 'antd'
+import Image from 'next/image'
 import React from 'react'
 
 import { Text, text } from '../../../utils/Text'
@@ -24,7 +25,12 @@ export const EnergyProviderDetails = ({ item }) => {
 
         <div className="info-wrapper">
           <div className="logo-wrapper">
-            <img src={item.logo?.url} />
+            <Image
+              height={100}
+              layout="intrinsic"
+              src={item.logo?.url}
+              width={100}
+            />
           </div>
           <div className="actions">
             <Space direction="vertical" style={{ width: '100%' }}>

@@ -1,6 +1,7 @@
 require('./organizationCard.less')
 
 import { Button, Card, Tag } from 'antd'
+import Image from 'next/image'
 import React from 'react'
 
 import { text } from '../../../utils/Text'
@@ -16,7 +17,7 @@ export const OrganizationCard = ({ item, onNext }) => {
       <div className="header">
         <div className="title">{item.name}</div>
         <div className="logo">
-          <img src={item.logo?.url} />
+          <Image layout="fill" objectFit="contain" src={item.logo?.url} />
         </div>
       </div>
       <div className="body-content">

@@ -1,6 +1,7 @@
 require('./actionCard.less')
 
 import { Button, Card, Tag } from 'antd'
+import Image from 'next/image'
 import React from 'react'
 
 import { text } from '../../../utils/Text'
@@ -32,7 +33,13 @@ export const ActionCard = ({ item, onNext }) => {
       </div>
       <div className="body-content">
         <div className="hero-image">
-          <img src={item.hero?.url} />
+          <Image
+            height={50}
+            layout="intrinsic"
+            objectFit="contain"
+            src={item.hero?.url}
+            width={100}
+          />
         </div>
         <div className="actions">
           <Button onClick={handleNext} type="primary">
