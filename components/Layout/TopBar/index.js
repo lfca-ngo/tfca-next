@@ -9,9 +9,9 @@ export const TopBar = () => {
   const [hidden, setHidden] = useState(false)
   return (
     <div className={classNames('top-bar', { hidden })}>
-      <div className="text">{`This is a BETA version`}</div>
+      <div className="text">{`👋 You are seeing a BETA version`}</div>
       <Button className="no-padding" type="link">
-        Most modules are not ready yet
+        Under construction
       </Button>
       <Button
         className="no-padding close-btn"
