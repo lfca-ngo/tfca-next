@@ -5,12 +5,13 @@ import {
   PlusCircleOutlined,
   ShareAltOutlined,
 } from '@ant-design/icons'
-import { Button, Divider, List, Modal, Space } from 'antd'
+import { Button, Divider, List, Space } from 'antd'
 import Image from 'next/image'
 import React, { useState } from 'react'
 
 import { Text, text } from '../../../utils/Text'
 import { LeavePage } from '../../ActionModules/helpers/LeavePage'
+import { BasicModal } from '../BasicModal'
 
 export const BankDetails = ({ item, onNext }) => {
   const [visible, setVisible] = useState(false)
@@ -101,20 +102,12 @@ export const BankDetails = ({ item, onNext }) => {
         </div>
       </div>
 
-      <Modal
-        destroyOnClose
-        footer={[
-          <Button key="submit" onClick={() => setVisible(false)} type="primary">
-            Schließen
-          </Button>,
-        ]}
-        onCancel={() => setVisible(false)}
-        title={'Some title'}
+      <BasicModal
+        content={<LeavePage onNext={onNext} />}
+        setVisible={setVisible}
+        title={null}
         visible={visible}
-        wrapClassName={`modal-md has-top`}
-      >
-        <LeavePage onNext={onNext} />
-      </Modal>
+      />
     </div>
   )
 }

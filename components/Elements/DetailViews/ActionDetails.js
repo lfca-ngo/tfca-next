@@ -7,16 +7,18 @@ import {
   ShareAltOutlined,
 } from '@ant-design/icons'
 import { Button, List } from 'antd'
+import Image from 'next/image'
 import React from 'react'
 
 import { Text, text } from '../../../utils/Text'
+// import { BasicModal } from '../BasicModal'
 import CallToAction from '../CallToAction'
 
-export const ActionDetails = ({ item }) => {
+export const ActionDetails = ({ item, onNext }) => {
   return (
     <div className="detail-view action">
       <div className="hero-image">
-        <img src={item.hero?.url} />
+        <Image height={304} src={item.hero?.url} width={665} />
       </div>
 
       <div className="header">
@@ -59,6 +61,13 @@ export const ActionDetails = ({ item }) => {
       {item?.actionsCollection?.items?.map((action, i) => (
         <CallToAction key={`action-${i}`} {...action} />
       ))}
+
+      {/* <BasicModal
+        content={<div>Do you want to do more than this action?</div>}
+        setVisible={setVisible}
+        title={null}
+        visible={visible}
+      /> */}
     </div>
   )
 }
