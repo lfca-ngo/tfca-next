@@ -155,6 +155,7 @@ export const Results = ({
           energyKwh={store?.users}
           item={store?.item}
           layout="provider"
+          onNext={() => goTo(nextKey)}
         />
       </Drawer>
 

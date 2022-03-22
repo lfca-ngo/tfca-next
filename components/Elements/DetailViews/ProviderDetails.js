@@ -48,7 +48,7 @@ const PriceGuarantee = ({ guarantee }) => {
   else return `Preisgarantie bis ${guarantee.date}`
 }
 
-export const ProviderDetails = ({ energyKwh, item }) => {
+export const ProviderDetails = ({ energyKwh, item, onNext }) => {
   const pricePerYearInCents =
     item.price.workingPrice * energyKwh + item.price.basePrice || 0
   const pricePerMonthInCents = pricePerYearInCents / 12 || 0
@@ -69,12 +69,7 @@ export const ProviderDetails = ({ energyKwh, item }) => {
 
         <div className="actions">
           <Space align="center">
-            <Button
-              block
-              onClick={() => setVisible(true)}
-              shape="round"
-              type="primary"
-            >
+            <Button block onClick={onNext} shape="round" type="primary">
               Switch now
             </Button>
             <Button
