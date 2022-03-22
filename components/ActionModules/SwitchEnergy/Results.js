@@ -162,7 +162,7 @@ export const Results = ({
       <Modal footer={null} onCancel={() => setVisible(false)} visible={visible}>
         <EnergyForm
           initialValues={{
-            postcodeUsers: {
+            postcodeEnergy: {
               energy: store?.energy,
               postcode: store?.postcode,
             },

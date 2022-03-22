@@ -80,7 +80,7 @@ export const Calculate = ({
 
       <EnergyForm
         initialValues={{
-          postcodeUsers: {
+          postcodeEnergy: {
             energy: store?.energy || inputEnergyFirstValue,
             postcode: store?.postcode,
           },
