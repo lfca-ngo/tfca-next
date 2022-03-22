@@ -50,7 +50,7 @@ export const PoliticianDetails = ({ item, onFinish, setStore, store }) => {
   }))
 
   return (
-    <div className="politician-detail-view">
+    <div className="detail-view politician">
       <ScrollableFilters
         additionalItems={[
           <Form.Item key={'activeMessageIndex'} label={'Message'}>

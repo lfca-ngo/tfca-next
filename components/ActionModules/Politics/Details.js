@@ -3,8 +3,8 @@ import React, { useRef } from 'react'
 
 import { text } from '../../../utils/Text'
 import { ArrowButton } from '../../Elements/ArrowButton'
-import { PoliticianCard } from '../../Elements/Cards'
-import { PoliticianDetails } from '../../Elements/DetailViews'
+import { CardView } from '../../Elements/Cards'
+import { DetailView } from '../../Elements/DetailViews'
 import Category from '../helpers/Category'
 import { StepHeader } from '../helpers/StepHeader'
 
@@ -51,14 +51,15 @@ export const Details = ({
       >
         {selectedPoliticians.map((politician) => (
           <div className="fixed-width-wrapper" key={politician.id}>
-            <PoliticianCard item={politician} minimal />
+            <CardView item={politician} layout="politician" minimal />
           </div>
         ))}
       </Carousel>
 
       {activePolitician ? (
-        <PoliticianDetails
+        <DetailView
           item={activePolitician}
+          layout="politician"
           onFinish={() => goTo(nextKey)}
           setStore={setStore}
           store={store}

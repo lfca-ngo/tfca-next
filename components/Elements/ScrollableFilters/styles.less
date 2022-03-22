@@ -2,14 +2,22 @@
 @import (reference) '../../../styles/fonts.less';
 @import (reference) '../../../styles/mixins.less';
 
+@margin-top-filters: 10px;
+@margin-bottom-filters: 10px;
+
 .scrollable-filters-spacer {
-  height: @scrollable-filter-mobile-height;
+  height: calc(
+    @scrollable-filter-mobile-height + @margin-top-filters +
+      @margin-bottom-filters
+  );
   @media @desktop {
     height: auto;
   }
 }
 
 .ant-form.scrollable-filters {
+  margin: @margin-top-filters 0 @margin-bottom-filters;
+
   display: flex;
   overflow-x: auto;
   overflow-y: hidden;
@@ -29,13 +37,14 @@
   }
 
   .ant-select:not(.ant-select-customize-input) {
-    @mobile-height: 38px;
+    @line-height-tag: 25px;
+    @mobile-height: 41px;
     @desktop-height: 44px;
     .ant-select-selector {
       background: transparent;
       color: @white;
       border-radius: 16px;
-      padding: 0 16px;
+      padding: 0 8px;
       font-size: 15px;
       height: @mobile-height;
       line-height: @mobile-height;
@@ -43,6 +52,7 @@
         font-size: 18px;
         height: @desktop-height;
         line-height: @desktop-height;
+        padding: 0 16px;
       }
       .ant-select-selection-item {
         line-height: @mobile-height;
@@ -52,10 +62,15 @@
       }
     }
     &.ant-select-multiple {
-      .ant-select-selector .ant-select-selection-item {
-        margin: 0;
-        line-height: 24px;
-        .tag-color(@white);
+      .ant-select-selector {
+        .ant-select-selection-overflow {
+          line-height: @line-height-tag;
+        }
+        .ant-select-selection-item {
+          margin: 0;
+          line-height: @line-height-tag;
+          .tag-color(@white);
+        }
       }
       .ant-select-clear {
         background: transparent;

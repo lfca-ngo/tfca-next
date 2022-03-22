@@ -13,7 +13,7 @@ import CallToAction from '../CallToAction'
 
 export const BankDetails = ({ item }) => {
   return (
-    <div className="bank-detail-view">
+    <div className="detail-view bank">
       <div className="header">
         <div className="text">
           <div className="title">{item.name}</div>

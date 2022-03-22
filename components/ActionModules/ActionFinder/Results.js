@@ -3,12 +3,7 @@ import React from 'react'
 
 import { LIST_GRIDS } from '../../../utils'
 import { text } from '../../../utils/Text'
-import {
-  ActionCard,
-  BankCard,
-  EnergyProviderCard,
-  OrganizationCard,
-} from '../../Elements/Cards'
+import { CardView } from '../../Elements/Cards'
 import { ScrollableFilters } from '../../Elements/ScrollableFilters'
 import Category from '../helpers/Category'
 import { StepHeader } from '../helpers/StepHeader'
@@ -72,9 +67,9 @@ const Results = (props) => {
         grid={LIST_GRIDS[listGrid]}
         renderItem={(item) => (
           <List.Item>
-            <ItemCard
-              cardLayout={dataMain?.cardLayout}
+            <CardView
               item={item}
+              layout={dataMain?.cardLayout}
               onNext={handleNext}
             />
           </List.Item>
@@ -82,21 +77,6 @@ const Results = (props) => {
       />
     </div>
   )
-}
-
-const ItemCard = (props) => {
-  switch (props.cardLayout) {
-    case 'action':
-      return <ActionCard item={props.item} onNext={props.onNext} />
-    case 'bank':
-      return <BankCard item={props.item} onNext={props.onNext} />
-    case 'organization':
-      return <OrganizationCard item={props.item} onNext={props.onNext} />
-    case 'energy-provider':
-      return <EnergyProviderCard item={props.item} onNext={props.onNext} />
-    default:
-      return null
-  }
 }
 
 export default Results

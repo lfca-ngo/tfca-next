@@ -8,7 +8,7 @@ import {
   useSwitchRates,
 } from '../../../services/switchforclimate'
 import { text } from '../../../utils/Text'
-import { ProviderCard } from '../../Elements/Cards'
+import { CardView } from '../../Elements/Cards'
 import CheckList from '../../Elements/CheckList'
 import Category from '../helpers/Category'
 import { EnergyForm } from './Calculate'
@@ -123,10 +123,11 @@ const Results = ({
         dataSource={sortedList}
         loading={loading}
         renderItem={(item, i) => (
-          <ProviderCard
+          <CardView
             energyKwh={store?.users}
             item={item}
             key={`card-${i}`}
+            layout="provider"
             next={() => {
               setProgress(0.75)
               goTo('form-switch')

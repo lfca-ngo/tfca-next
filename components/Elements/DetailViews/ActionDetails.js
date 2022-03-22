@@ -14,7 +14,7 @@ import CallToAction from '../CallToAction'
 
 export const ActionDetails = ({ item }) => {
   return (
-    <div className="action-detail-view">
+    <div className="detail-view action">
       <div className="hero-image">
         <img src={item.hero?.url} />
       </div>

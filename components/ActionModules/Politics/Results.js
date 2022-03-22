@@ -5,7 +5,7 @@ import React from 'react'
 import { usePoliticians } from '../../../services/politicians'
 import { LIST_GRIDS } from '../../../utils'
 import { text } from '../../../utils/Text'
-import { PoliticianCard } from '../../Elements/Cards'
+import { CardView } from '../../Elements/Cards'
 import Category from '../helpers/Category'
 import { StepHeader } from '../helpers/StepHeader'
 
@@ -83,9 +83,10 @@ export const Results = ({
                   'is-selected': isSelected,
                 })}
               >
-                <PoliticianCard
+                <CardView
                   isSelected={isSelected}
                   item={item}
+                  layout="politician"
                   onNext={toggleSelect}
                 />
               </List.Item>
