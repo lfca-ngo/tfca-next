@@ -16,6 +16,7 @@ const nextConfig = {
       'images.ctfassets.net',
       'www.bundestag.de',
       'www.europarl.europa.eu',
+      'backend.wirklich-gruen.de',
     ],
   },
   async redirects() {

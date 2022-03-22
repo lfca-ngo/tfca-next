@@ -1,0 +1,105 @@
+@import (reference) '../../../styles/variables.less';
+@import (reference) '../../../styles/fonts.less';
+@import (reference) '../../../styles/mixins.less';
+
+.detail-view.provider {
+  .ant-divider-horizontal {
+    margin: 16px 0;
+  }
+  .labels {
+    margin: 20px 0 10px;
+  }
+  .section-title {
+    .font-bold();
+    font-size: 19px;
+    .anticon {
+      color: @secondary-color;
+      margin-right: 8px;
+    }
+  }
+  .section-body {
+    font-size: 14px;
+    margin-top: 10px;
+    @media @desktop {
+      font-size: 16px;
+    }
+  }
+  .price {
+    padding: 0;
+    line-height: 1.3;
+
+    .ant-tag {
+      height: auto;
+      font-size: 12px;
+      width: 100%;
+      text-align: center;
+      margin-bottom: 4px;
+    }
+    .font-medium(@black);
+    .main-price {
+      color: @black;
+      .ant-tag {
+        font-size: 18px;
+        margin-top: 12px;
+        .font-semi(@black);
+        height: auto;
+        padding: 8px 6px;
+        @media (min-width: @screen-sm) {
+          font-size: 20px;
+          margin-top: 0;
+        }
+        .label {
+          font-size: 11px;
+          .font-regular();
+          line-height: 1;
+        }
+      }
+    }
+    .price-per-kwh,
+    .base-price {
+      line-height: 1.2;
+      font-size: 13px;
+      .font-regular(@black);
+    }
+  }
+  .ant-list-item {
+    .anticon {
+      color: @secondary-color;
+      g {
+        fill: @secondary-color;
+      }
+    }
+  }
+
+  .conditions {
+    .ant-list-item {
+      padding: 7px 0;
+    }
+    font-size: 14px;
+    .ant-list-item-meta-description {
+      font-size: 14px;
+      color: @black !important;
+      margin: 0;
+    }
+  }
+  .ant-tabs {
+    .ant-tabs-tab-btn {
+      font-size: 14px;
+    }
+    .ant-tabs-content {
+      font-size: 14px;
+      .font-regular();
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-size: 20px;
+      }
+      p {
+        margin: 0;
+      }
+    }
+  }
+}

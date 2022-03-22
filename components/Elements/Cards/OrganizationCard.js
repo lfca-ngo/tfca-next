@@ -12,7 +12,7 @@ export const OrganizationCard = ({ item, onNext }) => {
   const handleNext = () => onNext(item)
 
   return (
-    <Card className="organization-card" onClick={handleNext}>
+    <Card className="content-card organization" onClick={handleNext}>
       <div className="header">
         <div className="title">{item.name}</div>
         <div className="logo">

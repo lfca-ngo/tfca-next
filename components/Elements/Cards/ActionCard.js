@@ -14,7 +14,7 @@ export const ActionCard = ({ item, onNext }) => {
   const handleNext = () => onNext(item)
 
   return (
-    <Card className="action-card" onClick={handleNext}>
+    <Card className="content-card action" onClick={handleNext}>
       <div>
         <div className="title">{item.name}</div>
         <div className="tags">

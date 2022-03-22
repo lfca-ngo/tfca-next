@@ -1,12 +1,14 @@
 import { EditOutlined, LoadingOutlined } from '@ant-design/icons'
-import { Button, Col, List, Modal, Row, Select, Space } from 'antd'
+import { Button, Col, Drawer, List, Modal, Row, Select, Space } from 'antd'
 import React, { useMemo, useState } from 'react'
 
 import RobinIcon from '../../../assets/icons/robin.svg'
+import { useIsMobile } from '../../../hooks'
 import {
   useOperatorId,
   useSwitchRates,
 } from '../../../services/switchforclimate'
+import { MODAL_WIDTH_MD } from '../../../utils'
 import { text } from '../../../utils/Text'
 import { CardView } from '../../Elements/Cards'
 import CheckList from '../../Elements/CheckList'
@@ -32,7 +34,9 @@ export const Results = ({
   setStore,
   store,
 }) => {
+  const isMobile = useIsMobile()
   const [visible, setVisible] = useState(false)
+  const [drawerVisible, setDrawerVisible] = useState(false)
   const [sorting, setSorting] = useState(SORT[0].type)
 
   const changeSorting = (value) => {
@@ -132,6 +136,17 @@ export const Results = ({
           />
         )}
       />
+
+      <Drawer
+        className={`drawer-md`}
+        destroyOnClose
+        footer={null}
+        onClose={() => setDrawerVisible(false)}
+        visible={drawerVisible}
+        width={isMobile ? '100%' : MODAL_WIDTH_MD}
+      >
+        Something
+      </Drawer>
 
       <Modal footer={null} onCancel={() => setVisible(false)} visible={visible}>
         <EnergyForm

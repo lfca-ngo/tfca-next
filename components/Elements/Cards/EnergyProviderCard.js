@@ -8,7 +8,10 @@ export const EnergyProviderCard = ({ item, onNext }) => {
   const handleNext = () => onNext(item)
 
   return (
-    <Card className="energy-provider-card" style={{ background: 'white' }}>
+    <Card
+      className="content-card energy-provider"
+      style={{ background: 'white' }}
+    >
       <div className="list-small">
         <Row className="basic-tarif-info">
           <Col xs={16}>
