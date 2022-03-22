@@ -1,9 +1,8 @@
-import { Tabs } from 'antd'
+import { Progress, Tabs } from 'antd'
 import { useRouter } from 'next/router'
 import React from 'react'
 
 import { useFlow } from '../../../hooks'
-import { Share } from '../helpers/Share'
 import { Success } from '../helpers/Success'
 import { Details } from './Details'
 import { Filter } from './Filter'
@@ -69,7 +68,6 @@ export const Politics = ({ module }) => {
       ['results', { component: Results }],
       ['details', { component: Details }],
       ['success', { component: Success }],
-      ['share', { component: Share }],
     ])
 
     return {
@@ -82,7 +80,7 @@ export const Politics = ({ module }) => {
 
   const stepsKeys = [...steps.keys()]
 
-  const { goTo, index, setStore, store } = useFlow({
+  const { goTo, index, progress, setProgress, setStore, store } = useFlow({
     id: module?.id,
     initialIndex: stepsKeys[0],
     initialStore: {
@@ -96,8 +94,17 @@ export const Politics = ({ module }) => {
     },
   })
 
+  const handleGoTo = (key) => {
+    const keyIndex = stepsKeys.indexOf(key)
+    const progress = keyIndex / (stepsKeys.length - 1)
+    setProgress(progress)
+    goTo(key)
+  }
+
   return (
     <div className="steps-container">
+      <Progress percent={progress * 100} showInfo={false} />
+
       <Tabs
         activeKey={index}
         animated={{ inkBar: false, tabPane: true }}
@@ -114,10 +121,7 @@ export const Politics = ({ module }) => {
               <Page
                 availableFilters={availableFilters}
                 filterOption={filterOption}
-                goTo={(key) => {
-                  // TODO: Update progress
-                  goTo(key)
-                }}
+                goTo={handleGoTo}
                 icon={module?.icon?.url}
                 messagesByFilterValue={messagesByFilterValue}
                 messagesRelatedFilterKey={messagesRelatedFilterKey}

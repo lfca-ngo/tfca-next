@@ -1,8 +1,7 @@
-import { Tabs } from 'antd'
+import { Progress, Tabs } from 'antd'
 import React from 'react'
 
 import { useFlow } from '../../../hooks'
-import { Share } from '../helpers/Share'
 import { Success } from '../helpers/Success'
 import { Calculate } from './Calculate'
 import { CheckProvider } from './CheckProvider'
@@ -19,19 +18,27 @@ const steps = new Map([
   ['results', Results],
   ['form-switch', FormSwitch],
   ['success', Success],
-  ['share', Share],
 ])
 
 export const SwitchEnergy = ({ module }) => {
-  const { goTo, index, setStore, store } = useFlow({
+  const stepsKeys = [...steps.keys()]
+
+  const { goTo, index, progress, setProgress, setStore, store } = useFlow({
     id: module?.id,
-    initialIndex: 'intro',
+    initialIndex: stepsKeys[0],
   })
 
-  const stepsKeys = [...steps.keys()]
+  const handleGoTo = (key) => {
+    const keyIndex = stepsKeys.indexOf(key)
+    const progress = keyIndex / (stepsKeys.length - 1)
+    setProgress(progress)
+    goTo(key)
+  }
 
   return (
     <div className="steps-container">
+      <Progress percent={progress * 100} showInfo={false} />
+
       <Tabs
         activeKey={index}
         animated={{ inkBar: false, tabPane: true }}
@@ -46,10 +53,7 @@ export const SwitchEnergy = ({ module }) => {
           return (
             <TabPane key={key} tab={key}>
               <Page
-                goTo={(key) => {
-                  // TODO: Update progress
-                  goTo(key)
-                }}
+                goTo={handleGoTo}
                 icon={module?.icon?.url}
                 moduleBlocks={module?.blocks || {}}
                 moduleData={module?.data || {}}

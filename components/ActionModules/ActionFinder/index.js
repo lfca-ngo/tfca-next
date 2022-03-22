@@ -1,9 +1,8 @@
-import { Tabs } from 'antd'
+import { Progress, Tabs } from 'antd'
 import React, { useMemo } from 'react'
 
 import { useFlow } from '../../../hooks'
 import { getFilterOptions } from '../../../utils'
-import { Share } from '../helpers/Share'
 import { Success } from '../helpers/Success'
 import { Details } from './Details'
 import { Filter } from './Filter'
@@ -41,20 +40,28 @@ export const ActionFinderFlow = ({ module }) => {
       ['results', { component: Results }],
       ['details', { component: Details }],
       ['success', { component: Success }],
-      ['share', { component: Share }],
     ])
     return { availableFilters: parsedFilters, steps: dynamicSteps }
   }, [items, filters])
 
   const stepsKeys = [...steps.keys()]
 
-  const { goTo, index, setStore, store } = useFlow({
+  const { goTo, index, progress, setProgress, setStore, store } = useFlow({
     id: module?.id,
     initialIndex: stepsKeys[0],
   })
 
+  const handleGoTo = (key) => {
+    const keyIndex = stepsKeys.indexOf(key)
+    const progress = keyIndex / (stepsKeys.length - 1)
+    setProgress(progress)
+    goTo(key)
+  }
+
   return (
     <div className="steps-container">
+      <Progress percent={progress * 100} showInfo={false} />
+
       <Tabs
         activeKey={index}
         animated={{ inkBar: false, tabPane: true }}
@@ -70,10 +77,7 @@ export const ActionFinderFlow = ({ module }) => {
               <Page
                 availableFilters={availableFilters}
                 filterElement={filterElement}
-                goTo={(key) => {
-                  // TODO: Update progress
-                  goTo(key)
-                }}
+                goTo={handleGoTo}
                 icon={module?.icon?.url}
                 moduleBlocks={module?.blocks || {}}
                 moduleData={module?.data || {}}

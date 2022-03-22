@@ -1,8 +1,7 @@
-import { Tabs } from 'antd'
+import { Progress, Tabs } from 'antd'
 import React, { useMemo } from 'react'
 
 import { useFlow } from '../../../hooks'
-import { Share } from '../helpers/Share'
 import { Success } from '../helpers/Success'
 import { Answer } from './Answer'
 import { Question } from './Question'
@@ -13,11 +12,6 @@ export const ANSWER_SUFFIX = '_answer'
 
 export const Quiz = ({ module }) => {
   const quizItems = module?.quizCollection?.items
-
-  const { goTo, index, setStore, store } = useFlow({
-    id: module?.id,
-    initialIndex: quizItems[0]?.questionId,
-  })
 
   // for every question and answer pair we create one page component
   // that can be accessed via "next" or by calling it's key
@@ -31,17 +25,27 @@ export const Quiz = ({ module }) => {
       ],
     ])
     const flattened = [].concat.apply([], quizSteps)
-    return new Map([
-      ...flattened,
-      ['success', { component: Success }],
-      ['share', { component: Share }],
-    ])
+    return new Map([...flattened, ['success', { component: Success }]])
   }, [quizItems])
 
   const stepsKeys = [...steps.keys()]
 
+  const { goTo, index, progress, setProgress, setStore, store } = useFlow({
+    id: module?.id,
+    initialIndex: stepsKeys[0],
+  })
+
+  const handleGoTo = (key) => {
+    const keyIndex = stepsKeys.indexOf(key)
+    const progress = keyIndex / (stepsKeys.length - 1)
+    setProgress(progress)
+    goTo(key)
+  }
+
   return (
     <div className="steps-container">
+      <Progress percent={progress * 100} showInfo={false} />
+
       <Tabs
         activeKey={index}
         animated={{ inkBar: false, tabPane: true }}
@@ -57,10 +61,7 @@ export const Quiz = ({ module }) => {
             <TabPane key={key} tab={key}>
               <Page
                 activeQuestion={activeQuestion}
-                goTo={(key) => {
-                  // TODO: Update progress
-                  goTo(key)
-                }}
+                goTo={handleGoTo}
                 icon={module?.icon?.url}
                 moduleBlocks={module?.blocks || {}}
                 nextKey={nextKey}
