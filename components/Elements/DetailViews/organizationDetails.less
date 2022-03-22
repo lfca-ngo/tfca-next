@@ -5,26 +5,37 @@
 .detail-view.organization {
   .header {
     display: flex;
+    flex-direction: column;
     .text {
-      flex: 1;
+      width: 100%;
       @media @desktop {
         padding-right: 60px;
       }
       .title {
-        font-size: 48px;
-        .font-semi(@white);
-        margin: 0px 0 15px;
+        margin: 0px 0 25px;
+        font-size: 36px;
+        @media @desktop {
+          font-size: 48px;
+        }
       }
     }
     .info-wrapper {
-      margin-left: auto;
-      margin-right: 0;
       display: flex;
-      align-items: center;
-      flex-direction: column;
+      align-items: start;
+      flex-direction: row;
       .logo-wrapper {
+        padding: 12px;
         margin-bottom: 30px;
-        .logo-circle(140px, @white);
+        background: @white;
+        border-radius: 24px;
+        width: 140px;
+        height: 90px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .actions {
+        padding-left: 12px;
       }
     }
   }
@@ -44,7 +55,7 @@
     }
     .font-semi();
     font-size: 20px;
-    margin: 40px 0 10px;
+    margin: 20px 0 10px;
   }
 
   .tags {

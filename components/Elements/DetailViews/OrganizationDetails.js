@@ -17,9 +17,6 @@ export const OrganizationDetails = ({ item }) => {
       <div className="header">
         <div className="text">
           <div className="title">{item.name}</div>
-          <div className="description">
-            <Text block={item?.description} />
-          </div>
         </div>
 
         <div className="info-wrapper">
@@ -27,7 +24,7 @@ export const OrganizationDetails = ({ item }) => {
             <img src={item.logo?.url} />
           </div>
           <div className="actions">
-            <Space direction="vertical" style={{ width: '100%' }}>
+            <Space style={{ width: '100%' }}>
               <Button
                 block
                 icon={<ShareAltOutlined />}
@@ -62,6 +59,14 @@ export const OrganizationDetails = ({ item }) => {
             </List.Item>
           )}
         />
+      </div>
+
+      <div className="description">
+        <div className="section-title title">
+          <PlusCircleOutlined />
+          About
+        </div>
+        <Text block={item?.description} />
       </div>
 
       {item?.actionsCollection?.items?.map((action, i) => (
