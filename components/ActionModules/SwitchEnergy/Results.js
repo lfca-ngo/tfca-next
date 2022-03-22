@@ -48,8 +48,8 @@ export const Results = ({
   const updateProviders = (values) => {
     setVisible(false)
     setStore({
-      postcode: values.postcode,
-      users: values.users,
+      energy: values?.postcodeEnergy?.energy,
+      postcode: values?.postcodeEnergy?.postcode,
     })
   }
 
@@ -68,7 +68,7 @@ export const Results = ({
   const { data: rates, isLoading: fetchingRates } = useSwitchRates(
     store?.postcode,
     city,
-    store?.users,
+    store?.energy,
     firstOperatorId
   )
 
@@ -78,8 +78,8 @@ export const Results = ({
     if (!switchRates) return []
     if (sorting === 'price') {
       return switchRates.sort((a, b) => {
-        const priceA = getFullPrice(a, store?.users)
-        const priceB = getFullPrice(b, store?.users)
+        const priceA = getFullPrice(a, store?.energy)
+        const priceB = getFullPrice(b, store?.energy)
         return priceA - priceB
       })
     } else {
@@ -89,7 +89,7 @@ export const Results = ({
           a.rating.contributionByConsumption
       )
     }
-  }, [sorting, store?.users, switchRates])
+  }, [sorting, store?.energy, switchRates])
 
   const loading = fetchingOperators || fetchingRates
 
@@ -133,7 +133,7 @@ export const Results = ({
         loading={loading}
         renderItem={(item, i) => (
           <CardView
-            energyKwh={store?.users}
+            energyKwh={store?.energy}
             item={item}
             key={`card-${i}`}
             layout="provider"
@@ -152,7 +152,7 @@ export const Results = ({
         width={isMobile ? '100%' : MODAL_WIDTH_MD}
       >
         <DetailView
-          energyKwh={store?.users}
+          energyKwh={store?.energy}
           item={store?.item}
           layout="provider"
           onNext={() => goTo(nextKey)}
@@ -161,8 +161,12 @@ export const Results = ({
 
       <Modal footer={null} onCancel={() => setVisible(false)} visible={visible}>
         <EnergyForm
-          data={moduleData}
-          initialValues={{ postcode: store?.postcode, users: store?.users }}
+          initialValues={{
+            postcodeUsers: {
+              energy: store?.energy,
+              postcode: store?.postcode,
+            },
+          }}
           moduleBlocks={moduleBlocks}
           moduleData={moduleData}
           onFinish={updateProviders}
