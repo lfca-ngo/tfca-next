@@ -8,7 +8,7 @@ import {
   useOperatorId,
   useSwitchRates,
 } from '../../../services/switchforclimate'
-import { MODAL_WIDTH_MD } from '../../../utils'
+import { DRAWER_WIDTH_MD } from '../../../utils'
 import { text } from '../../../utils/Text'
 import { CardView } from '../../Elements/Cards'
 import CheckList from '../../Elements/CheckList'
@@ -149,7 +149,7 @@ export const Results = ({
         footer={null}
         onClose={() => setDrawerVisible(false)}
         visible={drawerVisible}
-        width={isMobile ? '100%' : MODAL_WIDTH_MD}
+        width={isMobile ? '100%' : DRAWER_WIDTH_MD}
       >
         <DetailView
           energyKwh={store?.energy}

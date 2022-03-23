@@ -14,7 +14,7 @@ import {
   useIsMobile,
 } from '../../../hooks'
 import { useTrackEvent } from '../../../services/analytics'
-import { MODAL_WIDTH_MD } from '../../../utils'
+import { DRAWER_WIDTH_MD } from '../../../utils'
 import { text } from '../../../utils/Text'
 import CheckList from '../../Elements/CheckList'
 import { NominateNameInput } from '../../Elements/NominateInput'
@@ -150,7 +150,7 @@ export const Success = ({ goTo, icon, id, moduleBlocks, prevKey }) => {
         footer={null}
         onClose={() => setVisible(false)}
         visible={visible}
-        width={isMobile ? '100%' : MODAL_WIDTH_MD}
+        width={isMobile ? '100%' : DRAWER_WIDTH_MD}
       >
         {error ? (
           <h3>{error}</h3>

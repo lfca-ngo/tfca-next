@@ -16,6 +16,7 @@ export const NavigationCollectionFragment = gql`
                   title
                   url
                   slug
+                  action
                 }
               }
             }
@@ -24,6 +25,7 @@ export const NavigationCollectionFragment = gql`
             title
             url
             slug
+            action
           }
         }
       }

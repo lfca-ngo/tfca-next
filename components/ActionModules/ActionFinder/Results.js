@@ -2,7 +2,7 @@ import { Drawer, List } from 'antd'
 import React, { useState } from 'react'
 
 import { useIsMobile } from '../../../hooks'
-import { LIST_GRIDS, MODAL_WIDTH_MD } from '../../../utils'
+import { LIST_GRIDS, DRAWER_WIDTH_MD } from '../../../utils'
 import { text } from '../../../utils/Text'
 import { CardView } from '../../Elements/Cards'
 import { DetailView } from '../../Elements/DetailViews'
@@ -100,7 +100,7 @@ export const Results = ({
           footer={null}
           onClose={() => setVisible(false)}
           visible={visible}
-          width={isMobile ? '100%' : MODAL_WIDTH_MD}
+          width={isMobile ? '100%' : DRAWER_WIDTH_MD}
         >
           <DetailView
             item={store?.item}

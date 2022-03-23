@@ -1,6 +1,11 @@
 @import (reference) '../../../styles/variables.less';
 @import (reference) '../../../styles/fonts.less';
 
+.link-font-style() {
+  .font-regular(var(--heading-color));
+  font-size: @font-size-sm;
+}
+
 nav.nav {
   border-bottom: 1px solid var(--medium-grey);
   ul {
@@ -12,9 +17,11 @@ nav.nav {
       border-left: 1px solid var(--medium-grey);
       align-items: center;
       display: flex;
-      font-size: @font-size-sm;
       a {
-        color: var(--heading-color);
+        .link-font-style();
+      }
+      .ant-btn-link {
+        .link-font-style();
       }
     }
   }
