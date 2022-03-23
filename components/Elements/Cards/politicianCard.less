@@ -2,7 +2,7 @@
 @import (reference) '../../../styles/fonts.less';
 
 .ant-list-item.multi-select-list-item.is-selected {
-  .ant-card.politician-card {
+  .ant-card.content-card.politician {
     .ant-card-body {
       header {
         border-bottom: 1px solid fade(@white, 20%);
@@ -20,6 +20,9 @@
 
 .content-card.politician {
   &.minimal {
+    &:hover {
+      transform: none;
+    }
     .ant-card-body {
       header {
         border-bottom: none;
@@ -93,7 +96,7 @@
       width: 600px !important;
     }
   }
-  .politician-card {
+  .content-card.politician {
     margin-right: 20px;
   }
 }

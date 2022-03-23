@@ -31,6 +31,7 @@ export const BankCard = ({ item, onNext }) => {
         setActiveTab(key)
       }}
       tabList={TABS_LIST}
+      tabProps={{ centered: true }}
       title={
         <header>
           <div className="logo">
