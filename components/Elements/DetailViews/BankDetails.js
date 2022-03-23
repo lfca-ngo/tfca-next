@@ -95,8 +95,11 @@ export const BankDetails = ({ item, onNext }) => {
         />
       </div>
 
-      <div className="text">
-        <div className="title">{item.name}</div>
+      <div className="sustainability">
+        <div className="section-title title">
+          <PlusCircleOutlined />
+          About {item?.name}
+        </div>
         <div className="description">
           <Text block={item?.description} />
         </div>

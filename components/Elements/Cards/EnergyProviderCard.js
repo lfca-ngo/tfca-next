@@ -5,14 +5,13 @@ import { Button, Card, Col, Divider, List, Row } from 'antd'
 import Image from 'next/image'
 import React from 'react'
 
+import { text } from '../../../utils/Text'
+
 export const EnergyProviderCard = ({ item, onNext }) => {
   const handleNext = () => onNext(item)
 
   return (
-    <Card
-      className="content-card energy-provider"
-      style={{ background: 'white' }}
-    >
+    <Card className="content-card energy-provider">
       <div className="list-small">
         <Row className="basic-tarif-info">
           <Col xs={16}>
@@ -53,15 +52,13 @@ export const EnergyProviderCard = ({ item, onNext }) => {
         <Row>
           <Col xs={{ span: 24 }}>
             <List
-              className="simple-list advantages"
+              className="simple-list"
               dataSource={item?.benefitsCollection?.items}
               renderItem={(item) => (
                 <List.Item>
                   <List.Item.Meta
                     avatar={<CheckCircleOutlined />}
-                    description={
-                      <div dangerouslySetInnerHTML={{ __html: item }} />
-                    }
+                    description={text(item?.value)}
                   />
                 </List.Item>
               )}

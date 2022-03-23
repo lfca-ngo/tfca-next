@@ -4,4 +4,23 @@
     box-shadow: 4px 5px 10px rgba(0, 0, 0, 0.2);
     transform: translateY(-1px);
   }
+  .ant-list.simple-list {
+    .ant-list-item {
+      border-bottom: 1px solid @medium-grey;
+    }
+    .anticon {
+      color: @secondary-color;
+      path {
+        fill: @secondary-color;
+      }
+    }
+    p {
+      font-size: 14px;
+      color: @black !important;
+      margin: 0;
+      @media @desktop {
+        font-size: 16px;
+      }
+    }
+  }
 }

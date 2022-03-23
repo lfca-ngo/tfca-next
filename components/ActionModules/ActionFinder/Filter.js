@@ -50,6 +50,7 @@ export const Filter = ({
           <SelectFilter
             filterMode={filterOption?.filterMode}
             options={filterOption?.options || []}
+            placeholder={filterOption?.placeholder}
           />
         </Form.Item>
         <Form.Item>
