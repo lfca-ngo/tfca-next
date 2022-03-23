@@ -3,7 +3,7 @@ require('./styles.less')
 import { Drawer } from 'antd'
 import React, { useState } from 'react'
 
-export const Hamburger = (props) => {
+export const Hamburger = ({ content, title }) => {
   const [open, setOpen] = useState(false)
 
   const toggleMenu = () => {
@@ -26,10 +26,10 @@ export const Hamburger = (props) => {
         className="hamburger-drawer"
         onClose={toggleMenu}
         placement="right"
-        title={props.title}
+        title={title}
         visible={open}
       >
-        {props.content}
+        {content}
       </Drawer>
     </div>
   )

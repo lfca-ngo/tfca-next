@@ -10,6 +10,7 @@ import React from 'react'
 import { useActiveAction, useDarkMode, useIsMobile } from '../../../hooks'
 import { getLogoSrc, scrollToId } from '../../../utils'
 import { Hamburger } from '../../Elements/Hamburger'
+import { QuestionAnswer } from '../../Elements/QuestionAnswer'
 
 const SCROLL_RANGE = [0, 400]
 const SCROLL_RANGE_SHORT = [0, 60]
@@ -49,7 +50,7 @@ export const Header = ({ actions, collapsed, setCollapsed }) => {
           <Image height={48} src={logoSrc} width={48} />
         </motion.div>
 
-        <Hamburger />
+        <Hamburger content={<QuestionAnswer />} />
       </motion.div>
 
       <motion.div
