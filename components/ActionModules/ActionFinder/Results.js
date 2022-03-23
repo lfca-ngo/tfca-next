@@ -2,7 +2,7 @@ import { Drawer, List } from 'antd'
 import React, { useState } from 'react'
 
 import { useIsMobile } from '../../../hooks'
-import { LIST_GRIDS, DRAWER_WIDTH_MD } from '../../../utils'
+import { DRAWER_WIDTH_MD, LIST_GRIDS } from '../../../utils'
 import { text } from '../../../utils/Text'
 import { CardView } from '../../Elements/Cards'
 import { DetailView } from '../../Elements/DetailViews'
