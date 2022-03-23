@@ -103,7 +103,13 @@ export const BankDetails = ({ item, onNext }) => {
       </div>
 
       <BasicModal
-        content={<LeavePage onNext={onNext} />}
+        content={
+          <LeavePage
+            destination={item.name}
+            destinationUrl={item.referralUrl}
+            onNext={onNext}
+          />
+        }
         setVisible={setVisible}
         title={null}
         visible={visible}

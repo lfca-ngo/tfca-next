@@ -1,19 +1,17 @@
-import { Button, Modal } from 'antd'
+require('./styles.less')
+
+import { Modal } from 'antd'
 import React from 'react'
 
 export const BasicModal = ({ content, setVisible, title, visible }) => {
   return (
     <Modal
       destroyOnClose
-      footer={[
-        <Button key="submit" onClick={() => setVisible(false)} type="primary">
-          Schließen
-        </Button>,
-      ]}
+      footer={null}
       onCancel={() => setVisible(false)}
       title={title}
       visible={visible}
-      wrapClassName={`modal-md has-top`}
+      wrapClassName={`modal-md basic-modal`}
     >
       {content}
     </Modal>
