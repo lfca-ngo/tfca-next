@@ -15,7 +15,7 @@ import { QuestionAnswer } from '../../Elements/QuestionAnswer'
 const SCROLL_RANGE = [0, 400]
 const SCROLL_RANGE_SHORT = [0, 60]
 const CONTENT_WIDTH_RANGE = [0, 375]
-const OPACITY_RANGE = [0, 1]
+const OPACITY_RANGE = [1, 0]
 const HEADER_WIDTH_RANGE = ['100%', '16%']
 const LOGO_PADDING_RANGE = ['20px', '0px']
 const BOX_SHADOW_RANGE = [
