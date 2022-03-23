@@ -11,7 +11,7 @@ import { useActiveAction, useDarkMode, useIsMobile } from '../../../hooks'
 import { getLogoSrc, scrollToId } from '../../../utils'
 import { Hamburger } from '../../Elements/Hamburger'
 
-const SCROLL_RANGE = [0, 200]
+const SCROLL_RANGE = [0, 400]
 const SCROLL_RANGE_SHORT = [0, 60]
 
 export const Header = ({ actions, collapsed, setCollapsed }) => {
