@@ -57,6 +57,15 @@
   }
 }
 
+.color-icon(@color: @secondary-color) {
+  .anticon {
+    color: @color;
+    path {
+      fill: @color;
+    }
+  }
+}
+
 .apply-color-scheme {
   // default color
   .color-module(@blue);

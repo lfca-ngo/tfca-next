@@ -1,0 +1,23 @@
+@import (reference) '../../../../styles/variables.less';
+@import (reference) '../../../../styles/fonts.less';
+@import (reference) '../../../../styles/mixins.less';
+
+.ant-btn.dropdown-select-btn {
+  .color-icon();
+  &.is-empty {
+    background: transparent;
+    color: @white;
+  }
+}
+
+.scrollable-filters {
+  .ant-btn.dropdown-select-btn {
+    .color-icon();
+    .ant-badge {
+      .ant-badge-count {
+        background: @secondary-color;
+        font-size: 14px;
+      }
+    }
+  }
+}
