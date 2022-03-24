@@ -36,60 +36,6 @@
     padding-bottom: 2px;
   }
 
-  .ant-select:not(.ant-select-customize-input) {
-    @line-height-tag: 25px;
-    @mobile-height: 41px;
-    @desktop-height: 44px;
-    .ant-select-selector {
-      background: transparent;
-      color: @white;
-      border-radius: 16px;
-      padding: 0 8px;
-      font-size: 15px;
-      height: @mobile-height;
-      line-height: @mobile-height;
-      @media @desktop {
-        font-size: 18px;
-        height: @desktop-height;
-        line-height: @desktop-height;
-        padding: 0 16px;
-      }
-      .ant-select-selection-item {
-        line-height: @mobile-height;
-        @media @desktop {
-          line-height: @desktop-height;
-        }
-      }
-    }
-    &.ant-select-multiple {
-      .ant-select-selector {
-        .ant-select-selection-overflow {
-          line-height: @line-height-tag;
-        }
-        .ant-select-selection-item {
-          margin: 0;
-          line-height: @line-height-tag;
-          .tag-color(@white);
-        }
-      }
-      .ant-select-clear {
-        background: transparent;
-      }
-    }
-    &:hover {
-      .ant-select-selector {
-        border-color: @white;
-      }
-    }
-  }
-
-  .ant-form-item-control {
-    width: 140px;
-    @media @desktop {
-      width: 200px;
-    }
-  }
-
   .ant-form-item {
     margin-right: 12px;
     display: flex;

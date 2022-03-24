@@ -1,4 +1,5 @@
 import { Button, Input, message, Tabs } from 'antd'
+import Image from 'next/image'
 import React from 'react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 
@@ -18,13 +19,16 @@ export const Share = ({ invites }) => {
           <TabPane key={`${i}`} tab={invite.name}>
             <TextArea rows={4} value={INVITE_TEXT} />
 
-            <img
+            <Image
               alt={invite.name}
+              height={630}
+              layout="intrinsic"
               src={invite.ogImageUrl}
               style={{ borderRadius: '12px', margin: '20px 0' }}
+              width={1200}
             />
 
-            <Input.Group compact>
+            <Input.Group className="equal-height" compact>
               <Input
                 className="copy-input"
                 disabled

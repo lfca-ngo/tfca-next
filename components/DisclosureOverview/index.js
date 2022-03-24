@@ -1,6 +1,7 @@
 require('./styles.less')
 
 import { Button, Card, Col, Input, List, Row, Select, Tabs } from 'antd'
+import Image from 'next/image'
 import React, { useState } from 'react'
 
 import { DisclosureDrawer } from '../Disclosure/DisclosureDrawer'
@@ -82,7 +83,13 @@ export const DisclosureOverview = ({ items }) => {
                   hoverable
                   title={
                     <div className="logo-wrapper no-border">
-                      <img src={item.company.logoUrl} />
+                      <Image
+                        height={60}
+                        layout="intrinsic"
+                        objectFit="contain"
+                        src={item.company.logoUrl}
+                        width={120}
+                      />
                     </div>
                   }
                 >

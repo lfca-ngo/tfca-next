@@ -1,0 +1,29 @@
+@import (reference) '../../../styles/variables.less';
+@import (reference) '../../../styles/fonts.less';
+@import (reference) '../../../styles/mixins.less';
+
+.action-category {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+
+  .ant-btn-link {
+    border-bottom: none;
+    border-top: none;
+    margin: 0;
+    .font-medium(@white);
+    padding: 0;
+    .anticon {
+      color: @white;
+    }
+  }
+  .icon {
+    padding: 6px;
+    margin-right: 12px;
+    background: @white;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

@@ -13,10 +13,12 @@ const nextConfig = {
   },
   images: {
     domains: [
+      'localhost',
       'images.ctfassets.net',
       'www.bundestag.de',
       'www.europarl.europa.eu',
       'backend.wirklich-gruen.de',
+      'res.cloudinary.com',
     ],
   },
   async redirects() {

@@ -47,7 +47,7 @@ export const SelectWithOptionalInput = ({
 
   return (
     <Input.Group
-      className={classNames('select-with-optional-input', {
+      className={classNames('select-with-optional-input', 'equal-height', {
         'with-optional-input': shouldShowInput,
       })}
       compact
