@@ -1,6 +1,6 @@
 import { InfoCircleOutlined } from '@ant-design/icons'
 import { Form, Input, Popover, Radio } from 'antd'
-import React, { useState } from 'react'
+import React from 'react'
 
 import { DateStringPicker } from '../DateStringPicker'
 import { ProviderSearchInput } from './ProviderSearchInput'

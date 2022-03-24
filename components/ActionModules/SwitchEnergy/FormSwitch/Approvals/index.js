@@ -3,32 +3,34 @@ import React from 'react'
 
 import { GroupWrapper } from '../GroupWrapper'
 
-export const Approvals = () => {
+export const Approvals = ({
+  cancellationLink,
+  privacyLink,
+  providerAddress,
+  providerLegalName,
+  termsLink,
+}) => {
   return (
     <GroupWrapper label="Einverständnis und Bestätigung">
       <Form.Item
         label={
           <span>
             Ich bestätige, dass ich die{' '}
-            <a
-              href="https://www.fairtradepower.de/agb-%c3%b6kostrom/"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
+            <a href={termsLink} rel="noopener noreferrer" target="_blank">
               AGB
             </a>{' '}
             und die{' '}
             <a
-              href="https://www.fairtradepower.de/agb-%c3%b6kostrom/"
+              href={cancellationLink}
               rel="noopener noreferrer"
               target="_blank"
             >
               Widerrufsbelehrung
             </a>{' '}
-            der <i>Fair Trade Power Deutschland GmbH</i> gelesen habe und
-            akzeptiere diese. Ich erteile die{' '}
+            der {providerLegalName} gelesen habe und akzeptiere diese. Ich
+            erteile die{' '}
             <Popover
-              content="Ich beauftrage die Fair Trade Power Deutschland GmbH, Vintschgauer Str. 5, 81547 München, mit der Lieferung von elektrischer Energie in Höhe meines Gesamtbedarfs für die unten bezeichnete Stromabnahmestelle. Ich beauftrage und bevollmächtige die Fair Trade Power Deutschland GmbH, sofern notwendig, meine gegenwärtig mit dem bisherigen Stromversorger bestehende Stromversorgung zu kündigen und, sofern notwendig, die erforderlichen Verträge mit dem örtlichen Netzbetreiber abzuschließen."
+              content={`Ich beauftrage die ${providerLegalName}, ${providerAddress}, mit der Lieferung von elektrischer Energie in Höhe meines Gesamtbedarfs für die unten bezeichnete Stromabnahmestelle. Ich beauftrage und bevollmächtige die Fair Trade Power Deutschland GmbH, sofern notwendig, meine gegenwärtig mit dem bisherigen Stromversorger bestehende Stromversorgung zu kündigen und, sofern notwendig, die erforderlichen Verträge mit dem örtlichen Netzbetreiber abzuschließen.`}
               title="Auftrag & Vollmacht"
               trigger="click"
             >
@@ -63,11 +65,7 @@ export const Approvals = () => {
         label={
           <span>
             Ich habe die{' '}
-            <a
-              href="https://www.fairtradepower.de/datenschutz/" //TODO: get dynamically
-              rel="noopener noreferrer"
-              target="_blank"
-            >
+            <a href={privacyLink} rel="noopener noreferrer" target="_blank">
               Datenschutzhinweise
             </a>{' '}
             mit den Informationen zur Verarbeitung meiner personenbezogenen

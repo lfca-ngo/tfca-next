@@ -48,6 +48,7 @@ export const Results = ({
   const updateProviders = (values) => {
     setVisible(false)
     setStore({
+      ...store,
       energy: values?.postcodeEnergy?.energy,
       postcode: values?.postcodeEnergy?.postcode,
     })
@@ -71,6 +72,23 @@ export const Results = ({
     store?.energy,
     firstOperatorId
   )
+
+  const handleOnNext = (item) => {
+    // Link to affiliate link if on page switch is not possible
+    if (!item.provider?.connectionDetails) {
+      window.open(item?.affiliateLink, '_blank')
+    } else {
+      // Set the selected rate + city to the stor
+      setStore({
+        ...store,
+        city,
+        item,
+        operatorId: firstOperatorId,
+      })
+
+      goTo(nextKey)
+    }
+  }
 
   const switchRates = rates?.switchRates
 
@@ -137,7 +155,7 @@ export const Results = ({
             item={item}
             key={`card-${i}`}
             layout="provider"
-            onNext={() => goTo(nextKey)}
+            onNext={() => handleOnNext(item)}
             showDetails={showDetails}
           />
         )}
@@ -155,7 +173,7 @@ export const Results = ({
           energyKwh={store?.energy}
           item={store?.item}
           layout="provider"
-          onNext={() => goTo(nextKey)}
+          onNext={() => handleOnNext(store?.item)}
         />
       </Drawer>
 

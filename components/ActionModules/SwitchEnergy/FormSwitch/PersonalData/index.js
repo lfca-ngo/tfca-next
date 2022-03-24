@@ -31,6 +31,7 @@ export const PersonalData = ({
       }
     >
       <AddressInput
+        cityAnZipDisabled={true}
         name="shippingAddress"
         requireSalutation={requireSalutation}
       />

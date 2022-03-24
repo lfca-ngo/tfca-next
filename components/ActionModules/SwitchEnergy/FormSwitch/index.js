@@ -10,24 +10,64 @@ import { PaymentData } from './PaymentData'
 import { PersonalData } from './PersonalData'
 import { SwitchData } from './SwitchData'
 
-export const FormSwitch = ({ goTo, icon, moduleBlocks }) => {
+export const FormSwitch = ({ goTo, icon, moduleBlocks, store }) => {
   const [visible, setVisible] = useState(false)
   const [loading, setLoading] = useState(false)
   // const { trackEvent } = useAnalytics()
   const [form] = Form.useForm()
 
-  // TODO: Remove mock implemetation
   const onFinish = async (props) => {
-    console.log(props)
+    const payload = {
+      ...props,
+      billingAddress: props.billingAddress || props.shippingAddress,
+      customerGroup: 'private',
+      partner: 'LFCA',
+      payment: {
+        ...props.payment,
+        method: 'debit',
+      },
+      searchSettings: {
+        city: store?.city || '',
+        consumption: store?.energy || 0,
+        customerGroup: 'private',
+        energy: 'power',
+        operatorId: store?.operatorId || '',
+        state: '',
+        street: '',
+        zipCode: store?.postcode || '',
+      },
+      switchRate: {
+        cancellationPeriod: store?.item?.cancellationPeriod || null,
+        emissions: store?.item?.emissions || [],
+        energyMix: store?.item?.energyMix || [],
+        extendedTerm: store?.item?.extendedTerm || null,
+        id: store?.item?.id || '',
+        minimumTerm: store?.item?.minimumTerm || null,
+        name: store?.item?.name || '',
+        price: {
+          basePrice: store?.item?.price?.basePrice || 0,
+          workingPrice: store?.item?.price?.workingPrice || 0,
+        },
+        priceGuarantee: {
+          date: store?.item?.priceGuarantee?.date || null,
+          period: store?.item?.priceGuarantee?.period || null,
+        },
+        provider: {
+          id: store?.item?.provider?.id || '',
+          name: store?.item?.provider?.name || '',
+        },
+      },
+    }
 
-    // setLoading(true)
-    // const res = { status: 200 }
-    // setLoading(false)
-    // if (res?.status === 200) {
-    //   goTo('success')
-    // } else {
-    //   alert('Etwas ist schiefgelaufen. Bitte melde dich bei timo@lfca.earth')
-    // }
+    // TODO: Remove mock implemetation
+    setLoading(true)
+    const res = { payload, status: 200 }
+    setLoading(false)
+    if (res?.status === 200) {
+      goTo('success')
+    } else {
+      alert('Etwas ist schiefgelaufen. Bitte melde dich bei timo@lfca.earth')
+    }
   }
 
   return (
@@ -61,61 +101,49 @@ export const FormSwitch = ({ goTo, icon, moduleBlocks }) => {
               privacyTerms: false,
               providerTerms: false,
             },
-            billingAddress: {
-              addition: '5. Stock',
-              city: 'Berlin', // Set from Calculate screen and disable changes
-              firstName: 'Greta',
-              lastName: 'Thunberg',
-              salutation: 'mr',
-              streetAddress: 'Straße 2',
-              zipCode: '12345', // Set from Calculate screen and disable changes
-            },
             contact: {
-              email: 'greta@lfca.earth',
-              phone: '1234565',
+              email: '',
+              phone: '',
             },
             desiredDelivery: {
               date: null,
-              mode: 'asap', // Keep this in since it sets the initial state!
+              mode: 'asap',
             },
             meter: {
               id: {
-                number: '12345678',
-                type: 'number', // Keep this in since it sets the initial state!
+                number: '',
+                type: 'number',
               },
             },
-            partner: 'LFCA', // TODO: Add after submitting form
             payment: {
               accountDetails: {
-                authorization: true,
-                bankName: 'Test Bank',
-                bic: 'BYLADEM1001',
-                iban: 'DE56120300001063973695',
+                authorization: false,
+                bankName: '',
+                bic: '',
+                iban: '',
               },
-              method: 'debit', // TODO: hardcoded
             },
             personal: {
-              birthday: '2022-03-22T13:56:46.952Z',
+              birthday: '',
             },
             previousContract: {
               cancellation: {
                 instructed: false,
               },
-              customerId: '123456',
+              customerId: '',
             },
             remember: true,
-            separateBillingAddress: true,
+            separateBillingAddress: false,
             shippingAddress: {
-              addition: '5. Stock',
-              city: 'Berlin',
-              firstName: 'Greta',
-              lastName: 'Thunberg',
-              salutation: 'mr',
-              streetAddress: 'Straße 2',
-              zipCode: '12345',
+              addition: '',
+              city: store?.city,
+              firstName: '',
+              lastName: '',
+              salutation: '',
+              streetAddress: '',
+              zipCode: store?.postcode,
             },
-            switchRate: {}, // TODO: Add after submitting form
-            type: 'switch', // Keep this in since it sets the initial state!
+            type: 'switch',
           }}
           layout="vertical"
           name="switch_provider"
@@ -124,16 +152,28 @@ export const FormSwitch = ({ goTo, icon, moduleBlocks }) => {
           <Divider />
 
           <PersonalData
-            requireBirthday={true} // orderSettings => personal.birthday
-            requirePhone={true} // orderSettings => contact.phone
-            requireSalutation={true} // orderSettings => address.salutation
+            requireBirthday={
+              store.item.provider.connectionDetails.fields
+                ?.personal_birthday === 'required'
+            }
+            requirePhone={
+              store.item.provider.connectionDetails.fields?.contact_phone ===
+              'required'
+            }
+            requireSalutation={
+              store.item.provider.connectionDetails.fields
+                ?.address_salutation === 'required'
+            }
           />
 
           <Divider />
 
           <SwitchData
             // allowsDesiredDelivery={true} // orderSettings => desiredDelivery
-            requirePreviousContractCustomerId={true} // orderSettings => previousContract.customerId
+            requirePreviousContractCustomerId={
+              store.item.provider.connectionDetails.fields
+                ?.previousContract_customerId === 'required'
+            }
           />
 
           <Divider />
@@ -142,7 +182,13 @@ export const FormSwitch = ({ goTo, icon, moduleBlocks }) => {
 
           <Divider />
 
-          <Approvals />
+          <Approvals
+            cancellationLink={store.item.provider.legalInfo?.cancellationLink}
+            privacyLink={store.item.provider.legalInfo?.privacyLink}
+            providerAddress={store.item.provider.address || ''}
+            providerLegalName={store.item.provider.legalName || ''}
+            termsLink={store.item.provider.legalInfo?.termsLink}
+          />
 
           <Form.Item>
             <Button

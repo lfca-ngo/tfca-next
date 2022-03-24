@@ -28,7 +28,7 @@ const SplitLayout = ({ children, company, layout, nav }) => {
         <main>
           <Nav className="hidden md" company={company} />
 
-          {/* <Hero onClick={() => scrollToId(nav[0]?.id)} /> */}
+          <Hero onClick={() => scrollToId(nav[0]?.id)} />
           <TopBar />
           {children}
           <Footer />

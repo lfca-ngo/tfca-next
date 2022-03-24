@@ -1,7 +1,11 @@
 import { Col, Form, Input, Radio, Row, Switch } from 'antd'
 import React, { useState } from 'react'
 
-export const AddressInput = ({ name, requireSalutation = false }) => {
+export const AddressInput = ({
+  cityAnZipDisabled = false,
+  name,
+  requireSalutation = false,
+}) => {
   const [hasAddition, setHasAddition] = useState(false)
 
   return (
@@ -89,7 +93,12 @@ export const AddressInput = ({ name, requireSalutation = false }) => {
               },
             ]}
           >
-            <Input placeholder="12099" size="large" type="number" />
+            <Input
+              disabled={cityAnZipDisabled}
+              placeholder="12099"
+              size="large"
+              type="number"
+            />
           </Form.Item>
         </Col>
         <Col xs={12}>
@@ -98,7 +107,11 @@ export const AddressInput = ({ name, requireSalutation = false }) => {
             name={[name, 'city']}
             rules={[{ message: 'Bitte gib deine Stadt an!', required: true }]}
           >
-            <Input placeholder="Paris" size="large" />
+            <Input
+              disabled={cityAnZipDisabled}
+              placeholder="Paris"
+              size="large"
+            />
           </Form.Item>
         </Col>
       </Row>
