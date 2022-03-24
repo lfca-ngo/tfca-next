@@ -34,7 +34,7 @@ export const SelectPostcodeEnergy = ({
   }
 
   return (
-    <Input.Group className={'select-postcode-users'} compact>
+    <Input.Group className={'equal-height'} compact>
       <Select
         items={items}
         onChange={onSelectChange}
