@@ -1,4 +1,4 @@
-import { Col, Form, Input, Radio, Row, Switch } from 'antd'
+import { Checkbox, Col, Form, Input, Radio, Row, Switch } from 'antd'
 import React, { useState } from 'react'
 
 export const AddressInput = ({
@@ -67,8 +67,10 @@ export const AddressInput = ({
       </Form.Item>
 
       {/* Do NOT add a `name` prop since we want to keep this value out of the form */}
-      <Form.Item label="Zusatz">
-        <Switch onChange={(checked) => setHasAddition(checked)} />
+      <Form.Item>
+        <Checkbox onChange={(e) => setHasAddition(e.target.checked)}>
+          Addresszusatz
+        </Checkbox>
       </Form.Item>
 
       {hasAddition && (

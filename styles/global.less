@@ -10,6 +10,9 @@ body {
   @media @desktop {
     height: 100%;
   }
+  a {
+    color: @secondary-color;
+  }
 }
 
 #__next {
@@ -240,7 +243,27 @@ label.ant-radio-wrapper {
 }
 
 .form-group {
+  padding: 0 4px;
   .form-group-inner {
+    .ant-form-item-label {
+      label {
+        font-size: @font-size-sm;
+      }
+    }
+    .ant-checkbox-wrapper {
+      font-size: @font-size-sm;
+      .ant-checkbox {
+        .ant-checkbox-inner {
+          border-radius: 3px;
+          width: 20px;
+          height: 20px;
+          &::after {
+            width: 6px;
+            height: 11px;
+          }
+        }
+      }
+    }
     .ant-form-item {
       margin-bottom: 16px;
     }

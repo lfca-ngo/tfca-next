@@ -13,7 +13,26 @@ export const Approvals = ({
   return (
     <GroupWrapper label="Einverständnis und Bestätigung">
       <Form.Item
-        label={
+        name={['approvals', 'providerTerms']}
+        rules={[
+          {
+            message: '',
+            required: true,
+          },
+          {
+            validator(_, value) {
+              if (value === true) {
+                return Promise.resolve()
+              }
+              return Promise.reject(
+                new Error('Bitte akzeptiere die Bedingungen des Versorgers.')
+              )
+            },
+          },
+        ]}
+        valuePropName="checked"
+      >
+        <Checkbox>
           <span>
             Ich bestätige, dass ich die{' '}
             <a href={termsLink} rel="noopener noreferrer" target="_blank">
@@ -38,40 +57,10 @@ export const Approvals = ({
             </Popover>{' '}
             zur Verarbeitung meiner Bestellung.
           </span>
-        }
-        name={['approvals', 'providerTerms']}
-        rules={[
-          {
-            message: '',
-            required: true,
-          },
-          {
-            validator(_, value) {
-              if (value === true) {
-                return Promise.resolve()
-              }
-              return Promise.reject(
-                new Error('Bitte akzeptiere die Bedingungen des Versorgers.')
-              )
-            },
-          },
-        ]}
-        valuePropName="checked"
-      >
-        <Checkbox />
+        </Checkbox>
       </Form.Item>
 
       <Form.Item
-        label={
-          <span>
-            Ich habe die{' '}
-            <a href={privacyLink} rel="noopener noreferrer" target="_blank">
-              Datenschutzhinweise
-            </a>{' '}
-            mit den Informationen zur Verarbeitung meiner personenbezogenen
-            Daten zur Kenntnis genommen.
-          </span>
-        }
         name={['approvals', 'privacyTerms']}
         rules={[
           {
@@ -91,11 +80,39 @@ export const Approvals = ({
         ]}
         valuePropName="checked"
       >
-        <Checkbox />
+        <Checkbox>
+          <span>
+            Ich habe die{' '}
+            <a href={privacyLink} rel="noopener noreferrer" target="_blank">
+              Datenschutzhinweise
+            </a>{' '}
+            mit den Informationen zur Verarbeitung meiner personenbezogenen
+            Daten zur Kenntnis genommen.
+          </span>
+        </Checkbox>
       </Form.Item>
 
       <Form.Item
-        label={
+        name={['approvals', 'ownTerms']}
+        rules={[
+          {
+            message: '',
+            required: true,
+          },
+          {
+            validator(_, value) {
+              if (value === true) {
+                return Promise.resolve()
+              }
+              return Promise.reject(
+                new Error('Bitte akzeptiere unsere Bedingungen.')
+              )
+            },
+          },
+        ]}
+        valuePropName="checked"
+      >
+        <Checkbox>
           <span>
             Desweiteren habe ich die{' '}
             <a
@@ -124,35 +141,14 @@ export const Approvals = ({
             </a>{' '}
             habe ich zur Kenntnis genommen.
           </span>
-        }
-        name={['approvals', 'ownTerms']}
-        rules={[
-          {
-            message: '',
-            required: true,
-          },
-          {
-            validator(_, value) {
-              if (value === true) {
-                return Promise.resolve()
-              }
-              return Promise.reject(
-                new Error('Bitte akzeptiere unsere Bedingungen.')
-              )
-            },
-          },
-        ]}
-        valuePropName="checked"
-      >
-        <Checkbox />
+        </Checkbox>
       </Form.Item>
 
-      <Form.Item
-        label="Ja, Switch for Climate darf mich per E-Mail zum Thema Klimaschutz informieren. Wir übertreiben es nicht, versprochen!"
-        name={['approvals', 'advertising']}
-        valuePropName="checked"
-      >
-        <Checkbox />
+      <Form.Item name={['approvals', 'advertising']} valuePropName="checked">
+        <Checkbox>
+          Ja, Switch for Climate darf mich per E-Mail zum Thema Klimaschutz
+          informieren. Wir übertreiben es nicht, versprochen!
+        </Checkbox>
       </Form.Item>
     </GroupWrapper>
   )
