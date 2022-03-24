@@ -73,7 +73,7 @@ export const Header = ({ actions, collapsed, setCollapsed }) => {
                 <div className="icon">
                   <Image height={30} src={action.icon} width={30} />
                 </div>
-                <div className="text">{action.name}</div>
+                <div className="text">{action.title}</div>
               </Button>
             </li>
           ))}

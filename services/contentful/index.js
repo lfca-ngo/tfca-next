@@ -328,7 +328,7 @@ const transformResults = (results) => {
       nav.push({
         icon: item.icon?.url || '',
         id: item.id || '',
-        name: item.name || '',
+        title: item.title || '',
       })
 
       // transform blocks to key value pairs

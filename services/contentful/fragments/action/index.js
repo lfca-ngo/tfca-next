@@ -13,6 +13,7 @@ export const ActionFragment = gql`
 
   fragment ActionFragment on Action {
     id
+    title
     name
     actionId
     carbonSaved
