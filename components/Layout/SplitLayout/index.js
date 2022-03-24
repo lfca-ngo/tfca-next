@@ -4,7 +4,9 @@ import classNames from 'classnames'
 import React, { useState } from 'react'
 
 import { EMBED, scrollToId } from '../../../utils'
+import { Hamburger } from '../../Elements/Hamburger'
 import { Hero } from '../../Elements/Hero'
+import { QuestionAnswer } from '../../Elements/QuestionAnswer'
 import Template from '../'
 import { Footer } from '../Footer'
 import { Header } from '../Header'
@@ -18,7 +20,9 @@ const SplitLayout = ({ children, company, layout, nav }) => {
   if (isEmbed)
     return (
       <div className="embedded" id="scroll-container">
+        <Hamburger content={<QuestionAnswer />} isFloating />
         {children}
+        <Footer />
       </div>
     )
   return (
