@@ -34,7 +34,11 @@ export const PaymentData = () => {
           },
         ]}
       >
-        <Input onKeyPress={onlyAllowBankChars} size="large" />
+        <Input
+          onKeyPress={onlyAllowBankChars}
+          placeholder="DE68500105178297336485"
+          size="large"
+        />
       </Form.Item>
 
       <Form.Item
@@ -52,7 +56,11 @@ export const PaymentData = () => {
           },
         ]}
       >
-        <Input onKeyPress={onlyAllowBankChars} size="large" />
+        <Input
+          onKeyPress={onlyAllowBankChars}
+          placeholder="LOYDCHGGZCH"
+          size="large"
+        />
       </Form.Item>
 
       <Form.Item
@@ -62,14 +70,10 @@ export const PaymentData = () => {
           { message: '„Name der Bank“ muss angegeben werden.', required: true },
         ]}
       >
-        <Input size="large" />
+        <Input placeholder="GLS Bank" size="large" />
       </Form.Item>
 
       <Form.Item
-        label="Ich ermächtige Fair Trade Power Deutschland GmbH, Zahlungen von meinem
-        Konto mittels Lastschrift einzuziehen. Zugleich weise
-        ich mein Kreditinstitut an, diese Lastschriften
-        einzulösen."
         name={['payment', 'accountDetails', 'authorization']}
         required
         rules={[
@@ -92,7 +96,11 @@ export const PaymentData = () => {
         ]}
         valuePropName="checked"
       >
-        <Checkbox />
+        <Checkbox>
+          Ich ermächtige Fair Trade Power Deutschland GmbH, Zahlungen von meinem
+          Konto mittels Lastschrift einzuziehen. Zugleich weise ich mein
+          Kreditinstitut an, diese Lastschriften einzulösen.
+        </Checkbox>
       </Form.Item>
     </GroupWrapper>
   )

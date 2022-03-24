@@ -29,6 +29,7 @@ export const ProviderSearchInput = ({ value = {}, onChange }) => {
       notFoundContent={null}
       onChange={onSelect}
       onSearch={debouncedSearch}
+      placeholder="Wähle einen Versorger"
       showSearch
       value={value.id || selectedProvider.id}
     >

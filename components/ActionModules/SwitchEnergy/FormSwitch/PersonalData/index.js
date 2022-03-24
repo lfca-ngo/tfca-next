@@ -1,5 +1,5 @@
 import { InfoCircleOutlined } from '@ant-design/icons'
-import { Button, Form, Input, Popover, Switch } from 'antd'
+import { Button, Checkbox, Form, Input, Popover } from 'antd'
 import moment from 'moment'
 import React from 'react'
 
@@ -36,12 +36,8 @@ export const PersonalData = ({
         requireSalutation={requireSalutation}
       />
 
-      <Form.Item
-        label="Abweichende Rechnungsadresse"
-        name="separateBillingAddress"
-        valuePropName="checked"
-      >
-        <Switch />
+      <Form.Item name="separateBillingAddress" valuePropName="checked">
+        <Checkbox>Abweichende Rechnungsadresse</Checkbox>
       </Form.Item>
 
       <Form.Item

@@ -42,7 +42,7 @@ export const PreviousProviderInput = ({
             { message: 'Bitte gib deine Kundennummer an!', required: true },
           ]}
         >
-          <Input size="large" />
+          <Input placeholder="012345678" size="large" />
         </Form.Item>
       )}
 

@@ -1,4 +1,4 @@
-import { Form, Radio } from 'antd'
+import { Form, Select } from 'antd'
 import moment from 'moment'
 import React from 'react'
 
@@ -21,10 +21,12 @@ export const DesiredDeliveryInput = () => {
                 name={['desiredDelivery', 'mode']}
                 rules={[{ message: 'Bitte auswählen!', required: true }]}
               >
-                <Radio.Group>
-                  <Radio value="asap">NächstmöglicherTermin</Radio>
-                  <Radio value="date">Termin auswählen</Radio>
-                </Radio.Group>
+                <Select>
+                  <Select.Option value="asap">
+                    NächstmöglicherTermin
+                  </Select.Option>
+                  <Select.Option value="date">Termin auswählen</Select.Option>
+                </Select>
               </Form.Item>
               <Form.Item
                 noStyle
