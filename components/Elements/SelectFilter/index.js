@@ -1,5 +1,6 @@
 import React from 'react'
 
+import { DropdownSelect } from './DropdownSelect'
 import { Radio } from './Radio'
 import { Select } from './Select'
 import { SelectWithOptionalInput } from './SelectWithOptionalInput'
@@ -16,7 +17,8 @@ export const SelectFilter = ({ filterMode, options, ...props }) => {
       case 'select-single':
         return <Select items={options} {...props} />
       case 'select-multi':
-        return <Select items={options} mode="multiple" {...props} />
+        return <DropdownSelect items={options} {...props} />
+      // return <Select items={options} mode="multiple" {...props} />
 
       default:
         return null
