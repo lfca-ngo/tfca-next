@@ -1,12 +1,13 @@
 require('./politicianDetails.less')
 
 import { MailOutlined } from '@ant-design/icons'
-import { Button, Form, Select, Space } from 'antd'
+import { Button, Form, Space } from 'antd'
 import React, { useEffect } from 'react'
 
 import { text as replaceVars } from '../../../utils/Text'
 import { CopyTextArea } from '../CopyTextArea'
 import { ScrollableFilters } from '../ScrollableFilters'
+import { DropdownSelect } from '../SelectFilter/DropdownSelect'
 
 export const PoliticianDetails = ({
   activeMessageIndex,
@@ -54,7 +55,7 @@ export const PoliticianDetails = ({
 
   const messagesOptions = messages.map((m, i) => ({
     label: `Message ${i + 1}`,
-    value: i,
+    value: `${i}`,
   }))
 
   return (
@@ -62,20 +63,13 @@ export const PoliticianDetails = ({
       <ScrollableFilters
         additionalItems={[
           <Form.Item key={'activeMessageIndex'} label={'Message'}>
-            <Select
-              onChange={(val) =>
+            <DropdownSelect
+              items={messagesOptions}
+              onSelect={(val) =>
                 setStore({ ...store, activeMessageIndex: val })
               }
-              placeholder={'Please select'}
-              size="small"
-              value={store?.activeMessageIndex}
-            >
-              {messagesOptions.map((item) => (
-                <Select.Option key={item.value} value={item.value}>
-                  {item.label}
-                </Select.Option>
-              ))}
-            </Select>
+              singleMode
+            />
           </Form.Item>,
         ]}
         availableFilters={availableFilters.filter(

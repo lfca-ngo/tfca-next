@@ -6,6 +6,7 @@ import {
   ShareAltOutlined,
 } from '@ant-design/icons'
 import { Button, List, Space } from 'antd'
+import Image from 'next/image'
 import React from 'react'
 
 import { Text, text } from '../../../utils/Text'
@@ -21,7 +22,12 @@ export const OrganizationDetails = ({ item }) => {
 
         <div className="info-wrapper">
           <div className="logo-wrapper">
-            <img src={item.logo?.url} />
+            <Image
+              height={70}
+              objectFit="contain"
+              src={item.logo?.url}
+              width={120}
+            />
           </div>
           <div className="actions">
             <Space style={{ width: '100%' }}>

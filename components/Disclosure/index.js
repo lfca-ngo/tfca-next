@@ -4,6 +4,8 @@ import { ArrowDownOutlined, CheckCircleFilled } from '@ant-design/icons'
 import { Col, Collapse, Row } from 'antd'
 import React from 'react'
 
+import { CircleImage } from '../Elements/CircleImage'
+
 const { Panel } = Collapse
 
 const Disclosure = ({ data }) => {
@@ -18,9 +20,7 @@ const Disclosure = ({ data }) => {
             <h1>{data?.company.name}</h1>
           </Col>
           <Col md={4} xs={8}>
-            <div className="logo-wrapper">
-              <img src={data?.company?.logoUrl} />
-            </div>
+            <CircleImage size={100} src={data?.company?.logoUrl} />
           </Col>
         </Row>
       </header>

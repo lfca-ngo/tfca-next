@@ -50,9 +50,13 @@
   .hamburger-inner::after {
     background-color: @white;
   }
+}
+
+.color-icon(@color: @secondary-color) {
   .anticon {
+    color: @color;
     path {
-      fill: @white;
+      fill: @color;
     }
   }
 }

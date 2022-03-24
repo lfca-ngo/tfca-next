@@ -8,7 +8,7 @@ export const ArrowButton = ({ className, onClick, style }) => {
   const icon = isPrev ? <ArrowLeftOutlined /> : <ArrowRightOutlined />
   return (
     <div className={classNames('slick-arrow-btn', className)} style={style}>
-      <Button icon={icon} onClick={onClick} />
+      <Button icon={icon} onClick={onClick} type="primary" />
     </div>
   )
 }

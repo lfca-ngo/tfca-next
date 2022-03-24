@@ -141,13 +141,13 @@ span.text-accent {
 .ant-drawer.drawer-md {
   .ant-drawer-content {
     .ant-drawer-header {
-      background: var(--body-background);
+      background: var(--card-background);
       border-radius: 0;
     }
     .ant-drawer-body {
       padding: @default-section-padding;
       color: var(--text-color);
-      background: var(--body-background);
+      background: var(--card-background);
       @media @desktop {
         padding: 40px 80px;
       }
@@ -272,8 +272,6 @@ span.text-accent {
     height: @arrow-size;
     margin-top: calc(-@arrow-size / 2);
     .ant-btn {
-      background: @secondary-color;
-      border: none;
       box-shadow: @box-shadow-base;
     }
     &.slick-disabled {
@@ -290,5 +288,14 @@ span.text-accent {
     display: flex;
     align-items: center;
     justify-self: center;
+  }
+}
+
+.ant-input-group.equal-height {
+  > .ant-select {
+    height: @input-height-base;
+  }
+  > input.ant-input {
+    height: @input-height-base;
   }
 }
