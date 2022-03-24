@@ -64,7 +64,9 @@ export const FormSwitch = ({ goTo, icon, moduleBlocks, store }) => {
     const res = { payload, status: 200 }
     setLoading(false)
     if (res?.status === 200) {
-      goTo('success')
+      alert(
+        'Dieses action module ist noch im BETA Modus. Bitte gedulde dich noch ein paar Tage! timo@lfca.earth'
+      )
     } else {
       alert('Etwas ist schiefgelaufen. Bitte melde dich bei timo@lfca.earth')
     }
