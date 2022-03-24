@@ -1,9 +1,10 @@
 require('./styles.less')
 
 import { Drawer } from 'antd'
+import classNames from 'classnames'
 import React, { useState } from 'react'
 
-export const Hamburger = ({ content, title }) => {
+export const Hamburger = ({ content, isFloating, title }) => {
   const [open, setOpen] = useState(false)
 
   const toggleMenu = () => {
@@ -11,9 +12,15 @@ export const Hamburger = ({ content, title }) => {
   }
 
   return (
-    <div>
+    <div
+      className={classNames('hamburger-wrapper', {
+        'is-floating': isFloating,
+      })}
+    >
       <button
-        className={`hamburger hamburger--spin ${open && 'is-active'}`}
+        className={classNames('hamburger', 'hamburger--spin', {
+          'is-active': open,
+        })}
         onClick={toggleMenu}
         type="button"
       >
