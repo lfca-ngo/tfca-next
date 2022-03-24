@@ -13,10 +13,10 @@ const { TabPane } = Tabs
 
 const steps = new Map([
   ['intro', Intro],
+  ['form-switch', FormSwitch],
   ['calculate', Calculate],
   ['check', CheckProvider],
   ['results', Results],
-  ['form-switch', FormSwitch],
   ['success', Success],
 ])
 
