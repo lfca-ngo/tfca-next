@@ -19,6 +19,7 @@ export const DropdownSelect = ({
   const hasSingleSelectedItem = selected.length === 1
   const [firstItem] = selected
   const firstItemContent = firstItem && items.find((i) => i.value === firstItem)
+  const firstItemLabel = firstItemContent?.label || firstItem
 
   const triggerChange = (changedValue) => {
     onChange?.(changedValue)
@@ -65,7 +66,7 @@ export const DropdownSelect = ({
         {isEmpty ? (
           placeholder
         ) : hasSingleSelectedItem ? (
-          firstItemContent.label
+          firstItemLabel
         ) : (
           <span>
             Multiple <Badge count={selected.length} />

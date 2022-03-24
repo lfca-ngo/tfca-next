@@ -1,3 +1,5 @@
+require('./actionStats.less')
+
 import {
   CoffeeOutlined,
   LikeOutlined,
