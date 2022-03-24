@@ -22,6 +22,7 @@ const SplitLayout = ({ children, company, layout, nav }) => {
       <div className="embedded" id="scroll-container">
         <Hamburger content={<QuestionAnswer />} isFloating />
         {children}
+        <Footer />
       </div>
     )
   return (
