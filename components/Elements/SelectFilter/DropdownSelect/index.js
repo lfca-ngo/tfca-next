@@ -30,7 +30,11 @@ export const DropdownSelect = ({
       ? selected.filter((v) => v !== key)
       : [...selected, key]
 
-    if (singleMode) newSelected = [key]
+    if (singleMode) {
+      newSelected = [key]
+      // close the dropdown
+      setVisible(false)
+    }
 
     setSelected(newSelected)
     onSelect && onSelect(newSelected)
