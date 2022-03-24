@@ -1,5 +1,5 @@
 import { InfoCircleOutlined } from '@ant-design/icons'
-import { Form, Input, Popover, Radio } from 'antd'
+import { Form, Input, Popover, Select } from 'antd'
 import React from 'react'
 
 export const MeterInput = () => {
@@ -10,10 +10,10 @@ export const MeterInput = () => {
         name={['meter', 'id', 'type']}
         rules={[{ message: 'Bitte auswählen!', required: true }]}
       >
-        <Radio.Group>
-          <Radio value="number">Zählernummer</Radio>
-          <Radio value="maLoId">Marktlokations-ID</Radio>
-        </Radio.Group>
+        <Select>
+          <Select.Option value="number">Zählernummer</Select.Option>
+          <Select.Option value="maLoId">Marktlokations-ID</Select.Option>
+        </Select>
       </Form.Item>
 
       <Form.Item
