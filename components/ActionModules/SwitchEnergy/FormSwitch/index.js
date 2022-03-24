@@ -1,17 +1,17 @@
-import { LockOutlined, MailOutlined } from '@ant-design/icons'
-import { Button, Divider, Form, Modal } from 'antd'
+import { LockOutlined } from '@ant-design/icons'
+import { Button, Divider, Form } from 'antd'
 import React, { useState } from 'react'
 
 import { text } from '../../../../utils/Text'
 import Category from '../../helpers/Category'
 import { Approvals } from './Approvals'
-import { EmailReminder } from './EmailReminder'
+// import { EmailReminder } from './EmailReminder'
 import { PaymentData } from './PaymentData'
 import { PersonalData } from './PersonalData'
 import { SwitchData } from './SwitchData'
 
 export const FormSwitch = ({ goTo, icon, moduleBlocks, store }) => {
-  const [visible, setVisible] = useState(false)
+  // const [visible, setVisible] = useState(false)
   const [loading, setLoading] = useState(false)
   // const { trackEvent } = useAnalytics()
   const [form] = Form.useForm()
@@ -79,7 +79,7 @@ export const FormSwitch = ({ goTo, icon, moduleBlocks, store }) => {
       />
       <h2>Eine sehr gute Wahl. Du hast es fast geschafft!</h2>
 
-      <div>
+      {/* <div>
         Gerade keine Zeit? Wir senden dir eine{' '}
         <Button
           icon={<MailOutlined />}
@@ -88,7 +88,7 @@ export const FormSwitch = ({ goTo, icon, moduleBlocks, store }) => {
         >
           Erinnerungs-Email
         </Button>
-      </div>
+      </div> */}
 
       <div>
         <Form
@@ -205,9 +205,9 @@ export const FormSwitch = ({ goTo, icon, moduleBlocks, store }) => {
         </Form>
       </div>
 
-      <Modal footer={null} onCancel={() => setVisible(false)} visible={visible}>
+      {/* <Modal footer={null} onCancel={() => setVisible(false)} visible={visible}>
         <EmailReminder onClose={() => setVisible(false)} />
-      </Modal>
+      </Modal> */}
     </div>
   )
 }
