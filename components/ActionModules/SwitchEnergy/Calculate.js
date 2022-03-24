@@ -13,21 +13,20 @@ export const EnergyForm = ({
   moduleData,
   onFinish,
 }) => {
-  const checkPostcode = (_, value) => {
-    if (value.postcode?.length <= 5) {
-      return Promise.resolve()
-    }
-
-    return Promise.reject(new Error('Postcode must be 5 digits'))
-  }
-
   return (
     <Form initialValues={initialValues} onFinish={onFinish}>
       <Form.Item
         name="postcodeEnergy"
         rules={[
+          { message: 'Gib deine Postleitzahl ein!!', required: true },
           {
-            validator: checkPostcode,
+            validator: (_, value) => {
+              if (!value || value.postcode?.length === 5) {
+                return Promise.resolve()
+              }
+
+              return Promise.reject(new Error('Postleitzahl ungültig'))
+            },
           },
         ]}
       >

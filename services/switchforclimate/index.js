@@ -77,68 +77,22 @@ export const useOperatorId = (zipCode) => {
   )
 }
 
-export const useLocalRate = (zipCode, operatorId) => {
-  if (!zipCode || !operatorId)
-    throw new Error('Must include zipCode and operatorId')
-
+export const useSearchProvider = (name) => {
   const query = gql`
-    query ($zipCode: String!, $operatorId: String!) {
-      localRate(energy: power, id: $operatorId, zipCode: $zipCode) {
+    query ($energy: String, $name: String) {
+      providers(energy: $energy, name: $name) {
         id
-        slug
-        name
-        zipCode
-      }
-    }
-  `
-  // '{\nid\nslug\nname\nzipCode\nprovider{\nname\nrobinWoodRating{\ncompanyName\ncriteriaId\nreason\nnote\nteaser\ntext\nlink\nrecommendation\n}\n}\nenergyMix{\nsource\npercent\n}\nzipCode\nemissions{\ntype\nvalue\n}\nminimumTerm{\nunit\nvalue\n}\nextendedTerm{\nunit\nvalue\n}\ncancellationPeriod{\nunit\nvalue\n}\npriceGuarantee{\ndate\nperiod{\nunit\nvalue\n}\n}\n\nprice{\nbasePrice\nworkingPrice\n}\n}\n}'
-  const variables = {
-    operatorId,
-    zipCode,
-  }
-
-  return useQuery(['localRate', operatorId, zipCode], async () =>
-    fetchData(query, variables)
-  )
-}
-
-export const useLocalRates = (zipCode) => {
-  if (!zipCode) throw new Error('Must include zipCode')
-
-  const query = gql`
-    query ($zipCode: String!) {
-      localRates(energy: power, zipCode: $zipCode) {
-        rates {
-          id
-          name
-        }
-      }
-    }
-  `
-
-  const variables = {
-    zipCode,
-  }
-
-  return useQuery(['localRates', zipCode], async () =>
-    fetchData(query, variables)
-  )
-}
-
-export const useSearchProvider = (searchString) => {
-  const query = gql`
-    query ($zipCode: String!) {
-      providers(energy: power, name: $searchString) {
         name
       }
     }
   `
 
   const variables = {
-    searchString,
+    energy: 'power',
+    name,
   }
 
-  return useQuery(['providersSearch', searchString], async () =>
+  return useQuery(['providersSearch', name], async () =>
     fetchData(query, variables)
   )
 }
