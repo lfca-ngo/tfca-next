@@ -15,11 +15,11 @@ export const SelectFilter = ({ filterMode, options, ...props }) => {
       case 'select-with-optional-input':
         return <SelectWithOptionalInput items={options} {...props} />
       case 'select-single':
-        return <Select items={options} {...props} />
+        return <DropdownSelect items={options} singleMode {...props} />
       case 'select-multi':
         return <DropdownSelect items={options} {...props} />
-      // return <Select items={options} mode="multiple" {...props} />
-
+      case 'select':
+        return <Select items={options} {...props} />
       default:
         return null
     }
