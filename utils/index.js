@@ -45,7 +45,7 @@ export const scrollToId = (id) => {
   section?.scrollIntoView({ behavior: 'smooth', block: 'start' })
 }
 
-export const MODAL_WIDTH_MD = '820px'
+export const DRAWER_WIDTH_MD = '820px'
 
 export const LIST_GRIDS = {
   '1-col': {
