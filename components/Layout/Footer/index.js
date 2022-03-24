@@ -2,6 +2,7 @@ require('./styles.less')
 
 import { ArrowRightOutlined } from '@ant-design/icons'
 import { Col, Collapse, List, Row } from 'antd'
+import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
@@ -54,7 +55,13 @@ export const Footer = () => {
                   <Panel header={partners?.title} key={`${i}`}>
                     {partners?.data.map((partner, j) => (
                       <div className="partner" key={`partner-${j}`}>
-                        <img src={partner.icon?.url} />
+                        <Image
+                          height={50}
+                          layout="intrinsic"
+                          objectFit="contain"
+                          src={partner.icon?.url}
+                          width={90}
+                        />
                       </div>
                     ))}
                   </Panel>

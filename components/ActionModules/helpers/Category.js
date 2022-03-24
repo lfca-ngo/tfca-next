@@ -1,5 +1,8 @@
+require('./category.less')
+
 import { ArrowLeftOutlined } from '@ant-design/icons'
 import { Button } from 'antd'
+import Image from 'next/image'
 import React from 'react'
 
 import { useContentBlocks } from '../../../hooks'
@@ -19,7 +22,7 @@ const Category = ({ goBack, icon, title }) => {
   return (
     <div className="action-category">
       <div className="icon">
-        <img src={icon} />
+        <Image height={22} layout="fixed" src={icon} width={22} />
       </div>
       <div className="text">{title}</div>
     </div>
