@@ -10,13 +10,20 @@ header.header {
   flex-direction: row;
 
   // fix on mobile
-  position: fixed;
+  position: sticky;
   z-index: 101;
   top: 0;
   width: 100%;
-  background: @light-white;
   height: @header-height-mini;
   transition: @default-transition;
+
+  &.dark-mode {
+    .header-content ul .action-element {
+      .text {
+        color: @white;
+      }
+    }
+  }
 
   @media @desktop {
     flex-direction: column;

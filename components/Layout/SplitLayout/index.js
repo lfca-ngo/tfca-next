@@ -27,13 +27,12 @@ const SplitLayout = ({ children, company, layout, nav }) => {
     )
   return (
     <Template>
+      <TopBar />
       <Header actions={nav} collapsed={collapsed} setCollapsed={setCollapsed} />
       <div className={classNames({ collapsed })} id="scroll-container">
         <main>
           <Nav company={company} />
-
           <Hero onClick={() => scrollToId(nav[0]?.id)} />
-          <TopBar />
           {children}
           <Footer />
         </main>

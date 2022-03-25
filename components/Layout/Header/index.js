@@ -7,7 +7,7 @@ import { motion, useTransform, useViewportScroll } from 'framer-motion'
 import Image from 'next/image'
 import React from 'react'
 
-import { useActiveAction, useDarkMode, useIsMobile } from '../../../hooks'
+import { useActiveAction, useIsMobile } from '../../../hooks'
 import { getLogoSrc, scrollToId } from '../../../utils'
 import { Hamburger } from '../../Elements/Hamburger'
 import { QuestionAnswer } from '../../Elements/QuestionAnswer'
@@ -28,12 +28,11 @@ const BOX_SHADOW_RANGE = [
 ]
 
 export const Header = ({ actions, collapsed, setCollapsed }) => {
-  const [isDarkMode] = useDarkMode()
   const isMobile = useIsMobile()
   const { scrollY } = useViewportScroll()
 
   // animations for mobile, the event does not fire on desktop
-  const transitionBgColor = isDarkMode ? DARK_BLUE : LIGHT_WHITE
+  const transitionBgColor = isMobile ? DARK_BLUE : LIGHT_WHITE
   const contentWidth = useTransform(scrollY, SCROLL_RANGE, CONTENT_WIDTH_RANGE)
   const opacity = useTransform(scrollY, SCROLL_RANGE_SHORT, OPACITY_RANGE)
   const headerWidth = useTransform(scrollY, SCROLL_RANGE, HEADER_WIDTH_RANGE)
@@ -50,13 +49,13 @@ export const Header = ({ actions, collapsed, setCollapsed }) => {
     ? { backgroundColor, boxShadow }
     : { boxShadow, marginLeft }
   const headerStartStyles = isMobile ? { width: headerWidth } : {}
-  const logoSrc = getLogoSrc(false)
+  const logoSrc = getLogoSrc(true)
 
   const { activeAction } = useActiveAction()
 
   return (
     <motion.header
-      className={classNames('header', { collapsed })}
+      className={classNames('header', { collapsed, 'dark-mode': isMobile })}
       key={`${isMobile}`}
       style={headerStyles}
     >
