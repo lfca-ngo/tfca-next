@@ -4,7 +4,6 @@
 @element-padding: 13px 16px;
 
 header.header {
-  border-right: 1px solid var(--medium-grey);
   display: flex;
   flex-direction: row;
 
@@ -25,6 +24,7 @@ header.header {
     height: auto;
     transition: width 0.3s ease;
     height: 100%;
+    border-right: 1px solid var(--medium-grey);
 
     &.collapsed {
       width: @side-bar-width-collapsed;

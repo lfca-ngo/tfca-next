@@ -40,6 +40,7 @@ export const Header = ({ actions, collapsed, setCollapsed }) => {
 
   const logoStyles = isMobile ? { opacity, padding: logoPadding } : {}
   const headerStyles = isMobile ? { boxShadow } : { boxShadow, marginLeft }
+  const headerStartStyles = isMobile ? { width: headerWidth } : {}
   const logoSrc = getLogoSrc(isDarkMode)
 
   const { activeAction } = useActiveAction()
@@ -47,9 +48,10 @@ export const Header = ({ actions, collapsed, setCollapsed }) => {
   return (
     <motion.header
       className={classNames('header', { collapsed })}
+      key={`${isMobile}`}
       style={headerStyles}
     >
-      <motion.div className="header-start" style={{ width: headerWidth }}>
+      <motion.div className="header-start" style={headerStartStyles}>
         <motion.div className="logo" style={logoStyles}>
           <Image height={48} src={logoSrc} width={48} />
         </motion.div>
