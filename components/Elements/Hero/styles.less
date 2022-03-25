@@ -2,13 +2,21 @@
 @import (reference) '../../../styles/fonts.less';
 
 .hero {
+  position: relative;
   padding-top: calc(50px + @header-height-mini);
   padding-bottom: 60px;
+  padding-left: @default-section-padding;
+  padding-right: @default-section-padding;
   text-align: left;
+
   @media @desktop {
     text-align: center;
     padding-top: calc(60px + @header-height-mini);
     padding-bottom: 80px;
+    padding-left: 40px;
+    padding-right: 40px;
+    max-width: @container-action-width;
+    margin: 0 auto;
   }
   h1 {
     .h1-hero();
@@ -21,5 +29,12 @@
     @media @desktop {
       font-size: 26px;
     }
+  }
+  .bg-wrapper {
+    position: absolute;
+    right: -400px;
+    bottom: -240px;
+    width: 435px;
+    height: 435px;
   }
 }

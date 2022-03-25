@@ -12,6 +12,8 @@ import { getLogoSrc, scrollToId } from '../../../utils'
 import { Hamburger } from '../../Elements/Hamburger'
 import { QuestionAnswer } from '../../Elements/QuestionAnswer'
 
+const MARGIN_LEFT_RANGE = [-75, 0]
+const SCROLL_RANGE_LG = [0, 650]
 const SCROLL_RANGE = [0, 400]
 const SCROLL_RANGE_SHORT = [0, 60]
 const CONTENT_WIDTH_RANGE = [0, 375]
@@ -34,8 +36,10 @@ export const Header = ({ actions, collapsed, setCollapsed }) => {
   const headerWidth = useTransform(scrollY, SCROLL_RANGE, HEADER_WIDTH_RANGE)
   const logoPadding = useTransform(scrollY, SCROLL_RANGE, LOGO_PADDING_RANGE)
   const boxShadow = useTransform(scrollY, SCROLL_RANGE, BOX_SHADOW_RANGE)
+  const marginLeft = useTransform(scrollY, SCROLL_RANGE_LG, MARGIN_LEFT_RANGE)
 
   const logoStyles = isMobile ? { opacity, padding: logoPadding } : {}
+  const headerStyles = isMobile ? { boxShadow } : { boxShadow, marginLeft }
   const logoSrc = getLogoSrc(isDarkMode)
 
   const { activeAction } = useActiveAction()
@@ -43,7 +47,7 @@ export const Header = ({ actions, collapsed, setCollapsed }) => {
   return (
     <motion.header
       className={classNames('header', { collapsed })}
-      style={{ boxShadow }}
+      style={headerStyles}
     >
       <motion.div className="header-start" style={{ width: headerWidth }}>
         <motion.div className="logo" style={logoStyles}>

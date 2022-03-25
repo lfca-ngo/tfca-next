@@ -18,13 +18,13 @@ header.header {
   transition: @default-transition;
 
   @media @desktop {
-    position: relative;
     flex-direction: column;
     flex: 1;
     width: @side-bar-width;
     padding: 0;
     height: auto;
     transition: width 0.3s ease;
+    height: 100%;
 
     &.collapsed {
       width: @side-bar-width-collapsed;

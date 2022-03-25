@@ -1,10 +1,12 @@
 require('./styles.less')
 
 import { Button, Typography } from 'antd'
+import Image from 'next/image'
 import React from 'react'
 
 import { useContentBlocks, useCustomization, useIsMobile } from '../../../hooks'
 import { text } from '../../../utils/Text'
+import World from './world.png'
 
 export const Hero = ({ onClick }) => {
   const isMobile = useIsMobile()
@@ -25,7 +27,16 @@ export const Hero = ({ onClick }) => {
     : headerText // text(headerText)
 
   return (
-    <div className="hero content main-container">
+    <div className="hero content">
+      <div className="bg-wrapper">
+        <Image
+          layout="fill"
+          objectFit="contain"
+          objectPosition={'center'}
+          src={World}
+        />
+      </div>
+
       <Typography.Title>
         <span>{header}</span>
       </Typography.Title>
