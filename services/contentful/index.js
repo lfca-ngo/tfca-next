@@ -3,7 +3,7 @@ import fs from 'fs'
 import { gql, request } from 'graphql-request'
 import path from 'path'
 
-import { DEFAULT, SETTINGS_ID } from '../../utils'
+import { DEFAULT, isDev, SETTINGS_ID } from '../../utils'
 import {
   ActionFragment,
   ListFragment,
@@ -13,7 +13,9 @@ import {
 } from './fragments'
 
 const space = process.env.NEXT_PUBLIC_CF_SPACE_ID
-const accessToken = process.env.NEXT_PUBLIC_CF_ACCESS_TOKEN
+const accessToken = isDev
+  ? process.env.NEXT_PUBLIC_CF_PREVIEW_ACCESS_TOKEN
+  : process.env.NEXT_PUBLIC_CF_ACCESS_TOKEN
 
 // Generic GraphQL client for contentful used
 // by all subsequent queries, can also called directly
@@ -74,14 +76,15 @@ export const fetchContent = async (query, variables) => {
 export const fetchAllNavs = async (locale) => {
   const query = gql`
     ${NavigationCollectionFragment}
-    query ($locale: String) {
-      navigationCollection(locale: $locale, limit: 10) {
+    query ($locale: String, $preview: Boolean) {
+      navigationCollection(locale: $locale, limit: 10, preview: $preview) {
         ...NavigationCollectionFragment
       }
     }
   `
   const variables = {
     locale: locale,
+    preview: isDev,
   }
 
   const { navigationCollection } = await fetchContent(query, variables)
@@ -97,14 +100,15 @@ export const fetchAllNavs = async (locale) => {
 export const fetchMetaData = async (locale, settingsId) => {
   const query = gql`
     ${MetaDataFragment}
-    query ($locale: String, $settingsId: String!) {
-      settings(locale: $locale, id: $settingsId) {
+    query ($locale: String, $settingsId: String!, $preview: Boolean) {
+      settings(locale: $locale, id: $settingsId, preview: $preview) {
         ...MetaDataFragment
       }
     }
   `
   const variables = {
     locale: locale,
+    preview: isDev,
     settingsId: settingsId,
   }
 
@@ -126,14 +130,15 @@ export const fetchMetaData = async (locale, settingsId) => {
 export const fetchMetaDataLists = async (locale, settingsId) => {
   const query = gql`
     ${MetaDataListsFragment}
-    query ($locale: String, $settingsId: String!) {
-      settings(locale: $locale, id: $settingsId) {
+    query ($locale: String, $settingsId: String!, $preview: Boolean) {
+      settings(locale: $locale, id: $settingsId, preview: $preview) {
         ...MetaDataListsFragment
       }
     }
   `
   const variables = {
     locale: locale,
+    preview: isDev,
     settingsId: settingsId,
   }
 
@@ -150,8 +155,13 @@ export const fetchMetaDataLists = async (locale, settingsId) => {
 
 export const fetchPageBySlug = async (locale, slug) => {
   const query = gql`
-    query ($locale: String, $slug: String) {
-      pageLocalCollection(limit: 1, locale: $locale, where: { slug: $slug }) {
+    query ($locale: String, $slug: String, $preview: Boolean) {
+      pageLocalCollection(
+        limit: 1
+        locale: $locale
+        where: { slug: $slug }
+        preview: $preview
+      ) {
         items {
           slug
           layout
@@ -169,6 +179,7 @@ export const fetchPageBySlug = async (locale, slug) => {
 
   const variables = {
     locale: locale,
+    preview: isDev,
     slug: slug,
   }
 
@@ -204,11 +215,12 @@ export const fetchAllStaticContent = async (locale) => {
 // for each action module with a separate api call
 export const fetchCollectionIds = async (locale, slug) => {
   const query = gql`
-    query ($locale: String, $slug: String) {
+    query ($locale: String, $slug: String, $preview: Boolean) {
       actionsLocalCollection(
         limit: 1
         locale: $locale
         where: { slug: $slug }
+        preview: $preview
       ) {
         items {
           layout
@@ -239,6 +251,7 @@ export const fetchCollectionIds = async (locale, slug) => {
   `
   const variables = {
     locale: locale,
+    preview: isDev,
     slug: slug,
   }
 
@@ -268,8 +281,9 @@ const fetchActionDataById = async (id, locale) => {
       $blocksLimit: Int
       $listsLimit: Int
       $quizLimit: Int
+      $preview: Boolean
     ) {
-      action(id: $id, locale: $locale) {
+      action(id: $id, locale: $locale, preview: $preview) {
         ...ActionFragment
       }
     }
@@ -280,6 +294,7 @@ const fetchActionDataById = async (id, locale) => {
     id: id.id,
     listsLimit: id.listsLimit,
     locale: locale,
+    preview: isDev,
     quizLimit: id.quizLimit,
   }
 
@@ -381,8 +396,8 @@ const transformResults = (results) => {
 
 export const fetchListIds = async () => {
   const query = gql`
-    query {
-      listCollection {
+    query ($preview: Boolean) {
+      listCollection(preview: $preview) {
         items {
           sys {
             id
@@ -391,8 +406,8 @@ export const fetchListIds = async () => {
       }
     }
   `
-
-  const { listCollection } = await fetchContent(query)
+  const variables = { preview: isDev }
+  const { listCollection } = await fetchContent(query, variables)
 
   const ids = listCollection?.items?.map((item) => item.sys.id)
   return ids
@@ -401,8 +416,8 @@ export const fetchListIds = async () => {
 const fetchListDataById = async (id, locale) => {
   const query = gql`
     ${ListFragment}
-    query ($locale: String, $id: String!) {
-      list(id: $id, locale: $locale) {
+    query ($locale: String, $id: String!, $preview: Boolean) {
+      list(id: $id, locale: $locale, preview: $preview) {
         ...ListFragment
       }
     }
@@ -410,6 +425,7 @@ const fetchListDataById = async (id, locale) => {
   const variables = {
     id: id,
     locale: locale,
+    preview: isDev,
   }
 
   const { list } = await fetchContent(query, variables)
