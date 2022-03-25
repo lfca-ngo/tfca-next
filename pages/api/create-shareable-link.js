@@ -1,13 +1,12 @@
-import jwt from 'jsonwebtoken'
+import { createShareToken } from '../../utils'
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).send({ message: 'Only POST requests allowed' })
   }
 
-  const { actionCollectionSlug, tokenPayload } = req.body
-  // TODO: Verify payload
-  const token = jwt.sign(tokenPayload, process.env.JWT_TOKEN_PRIVATE_KEY)
+  const { actionCollectionSlug, actionId, color, message, names } = req.body
+  const token = createShareToken({ actionId, color, message, names })
 
   const shareLink = `${process.env.BASE_URL}/${actionCollectionSlug}/invite/${token}`
   const ogImageUrl = `${process.env.BASE_URL}/api/images/${token}`

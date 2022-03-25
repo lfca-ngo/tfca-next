@@ -12,8 +12,7 @@ import { StepHeader } from '../helpers/StepHeader'
 export const Results = ({
   availableFilters,
   goTo,
-  icon,
-  moduleBlocks,
+  module: { blocks = {}, icon = {} },
   nextKey,
   prevKey,
   setStore,
@@ -41,13 +40,13 @@ export const Results = ({
     <div className="step">
       <Category
         goBack={prevKey ? () => goTo(prevKey) : undefined}
-        icon={icon}
-        title={text(moduleBlocks['category.title'])}
+        icon={icon.url}
+        title={text(blocks['category.title'])}
       />
 
       <StepHeader
-        subtitle={moduleBlocks['results.subtitle']}
-        title={moduleBlocks['results.title']}
+        subtitle={blocks['results.subtitle']}
+        title={blocks['results.title']}
       />
 
       {countSelected > 0 && (

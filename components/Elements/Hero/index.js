@@ -5,6 +5,7 @@ import Image from 'next/image'
 import React from 'react'
 
 import { useContentBlocks, useCustomization, useIsMobile } from '../../../hooks'
+import { namesArrayToString } from '../../../utils'
 import { text } from '../../../utils/Text'
 import World from './world.png'
 
@@ -13,7 +14,11 @@ export const Hero = ({ onClick }) => {
   const customization = useCustomization()
   const customHeaderText = (
     <span>
-      Hi <span className="text-accent">David</span>, ready to act?
+      Hi{' '}
+      <span className="text-accent">
+        {namesArrayToString(customization?.names)}
+      </span>
+      , ready to act?
     </span>
   ) // useContentBlocks('header.title.custom')
   const headerText = (
@@ -22,7 +27,8 @@ export const Hero = ({ onClick }) => {
     </span>
   ) //useContentBlocks('header.title')
 
-  const header = customization
+  // TODO: Get texts from contentful
+  const header = customization?.names
     ? customHeaderText // text(customHeaderText, { name: customization.to })
     : headerText // text(headerText)
 

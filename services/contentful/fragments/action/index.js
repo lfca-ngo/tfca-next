@@ -22,6 +22,8 @@ export const ActionFragment = gql`
     icon {
       url
     }
+    imageInviteText
+    imageInviteColor
     blocksCollection(limit: $blocksLimit) {
       items {
         ...BlockFragment

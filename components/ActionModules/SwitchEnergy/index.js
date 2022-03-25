@@ -52,10 +52,7 @@ export const SwitchEnergy = ({ module }) => {
             <TabPane key={key} tab={key}>
               <Page
                 goTo={handleGoTo}
-                icon={module?.icon?.url}
-                moduleBlocks={module?.blocks || {}}
-                moduleData={module?.data || {}}
-                moduleLists={module?.lists || {}}
+                module={module || {}}
                 nextKey={nextKey}
                 prevKey={prevKey}
                 setStore={setStore}

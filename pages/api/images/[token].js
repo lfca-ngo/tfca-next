@@ -1,8 +1,7 @@
-import jwt from 'jsonwebtoken'
 import path from 'path'
 import sharp from 'sharp'
 
-import { createShareSvg } from '../../../utils'
+import { createShareSvg, decodeShareToken } from '../../../utils'
 
 /**
  * Resolve fonts so that they are bundled
@@ -10,7 +9,9 @@ import { createShareSvg } from '../../../utils'
  */
 path.resolve(process.cwd(), 'fonts', 'fonts.conf')
 path.resolve(process.cwd(), 'fonts', 'Manrope-Bold.ttf')
+path.resolve(process.cwd(), 'fonts', 'Manrope-ExtraBold.ttf')
 path.resolve(process.cwd(), 'fonts', 'Manrope-Regular.ttf')
+path.resolve(process.cwd(), 'fonts', 'Manrope-SemiBold.ttf')
 
 export default async function handler(req, res) {
   if (req.method !== 'GET') {
@@ -19,26 +20,23 @@ export default async function handler(req, res) {
 
   try {
     const { token } = req.query
-    const payload = jwt.verify(token, process.env.JWT_TOKEN_PRIVATE_KEY)
+    const { color, message, names } = decodeShareToken(token)
 
     const svgImage = Buffer.from(
       createShareSvg({
-        friendChallenge1: payload.invitee1?.challenge || '',
-        friendChallenge2: payload.invitee2?.challenge || '',
-        friendChallenge3: payload.invitee3?.challenge || '',
-        friendName1: payload.invitee1?.name || '',
-        friendName2: payload.invitee2?.name || '',
-        friendName3: payload.invitee3?.name || '',
-        ownName: payload?.sender.name || 'Me',
+        color,
+        message,
+        names,
       })
     )
 
-    const jpeg = await sharp(svgImage).jpeg().toBuffer()
+    const png = await sharp(svgImage, { density: 144 })
+      .png({ quality: 100 })
+      .toBuffer()
 
     res.setHeader('Content-Type', 'image/png')
-    // TODO: activate cache headers
-    // res.setHeader('Cache-Control', 's-maxage=31536000') // 1 year
-    res.send(jpeg)
+    res.setHeader('Cache-Control', 's-maxage=31536000') // 1 year
+    res.send(png)
   } catch (e) {
     res.status(404).send({ error: 'Not found' })
   }

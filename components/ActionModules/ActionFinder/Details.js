@@ -7,14 +7,12 @@ import Category from '../helpers/Category'
 
 export const Details = ({
   goTo,
-  icon,
-  moduleBlocks,
-  moduleData,
+  module: { blocks = {}, data = {}, icon = {} },
   nextKey,
   prevKey,
   store,
 }) => {
-  const cardLayout = moduleData?.main?.cardLayout || 'action'
+  const cardLayout = data.main?.cardLayout || 'action'
   const item = store.item
   if (!item) return null
 
@@ -22,8 +20,8 @@ export const Details = ({
     <div className="step">
       <Category
         goBack={prevKey ? () => goTo(prevKey) : undefined}
-        icon={icon}
-        title={text(moduleBlocks['category.title'])}
+        icon={icon.url}
+        title={text(blocks['category.title'])}
       />
       <DetailView item={item} layout={cardLayout} />
       <Button

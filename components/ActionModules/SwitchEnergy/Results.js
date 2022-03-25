@@ -26,16 +26,8 @@ const SORT = [
 export const getFullPrice = (item, kwh) =>
   item.price.workingPrice * kwh + item.price.basePrice || 0
 
-export const Results = ({
-  goTo,
-  icon,
-  moduleBlocks,
-  moduleData,
-  moduleLists,
-  nextKey,
-  setStore,
-  store,
-}) => {
+export const Results = ({ goTo, module, nextKey, setStore, store }) => {
+  const { blocks = {}, lists = {}, icon = {} } = module
   const isMobile = useIsMobile()
   const [visible, setVisible] = useState(false)
   const [drawerVisible, setDrawerVisible] = useState(false)
@@ -115,16 +107,15 @@ export const Results = ({
     <div className="step">
       <Category
         goBack={() => goTo('calculate')}
-        icon={icon}
+        icon={icon.url}
         title={
           <span>
-            {text(moduleBlocks['category.title'])}{' '}
-            {loading && <LoadingOutlined />}{' '}
+            {text(blocks['category.title'])} {loading && <LoadingOutlined />}{' '}
           </span>
         }
       />
-      <h2>{text(moduleBlocks['results.title'])}</h2>
-      <CheckList data={moduleLists['comparison.benefits']} />
+      <h2>{text(blocks['results.title'])}</h2>
+      <CheckList data={lists['comparison.benefits']} />
 
       <Row>
         <Col xs={12}>
@@ -185,8 +176,7 @@ export const Results = ({
               postcode: store?.postcode,
             },
           }}
-          moduleBlocks={moduleBlocks}
-          moduleData={moduleData}
+          module={module}
           onFinish={updateProviders}
         />
       </Modal>

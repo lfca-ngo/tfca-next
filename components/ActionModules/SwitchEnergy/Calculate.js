@@ -9,9 +9,8 @@ import { SelectPostcodeEnergy } from './SelectPostcodeEnergy'
 
 export const EnergyForm = ({
   initialValues,
-  moduleBlocks,
-  moduleData,
   onFinish,
+  module: { blocks = {}, data = {} },
 }) => {
   return (
     <Form initialValues={initialValues} onFinish={onFinish}>
@@ -31,8 +30,8 @@ export const EnergyForm = ({
         ]}
       >
         <SelectPostcodeEnergy
-          items={moduleData?.['input.energy']?.items}
-          placeholderInput={text(moduleBlocks['form.postcode.placeholder'])}
+          items={data['input.energy']?.items}
+          placeholderInput={text(blocks['form.postcode.placeholder'])}
           placeholderSelect="Please select"
         />
       </Form.Item>
@@ -45,16 +44,9 @@ export const EnergyForm = ({
   )
 }
 
-export const Calculate = ({
-  goTo,
-  icon,
-  moduleBlocks,
-  moduleData,
-  moduleLists,
-  setStore,
-  store,
-}) => {
-  const inputEnergyOptions = moduleData?.['input.energy']?.items
+export const Calculate = ({ goTo, module, setStore, store }) => {
+  const { blocks = {}, data = {}, lists = {}, icon = {} } = module
+  const inputEnergyOptions = data['input.energy']?.items
   const inputEnergyFirstValue = inputEnergyOptions?.[0]?.valueNumber
 
   const handleFinish = (allValues) => {
@@ -69,13 +61,13 @@ export const Calculate = ({
     <div className="step">
       <Category
         goBack={() => goTo('intro')}
-        icon={icon}
-        title={text(moduleBlocks['category.title'])}
+        icon={icon.url}
+        title={text(blocks['category.title'])}
       />
 
-      <StepHeader title={moduleBlocks['calculate.title']} />
+      <StepHeader title={blocks['calculate.title']} />
 
-      <CheckList data={moduleLists?.benefits} />
+      <CheckList data={lists.benefits} />
 
       <EnergyForm
         initialValues={{
@@ -84,8 +76,7 @@ export const Calculate = ({
             postcode: store?.postcode,
           },
         }}
-        moduleBlocks={moduleBlocks}
-        moduleData={moduleData}
+        module={module}
         onFinish={handleFinish}
       />
     </div>

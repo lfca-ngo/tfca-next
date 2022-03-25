@@ -5,12 +5,12 @@ import { Text, text } from '../../../utils/Text'
 import Category from '../helpers/Category'
 import { StepHeader } from '../helpers/StepHeader'
 
-export const Intro = ({ goTo, icon, moduleBlocks }) => {
+export const Intro = ({ goTo, module: { blocks = {}, icon = {} } }) => {
   return (
     <div className="step">
-      <Category icon={icon} title={text(moduleBlocks['category.title'])} />
+      <Category icon={icon.url} title={text(blocks['category.title'])} />
 
-      <StepHeader title={moduleBlocks['intro.title']} />
+      <StepHeader title={blocks['intro.title']} />
 
       <Row className="btn-wrapper" gutter={12} style={{ marginBottom: '15px' }}>
         <Col md={12} xs={24}>
@@ -20,7 +20,7 @@ export const Intro = ({ goTo, icon, moduleBlocks }) => {
             size="large"
             type="primary"
           >
-            <Text asString block={moduleBlocks['intro.button.primary']} />
+            <Text asString block={blocks['intro.button.primary']} />
           </Button>
         </Col>
         <Col md={12} xs={24}>
@@ -31,14 +31,14 @@ export const Intro = ({ goTo, icon, moduleBlocks }) => {
             size="large"
             type="primary"
           >
-            <Text asString block={moduleBlocks['intro.button.secondary']} />
+            <Text asString block={blocks['intro.button.secondary']} />
           </Button>
         </Col>
       </Row>
 
       <Row>
         <Col xs={24}>
-          <Text block={moduleBlocks['intro.hint']} />
+          <Text block={blocks['intro.hint']} />
         </Col>
       </Row>
     </div>
