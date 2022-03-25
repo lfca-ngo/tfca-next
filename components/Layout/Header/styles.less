@@ -16,8 +16,10 @@ header.header {
   width: 100%;
   height: @header-height-mini;
   transition: @default-transition;
+  background: @light-white;
 
   &.dark-mode {
+    background: @blue-dark;
     .header-content ul .action-element {
       .text {
         color: @white;
@@ -34,6 +36,7 @@ header.header {
     transition: width 0.3s ease;
     height: 100%;
     border-right: 1px solid @medium-grey;
+    position: fixed;
 
     &.collapsed {
       width: @side-bar-width-collapsed;

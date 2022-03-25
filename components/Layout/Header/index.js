@@ -49,7 +49,7 @@ export const Header = ({ actions, collapsed, setCollapsed }) => {
     ? { backgroundColor, boxShadow }
     : { boxShadow, marginLeft }
   const headerStartStyles = isMobile ? { width: headerWidth } : {}
-  const logoSrc = getLogoSrc(true)
+  const logoSrc = getLogoSrc(isMobile)
 
   const { activeAction } = useActiveAction()
 
