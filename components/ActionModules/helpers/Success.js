@@ -23,7 +23,12 @@ import { Share } from './Share'
 
 const MAX_INVITES = 3
 
-export const Success = ({ goTo, icon, id, moduleBlocks, prevKey }) => {
+export const Success = ({
+  goTo,
+  icon,
+  module: { blocks = {}, id },
+  prevKey,
+}) => {
   const isMobile = useIsMobile()
   const benefits = useContentLists('sharing.benefits')
   const [isGeneratingToken, setIsGeneratingToken] = React.useState(false)
@@ -60,7 +65,7 @@ export const Success = ({ goTo, icon, id, moduleBlocks, prevKey }) => {
         <Category
           goBack={prevKey ? () => goTo(prevKey) : undefined}
           icon={icon}
-          title={text(moduleBlocks['category.title'])}
+          title={text(blocks['category.title'])}
         />
         <h2>{text(useContentBlocks('sharing.headline'))}</h2>
 

@@ -14,16 +14,14 @@ export const Results = ({
   goTo,
   prevKey,
   nextKey,
-  icon,
+  module: { blocks = {}, data = {}, icon = {} },
   setStore,
-  moduleData,
-  moduleBlocks,
   store,
   availableFilters = [],
 }) => {
   const [visible, setVisible] = useState(false)
   const isMobile = useIsMobile()
-  const detailViewType = moduleData?.main?.detailViewType || 'page'
+  const detailViewType = data.main?.detailViewType || 'page'
   const isDrawerView = detailViewType === 'drawer'
 
   const handleNext = (item) => {
@@ -54,7 +52,7 @@ export const Results = ({
     return true
   }
 
-  const dataMain = moduleData['main']
+  const dataMain = data['main']
   const dataItems = dataMain?.items || []
   const dataListGrid = dataMain?.listGrid || '1-col'
   const isEqualHeight = dataListGrid === '2-col'
@@ -63,13 +61,13 @@ export const Results = ({
     <div className="step">
       <Category
         goBack={prevKey ? () => goTo(prevKey) : undefined}
-        icon={icon}
-        title={text(moduleBlocks['category.title'])}
+        icon={icon.url}
+        title={text(blocks['category.title'])}
       />
 
       <StepHeader
-        subtitle={moduleBlocks['results.subtitle']}
-        title={moduleBlocks['results.title']}
+        subtitle={blocks['results.subtitle']}
+        title={blocks['results.title']}
       />
 
       <ScrollableFilters

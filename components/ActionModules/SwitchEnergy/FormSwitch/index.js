@@ -10,7 +10,11 @@ import { PaymentData } from './PaymentData'
 import { PersonalData } from './PersonalData'
 import { SwitchData } from './SwitchData'
 
-export const FormSwitch = ({ goTo, icon, moduleBlocks, store }) => {
+export const FormSwitch = ({
+  goTo,
+  module: { blocks = {}, icon = {} },
+  store,
+}) => {
   // const [visible, setVisible] = useState(false)
   const [loading, setLoading] = useState(false)
   // const { trackEvent } = useAnalytics()
@@ -76,8 +80,8 @@ export const FormSwitch = ({ goTo, icon, moduleBlocks, store }) => {
     <div className="step">
       <Category
         goBack={() => goTo('results')}
-        icon={icon}
-        title={text(moduleBlocks['category.title'])}
+        icon={icon.url}
+        title={text(blocks['category.title'])}
       />
       <h2>Eine sehr gute Wahl. Du hast es fast geschafft!</h2>
 
