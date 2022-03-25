@@ -53,6 +53,7 @@ export const SwitchEnergy = ({ module }) => {
               <Page
                 goTo={handleGoTo}
                 icon={module?.icon?.url}
+                id={module?.id}
                 moduleBlocks={module?.blocks || {}}
                 moduleData={module?.data || {}}
                 moduleLists={module?.lists || {}}

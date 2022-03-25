@@ -77,6 +77,7 @@ export const ActionFinderFlow = ({ module }) => {
                 filterElement={filterElement}
                 goTo={handleGoTo}
                 icon={module?.icon?.url}
+                id={module?.id}
                 moduleBlocks={module?.blocks || {}}
                 moduleData={module?.data || {}}
                 nextKey={nextKey}

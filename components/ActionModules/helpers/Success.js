@@ -4,7 +4,8 @@ import {
   PlusOutlined,
   SendOutlined,
 } from '@ant-design/icons'
-import { Alert, Button, Drawer, Form } from 'antd'
+import { Alert, Button, Drawer, Form, Input } from 'antd'
+import { useRouter } from 'next/router'
 import React from 'react'
 
 import {
@@ -17,7 +18,6 @@ import { useTrackEvent } from '../../../services/analytics'
 import { DRAWER_WIDTH_MD } from '../../../utils'
 import { text } from '../../../utils/Text'
 import CheckList from '../../Elements/CheckList'
-import { NominateNameInput } from '../../Elements/NominateInput'
 import Category from './Category'
 import { Share } from './Share'
 
@@ -31,19 +31,25 @@ export const Success = ({ goTo, icon, id, moduleBlocks, prevKey }) => {
   const [visible, setVisible] = React.useState('')
   const [invites, setInvites] = React.useState([])
 
+  const router = useRouter()
+  const { actionCollectionSlug } = router.query
+
   useConfetti()
   useTrackEvent({ name: 'action_completed', values: { action_id: id } })
 
   // create multiple invite links
   // map of promises with infos
   const createInvites = async (values) => {
-    const singleInvites = values.names.map((name) => () => createInvite([name]))
-    const allInvites = [...singleInvites, () => createInvite(values.names)]
+    const invites = values.names.map((name) => () => createInvite([name]))
+    if (values.names.length > 1) {
+      // Add a miulti invite
+      invites.push(() => createInvite(values.names))
+    }
 
     setVisible(true)
     setIsGeneratingToken(true)
 
-    const results = await Promise.all(allInvites.map((invite) => invite()))
+    const results = await Promise.all(invites.map((invite) => invite()))
     setIsGeneratingToken(false)
     setInvites(results)
   }
@@ -61,7 +67,7 @@ export const Success = ({ goTo, icon, id, moduleBlocks, prevKey }) => {
         <CheckList data={benefits?.items} />
         <Form
           className="dynamic-form"
-          initialValues={{ names: [{ challenge: 'Energy', name: null }] }}
+          initialValues={{ names: [''] }}
           layout="vertical"
           name="dynamic_invitees"
           onFinish={createInvites}
@@ -94,7 +100,7 @@ export const Success = ({ goTo, icon, id, moduleBlocks, prevKey }) => {
                       ]}
                       validateTrigger={['onChange', 'onBlur']}
                     >
-                      <NominateNameInput placeholder="Name" />
+                      <Input placeholder="Name" />
                     </Form.Item>
                     {fields.length > 1 ? (
                       <MinusCircleOutlined
@@ -167,27 +173,15 @@ export const Success = ({ goTo, icon, id, moduleBlocks, prevKey }) => {
     </>
   )
 
-  async function createInvite(invitees) {
-    const [invitee1, invitee2, invitee3] = invitees
-    const multiInvite = invitees.length > 1
+  async function createInvite(names) {
+    setError('')
     // Gereate the share token
-    const tokenPayload = {
-      invitee1,
-      invitee2,
-      invitee3,
-      // TODO: Get sender Info from challenge inputs?
-      sender: {
-        challenge: 'energy',
-        name: 'DavidStatic',
-      },
-    }
-
     try {
       const response = await fetch('/api/create-shareable-link', {
-        // TODO: Dynamically set actionCollectionSlug
         body: JSON.stringify({
-          actionCollectionSlug: 'int',
-          tokenPayload,
+          actionCollectionSlug,
+          actionId: id,
+          names,
         }),
         headers: {
           'Content-Type': 'application/json',
@@ -199,8 +193,8 @@ export const Success = ({ goTo, icon, id, moduleBlocks, prevKey }) => {
 
       return {
         ...data,
-        challenge: multiInvite ? 'All' : invitee1?.challenge,
-        name: multiInvite ? 'All' : invitee1?.name,
+        actionId: id,
+        names,
       }
     } catch (e) {
       setError('Failed to generate link')

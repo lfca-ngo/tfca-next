@@ -61,6 +61,7 @@ export const Quiz = ({ module }) => {
                 activeQuestion={activeQuestion}
                 goTo={handleGoTo}
                 icon={module?.icon?.url}
+                id={module?.id}
                 moduleBlocks={module?.blocks || {}}
                 nextKey={nextKey}
                 prevKey={prevKey}

@@ -121,6 +121,7 @@ export const Politics = ({ module }) => {
                 filterOption={filterOption}
                 goTo={handleGoTo}
                 icon={module?.icon?.url}
+                id={module?.id}
                 messagesByFilterValue={messagesByFilterValue}
                 messagesRelatedFilterKey={messagesRelatedFilterKey}
                 moduleBlocks={module?.blocks || {}}

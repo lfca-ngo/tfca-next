@@ -2,6 +2,7 @@ import { v4 as uuidv4 } from 'uuid'
 
 import { text } from './Text'
 export * from './create-share-svg'
+export * from './share-token'
 
 export const isDev = process.env.NODE_ENV === 'development'
 export const isBrowser = () => typeof window !== 'undefined'
