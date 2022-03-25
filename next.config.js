@@ -19,6 +19,8 @@ const nextConfig = {
       'www.europarl.europa.eu',
       'backend.wirklich-gruen.de',
       'res.cloudinary.com',
+      'tfca.earth',
+      'www.tfca.earth',
     ],
   },
   async redirects() {
@@ -52,10 +54,6 @@ module.exports = withPlugins(
       withAntdLess,
       {
         lessVarsFilePath: './styles/variables.less',
-        // lessVarsFilePathAppendToEndOfContent: false,
-        // nextjs: {
-        //   localIdentNameFollowDev: true,
-        // },
         webpack: (config) => {
           config.module.rules.push({
             issuer: /\.[jt]sx?$/,
