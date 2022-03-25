@@ -39,7 +39,7 @@
   font-size: 36px;
   letter-spacing: -1.1px;
   line-height: 1.2;
-  @media (min-width: @screen-sm) {
+  @media @desktop {
     font-size: 62px;
   }
 }
@@ -48,7 +48,7 @@
   .font-bold();
   font-size: 36px;
   line-height: 1.1;
-  @media (min-width: @screen-sm) {
+  @media @desktop {
     font-size: 56px;
   }
 }
@@ -56,7 +56,7 @@
 .h3() {
   .font-bold();
   font-size: 28px;
-  @media (min-width: @screen-sm) {
+  @media @desktop {
     font-size: 32px;
   }
 }
@@ -64,7 +64,7 @@
 .h4() {
   .font-bold();
   font-size: 21px;
-  @media (min-width: @screen-sm) {
+  @media @desktop {
     font-size: 28px;
   }
 }
@@ -73,6 +73,10 @@
   color: var(--text-color);
   font-weight: 300;
   line-height: 1.5;
+  font-size: @font-size-sm;
+  @media @desktop {
+    font-size: @font-size-base;
+  }
 }
 
 .h1-hero() {
@@ -80,7 +84,7 @@
   font-size: 54px;
   letter-spacing: -1px;
   line-height: 1;
-  @media (min-width: @screen-sm) {
+  @media @desktop {
     font-size: 110px;
     letter-spacing: -2.5px;
     line-height: 0.92;
