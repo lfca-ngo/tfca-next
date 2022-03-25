@@ -7,7 +7,7 @@ import { motion, useTransform, useViewportScroll } from 'framer-motion'
 import Image from 'next/image'
 import React from 'react'
 
-import { useActiveAction, useIsMobile } from '../../../hooks'
+import { useActiveAction, useIsClient, useIsMobile } from '../../../hooks'
 import { getLogoSrc, scrollToId } from '../../../utils'
 import { Hamburger } from '../../Elements/Hamburger'
 import { QuestionAnswer } from '../../Elements/QuestionAnswer'
@@ -29,6 +29,7 @@ const BOX_SHADOW_RANGE = [
 
 export const Header = ({ actions, collapsed, setCollapsed }) => {
   const isMobile = useIsMobile()
+  const isClient = useIsClient()
   const { scrollY } = useViewportScroll()
 
   // animations for mobile, the event does not fire on desktop
@@ -55,7 +56,11 @@ export const Header = ({ actions, collapsed, setCollapsed }) => {
 
   return (
     <motion.header
-      className={classNames('header', { collapsed, 'dark-mode': isMobile })}
+      className={classNames('header', {
+        collapsed,
+        'dark-mode': isMobile,
+        'is-client': isClient,
+      })}
       key={`${isMobile}`}
       style={headerStyles}
     >

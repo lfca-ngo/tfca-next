@@ -18,6 +18,12 @@ header.header {
   transition: @default-transition;
   background: @light-white;
 
+  // prevent glitch on mobile
+  opacity: 0;
+  &.is-client {
+    opacity: 1;
+  }
+
   &.dark-mode {
     background: @blue-dark;
     .header-content ul .action-element {

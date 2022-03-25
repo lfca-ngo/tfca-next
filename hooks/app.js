@@ -104,3 +104,8 @@ export const useIsMobile = () => {
   const { isMobile } = React.useContext(AppContext)
   return isMobile
 }
+
+export const useIsClient = () => {
+  const { isClient } = React.useContext(AppContext)
+  return isClient
+}
