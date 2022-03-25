@@ -1,6 +1,7 @@
 require('./styles.less')
 
 import { Button, Drawer } from 'antd'
+import classNames from 'classnames'
 import Link from 'next/link'
 import React, { useState } from 'react'
 
@@ -14,14 +15,14 @@ import { IntlSelector } from '../../IntlSelector'
 
 const TOGGLE_Q_AND_A = 'toggle-q-and-a'
 
-export const Nav = (props) => {
+export const Nav = ({ company, style }) => {
   const [open, setOpen] = useState(false)
   const [visible, setVisible] = useState(false)
   const toggle = () => setVisible(!visible)
   const mainNav = useContentNavs('mainHeaderNav')
 
   return (
-    <nav className={`${props.className} nav`}>
+    <nav className={classNames('nav', 'hidden md', style)}>
       <DefaultLogo />
       <ul>
         {mainNav?.elementsCollection?.items?.map((link) => {
@@ -53,9 +54,7 @@ export const Nav = (props) => {
           )
         })}
         {/* Company Info */}
-        {props.company && (
-          <li onClick={toggle}>{props.company?.company?.name}</li>
-        )}
+        {company && <li onClick={toggle}>{company?.company?.name}</li>}
         <li>
           <DarkModeSelector />
         </li>
@@ -63,11 +62,7 @@ export const Nav = (props) => {
           <IntlSelector />
         </li>
       </ul>
-      <DisclosureDrawer
-        data={props.company}
-        onClose={toggle}
-        visible={visible}
-      />
+      <DisclosureDrawer data={company} onClose={toggle} visible={visible} />
     </nav>
   )
 }

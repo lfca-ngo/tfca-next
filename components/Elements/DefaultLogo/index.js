@@ -14,7 +14,7 @@ export const DefaultLogo = () => {
     <div className="logo">
       <Link href="/">
         <a>
-          <Image height={70} src={logoSrc} width={70} />
+          <Image height={66} src={logoSrc} width={66} />
         </a>
       </Link>
     </div>

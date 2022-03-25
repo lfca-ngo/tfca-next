@@ -4,6 +4,8 @@
 @element-padding: 13px 16px;
 
 header.header {
+  @medium-grey: #ddd;
+
   display: flex;
   flex-direction: row;
 
@@ -24,7 +26,7 @@ header.header {
     height: auto;
     transition: width 0.3s ease;
     height: 100%;
-    border-right: 1px solid var(--medium-grey);
+    border-right: 1px solid @medium-grey;
 
     &.collapsed {
       width: @side-bar-width-collapsed;
@@ -50,7 +52,7 @@ header.header {
     justify-content: space-between;
     width: 100%;
     @media @desktop {
-      border-bottom: 1px solid var(--medium-grey);
+      border-bottom: 1px solid @medium-grey;
       padding-bottom: 20px;
     }
   }
@@ -95,7 +97,7 @@ header.header {
         margin-left: 20px;
 
         @media @desktop {
-          border-bottom: 1px solid var(--medium-grey);
+          border-bottom: 1px solid @medium-grey;
           padding: @element-padding;
           margin-left: 0;
         }
@@ -118,7 +120,7 @@ header.header {
           margin-left: 12px;
           flex: 1;
           transition: all 0.2s ease-in-out;
-          color: var(--text-color);
+          color: @text-color;
           font-size: @font-size-sm;
         }
       }
@@ -129,18 +131,19 @@ header.header {
     margin-bottom: 0;
     margin-top: auto;
     padding: 0;
-    border-top: 1px solid var(--medium-grey);
+    border-top: 1px solid @medium-grey;
     width: 100%;
     display: none;
     .font-medium();
 
     .ant-btn {
       margin-left: 4px;
-      color: var(--text-color);
+      color: @text-color;
       font-size: @font-size-sm;
       .anticon {
         margin-right: 8px;
         display: flex;
+        color: @black;
       }
     }
 
