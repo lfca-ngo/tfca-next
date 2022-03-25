@@ -10,11 +10,11 @@
 #scroll-container {
   width: 100%;
   overflow-y: scroll;
+  overflow-x: hidden;
   transition: @default-transition;
   @media @desktop {
     overflow-y: auto;
     transition: @default-transition;
-    overflow-x: hidden;
   }
   // when embedded, show full screen
   &.embedded {

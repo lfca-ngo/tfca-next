@@ -12,7 +12,7 @@ import { getLogoSrc, scrollToId } from '../../../utils'
 import { Hamburger } from '../../Elements/Hamburger'
 import { QuestionAnswer } from '../../Elements/QuestionAnswer'
 
-const DARK_BLUE = '#0d1a37'
+const DARK_BLUE = '#081022'
 const LIGHT_WHITE = '#fdfaf5'
 const MARGIN_LEFT_RANGE = [-75, 0]
 const SCROLL_RANGE_LG = [0, 650]
