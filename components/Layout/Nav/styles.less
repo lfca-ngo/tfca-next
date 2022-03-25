@@ -7,12 +7,28 @@
 }
 
 nav.nav {
+  display: flex;
+  justify-content: space-between;
+
+  @media @desktop {
+    max-width: @container-max-width;
+    margin: 0 auto;
+  }
+
+  .logo {
+    padding: @default-logo-padding;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   ul {
     display: flex;
     justify-content: flex-end;
     margin: 0;
+    align-self: flex-start;
     li {
-      padding: 12px 30px;
+      padding: 20px 30px;
       align-items: center;
       display: flex;
       .link-font-style();

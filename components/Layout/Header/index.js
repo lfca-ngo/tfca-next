@@ -12,6 +12,8 @@ import { getLogoSrc, scrollToId } from '../../../utils'
 import { Hamburger } from '../../Elements/Hamburger'
 import { QuestionAnswer } from '../../Elements/QuestionAnswer'
 
+const DARK_BLUE = '#0d1a37'
+const LIGHT_WHITE = '#fdfaf5'
 const MARGIN_LEFT_RANGE = [-75, 0]
 const SCROLL_RANGE_LG = [0, 650]
 const SCROLL_RANGE = [0, 400]
@@ -31,17 +33,24 @@ export const Header = ({ actions, collapsed, setCollapsed }) => {
   const { scrollY } = useViewportScroll()
 
   // animations for mobile, the event does not fire on desktop
+  const transitionBgColor = isDarkMode ? DARK_BLUE : LIGHT_WHITE
   const contentWidth = useTransform(scrollY, SCROLL_RANGE, CONTENT_WIDTH_RANGE)
   const opacity = useTransform(scrollY, SCROLL_RANGE_SHORT, OPACITY_RANGE)
   const headerWidth = useTransform(scrollY, SCROLL_RANGE, HEADER_WIDTH_RANGE)
   const logoPadding = useTransform(scrollY, SCROLL_RANGE, LOGO_PADDING_RANGE)
   const boxShadow = useTransform(scrollY, SCROLL_RANGE, BOX_SHADOW_RANGE)
   const marginLeft = useTransform(scrollY, SCROLL_RANGE_LG, MARGIN_LEFT_RANGE)
+  const backgroundColor = useTransform(scrollY, SCROLL_RANGE, [
+    'transparent',
+    transitionBgColor,
+  ])
 
   const logoStyles = isMobile ? { opacity, padding: logoPadding } : {}
-  const headerStyles = isMobile ? { boxShadow } : { boxShadow, marginLeft }
+  const headerStyles = isMobile
+    ? { backgroundColor, boxShadow }
+    : { boxShadow, marginLeft }
   const headerStartStyles = isMobile ? { width: headerWidth } : {}
-  const logoSrc = getLogoSrc(isDarkMode)
+  const logoSrc = getLogoSrc(false)
 
   const { activeAction } = useActiveAction()
 

@@ -11,7 +11,7 @@
 
   @media @desktop {
     text-align: center;
-    padding-top: calc(60px + @header-height-mini);
+    padding-top: 40px;
     padding-bottom: 80px;
     padding-left: 40px;
     padding-right: 40px;
@@ -32,9 +32,15 @@
   }
   .bg-wrapper {
     position: absolute;
-    right: -400px;
+    right: -260px;
     bottom: -240px;
-    width: 435px;
-    height: 435px;
+    width: 380px;
+    height: 380px;
+    @media @desktop {
+      right: -400px;
+      bottom: -240px;
+      width: 435px;
+      height: 435px;
+    }
   }
 }

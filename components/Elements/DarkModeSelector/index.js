@@ -1,3 +1,5 @@
+require('./styles.less')
+
 import Icon from '@ant-design/icons'
 import React from 'react'
 
@@ -11,6 +13,7 @@ export const DarkModeSelector = () => {
 
   return (
     <Icon
+      className="dark-mode-selector"
       component={isDarkMode ? IconSun : IconMoon}
       onClick={toggleDarkMode}
     />

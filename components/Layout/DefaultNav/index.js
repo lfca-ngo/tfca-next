@@ -2,12 +2,11 @@ require('./styles.less')
 
 import { Avatar, Button } from 'antd'
 import classNames from 'classnames'
-import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
-import { getLogoSrc } from '../../../utils'
 import { DarkModeSelector } from '../../Elements/DarkModeSelector'
+import { DefaultLogo } from '../../Elements/DefaultLogo'
 import { Hamburger } from '../../Elements/Hamburger'
 
 const NavElement = ({ icon, slug, title, type, url }) => {
@@ -45,16 +44,9 @@ const NavItems = ({ extra, items }) => {
 }
 
 export const DefaultNav = ({ data, style }) => {
-  const logoSrc = getLogoSrc(true)
   return (
     <div className={classNames('default-nav', style)}>
-      <div className="logo">
-        <Link href="/">
-          <a>
-            <Image height={48} src={logoSrc} width={48} />
-          </a>
-        </Link>
-      </div>
+      <DefaultLogo />
       <nav>
         <div className="nav-items">
           <NavItems

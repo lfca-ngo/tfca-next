@@ -8,6 +8,7 @@ import { useContentNavs } from '../../../hooks'
 import { DRAWER_WIDTH_MD } from '../../../utils'
 import { DisclosureDrawer } from '../../Disclosure/DisclosureDrawer'
 import { DarkModeSelector } from '../../Elements/DarkModeSelector'
+import { DefaultLogo } from '../../Elements/DefaultLogo'
 import { QuestionAnswer } from '../../Elements/QuestionAnswer'
 import { IntlSelector } from '../../IntlSelector'
 
@@ -21,6 +22,7 @@ export const Nav = (props) => {
 
   return (
     <nav className={`${props.className} nav`}>
+      <DefaultLogo />
       <ul>
         {mainNav?.elementsCollection?.items?.map((link) => {
           if (link?.action === TOGGLE_Q_AND_A) {
