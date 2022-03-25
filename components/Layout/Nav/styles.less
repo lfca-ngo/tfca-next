@@ -1,20 +1,37 @@
 @import (reference) '../../../styles/variables.less';
 @import (reference) '../../../styles/fonts.less';
+@import (reference) '../../../styles/mixins.less';
 
 .link-font-style() {
-  .font-regular(var(--heading-color));
+  .font-regular(@white);
   font-size: @font-size-sm;
 }
 
 nav.nav {
-  border-bottom: 1px solid var(--medium-grey);
+  display: flex;
+  justify-content: space-between;
+
+  .apply-color-scheme();
+
+  @media @desktop {
+    max-width: @container-max-width;
+    margin: 0 auto;
+  }
+
+  .logo {
+    padding: @default-logo-padding;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   ul {
     display: flex;
     justify-content: flex-end;
     margin: 0;
+    align-self: flex-start;
     li {
-      padding: 12px 30px;
-      border-left: 1px solid var(--medium-grey);
+      padding: 20px 30px;
       align-items: center;
       display: flex;
       .link-font-style();

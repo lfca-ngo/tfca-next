@@ -5,6 +5,7 @@
 // -------- Colors -----------
 // Palette
 @blue: #1f335e;
+@blue-dark: #0d1a37;
 @green: #009976;
 @orange: #ff832c;
 @pink: #d82086;
@@ -29,6 +30,16 @@
 
 // Gradients
 @pink-gradient: linear-gradient(270deg, darken(@pink, 5%) 0%, @pink 100%);
+@dark-blue-gradient: linear-gradient(
+  90deg,
+  darken(@blue-dark, 5%) 0%,
+  @blue-dark 100%
+);
+@white-gradient: linear-gradient(
+  270deg,
+  darken(@light-white, 2%) 0%,
+  @light-white 100%
+);
 
 // Fonts
 @font-family: 'Manrope', -apple-system, Helvetica, Arial, sans-serif;
@@ -87,6 +98,7 @@
 
 // Background
 @body-background: @light-white;
+@body-background-image: @dark-blue-gradient;
 @card-background: @white;
 
 // Tags
@@ -101,7 +113,9 @@
 // Other variables
 // Container variables
 @container-width: 1040px;
-@container-action-width: 740px;
+@container-hero-width: 840px;
+@container-max-width: 1280px;
+@container-action-width: 700px;
 @container-header-width: 840px;
 @container-header-max-width: 1000px;
 @default-section-padding-md: 60px 0;

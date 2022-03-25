@@ -17,7 +17,7 @@ body {
 
 #__next {
   width: 100%;
-  background: var(--body-background);
+  background-image: var(--body-background-image);
   transition: background 0.5s;
   @media @desktop {
     min-height: 100%;
@@ -57,7 +57,6 @@ span.text-accent {
   padding: 0 @default-section-padding;
   @media @desktop {
     margin: 0 auto;
-    padding: calc(50px + @header-height-mini) @side-bar-width-collapsed 60px 0;
   }
 }
 

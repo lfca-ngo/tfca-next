@@ -1,26 +1,28 @@
 require('./styles.less')
 
 import { Button, Drawer } from 'antd'
+import classNames from 'classnames'
 import Link from 'next/link'
 import React, { useState } from 'react'
 
 import { useContentNavs } from '../../../hooks'
 import { DRAWER_WIDTH_MD } from '../../../utils'
 import { DisclosureDrawer } from '../../Disclosure/DisclosureDrawer'
-import { DarkModeSelector } from '../../Elements/DarkModeSelector'
+import { DefaultLogo } from '../../Elements/DefaultLogo'
 import { QuestionAnswer } from '../../Elements/QuestionAnswer'
 import { IntlSelector } from '../../IntlSelector'
 
 const TOGGLE_Q_AND_A = 'toggle-q-and-a'
 
-export const Nav = (props) => {
+export const Nav = ({ company, style }) => {
   const [open, setOpen] = useState(false)
   const [visible, setVisible] = useState(false)
   const toggle = () => setVisible(!visible)
   const mainNav = useContentNavs('mainHeaderNav')
 
   return (
-    <nav className={`${props.className} nav`}>
+    <nav className={classNames('nav', 'hidden md', style)}>
+      <DefaultLogo />
       <ul>
         {mainNav?.elementsCollection?.items?.map((link) => {
           if (link?.action === TOGGLE_Q_AND_A) {
@@ -51,21 +53,12 @@ export const Nav = (props) => {
           )
         })}
         {/* Company Info */}
-        {props.company && (
-          <li onClick={toggle}>{props.company?.company?.name}</li>
-        )}
-        <li>
-          <DarkModeSelector />
-        </li>
+        {company && <li onClick={toggle}>{company?.company?.name}</li>}
         <li>
           <IntlSelector />
         </li>
       </ul>
-      <DisclosureDrawer
-        data={props.company}
-        onClose={toggle}
-        visible={visible}
-      />
+      <DisclosureDrawer data={company} onClose={toggle} visible={visible} />
     </nav>
   )
 }
