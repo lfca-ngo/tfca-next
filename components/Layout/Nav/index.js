@@ -8,7 +8,6 @@ import React, { useState } from 'react'
 import { useContentNavs } from '../../../hooks'
 import { DRAWER_WIDTH_MD } from '../../../utils'
 import { DisclosureDrawer } from '../../Disclosure/DisclosureDrawer'
-import { DarkModeSelector } from '../../Elements/DarkModeSelector'
 import { DefaultLogo } from '../../Elements/DefaultLogo'
 import { QuestionAnswer } from '../../Elements/QuestionAnswer'
 import { IntlSelector } from '../../IntlSelector'
@@ -55,9 +54,6 @@ export const Nav = ({ company, style }) => {
         })}
         {/* Company Info */}
         {company && <li onClick={toggle}>{company?.company?.name}</li>}
-        <li>
-          <DarkModeSelector />
-        </li>
         <li>
           <IntlSelector />
         </li>

@@ -4,12 +4,10 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
-import { useDarkMode } from '../../../hooks'
 import { getLogoSrc } from '../../../utils'
 
 export const DefaultLogo = () => {
-  const [isDarkMode] = useDarkMode()
-  const logoSrc = getLogoSrc(isDarkMode)
+  const logoSrc = getLogoSrc(true)
   return (
     <div className="logo">
       <Link href="/">
