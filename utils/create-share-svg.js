@@ -1,4 +1,4 @@
-export function createShareSvg({ message, names = [], color = '#1F335E' }) {
+export function createShareSvg({ color, message, names }) {
   return `
       <svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
       <rect width="1200" height="630" fill="${color}"/>
@@ -89,7 +89,7 @@ export function createShareSvg({ message, names = [], color = '#1F335E' }) {
       ${names.map(
         (name, i) => `
           <svg x="769" y="${
-            144 + i * (144 + 20)
+            144 + i * 144
           }" width="431" height="116" viewBox="0 0 431 116" fill="none">
             <path d="M432 0H17.5L0 116H432V0Z" fill="white" fill-opacity="0.90"/>
             <text x="47" y="50%" dy="0.37em" fill="#12244A" font-family="Manrope" font-size="66" font-weight="700" letter-spacing="-2.1">

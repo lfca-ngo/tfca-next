@@ -13,17 +13,6 @@ path.resolve(process.cwd(), 'fonts', 'Manrope-ExtraBold.ttf')
 path.resolve(process.cwd(), 'fonts', 'Manrope-Regular.ttf')
 path.resolve(process.cwd(), 'fonts', 'Manrope-SemiBold.ttf')
 
-const colorByName = {
-  blue: '#1f335e',
-  green: '#009976',
-  lila: '#622860',
-  orange: '#ff832c',
-  pink: '#d82086',
-  purple: '#5001ab',
-  'purple-light': '#c899fd',
-  yellow: '#f2ca49',
-}
-
 export default async function handler(req, res) {
   if (req.method !== 'GET') {
     return res.status(405).send({ message: 'Only GET requests allowed' })
@@ -31,14 +20,11 @@ export default async function handler(req, res) {
 
   try {
     const { token } = req.query
-    const { actionId, names } = decodeShareToken(token)
-
-    const message = 'I took action for a brighter tomorrow'
-    const color = 'green'
+    const { color, message, names } = decodeShareToken(token)
 
     const svgImage = Buffer.from(
       createShareSvg({
-        color: colorByName[color],
+        color,
         message,
         names,
       })

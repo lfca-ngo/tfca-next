@@ -8,6 +8,7 @@ import { StepHeader } from '../helpers/StepHeader'
 
 const { Option } = Select
 
+// TODO: Get this dynamically?
 const GREEN = [
   'Naturstrom',
   'Fair Trade Power',

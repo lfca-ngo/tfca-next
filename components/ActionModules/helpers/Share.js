@@ -3,37 +3,38 @@ import Image from 'next/image'
 import React from 'react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 
+import { namesArrayToString } from '../../../utils'
+
 const { TextArea } = Input
 const { TabPane } = Tabs
 
 const BTN_WIDTH = '120px'
 
-export const Share = ({ invites }) => {
-  const createInviteText = (actionId, names) => {
+export const Share = ({ imageInviteText, invites }) => {
+  const createInviteText = (names) => {
     let prefix = ''
     let namesString = 'you'
 
     if (names.length === 1) {
       prefix = `Hey ${names[0]}! `
     } else {
-      namesString = `${names.slice(0, names.length - 1).join(', ')} and ${
-        names[names.length - 1]
-      }`
+      namesString = namesArrayToString(names)
     }
 
-    return `${prefix}I completed the ${actionId} challenge! I am nominating ${namesString} to do the same! It’s Earth Day, you can afford #5minForThePlanet`
+    // TODO: Get text from contentful
+    return `${prefix}${imageInviteText}! I am nominating ${namesString} to do the same! It’s Earth Day, you can afford #5minForThePlanet`
   }
 
   return (
     <div>
       <h2>Ready! Invite your friends</h2>
-      <Tabs>
-        {invites.map(({ actionId, names, ogImageUrl, shortLink }, i) => {
+      <Tabs defaultActiveKey="0">
+        {invites.map(({ names, ogImageUrl, shortLink }, i) => {
           const tabName = names.length === 1 ? names[0] : 'All'
 
           return (
-            <TabPane key={tabName} tab={tabName}>
-              <TextArea rows={4} value={createInviteText(actionId, names)} />
+            <TabPane key={`${i}`} tab={tabName}>
+              <TextArea rows={4} value={createInviteText(names)} />
 
               <Image
                 alt={tabName}

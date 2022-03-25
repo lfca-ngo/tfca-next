@@ -26,7 +26,7 @@ const MAX_INVITES = 3
 export const Success = ({
   goTo,
   icon,
-  module: { blocks = {}, id },
+  module: { blocks = {}, id, imageInviteText, imageInviteColor },
   prevKey,
 }) => {
   const isMobile = useIsMobile()
@@ -170,7 +170,7 @@ export const Success = ({
             {isGeneratingToken ? (
               <LoadingOutlined />
             ) : (
-              <Share invites={invites} />
+              <Share imageInviteText={imageInviteText} invites={invites} />
             )}
           </div>
         )}
@@ -186,6 +186,8 @@ export const Success = ({
         body: JSON.stringify({
           actionCollectionSlug,
           actionId: id,
+          color: imageInviteColor,
+          message: imageInviteText,
           names,
         }),
         headers: {
