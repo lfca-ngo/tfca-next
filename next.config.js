@@ -13,12 +13,14 @@ const nextConfig = {
   },
   images: {
     domains: [
-      'localhost',
+      'backend.wirklich-gruen.de',
       'images.ctfassets.net',
+      'localhost',
+      'res.cloudinary.com',
+      'tfca-next.vercel.app',
       'www.bundestag.de',
       'www.europarl.europa.eu',
-      'backend.wirklich-gruen.de',
-      'res.cloudinary.com',
+      'www.tfca.earth',
     ],
   },
   async redirects() {
