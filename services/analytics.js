@@ -6,7 +6,7 @@ import { getWindowUid, INITIAL_STATS, INTERNAL_COOKIE } from '../utils'
 
 export const COOKIE = 'userId'
 
-const COLLECTION_ID = 'base'
+const DEFAULT_COLLECTION_ID = 'base'
 const LOG = 'log'
 const VISUALIZE = 'visualize/data'
 const DEFAULT_HEADERS = { 'Content-Type': 'application/json' }
@@ -14,10 +14,14 @@ const POST = 'post'
 
 const DEFAULT_PAYLOAD = {
   api_key: process.env.NEXT_PUBLIC_GRAPH_JSON_API_KEY,
-  collection: COLLECTION_ID,
 }
 
-export const trackEvent = ({ name, userId, values }) => {
+export const trackEvent = ({
+  collection = DEFAULT_COLLECTION_ID,
+  name,
+  userId,
+  values,
+}) => {
   const event = {
     Event: name,
     User_ID: userId,
@@ -26,6 +30,7 @@ export const trackEvent = ({ name, userId, values }) => {
 
   const payload = {
     ...DEFAULT_PAYLOAD,
+    collection,
     json: JSON.stringify(event),
     timestamp: Math.floor(new Date().getTime() / 1000),
   }
@@ -63,6 +68,7 @@ export const fetchStats = () => {
   const payload = {
     ...DEFAULT_PAYLOAD,
     aggregation: 'Count',
+    collection: DEFAULT_COLLECTION_ID,
     compare: null,
     end: 'now',
     filters: [['Event', '=', 'action_completed']],
