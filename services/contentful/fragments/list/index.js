@@ -6,6 +6,7 @@ import { DataBankFragment } from './data-bank'
 import { DataEnergyProviderFragment } from './data-energy-provider'
 import { DataOrganizationFragment } from './data-organization'
 import { DataPoliticalTopicFragment } from './data-political-topic'
+import { DataToolFragment } from './data-tool'
 import { DataWorkFragment } from './data-work'
 import { FilterFragment } from './filter'
 import { InputFragment } from './input'
@@ -18,6 +19,7 @@ export const ListFragment = gql`
   ${DataEnergyProviderFragment}
   ${DataOrganizationFragment}
   ${DataPoliticalTopicFragment}
+  ${DataToolFragment}
   ${DataWorkFragment}
   ${FilterFragment}
   ${InputFragment}
@@ -43,6 +45,7 @@ export const ListFragment = gql`
         ...DataEnergyProviderFragment
         ...DataOrganizationFragment
         ...DataPoliticalTopicFragment
+        ...DataToolFragment
         ...DataWorkFragment
         ...FilterFragment
         ...InputFragment

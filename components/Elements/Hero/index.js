@@ -24,7 +24,9 @@ export const Hero = ({ onClick }) => {
   const customHeaderText = (
     <span dangerouslySetInnerHTML={{ __html: customWithVars }} />
   )
-  const headerText = <span dangerouslySetInnerHTML={{ __html: defaultBlock }} />
+  const headerText = (
+    <span dangerouslySetInnerHTML={{ __html: text(defaultBlock) }} />
+  )
   const header = customization?.names ? customHeaderText : headerText
 
   return (

@@ -17,6 +17,7 @@ export const CardView = (props) => {
       return <ActionCard {...props} />
     case 'bank':
       return <BankCard {...props} />
+    case 'tool':
     case 'organization':
       return <OrganizationCard {...props} />
     case 'energy-provider':
