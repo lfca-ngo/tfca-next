@@ -5,7 +5,7 @@ import React from 'react'
 import { CookiesProvider } from 'react-cookie'
 import { QueryClient, QueryClientProvider } from 'react-query'
 
-import { ErrorBoundary } from '../components/ErrorBoundry'
+import { ErrorBoundary } from '../components/ErrorBoundary'
 import { AppProvider } from '../hooks'
 
 const apiClient = new QueryClient({

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { ErrorBoundary } from '../ErrorBoundry'
+import { ErrorBoundary } from '../ErrorBoundary'
 import { ActionFinderFlow } from './ActionFinder'
 import { ActionWrapper } from './helpers/ActionWrapper'
 import { Politics } from './Politics'

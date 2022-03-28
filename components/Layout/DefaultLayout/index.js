@@ -3,7 +3,7 @@ require('./styles.less')
 import React from 'react'
 
 import { DefaultHero } from '../../Elements/DefaultHero'
-import { ErrorBoundary } from '../../ErrorBoundry'
+import { ErrorBoundary } from '../../ErrorBoundary'
 import Template from '../'
 import { Footer } from '../Footer'
 import { Nav } from '../Nav'
