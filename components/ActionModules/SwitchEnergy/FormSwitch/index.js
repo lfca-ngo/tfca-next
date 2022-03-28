@@ -12,8 +12,10 @@ import { SwitchData } from './SwitchData'
 
 export const FormSwitch = ({
   goTo,
+  nextKey,
   module: { blocks = {}, icon = {} },
   store,
+  setStore,
 }) => {
   // const [visible, setVisible] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -68,6 +70,10 @@ export const FormSwitch = ({
     const res = { payload, status: 200 }
     setLoading(false)
     if (res?.status === 200) {
+      setStore({
+        ...store,
+        form: props,
+      })
       alert(
         'Dieses action module ist noch im BETA Modus. Bitte gedulde dich noch ein paar Tage! timo@lfca.earth'
       )
@@ -100,57 +106,59 @@ export const FormSwitch = ({
         <Form
           autoComplete="off"
           form={form}
-          initialValues={{
-            approvals: {
-              advertising: false,
-              ownTerms: false,
-              privacyTerms: false,
-              providerTerms: false,
-            },
-            contact: {
-              email: '',
-              phone: '',
-            },
-            desiredDelivery: {
-              date: null,
-              mode: 'asap',
-            },
-            meter: {
-              id: {
-                number: '',
-                type: 'number',
+          initialValues={
+            store.form || {
+              approvals: {
+                advertising: false,
+                ownTerms: false,
+                privacyTerms: false,
+                providerTerms: false,
               },
-            },
-            payment: {
-              accountDetails: {
-                authorization: false,
-                bankName: '',
-                bic: '',
-                iban: '',
+              contact: {
+                email: '',
+                phone: '',
               },
-            },
-            personal: {
-              birthday: '',
-            },
-            previousContract: {
-              cancellation: {
-                instructed: false,
+              desiredDelivery: {
+                date: null,
+                mode: 'asap',
               },
-              customerId: '',
-            },
-            remember: true,
-            separateBillingAddress: false,
-            shippingAddress: {
-              addition: '',
-              city: store?.city,
-              firstName: '',
-              lastName: '',
-              salutation: '',
-              streetAddress: '',
-              zipCode: store?.postcode,
-            },
-            type: 'switch',
-          }}
+              meter: {
+                id: {
+                  number: '',
+                  type: 'number',
+                },
+              },
+              payment: {
+                accountDetails: {
+                  authorization: false,
+                  bankName: '',
+                  bic: '',
+                  iban: '',
+                },
+              },
+              personal: {
+                birthday: '',
+              },
+              previousContract: {
+                cancellation: {
+                  instructed: false,
+                },
+                customerId: '',
+              },
+              remember: true,
+              separateBillingAddress: false,
+              shippingAddress: {
+                addition: '',
+                city: store?.city,
+                firstName: '',
+                lastName: '',
+                salutation: '',
+                streetAddress: '',
+                zipCode: store?.postcode,
+              },
+              type: 'switch',
+            }
+          }
           layout="vertical"
           name="switch_provider"
           onFinish={onFinish}
