@@ -12,7 +12,7 @@ import { SwitchData } from './SwitchData'
 
 export const FormSwitch = ({
   goTo,
-  nextKey,
+  // nextKey,
   module: { blocks = {}, icon = {} },
   store,
   setStore,
