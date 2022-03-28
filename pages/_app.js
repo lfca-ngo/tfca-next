@@ -5,6 +5,7 @@ import React from 'react'
 import { CookiesProvider } from 'react-cookie'
 import { QueryClient, QueryClientProvider } from 'react-query'
 
+import { ErrorBoundary } from '../components/ErrorBoundry'
 import { AppProvider } from '../hooks'
 
 const apiClient = new QueryClient({
@@ -27,7 +28,9 @@ function MyApp({ Component, pageProps }) {
             content={pageProps?.content}
             customization={pageProps?.customization}
           >
-            <Component {...pageProps} />
+            <ErrorBoundary>
+              <Component {...pageProps} />
+            </ErrorBoundary>
           </AppProvider>
         </CookiesProvider>
       </QueryClientProvider>

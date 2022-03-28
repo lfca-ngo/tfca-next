@@ -1,5 +1,6 @@
 import React from 'react'
 
+import { ErrorBoundary } from '../ErrorBoundry'
 import { ActionFinderFlow } from './ActionFinder'
 import { ActionWrapper } from './helpers/ActionWrapper'
 import { Politics } from './Politics'
@@ -34,7 +35,7 @@ const ActionModules = (props) => {
       name={action.name}
       otherUsers={props.stats[action.id]}
     >
-      {renderAction(action)}
+      <ErrorBoundary>{renderAction(action)}</ErrorBoundary>
     </ActionWrapper>
   ))
 }
