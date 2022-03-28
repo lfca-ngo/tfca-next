@@ -5,7 +5,7 @@ import React from 'react'
 import { withCookies } from 'react-cookie'
 
 import { trackEvent } from '../../services/analytics'
-import { INTERNAL_COOKIE } from '../../utils'
+import { getWindowUid, INTERNAL_COOKIE } from '../../utils'
 
 class EB extends React.Component {
   constructor(props) {
@@ -18,8 +18,7 @@ class EB extends React.Component {
   }
 
   componentDidCatch(error, errorInfo) {
-    // // const withConsent = Boolean(cookies[INTERNAL_COOKIE])
-    const userId = this.props.cookies.get(INTERNAL_COOKIE)
+    const userId = this.props.cookies.get(INTERNAL_COOKIE) || getWindowUid()
 
     // // Log the error
     trackEvent({
