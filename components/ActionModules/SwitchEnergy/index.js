@@ -46,16 +46,17 @@ export const SwitchEnergy = ({ module }) => {
         {stepsKeys.map((key, i) => {
           const Page = steps.get(key)
           const nextKey = i <= stepsKeys.length ? stepsKeys[i + 1] : null
-          const prevKey = i > 0 ? stepsKeys[i - 1] : null
+          let prevKey = i > 0 ? stepsKeys[i - 1] : null
+
+          if (key === 'success') {
+            if (!store.form) prevKey = 'check'
+          }
 
           return (
             <TabPane key={key} tab={key}>
               <Page
                 goTo={handleGoTo}
-                icon={module?.icon?.url}
-                moduleBlocks={module?.blocks || {}}
-                moduleData={module?.data || {}}
-                moduleLists={module?.lists || {}}
+                module={module || {}}
                 nextKey={nextKey}
                 prevKey={prevKey}
                 setStore={setStore}

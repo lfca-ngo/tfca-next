@@ -8,8 +8,7 @@ import Category from '../helpers/Category'
 export const Answer = ({
   activeQuestion,
   goTo,
-  icon,
-  moduleBlocks,
+  module: { blocks = {}, icon = {} },
   nextKey,
   prevKey,
 }) => {
@@ -19,8 +18,8 @@ export const Answer = ({
     <div className="step">
       <Category
         goBack={prevKey ? () => goTo(prevKey) : undefined}
-        icon={icon}
-        title={text(moduleBlocks['category.title'])}
+        icon={icon.url}
+        title={text(blocks['category.title'])}
       />
       <Text block={activeQuestion?.result} />
 

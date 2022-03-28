@@ -8,6 +8,7 @@ import { StepHeader } from '../helpers/StepHeader'
 
 const { Option } = Select
 
+// TODO: Get this dynamically?
 const GREEN = [
   'Naturstrom',
   'Fair Trade Power',
@@ -33,7 +34,7 @@ const customizeRenderEmpty = () => (
   </div>
 )
 
-export const CheckProvider = ({ goTo, icon, moduleBlocks }) => {
+export const CheckProvider = ({ goTo, module: { blocks = {}, icon = {} } }) => {
   const [provider, setProvider] = useState()
 
   const handleChange = (val) => {
@@ -90,13 +91,13 @@ export const CheckProvider = ({ goTo, icon, moduleBlocks }) => {
     <div className="step">
       <Category
         goBack={() => goTo('intro')}
-        icon={icon}
-        title={text(moduleBlocks['category.title'])}
+        icon={icon.url}
+        title={text(blocks['category.title'])}
       />
 
       <StepHeader
-        subtitle={moduleBlocks['checkprovider.description']}
-        title={moduleBlocks['checkprovider.title']}
+        subtitle={blocks['checkprovider.description']}
+        title={blocks['checkprovider.title']}
       />
 
       <Form>
@@ -108,9 +109,7 @@ export const CheckProvider = ({ goTo, icon, moduleBlocks }) => {
               }
               onChange={handleChange}
               optionFilterProp="children"
-              placeholder={
-                <span>{text(moduleBlocks['checkprovider.choose'])}</span>
-              }
+              placeholder={<span>{text(blocks['checkprovider.choose'])}</span>}
               showSearch
               size="large"
               style={{ width: '100%' }}

@@ -60,8 +60,7 @@ export const Quiz = ({ module }) => {
               <Page
                 activeQuestion={activeQuestion}
                 goTo={handleGoTo}
-                icon={module?.icon?.url}
-                moduleBlocks={module?.blocks || {}}
+                module={module || {}}
                 nextKey={nextKey}
                 prevKey={prevKey}
                 setStore={setStore}

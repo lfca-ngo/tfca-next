@@ -11,10 +11,9 @@ import { StepHeader } from '../helpers/StepHeader'
 export const Details = ({
   availableFilters,
   goTo,
-  icon,
+  module: { blocks = {}, icon = {} },
   messagesByFilterValue,
   messagesRelatedFilterKey,
-  moduleBlocks,
   nextKey,
   prevKey,
   setStore,
@@ -29,13 +28,13 @@ export const Details = ({
     <div className="step">
       <Category
         goBack={prevKey ? () => goTo(prevKey) : undefined}
-        icon={icon}
-        title={text(moduleBlocks['details.title'])}
+        icon={icon.url}
+        title={text(blocks['details.title'])}
       />
 
       <StepHeader
-        subtitle={moduleBlocks['details.subtitle']}
-        title={moduleBlocks['details.title']}
+        subtitle={blocks['details.subtitle']}
+        title={blocks['details.title']}
       />
 
       <Carousel

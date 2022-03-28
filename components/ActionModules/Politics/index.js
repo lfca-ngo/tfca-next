@@ -120,10 +120,9 @@ export const Politics = ({ module }) => {
                 availableFilters={availableFilters}
                 filterOption={filterOption}
                 goTo={handleGoTo}
-                icon={module?.icon?.url}
                 messagesByFilterValue={messagesByFilterValue}
                 messagesRelatedFilterKey={messagesRelatedFilterKey}
-                moduleBlocks={module?.blocks || {}}
+                module={module || {}}
                 nextKey={nextKey}
                 prevKey={prevKey}
                 setStore={setStore}
