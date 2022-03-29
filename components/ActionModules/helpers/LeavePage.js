@@ -52,6 +52,7 @@ export const LeavePage = ({ destination, destinationUrl, onNext }) => {
               Continue to {destination}
             </Button>
           </a>
+          <label>(Link opens in new window)</label>
         </Space>
       </div>
     </div>
