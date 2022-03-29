@@ -6,7 +6,10 @@ import { DesiredDeliveryInput } from './DesiredDeliveryInput'
 import { MeterInput } from './MeterInput'
 import { PreviousProviderInput } from './PreviousProviderInput'
 
-export const SwitchData = ({ requirePreviousContractCustomerId }) => {
+export const SwitchData = ({
+  disableDesiredDelivery,
+  requirePreviousContractCustomerId,
+}) => {
   return (
     <GroupWrapper
       description="Wenn du in den letzten 6 Wochen umgezogen bist oder in Kürze umziehen wirst, dann wähle die Umzugsoption."
@@ -54,7 +57,9 @@ export const SwitchData = ({ requirePreviousContractCustomerId }) => {
         {({ getFieldValue }) =>
           getFieldValue(['previousContract', 'cancellation', 'instructed']) ===
           true ? null : (
-            <DesiredDeliveryInput />
+            <DesiredDeliveryInput
+              disableDesiredDelivery={disableDesiredDelivery}
+            />
           )
         }
       </Form.Item>

@@ -24,8 +24,6 @@ import ShowMore from '../ShowMore'
 
 const { TabPane } = Tabs
 
-const IMG_BASE_URL = process.env.NEXT_PUBLIC_SWITCH_CLIMATE_IMG_URL
-
 const INTL_UNIT = {
   days: 'Tage',
   months: 'Monate',
@@ -62,7 +60,7 @@ export const ProviderDetails = ({ energyKwh, item, onNext }) => {
             height={46}
             layout="fill"
             objectFit="contain"
-            src={`${IMG_BASE_URL}${item.provider?.logo?.url}`}
+            src={`${process.env.NEXT_PUBLIC_SWITCH_CLIMATE_IMG_URL}${item.provider?.logo?.url}`}
             width={100}
           />
         </div>

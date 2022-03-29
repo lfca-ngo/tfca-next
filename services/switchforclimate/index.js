@@ -1,5 +1,5 @@
 import { gql, request } from 'graphql-request'
-import { useQuery } from 'react-query'
+import { useMutation, useQuery } from 'react-query'
 
 import { SwitchRateFragment } from './fragments'
 
@@ -20,6 +20,21 @@ export const fetchData = async (query, variables) => {
   } catch (error) {
     throw error
   }
+}
+
+export const postData = async (urlPath, payload) => {
+  const url = `${process.env.NEXT_PUBLIC_SWITCH_CLIMATE_BE_URL}${urlPath}`
+
+  const resp = await fetch(url, {
+    body: JSON.stringify(payload),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    method: 'POST',
+  })
+
+  const json = await resp.json()
+  return json
 }
 
 // hooks to consume specific data
@@ -142,4 +157,8 @@ export const useRobinWoodRating = (companyName) => {
       enabled: !!companyName,
     }
   )
+}
+
+export const useSwitchOrder = () => {
+  return useMutation((payload) => postData('/switch-orders', payload))
 }
