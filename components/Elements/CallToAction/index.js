@@ -18,7 +18,7 @@ const CallToAction = ({ block, ghost, size, slug, style, text, type, url }) => {
     )
   })
   return (
-    <Link href={slug || url} passHref>
+    <Link href={slug || url || ''} passHref>
       <CtaButton />
     </Link>
   )

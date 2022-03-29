@@ -1,4 +1,4 @@
-import { Button } from 'antd'
+import { Button, Space } from 'antd'
 import React from 'react'
 
 import { text } from '../../../utils/Text'
@@ -19,6 +19,7 @@ export const Results = ({
   const correctAnswers = Object.keys(answers).filter(
     (key) => answers[key]
   ).length
+
   return (
     <div className="step">
       <Category
@@ -38,11 +39,13 @@ export const Results = ({
         title={blocks['results.title']}
         vars={{ points: correctAnswers, totalQuestions: quizLength }}
       />
-      {actions?.items?.map((action, i) => (
-        <CallToAction key={`action-${i}`} {...action} />
-      ))}
+      <Space direction="vertical">
+        {actions?.map((action, i) => (
+          <CallToAction key={`action-${i}`} {...action} />
+        ))}
+      </Space>
       <Button block onClick={() => goTo(nextKey)} size="large" type="primary">
-        Continue
+        Make it count
       </Button>
     </div>
   )
