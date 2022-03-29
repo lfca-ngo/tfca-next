@@ -20,12 +20,12 @@ export const FormCheck = ({ goTo, module: { blocks = {}, icon = {} } }) => {
   const {
     data: searchResult,
     error: searchError,
-    loading: searchLoading,
+    isLoading: isSearchLoading,
   } = useSearchRobinWoodProvider(searchText)
   const {
     data: ratingResult,
     error: ratingError,
-    loading: ratingLoading,
+    isLoading: isRatingLoading,
     refetch: refetchRating,
   } = useRobinWoodRating(selectedProviderName)
 
@@ -49,7 +49,7 @@ export const FormCheck = ({ goTo, module: { blocks = {}, icon = {} } }) => {
       <Select
         defaultActiveFirstOption={false}
         filterOption={false}
-        loading={searchLoading}
+        loading={isSearchLoading}
         notFoundContent={null}
         onChange={setSelectedProviderName}
         onSearch={debouncedSearch}
@@ -67,7 +67,7 @@ export const FormCheck = ({ goTo, module: { blocks = {}, icon = {} } }) => {
 
       {searchError || ratingError ? (
         <FetchError onRefetch={ratingError ? refetchRating : undefined} />
-      ) : ratingLoading ? (
+      ) : isRatingLoading ? (
         <Spinner />
       ) : ratingResult ? (
         ratingResult.robinWoodRating?.recommendation === 'yes' ? (
