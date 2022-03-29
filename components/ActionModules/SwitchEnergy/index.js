@@ -49,7 +49,7 @@ export const SwitchEnergy = ({ module }) => {
           let prevKey = i > 0 ? stepsKeys[i - 1] : null
 
           if (key === 'success') {
-            if (!store.form) prevKey = 'form-check'
+            prevKey = undefined
           }
 
           return (
