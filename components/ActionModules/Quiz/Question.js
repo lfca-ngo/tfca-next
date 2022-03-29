@@ -72,7 +72,10 @@ export const Question = ({
         title={text(blocks['category.title'])}
       />
 
-      <StepHeader title={activeQuestion.question} />
+      <StepHeader
+        subtitle={activeQuestion.hint}
+        title={activeQuestion.question}
+      />
 
       <Form initialValues={store} layout="vertical" onFinish={handleNext}>
         <Form.Item
