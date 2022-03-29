@@ -13,6 +13,7 @@ import { text } from '../../../utils/Text'
 import { CardView } from '../../Elements/Cards'
 import CheckList from '../../Elements/CheckList'
 import { DetailView } from '../../Elements/DetailViews'
+import { FetchError } from '../../Elements/FetchError'
 import Category from '../helpers/Category'
 import { EnergyForm } from './Calculate'
 
@@ -52,18 +53,20 @@ export const Results = ({ goTo, module, nextKey, setStore, store }) => {
   }
 
   const getFirstOperatorId = (o) => (o ? Object.keys(o)[0] : null)
-  const { data: operatorData, isLoading: fetchingOperators } = useOperatorId(
-    store?.postcode
-  )
+  const {
+    data: operatorData,
+    error: operatorError,
+    isLoading: fetchingOperators,
+  } = useOperatorId(store?.postcode)
   const { city, operators } = operatorData?.locations[0] || {}
   const firstOperatorId = getFirstOperatorId(operators)
 
-  const { data: rates, isLoading: fetchingRates } = useSwitchRates(
-    store?.postcode,
-    city,
-    store?.energy,
-    firstOperatorId
-  )
+  const {
+    data: rates,
+    error: ratesError,
+    isLoading: fetchingRates,
+    refetch: refetchRates,
+  } = useSwitchRates(store?.postcode, city, store?.energy, firstOperatorId)
 
   const handleOnNext = (item) => {
     // Link to affiliate link if on page switch is not possible
@@ -80,6 +83,10 @@ export const Results = ({ goTo, module, nextKey, setStore, store }) => {
 
       goTo(nextKey)
     }
+  }
+
+  const handleGoBack = () => {
+    goTo('calculate')
   }
 
   const switchRates = rates?.switchRates
@@ -106,7 +113,7 @@ export const Results = ({ goTo, module, nextKey, setStore, store }) => {
   return (
     <div className="step">
       <Category
-        goBack={() => goTo('calculate')}
+        goBack={handleGoBack}
         icon={icon.url}
         title={
           <span>
@@ -117,69 +124,81 @@ export const Results = ({ goTo, module, nextKey, setStore, store }) => {
       <h2>{text(blocks['results.title'])}</h2>
       <CheckList data={lists['comparison.benefits']} />
 
-      <Row>
-        <Col xs={12}>
-          <RobinIcon />
-        </Col>
-        <Col className="actions-bar" style={{ textAlign: 'right' }} xs={12}>
-          <Space>
-            <Button
-              icon={<EditOutlined />}
-              onClick={() => setVisible(true)}
-              type="primary"
-            />
-            <Select onChange={changeSorting} value={sorting}>
-              <Option value="price">Price</Option>
-              <Option value="impact">Impact</Option>
-            </Select>
-          </Space>
-        </Col>
-      </Row>
+      {operatorError || (operatorData && !firstOperatorId) ? (
+        <FetchError onRefetch={handleGoBack} />
+      ) : ratesError ? (
+        <FetchError onRefetch={refetchRates} />
+      ) : (
+        <>
+          <Row>
+            <Col xs={12}>
+              <RobinIcon />
+            </Col>
+            <Col className="actions-bar" style={{ textAlign: 'right' }} xs={12}>
+              <Space>
+                <Button
+                  icon={<EditOutlined />}
+                  onClick={() => setVisible(true)}
+                  type="primary"
+                />
+                <Select onChange={changeSorting} value={sorting}>
+                  <Option value="price">Price</Option>
+                  <Option value="impact">Impact</Option>
+                </Select>
+              </Space>
+            </Col>
+          </Row>
 
-      <List
-        className="comparison-list"
-        dataSource={sortedList}
-        loading={loading}
-        renderItem={(item, i) => (
-          <CardView
-            energyKwh={store?.energy}
-            item={item}
-            key={`card-${i}`}
-            layout="provider"
-            onNext={() => handleOnNext(item)}
-            showDetails={showDetails}
+          <List
+            className="comparison-list"
+            dataSource={sortedList}
+            loading={loading}
+            renderItem={(item, i) => (
+              <CardView
+                energyKwh={store?.energy}
+                item={item}
+                key={`card-${i}`}
+                layout="provider"
+                onNext={() => handleOnNext(item)}
+                showDetails={showDetails}
+              />
+            )}
           />
-        )}
-      />
 
-      <Drawer
-        className={`drawer-md`}
-        destroyOnClose
-        footer={null}
-        onClose={() => setDrawerVisible(false)}
-        visible={drawerVisible}
-        width={isMobile ? '100%' : DRAWER_WIDTH_MD}
-      >
-        <DetailView
-          energyKwh={store?.energy}
-          item={store?.item}
-          layout="provider"
-          onNext={() => handleOnNext(store?.item)}
-        />
-      </Drawer>
+          <Drawer
+            className={`drawer-md`}
+            destroyOnClose
+            footer={null}
+            onClose={() => setDrawerVisible(false)}
+            visible={drawerVisible}
+            width={isMobile ? '100%' : DRAWER_WIDTH_MD}
+          >
+            <DetailView
+              energyKwh={store?.energy}
+              item={store?.item}
+              layout="provider"
+              onNext={() => handleOnNext(store?.item)}
+            />
+          </Drawer>
 
-      <Modal footer={null} onCancel={() => setVisible(false)} visible={visible}>
-        <EnergyForm
-          initialValues={{
-            postcodeEnergy: {
-              energy: store?.energy,
-              postcode: store?.postcode,
-            },
-          }}
-          module={module}
-          onFinish={updateProviders}
-        />
-      </Modal>
+          <Modal
+            footer={null}
+            onCancel={() => setVisible(false)}
+            visible={visible}
+          >
+            <EnergyForm
+              initialValues={{
+                postcodeEnergy: {
+                  energy: store?.energy,
+                  postcode: store?.postcode,
+                },
+              }}
+              module={module}
+              onFinish={updateProviders}
+            />
+          </Modal>
+        </>
+      )}
     </div>
   )
 }
