@@ -39,14 +39,15 @@ export const Results = ({
         title={blocks['results.title']}
         vars={{ points: correctAnswers, totalQuestions: quizLength }}
       />
-      <Space direction="vertical">
+      <Space direction="vertical" style={{ width: '100%' }}>
         {actions?.map((action, i) => (
           <CallToAction key={`action-${i}`} {...action} />
         ))}
+
+        <Button block onClick={() => goTo(nextKey)} size="large" type="primary">
+          Make it count
+        </Button>
       </Space>
-      <Button block onClick={() => goTo(nextKey)} size="large" type="primary">
-        Make it count
-      </Button>
     </div>
   )
 }
