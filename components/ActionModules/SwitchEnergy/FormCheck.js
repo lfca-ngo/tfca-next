@@ -1,0 +1,121 @@
+import { Alert, Button, Select } from 'antd'
+import debounce from 'lodash/debounce'
+import React, { useRef, useState } from 'react'
+
+import {
+  useRobinWoodRating,
+  useSearchRobinWoodProvider,
+} from '../../../services/switchforclimate'
+import { text } from '../../../utils/Text'
+import { FetchError } from '../../Elements/FetchError'
+import { Spinner } from '../../Elements/Spinner'
+import Category from '../helpers/Category'
+import { StepHeader } from '../helpers/StepHeader'
+
+const { Option } = Select
+
+export const FormCheck = ({ goTo, module: { blocks = {}, icon = {} } }) => {
+  const [selectedProviderName, setSelectedProviderName] = useState(null)
+  const [searchText, setSearchText] = useState('')
+  const {
+    data: searchResult,
+    error: searchError,
+    loading: searchLoading,
+  } = useSearchRobinWoodProvider(searchText)
+  const {
+    data: ratingResult,
+    error: ratingError,
+    loading: ratingLoading,
+    refetch: refetchRating,
+  } = useRobinWoodRating(selectedProviderName)
+
+  const debouncedSearch = useRef(
+    debounce((nextValue) => setSearchText(nextValue), 250)
+  ).current
+
+  return (
+    <div className="step">
+      <Category
+        goBack={() => goTo('intro')}
+        icon={icon.url}
+        title={text(blocks['category.title'])}
+      />
+
+      <StepHeader
+        subtitle={blocks['checkprovider.description']}
+        title={blocks['checkprovider.title']}
+      />
+
+      <Select
+        defaultActiveFirstOption={false}
+        filterOption={false}
+        loading={searchLoading}
+        notFoundContent={null}
+        onChange={setSelectedProviderName}
+        onSearch={debouncedSearch}
+        placeholder="Wähle einen Versorger"
+        showSearch
+        style={{ width: '100%' }}
+        value={selectedProviderName}
+      >
+        {searchResult?.robinWoodProviders?.map((item) => (
+          <Option key={item.companyName} value={item.companyName}>
+            {item.companyName}
+          </Option>
+        ))}
+      </Select>
+
+      {searchError || ratingError ? (
+        <FetchError onRefetch={ratingError ? refetchRating : undefined} />
+      ) : ratingLoading ? (
+        <Spinner />
+      ) : ratingResult ? (
+        ratingResult.robinWoodRating?.recommendation === 'yes' ? (
+          <div style={{ marginTop: '15px' }}>
+            <Alert
+              description="Dein Provider erfüllt bereits alle Vorgaben als unabhängiger Ökostromlieferant. Klick auf den Button, um deine Challenge erfolgreich abzuschließen!"
+              message="Wunderbar!"
+              showIcon
+              type="success"
+            />
+            <Button
+              block
+              onClick={() => goTo('success')}
+              size="large"
+              style={{ marginTop: '15px' }}
+              type="primary"
+            >
+              Challenge abschließen
+            </Button>
+          </div>
+        ) : (
+          <div style={{ marginTop: '15px' }}>
+            <Alert
+              description={
+                <div>
+                  {ratingResult.robinWoodRating?.reason ||
+                    'Dein Provider erfüllt nicht die höchsten Herausforderungen an Ökostrom.'}
+                  <br />
+                  Um die Challenge abzuschließen, kannst du mit wenigen Klicks
+                  deinen Anbieter wechseln!
+                </div>
+              }
+              message={ratingResult.robinWoodRating?.text}
+              showIcon
+              type="warning"
+            />
+            <Button
+              block
+              onClick={() => goTo('calculate')}
+              size="large"
+              style={{ marginTop: '15px' }}
+              type="primary"
+            >
+              Jetzt Provider wechseln
+            </Button>
+          </div>
+        )
+      ) : null}
+    </div>
+  )
+}

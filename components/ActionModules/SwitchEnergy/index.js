@@ -4,7 +4,7 @@ import React from 'react'
 import { useFlow } from '../../../hooks'
 import { Success } from '../helpers/Success'
 import { Calculate } from './Calculate'
-import { CheckProvider } from './CheckProvider'
+import { FormCheck } from './FormCheck'
 import { FormSwitch } from './FormSwitch'
 import { Intro } from './Intro'
 import { Results } from './Results'
@@ -14,7 +14,7 @@ const { TabPane } = Tabs
 const steps = new Map([
   ['intro', Intro],
   ['calculate', Calculate],
-  ['check', CheckProvider],
+  ['form-check', FormCheck],
   ['results', Results],
   ['form-switch', FormSwitch],
   ['success', Success],
@@ -49,7 +49,7 @@ export const SwitchEnergy = ({ module }) => {
           let prevKey = i > 0 ? stepsKeys[i - 1] : null
 
           if (key === 'success') {
-            if (!store.form) prevKey = 'check'
+            if (!store.form) prevKey = 'form-check'
           }
 
           return (

@@ -96,3 +96,50 @@ export const useSearchProvider = (name) => {
     fetchData(query, variables)
   )
 }
+
+export const useSearchRobinWoodProvider = (name) => {
+  const query = gql`
+    query ($name: String!) {
+      robinWoodProviders(name: $name) {
+        companyName
+      }
+    }
+  `
+
+  const variables = {
+    name,
+  }
+
+  return useQuery(['robinWoodSearch', name], async () =>
+    fetchData(query, variables)
+  )
+}
+
+export const useRobinWoodRating = (companyName) => {
+  const query = gql`
+    query ($companyName: String!) {
+      robinWoodRating(companyName: $companyName) {
+        companyName
+        criteriaId
+        reason
+        note
+        teaser
+        text
+        link
+        recommendation
+      }
+    }
+  `
+
+  const variables = {
+    companyName,
+  }
+
+  return useQuery(
+    ['robinWoodRating', companyName],
+    async () => fetchData(query, variables),
+    {
+      enabled: !!companyName,
+    }
+  )
+}
