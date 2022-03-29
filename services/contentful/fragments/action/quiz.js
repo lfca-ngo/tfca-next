@@ -3,6 +3,9 @@ import { gql } from 'graphql-request'
 export const QuizFragment = gql`
   fragment QuizFragment on Quiz {
     question
+    hint {
+      json
+    }
     questionId
     inputType
     wrongAnswerResponse

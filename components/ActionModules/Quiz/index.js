@@ -12,18 +12,22 @@ export const ANSWER_SUFFIX = '_answer'
 
 export const Quiz = ({ module }) => {
   const quizItems = module?.quizCollection?.items
+  const quizLength = quizItems?.length
 
   // for every question and answer pair we create one page component
   // that can be accessed via "next" or by calling it's key
   // we store all the answers in the store
   const steps = useMemo(() => {
-    const quizSteps = quizItems.map((item) => [
-      [item.questionId, { activeQuestion: item, component: Question }],
-      [
-        `${item.questionId}${ANSWER_SUFFIX}`,
-        { activeQuestion: item, component: Answer },
-      ],
-    ])
+    const quizSteps = quizItems.map((item, i) => {
+      const activeQuestion = { ...item, number: i + 1 }
+      return [
+        [item.questionId, { activeQuestion, component: Question }],
+        [
+          `${item.questionId}${ANSWER_SUFFIX}`,
+          { activeQuestion, component: Answer },
+        ],
+      ]
+    })
     const flattened = [].concat.apply([], quizSteps)
     return new Map([...flattened, ['success', { component: Success }]])
   }, [quizItems])
@@ -66,6 +70,7 @@ export const Quiz = ({ module }) => {
                 module={module || {}}
                 nextKey={nextKey}
                 prevKey={prevKey}
+                quizLength={quizLength}
                 setStore={setStore}
                 store={store}
               />

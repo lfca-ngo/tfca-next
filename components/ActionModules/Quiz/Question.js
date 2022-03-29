@@ -15,6 +15,7 @@ export const Question = ({
   module: { blocks = {}, icon = {} },
   nextKey,
   prevKey,
+  quizLength,
   store,
   setStore,
 }) => {
@@ -47,22 +48,24 @@ export const Question = ({
       answers: { ...store.answers, [activeQuestion?.questionId]: isCorrect },
     })
 
-    if (!isCorrect) {
-      setStatus('error')
-    } else {
-      setStatus('success')
-    }
-    // wait 2 sec and continue
-    setTimeout(() => {
-      goTo(nextKey)
-    }, 600)
+    if (!isCorrect) setStatus('error')
+    else setStatus('success')
+
+    // wait shortly and continue
+    setTimeout(() => goTo(nextKey), 600)
   }
 
   return (
     <div className="step">
       <Category
         addOn={
-          <GameProgress count={1} questionNumber={2} totalQuestionCount={6} />
+          activeQuestion?.number === 1 ? null : (
+            <GameProgress
+              answers={store?.answers}
+              questionNumber={activeQuestion?.number}
+              totalQuestionCount={quizLength}
+            />
+          )
         }
         goBack={prevKey ? () => goTo(prevKey) : undefined}
         icon={icon.url}

@@ -15,21 +15,26 @@ const GameProgressInner = ({ content, icon, popoverContent = '' }) => (
 )
 
 export const GameProgress = ({
-  count,
+  answers,
   questionNumber = 0,
   totalQuestionCount = 0,
-}) => (
-  <div className="game-progress">
-    <GameProgressInner
-      content={`${questionNumber} / ${totalQuestionCount}`}
-      icon={<QuestionOutlined />}
-      popoverContent={`Question ${questionNumber} of ${totalQuestionCount}`}
-    />
-    <Divider type="vertical" />
-    <GameProgressInner
-      content={count}
-      icon={<LikeOutlined />}
-      popoverContent={`Amount of correct answers`}
-    />
-  </div>
-)
+}) => {
+  const correctAnswers = Object.keys(answers).filter((key) => answers[key])
+  const correctAnswerCount = correctAnswers.length
+
+  return (
+    <div className="game-progress">
+      <GameProgressInner
+        content={`${questionNumber} / ${totalQuestionCount}`}
+        icon={<QuestionOutlined />}
+        popoverContent={`Question ${questionNumber} of ${totalQuestionCount}`}
+      />
+      <Divider type="vertical" />
+      <GameProgressInner
+        content={correctAnswerCount}
+        icon={<LikeOutlined />}
+        popoverContent={`Amount of correct answers`}
+      />
+    </div>
+  )
+}
