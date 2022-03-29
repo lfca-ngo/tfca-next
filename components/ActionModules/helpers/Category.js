@@ -8,23 +8,26 @@ import React from 'react'
 import { useContentBlocks } from '../../../hooks'
 import { text } from '../../../utils/Text'
 
-const Category = ({ goBack, icon, title }) => {
+const Category = ({ addOn, goBack, icon, title }) => {
   const backString = useContentBlocks('nav.back')
-  if (goBack) {
-    return (
-      <div className="action-category">
-        <Button onClick={goBack} type="link">
-          <ArrowLeftOutlined /> {text(backString)}
-        </Button>
-      </div>
-    )
-  }
+
   return (
     <div className="action-category">
-      <div className="icon">
-        <Image height={22} layout="fixed" src={icon} width={22} />
+      <div className="content">
+        {goBack ? (
+          <Button onClick={goBack} type="link">
+            <ArrowLeftOutlined /> {text(backString)}
+          </Button>
+        ) : (
+          <>
+            <div className="icon">
+              <Image height={22} layout="fixed" src={icon} width={22} />
+            </div>
+            <div className="text">{title}</div>
+          </>
+        )}
       </div>
-      <div className="text">{title}</div>
+      {addOn && <div className="add-on">{addOn}</div>}
     </div>
   )
 }

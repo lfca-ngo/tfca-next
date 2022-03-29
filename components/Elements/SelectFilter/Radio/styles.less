@@ -1,7 +1,76 @@
 @import (reference) '../../../../styles/variables.less';
 @import (reference) '../../../../styles/fonts.less';
 
+@keyframes shake {
+  10%,
+  90% {
+    transform: translate3d(-2px, 0, 0);
+  }
+
+  20%,
+  80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-2px, 0, 0);
+  }
+
+  40%,
+  60% {
+    transform: translate3d(2px, 0, 0);
+  }
+}
+
 .multi-select {
+  @correct-color: darken(@green, 15%);
+  @wrong-color: @red;
+
+  .color-item(@color) {
+    .ant-checkbox-group {
+      .ant-checkbox-wrapper {
+        &.ant-checkbox-wrapper-checked {
+          background: @color;
+          border-color: @color;
+          .ant-checkbox + span {
+            .label-wrapper {
+              color: white;
+            }
+          }
+        }
+        &.correct {
+          background: @correct-color;
+          border-color: @correct-color;
+          .ant-checkbox + span {
+            .label-wrapper {
+              color: white;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &.success {
+    .color-item(@correct-color);
+  }
+  &.error {
+    .color-item(@wrong-color);
+    .ant-checkbox-group {
+      .ant-checkbox-wrapper {
+        &.ant-checkbox-wrapper-checked {
+          .label-wrapper {
+            animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+            transform: translate3d(0, 0, 0);
+            backface-visibility: hidden;
+          }
+        }
+      }
+    }
+  }
+
   .ant-checkbox-group {
     display: flex;
     width: 100%;

@@ -3,8 +3,13 @@ import { gql } from 'graphql-request'
 export const QuizFragment = gql`
   fragment QuizFragment on Quiz {
     question
+    hint {
+      json
+    }
     questionId
     inputType
+    wrongAnswerResponse
+    rightAnswerResponse
     result {
       json
     }
@@ -13,7 +18,7 @@ export const QuizFragment = gql`
         ...CallToActionFragment
       }
     }
-    answersCollection(limit: 5) {
+    answersCollection(limit: 8) {
       items {
         ...QuizAnswerFragment
       }

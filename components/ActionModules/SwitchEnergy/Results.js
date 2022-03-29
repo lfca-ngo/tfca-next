@@ -123,7 +123,7 @@ export const Results = ({ goTo, module, nextKey, setStore, store }) => {
         }
       />
       <h2>{text(blocks['results.title'])}</h2>
-      <CheckList data={lists['comparison.benefits']} />
+      <CheckList data={lists['comparison.benefits']?.items} />
 
       {operatorError || (operatorData && !firstOperatorId) ? (
         <FetchError onRefetch={handleGoBack} />

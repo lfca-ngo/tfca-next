@@ -1,6 +1,7 @@
 require('./styles.less')
 
 import { Checkbox } from 'antd'
+import classNames from 'classnames'
 import Image from 'next/image'
 import React, { useState } from 'react'
 
@@ -10,6 +11,7 @@ export const Radio = ({
   items = [],
   singleMode,
   onSelect,
+  quizAnswerStatus,
 }) => {
   const [selected, setSelected] = useState(value)
 
@@ -34,10 +36,11 @@ export const Radio = ({
   }
 
   return (
-    <span className="multi-select">
+    <span className={classNames('multi-select', quizAnswerStatus)}>
       <Checkbox.Group onChange={onCheckboxChange} value={selected}>
         {items.map((item, i) => (
           <Checkbox
+            className={classNames({ correct: item.isCorrect })}
             key={`selected-${i}`}
             style={{ lineHeight: '32px' }}
             value={item.value}

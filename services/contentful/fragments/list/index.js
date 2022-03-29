@@ -30,6 +30,7 @@ export const ListFragment = gql`
       id
     }
     listId
+    label
     cardLayout
     listGrid
     detailViewType
@@ -41,6 +42,7 @@ export const ListFragment = gql`
     itemsCollection(limit: 30) {
       items {
         ...BlockFragment
+        ...CallToActionFragment
         ...DataBankFragment
         ...DataEnergyProviderFragment
         ...DataOrganizationFragment
