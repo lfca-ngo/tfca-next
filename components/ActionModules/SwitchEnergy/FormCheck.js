@@ -1,4 +1,4 @@
-import { Alert, Button, Select } from 'antd'
+import { Alert, Button, Select, Spin } from 'antd'
 import debounce from 'lodash/debounce'
 import React, { useRef, useState } from 'react'
 
@@ -8,7 +8,7 @@ import {
 } from '../../../services/switchforclimate'
 import { text } from '../../../utils/Text'
 import { FetchError } from '../../Elements/FetchError'
-import { Spinner } from '../../Elements/Spinner'
+import { LoadingSpinner } from '../../Elements/LoadingSpinner'
 import Category from '../helpers/Category'
 import { StepHeader } from '../helpers/StepHeader'
 
@@ -68,7 +68,7 @@ export const FormCheck = ({ goTo, module: { blocks = {}, icon = {} } }) => {
       {searchError || ratingError ? (
         <FetchError onRefetch={ratingError ? refetchRating : undefined} />
       ) : isRatingLoading ? (
-        <Spinner />
+        <LoadingSpinner />
       ) : ratingResult ? (
         ratingResult.robinWoodRating?.recommendation === 'yes' ? (
           <div style={{ marginTop: '15px' }}>
