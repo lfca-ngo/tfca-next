@@ -58,7 +58,7 @@ export const ActionDetails = ({ item }) => {
       </div>
 
       {item?.actionsCollection?.items?.map((action, i) => (
-        <CallToAction key={`action-${i}`} {...action} />
+        <CallToAction key={`action-${i}`} showLeaveModal {...action} />
       ))}
     </div>
   )

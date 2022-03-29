@@ -76,7 +76,7 @@ export const OrganizationDetails = ({ item }) => {
       </div>
 
       {item?.actionsCollection?.items?.map((action, i) => (
-        <CallToAction key={`action-${i}`} {...action} />
+        <CallToAction key={`action-${i}`} showLeaveModal {...action} />
       ))}
     </div>
   )

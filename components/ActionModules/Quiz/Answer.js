@@ -36,10 +36,6 @@ export const Answer = ({
       />
       <Text block={activeQuestion?.result} vars={{ response }} />
 
-      {actions?.items?.map((action, i) => (
-        <CallToAction key={`action-${i}`} {...action} />
-      ))}
-
       <Button block onClick={() => goTo(nextKey)} size="large" type="primary">
         Continue
       </Button>
