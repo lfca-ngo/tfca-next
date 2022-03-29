@@ -7,14 +7,12 @@ import {
 } from '@ant-design/icons'
 import { Button, Divider, List, Space } from 'antd'
 import Image from 'next/image'
-import React, { useState } from 'react'
+import React from 'react'
 
 import { Text, text } from '../../.././utils/Text'
 import CallToAction from '../CallToAction'
 
 export const BankDetails = ({ item, onNext }) => {
-  const [visible, setVisible] = useState(false)
-
   return (
     <div className="detail-view bank">
       <header>

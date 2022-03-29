@@ -2,7 +2,6 @@ import { Button } from 'antd'
 import React from 'react'
 
 import { Text, text } from '../../../utils/Text'
-import CallToAction from '../../Elements/CallToAction'
 import { GameProgress } from '../../Elements/GameProgress'
 import Category from '../helpers/Category'
 
@@ -15,7 +14,6 @@ export const Answer = ({
   prevKey,
   store: { answers },
 }) => {
-  const actions = activeQuestion?.resultActionsCollection
   const lastAnswer = answers?.[activeQuestion?.questionId]
   const { rightAnswerResponse = '', wrongAnswerResponse = '' } = activeQuestion
   const response = lastAnswer ? rightAnswerResponse : wrongAnswerResponse
