@@ -70,20 +70,15 @@ export const Results = ({ goTo, module, nextKey, setStore, store }) => {
   } = useSwitchRates(store?.postcode, city, store?.energy, firstOperatorId)
 
   const handleOnNext = (item) => {
-    // Link to affiliate link if on page switch is not possible
-    if (!item.provider?.connectionDetails) {
-      window.open(item?.affiliateLink, '_blank')
-    } else {
-      // Set the selected rate + city to the stor
-      setStore({
-        ...store,
-        city,
-        item,
-        operatorId: firstOperatorId,
-      })
+    // Set the selected rate + city to the stor
+    setStore({
+      ...store,
+      city,
+      item,
+      operatorId: firstOperatorId,
+    })
 
-      goTo(nextKey)
-    }
+    goTo(nextKey)
   }
 
   const handleGoBack = () => {
