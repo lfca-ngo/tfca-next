@@ -9,9 +9,8 @@ import { Button, Divider, List, Space } from 'antd'
 import Image from 'next/image'
 import React, { useState } from 'react'
 
-import { Text, text } from '../../../utils/Text'
-import { LeavePage } from '../../ActionModules/helpers/LeavePage'
-import { BasicModal } from '../BasicModal'
+import { Text, text } from '../../.././utils/Text'
+import CallToAction from '../CallToAction'
 
 export const BankDetails = ({ item, onNext }) => {
   const [visible, setVisible] = useState(false)
@@ -35,14 +34,16 @@ export const BankDetails = ({ item, onNext }) => {
 
         <div className="actions">
           <Space align="center">
-            <Button
+            <CallToAction
               block
-              onClick={() => setVisible(true)}
+              onCountMeIn={onNext}
               shape="round"
+              showLeaveModal
+              text={`Visit ${item.name}`}
               type="primary"
-            >
-              Switch now
-            </Button>
+              url={item.referralUrl}
+            />
+
             <Button
               block
               icon={<ShareAltOutlined />}
@@ -104,19 +105,6 @@ export const BankDetails = ({ item, onNext }) => {
           <Text block={item?.description} />
         </div>
       </div>
-
-      <BasicModal
-        content={
-          <LeavePage
-            destination={item.name}
-            destinationUrl={item.referralUrl}
-            onNext={onNext}
-          />
-        }
-        setVisible={setVisible}
-        title={null}
-        visible={visible}
-      />
     </div>
   )
 }

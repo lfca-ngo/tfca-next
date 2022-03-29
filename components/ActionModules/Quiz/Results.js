@@ -42,9 +42,13 @@ export const Results = ({
       <Space direction="vertical" style={{ width: '100%' }}>
         <h4>{actions?.label}</h4>
         {actions?.items?.map((action, i) => (
-          <CallToAction key={`action-${i}`} {...action} />
+          <CallToAction
+            key={`action-${i}`}
+            onCountMeIn={() => goTo(nextKey)}
+            showLeaveModal
+            {...action}
+          />
         ))}
-
         <h4>Count your action & share</h4>
         <Button block onClick={() => goTo(nextKey)} size="large" type="primary">
           Make it count

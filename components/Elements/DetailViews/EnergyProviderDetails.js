@@ -67,6 +67,7 @@ export const EnergyProviderDetails = ({ item }) => {
 
       <CallToAction
         block
+        showLeaveModal
         text="Visit provider"
         type="primary"
         url={`https://google.de`}
