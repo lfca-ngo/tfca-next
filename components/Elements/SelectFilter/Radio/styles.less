@@ -25,6 +25,9 @@
 }
 
 .multi-select {
+  @correct-color: darken(@green, 15%);
+  @wrong-color: @red;
+
   .color-item(@color) {
     .ant-checkbox-group {
       .ant-checkbox-wrapper {
@@ -37,15 +40,24 @@
             }
           }
         }
+        &.correct {
+          background: @correct-color;
+          border-color: @correct-color;
+          .ant-checkbox + span {
+            .label-wrapper {
+              color: white;
+            }
+          }
+        }
       }
     }
   }
 
   &.success {
-    .color-item(darken(@green, 15%));
+    .color-item(@correct-color);
   }
   &.error {
-    .color-item(@red);
+    .color-item(@wrong-color);
     .ant-checkbox-group {
       .ant-checkbox-wrapper {
         &.ant-checkbox-wrapper-checked {

@@ -32,10 +32,11 @@ export const getFilterOptions = (items, fieldName) => {
   return Object.keys(types)?.map((type) => types[type])
 }
 
-export const transformOption = (item, key) => ({
+export const transformOption = (item, key, addOn) => ({
   iconUrl: item.icon?.url,
   label: text(item.value),
   value: key,
+  ...addOn,
 })
 
 export const checkAnswers = (arr1, arr2) => {

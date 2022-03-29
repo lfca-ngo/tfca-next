@@ -40,6 +40,7 @@ export const Radio = ({
       <Checkbox.Group onChange={onCheckboxChange} value={selected}>
         {items.map((item, i) => (
           <Checkbox
+            className={classNames({ correct: item.isCorrect })}
             key={`selected-${i}`}
             style={{ lineHeight: '32px' }}
             value={item.value}

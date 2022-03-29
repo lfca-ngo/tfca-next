@@ -20,7 +20,7 @@ export const Question = ({
   setStore,
 }) => {
   const [status, setStatus] = useState()
-  const isSingleMode = activeQuestion?.inputType === SINGLE
+  const isSingleMode = activeQuestion?.inputType.indexOf(SINGLE) > -1
   const labelSingleMode = text(useContentBlocks('label.singlemode'))
   const labelMultiMode = text(useContentBlocks('label.multimode'))
 
@@ -29,7 +29,7 @@ export const Question = ({
     const answerOptions = activeQuestion?.answersCollection?.items?.map(
       (item) => {
         if (item.isCorrect) correctAnswers.push(item.key)
-        return transformOption(item, item.key)
+        return transformOption(item, item.key, { isCorrect: item.isCorrect })
       }
     )
     return {
@@ -84,7 +84,7 @@ export const Question = ({
           validateStatus={status}
         >
           <SelectFilter
-            filterMode="radio-single"
+            filterMode={activeQuestion?.inputType}
             items={answers?.options}
             onSelect={() => setStatus(null)}
             quizAnswerStatus={status}
