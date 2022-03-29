@@ -3,13 +3,16 @@ import { documentToPlainTextString } from '@contentful/rich-text-plain-text-rend
 import { INLINES } from '@contentful/rich-text-types'
 import React from 'react'
 
+const attributeValue = (value) => `"${value.replace(/"/g, '&quot;')}"`
+
 const options = {
   renderNode: {
-    [INLINES.HYPERLINK]: (node, children) => (
-      <a href={node.data.uri} rel="noreferrer" target="_blank">
-        {children}
-      </a>
-    ),
+    [INLINES.HYPERLINK]: (node, next) => {
+      const href = typeof node.data.uri === 'string' ? node.data.uri : ''
+      return `<a rel="noreferrer" target="_blank" href=${attributeValue(
+        href
+      )}>${next(node.content)}</a>`
+    },
   },
 }
 
