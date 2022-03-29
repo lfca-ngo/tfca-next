@@ -30,6 +30,7 @@ export const ListFragment = gql`
       id
     }
     listId
+    label
     cardLayout
     listGrid
     detailViewType

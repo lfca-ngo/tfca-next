@@ -353,8 +353,11 @@ const transformResults = (results) => {
       }, {})
       // transform lists to key value pairs
       const lists = listsCollection?.items.reduce((allLists, list) => {
-        const { itemsCollection, listId } = list
-        return { ...allLists, [listId]: itemsCollection.items }
+        const { itemsCollection, label, listId } = list
+        return {
+          ...allLists,
+          [listId]: { items: itemsCollection.items, label },
+        }
       }, {})
       // transform data to key value pairs
       const data = dataCollection?.items.reduce((allData, data) => {

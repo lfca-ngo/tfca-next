@@ -30,7 +30,7 @@ export const Success = ({
   prevKey,
 }) => {
   const isMobile = useIsMobile()
-  const benefits = useContentLists('sharing.benefits')
+  const benefits = useContentLists('sharing.benefits')?.items
   const [isGeneratingToken, setIsGeneratingToken] = React.useState(false)
   const [error, setError] = React.useState('')
   const [visible, setVisible] = React.useState('')

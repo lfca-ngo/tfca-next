@@ -15,7 +15,8 @@ export const Results = ({
   prevKey,
   store: { answers },
 }) => {
-  const actions = lists?.['results.actions']
+  const actions1 = lists?.['results.actions.list1']
+  const actions2 = lists?.['results.actions.list2']
   const correctAnswers = Object.keys(answers).filter(
     (key) => answers[key]
   ).length
@@ -40,10 +41,19 @@ export const Results = ({
         vars={{ points: correctAnswers, totalQuestions: quizLength }}
       />
       <Space direction="vertical" style={{ width: '100%' }}>
-        {actions?.map((action, i) => (
+        <h4>{actions1?.label}</h4>
+        {actions1?.items?.map((action, i) => (
           <CallToAction key={`action-${i}`} {...action} />
         ))}
-
+        {actions2 && (
+          <>
+            <h4>{actions2?.label}</h4>
+            {actions2?.items?.map((action, i) => (
+              <CallToAction key={`action-${i}`} {...action} />
+            ))}
+          </>
+        )}
+        <h4>Count your action & share</h4>
         <Button block onClick={() => goTo(nextKey)} size="large" type="primary">
           Make it count
         </Button>
