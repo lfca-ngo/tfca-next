@@ -67,7 +67,7 @@ export const Calculate = ({ goTo, module, setStore, store }) => {
 
       <StepHeader title={blocks['calculate.title']} />
 
-      <CheckList data={lists.benefits} />
+      <CheckList data={lists.benefits?.items} />
 
       <EnergyForm
         initialValues={{
