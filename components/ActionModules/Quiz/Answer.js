@@ -11,8 +11,12 @@ export const Answer = ({
   module: { blocks = {}, icon = {} },
   nextKey,
   prevKey,
+  store: { answers },
 }) => {
   const actions = activeQuestion?.resultActionsCollection
+  const lastAnswer = answers?.[activeQuestion?.questionId]
+  const { rightAnswerResponse = '', wrongAnswerResponse = '' } = activeQuestion
+  const response = lastAnswer ? rightAnswerResponse : wrongAnswerResponse
 
   return (
     <div className="step">
@@ -21,7 +25,7 @@ export const Answer = ({
         icon={icon.url}
         title={text(blocks['category.title'])}
       />
-      <Text block={activeQuestion?.result} />
+      <Text block={activeQuestion?.result} vars={{ response }} />
 
       {actions?.items?.map((action, i) => (
         <CallToAction key={`action-${i}`} {...action} />

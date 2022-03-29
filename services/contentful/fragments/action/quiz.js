@@ -5,6 +5,8 @@ export const QuizFragment = gql`
     question
     questionId
     inputType
+    wrongAnswerResponse
+    rightAnswerResponse
     result {
       json
     }

@@ -33,6 +33,9 @@ export const Quiz = ({ module }) => {
   const { goTo, index, setProgress, setStore, store } = useFlow({
     id: module?.id,
     initialIndex: stepsKeys[0],
+    initialStore: {
+      answers: {},
+    },
   })
 
   const handleGoTo = (key) => {
