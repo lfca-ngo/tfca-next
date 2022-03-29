@@ -18,7 +18,7 @@ export const QuizFragment = gql`
         ...CallToActionFragment
       }
     }
-    answersCollection(limit: 5) {
+    answersCollection(limit: 8) {
       items {
         ...QuizAnswerFragment
       }

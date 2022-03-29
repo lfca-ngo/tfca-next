@@ -5,6 +5,7 @@ import { useFlow } from '../../../hooks'
 import { Success } from '../helpers/Success'
 import { Answer } from './Answer'
 import { Question } from './Question'
+import { Results } from './Results'
 
 const { TabPane } = Tabs
 
@@ -29,7 +30,11 @@ export const Quiz = ({ module }) => {
       ]
     })
     const flattened = [].concat.apply([], quizSteps)
-    return new Map([...flattened, ['success', { component: Success }]])
+    return new Map([
+      ...flattened,
+      ['results', { component: Results }],
+      ['success', { component: Success }],
+    ])
   }, [quizItems])
 
   const stepsKeys = [...steps.keys()]
