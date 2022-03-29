@@ -7,6 +7,7 @@ import { LIST_GRIDS } from '../../../utils'
 import { text } from '../../../utils/Text'
 import { CardView } from '../../Elements/Cards'
 import { FetchError } from '../../Elements/FetchError'
+import { spinnerProps } from '../../Elements/LoadingSpinner'
 import Category from '../helpers/Category'
 import { StepHeader } from '../helpers/StepHeader'
 
@@ -78,7 +79,7 @@ export const Results = ({
             tags: [item.nationalPoliticalGroup],
           }))}
           grid={LIST_GRIDS['1-col']}
-          loading={isLoading}
+          loading={spinnerProps(isLoading)}
           renderItem={(item) => {
             const isSelected =
               (store.selectedPoliticians || []).findIndex(

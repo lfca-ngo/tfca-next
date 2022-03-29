@@ -14,6 +14,7 @@ import { CardView } from '../../Elements/Cards'
 import CheckList from '../../Elements/CheckList'
 import { DetailView } from '../../Elements/DetailViews'
 import { FetchError } from '../../Elements/FetchError'
+import { spinnerProps } from '../../Elements/LoadingSpinner'
 import Category from '../helpers/Category'
 import { EnergyForm } from './Calculate'
 
@@ -152,7 +153,7 @@ export const Results = ({ goTo, module, nextKey, setStore, store }) => {
           <List
             className="comparison-list"
             dataSource={sortedList}
-            loading={loading}
+            loading={spinnerProps(loading)}
             renderItem={(item, i) => (
               <CardView
                 energyKwh={store?.energy}

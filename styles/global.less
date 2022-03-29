@@ -24,11 +24,6 @@ body {
   }
 }
 
-// by default, icons should have text color
-body .anticon {
-  color: var(--text-color);
-}
-
 span.text-accent {
   background-color: @pink;
   background-image: linear-gradient(270deg, darken(@pink, 5%) 0%, @pink 100%);
@@ -279,6 +274,15 @@ label.ant-radio-wrapper {
       margin: 10px 0 15px;
     }
   }
+}
+
+.confetti-wrapper {
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
 }
 
 .mt-30 {

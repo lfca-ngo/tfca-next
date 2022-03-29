@@ -15,6 +15,7 @@ export const DetailView = (props) => {
       return <ActionDetails {...props} />
     case 'bank':
       return <BankDetails {...props} />
+    case 'tool':
     case 'organization':
       return <OrganizationDetails {...props} />
     case 'energy-provider':

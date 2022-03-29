@@ -11,7 +11,7 @@ import { Results } from './Results'
 const { TabPane } = Tabs
 
 export const ActionFinderFlow = ({ module }) => {
-  const { filters, items } = module?.data['main'] || {}
+  const { filters = [], items } = module?.data['main'] || {}
 
   const { availableFilters, steps } = useMemo(() => {
     const steps = []

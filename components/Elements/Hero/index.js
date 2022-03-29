@@ -4,33 +4,30 @@ import { Button, Typography } from 'antd'
 import Image from 'next/image'
 import React from 'react'
 
-import { useContentBlocks, useCustomization, useIsMobile } from '../../../hooks'
+import { useContentBlocks, useCustomization } from '../../../hooks'
 import { namesArrayToString } from '../../../utils'
 import { text } from '../../../utils/Text'
 import World from './world.png'
 
 export const Hero = ({ onClick }) => {
-  const isMobile = useIsMobile()
   const customization = useCustomization()
-  const customHeaderText = (
-    <span>
-      Hi{' '}
-      <span className="text-accent">
-        {namesArrayToString(customization?.names)}
-      </span>
-      , ready to act?
-    </span>
-  ) // useContentBlocks('header.title.custom')
-  const headerText = (
-    <span>
-      The time to act is <span className="text-accent">now</span>
-    </span>
-  ) //useContentBlocks('header.title')
 
-  // TODO: Get texts from contentful
-  const header = customization?.names
-    ? customHeaderText // text(customHeaderText, { name: customization.to })
-    : headerText // text(headerText)
+  const recipientsFallback = text(
+    useContentBlocks('header.title.recipients.fallback')
+  )
+  const defaultBlock = useContentBlocks('header.title')
+  const customBlock = useContentBlocks('header.title.custom')
+  const customWithVars = text(customBlock, {
+    name: namesArrayToString(customization?.names, recipientsFallback),
+  })
+
+  const customHeaderText = (
+    <span dangerouslySetInnerHTML={{ __html: customWithVars }} />
+  )
+  const headerText = (
+    <span dangerouslySetInnerHTML={{ __html: text(defaultBlock) }} />
+  )
+  const header = customization?.names ? customHeaderText : headerText
 
   return (
     <div className="hero content">
@@ -47,11 +44,7 @@ export const Hero = ({ onClick }) => {
         <span>{header}</span>
       </Typography.Title>
       <p>
-        <span>
-          {text(useContentBlocks('header.body'), {
-            emoji: isMobile ? ` 👇` : ` 👉`,
-          })}
-        </span>
+        <span>{text(useContentBlocks('header.body'))}</span>
       </p>
 
       <div className="start-btn">

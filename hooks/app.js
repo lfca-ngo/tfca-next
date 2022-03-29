@@ -43,7 +43,11 @@ export const AppProvider = ({ children, content, customization = null }) => {
         setShowConfetti,
       }}
     >
-      {showConfetti && <Confetti />}
+      {showConfetti && (
+        <div className="confetti-wrapper">
+          <Confetti />
+        </div>
+      )}
       {children}
     </AppContext.Provider>
   )
