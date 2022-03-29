@@ -25,8 +25,7 @@ const MAX_INVITES = 3
 
 export const Success = ({
   goTo,
-  icon,
-  module: { blocks = {}, id, imageInviteText, imageInviteColor },
+  module: { blocks = {}, id, imageInviteText, imageInviteColor, icon = {} },
   prevKey,
 }) => {
   const isMobile = useIsMobile()
@@ -64,7 +63,7 @@ export const Success = ({
       <div className="step">
         <Category
           goBack={prevKey ? () => goTo(prevKey) : undefined}
-          icon={icon}
+          icon={icon.url}
           title={text(blocks['category.title'])}
         />
         <h2>{text(useContentBlocks('sharing.headline'))}</h2>
