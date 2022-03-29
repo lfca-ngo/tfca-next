@@ -41,6 +41,7 @@ export const ListFragment = gql`
     itemsCollection(limit: 30) {
       items {
         ...BlockFragment
+        ...CallToActionFragment
         ...DataBankFragment
         ...DataEnergyProviderFragment
         ...DataOrganizationFragment
