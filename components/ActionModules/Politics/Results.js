@@ -6,6 +6,7 @@ import { usePoliticians } from '../../../services/politicians'
 import { LIST_GRIDS } from '../../../utils'
 import { text } from '../../../utils/Text'
 import { CardView } from '../../Elements/Cards'
+import { FetchError } from '../../Elements/FetchError'
 import { spinnerProps } from '../../Elements/LoadingSpinner'
 import Category from '../helpers/Category'
 import { StepHeader } from '../helpers/StepHeader'
@@ -19,7 +20,7 @@ export const Results = ({
   setStore,
   store,
 }) => {
-  const { data, error, isLoading } = usePoliticians(
+  const { data, error, isLoading, refetch } = usePoliticians(
     createPoliticsFilter(availableFilters, store)
   )
   const countSelected = store?.selectedPoliticians?.length || 0
@@ -66,7 +67,7 @@ export const Results = ({
       )}
 
       {error ? (
-        <h3>Something went wrong...</h3>
+        <FetchError onRefetch={refetch} />
       ) : (
         <List
           dataSource={(data?.items || []).map((item) => ({
