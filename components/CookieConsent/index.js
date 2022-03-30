@@ -54,10 +54,9 @@ const CookieConsent = () => {
     }
 
     // Set the uid cookie if we are allowed to
-    if (all || cookiesState[ANALYTICS_CONSENT_COOKIE_NAME]) {
-      // Use the UID on window (which might already have been used for initial tracking events)
-      setCookie(UID_COOKIE_NAME, getWindowUid())
-    }
+    const uid =
+      all || cookiesState[ANALYTICS_CONSENT_COOKIE_NAME] ? getWindowUid() : ''
+    setCookie(UID_COOKIE_NAME, uid)
 
     setVisible(false)
   }

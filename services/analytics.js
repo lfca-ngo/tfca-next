@@ -18,9 +18,10 @@ export const trackEvent = ({
   values = {},
 }) => {
   if (!isBrowser()) return
+  const uidCookie = getCookie(UID_COOKIE_NAME)
 
-  const consent = Boolean(getCookie(UID_COOKIE_NAME))
-  const userId = getCookie(UID_COOKIE_NAME) || getWindowUid()
+  const consent = uidCookie === null ? null : Boolean(uidCookie) // UID cookie will be set with empty '' if no consent is given
+  const userId = uidCookie || getWindowUid()
 
   const event = {
     consent,
