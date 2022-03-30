@@ -248,7 +248,7 @@ export const FormSwitch = ({
               size="large"
               type="primary"
             >
-              {error ? 'Retry' : 'Jetzt sicher wechseln'}
+              {error ? 'Retry' : 'Testorder platzieren (BETA)'}
             </Button>
           </Form.Item>
         </Form>
