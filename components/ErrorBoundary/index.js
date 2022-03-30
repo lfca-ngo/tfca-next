@@ -2,12 +2,11 @@ require('./styles.less')
 
 import { Button } from 'antd'
 import React from 'react'
-import { withCookies } from 'react-cookie'
 
 import { trackEvent } from '../../services/analytics'
-import { getWindowUid, INTERNAL_COOKIE } from '../../utils'
+import { getCookie, getWindowUid, UID_COOKIE_NAME } from '../../utils'
 
-class EB extends React.Component {
+export class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props)
     this.state = { hasError: false }
@@ -18,11 +17,11 @@ class EB extends React.Component {
   }
 
   componentDidCatch(error, errorInfo) {
-    const userId = this.props.cookies.get(INTERNAL_COOKIE) || getWindowUid()
+    const userId = getCookie(UID_COOKIE_NAME) || getWindowUid()
 
     // // Log the error
     trackEvent({
-      collection: 'errors',
+      collection: process.env.NEXT_PUBLIC_GRAPH_JSON_ERRORS_COLLECTION,
       name: 'error_boundary',
       userId,
       values: {
@@ -46,5 +45,3 @@ class EB extends React.Component {
     return this.props.children
   }
 }
-
-export const ErrorBoundary = withCookies(EB)
