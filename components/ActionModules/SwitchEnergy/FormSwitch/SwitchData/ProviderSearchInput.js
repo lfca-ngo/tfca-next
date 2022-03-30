@@ -17,8 +17,13 @@ export const ProviderSearchInput = ({ value = {}, onChange }) => {
 
   const onSelect = (providerId) => {
     const provider = searchResult?.providers?.find((r) => r.id === providerId)
-    setSelectedProvider(provider)
-    onChange(provider)
+
+    const newSelectedProvider = {
+      name: provider.name,
+      pid: providerId,
+    }
+    setSelectedProvider(newSelectedProvider)
+    onChange(newSelectedProvider)
   }
 
   return (
@@ -31,7 +36,7 @@ export const ProviderSearchInput = ({ value = {}, onChange }) => {
       onSearch={debouncedSearch}
       placeholder="Wähle einen Versorger"
       showSearch
-      value={value.id || selectedProvider.id}
+      value={value.pid || selectedProvider.pid}
     >
       {searchResult?.providers?.map((o) => (
         <Option key={o.id} value={o.id}>

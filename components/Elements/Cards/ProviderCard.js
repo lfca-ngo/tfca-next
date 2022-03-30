@@ -6,7 +6,6 @@ import Image from 'next/image'
 import React from 'react'
 
 import { Labels } from '../EnergyLabels'
-const IMG_BASE_URL = process.env.NEXT_PUBLIC_SWITCH_CLIMATE_IMG_URL
 
 export const ProviderCard = ({ energyKwh, item, onNext, showDetails }) => {
   const handleSwitch = () => onNext()
@@ -26,7 +25,7 @@ export const ProviderCard = ({ energyKwh, item, onNext, showDetails }) => {
               layout="fill"
               objectFit="contain"
               objectPosition={'0 0'}
-              src={`${IMG_BASE_URL}${item.provider?.logo?.url}`}
+              src={`${process.env.NEXT_PUBLIC_SWITCH_CLIMATE_IMG_URL}${item.provider?.logo?.url}`}
             />
           </div>
           <div className="tariff">

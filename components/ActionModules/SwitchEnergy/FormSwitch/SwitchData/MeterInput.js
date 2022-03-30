@@ -7,7 +7,7 @@ export const MeterInput = () => {
     <>
       <Form.Item
         label="Zur Ermittlung Deines Stromzählers benötigen wir eine Angabe"
-        name={['meter', 'id', 'type']}
+        name={['meter', 'mid', 'type']}
         rules={[{ message: 'Bitte auswählen!', required: true }]}
       >
         <Select>
@@ -19,11 +19,11 @@ export const MeterInput = () => {
       <Form.Item
         noStyle
         shouldUpdate={(prevValues, currentValues) =>
-          prevValues.meter?.id?.type !== currentValues.meter?.id?.type
+          prevValues.meter?.mid?.type !== currentValues.meter?.mid?.type
         }
       >
         {({ getFieldValue }) =>
-          getFieldValue(['meter', 'id', 'type']) === 'number' ? (
+          getFieldValue(['meter', 'mid', 'type']) === 'number' ? (
             <Form.Item
               label={
                 <div>
@@ -40,7 +40,7 @@ export const MeterInput = () => {
                   </Popover>
                 </div>
               }
-              name={['meter', 'id', 'number']}
+              name={['meter', 'mid', 'number']}
               rules={[
                 {
                   message: 'Bitte gebe deine Zählernummer ein!',
@@ -67,7 +67,7 @@ export const MeterInput = () => {
                   </Popover>
                 </div>
               }
-              name={['meter', 'id', 'maLoId']}
+              name={['meter', 'mid', 'maLoId']}
               rules={[
                 {
                   message: 'Bitte gebe deine Marktlokations-ID ein!',

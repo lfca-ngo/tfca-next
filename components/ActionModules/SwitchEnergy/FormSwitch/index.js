@@ -1,33 +1,72 @@
 import { LockOutlined } from '@ant-design/icons'
 import { Button, Divider, Form } from 'antd'
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 
+import { useSwitchOrder } from '../../../../services/switchforclimate'
 import { text } from '../../../../utils/Text'
+import { FetchError } from '../../../Elements/FetchError'
 import Category from '../../helpers/Category'
 import { Approvals } from './Approvals'
-// import { EmailReminder } from './EmailReminder'
 import { PaymentData } from './PaymentData'
 import { PersonalData } from './PersonalData'
 import { SwitchData } from './SwitchData'
 
 export const FormSwitch = ({
   goTo,
-  // nextKey,
+  nextKey,
   module: { blocks = {}, icon = {} },
   store,
-  setStore,
 }) => {
-  // const [visible, setVisible] = useState(false)
-  const [loading, setLoading] = useState(false)
-  // const { trackEvent } = useAnalytics()
+  const {
+    data,
+    error,
+    isLoading,
+    mutate: switchOrder,
+    reset,
+  } = useSwitchOrder()
   const [form] = Form.useForm()
 
   const onFinish = async (props) => {
+    // Reset potentially set errors
+    reset()
+
     const payload = {
       ...props,
-      billingAddress: props.billingAddress || props.shippingAddress,
+      additionalInfos: {},
+      approvals: {
+        advertising: props.approvals.advertising,
+        ownTerms: props.approvals.ownTerms,
+        providerTerms: props.approvals.providerTerms,
+      },
+      charityProject: null,
+      comparisonRate: {
+        cancellationPeriod: null,
+        emissions: [],
+        energyMix: [],
+        extendedTerm: null,
+        id: '',
+        minimumTerm: null,
+        name: '',
+        price: {
+          basePrice: 0,
+          workingPrice: 0,
+        },
+        priceGuarantee: {
+          date: null,
+          period: null,
+        },
+        provider: {
+          id: '',
+          name: '',
+        },
+      },
       customerGroup: 'private',
-      partner: 'LFCA',
+      desiredDelivery:
+        store.item?.provider?.connectionDetails?.fields?.desiredDelivery ===
+        'hidden'
+          ? { mode: 'asap' }
+          : props.desiredDelivery,
+      partner: 'lfca',
       payment: {
         ...props.payment,
         method: 'debit',
@@ -65,22 +104,28 @@ export const FormSwitch = ({
       },
     }
 
-    // TODO: Remove mock implemetation
-    setLoading(true)
-    const res = { payload, status: 200 }
-    setLoading(false)
-    if (res?.status === 200) {
-      setStore({
-        ...store,
-        form: props,
-      })
-      alert(
-        'Dieses action module ist noch im BETA Modus. Bitte gedulde dich noch ein paar Tage! timo@lfca.earth'
-      )
-    } else {
-      alert('Etwas ist schiefgelaufen. Bitte melde dich bei timo@lfca.earth')
+    if (payload.previousContract.cancellation.instructed) {
+      payload.desiredDelivery.mode = 'asap'
     }
+
+    if (payload.desiredDelivery.mode !== 'date') {
+      payload.desiredDelivery.date = null
+    }
+
+    if (!payload.separateBillingAddress) {
+      payload.billingAddress = null
+    }
+
+    switchOrder(payload)
   }
+
+  useEffect(() => {
+    if (data?.state === 'received') {
+      // Requets was successful
+      // TODO: track?
+      goTo(nextKey)
+    }
+  }, [data, goTo, nextKey])
 
   return (
     <div className="step">
@@ -91,74 +136,61 @@ export const FormSwitch = ({
       />
       <h2>Eine sehr gute Wahl. Du hast es fast geschafft!</h2>
 
-      {/* <div>
-        Gerade keine Zeit? Wir senden dir eine{' '}
-        <Button
-          icon={<MailOutlined />}
-          onClick={() => setVisible(true)}
-          type="link"
-        >
-          Erinnerungs-Email
-        </Button>
-      </div> */}
-
       <div>
         <Form
           autoComplete="off"
           form={form}
-          initialValues={
-            store.form || {
-              approvals: {
-                advertising: false,
-                ownTerms: false,
-                privacyTerms: false,
-                providerTerms: false,
+          initialValues={{
+            approvals: {
+              advertising: false,
+              ownTerms: false,
+              privacyTerms: false,
+              providerTerms: false,
+            },
+            contact: {
+              email: '',
+              phone: '',
+            },
+            desiredDelivery: {
+              date: null,
+              mode: 'asap',
+            },
+            meter: {
+              mid: {
+                number: '',
+                type: 'number',
               },
-              contact: {
-                email: '',
-                phone: '',
+            },
+            payment: {
+              accountDetails: {
+                authorization: false,
+                bankName: '',
+                bic: '',
+                iban: '',
               },
-              desiredDelivery: {
-                date: null,
-                mode: 'asap',
+            },
+            personal: {
+              birthday: '',
+            },
+            previousContract: {
+              cancellation: {
+                instructed: false,
               },
-              meter: {
-                id: {
-                  number: '',
-                  type: 'number',
-                },
-              },
-              payment: {
-                accountDetails: {
-                  authorization: false,
-                  bankName: '',
-                  bic: '',
-                  iban: '',
-                },
-              },
-              personal: {
-                birthday: '',
-              },
-              previousContract: {
-                cancellation: {
-                  instructed: false,
-                },
-                customerId: '',
-              },
-              remember: true,
-              separateBillingAddress: false,
-              shippingAddress: {
-                addition: '',
-                city: store?.city,
-                firstName: '',
-                lastName: '',
-                salutation: '',
-                streetAddress: '',
-                zipCode: store?.postcode,
-              },
-              type: 'switch',
-            }
-          }
+              customerId: '',
+            },
+            remember: true,
+            separateBillingAddress: false,
+            shippingAddress: {
+              addition: '',
+              city: store?.city,
+              firstName: '',
+              lastName: '',
+              salutation: '',
+              streetAddress: '',
+              zipCode: store?.postcode,
+            },
+            type: 'switch',
+          }}
           layout="vertical"
           name="switch_provider"
           onFinish={onFinish}
@@ -167,15 +199,15 @@ export const FormSwitch = ({
 
           <PersonalData
             requireBirthday={
-              store.item.provider.connectionDetails.fields
+              store.item?.provider?.connectionDetails?.fields
                 ?.personal_birthday === 'required'
             }
             requirePhone={
-              store.item.provider.connectionDetails.fields?.contact_phone ===
+              store.item?.provider?.connectionDetails?.fields?.contact_phone ===
               'required'
             }
             requireSalutation={
-              store.item.provider.connectionDetails.fields
+              store.item?.provider?.connectionDetails?.fields
                 ?.address_salutation === 'required'
             }
           />
@@ -183,9 +215,12 @@ export const FormSwitch = ({
           <Divider />
 
           <SwitchData
-            // allowsDesiredDelivery={true} // orderSettings => desiredDelivery
+            disableDesiredDelivery={
+              store.item?.provider?.connectionDetails?.fields
+                ?.desiredDelivery === 'hidden'
+            }
             requirePreviousContractCustomerId={
-              store.item.provider.connectionDetails.fields
+              store.item?.provider?.connectionDetails?.fields
                 ?.previousContract_customerId === 'required'
             }
           />
@@ -197,11 +232,11 @@ export const FormSwitch = ({
           <Divider />
 
           <Approvals
-            cancellationLink={store.item.provider.legalInfo?.cancellationLink}
-            privacyLink={store.item.provider.legalInfo?.privacyLink}
-            providerAddress={store.item.provider.address || ''}
-            providerLegalName={store.item.provider.legalName || ''}
-            termsLink={store.item.provider.legalInfo?.termsLink}
+            cancellationLink={store.item?.provider.legalInfo?.cancellationLink}
+            privacyLink={store.item?.provider.legalInfo?.privacyLink}
+            providerAddress={store.item?.provider.address || ''}
+            providerLegalName={store.item?.provider.legalName || ''}
+            termsLink={store.item?.provider.legalInfo?.termsLink}
           />
 
           <Form.Item>
@@ -209,19 +244,16 @@ export const FormSwitch = ({
               block
               htmlType="submit"
               icon={<LockOutlined />}
-              loading={loading}
+              loading={isLoading}
               size="large"
               type="primary"
             >
-              Jetzt sicher wechseln
+              {error ? 'Retry' : 'Jetzt sicher wechseln'}
             </Button>
           </Form.Item>
         </Form>
+        {error && <FetchError />}
       </div>
-
-      {/* <Modal footer={null} onCancel={() => setVisible(false)} visible={visible}>
-        <EmailReminder onClose={() => setVisible(false)} />
-      </Modal> */}
     </div>
   )
 }
