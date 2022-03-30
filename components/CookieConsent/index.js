@@ -25,8 +25,6 @@ const CookieConsent = () => {
 
   useEffect(() => {
     const isNewUser = !getCookie(requiredCookie)
-    // make sure that a uid is generated and assigned to window var
-    if (isNewUser || !getCookie(UID_COOKIE_NAME)) getWindowUid()
 
     // show consent banner if needed
     if (isNewUser) {
@@ -57,7 +55,7 @@ const CookieConsent = () => {
 
     // Set the uid cookie if we are allowed to
     if (all || cookiesState[ANALYTICS_CONSENT_COOKIE_NAME]) {
-      // Re-use the previously set UID on window (which might already have been used for initial tracking events)
+      // Use the UID on window (which might already have been used for initial tracking events)
       setCookie(UID_COOKIE_NAME, getWindowUid())
     }
 

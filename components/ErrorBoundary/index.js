@@ -4,7 +4,6 @@ import { Button } from 'antd'
 import React from 'react'
 
 import { trackEvent } from '../../services/analytics'
-import { getCookie, getWindowUid, UID_COOKIE_NAME } from '../../utils'
 
 export class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -17,13 +16,10 @@ export class ErrorBoundary extends React.Component {
   }
 
   componentDidCatch(error, errorInfo) {
-    const userId = getCookie(UID_COOKIE_NAME) || getWindowUid()
-
     // // Log the error
     trackEvent({
       collection: process.env.NEXT_PUBLIC_GRAPH_JSON_ERRORS_COLLECTION,
       name: 'error_boundary',
-      userId,
       values: {
         message: error.message || 'Unknown message',
         ...errorInfo,
