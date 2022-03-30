@@ -1,11 +1,7 @@
 require('./toolDetails.less')
 
-import {
-  CheckOutlined,
-  PlusCircleOutlined,
-  ShareAltOutlined,
-} from '@ant-design/icons'
-import { Button, List, Space } from 'antd'
+import { CheckOutlined, PlusCircleOutlined } from '@ant-design/icons'
+import { Divider, List } from 'antd'
 import Image from 'next/image'
 import React from 'react'
 
@@ -15,62 +11,66 @@ import CallToAction from '../CallToAction'
 export const ToolDetails = ({ item }) => {
   return (
     <div className="detail-view tool">
-      <div className="header">
-        <div className="text">
-          <div className="title">{item.name}</div>
+      <header>
+        <div className="logo-wrapper">
+          <Image layout="fill" objectFit="contain" src={item.logo?.url} />
         </div>
-
-        <div className="info-wrapper">
-          <div className="logo-wrapper">
-            <Image layout="fill" objectFit="contain" src={item.logo?.url} />
-          </div>
+        <div className="content">
+          <div className="name">{item.name}</div>
+          <div className="title">{item.title}</div>
+          <Divider />
           <div className="actions">
-            <Space style={{ width: '100%' }}>
-              <Button
-                block
-                icon={<ShareAltOutlined />}
-                shape="round"
-                type="primary"
-              />
-              <Button block shape="round" type="primary">
-                Call to Action
-              </Button>
-            </Space>
+            {item?.actionsCollection?.items?.map((action, i) => (
+              <CallToAction key={`action-${i}`} showLeaveModal {...action} />
+            ))}
           </div>
         </div>
-      </div>
+      </header>
 
-      <div className="activities">
-        <div className="section-title title">
-          <PlusCircleOutlined />
-          Activities
+      <main>
+        <div className="activities">
+          <div className="section-title title">
+            <PlusCircleOutlined />
+            Benefits
+          </div>
+
+          <List
+            className="simple-list"
+            dataSource={item?.benefitsCollection?.items}
+            renderItem={(item) => (
+              <List.Item>
+                <List.Item.Meta
+                  avatar={<CheckOutlined />}
+                  description={text(item.value)}
+                />
+              </List.Item>
+            )}
+          />
+        </div>
+        <div>
+          <div className="section-title title">
+            <PlusCircleOutlined />
+            How it works
+          </div>
+          <div className="screen">
+            <Image
+              height={360}
+              layout="responsive"
+              objectFit="contain"
+              src={item.hero?.url}
+              width={665}
+            />
+          </div>
         </div>
 
-        <List
-          className="simple-list"
-          dataSource={item?.benefitsCollection?.items}
-          renderItem={(item) => (
-            <List.Item>
-              <List.Item.Meta
-                avatar={<CheckOutlined />}
-                description={text(item.value)}
-              />
-            </List.Item>
-          )}
-        />
-      </div>
-
-      <div className="description">
-        <div className="section-title title">
-          <PlusCircleOutlined />
-          About
+        <div className="description">
+          <div className="section-title title">
+            <PlusCircleOutlined />
+            About
+          </div>
+          <Text block={item?.description} />
         </div>
-        <Text block={item?.description} />
-      </div>
-
-      {item?.actionsCollection?.items?.map((action, i) => (
-        <CallToAction key={`action-${i}`} showLeaveModal {...action} />
-      ))}
+      </main>
     </div>
   )
 }

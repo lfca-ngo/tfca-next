@@ -3,34 +3,57 @@
 @import (reference) '../../../styles/mixins.less';
 
 .detail-view.tool {
-  .header {
+  .screen {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 20px;
+  }
+
+  .ant-divider {
+    margin: 16px 0;
+  }
+
+  header {
+    margin: 40px 0 20px;
     display: flex;
     flex-direction: column;
-    .text {
-      width: 100%;
+    @media @desktop {
+      flex-direction: row;
+    }
+    .logo-wrapper {
+      .app-icon-style(100px);
       @media @desktop {
-        padding-right: 60px;
-      }
-      .title {
-        margin: 0px 0 25px;
-        font-size: 36px;
-        color: var(--heading-color);
-        @media @desktop {
-          font-size: 48px;
-        }
+        .app-icon-style(140px);
       }
     }
-    .info-wrapper {
-      @logo-wrapper-width: 140px;
-      @logo-wrapper-height: 90px;
+
+    .content {
       display: flex;
       align-items: flex-start;
-      flex-direction: row;
-      .logo-wrapper {
-        .app-icon-style(100px);
+      flex-direction: column;
+      flex: 1;
+      .name {
+        font-size: @font-size-base;
+        margin: 15px 0 5px;
+        @media @desktop {
+          margin: 0;
+        }
       }
       .actions {
-        padding-left: 12px;
+        display: flex;
+        overflow-x: auto;
+        overflow-y: hidden;
+        flex-wrap: nowrap;
+        max-width: 100%;
+        .ant-btn {
+          margin-right: 8px;
+        }
+        .hide-scrollbar();
+      }
+      .title {
+        font-size: 32px;
+        .font-semi(@black);
       }
     }
   }

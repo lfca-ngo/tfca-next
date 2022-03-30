@@ -1,4 +1,7 @@
+require('./styles.less')
+
 import { Button } from 'antd'
+import Image from 'next/image'
 import Link from 'next/link'
 import React, { useState } from 'react'
 
@@ -8,6 +11,7 @@ import { BasicModal } from '../BasicModal'
 const CallToAction = ({
   block,
   ghost,
+  icon,
   onClick,
   size,
   slug,
@@ -17,11 +21,23 @@ const CallToAction = ({
   url,
 }) => {
   const CtaButton = React.forwardRef(function renderButton() {
+    console.log('icon', icon)
     return (
       <Button
         block={block}
         className={`cta-button`}
         ghost={ghost}
+        icon={
+          icon ? (
+            <Image
+              height={24}
+              layout="fixed"
+              src={icon?.url}
+              style={{ marginRight: '8px' }}
+              width={24}
+            />
+          ) : null
+        }
         onClick={onClick}
         size={size}
         style={style}

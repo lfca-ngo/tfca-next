@@ -21,5 +21,8 @@ export const DataToolFragment = gql`
     logo {
       url
     }
+    hero {
+      url
+    }
   }
 `
