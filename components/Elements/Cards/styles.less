@@ -19,13 +19,17 @@
         fill: @secondary-color;
       }
     }
-    p {
-      font-size: 14px;
-      color: @black !important;
+    p,
+    .ant-list-item-meta,
+    .ant-list-item-meta-description {
+      font-size: @font-size-sm;
       margin: 0;
       @media @desktop {
-        font-size: 16px;
+        font-size: @font-size-base;
       }
+    }
+    p {
+      color: @black !important;
     }
   }
 }
