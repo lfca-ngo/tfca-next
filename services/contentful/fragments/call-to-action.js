@@ -12,5 +12,10 @@ export const CallToActionFragment = gql`
       url
     }
     ghost
+    action
+    emailTemplate {
+      subject
+      text
+    }
   }
 `

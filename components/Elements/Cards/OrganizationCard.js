@@ -7,8 +7,8 @@ import React from 'react'
 import { text } from '../../../utils/Text'
 
 export const OrganizationCard = ({ item, onNext }) => {
-  const typeTags =
-    item.tagsCollection?.items?.map((tag) => text(tag.value)) || []
+  const needsTags =
+    item.needsCollection?.items?.map((tag) => text(tag.value)) || []
 
   const handleNext = () => onNext(item)
 
@@ -22,7 +22,7 @@ export const OrganizationCard = ({ item, onNext }) => {
       </div>
       <div className="body-content">
         <div className="tags">
-          {typeTags?.map((tag, index) => (
+          {needsTags?.map((tag, index) => (
             <Tag className="base-tag blue" key={index}>
               {tag}
             </Tag>

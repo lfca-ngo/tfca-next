@@ -6,7 +6,7 @@ import {
   QuestionCircleOutlined,
   ShareAltOutlined,
 } from '@ant-design/icons'
-import { Button, List } from 'antd'
+import { Button, List, Space } from 'antd'
 import Image from 'next/image'
 import React from 'react'
 
@@ -57,9 +57,17 @@ export const ActionDetails = ({ item }) => {
         <Text block={item?.description} />
       </div>
 
-      {item?.actionsCollection?.items?.map((action, i) => (
-        <CallToAction key={`action-${i}`} showLeaveModal {...action} />
-      ))}
+      <Space direction="vertical" style={{ width: '100%' }}>
+        {item?.actionsCollection?.items?.map((action, i) => (
+          <CallToAction
+            key={`action-${i}`}
+            showLeaveModal
+            {...action}
+            block
+            ghost={false}
+          />
+        ))}
+      </Space>
     </div>
   )
 }

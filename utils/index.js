@@ -103,3 +103,9 @@ export const INITIAL_STATS = {
 
 export const getLogoSrc = (isDarkMode) =>
   isDarkMode ? '/images/logo_darkmode.svg' : '/images/logo.svg'
+
+export const getMailToLink = (email, subject, body) => {
+  return `mailto:${email}?subject=${subject}&cc=politics@lfca.earth&body=${encodeURIComponent(
+    body
+  )}`
+}
