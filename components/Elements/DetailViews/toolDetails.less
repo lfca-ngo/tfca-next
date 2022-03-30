@@ -1,0 +1,37 @@
+@import (reference) '../../../styles/variables.less';
+@import (reference) '../../../styles/fonts.less';
+@import (reference) '../../../styles/mixins.less';
+
+.detail-view.tool {
+  .header {
+    display: flex;
+    flex-direction: column;
+    .text {
+      width: 100%;
+      @media @desktop {
+        padding-right: 60px;
+      }
+      .title {
+        margin: 0px 0 25px;
+        font-size: 36px;
+        color: var(--heading-color);
+        @media @desktop {
+          font-size: 48px;
+        }
+      }
+    }
+    .info-wrapper {
+      @logo-wrapper-width: 140px;
+      @logo-wrapper-height: 90px;
+      display: flex;
+      align-items: flex-start;
+      flex-direction: row;
+      .logo-wrapper {
+        .app-icon-style(100px);
+      }
+      .actions {
+        padding-left: 12px;
+      }
+    }
+  }
+}

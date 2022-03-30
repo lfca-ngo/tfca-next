@@ -1,5 +1,6 @@
 @import (reference) '../../../styles/variables.less';
 @import (reference) '../../../styles/fonts.less';
+@import (reference) '../../../styles/mixins.less';
 
 .content-card.tool {
   .ant-card-body {
@@ -7,6 +8,9 @@
     flex-direction: column;
     align-items: flex-start;
     color: @black;
+    @media @desktop {
+      padding: 32px;
+    }
 
     .header {
       display: flex;
@@ -29,16 +33,7 @@
         .font-semi(@black);
       }
       .logo {
-        position: relative;
-        width: 70px;
-        height: 70px;
-        margin-right: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: @border-radius-lg;
-        overflow: hidden;
-        box-shadow: @box-shadow-base;
+        .app-icon-style(70px);
       }
     }
 
