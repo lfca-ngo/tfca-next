@@ -11,8 +11,16 @@ import React from 'react'
 
 import { Text, text } from '../../../utils/Text'
 import CallToAction from '../CallToAction'
+import { SocialIcons } from '../SocialIcons'
 
 export const OrganizationDetails = ({ item }) => {
+  const socials = [
+    { id: 'facebook', url: item.facebook },
+    { id: 'instagram', url: item.instagram },
+    { id: 'twitter', url: item.twitter },
+    { id: 'website', url: item.website },
+  ]
+
   return (
     <div className="detail-view organization">
       <div className="header">
@@ -74,6 +82,18 @@ export const OrganizationDetails = ({ item }) => {
         </div>
         <Text block={item?.description} />
       </div>
+
+      <SocialIcons items={socials} />
+
+      {item?.vettedByCollection?.items?.map((item, i) => (
+        <Image
+          height={40}
+          key={`vetted-${i}`}
+          layout="fixed"
+          src={item?.icon?.url}
+          width={40}
+        />
+      ))}
 
       {item?.actionsCollection?.items?.map((action, i) => (
         <CallToAction key={`action-${i}`} showLeaveModal {...action} />
