@@ -45,6 +45,7 @@ export const MetaDataFragment = gql`
       }
       acceptButton
       denyButton
+      infoboxStats
       levelsCollection(limit: 5) {
         items {
           key

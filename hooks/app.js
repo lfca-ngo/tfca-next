@@ -8,7 +8,7 @@ import React, {
 import Confetti from 'react-confetti'
 import { isMobile as isMobileClient } from 'react-device-detect'
 
-import { useTrackEvent } from '../services/analytics'
+import { trackEvent } from '../services/analytics'
 
 const AppContext = createContext()
 
@@ -22,12 +22,13 @@ export const AppProvider = ({ children, content, customization = null }) => {
 
   const key = isClient ? 'client' : 'server'
 
-  useTrackEvent({ name: 'page_visit' })
-
   // due to SSG we only know if it's mobile after first client side render
   useEffect(() => {
     setClient(true)
     setIsMobile(isMobileClient)
+    trackEvent({
+      name: 'page_visit',
+    })
   }, [])
 
   return (

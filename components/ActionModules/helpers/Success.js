@@ -6,7 +6,7 @@ import {
 } from '@ant-design/icons'
 import { Alert, Button, Drawer, Form, Input } from 'antd'
 import { useRouter } from 'next/router'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import {
   useConfetti,
@@ -14,7 +14,7 @@ import {
   useContentLists,
   useIsMobile,
 } from '../../../hooks'
-import { useTrackEvent } from '../../../services/analytics'
+import { trackEvent } from '../../../services/analytics'
 import { DRAWER_WIDTH_MD } from '../../../utils'
 import { text } from '../../../utils/Text'
 import CheckList from '../../Elements/CheckList'
@@ -39,7 +39,13 @@ export const Success = ({
   const { actionCollectionSlug } = router.query
 
   useConfetti()
-  useTrackEvent({ name: 'action_completed', values: { action_id: id } })
+
+  useEffect(() => {
+    trackEvent({
+      name: 'action_completed',
+      values: { action_id: id },
+    })
+  }, [id])
 
   // create multiple invite links
   // map of promises with infos
