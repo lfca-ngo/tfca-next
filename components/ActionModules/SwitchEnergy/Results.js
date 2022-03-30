@@ -3,12 +3,10 @@ import { Button, Col, Drawer, List, Modal, Row, Select, Space } from 'antd'
 import React, { useMemo, useState } from 'react'
 
 import RobinIcon from '../../../assets/icons/robin.svg'
-import { useIsMobile } from '../../../hooks'
 import {
   useOperatorId,
   useSwitchRates,
 } from '../../../services/switchforclimate'
-import { DRAWER_WIDTH_MD } from '../../../utils'
 import { text } from '../../../utils/Text'
 import { CardView } from '../../Elements/Cards'
 import CheckList from '../../Elements/CheckList'
@@ -30,7 +28,6 @@ export const getFullPrice = (item, kwh) =>
 
 export const Results = ({ goTo, module, nextKey, setStore, store }) => {
   const { blocks = {}, lists = {}, icon = {} } = module
-  const isMobile = useIsMobile()
   const [visible, setVisible] = useState(false)
   const [drawerVisible, setDrawerVisible] = useState(false)
   const [sorting, setSorting] = useState(SORT[0].type)
@@ -167,7 +164,6 @@ export const Results = ({ goTo, module, nextKey, setStore, store }) => {
             footer={null}
             onClose={() => setDrawerVisible(false)}
             visible={drawerVisible}
-            width={isMobile ? '100%' : DRAWER_WIDTH_MD}
           >
             <DetailView
               energyKwh={store?.energy}

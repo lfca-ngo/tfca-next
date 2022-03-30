@@ -1,8 +1,7 @@
 import { Drawer, List } from 'antd'
 import React, { useState } from 'react'
 
-import { useIsMobile } from '../../../hooks'
-import { DRAWER_WIDTH_MD, LIST_GRIDS } from '../../../utils'
+import { LIST_GRIDS } from '../../../utils'
 import { text } from '../../../utils/Text'
 import { CardView } from '../../Elements/Cards'
 import { DetailView } from '../../Elements/DetailViews'
@@ -20,7 +19,6 @@ export const Results = ({
   availableFilters = [],
 }) => {
   const [visible, setVisible] = useState(false)
-  const isMobile = useIsMobile()
   const detailViewType = data.main?.detailViewType || 'page'
   const isDrawerView = detailViewType === 'drawer'
 
@@ -98,7 +96,6 @@ export const Results = ({
           footer={null}
           onClose={() => setVisible(false)}
           visible={visible}
-          width={isMobile ? '100%' : DRAWER_WIDTH_MD}
         >
           <DetailView
             item={store?.item}

@@ -8,14 +8,15 @@
 }
 
 nav.nav {
-  display: flex;
-  justify-content: space-between;
-
   .apply-color-scheme();
 
-  @media @desktop {
-    max-width: @container-max-width;
-    margin: 0 auto;
+  .nav-container {
+    display: flex;
+    justify-content: space-between;
+    @media @desktop {
+      max-width: @container-max-width;
+      margin: 0 auto;
+    }
   }
 
   .logo {
