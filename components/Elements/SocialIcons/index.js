@@ -6,13 +6,14 @@ import {
   InstagramOutlined,
   TwitterOutlined,
 } from '@ant-design/icons'
+import { Button } from 'antd'
 import React from 'react'
 
 const MAP = {
-  facebook: <FacebookOutlined />,
-  instagram: <InstagramOutlined />,
-  twitter: <TwitterOutlined />,
-  website: <HomeOutlined />,
+  Facebook: <FacebookOutlined />,
+  Instagram: <InstagramOutlined />,
+  Twitter: <TwitterOutlined />,
+  Web: <HomeOutlined />,
 }
 
 export const SocialIcons = ({ items }) => {
@@ -24,7 +25,7 @@ export const SocialIcons = ({ items }) => {
           return (
             <div className="social-icon" key={social.id}>
               <a href={social.url} rel="noreferrer" target="_blank">
-                {MAP[social.id]}
+                <Button icon={MAP[social.id]}>{social.id}</Button>
               </a>
             </div>
           )

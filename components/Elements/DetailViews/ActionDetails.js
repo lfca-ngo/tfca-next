@@ -1,17 +1,12 @@
 require('./actionDetails.less')
 
-import {
-  CheckOutlined,
-  PlusCircleOutlined,
-  QuestionCircleOutlined,
-  ShareAltOutlined,
-} from '@ant-design/icons'
-import { Button, List, Space } from 'antd'
+import { ShareAltOutlined } from '@ant-design/icons'
+import { Button, Space } from 'antd'
 import Image from 'next/image'
 import React from 'react'
 
-import { Text, text } from '../../../utils/Text'
 import CallToAction from '../CallToAction'
+import { ListSection, TextSection } from '../Sections'
 
 export const ActionDetails = ({ item }) => {
   return (
@@ -27,35 +22,14 @@ export const ActionDetails = ({ item }) => {
         </div>
       </div>
 
-      <div className="short-description">{item?.shortDescription}</div>
+      <TextSection text={item?.shortDescription} title="Description" />
 
-      <div className="reasons">
-        <div className="section-title title">
-          <PlusCircleOutlined />
-          Why do this?
-        </div>
+      <ListSection
+        items={item?.reasonsCollection?.items}
+        title="Why should I do this?"
+      />
 
-        <List
-          className="simple-list"
-          dataSource={item?.reasonsCollection?.items}
-          renderItem={(item) => (
-            <List.Item>
-              <List.Item.Meta
-                avatar={<CheckOutlined />}
-                description={text(item.value)}
-              />
-            </List.Item>
-          )}
-        />
-      </div>
-
-      <div className="reasons">
-        <div className="section-title title">
-          <QuestionCircleOutlined />
-          How to do this?
-        </div>
-        <Text block={item?.description} />
-      </div>
+      <TextSection text={item?.description} title="How to do this" />
 
       <Space direction="vertical" style={{ width: '100%' }}>
         {item?.actionsCollection?.items?.map((action, i) => (

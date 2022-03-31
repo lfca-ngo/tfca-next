@@ -1,24 +1,21 @@
 require('./organizationDetails.less')
 
-import {
-  CheckOutlined,
-  PlusCircleOutlined,
-  ShareAltOutlined,
-} from '@ant-design/icons'
-import { Button, List, Space } from 'antd'
+import { PlusCircleOutlined, ShareAltOutlined } from '@ant-design/icons'
+import { Button, Space, Tag } from 'antd'
 import Image from 'next/image'
 import React from 'react'
 
-import { Text, text } from '../../../utils/Text'
+import { text } from '../../../utils/Text'
 import CallToAction from '../CallToAction'
+import { ListSection, TextSection } from '../Sections'
 import { SocialIcons } from '../SocialIcons'
 
 export const OrganizationDetails = ({ item }) => {
   const socials = [
-    { id: 'facebook', url: item.facebook },
-    { id: 'instagram', url: item.instagram },
-    { id: 'twitter', url: item.twitter },
-    { id: 'website', url: item.website },
+    { id: 'Facebook', url: item.facebook },
+    { id: 'Instagram', url: item.instagram },
+    { id: 'Twitter', url: item.twitter },
+    { id: 'Web', url: item.website },
   ]
 
   return (
@@ -26,6 +23,19 @@ export const OrganizationDetails = ({ item }) => {
       <div className="header">
         <div className="text">
           <div className="title">{item.name}</div>
+          <div className="vetted-by">
+            {item?.vettedByCollection?.items?.map((item, i) => (
+              <Tag className="vetted-by-org" key={`vetted-${i}`}>
+                <Image
+                  height={24}
+                  layout="fixed"
+                  src={item?.icon?.url}
+                  width={24}
+                />
+                {text(item?.value)}
+              </Tag>
+            ))}
+          </div>
         </div>
 
         <div className="info-wrapper">
@@ -55,45 +65,25 @@ export const OrganizationDetails = ({ item }) => {
         </div>
       </div>
 
-      <div className="activities">
-        <div className="section-title title">
-          <PlusCircleOutlined />
-          Activities
-        </div>
+      <ListSection
+        items={item?.activitiesCollection?.items}
+        title={'Activities'}
+        titleIcon={<PlusCircleOutlined />}
+      />
 
-        <List
-          className="simple-list"
-          dataSource={item?.activitiesCollection?.items}
-          renderItem={(item) => (
-            <List.Item>
-              <List.Item.Meta
-                avatar={<CheckOutlined />}
-                description={text(item.value)}
-              />
-            </List.Item>
-          )}
-        />
-      </div>
+      <ListSection
+        items={item?.areasCollection?.items}
+        title={'Areas'}
+        titleIcon={<PlusCircleOutlined />}
+      />
 
-      <div className="description">
-        <div className="section-title title">
-          <PlusCircleOutlined />
-          About
-        </div>
-        <Text block={item?.description} />
-      </div>
+      <TextSection
+        text={item?.description}
+        title={'About'}
+        titleIcon={<PlusCircleOutlined />}
+      />
 
       <SocialIcons items={socials} />
-
-      {item?.vettedByCollection?.items?.map((item, i) => (
-        <Image
-          height={40}
-          key={`vetted-${i}`}
-          layout="fixed"
-          src={item?.icon?.url}
-          width={40}
-        />
-      ))}
 
       {item?.actionsCollection?.items?.map((action, i) => (
         <CallToAction key={`action-${i}`} showLeaveModal {...action} />

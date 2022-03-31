@@ -1,12 +1,12 @@
 require('./toolDetails.less')
 
-import { CheckOutlined, PlusCircleOutlined } from '@ant-design/icons'
-import { Divider, List } from 'antd'
+import { PlusCircleOutlined } from '@ant-design/icons'
+import { Divider } from 'antd'
 import Image from 'next/image'
 import React from 'react'
 
-import { Text, text } from '../../../utils/Text'
 import CallToAction from '../CallToAction'
+import { ListSection, TextSection } from '../Sections'
 
 export const ToolDetails = ({ item }) => {
   return (
@@ -28,25 +28,8 @@ export const ToolDetails = ({ item }) => {
       </header>
 
       <main>
-        <div className="activities">
-          <div className="section-title title">
-            <PlusCircleOutlined />
-            Benefits
-          </div>
+        <ListSection items={item?.benefitsCollection?.items} title="Benefits" />
 
-          <List
-            className="simple-list"
-            dataSource={item?.benefitsCollection?.items}
-            renderItem={(item) => (
-              <List.Item>
-                <List.Item.Meta
-                  avatar={<CheckOutlined />}
-                  description={text(item.value)}
-                />
-              </List.Item>
-            )}
-          />
-        </div>
         <div>
           <div className="section-title title">
             <PlusCircleOutlined />
@@ -63,13 +46,7 @@ export const ToolDetails = ({ item }) => {
           </div>
         </div>
 
-        <div className="description">
-          <div className="section-title title">
-            <PlusCircleOutlined />
-            About
-          </div>
-          <Text block={item?.description} />
-        </div>
+        <TextSection text={item?.description} title="About" />
       </main>
     </div>
   )
