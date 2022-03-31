@@ -10,6 +10,7 @@ import React, { useEffect } from 'react'
 
 import { useConfetti, useContentBlocks, useContentLists } from '../../../hooks'
 import { trackEvent } from '../../../services/analytics'
+import { getCookie, getWindowUid, UID_COOKIE_NAME } from '../../../utils'
 import { text } from '../../../utils/Text'
 import CheckList from '../../Elements/CheckList'
 import Category from './Category'
@@ -186,6 +187,7 @@ export const Success = ({
           color: imageInviteColor,
           message: imageInviteText,
           names,
+          uid: getCookie(UID_COOKIE_NAME) || getWindowUid(),
         }),
         headers: {
           'Content-Type': 'application/json',

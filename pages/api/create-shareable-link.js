@@ -5,8 +5,9 @@ export default async function handler(req, res) {
     return res.status(405).send({ message: 'Only POST requests allowed' })
   }
 
-  const { actionCollectionSlug, actionId, color, message, names } = req.body
-  const token = createShareToken({ actionId, color, message, names })
+  const { actionCollectionSlug, actionId, color, message, names, uid } =
+    req.body
+  const token = createShareToken({ actionId, color, message, names, uid })
 
   const shareLink = `${process.env.BASE_URL}/${actionCollectionSlug}/invite/${token}`
   const ogImageUrl = `${process.env.BASE_URL}/api/images/${token}`

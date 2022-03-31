@@ -83,8 +83,12 @@ export const setCookie = (name, value) => {
 
 export const getCookie = (name) => {
   if (!isBrowser()) return null
-
   return window.localStorage.getItem(name)
+}
+
+export const deleteCookie = (name) => {
+  if (!isBrowser()) return
+  window.localStorage.removeItem(name)
 }
 
 // gets & sets uid in window variable

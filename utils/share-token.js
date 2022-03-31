@@ -19,6 +19,7 @@ export function createShareToken({
   names = [],
   color = DEFAULT_COLOR,
   message = DEFAULT_MESSAGE,
+  uid = null,
 }) {
   return jwt.sign(
     {
@@ -27,6 +28,7 @@ export function createShareToken({
       iat: 1648205376, // Prevent the default timestamp to always create the same token for the same input
       message,
       names,
+      uid,
     },
     process.env.JWT_TOKEN_PRIVATE_KEY
   )
@@ -34,7 +36,7 @@ export function createShareToken({
 
 export function decodeShareToken(token) {
   try {
-    const { actionId, color, message, names } = jwt.verify(
+    const { actionId, color, message, names, uid } = jwt.verify(
       token,
       process.env.JWT_TOKEN_PRIVATE_KEY
     )
@@ -43,6 +45,7 @@ export function decodeShareToken(token) {
       color,
       message,
       names,
+      uid,
     }
   } catch (e) {
     return null
