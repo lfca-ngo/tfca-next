@@ -124,7 +124,7 @@ export const IntlSelector = () => {
     let path = `/${newActionCollectionSlug || actionCollectionSlug}`
 
     if (companySlug) {
-      path += `/supporter/${companySlug}`
+      path += `/co/${companySlug}`
     } else if (shareToken) {
       path = `/invite/${shareToken}`
     }

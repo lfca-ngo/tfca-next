@@ -38,9 +38,9 @@ const nextConfig = {
         source: '/',
       },
       {
-        destination: '/int/supporter/:companySlug',
+        destination: '/int/co/:companySlug',
         permanent: false,
-        source: '/supporter/:companySlug',
+        source: '/co/:companySlug',
       },
       {
         destination: '/int/invite/:shareToken',

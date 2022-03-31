@@ -34,7 +34,12 @@ export const PoliticianDetails = ({
   }, [messages, activeMessageIndex, item])
 
   const handleSend = () => {
-    const mailToLink = getMailToLink(item.email, subject, text)
+    const mailToLink = getMailToLink({
+      body: text,
+      cc: 'politics@lfca.earth',
+      subject,
+      to: item.email,
+    })
     window.location.href = mailToLink
     // remove selectedItem aka politician
     // from store and add to sentItems
