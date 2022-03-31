@@ -9,7 +9,7 @@ const nextConfig = {
     localeDetection: false,
     // IMPORTANT: This must! match all possible isoCodes in the `languagesCollection` in contentful!!!
     // TODO: fetch contentful languages dynamically
-    locales: ['de', 'en', 'en-US'],
+    locales: ['de', 'en', 'en-US', 'tr', 'es', 'fr'],
   },
   images: {
     domains: [
