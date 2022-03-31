@@ -15,12 +15,12 @@ export const ActionDetails = ({ item }) => {
         <Image height={304} src={item.hero?.url} width={665} />
       </div>
 
-      <div className="header">
+      <header>
         <div className="title">{item.name}</div>
         <div className="actions">
           <Button icon={<ShareAltOutlined />} shape="round" type="primary" />
         </div>
-      </div>
+      </header>
 
       <TextSection text={item?.shortDescription} title="Description" />
 

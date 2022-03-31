@@ -12,7 +12,7 @@ import { ListSection } from '../Sections'
 export const EnergyProviderDetails = ({ item }) => {
   return (
     <div className="detail-view energy-provider">
-      <div className="header">
+      <header>
         <div className="text">
           <div className="title">{item.name}</div>
           <div className="description">
@@ -40,7 +40,7 @@ export const EnergyProviderDetails = ({ item }) => {
             </Space>
           </div>
         </div>
-      </div>
+      </header>
 
       <ListSection items={item?.benefitsCollection?.items} title="Benefits" />
 

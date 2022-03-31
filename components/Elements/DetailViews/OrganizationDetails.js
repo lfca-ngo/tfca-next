@@ -1,7 +1,7 @@
 require('./organizationDetails.less')
 
-import { PlusCircleOutlined, ShareAltOutlined } from '@ant-design/icons'
-import { Button, Space, Tag } from 'antd'
+import { PlusCircleOutlined } from '@ant-design/icons'
+import { Divider, Space, Tag } from 'antd'
 import Image from 'next/image'
 import React from 'react'
 
@@ -20,8 +20,12 @@ export const OrganizationDetails = ({ item }) => {
 
   return (
     <div className="detail-view organization">
-      <div className="header">
-        <div className="text">
+      <header>
+        <div className="logo-wrapper">
+          <Image layout="fill" objectFit="contain" src={item.logo?.url} />
+        </div>
+
+        <div className="content">
           <div className="title">{item.name}</div>
           <div className="vetted-by">
             {item?.vettedByCollection?.items?.map((item, i) => (
@@ -37,45 +41,9 @@ export const OrganizationDetails = ({ item }) => {
             ))}
           </div>
         </div>
+      </header>
 
-        <div className="info-wrapper">
-          <div className="logo-wrapper">
-            <Image
-              height={70}
-              objectFit="contain"
-              src={item.logo?.url}
-              width={120}
-            />
-          </div>
-          <div className="actions">
-            <Space style={{ width: '100%' }}>
-              <Button
-                block
-                icon={<ShareAltOutlined />}
-                shape="round"
-                type="primary"
-              />
-              <Button block shape="round" type="primary">
-                {item?.pricePerMonth
-                  ? `${item?.pricePerMonth} ${item?.currency}`
-                  : 'Free'}
-              </Button>
-            </Space>
-          </div>
-        </div>
-      </div>
-
-      <ListSection
-        items={item?.activitiesCollection?.items}
-        title={'Activities'}
-        titleIcon={<PlusCircleOutlined />}
-      />
-
-      <ListSection
-        items={item?.areasCollection?.items}
-        title={'Areas'}
-        titleIcon={<PlusCircleOutlined />}
-      />
+      <Divider />
 
       <TextSection
         text={item?.description}
@@ -83,11 +51,49 @@ export const OrganizationDetails = ({ item }) => {
         titleIcon={<PlusCircleOutlined />}
       />
 
-      <SocialIcons items={socials} />
+      <Divider />
 
-      {item?.actionsCollection?.items?.map((action, i) => (
-        <CallToAction key={`action-${i}`} showLeaveModal {...action} />
-      ))}
+      <ListSection
+        items={item?.activitiesCollection?.items}
+        title={'Activities'}
+        titleIcon={<PlusCircleOutlined />}
+      />
+
+      <Divider />
+
+      <ListSection
+        items={item?.areasCollection?.items}
+        title={'Areas'}
+        titleIcon={<PlusCircleOutlined />}
+      />
+
+      <Divider />
+
+      <ListSection
+        items={item?.needsCollection?.items}
+        title={'Needs'}
+        titleIcon={<PlusCircleOutlined />}
+      />
+
+      <Divider />
+
+      <div className="socials">
+        <SocialIcons items={socials} />
+      </div>
+
+      <Divider />
+
+      <Space direction="vertical" style={{ width: '100%' }}>
+        {item?.actionsCollection?.items?.map((action, i) => (
+          <CallToAction
+            key={`action-${i}`}
+            showLeaveModal
+            {...action}
+            block
+            ghost={false}
+          />
+        ))}
+      </Space>
     </div>
   )
 }
