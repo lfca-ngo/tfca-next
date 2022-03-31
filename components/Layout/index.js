@@ -17,7 +17,7 @@ const Template = ({ children, className }) => {
         </Head>
         <div className="siteContent">
           {children}
-          <CookieConsent expires={60} />
+          <CookieConsent />
         </div>
       </div>
     </Fragment>

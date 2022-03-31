@@ -1,14 +1,12 @@
 import { useEffect } from 'react'
-import { useCookies } from 'react-cookie'
 
-import { CSS_THEME_DARK, isBrowser } from '../utils'
+import { CSS_THEME_DARK, getCookie, isBrowser, setCookie } from '../utils'
 
 const THEME_COOKIE = 'theme'
 const LIGHT_THEME = 'light'
 
 export const useDarkMode = () => {
-  const [cookies, setCookie] = useCookies()
-  const themeValue = cookies[THEME_COOKIE]
+  const themeValue = getCookie(THEME_COOKIE)
   const isDarkMode = themeValue === CSS_THEME_DARK
   const htmlEl = isBrowser() && document?.documentElement
 

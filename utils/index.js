@@ -73,14 +73,19 @@ export const MULTI = 'multi'
 export const EMBED = 'embed'
 export const DEFAULT = 'default'
 
-export const SAME_SITE_OPTIONS = {
-  LAX: 'lax',
-  NONE: 'none',
-  STRICT: 'strict',
+export const UID_COOKIE_NAME = 'ui'
+export const ANALYTICS_CONSENT_COOKIE_NAME = 'cookies.statistical'
+
+export const setCookie = (name, value) => {
+  if (!isBrowser()) return
+  window.localStorage.setItem(name, value)
 }
 
-export const INTERNAL_COOKIE = 'ui'
-export const CONSENT_COOKIE = 'ui_consent'
+export const getCookie = (name) => {
+  if (!isBrowser()) return null
+
+  return window.localStorage.getItem(name)
+}
 
 // gets & sets uid in window variable
 export const getWindowUid = () => {

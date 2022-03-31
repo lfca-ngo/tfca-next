@@ -1,29 +1,32 @@
 import axios from 'axios'
-import { useEffect } from 'react'
-import { useCookies } from 'react-cookie'
 
-import { getWindowUid, INITIAL_STATS, INTERNAL_COOKIE } from '../utils'
-
-export const COOKIE = 'userId'
-
-const DEFAULT_COLLECTION_ID = 'base'
-const LOG = 'log'
-const VISUALIZE = 'visualize/data'
-const DEFAULT_HEADERS = { 'Content-Type': 'application/json' }
-const POST = 'post'
+import {
+  getCookie,
+  getWindowUid,
+  INITIAL_STATS,
+  isBrowser,
+  UID_COOKIE_NAME,
+} from '../utils'
 
 const DEFAULT_PAYLOAD = {
   api_key: process.env.NEXT_PUBLIC_GRAPH_JSON_API_KEY,
 }
 
 export const trackEvent = ({
-  collection = DEFAULT_COLLECTION_ID,
+  collection = process.env.NEXT_PUBLIC_GRAPH_JSON_EVENTS_COLLECTION,
   name,
-  userId,
-  values,
+  values = {},
 }) => {
+  if (!isBrowser()) return
+  const uidCookie = getCookie(UID_COOKIE_NAME)
+
+  const consent = uidCookie === null ? null : Boolean(uidCookie) // UID cookie will be set with empty '' if no consent is given
+  const userId = uidCookie || getWindowUid()
+
   const event = {
+    consent,
     Event: name,
+    path: window?.location.pathname,
     User_ID: userId,
     ...values,
   }
@@ -37,38 +40,17 @@ export const trackEvent = ({
 
   axios({
     data: payload,
-    headers: DEFAULT_HEADERS,
-    method: POST,
-    url: `${process.env.NEXT_PUBLIC_GRAPH_JSON_URL}/${LOG}`,
+    headers: { 'Content-Type': 'application/json' },
+    method: 'POST',
+    url: `${process.env.NEXT_PUBLIC_GRAPH_JSON_URL}/log`,
   })
-}
-
-export const useTrackEvent = ({ name, values, withTrigger }) => {
-  const [cookies] = useCookies()
-  const withConsent = Boolean(cookies[INTERNAL_COOKIE])
-  const userId = cookies[INTERNAL_COOKIE] || getWindowUid()
-  const eventPayload = { consent: withConsent, name, userId, values }
-
-  // if a trigger is set do not track the event on mount
-  useEffect(() => {
-    if (withTrigger) return
-    trackEvent(eventPayload)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  // custom trigger can add additional scoped values
-  const triggerTrackEvent = ({ name, values }) => {
-    trackEvent({ ...eventPayload, name, values })
-  }
-
-  return triggerTrackEvent
 }
 
 export const fetchStats = () => {
   const payload = {
     ...DEFAULT_PAYLOAD,
     aggregation: 'Count',
-    collection: DEFAULT_COLLECTION_ID,
+    collection: process.env.NEXT_PUBLIC_GRAPH_JSON_EVENTS_COLLECTION,
     compare: null,
     end: 'now',
     filters: [['Event', '=', 'action_completed']],
@@ -81,9 +63,9 @@ export const fetchStats = () => {
 
   return axios({
     data: payload,
-    headers: DEFAULT_HEADERS,
-    method: POST,
-    url: `${process.env.NEXT_PUBLIC_GRAPH_JSON_URL}/${VISUALIZE}`,
+    headers: { 'Content-Type': 'application/json' },
+    method: 'POST',
+    url: `${process.env.NEXT_PUBLIC_GRAPH_JSON_URL}/visualize/data`,
   }).then(({ data }) => {
     const { result } = data
 

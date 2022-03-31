@@ -3,108 +3,63 @@ require('./styles.less')
 import { Button, Col, Row } from 'antd'
 import { motion } from 'framer-motion'
 import React, { useEffect, useState } from 'react'
-import { useCookies } from 'react-cookie'
 
 import { useContent } from '../../hooks'
 import {
-  CONSENT_COOKIE,
+  ANALYTICS_CONSENT_COOKIE_NAME,
+  getCookie,
   getWindowUid,
-  INTERNAL_COOKIE,
-  isBrowser,
-  SAME_SITE_OPTIONS,
+  setCookie,
+  UID_COOKIE_NAME,
 } from '../../utils'
 import { text } from '../../utils/Text'
 import { ConditionalWrapper, CookieSelector } from './helpers'
 
-const INITIAL_COOKIE_STATE = {
-  [`cookies.marketing`]: {
-    value: false,
-  },
-  [`cookies.statistical`]: {
-    showInfo: true,
-    value: false,
-  },
-  [`cookies.technical`]: {
-    disabled: true,
-    value: true,
-  },
-}
-
-const CookieConsent = (props) => {
+const CookieConsent = () => {
   const cookieBanner = useContent()?.metaData?.cookieBanner
+  // We assume that the first cookie is required and always needs to be accepted
+  const requiredCookie = cookieBanner?.levelsCollection?.items?.[0]?.key
+
+  // We show the banner when the required cookie has not been accepted, yet
   const [visible, setVisible] = useState(false)
-  const [cookiesState, setCookiesState] = useState(INITIAL_COOKIE_STATE)
-
-  const setCookieState = (id, isActive) => {
-    const newState = { ...cookiesState }
-    newState[id].value = isActive
-    setCookiesState(newState)
-  }
-
-  const [cookies, setReactCookie] = useCookies()
-
-  const accept = () => {
-    setCookie(CONSENT_COOKIE, 'true')
-    setCookie(INTERNAL_COOKIE, window.ui || uuidv4())
-    setVisible(false)
-  }
-
-  const decline = () => {
-    setCookie(CONSENT_COOKIE, 'false')
-    setVisible(false)
-  }
-
-  const setCookie = (cookieName, cookieValue) => {
-    const { expires, extraCookieOptions, sameSite } = props
-    const expiresDays = 1000 * 60 * 60 * 24 * expires
-    const expiresFromNow = new Date(new Date().valueOf() + expiresDays)
-    let { cookieSecurity } = props
-
-    if (cookieSecurity === undefined && isBrowser()) {
-      cookieSecurity = window.location
-        ? window.location.protocol === 'https:'
-        : true
-    }
-
-    const cookieOptions = {
-      expires: expiresFromNow,
-      ...extraCookieOptions,
-      sameSite: sameSite || SAME_SITE_OPTIONS.LAX,
-      secure: cookieSecurity,
-    }
-
-    setReactCookie(cookieName, cookieValue, cookieOptions)
-  }
-
-  const getCookieValue = (cookieName) => {
-    let cookieValue = cookies[cookieName]
-
-    return cookieValue
-  }
-
-  const variants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1 },
-  }
-
-  // cookie states to handle
-  const isNewUser = getCookieValue(CONSENT_COOKIE) === undefined || props.debug
-  const hasDeniedCookies = getCookieValue(CONSENT_COOKIE) === 'false'
 
   useEffect(() => {
-    // if the user has already a decline cookie set or is new
-    // make sure that a uid is generated and assigned to window var
-    if (hasDeniedCookies || isNewUser) getWindowUid()
+    const isNewUser = !getCookie(requiredCookie)
 
-    // show consent banner: if the user accepts,
-    // use the window uuid to set the cookie
+    // show consent banner if needed
     if (isNewUser) {
       setTimeout(() => {
         setVisible(true)
       }, 1000)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [requiredCookie])
+
+  const [cookiesState, setCookiesState] = useState(
+    requiredCookie ? { [requiredCookie]: true } : {}
+  )
+
+  const accept = (all = false) => {
+    if (all) {
+      // Accept all cookies
+      cookieBanner?.levelsCollection?.items?.forEach((cookie) => {
+        setCookie(cookie.key, true)
+      })
+    } else {
+      // Accept only selected cookies
+      Object.keys(cookiesState).forEach((key) => {
+        if (cookiesState[key]) {
+          setCookie(key, true)
+        }
+      })
+    }
+
+    // Set the uid cookie if we are allowed to
+    const uid =
+      all || cookiesState[ANALYTICS_CONSENT_COOKIE_NAME] ? getWindowUid() : ''
+    setCookie(UID_COOKIE_NAME, uid)
+
+    setVisible(false)
+  }
 
   if (!visible) return null
 
@@ -118,7 +73,10 @@ const CookieConsent = (props) => {
         className="cookie-consent-banner"
         initial="hidden"
         transition={{ duration: 1, ease: 'easeInOut' }}
-        variants={variants}
+        variants={{
+          hidden: { opacity: 0 },
+          visible: { opacity: 1 },
+        }}
       >
         <div className="cookie-content">
           <div className="title">{cookieBanner?.title}</div>
@@ -128,15 +86,19 @@ const CookieConsent = (props) => {
               {cookieBanner?.levelsCollection?.items.map((level, i) => {
                 return (
                   <CookieSelector
-                    disabled={cookiesState[level.key].disabled}
+                    // The first cookie is required and can't be changed
+                    disabled={i === 0}
                     infoBox={cookieBanner?.infoboxStats}
-                    isActive={cookiesState[level.key].value}
-                    key={`level-${i}`}
-                    showInfo={cookiesState[level.key].showInfo}
+                    isActive={!!cookiesState[level.key]}
+                    key={level.key}
+                    showInfo={i > 0}
                     title={<div className="text-wrapper">{level.value}</div>}
-                    toggleValue={(checked) =>
-                      setCookieState(level.key, checked)
-                    }
+                    toggleValue={(checked) => {
+                      setCookiesState((s) => ({
+                        ...s,
+                        [level.key]: checked,
+                      }))
+                    }}
                   />
                 )
               })}
@@ -149,9 +111,7 @@ const CookieConsent = (props) => {
             <Button
               block
               key="acceptButton"
-              onClick={() => {
-                accept()
-              }}
+              onClick={() => accept(true)}
               size="large"
               type="primary"
             >
@@ -163,9 +123,7 @@ const CookieConsent = (props) => {
               block
               ghost
               key="declineButton"
-              onClick={() => {
-                decline()
-              }}
+              onClick={() => accept()}
               size="large"
               type="primary"
             >
