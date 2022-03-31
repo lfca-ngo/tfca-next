@@ -21,11 +21,11 @@ const CallToAction = (props) => {
     case 'open-email':
       return (
         <a
-          href={getMailToLink(
-            DEFAULT_RECIPIENT,
-            props.emailTemplate.subject,
-            props.emailTemplate.text
-          )}
+          href={getMailToLink({
+            body: props.emailTemplate.text,
+            subject: props.emailTemplate.subject,
+            to: DEFAULT_RECIPIENT,
+          })}
         >
           <CtaButton {...props} />{' '}
         </a>

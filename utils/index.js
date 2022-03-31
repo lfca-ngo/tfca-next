@@ -113,8 +113,20 @@ export const INITIAL_STATS = {
 export const getLogoSrc = (isDarkMode) =>
   isDarkMode ? '/images/logo_darkmode.svg' : '/images/logo.svg'
 
-export const getMailToLink = (email, subject, body) => {
-  return `mailto:${email}?subject=${subject}&cc=politics@lfca.earth&body=${encodeURIComponent(
-    body
-  )}`
+export const getMailToLink = ({ body, cc, subject, to }) => {
+  const args = []
+  if (typeof subject !== 'undefined') {
+    args.push('subject=' + encodeURIComponent(subject))
+  }
+  if (typeof body !== 'undefined') {
+    args.push('body=' + encodeURIComponent(body))
+  }
+  if (typeof cc !== 'undefined') {
+    args.push('cc=' + encodeURIComponent(cc))
+  }
+  let url = 'mailto:' + encodeURIComponent(to)
+  if (args.length > 0) {
+    url += '?' + args.join('&')
+  }
+  return url
 }
