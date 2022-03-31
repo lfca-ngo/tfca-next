@@ -9,12 +9,14 @@ import { getLogoSrc } from '../../../utils'
 export const DefaultLogo = () => {
   const logoSrc = getLogoSrc(true)
   return (
-    <div className="logo">
-      <Link href="/">
-        <a>
-          <Image height={66} src={logoSrc} width={66} />
-        </a>
-      </Link>
+    <div className="default-logo">
+      <div className="default-logo-wrapper">
+        <Link href="/">
+          <a>
+            <Image layout="fill" objectFit="contain" src={logoSrc} />
+          </a>
+        </Link>
+      </div>
     </div>
   )
 }

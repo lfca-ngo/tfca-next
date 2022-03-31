@@ -4,6 +4,7 @@ import { MailOutlined } from '@ant-design/icons'
 import { Button, Form, Space } from 'antd'
 import React, { useEffect } from 'react'
 
+import { getMailToLink } from '../../../utils'
 import { text as replaceVars } from '../../../utils/Text'
 import { CopyTextArea } from '../CopyTextArea'
 import { ScrollableFilters } from '../ScrollableFilters'
@@ -33,11 +34,7 @@ export const PoliticianDetails = ({
   }, [messages, activeMessageIndex, item])
 
   const handleSend = () => {
-    const mailToLink = `mailto:${
-      item.email
-    }?subject=${subject}&cc=politics@lfca.earth&body=${encodeURIComponent(
-      text
-    )}`
+    const mailToLink = getMailToLink(item.email, subject, text)
     window.location.href = mailToLink
     // remove selectedItem aka politician
     // from store and add to sentItems

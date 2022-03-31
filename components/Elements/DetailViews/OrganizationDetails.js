@@ -1,83 +1,99 @@
 require('./organizationDetails.less')
 
-import {
-  CheckOutlined,
-  PlusCircleOutlined,
-  ShareAltOutlined,
-} from '@ant-design/icons'
-import { Button, List, Space } from 'antd'
+import { PlusCircleOutlined } from '@ant-design/icons'
+import { Divider, Space, Tag } from 'antd'
 import Image from 'next/image'
 import React from 'react'
 
-import { Text, text } from '../../../utils/Text'
+import { text } from '../../../utils/Text'
 import CallToAction from '../CallToAction'
+import { ListSection, TextSection } from '../Sections'
+import { SocialIcons } from '../SocialIcons'
 
 export const OrganizationDetails = ({ item }) => {
+  const socials = [
+    { id: 'Facebook', url: item.facebook },
+    { id: 'Instagram', url: item.instagram },
+    { id: 'Twitter', url: item.twitter },
+    { id: 'Web', url: item.website },
+  ]
+
   return (
     <div className="detail-view organization">
-      <div className="header">
-        <div className="text">
+      <header>
+        <div className="logo-wrapper">
+          <Image layout="fill" objectFit="contain" src={item.logo?.url} />
+        </div>
+
+        <div className="content">
           <div className="title">{item.name}</div>
-        </div>
-
-        <div className="info-wrapper">
-          <div className="logo-wrapper">
-            <Image
-              height={70}
-              objectFit="contain"
-              src={item.logo?.url}
-              width={120}
-            />
-          </div>
-          <div className="actions">
-            <Space style={{ width: '100%' }}>
-              <Button
-                block
-                icon={<ShareAltOutlined />}
-                shape="round"
-                type="primary"
-              />
-              <Button block shape="round" type="primary">
-                {item?.pricePerMonth
-                  ? `${item?.pricePerMonth} ${item?.currency}`
-                  : 'Free'}
-              </Button>
-            </Space>
+          <div className="vetted-by">
+            {item?.vettedByCollection?.items?.map((item, i) => (
+              <Tag className="vetted-by-org" key={`vetted-${i}`}>
+                <Image
+                  height={24}
+                  layout="fixed"
+                  src={item?.icon?.url}
+                  width={24}
+                />
+                {text(item?.value)}
+              </Tag>
+            ))}
           </div>
         </div>
+      </header>
+
+      <Divider />
+
+      <TextSection
+        text={item?.description}
+        title={'About'}
+        titleIcon={<PlusCircleOutlined />}
+      />
+
+      <Divider />
+
+      <ListSection
+        items={item?.activitiesCollection?.items}
+        title={'Activities'}
+        titleIcon={<PlusCircleOutlined />}
+      />
+
+      <Divider />
+
+      <ListSection
+        items={item?.areasCollection?.items}
+        title={'Areas'}
+        titleIcon={<PlusCircleOutlined />}
+      />
+
+      <Divider />
+
+      <ListSection
+        items={item?.needsCollection?.items}
+        title={'Needs'}
+        titleIcon={<PlusCircleOutlined />}
+      />
+
+      <Divider />
+
+      <div className="socials">
+        <SocialIcons items={socials} />
       </div>
 
-      <div className="activities">
-        <div className="section-title title">
-          <PlusCircleOutlined />
-          Activities
-        </div>
+      <Divider />
 
-        <List
-          className="simple-list"
-          dataSource={item?.activitiesCollection?.items}
-          renderItem={(item) => (
-            <List.Item>
-              <List.Item.Meta
-                avatar={<CheckOutlined />}
-                description={text(item.value)}
-              />
-            </List.Item>
-          )}
-        />
-      </div>
-
-      <div className="description">
-        <div className="section-title title">
-          <PlusCircleOutlined />
-          About
-        </div>
-        <Text block={item?.description} />
-      </div>
-
-      {item?.actionsCollection?.items?.map((action, i) => (
-        <CallToAction key={`action-${i}`} showLeaveModal {...action} />
-      ))}
+      <Space direction="vertical" style={{ width: '100%' }}>
+        {item?.actionsCollection?.items?.map((action, i) => (
+          <CallToAction
+            key={`action-${i}`}
+            showLeaveModal
+            {...action}
+            block
+            ghost={false}
+          />
+        ))}
+      </Space>
     </div>
   )
 }

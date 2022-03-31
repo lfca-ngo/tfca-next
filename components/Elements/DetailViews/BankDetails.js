@@ -1,16 +1,12 @@
 require('./bankDetails.less')
 
-import {
-  CheckOutlined,
-  PlusCircleOutlined,
-  ShareAltOutlined,
-} from '@ant-design/icons'
-import { Button, Divider, List, Space } from 'antd'
+import { ShareAltOutlined } from '@ant-design/icons'
+import { Button, Divider, Space } from 'antd'
 import Image from 'next/image'
 import React from 'react'
 
-import { Text, text } from '../../.././utils/Text'
 import CallToAction from '../CallToAction'
+import { ListSection, TextSection } from '../Sections'
 
 export const BankDetails = ({ item, onNext }) => {
   return (
@@ -54,55 +50,12 @@ export const BankDetails = ({ item, onNext }) => {
 
       <Divider />
 
-      <div className="benefits">
-        <div className="section-title title">
-          <PlusCircleOutlined />
-          Benefits
-        </div>
-
-        <List
-          className="simple-list"
-          dataSource={item?.benefitsCollection?.items}
-          renderItem={(item) => (
-            <List.Item>
-              <List.Item.Meta
-                avatar={<CheckOutlined />}
-                description={text(item.value)}
-              />
-            </List.Item>
-          )}
-        />
-      </div>
-
-      <div className="sustainability">
-        <div className="section-title title">
-          <PlusCircleOutlined />
-          Sustainability
-        </div>
-
-        <List
-          className="simple-list"
-          dataSource={item?.sustainabilityCollection?.items}
-          renderItem={(item) => (
-            <List.Item>
-              <List.Item.Meta
-                avatar={<CheckOutlined />}
-                description={text(item.value)}
-              />
-            </List.Item>
-          )}
-        />
-      </div>
-
-      <div className="sustainability">
-        <div className="section-title title">
-          <PlusCircleOutlined />
-          About {item?.name}
-        </div>
-        <div className="description">
-          <Text block={item?.description} />
-        </div>
-      </div>
+      <ListSection items={item.benefitsCollection?.items} title="Benefits" />
+      <ListSection
+        items={item.sustainabilityCollection?.items}
+        title="Sustainability"
+      />
+      <TextSection text={item?.description} title={`About ${item?.name}`} />
     </div>
   )
 }

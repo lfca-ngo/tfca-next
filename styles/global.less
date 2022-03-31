@@ -118,7 +118,8 @@ span.text-accent {
     margin: 0 3px 3px 0;
     padding: 1px 6px;
     border-radius: 4px;
-    font-size: 12px;
+    font-size: 13px;
+    height: 22px;
     .font-semi();
     &.lila {
       .tag-color(@lila);
@@ -136,6 +137,14 @@ span.text-accent {
 }
 
 .ant-drawer.drawer-md {
+  // se width
+  .ant-drawer-content-wrapper {
+    width: 100% !important;
+    @media @desktop {
+      width: @default-drawer-width !important;
+    }
+  }
+
   .ant-drawer-content {
     .ant-drawer-header {
       background: var(--card-background);

@@ -8,6 +8,7 @@ import { EnergyProviderDetails } from './EnergyProviderDetails'
 import { OrganizationDetails } from './OrganizationDetails'
 import { PoliticianDetails } from './PoliticianDetails'
 import { ProviderDetails } from './ProviderDetails'
+import { ToolDetails } from './ToolDetails'
 
 export const DetailView = (props) => {
   switch (props.layout) {
@@ -16,6 +17,7 @@ export const DetailView = (props) => {
     case 'bank':
       return <BankDetails {...props} />
     case 'tool':
+      return <ToolDetails {...props} />
     case 'organization':
       return <OrganizationDetails {...props} />
     case 'energy-provider':

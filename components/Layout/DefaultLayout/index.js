@@ -11,8 +11,8 @@ import { Nav } from '../Nav'
 export const DefaultLayout = ({ children, style, subtitle, title }) => {
   return (
     <Template className="default-layout">
-      <Nav style={style} />
-      <DefaultHero style={style} subtitle={subtitle} title={title} />
+      <Nav className={style} />
+      <DefaultHero className={style} subtitle={subtitle} title={title} />
       <main className="container">
         <ErrorBoundary>{children}</ErrorBoundary>
       </main>

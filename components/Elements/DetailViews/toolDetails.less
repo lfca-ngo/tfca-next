@@ -1,0 +1,59 @@
+@import (reference) '../../../styles/variables.less';
+@import (reference) '../../../styles/fonts.less';
+@import (reference) '../../../styles/mixins.less';
+
+.detail-view.tool {
+  .screen {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 20px;
+  }
+
+  .ant-divider {
+    margin: 16px 0;
+  }
+
+  header {
+    margin: 40px 0 20px;
+    display: flex;
+    flex-direction: column;
+    @media @desktop {
+      flex-direction: row;
+    }
+    .logo-wrapper {
+      .app-icon-style(100px);
+      @media @desktop {
+        .app-icon-style(140px);
+      }
+    }
+
+    .content {
+      display: flex;
+      align-items: flex-start;
+      flex-direction: column;
+      flex: 1;
+
+      @media @desktop {
+        padding-left: 20px;
+      }
+      .name {
+        font-size: @font-size-base;
+        margin: 15px 0 5px;
+        @media @desktop {
+          margin: 0;
+        }
+      }
+      .actions {
+        .horizontal-scroll();
+        .ant-btn {
+          margin-right: 8px;
+        }
+      }
+      .title {
+        font-size: 32px;
+        .font-semi(@black);
+      }
+    }
+  }
+}

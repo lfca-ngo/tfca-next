@@ -8,14 +8,8 @@ import { Alert, Button, Drawer, Form, Input } from 'antd'
 import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
 
-import {
-  useConfetti,
-  useContentBlocks,
-  useContentLists,
-  useIsMobile,
-} from '../../../hooks'
+import { useConfetti, useContentBlocks, useContentLists } from '../../../hooks'
 import { trackEvent } from '../../../services/analytics'
-import { DRAWER_WIDTH_MD } from '../../../utils'
 import { text } from '../../../utils/Text'
 import CheckList from '../../Elements/CheckList'
 import Category from './Category'
@@ -28,7 +22,6 @@ export const Success = ({
   module: { blocks = {}, id, imageInviteText, imageInviteColor, icon = {} },
   prevKey,
 }) => {
-  const isMobile = useIsMobile()
   const benefits = useContentLists('sharing.benefits')?.items
   const [isGeneratingToken, setIsGeneratingToken] = React.useState(false)
   const [error, setError] = React.useState('')
@@ -166,7 +159,6 @@ export const Success = ({
         footer={null}
         onClose={() => setVisible(false)}
         visible={visible}
-        width={isMobile ? '100%' : DRAWER_WIDTH_MD}
       >
         {error ? (
           <h3>{error}</h3>

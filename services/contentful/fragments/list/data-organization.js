@@ -19,11 +19,6 @@ export const DataOrganizationFragment = gql`
         ...BlockFragment
       }
     }
-    tagsCollection(limit: 5) {
-      items {
-        ...BlockFragment
-      }
-    }
     areasCollection(limit: 5) {
       items {
         ...BlockFragment
@@ -34,5 +29,18 @@ export const DataOrganizationFragment = gql`
         ...BlockFragment
       }
     }
+    vettedByCollection(limit: 5) {
+      items {
+        ...BlockFragment
+      }
+    }
+    location {
+      lat
+      lon
+    }
+    facebook
+    instagram
+    twitter
+    website
   }
 `

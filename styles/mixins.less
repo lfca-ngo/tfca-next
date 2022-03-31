@@ -31,6 +31,27 @@
   }
 }
 
+.horizontal-scroll() {
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  flex-wrap: nowrap;
+  max-width: 100%;
+  .hide-scrollbar();
+}
+
+.app-icon-style(@size) {
+  position: relative;
+  width: @size;
+  height: @size;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: calc(@size / 4);
+  overflow: hidden;
+  box-shadow: @box-shadow-base;
+}
+
 .tag-color(@color) {
   background-color: fade(@color, 5%);
   color: @color;

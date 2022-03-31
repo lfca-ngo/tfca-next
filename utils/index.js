@@ -7,7 +7,6 @@ export * from './share-token'
 
 export const isDev = process.env.NODE_ENV === 'development'
 export const isBrowser = () => typeof window !== 'undefined'
-export const NAVBAR_HEIGHT_XS = 75
 export const SETTINGS_ID = '48AtzIK5THq8u72j19vKw1'
 
 const __CSS_THEME_DARK__ = 'theme-dark'
@@ -47,8 +46,6 @@ export const scrollToId = (id) => {
   const section = document.querySelector(`#${id}`)
   section?.scrollIntoView({ behavior: 'smooth', block: 'start' })
 }
-
-export const DRAWER_WIDTH_MD = '820px'
 
 export const LIST_GRIDS = {
   '1-col': {
@@ -111,3 +108,9 @@ export const INITIAL_STATS = {
 
 export const getLogoSrc = (isDarkMode) =>
   isDarkMode ? '/images/logo_darkmode.svg' : '/images/logo.svg'
+
+export const getMailToLink = (email, subject, body) => {
+  return `mailto:${email}?subject=${subject}&cc=politics@lfca.earth&body=${encodeURIComponent(
+    body
+  )}`
+}

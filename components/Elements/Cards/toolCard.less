@@ -1,0 +1,58 @@
+@import (reference) '../../../styles/variables.less';
+@import (reference) '../../../styles/fonts.less';
+@import (reference) '../../../styles/mixins.less';
+
+.content-card.tool {
+  .ant-card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    color: @black;
+    @media @desktop {
+      padding: 32px;
+    }
+
+    .header {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      .desc {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        flex: 1;
+      }
+      .name {
+        font-size: @font-size-sm;
+        color: @medium-grey;
+        margin-bottom: 4px;
+      }
+      .title {
+        font-size: 22px;
+        .font-semi(@black);
+      }
+      .logo {
+        .app-icon-style(70px);
+        margin-right: 20px;
+      }
+    }
+
+    .body-content {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      margin: 15px 0 0;
+
+      .benefits {
+        flex: 1;
+        margin-right: 30px;
+      }
+      .actions {
+        display: flex;
+        align-items: flex-end;
+        margin: 15px 0 0;
+      }
+    }
+  }
+}

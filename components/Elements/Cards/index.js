@@ -8,6 +8,7 @@ import { EnergyProviderCard } from './EnergyProviderCard'
 import { OrganizationCard } from './OrganizationCard'
 import { PoliticianCard } from './PoliticianCard'
 import { ProviderCard } from './ProviderCard'
+import { ToolCard } from './ToolCard'
 
 export const CardView = (props) => {
   switch (props.layout) {
@@ -17,13 +18,14 @@ export const CardView = (props) => {
       return <ActionCard {...props} />
     case 'bank':
       return <BankCard {...props} />
-    case 'tool':
     case 'organization':
       return <OrganizationCard {...props} />
     case 'energy-provider':
       return <EnergyProviderCard {...props} />
     case 'provider':
       return <ProviderCard {...props} />
+    case 'tool':
+      return <ToolCard {...props} />
     default:
       return null
   }
