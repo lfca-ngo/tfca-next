@@ -16,7 +16,7 @@ export class ErrorBoundary extends React.Component {
   }
 
   componentDidCatch(error, errorInfo) {
-    // // Log the error
+    // Log the error
     trackEvent({
       collection: process.env.NEXT_PUBLIC_GRAPH_JSON_ERRORS_COLLECTION,
       name: 'error_boundary',

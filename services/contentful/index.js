@@ -171,6 +171,20 @@ export const fetchPageBySlug = async (locale, slug) => {
           componentId
           body {
             json
+            links {
+              entries {
+                inline {
+                  sys {
+                    id
+                  }
+                  ... on NavigationElement {
+                    title
+                    action
+                    __typename
+                  }
+                }
+              }
+            }
           }
         }
       }

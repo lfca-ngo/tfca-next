@@ -26,10 +26,14 @@ export const AppProvider = ({ children, content, customization = null }) => {
   useEffect(() => {
     setClient(true)
     setIsMobile(isMobileClient)
+
     trackEvent({
       name: 'page_visit',
+      values: {
+        inviting_uid: customization?.uid,
+      },
     })
-  }, [])
+  }, [customization])
 
   return (
     <AppContext.Provider

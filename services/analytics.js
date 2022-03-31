@@ -12,6 +12,20 @@ const DEFAULT_PAYLOAD = {
   api_key: process.env.NEXT_PUBLIC_GRAPH_JSON_API_KEY,
 }
 
+const PATHS_TO_CUT = ['/invite']
+
+const getCleanPathName = () => {
+  const pathname = window?.location.pathname
+
+  for (const p of PATHS_TO_CUT) {
+    if (pathname.includes(p)) {
+      return pathname.split(p)[0].concat(p)
+    }
+  }
+
+  return pathname
+}
+
 export const trackEvent = ({
   collection = process.env.NEXT_PUBLIC_GRAPH_JSON_EVENTS_COLLECTION,
   name,
@@ -26,7 +40,7 @@ export const trackEvent = ({
   const event = {
     consent,
     Event: name,
-    path: window?.location.pathname,
+    path: getCleanPathName(),
     User_ID: userId,
     ...values,
   }
