@@ -74,7 +74,8 @@ export const Success = ({
         />
         <h2>{text(useContentBlocks('sharing.headline'))}</h2>
 
-        <CheckList data={benefits?.items} />
+        <CheckList data={benefits} />
+
         <Form
           className="dynamic-form"
           initialValues={{ names: [''] }}
