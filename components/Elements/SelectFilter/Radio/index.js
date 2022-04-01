@@ -1,6 +1,7 @@
 require('./styles.less')
 
-import { Checkbox } from 'antd'
+import { QuestionCircleOutlined } from '@ant-design/icons'
+import { Checkbox, Popover } from 'antd'
 import classNames from 'classnames'
 import Image from 'next/image'
 import React, { useState } from 'react'
@@ -55,7 +56,12 @@ export const Radio = ({
               <div className="text">
                 <span className="label">{item.label}</span>
                 {item.description && (
-                  <span className="description">{item.description}</span>
+                  <Popover
+                    content={item.description}
+                    overlayClassName="popover-md"
+                  >
+                    <QuestionCircleOutlined />
+                  </Popover>
                 )}
               </div>
             </span>
