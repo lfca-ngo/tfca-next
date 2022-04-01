@@ -1,6 +1,7 @@
 import crypto from 'crypto'
 import fs from 'fs'
 import { gql, request } from 'graphql-request'
+import pLimit from 'p-limit'
 import path from 'path'
 
 import { DEFAULT, isDev, SETTINGS_ID } from '../../utils'
@@ -16,6 +17,8 @@ const space = process.env.NEXT_PUBLIC_CF_SPACE_ID
 const accessToken = isDev
   ? process.env.NEXT_PUBLIC_CF_PREVIEW_ACCESS_TOKEN
   : process.env.NEXT_PUBLIC_CF_ACCESS_TOKEN
+
+const limit = pLimit(2)
 
 // Generic GraphQL client for contentful used
 // by all subsequent queries, can also called directly
@@ -209,9 +212,9 @@ export const fetchPageBySlug = async (locale, slug) => {
 // or meta data
 export const fetchAllStaticContent = async (locale) => {
   const promises = [
-    fetchAllNavs(locale),
-    fetchMetaData(locale, SETTINGS_ID),
-    fetchMetaDataLists(locale, SETTINGS_ID),
+    limit(() => fetchAllNavs(locale)),
+    limit(() => fetchMetaData(locale, SETTINGS_ID)),
+    limit(() => fetchMetaDataLists(locale, SETTINGS_ID)),
   ]
 
   const [navs, metaData, metaDataLists] = await Promise.all(promises)
@@ -238,6 +241,13 @@ export const fetchCollectionIds = async (locale, slug) => {
       ) {
         items {
           layout
+          openGraphInfo {
+            ogtitle
+            ogimage {
+              url
+            }
+            ogdescription
+          }
           actionsCollection(limit: 15) {
             items {
               ... on Action {
@@ -281,7 +291,11 @@ export const fetchCollectionIds = async (locale, slug) => {
       quizLimit: item.quizCollection.total,
     })
   )
-  return { ids, layout: layout || DEFAULT }
+  return {
+    ids,
+    layout: layout || DEFAULT,
+    openGraphInfo: actionsLocalCollection?.items[0]?.openGraphInfo,
+  }
 }
 
 // Fetch all action module related content
@@ -317,11 +331,15 @@ const fetchActionDataById = async (id, locale) => {
 }
 
 export const fetchAllActions = async (locale, actionCollectionSlug) => {
-  const { ids: collectionIds, layout } = await fetchCollectionIds(
-    locale,
-    actionCollectionSlug
+  const {
+    ids: collectionIds,
+    layout,
+    openGraphInfo,
+  } = await fetchCollectionIds(locale, actionCollectionSlug)
+
+  const promises = collectionIds.map((id) =>
+    limit(() => fetchActionDataById(id, locale))
   )
-  const promises = collectionIds.map((id) => fetchActionDataById(id, locale))
 
   const actionsResults = await Promise.all(promises)
   // `listsCollection` and `dataCollection` (both only can conatin List type) are fetched separatly
@@ -345,7 +363,7 @@ export const fetchAllActions = async (locale, actionCollectionSlug) => {
 
   const transformed = transformResults(enrichedActions)
 
-  return { ...transformed, layout }
+  return { ...transformed, layout, openGraphInfo }
 }
 
 // Helper function to transform the results into key value pairs

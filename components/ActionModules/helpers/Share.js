@@ -42,6 +42,7 @@ export const Share = ({ imageInviteText, invites }) => {
                 layout="intrinsic"
                 src={ogImageUrl}
                 style={{ borderRadius: '12px', margin: '20px 0' }}
+                unoptimized={true}
                 width={1200}
               />
 

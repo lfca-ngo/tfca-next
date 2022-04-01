@@ -43,9 +43,7 @@ export const Hero = ({ onClick }) => {
             )
           : text(defaultBlock, {}, true)}
       </Typography.Title>
-      <p>
-        <span>{text(useContentBlocks('header.body'))}</span>
-      </p>
+      <p>{text(useContentBlocks('header.body'))}</p>
 
       <div className="start-btn">
         <Button

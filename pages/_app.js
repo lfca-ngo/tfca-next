@@ -16,10 +16,20 @@ const apiClient = new QueryClient({
 })
 
 function MyApp({ Component, pageProps }) {
+  const ogTitle = pageProps?.openGraphInfo?.ogtitle || null
+  const ogDescription = pageProps?.openGraphInfo?.ogdescription || null
+  const ogImage = pageProps?.openGraphInfo?.ogimage?.url || null
+
   return (
     <>
       <Head>
         <meta content="width=device-width, initial-scale=1" name="viewport" />
+        {ogTitle && <meta content={ogTitle} property="og:title" />}
+        {ogDescription && (
+          <meta content={ogDescription} property="og:description" />
+        )}
+        {ogImage && <meta content={ogImage} property="og:image" />}
+        <meta content="summary_large_image" name="twitter:card" />
       </Head>
       <QueryClientProvider client={apiClient}>
         <AppProvider

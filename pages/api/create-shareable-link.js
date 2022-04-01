@@ -5,12 +5,20 @@ export default async function handler(req, res) {
     return res.status(405).send({ message: 'Only POST requests allowed' })
   }
 
-  const { actionCollectionSlug, actionId, color, message, names, uid } =
-    req.body
+  const {
+    actionCollectionSlug,
+    actionId,
+    color,
+    message,
+    names,
+    socialDescription = '',
+    socialTitle = '',
+    uid,
+  } = req.body
   const token = createShareToken({ actionId, color, message, names, uid })
 
-  const shareLink = `${process.env.BASE_URL}/${actionCollectionSlug}/invite/${token}`
-  const ogImageUrl = `${process.env.BASE_URL}/api/images/${token}`
+  const shareLink = `${process.env.NEXT_PUBLIC_VERCEL_URL}/${actionCollectionSlug}/invite/${token}`
+  const ogImageUrl = `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/images/${token}`
 
   // Create short link
   try {
@@ -31,9 +39,9 @@ export default async function handler(req, res) {
               enableForcedRedirect: true,
             },
             socialMetaTagInfo: {
-              socialDescription: 'This is a test created via API',
+              socialDescription,
               socialImageLink: ogImageUrl,
-              socialTitle: 'You are invited to TFCA via API',
+              socialTitle,
             },
           },
           suffix: {
