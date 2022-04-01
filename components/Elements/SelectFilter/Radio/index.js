@@ -36,6 +36,7 @@ export const Radio = ({
     triggerChange(newValues)
   }
 
+  console.log('items', items)
   return (
     <span className={classNames('multi-select', quizAnswerStatus, layout)}>
       <Checkbox.Group onChange={onCheckboxChange} value={selected}>
@@ -52,7 +53,12 @@ export const Radio = ({
                   <Image layout="fill" objectFit="contain" src={item.iconUrl} />
                 </span>
               )}
-              {item.label}
+              <div className="text">
+                <span className="label">{item.label}</span>
+                {item.description && (
+                  <span className="description">{item.description}</span>
+                )}
+              </div>
             </span>
           </Checkbox>
         ))}
