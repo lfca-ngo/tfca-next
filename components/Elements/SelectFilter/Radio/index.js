@@ -12,6 +12,7 @@ export const Radio = ({
   singleMode,
   onSelect,
   quizAnswerStatus,
+  layout,
 }) => {
   const [selected, setSelected] = useState(value)
 
@@ -36,7 +37,7 @@ export const Radio = ({
   }
 
   return (
-    <span className={classNames('multi-select', quizAnswerStatus)}>
+    <span className={classNames('multi-select', quizAnswerStatus, layout)}>
       <Checkbox.Group onChange={onCheckboxChange} value={selected}>
         {items.map((item, i) => (
           <Checkbox
@@ -48,7 +49,7 @@ export const Radio = ({
             <span className="label-wrapper">
               {item.iconUrl && (
                 <span className="icon">
-                  <Image height={25} src={item.iconUrl} width={25} />
+                  <Image layout="fill" objectFit="contain" src={item.iconUrl} />
                 </span>
               )}
               {item.label}

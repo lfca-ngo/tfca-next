@@ -8,8 +8,26 @@ import { SelectWithOptionalInput } from './SelectWithOptionalInput'
 export const SelectFilter = ({ filterMode, options, ...props }) => {
   const renderFilterType = () => {
     switch (filterMode) {
+      case 'radio-single-vertical':
+        return (
+          <Radio
+            items={options}
+            layout="vertical"
+            singleMode={true}
+            {...props}
+          />
+        )
       case 'radio-single':
         return <Radio items={options} singleMode={true} {...props} />
+      case 'radio-multi-vertical':
+        return (
+          <Radio
+            items={options}
+            layout="vertical"
+            singleMode={false}
+            {...props}
+          />
+        )
       case 'radio-multi':
         return <Radio items={options} singleMode={false} {...props} />
       case 'select-with-optional-input':
