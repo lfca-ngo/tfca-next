@@ -241,6 +241,13 @@ export const fetchCollectionIds = async (locale, slug) => {
       ) {
         items {
           layout
+          openGraphInfo {
+            ogtitle
+            ogimage {
+              url
+            }
+            ogdescription
+          }
           actionsCollection(limit: 15) {
             items {
               ... on Action {
@@ -284,7 +291,11 @@ export const fetchCollectionIds = async (locale, slug) => {
       quizLimit: item.quizCollection.total,
     })
   )
-  return { ids, layout: layout || DEFAULT }
+  return {
+    ids,
+    layout: layout || DEFAULT,
+    openGraphInfo: actionsLocalCollection?.items[0]?.openGraphInfo,
+  }
 }
 
 // Fetch all action module related content
@@ -320,10 +331,11 @@ const fetchActionDataById = async (id, locale) => {
 }
 
 export const fetchAllActions = async (locale, actionCollectionSlug) => {
-  const { ids: collectionIds, layout } = await fetchCollectionIds(
-    locale,
-    actionCollectionSlug
-  )
+  const {
+    ids: collectionIds,
+    layout,
+    openGraphInfo,
+  } = await fetchCollectionIds(locale, actionCollectionSlug)
 
   const promises = collectionIds.map((id) =>
     limit(() => fetchActionDataById(id, locale))
@@ -351,7 +363,7 @@ export const fetchAllActions = async (locale, actionCollectionSlug) => {
 
   const transformed = transformResults(enrichedActions)
 
-  return { ...transformed, layout }
+  return { ...transformed, layout, openGraphInfo }
 }
 
 // Helper function to transform the results into key value pairs
