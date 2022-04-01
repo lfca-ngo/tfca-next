@@ -5,7 +5,7 @@ import Image from 'next/image'
 import React from 'react'
 
 import { useContentBlocks, useCustomization } from '../../../hooks'
-import { Text, text } from '../../../utils/Text'
+import { text } from '../../../utils/Text'
 import World from './world.png'
 
 export const Hero = ({ onClick }) => {
@@ -28,19 +28,21 @@ export const Hero = ({ onClick }) => {
         />
       </div>
 
-      {customization?.names?.length ? (
-        <Text
-          block={customBlock}
-          vars={{
-            name:
-              customization.names.length === 1
-                ? customization.names[0]
-                : recipientsFallback,
-          }}
-        />
-      ) : (
-        <Text block={defaultBlock} />
-      )}
+      <Typography.Title>
+        {customization?.names?.length
+          ? text(
+              customBlock,
+              {
+                name:
+                  customization.names.length === 1
+                    ? customization.names[0]
+                    : recipientsFallback,
+              },
+              {},
+              true
+            )
+          : text(defaultBlock, {}, true)}
+      </Typography.Title>
       <p>
         <span>{text(useContentBlocks('header.body'))}</span>
       </p>

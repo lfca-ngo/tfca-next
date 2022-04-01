@@ -84,6 +84,15 @@ const replaceVars = (text, vars) => {
   return s
 }
 
+// Adopted from https://stackoverflow.com/a/59202370
+const parseMarkdownStringToReactComponents = (string) => {
+  // Currently we only support *bold* marks
+  const regex = /((?:^|[^\\])(?:\\.)*)\*((?:\\.|[^*])*)\*/g
+  return string
+    .split(regex)
+    .map((s, i) => (i % 3 === 2 ? <strong key={i}>{s}</strong> : s))
+}
+
 export const Text = ({ asString, block, vars }) => {
   if (!block) return null
   if (typeof block === 'string') return block
@@ -97,8 +106,12 @@ export const Text = ({ asString, block, vars }) => {
 }
 
 // Sometimes we just need to get the plain text from a block
-export const text = (block, vars) => {
+export const text = (block, vars, parseMarkdown = false) => {
   if (!block) return null
-  if (typeof block === 'string') return replaceVars(block, vars)
-  return replaceVars(documentToPlainTextString(block?.json), vars) || ''
+  let string =
+    typeof block === 'string'
+      ? replaceVars(block, vars)
+      : replaceVars(documentToPlainTextString(block?.json), vars) || ''
+
+  return parseMarkdown ? parseMarkdownStringToReactComponents(string) : string
 }
