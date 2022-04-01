@@ -1,6 +1,7 @@
 import crypto from 'crypto'
 import fs from 'fs'
 import { gql, request } from 'graphql-request'
+import pLimit from 'p-limit'
 import path from 'path'
 
 import { DEFAULT, isDev, SETTINGS_ID } from '../../utils'
@@ -16,6 +17,8 @@ const space = process.env.NEXT_PUBLIC_CF_SPACE_ID
 const accessToken = isDev
   ? process.env.NEXT_PUBLIC_CF_PREVIEW_ACCESS_TOKEN
   : process.env.NEXT_PUBLIC_CF_ACCESS_TOKEN
+
+const limit = pLimit(1)
 
 // Generic GraphQL client for contentful used
 // by all subsequent queries, can also called directly
@@ -209,9 +212,9 @@ export const fetchPageBySlug = async (locale, slug) => {
 // or meta data
 export const fetchAllStaticContent = async (locale) => {
   const promises = [
-    fetchAllNavs(locale),
-    fetchMetaData(locale, SETTINGS_ID),
-    fetchMetaDataLists(locale, SETTINGS_ID),
+    limit(() => fetchAllNavs(locale)),
+    limit(() => fetchMetaData(locale, SETTINGS_ID)),
+    limit(() => fetchMetaDataLists(locale, SETTINGS_ID)),
   ]
 
   const [navs, metaData, metaDataLists] = await Promise.all(promises)
@@ -321,7 +324,10 @@ export const fetchAllActions = async (locale, actionCollectionSlug) => {
     locale,
     actionCollectionSlug
   )
-  const promises = collectionIds.map((id) => fetchActionDataById(id, locale))
+
+  const promises = collectionIds.map((id) =>
+    limit(() => fetchActionDataById(id, locale))
+  )
 
   const actionsResults = await Promise.all(promises)
   // `listsCollection` and `dataCollection` (both only can conatin List type) are fetched separatly
