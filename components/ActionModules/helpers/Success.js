@@ -41,6 +41,12 @@ export const Success = ({
     })
   }, [id])
 
+  const socialDescription = text(useContentBlocks('header.body'))
+  const socialTitle = useContentBlocks('header.title.custom')
+  const socialNameFallback = text(
+    useContentBlocks('header.title.recipients.fallback')
+  )
+
   // create multiple invite links
   // map of promises with infos
   const createInvites = async (values) => {
@@ -187,6 +193,10 @@ export const Success = ({
           color: imageInviteColor,
           message: imageInviteText,
           names,
+          socialDescription,
+          socialTitle: text(socialTitle, {
+            name: names.length === 1 ? names[0] : socialNameFallback,
+          }).replace(/\*/g, ''),
           uid: getCookie(UID_COOKIE_NAME) || getWindowUid(),
         }),
         headers: {
