@@ -1,3 +1,5 @@
+require('./styles.less')
+
 import { Select as AntdSelect } from 'antd'
 import Image from 'next/image'
 import React from 'react'

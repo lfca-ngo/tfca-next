@@ -36,7 +36,6 @@ export const Radio = ({
     triggerChange(newValues)
   }
 
-  console.log('items', items)
   return (
     <span className={classNames('multi-select', quizAnswerStatus, layout)}>
       <Checkbox.Group onChange={onCheckboxChange} value={selected}>
