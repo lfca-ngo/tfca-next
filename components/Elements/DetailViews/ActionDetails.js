@@ -8,7 +8,7 @@ import React from 'react'
 import CallToAction from '../CallToAction'
 import { ListSection, TextSection } from '../Sections'
 
-export const ActionDetails = ({ item }) => {
+export const ActionDetails = ({ item, onNext }) => {
   return (
     <div className="detail-view action">
       <div className="hero-image">
@@ -35,6 +35,7 @@ export const ActionDetails = ({ item }) => {
         {item?.actionsCollection?.items?.map((action, i) => (
           <CallToAction
             key={`action-${i}`}
+            onCountMeIn={onNext}
             showLeaveModal
             {...action}
             block
