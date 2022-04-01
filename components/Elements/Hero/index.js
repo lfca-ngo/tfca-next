@@ -5,29 +5,17 @@ import Image from 'next/image'
 import React from 'react'
 
 import { useContentBlocks, useCustomization } from '../../../hooks'
-import { namesArrayToString } from '../../../utils'
-import { text } from '../../../utils/Text'
+import { Text, text } from '../../../utils/Text'
 import World from './world.png'
 
 export const Hero = ({ onClick }) => {
   const customization = useCustomization()
 
+  const defaultBlock = useContentBlocks('header.title')
+  const customBlock = useContentBlocks('header.title.custom')
   const recipientsFallback = text(
     useContentBlocks('header.title.recipients.fallback')
   )
-  const defaultBlock = useContentBlocks('header.title')
-  const customBlock = useContentBlocks('header.title.custom')
-  const customWithVars = text(customBlock, {
-    name: namesArrayToString(customization?.names, recipientsFallback),
-  })
-
-  const customHeaderText = (
-    <span dangerouslySetInnerHTML={{ __html: customWithVars }} />
-  )
-  const headerText = (
-    <span dangerouslySetInnerHTML={{ __html: text(defaultBlock) }} />
-  )
-  const header = customization?.names ? customHeaderText : headerText
 
   return (
     <div className="hero content">
@@ -40,9 +28,19 @@ export const Hero = ({ onClick }) => {
         />
       </div>
 
-      <Typography.Title>
-        <span>{header}</span>
-      </Typography.Title>
+      {customization?.names?.length ? (
+        <Text
+          block={customBlock}
+          vars={{
+            name:
+              customization.names.length === 1
+                ? customization.names[0]
+                : recipientsFallback,
+          }}
+        />
+      ) : (
+        <Text block={defaultBlock} />
+      )}
       <p>
         <span>{text(useContentBlocks('header.body'))}</span>
       </p>
