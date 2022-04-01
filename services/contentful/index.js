@@ -18,7 +18,7 @@ const accessToken = isDev
   ? process.env.NEXT_PUBLIC_CF_PREVIEW_ACCESS_TOKEN
   : process.env.NEXT_PUBLIC_CF_ACCESS_TOKEN
 
-const limit = pLimit(1)
+const limit = pLimit(2)
 
 // Generic GraphQL client for contentful used
 // by all subsequent queries, can also called directly
