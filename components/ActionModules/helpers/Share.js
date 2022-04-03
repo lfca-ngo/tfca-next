@@ -56,15 +56,20 @@ export const Share = ({ imageInviteText, invites }) => {
           const inviteTitle = `It's time to take climate action`
           return (
             <TabPane key={`${i}`} tab={tabName}>
-              <CopyTextArea rows={4} text={inviteText} textSize="large" />
+              <CopyTextArea
+                disabled
+                rows={4}
+                text={inviteText}
+                textSize="large"
+              />
 
               <div className="share-image-preview">
                 <Image
                   alt={tabName}
                   height={630}
-                  layout="intrinsic"
+                  layout="responsive"
+                  objectFit="cover"
                   src={ogImageUrl}
-                  style={{ borderRadius: '12px', margin: '20px 0' }}
                   unoptimized={true}
                   width={1200}
                 />

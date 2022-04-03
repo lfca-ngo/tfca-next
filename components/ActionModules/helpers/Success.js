@@ -50,10 +50,10 @@ export const Success = ({
   // create multiple invite links
   // map of promises with infos
   const createInvites = async (values) => {
-    const invites = values.names.map((name) => () => createInvite([name]))
+    let invites = values.names.map((name) => () => createInvite([name]))
     if (values.names.length > 1) {
       // Add a miulti invite
-      invites.push(() => createInvite(values.names))
+      invites = [() => createInvite(values.names), ...invites]
     }
 
     setVisible(true)

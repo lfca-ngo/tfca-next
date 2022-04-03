@@ -4,7 +4,6 @@ import React, { useMemo } from 'react'
 import { useFlow } from '../../../hooks'
 import { getFilterOptions } from '../../../utils'
 import { Success } from '../helpers/Success'
-import { Details } from './Details'
 import { Filter } from './Filter'
 import { Results } from './Results'
 
@@ -38,7 +37,6 @@ export const ActionFinderFlow = ({ module }) => {
     const dynamicSteps = new Map([
       ...steps,
       ['results', { component: Results }],
-      ['details', { component: Details }],
       ['success', { component: Success }],
     ])
     return { availableFilters: parsedFilters, steps: dynamicSteps }

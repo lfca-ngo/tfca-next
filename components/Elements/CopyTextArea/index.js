@@ -8,11 +8,17 @@ import { CopyToClipboard } from 'react-copy-to-clipboard'
 
 const { TextArea } = Input
 
-export const CopyTextArea = ({ rows = 10, setText, text, textSize }) => {
+export const CopyTextArea = ({
+  disabled,
+  rows = 10,
+  setText,
+  text,
+  textSize,
+}) => {
   return (
     <div className={classNames('copy-text-area', textSize)}>
       <TextArea
-        onChange={(e) => setText(e.target.value)}
+        onChange={(e) => !disabled && setText(e.target.value)}
         rows={rows}
         value={text}
       />
