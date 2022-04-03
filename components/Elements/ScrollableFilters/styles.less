@@ -40,16 +40,16 @@
     margin-right: 12px;
     display: flex;
     flex-direction: row;
-    @media @desktop {
-      flex-direction: column;
-    }
     .ant-select {
       .ant-select-selection-overflow {
         flex-wrap: initial;
       }
     }
-    .ant-form-item-label > label {
-      font-size: 14px;
+    .ant-form-item-label {
+      flex: 0 0 100%;
+      > label {
+        font-size: 14px;
+      }
     }
   }
 }

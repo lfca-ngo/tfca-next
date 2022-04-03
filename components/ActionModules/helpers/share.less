@@ -1,0 +1,22 @@
+@import (reference) '../../../styles/variables.less';
+@import (reference) '../../../styles/fonts.less';
+@import (reference) '../../../styles/mixins.less';
+
+.share-dialog {
+  .share-image-preview {
+    position: relative;
+    border-radius: @border-radius-base;
+    margin: 30px 0;
+    overflow: hidden;
+    background: @light-grey;
+  }
+  .share-buttons {
+    margin: 30px 0;
+  }
+  button.share-btn {
+    width: 100%;
+    .anticon {
+      margin-right: 12px;
+    }
+  }
+}

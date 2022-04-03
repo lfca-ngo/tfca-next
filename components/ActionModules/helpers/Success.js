@@ -1,4 +1,3 @@
-import { LoadingOutlined } from '@ant-design/icons'
 import {
   MinusCircleOutlined,
   PlusOutlined,
@@ -13,6 +12,7 @@ import { trackEvent } from '../../../services/analytics'
 import { getCookie, getWindowUid, UID_COOKIE_NAME } from '../../../utils'
 import { text } from '../../../utils/Text'
 import CheckList from '../../Elements/CheckList'
+import { LoadingSpinner } from '../../Elements/LoadingSpinner'
 import Category from './Category'
 import { Share } from './Share'
 
@@ -50,10 +50,10 @@ export const Success = ({
   // create multiple invite links
   // map of promises with infos
   const createInvites = async (values) => {
-    const invites = values.names.map((name) => () => createInvite([name]))
+    let invites = values.names.map((name) => () => createInvite([name]))
     if (values.names.length > 1) {
       // Add a miulti invite
-      invites.push(() => createInvite(values.names))
+      invites = [() => createInvite(values.names), ...invites]
     }
 
     setVisible(true)
@@ -173,7 +173,7 @@ export const Success = ({
         ) : (
           <div>
             {isGeneratingToken ? (
-              <LoadingOutlined />
+              <LoadingSpinner className="dark" label="...generating link" />
             ) : (
               <Share imageInviteText={imageInviteText} invites={invites} />
             )}

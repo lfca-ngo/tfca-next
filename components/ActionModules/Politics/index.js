@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import React from 'react'
 
 import { useFlow } from '../../../hooks'
+import { text } from '../../../utils/Text'
 import { Success } from '../helpers/Success'
 import { Details } from './Details'
 import { Filter } from './Filter'
@@ -41,6 +42,7 @@ export const Politics = ({ module }) => {
         }
 
         return {
+          description: text(option?.description),
           hasOptionalInput: option.hasOptionalInput,
           iconUrl: option.icon?.url,
           label: option.label,

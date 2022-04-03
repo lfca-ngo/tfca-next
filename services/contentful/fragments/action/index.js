@@ -18,6 +18,9 @@ export const ActionFragment = gql`
     actionId
     carbonSaved
     impact
+    impactDisclaimer {
+      json
+    }
     effort
     icon {
       url

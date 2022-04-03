@@ -19,7 +19,7 @@ export const Results = ({
   availableFilters = [],
 }) => {
   const [visible, setVisible] = useState(false)
-  const detailViewType = data.main?.detailViewType || 'page'
+  const detailViewType = data.main?.detailViewType || 'drawer'
   const isDrawerView = detailViewType === 'drawer'
 
   const handleNext = (item) => {

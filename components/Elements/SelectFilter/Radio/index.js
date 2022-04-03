@@ -1,6 +1,7 @@
 require('./styles.less')
 
-import { Checkbox } from 'antd'
+import { QuestionCircleOutlined } from '@ant-design/icons'
+import { Checkbox, Popover } from 'antd'
 import classNames from 'classnames'
 import Image from 'next/image'
 import React, { useState } from 'react'
@@ -12,6 +13,7 @@ export const Radio = ({
   singleMode,
   onSelect,
   quizAnswerStatus,
+  layout,
 }) => {
   const [selected, setSelected] = useState(value)
 
@@ -36,7 +38,7 @@ export const Radio = ({
   }
 
   return (
-    <span className={classNames('multi-select', quizAnswerStatus)}>
+    <span className={classNames('multi-select', quizAnswerStatus, layout)}>
       <Checkbox.Group onChange={onCheckboxChange} value={selected}>
         {items.map((item, i) => (
           <Checkbox
@@ -48,10 +50,20 @@ export const Radio = ({
             <span className="label-wrapper">
               {item.iconUrl && (
                 <span className="icon">
-                  <Image height={25} src={item.iconUrl} width={25} />
+                  <Image layout="fill" objectFit="contain" src={item.iconUrl} />
                 </span>
               )}
-              {item.label}
+              <div className="text">
+                <span className="label">{item.label}</span>
+                {item.description && (
+                  <Popover
+                    content={item.description}
+                    overlayClassName="popover-md"
+                  >
+                    <QuestionCircleOutlined />
+                  </Popover>
+                )}
+              </div>
             </span>
           </Checkbox>
         ))}

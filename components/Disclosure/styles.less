@@ -45,8 +45,22 @@
       margin: 20px 0 10px;
     }
 
-    .logo-wrapper {
-      .logo-circle(90px, @light-grey);
+    .logo-container {
+      width: 120px;
+      height: 120px;
+      box-shadow: @box-shadow-base;
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .logo-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100px;
+        height: 100px;
+      }
     }
   }
 
