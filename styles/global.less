@@ -43,6 +43,11 @@ body {
 
 .hidden {
   &.md {
+    @media (min-width: @screen-md) {
+      display: none;
+    }
+  }
+  &.md-max {
     @media (max-width: @screen-md-max) {
       display: none;
     }
@@ -145,6 +150,11 @@ body {
 // Popover
 .ant-popover.popover-md {
   max-width: 360px;
+  font-size: @font-size-sm;
+}
+
+.ant-popover.popover-sm {
+  max-width: 300px;
   font-size: @font-size-sm;
 }
 
