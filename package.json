@@ -33,6 +33,7 @@
     "react-intersection-observer": "^8.33.1",
     "react-minimal-pie-chart": "^8.2.0",
     "react-query": "^3.34.15",
+    "react-share": "^4.4.0",
     "sharp": "^0.30.1",
     "snarkdown": "^2.0.0",
     "uuid": "^8.3.2"
