@@ -5,7 +5,7 @@ import {
   LikeOutlined,
   UsergroupAddOutlined,
 } from '@ant-design/icons'
-import { Progress, Tag } from 'antd'
+import { Popover, Progress, Tag } from 'antd'
 import React from 'react'
 
 import { useContentBlocks } from '../../../hooks'
@@ -39,11 +39,21 @@ const ActionStats = (props) => {
 
       <Stat
         data={
-          <Progress
-            percent={props.impact * (100 / STEPS)}
-            showInfo={false}
-            steps={STEPS}
-          />
+          <Popover
+            content={
+              <div>
+                {text(useContentBlocks('stats.popover.impact'))}
+                {text(props.impactDisclaimer)}
+              </div>
+            }
+            overlayClassName="popover-md"
+          >
+            <Progress
+              percent={props.impact * (100 / STEPS)}
+              showInfo={false}
+              steps={STEPS}
+            />
+          </Popover>
         }
         icon={<LikeOutlined />}
         text={text(useContentBlocks('stats.impact'))}

@@ -31,6 +31,7 @@ const ActionModules = (props) => {
       effort={action.effort}
       id={action.id}
       impact={action.impact}
+      impactDisclaimer={action.impactDisclaimer}
       key={action.id}
       name={action.name}
       otherUsers={props.stats[action.id]}

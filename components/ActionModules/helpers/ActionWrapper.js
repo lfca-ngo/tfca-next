@@ -39,6 +39,7 @@ export const ActionWrapper = (props) => {
           <ActionStats
             effort={props.effort}
             impact={props.impact}
+            impactDisclaimer={props.impactDisclaimer}
             name={props.name}
             otherUsers={props.otherUsers}
             timeLeft={null}

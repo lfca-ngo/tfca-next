@@ -72,7 +72,7 @@ const Menu = ({
             />
           }
           onVisibleChange={(visible) => setCompanyInfoVisible(visible)}
-          overlayClassName="popover-sm hidden md"
+          overlayClassName="popover-sm hidden md-max"
           placement="bottom"
           visible={companyInfoVisible}
         >
