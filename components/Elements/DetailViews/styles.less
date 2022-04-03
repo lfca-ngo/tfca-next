@@ -5,9 +5,17 @@
 .detail-view {
   // generic styles that apply to all detail views
   font-size: @font-size-sm;
+
+  @media @desktop {
+    font-size: @font-size-base;
+  }
+
   .ant-list {
     .ant-list-item-meta-description {
       font-size: @font-size-sm;
+      @media @desktop {
+        font-size: @font-size-base;
+      }
     }
   }
   header {
@@ -50,7 +58,10 @@
       }
     }
     .font-semi(var(--heading-color));
-    font-size: 20px;
+    font-size: 22px;
     margin: 40px 0 10px;
+    @media @desktop {
+      font-size: 24px;
+    }
   }
 }
