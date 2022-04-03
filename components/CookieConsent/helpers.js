@@ -26,7 +26,10 @@ export const CookieSelector = (props) => {
         />{' '}
         {props.title}
         {props.showInfo && (
-          <Popover content={props.infoBox} overlayClassName={'cookie-popover'}>
+          <Popover
+            content={props.infoBox}
+            overlayClassName={'cookie-popover popover-sm'}
+          >
             <QuestionCircleOutlined className="add-info" />
           </Popover>
         )}
