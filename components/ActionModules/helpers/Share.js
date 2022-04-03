@@ -39,9 +39,19 @@ export const Share = ({ imageInviteText, invites }) => {
           return (
             <TabPane key={`${i}`} tab={tabName}>
               <CopyTextArea
-                rows={5}
+                rows={4}
                 text={createInviteText(names)}
                 textSize="large"
+              />
+
+              <Image
+                alt={tabName}
+                height={630}
+                layout="intrinsic"
+                src={ogImageUrl}
+                style={{ borderRadius: '12px', margin: '20px 0' }}
+                unoptimized={true}
+                width={1200}
               />
 
               <div className="share-image-preview">

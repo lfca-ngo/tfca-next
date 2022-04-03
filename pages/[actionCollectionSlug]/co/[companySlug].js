@@ -54,10 +54,6 @@ export async function getStaticProps({ locale, params }) {
     props: {
       ...staticData,
       company,
-      customization: {
-        from: companySlug,
-        to: 'YOU!',
-      },
     },
   }
 }

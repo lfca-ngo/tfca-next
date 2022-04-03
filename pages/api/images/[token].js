@@ -30,7 +30,7 @@ export default async function handler(req, res) {
       })
     )
 
-    const png = await sharp(svgImage, { density: 144 })
+    const png = await sharp(svgImage, { density: 72 })
       .png({ quality: 100 })
       .toBuffer()
 
