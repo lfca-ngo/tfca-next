@@ -2,9 +2,8 @@ require('./styles.less')
 
 import { ArrowDownOutlined, CheckCircleFilled } from '@ant-design/icons'
 import { Col, Collapse, Row } from 'antd'
+import Image from 'next/image'
 import React from 'react'
-
-import { CircleImage } from '../Elements/CircleImage'
 
 const { Panel } = Collapse
 
@@ -20,7 +19,15 @@ const Disclosure = ({ data }) => {
             <h1>{data?.company.name}</h1>
           </Col>
           <Col md={4} xs={8}>
-            <CircleImage size={100} src={data?.company?.logoUrl} />
+            <div className="logo-container">
+              <div className="logo-wrapper">
+                <Image
+                  layout="fill"
+                  objectFit="contain"
+                  src={data?.company?.logoUrl}
+                />
+              </div>
+            </div>
           </Col>
         </Row>
       </header>
