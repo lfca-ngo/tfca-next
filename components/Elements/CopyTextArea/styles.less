@@ -1,9 +1,14 @@
 .copy-text-area {
   position: relative;
+  &.large {
+    textarea.ant-input {
+      font-size: @font-size-base;
+    }
+  }
   textarea.ant-input {
     padding: 20px;
     line-height: 1.5;
-    font-size: 18px;
+    font-size: @font-size-sm;
   }
   .ant-btn {
     position: absolute;

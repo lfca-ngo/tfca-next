@@ -1,4 +1,3 @@
-import { LoadingOutlined } from '@ant-design/icons'
 import {
   MinusCircleOutlined,
   PlusOutlined,
@@ -13,6 +12,7 @@ import { trackEvent } from '../../../services/analytics'
 import { getCookie, getWindowUid, UID_COOKIE_NAME } from '../../../utils'
 import { text } from '../../../utils/Text'
 import CheckList from '../../Elements/CheckList'
+import { LoadingSpinner } from '../../Elements/LoadingSpinner'
 import Category from './Category'
 import { Share } from './Share'
 
@@ -166,7 +166,7 @@ export const Success = ({
         ) : (
           <div>
             {isGeneratingToken ? (
-              <LoadingOutlined />
+              <LoadingSpinner className="dark" label="...generating link" />
             ) : (
               <Share imageInviteText={imageInviteText} invites={invites} />
             )}
