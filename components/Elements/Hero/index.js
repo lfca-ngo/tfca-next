@@ -9,7 +9,7 @@ import { text } from '../../../utils/Text'
 import { ChallengeStatus } from '../ChallengeStatus'
 import World from './world.png'
 
-export const Hero = ({ onClick }) => {
+export const Hero = ({ onClick, openGraphInfo }) => {
   const customization = useCustomization()
 
   const defaultBlock = useContentBlocks('header.title')
@@ -60,7 +60,10 @@ export const Hero = ({ onClick }) => {
           </div>
         </div>
         {/* Challenge status (floating) */}
-        <ChallengeStatus className={'hidden md-max floating'} />
+        <ChallengeStatus
+          className={'hidden md-max floating'}
+          openGraphInfo={openGraphInfo}
+        />
       </div>
     </div>
   )

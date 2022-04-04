@@ -5,9 +5,13 @@ import { Layout } from '../../../components/Layout'
 import { fetchAllStaticData } from '../../../services'
 import { decodeShareToken, WITH_SIDEBAR } from '../../../utils'
 
-export default function InvitePage({ actions, stats }) {
+export default function InvitePage({ actions, openGraphInfo, stats }) {
   return (
-    <Layout layout={actions?.layout || WITH_SIDEBAR} nav={actions?.nav}>
+    <Layout
+      layout={actions?.layout || WITH_SIDEBAR}
+      nav={actions?.nav}
+      openGraphInfo={openGraphInfo}
+    >
       <ActionModules actions={actions?.items} stats={stats} />
     </Layout>
   )

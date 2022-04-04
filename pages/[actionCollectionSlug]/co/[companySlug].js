@@ -8,12 +8,18 @@ import { fetchData } from '../../../services/lfca'
 import { QualifiedCompanyItemFragment } from '../../../services/lfca/fragments'
 import { WITH_SIDEBAR } from '../../../utils'
 
-export default function SupporterPage({ actions, company, stats }) {
+export default function SupporterPage({
+  actions,
+  company,
+  openGraphInfo,
+  stats,
+}) {
   return (
     <Layout
       company={company}
       layout={actions?.layout || WITH_SIDEBAR}
       nav={actions?.nav}
+      openGraphInfo={openGraphInfo}
     >
       <ActionModules actions={actions?.items} stats={stats} />
     </Layout>

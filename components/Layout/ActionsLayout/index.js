@@ -4,11 +4,12 @@ import { CloseOutlined } from '@ant-design/icons'
 import { Button, Drawer, Popover } from 'antd'
 import React, { useState } from 'react'
 
-import { useContentNavs, useCustomization } from '../../../hooks'
+import { useContentNavs } from '../../../hooks'
 import { scrollToId } from '../../../utils'
 import { Disclosure } from '../../Disclosure'
 import { ChallengeStatus } from '../../Elements/ChallengeStatus'
 import { Hero } from '../../Elements/Hero'
+import { MenuSection } from '../../Elements/MenuSection'
 import { QuestionAnswer } from '../../Elements/QuestionAnswer'
 import { ErrorBoundary } from '../../ErrorBoundary'
 import { IntlSelector } from '../../IntlSelector'
@@ -58,7 +59,7 @@ const CompanyMenuItem = ({ company }) => {
   )
 }
 
-export const ActionsLayout = ({ children, company, nav }) => {
+export const ActionsLayout = ({ children, company, nav, openGraphInfo }) => {
   const [collapsed, setCollapsed] = useState(true)
   const mainNav = useContentNavs('mainHeaderNav')?.elementsCollection?.items
   let addOnItems = [
@@ -79,9 +80,15 @@ export const ActionsLayout = ({ children, company, nav }) => {
         collapsed={collapsed}
         hamburgerMenu={
           <div>
-            <ChallengeStatus />
-            <QuestionAnswer />
-            <MainMenu items={mainNav.filter((i) => !i.action)} />
+            <MenuSection
+              content={<ChallengeStatus openGraphInfo={openGraphInfo} />}
+              title="Challenge"
+            />
+            <MenuSection content={<QuestionAnswer />} title="Questions" />
+            <MenuSection
+              content={<MainMenu items={mainNav.filter((i) => !i.action)} />}
+              title="Menu"
+            />
           </div>
         }
         setCollapsed={setCollapsed}
@@ -94,7 +101,10 @@ export const ActionsLayout = ({ children, company, nav }) => {
       />
 
       <main id="scroll-container">
-        <Hero onClick={() => scrollToId(nav[0]?.id)} />
+        <Hero
+          onClick={() => scrollToId(nav[0]?.id)}
+          openGraphInfo={openGraphInfo}
+        />
         <ErrorBoundary>{children}</ErrorBoundary>
         <Footer />
       </main>

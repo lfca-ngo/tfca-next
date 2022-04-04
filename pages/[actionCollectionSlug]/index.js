@@ -7,9 +7,17 @@ import { fetchAllStaticData } from '../../services'
 import { fetchContent } from '../../services/contentful'
 import { WITH_SIDEBAR } from '../../utils'
 
-export default function ActionCollectionPage({ actions, stats }) {
+export default function ActionCollectionPage({
+  actions,
+  openGraphInfo,
+  stats,
+}) {
   return (
-    <Layout layout={actions?.layout || WITH_SIDEBAR} nav={actions?.nav}>
+    <Layout
+      layout={actions?.layout || WITH_SIDEBAR}
+      nav={actions?.nav}
+      openGraphInfo={openGraphInfo}
+    >
       <ActionModules actions={actions?.items} stats={stats} />
     </Layout>
   )
