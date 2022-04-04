@@ -1,19 +1,69 @@
-name: deploy
+name: ci
 on: push
 jobs:
-  deploy:
+  lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: "Deploy to Vercel"
-        run: |
-          prodRun=""
-          if [[ ${GITHUB_REF} == "refs/heads/main" ]]; then
-            prodRun="--prod"
-          fi
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+      - uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+      - name: Install dependencies
+        run: yarn --frozen-lockfile
+      - name: Run linter
+        run: yarn lint
 
-          npx vercel --token ${VERCEL_TOKEN} $prodRun
+  deploy:
+    runs-on: ubuntu-latest
+    needs: lint
+    outputs:
+      preview_url: ${{ steps.vercel-deploy.outputs.preview-url }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Determine vercel args
+        uses: haya14busa/action-cond@v1
+        id: vercel-args
+        with:
+          cond: ${{ github.ref_name == 'main' }}
+          if_true: '--prod'
+          if_false: ''
+      - name: Deploy to Vercel Action
+        uses: amondnet/vercel-action@v20 #deploy
+        id: vercel-deploy
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          vercel-args: ${{ steps.vercel-args.outputs.value }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID}}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID}}
+
+  e2e-test:
+    runs-on: ubuntu-latest
+    needs: deploy
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+      - uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+      - name: Install dependencies
+        run: yarn --frozen-lockfile
+      - name: Install Playwright
+        run: npx playwright install --with-deps
+      - name: Run e2e tests
+        run: yarn test:e2e
         env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          PLAYWRIGHT_TEST_BASE_URL: ${{ needs.deploy.outputs.preview_url }}
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: playwright-results
+          path: test-results
