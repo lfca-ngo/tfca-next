@@ -1,0 +1,55 @@
+@import (reference) '../../../styles/variables.less';
+@import (reference) '../../../styles/fonts.less';
+
+.challenge-status {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: @light-grey;
+  padding: 12px 12px;
+  border: 1px solid @black;
+  border-radius: @border-radius-base;
+
+  &.floating {
+    position: absolute;
+    left: 40px;
+    bottom: 40px;
+    .ant-btn {
+      height: auto;
+      padding: 6px 12px;
+      font-size: 15px;
+    }
+    .invited-by {
+      flex-direction: row;
+      margin: 0 10px 0 0;
+      label {
+        margin-right: 3px;
+      }
+      label,
+      .invited-by-text {
+        font-size: 16px;
+        line-height: 18px;
+      }
+      .invited-by-text {
+        .font-semi();
+        letter-spacing: 0;
+      }
+    }
+  }
+
+  .status-icon {
+    color: @secondary-color;
+    margin-right: 8px;
+  }
+
+  .invited-by {
+    display: flex;
+    flex-direction: column;
+    label {
+      font-size: 14px;
+    }
+    .invited-by-text {
+      .font-medium();
+    }
+  }
+}

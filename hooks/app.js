@@ -60,7 +60,8 @@ export const AppProvider = ({ children, content, customization = null }) => {
 
 export const useCustomization = () => {
   const context = useContext(AppContext)
-  return context.customization
+  // @TODO: @David, pls replace with real value
+  return { ...context.customization, sender: 'Timo' }
 }
 
 export const useActiveAction = () => {

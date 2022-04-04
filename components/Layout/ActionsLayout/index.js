@@ -4,9 +4,10 @@ import { CloseOutlined } from '@ant-design/icons'
 import { Button, Drawer, Popover } from 'antd'
 import React, { useState } from 'react'
 
-import { useContentNavs } from '../../../hooks'
+import { useContentNavs, useCustomization } from '../../../hooks'
 import { scrollToId } from '../../../utils'
 import { Disclosure } from '../../Disclosure'
+import { ChallengeStatus } from '../../Elements/ChallengeStatus'
 import { Hero } from '../../Elements/Hero'
 import { QuestionAnswer } from '../../Elements/QuestionAnswer'
 import { ErrorBoundary } from '../../ErrorBoundary'
@@ -37,6 +38,7 @@ const PopoverContent = ({ name, onClose }) => {
 const CompanyMenuItem = ({ company }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [popoverOpen, setPopoverOpen] = useState(true)
+
   return (
     <li>
       <Popover
@@ -77,6 +79,7 @@ export const ActionsLayout = ({ children, company, nav }) => {
         collapsed={collapsed}
         hamburgerMenu={
           <div>
+            <ChallengeStatus />
             <QuestionAnswer />
             <MainMenu items={mainNav.filter((i) => !i.action)} />
           </div>
