@@ -1,10 +1,10 @@
 require('./styles.less')
 
-import { Button, Card, Col, Input, List, Row, Select, Tabs } from 'antd'
+import { Button, Card, Col, Drawer, Input, List, Row, Select, Tabs } from 'antd'
 import Image from 'next/image'
 import React, { useState } from 'react'
 
-import { DisclosureDrawer } from '../Disclosure/DisclosureDrawer'
+import { Disclosure } from '../Disclosure'
 import CheckList from '../Elements/CheckList'
 
 const { Search } = Input
@@ -144,11 +144,13 @@ export const DisclosureOverview = ({ items }) => {
         />
       </div>
 
-      <DisclosureDrawer
-        data={activeItem}
-        onClose={() => setDrawerVisible(false)}
-        visible={drawerVisible}
-      />
+      <Drawer
+        className="drawer-md"
+        onClose={() => setDisclosureVisible(!disclosureVisible)}
+        visible={disclosureVisible}
+      >
+        <Disclosure data={activeItem} />
+      </Drawer>
     </div>
   )
 }

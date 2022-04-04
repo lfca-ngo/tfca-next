@@ -59,7 +59,11 @@ const CompanyMenuItem = ({ company }) => {
 export const ActionsLayout = ({ children, company, nav }) => {
   const [collapsed, setCollapsed] = useState(true)
   const mainNav = useContentNavs('mainHeaderNav')?.elementsCollection?.items
-  let addOnItems = [<IntlSelector key="intl" />]
+  let addOnItems = [
+    <li key="intl">
+      <IntlSelector />
+    </li>,
+  ]
   if (company) {
     addOnItems = [<CompanyMenuItem company={company} key="co" />, ...addOnItems]
   }
