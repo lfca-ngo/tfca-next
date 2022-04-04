@@ -7,18 +7,18 @@ import React, { useState } from 'react'
 
 import { text } from '../../../utils/Text'
 
-const TABS_LIST = [
-  {
-    key: 'benefitsCollection',
-    tab: 'Benefits',
-  },
-  {
-    key: 'sustainabilityCollection',
-    tab: 'Sustainability',
-  },
-]
+export const BankCard = ({ blocks, item, onNext }) => {
+  const TABS_LIST = [
+    {
+      key: 'benefitsCollection',
+      tab: text(blocks['label.benefits']),
+    },
+    {
+      key: 'sustainabilityCollection',
+      tab: text(blocks['label.sustainability']),
+    },
+  ]
 
-export const BankCard = ({ item, onNext }) => {
   const [activeTab, setActiveTab] = useState(TABS_LIST[0].key)
 
   const handleNext = () => onNext(item)
