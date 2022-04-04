@@ -9,15 +9,12 @@ const { Panel } = Collapse
 export const QuestionAnswer = () => {
   const faqContent = useContentLists('faq.general')?.items || []
   return (
-    <div>
-      <h3>Questions?</h3>
-      <Collapse accordion bordered={false} className="collapse-basic">
-        {faqContent.map((faq, index) => (
-          <Panel header={faq.question} key={index}>
-            <Text block={faq.answer} />
-          </Panel>
-        ))}
-      </Collapse>
-    </div>
+    <Collapse accordion bordered={false} className="collapse-basic">
+      {faqContent.map((faq, index) => (
+        <Panel header={faq.question} key={index}>
+          <Text block={faq.answer} />
+        </Panel>
+      ))}
+    </Collapse>
   )
 }

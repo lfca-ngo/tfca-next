@@ -41,6 +41,13 @@ body {
   padding: 0 @default-section-padding;
 }
 
+.container-max {
+  width: 100%;
+  max-width: @container-max-width;
+  margin: 0 auto;
+  padding: 0 @default-section-padding;
+}
+
 .hidden {
   &.md {
     @media (min-width: @screen-md) {
@@ -133,13 +140,13 @@ body {
 
   .ant-drawer-content {
     .ant-drawer-header {
-      background: var(--card-background);
+      background: @white;
       border-radius: 0;
     }
     .ant-drawer-body {
       padding: @default-section-padding;
       color: var(--text-color);
-      background: var(--card-background);
+      background: @white;
       @media @desktop {
         padding: 40px 80px;
       }

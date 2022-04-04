@@ -30,7 +30,7 @@ export const Hamburger = ({ content, isFloating, title }) => {
       </button>
 
       <Drawer
-        className="hamburger-drawer"
+        className="hamburger-drawer drawer-md"
         onClose={toggleMenu}
         placement="right"
         title={title}

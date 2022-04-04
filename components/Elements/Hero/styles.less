@@ -2,22 +2,6 @@
 @import (reference) '../../../styles/fonts.less';
 
 .hero {
-  position: relative;
-  padding-top: 50px;
-  padding-bottom: 60px;
-  padding-left: @default-section-padding;
-  padding-right: @default-section-padding;
-  text-align: left;
-
-  @media @desktop {
-    text-align: center;
-    padding-top: 60px;
-    padding-bottom: 80px;
-    padding-left: 40px;
-    padding-right: 40px;
-    max-width: @container-hero-width;
-    margin: 0 auto;
-  }
   h1 {
     .h1-hero();
     color: @white;
@@ -26,7 +10,11 @@
     strong {
       .h1-hero();
       background-color: @pink;
-      background-image: linear-gradient(270deg, darken(@pink, 5%) 0%, @pink 100%);
+      background-image: linear-gradient(
+        270deg,
+        darken(@pink, 5%) 0%,
+        @pink 100%
+      );
       background-size: 100%;
       background-clip: text;
       text-decoration: none;
@@ -44,17 +32,38 @@
       font-size: 26px;
     }
   }
-  .bg-wrapper {
-    position: absolute;
-    right: -260px;
-    bottom: -240px;
-    width: 380px;
-    height: 380px;
+
+  .container-max {
+    position: relative;
+  }
+
+  .content {
+    position: relative;
+    padding-top: 50px;
+    padding-bottom: 60px;
+    text-align: left;
+
     @media @desktop {
-      right: -400px;
+      text-align: center;
+      padding-top: 60px;
+      padding-bottom: 80px;
+      padding-left: 40px;
+      padding-right: 40px;
+      max-width: @container-hero-width;
+      margin: 0 auto;
+    }
+    .bg-wrapper {
+      position: absolute;
+      right: -260px;
       bottom: -240px;
-      width: 435px;
-      height: 435px;
+      width: 380px;
+      height: 380px;
+      @media @desktop {
+        right: -400px;
+        bottom: -240px;
+        width: 435px;
+        height: 435px;
+      }
     }
   }
 }

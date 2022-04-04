@@ -1,15 +1,19 @@
 import React from 'react'
 
 import ActionModules from '../../../components/ActionModules'
-import SplitLayout from '../../../components/Layout/SplitLayout'
+import { Layout } from '../../../components/Layout'
 import { fetchAllStaticData } from '../../../services'
-import { decodeShareToken } from '../../../utils'
+import { decodeShareToken, WITH_SIDEBAR } from '../../../utils'
 
-export default function InvitePage({ actions, stats }) {
+export default function InvitePage({ actions, openGraphInfo, stats }) {
   return (
-    <SplitLayout layout={actions?.layout} nav={actions?.nav}>
+    <Layout
+      layout={actions?.layout || WITH_SIDEBAR}
+      nav={actions?.nav}
+      openGraphInfo={openGraphInfo}
+    >
       <ActionModules actions={actions?.items} stats={stats} />
-    </SplitLayout>
+    </Layout>
   )
 }
 

@@ -1,27 +1,17 @@
-require('../../styles/override-ant-globals.less')
+import React from 'react'
 
-import classNames from 'classnames'
-import Head from 'next/head'
-import React, { Fragment } from 'react'
+import { EMBED, WITH_SIDEBAR } from '../../utils'
+import { ActionsLayout } from './ActionsLayout'
+import { BasicLayout } from './BasicLayout'
+import { EmbedLayout } from './EmbedLayout'
 
-import CookieConsent from '../CookieConsent'
-
-const Template = ({ children, className }) => {
-  return (
-    <Fragment>
-      <div className={classNames('siteRoot', className)}>
-        <Head>
-          <title>TFCA</title>
-          <meta charSet="utf-8" />
-          <link href="/favicon.ico" rel="icon" />
-        </Head>
-        <div className="siteContent">
-          {children}
-          <CookieConsent />
-        </div>
-      </div>
-    </Fragment>
-  )
+export const Layout = (props) => {
+  switch (props.layout) {
+    case EMBED:
+      return <EmbedLayout {...props}>{props.children}</EmbedLayout>
+    case WITH_SIDEBAR:
+      return <ActionsLayout {...props}>{props.children}</ActionsLayout>
+    default:
+      return <BasicLayout {...props}>{props.children}</BasicLayout>
+  }
 }
-
-export default Template

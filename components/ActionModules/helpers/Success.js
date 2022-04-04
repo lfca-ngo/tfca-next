@@ -47,6 +47,7 @@ export const Success = ({
     useContentBlocks('header.title.recipients.fallback')
   )
 
+  // @TODO: @David to add generic sharing link for user
   // create multiple invite links
   // map of promises with infos
   const createInvites = async (values) => {

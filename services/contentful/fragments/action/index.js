@@ -48,7 +48,6 @@ export const ActionFragment = gql`
         }
       }
     }
-
     quizCollection(limit: $quizLimit) {
       items {
         ...QuizFragment

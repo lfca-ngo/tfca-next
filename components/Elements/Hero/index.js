@@ -6,9 +6,10 @@ import React from 'react'
 
 import { useContentBlocks, useCustomization } from '../../../hooks'
 import { text } from '../../../utils/Text'
+import { ChallengeStatus } from '../ChallengeStatus'
 import World from './world.png'
 
-export const Hero = ({ onClick }) => {
+export const Hero = ({ onClick, openGraphInfo }) => {
   const customization = useCustomization()
 
   const defaultBlock = useContentBlocks('header.title')
@@ -18,42 +19,51 @@ export const Hero = ({ onClick }) => {
   )
 
   return (
-    <div className="hero content">
-      <div className="bg-wrapper">
-        <Image
-          layout="fill"
-          objectFit="contain"
-          objectPosition={'center'}
-          src={World}
+    <div className="hero">
+      <div className="container-max">
+        <div className="content">
+          <div className="bg-wrapper">
+            <Image
+              layout="fill"
+              objectFit="contain"
+              objectPosition={'center'}
+              src={World}
+            />
+          </div>
+
+          <Typography.Title>
+            {customization?.names?.length
+              ? text(
+                  customBlock,
+                  {
+                    name:
+                      customization.names.length === 1
+                        ? customization.names[0]
+                        : recipientsFallback,
+                  },
+                  {},
+                  true
+                )
+              : text(defaultBlock, {}, true)}
+          </Typography.Title>
+          <p>{text(useContentBlocks('header.body'))}</p>
+
+          <div className="start-btn">
+            <Button
+              className="ant-btn-xl"
+              onClick={onClick}
+              size="large"
+              type="primary"
+            >
+              {text(useContentBlocks('header.button.primary'))}
+            </Button>
+          </div>
+        </div>
+        {/* Challenge status (floating) */}
+        <ChallengeStatus
+          className={'hidden md-max floating'}
+          openGraphInfo={openGraphInfo}
         />
-      </div>
-
-      <Typography.Title>
-        {customization?.names?.length
-          ? text(
-              customBlock,
-              {
-                name:
-                  customization.names.length === 1
-                    ? customization.names[0]
-                    : recipientsFallback,
-              },
-              {},
-              true
-            )
-          : text(defaultBlock, {}, true)}
-      </Typography.Title>
-      <p>{text(useContentBlocks('header.body'))}</p>
-
-      <div className="start-btn">
-        <Button
-          className="ant-btn-xl"
-          onClick={onClick}
-          size="large"
-          type="primary"
-        >
-          {text(useContentBlocks('header.button.primary'))}
-        </Button>
       </div>
     </div>
   )
