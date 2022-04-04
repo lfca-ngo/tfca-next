@@ -3,6 +3,7 @@ import Link from 'next/link'
 import React, { useState } from 'react'
 
 import { TOGGLE_Q_AND_A } from '../../../utils'
+import { MenuSection } from '../../Elements/MenuSection'
 import { QuestionAnswer } from '../../Elements/QuestionAnswer'
 
 export const MenuItem = ({ link }) => {
@@ -24,7 +25,7 @@ export const MenuItem = ({ link }) => {
             onClose={() => setQaVisible(!qaVisible)}
             visible={qaVisible}
           >
-            <QuestionAnswer />
+            <MenuSection content={<QuestionAnswer />} title="Questions?" />
           </Drawer>
         </li>
       )
