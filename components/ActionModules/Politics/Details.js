@@ -62,6 +62,7 @@ export const Details = ({
         <DetailView
           activeMessageIndex={store?.activeMessageIndex}
           availableFilters={availableFilters}
+          blocks={blocks}
           item={activePolitician}
           layout="politician"
           messages={messagesByFilterValue[store[messagesRelatedFilterKey]]}

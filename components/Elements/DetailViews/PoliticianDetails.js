@@ -13,6 +13,7 @@ import { DropdownSelect } from '../SelectFilter/DropdownSelect'
 export const PoliticianDetails = ({
   activeMessageIndex,
   availableFilters,
+  blocks,
   item,
   messages,
   messagesRelatedFilterKey,
@@ -94,7 +95,7 @@ export const PoliticianDetails = ({
           size="large"
           type="primary"
         >
-          Open E-Mail
+          {replaceVars(blocks['contact.button.primary'])}
         </Button>
       </Space>
     </div>

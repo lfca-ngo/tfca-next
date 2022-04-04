@@ -48,7 +48,7 @@ export const Filter = ({
         </Form.Item>
         <Form.Item>
           <Button block htmlType="submit" size="large" type="primary">
-            Submit
+            {text(blocks['filter.button.primary'])}
           </Button>
         </Form.Item>
       </Form>
