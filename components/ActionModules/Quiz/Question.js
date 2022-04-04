@@ -92,7 +92,7 @@ export const Question = ({
         </Form.Item>
         <Form.Item>
           <Button block htmlType="submit" size="large" type="primary">
-            Submit
+            {text(blocks['question.button.primary'])}
           </Button>
         </Form.Item>
       </Form>
