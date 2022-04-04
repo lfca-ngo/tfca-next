@@ -8,11 +8,13 @@ import { useContentNavs } from '../../../hooks'
 import { scrollToId } from '../../../utils'
 import { Disclosure } from '../../Disclosure'
 import { Hero } from '../../Elements/Hero'
+import { QuestionAnswer } from '../../Elements/QuestionAnswer'
 import { ErrorBoundary } from '../../ErrorBoundary'
 import { IntlSelector } from '../../IntlSelector'
 import { ActionsNav } from '../ActionsNav'
 import { Footer } from '../Footer'
 import { Nav } from '../Nav'
+import { MainMenu } from '../Nav'
 import { Template } from '../Template'
 import { TopBar } from '../TopBar'
 
@@ -56,7 +58,7 @@ const CompanyMenuItem = ({ company }) => {
 
 export const ActionsLayout = ({ children, company, nav }) => {
   const [collapsed, setCollapsed] = useState(true)
-  const mainNav = useContentNavs('mainHeaderNav')?.items
+  const mainNav = useContentNavs('mainHeaderNav')?.elementsCollection?.items
   let addOnItems = [<IntlSelector key="intl" />]
   if (company) {
     addOnItems = [<CompanyMenuItem company={company} key="co" />, ...addOnItems]
@@ -69,6 +71,12 @@ export const ActionsLayout = ({ children, company, nav }) => {
       <ActionsNav
         actions={nav}
         collapsed={collapsed}
+        hamburgerMenu={
+          <div>
+            <QuestionAnswer />
+            <MainMenu items={mainNav.filter((i) => !i.action)} />
+          </div>
+        }
         setCollapsed={setCollapsed}
       />
 

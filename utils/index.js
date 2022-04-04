@@ -10,6 +10,7 @@ export const isBrowser = () => typeof window !== 'undefined'
 export const SETTINGS_ID = '48AtzIK5THq8u72j19vKw1'
 
 export const WITH_SIDEBAR = 'with-sidebar'
+export const TOGGLE_Q_AND_A = 'toggle-q-and-a'
 
 const __CSS_THEME_DARK__ = 'theme-dark'
 

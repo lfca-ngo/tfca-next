@@ -7,7 +7,7 @@ import { DefaultLogo } from '../../Elements/DefaultLogo'
 import { Hamburger } from '../../Elements/Hamburger'
 import { MenuItem } from './MenuItem'
 
-const MainMenu = ({ addOnItems, className, items }) => {
+export const MainMenu = ({ addOnItems, className, items }) => {
   return (
     <ul className={className}>
       {items?.map((link, i) => (
