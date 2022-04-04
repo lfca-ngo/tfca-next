@@ -146,8 +146,8 @@ export const DisclosureOverview = ({ items }) => {
 
       <Drawer
         className="drawer-md"
-        onClose={() => setDisclosureVisible(!disclosureVisible)}
-        visible={disclosureVisible}
+        onClose={() => setDrawerVisible(!drawerVisible)}
+        visible={drawerVisible}
       >
         <Disclosure data={activeItem} />
       </Drawer>

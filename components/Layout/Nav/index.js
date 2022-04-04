@@ -7,9 +7,9 @@ import { DefaultLogo } from '../../Elements/DefaultLogo'
 import { Hamburger } from '../../Elements/Hamburger'
 import { MenuItem } from './MenuItem'
 
-export const MainMenu = ({ addOnItems, className, items }) => {
+export const MainMenu = ({ addOnItems, className = '', items }) => {
   return (
-    <ul className={className}>
+    <ul className={`main-menu ${className}`}>
       {items?.map((link, i) => (
         <MenuItem key={`menu-${i}`} link={link} />
       ))}
@@ -23,7 +23,11 @@ export const Nav = ({ addOnItems, className, menuItems }) => {
     <nav className={classNames('nav', className)}>
       <div className="nav-container">
         <DefaultLogo />
-        <MainMenu addOnItems={addOnItems} items={menuItems} />
+        <MainMenu
+          addOnItems={addOnItems}
+          className="hidden md-max"
+          items={menuItems}
+        />
         <Hamburger
           content={<MainMenu addOnItems={addOnItems} items={menuItems} />}
         />
