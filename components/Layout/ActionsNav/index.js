@@ -28,7 +28,7 @@ const BOX_SHADOW_RANGE = [
   '0px 10px 10px rgba(0, 0, 0, 0.05)',
 ]
 
-export const Header = ({ actions, collapsed, setCollapsed }) => {
+export const ActionsNav = ({ actions, collapsed, setCollapsed }) => {
   const isMobile = useIsMobile()
   const isClient = useIsClient()
   const { scrollY } = useViewportScroll()
@@ -73,6 +73,7 @@ export const Header = ({ actions, collapsed, setCollapsed }) => {
           <Image height={48} src={logoSrc} width={48} />
         </motion.div>
 
+        {/* @TODO: Here should be either the same menu like on default pages */}
         <Hamburger content={<QuestionAnswer />} />
       </motion.div>
 

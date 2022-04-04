@@ -2,15 +2,16 @@ import { gql } from 'graphql-request'
 import React from 'react'
 
 import ActionModules from '../../components/ActionModules'
-import SplitLayout from '../../components/Layout/SplitLayout'
+import { Layout } from '../../components/Layout'
 import { fetchAllStaticData } from '../../services'
 import { fetchContent } from '../../services/contentful'
+import { WITH_SIDEBAR } from '../../utils'
 
 export default function ActionCollectionPage({ actions, stats }) {
   return (
-    <SplitLayout layout={actions?.layout} nav={actions?.nav}>
+    <Layout layout={actions?.layout || WITH_SIDEBAR} nav={actions?.nav}>
       <ActionModules actions={actions?.items} stats={stats} />
-    </SplitLayout>
+    </Layout>
   )
 }
 

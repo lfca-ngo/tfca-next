@@ -7,7 +7,7 @@ import React from 'react'
 
 const { Panel } = Collapse
 
-const Disclosure = ({ data }) => {
+export const Disclosure = ({ data }) => {
   const actionsList = data?.completedCompanyActions
   const campaignContributionMap = data.company.campaignParticipationPackages
 
@@ -130,5 +130,3 @@ const Disclosure = ({ data }) => {
     </div>
   )
 }
-
-export default Disclosure

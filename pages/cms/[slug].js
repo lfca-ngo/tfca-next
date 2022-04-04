@@ -2,7 +2,7 @@ import { gql } from 'graphql-request'
 import React from 'react'
 
 import { DisclosureOverview } from '../../components/DisclosureOverview'
-import { DefaultLayout } from '../../components/Layout/DefaultLayout'
+import { Layout } from '../../components/Layout'
 import {
   fetchAllStaticContent,
   fetchContent,
@@ -25,7 +25,7 @@ const renderCustomComponent = (id, data) => {
 
 export default function Page({ items, pageData }) {
   return (
-    <DefaultLayout
+    <Layout
       style={pageData?.style}
       subtitle={pageData?.subtitle}
       title={pageData?.title}
@@ -36,7 +36,7 @@ export default function Page({ items, pageData }) {
         </div>
       )}
       {renderCustomComponent(pageData?.componentId, items)}
-    </DefaultLayout>
+    </Layout>
   )
 }
 
