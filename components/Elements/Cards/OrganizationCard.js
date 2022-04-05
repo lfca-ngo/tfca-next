@@ -1,39 +1,49 @@
 require('./organizationCard.less')
 
-import { Button, Card, Tag } from 'antd'
+import { Card } from 'antd'
 import Image from 'next/image'
 import React from 'react'
 
 import { text } from '../../../utils/Text'
+import { DetailButton } from './DetailButton'
 
 export const OrganizationCard = ({ item, onNext }) => {
-  const needsTags =
-    item.needsCollection?.items?.map((tag) => text(tag.value)) || []
-
   const handleNext = () => onNext(item)
-
+  console.log(item)
   return (
-    <Card className="content-card organization" onClick={handleNext}>
-      <div className="header">
+    <Card
+      className="content-card organization"
+      cover={
+        <Image
+          layout="fill"
+          objectFit="cover"
+          src={
+            item.hero?.url ||
+            'https://images.ctfassets.net/f3bw2oxveb3i/2UHSqYQDCPz0vmbdh8kHj/abb54db139c6568c1399b5ba10a99e1a/350org.jpg'
+          }
+        />
+      }
+      onClick={handleNext}
+    >
+      <header>
         <div className="title">{item.name}</div>
         <div className="logo">
-          <Image layout="fill" objectFit="contain" src={item.logo?.url} />
+          <Image
+            layout="fill"
+            objectFit="contain"
+            objectPosition={'right center'}
+            src={item.logo?.url}
+          />
         </div>
-      </div>
-      <div className="body-content">
-        <div className="tags">
-          {needsTags?.map((tag, index) => (
-            <Tag className="base-tag blue" key={index}>
-              {tag}
-            </Tag>
-          ))}
+      </header>
+      <main>
+        <div className="text">
+          <div className="description">{item?.shortDescription}</div>
         </div>
-        <div className="actions">
-          <Button onClick={handleNext} type="primary">
-            Details
-          </Button>
-        </div>
-      </div>
+      </main>
+      <footer>
+        <DetailButton onClick={handleNext} text={'Details'} />
+      </footer>
     </Card>
   )
 }

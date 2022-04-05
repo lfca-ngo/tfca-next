@@ -1,11 +1,10 @@
 require('./actionCard.less')
 
-import { ArrowRightOutlined } from '@ant-design/icons'
-import { Button, Card, Tag } from 'antd'
+import { Card, Tag } from 'antd'
 import Image from 'next/image'
 import React from 'react'
 
-import { text } from '../../../utils/Text'
+import { DetailButton } from './DetailButton'
 
 export const ActionCard = ({ item, onNext }) => {
   const actionIcons =
@@ -13,7 +12,6 @@ export const ActionCard = ({ item, onNext }) => {
 
   const handleNext = () => onNext(item)
 
-  console.log(actionIcons)
   return (
     <Card className="content-card action" onClick={handleNext}>
       <header>
@@ -44,10 +42,7 @@ export const ActionCard = ({ item, onNext }) => {
             ))}
         </div>
         <div className="details">
-          <Button className="no-padding" onClick={handleNext} type="link">
-            Details
-            <ArrowRightOutlined />
-          </Button>
+          <DetailButton onClick={handleNext} text={'Details'} />
         </div>
       </footer>
     </Card>
