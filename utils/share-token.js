@@ -38,10 +38,15 @@ export function createShareToken({
 
 export function decodeShareToken(token) {
   try {
-    const { actionId, color, message, names, sender, uid } = jwt.verify(
-      token,
-      process.env.JWT_TOKEN_PRIVATE_KEY
-    )
+    const {
+      actionId = null,
+      color = null,
+      message = null,
+      names = null,
+      sender = null,
+      uid = null,
+    } = jwt.verify(token, process.env.JWT_TOKEN_PRIVATE_KEY)
+
     return {
       actionId,
       color,
