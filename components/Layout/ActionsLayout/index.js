@@ -52,7 +52,13 @@ const CompanyMenuItem = ({ company }) => {
         overlayClassName="popover-md"
         visible={popoverOpen}
       >
-        {company?.company?.name}
+        <Button
+          className="no-padding"
+          onClick={() => setIsOpen(true)}
+          type="link"
+        >
+          {company?.company?.name}
+        </Button>
       </Popover>
       <Drawer
         className="drawer-md"
