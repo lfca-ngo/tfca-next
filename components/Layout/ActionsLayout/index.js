@@ -43,10 +43,15 @@ const CompanyMenuItem = ({ company }) => {
   return (
     <li>
       <Popover
-        content={<PopoverContent onClose={() => setPopoverOpen(false)} />}
+        content={
+          <PopoverContent
+            name={company?.company?.name}
+            onClose={() => setPopoverOpen(false)}
+          />
+        }
         visible={popoverOpen}
       >
-        {company.name}
+        {company?.company?.name}
       </Popover>
       <Drawer
         className="drawer-md"
