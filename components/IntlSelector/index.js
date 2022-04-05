@@ -13,7 +13,7 @@ export const IntlSelector = () => {
 
   const {
     locale,
-    query: { actionCollectionSlug, companySlug, shareToken },
+    query: { actionCollectionSlug, shareToken },
   } = router
 
   const regions = metaData?.regionsCollection?.items || []
