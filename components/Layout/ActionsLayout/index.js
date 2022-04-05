@@ -4,7 +4,7 @@ import { CloseOutlined } from '@ant-design/icons'
 import { Button, Drawer, Popover } from 'antd'
 import React, { useState } from 'react'
 
-import { useContentNavs } from '../../../hooks'
+import { useContentNavs, useCustomization } from '../../../hooks'
 import { scrollToId } from '../../../utils'
 import { Disclosure } from '../../Disclosure'
 import { ChallengeStatus } from '../../Elements/ChallengeStatus'
@@ -75,6 +75,8 @@ const CompanyMenuItem = ({ company }) => {
 export const ActionsLayout = ({ children, company, nav, openGraphInfo }) => {
   const [collapsed, setCollapsed] = useState(true)
   const mainNav = useContentNavs('mainHeaderNav')?.elementsCollection?.items
+  const customization = useCustomization()
+
   let addOnItems = [
     <li key="intl">
       <IntlSelector />
@@ -115,7 +117,7 @@ export const ActionsLayout = ({ children, company, nav, openGraphInfo }) => {
 
       <main id="scroll-container">
         <Hero
-          onClick={() => scrollToId(nav[0]?.id)}
+          onClick={() => scrollToId(customization?.actionId || nav[0]?.id)}
           openGraphInfo={openGraphInfo}
         />
         <ErrorBoundary>{children}</ErrorBoundary>
