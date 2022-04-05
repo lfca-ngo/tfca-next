@@ -58,6 +58,8 @@ jobs:
         run: yarn --frozen-lockfile
       - name: Install Playwright
         run: npx playwright install --with-deps
+        env:
+          PLAYWRIGHT_BROWSERS_PATH: '0' # Downloads the browser binaries into node_modules so that they get cached
       - name: Run e2e tests
         run: yarn test:e2e
         env:
