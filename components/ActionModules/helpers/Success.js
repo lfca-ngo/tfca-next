@@ -82,7 +82,7 @@ export const Success = ({
           icon={icon.url}
           title={text(blocks['category.title'])}
         />
-        <h2>{text(useContentBlocks('sharing.headline'))}</h2>
+        <h2>{text(useContentBlocks('sharing.nominate.title'))}</h2>
 
         <CheckList data={benefits} />
 
@@ -196,7 +196,7 @@ export const Success = ({
             {isGeneratingToken ? (
               <LoadingSpinner className="dark" label="...generating link" />
             ) : (
-              <Share invites={invites} />
+              <Share actionInviteText={imageInviteText} invites={invites} />
             )}
           </div>
         )}
