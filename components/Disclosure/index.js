@@ -33,8 +33,9 @@ export const Disclosure = ({ data }) => {
       </header>
 
       <section>
-        <h4>Campaign contribution</h4>
+        <h4>Company Goals</h4>
         <p>{data.company.campaignGoals}</p>
+        <h4>Campaign Contributions</h4>
         <Collapse
           accordion
           className="actions-wrapper"
