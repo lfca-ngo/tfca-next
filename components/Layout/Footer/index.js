@@ -6,7 +6,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
-import { useContentLists, useContentNavs } from '../../../hooks'
+import { useContentLists, useContentNavs, useIsMobile } from '../../../hooks'
 
 const { Panel } = Collapse
 
@@ -30,10 +30,11 @@ export const Footer = () => {
     },
   ]
 
+  const isMobile = useIsMobile()
   const footerLegal = useContentNavs('footerLegal')
 
   return (
-    <footer className="footer">
+    <footer className="footer" key={`${isMobile}`}>
       <div className="container">
         <Row gutter={30}>
           <Col md={{ offset: 1, span: 22 }} xs={24}>
@@ -42,7 +43,7 @@ export const Footer = () => {
                 <Collapse
                   bordered={false}
                   className="partners"
-                  defaultActiveKey={[`${i}`]}
+                  defaultActiveKey={isMobile ? [] : [`${i}`]}
                   expandIcon={({ isActive }) => (
                     <ArrowRightOutlined
                       style={{
@@ -56,11 +57,9 @@ export const Footer = () => {
                     {partners?.data.map((partner, j) => (
                       <div className="partner" key={`partner-${j}`}>
                         <Image
-                          height={50}
-                          layout="intrinsic"
+                          layout="fill"
                           objectFit="contain"
                           src={partner.icon?.url}
-                          width={90}
                         />
                       </div>
                     ))}
