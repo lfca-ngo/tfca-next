@@ -115,7 +115,7 @@ export const Success = ({
           >
             {(fields, { add, remove }, { errors }) => (
               <>
-                {fields.map((field, i) => (
+                {fields.map((field) => (
                   <Form.Item key={field.key} required={false}>
                     <Form.Item
                       {...field}
