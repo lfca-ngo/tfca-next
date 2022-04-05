@@ -62,7 +62,7 @@ export const Results = ({
             count={countSelected}
             style={{ background: 'transparent', marginRight: '12px' }}
           />
-          Continue
+          {text(blocks['results.button.primary'])}
         </Button>
       )}
 

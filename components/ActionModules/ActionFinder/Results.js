@@ -81,6 +81,7 @@ export const Results = ({
         renderItem={(item) => (
           <List.Item>
             <CardView
+              blocks={blocks}
               item={item}
               layout={dataMain?.cardLayout}
               onNext={handleNext}
@@ -98,6 +99,7 @@ export const Results = ({
           visible={visible}
         >
           <DetailView
+            blocks={blocks}
             item={store?.item}
             layout={dataMain?.cardLayout}
             onNext={() => goTo('success')}

@@ -4,6 +4,7 @@ import React, { useMemo } from 'react'
 import { useFlow } from '../../../hooks'
 import { Success } from '../helpers/Success'
 import { Answer } from './Answer'
+import { Intro } from './Intro'
 import { Question } from './Question'
 import { Results } from './Results'
 
@@ -31,6 +32,7 @@ export const Quiz = ({ module }) => {
     })
     const flattened = [].concat.apply([], quizSteps)
     return new Map([
+      ['intro', { component: Intro }],
       ...flattened,
       ['results', { component: Results }],
       ['success', { component: Success }],

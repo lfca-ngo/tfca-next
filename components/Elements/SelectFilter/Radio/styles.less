@@ -40,6 +40,7 @@
             }
           }
         }
+        &.ant-checkbox-wrapper-checked.correct,
         &.correct {
           background: @correct-color;
           border-color: @correct-color;
@@ -145,11 +146,8 @@
           flex: 1;
           .label-wrapper {
             color: @black;
-            .text {
-              color: @black;
-              .description {
-                color: fade(@black, 85%);
-              }
+            .description {
+              color: fade(@black, 85%);
             }
           }
         }

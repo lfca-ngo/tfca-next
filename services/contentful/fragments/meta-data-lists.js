@@ -5,6 +5,7 @@ export const MetaDataListsFragment = gql`
     listsCollection(limit: 20) {
       items {
         listId
+        label
         itemsCollection {
           items {
             ... on Block {

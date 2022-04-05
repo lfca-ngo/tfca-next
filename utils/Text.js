@@ -6,8 +6,6 @@ import React from 'react'
 import { TrackingOptOutButton } from '../components/Elements/TrackingOptOutButton'
 import { trackEvent } from '../services/analytics'
 
-const attributeValue = (value) => `"${value.replace(/"/g, '&quot;')}"`
-
 const getInlineEntryWithId = (links, id) => {
   const link = links.entries?.inline?.find((link) => link.sys?.id === id)
 
@@ -37,7 +35,7 @@ const createRenderOptions = (vars, links) => ({
     [INLINES.HYPERLINK]: (node, children) => {
       const href = typeof node.data.uri === 'string' ? node.data.uri : ''
       return (
-        <a href={attributeValue(href)} rel="noreferrer" target="_blank">
+        <a href={href} rel="noreferrer" target="_blank">
           {children}
         </a>
       )

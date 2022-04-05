@@ -1,6 +1,7 @@
 import { Button, Form } from 'antd'
 import React from 'react'
 
+import { validatePostcode } from '../../../utils'
 import { text } from '../../../utils/Text'
 import { SelectFilter } from '../../Elements/SelectFilter'
 import Category from '../helpers/Category'
@@ -16,6 +17,10 @@ export const Filter = ({
   store,
 }) => {
   const initialValue = store[filterOption?.fieldName]
+  const isPostcode = filterOption?.fieldName === 'countries.zip'
+  const validationRules = isPostcode
+    ? [{ validator: (_, value) => validatePostcode(value, 'input') }]
+    : []
 
   const handleNext = (v) => {
     const value = v[filterOption?.fieldName]
@@ -38,7 +43,11 @@ export const Filter = ({
       />
 
       <Form layout="vertical" onFinish={handleNext}>
-        <Form.Item initialValue={initialValue} name={filterOption?.fieldName}>
+        <Form.Item
+          initialValue={initialValue}
+          name={filterOption?.fieldName}
+          rules={validationRules}
+        >
           <SelectFilter
             filterMode={filterOption?.filterMode}
             options={filterOption?.options || []}
@@ -48,7 +57,7 @@ export const Filter = ({
         </Form.Item>
         <Form.Item>
           <Button block htmlType="submit" size="large" type="primary">
-            Submit
+            {text(blocks['filter.button.primary'])}
           </Button>
         </Form.Item>
       </Form>

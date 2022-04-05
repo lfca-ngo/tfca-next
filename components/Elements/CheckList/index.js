@@ -5,7 +5,7 @@ import React from 'react'
 
 import { Text } from '../../../utils/Text'
 
-const CheckList = ({ data, limit }) => {
+export const CheckList = ({ data, limit }) => {
   if (!data) return null
 
   let listData = data
@@ -28,5 +28,3 @@ const CheckList = ({ data, limit }) => {
     </div>
   )
 }
-
-export default CheckList

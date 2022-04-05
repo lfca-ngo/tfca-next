@@ -9,11 +9,12 @@ import {
 } from '../../../services/switchforclimate'
 import { text } from '../../../utils/Text'
 import { CardView } from '../../Elements/Cards'
-import CheckList from '../../Elements/CheckList'
+import { CheckList } from '../../Elements/CheckList'
 import { DetailView } from '../../Elements/DetailViews'
 import { FetchError } from '../../Elements/FetchError'
 import { spinnerProps } from '../../Elements/LoadingSpinner'
 import Category from '../helpers/Category'
+import { StepHeader } from '../helpers/StepHeader'
 import { EnergyForm } from './Calculate'
 
 const { Option } = Select
@@ -114,7 +115,7 @@ export const Results = ({ goTo, module, nextKey, setStore, store }) => {
           </span>
         }
       />
-      <h2>{text(blocks['results.title'])}</h2>
+      <StepHeader title={blocks['results.title']} />
       <CheckList data={lists['comparison.benefits']?.items} />
 
       {operatorError || (operatorData && !firstOperatorId) ? (
@@ -125,7 +126,9 @@ export const Results = ({ goTo, module, nextKey, setStore, store }) => {
         <>
           <Row>
             <Col xs={12}>
-              <RobinIcon />
+              <div className="robin-wood-icon">
+                <RobinIcon />
+              </div>
             </Col>
             <Col className="actions-bar" style={{ textAlign: 'right' }} xs={12}>
               <Space>

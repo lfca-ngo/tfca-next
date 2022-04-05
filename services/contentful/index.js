@@ -149,8 +149,8 @@ export const fetchMetaDataLists = async (locale, settingsId) => {
   const { listsCollection } = settings
 
   const lists = listsCollection?.items.reduce((allLists, list) => {
-    const { itemsCollection, listId } = list
-    return { ...allLists, [listId]: itemsCollection }
+    const { itemsCollection, label, listId } = list
+    return { ...allLists, [listId]: { items: itemsCollection?.items, label } }
   }, {})
 
   return lists

@@ -16,9 +16,14 @@ export const SelectWithOptionalInput = ({
   const [selectValue, setSelectValue] = React.useState()
   const [inputValue, setInputValue] = React.useState('')
 
+  const selectedItem = items.find(
+    (item) => item.value === (value.select || selectValue)
+  )
+  const shouldShowInput = !!selectedItem?.hasOptionalInput
+
   const triggerChange = (changedValue) => {
     onChange?.({
-      input: inputValue,
+      input: shouldShowInput ? inputValue : null,
       select: selectValue,
       ...value,
       ...changedValue,
@@ -26,24 +31,15 @@ export const SelectWithOptionalInput = ({
   }
 
   const onSelectChange = (newVal) => {
-    if (!('select' in value)) {
-      setSelectValue(newVal)
-    }
+    setSelectValue(newVal)
     triggerChange({ select: newVal })
   }
 
   const onInputChange = (e) => {
     const newInput = e.target.value
-    if (!('input' in value)) {
-      setInputValue(newInput)
-    }
+    setInputValue(newInput)
     triggerChange({ input: newInput })
   }
-
-  const selectedItem = items.find(
-    (item) => item.value === (value.select || selectValue)
-  )
-  const shouldShowInput = !!selectedItem?.hasOptionalInput
 
   return (
     <Input.Group
