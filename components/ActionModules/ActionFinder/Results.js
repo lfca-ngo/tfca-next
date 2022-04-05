@@ -1,3 +1,4 @@
+import { ArrowLeftOutlined } from '@ant-design/icons'
 import { Drawer, List } from 'antd'
 import React, { useState } from 'react'
 
@@ -94,6 +95,11 @@ export const Results = ({
       {isDrawerView && (
         <Drawer
           className={`drawer-md`}
+          closeIcon={
+            <div className="back-btn-wrapper">
+              <ArrowLeftOutlined />
+            </div>
+          }
           destroyOnClose
           footer={null}
           onClose={() => setVisible(false)}
