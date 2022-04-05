@@ -13,16 +13,12 @@ const { Panel } = Collapse
 export const Footer = () => {
   const partnersList = [
     {
-      data: useContentLists('partners.core')?.items,
-      title: useContentLists('partners.core')?.label,
+      data: useContentLists('partners.other')?.items,
+      title: useContentLists('partners.other')?.label,
     },
     {
       data: useContentLists('partners.ecosystem')?.items,
       title: useContentLists('partners.ecosystem')?.label,
-    },
-    {
-      data: useContentLists('partners.other')?.items,
-      title: useContentLists('partners.other')?.label,
     },
     {
       data: useContentLists('partners.companies')?.items,
