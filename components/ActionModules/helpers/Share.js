@@ -30,19 +30,19 @@ const { TabPane } = Tabs
 
 const BTN_WIDTH = '120px'
 
-export const Share = ({ imageInviteText, invites }) => {
+export const Share = ({ invites }) => {
   const createInviteText = (names) => {
     let prefix = ''
     let namesString = 'you'
 
-    if (names.length === 1) {
+    if (names?.length === 1) {
       prefix = `Hey ${names[0]}! `
-    } else {
+    } else if (names?.length > 1) {
       namesString = namesArrayToString(names)
     }
 
     // TODO: Get text from contentful
-    return `${prefix}${imageInviteText}! I am nominating ${namesString} to do the same! It’s Earth Day, you can afford #5minForThePlanet`
+    return `${prefix}! I am nominating ${namesString}! It’s Earth Day, you can afford #5minForThePlanet`
   }
 
   return (
@@ -51,7 +51,11 @@ export const Share = ({ imageInviteText, invites }) => {
       <h2>Ready! Invite your friends</h2>
       <Tabs defaultActiveKey="0">
         {invites.map(({ names, ogImageUrl, shortLink }, i) => {
-          const tabName = names.length === 1 ? names[0] : 'All'
+          const tabName = !names
+            ? 'General'
+            : names.length === 1
+            ? names[0]
+            : 'All'
           const inviteText = createInviteText(names)
           const inviteTitle = `It's time to take climate action`
           return (

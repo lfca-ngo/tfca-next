@@ -3,7 +3,7 @@ import {
   PlusOutlined,
   SendOutlined,
 } from '@ant-design/icons'
-import { Alert, Button, Drawer, Form, Input } from 'antd'
+import { Alert, Button, Divider, Drawer, Form, Input } from 'antd'
 import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
 
@@ -43,18 +43,27 @@ export const Success = ({
 
   const socialDescription = text(useContentBlocks('header.body'))
   const socialTitle = useContentBlocks('header.title.custom')
-  const socialNameFallback = text(
+  const fallbackName = text(
     useContentBlocks('header.title.recipients.fallback')
   )
 
-  // @TODO: @David to add generic sharing link for user
   // create multiple invite links
   // map of promises with infos
   const createInvites = async (values) => {
-    let invites = values.names.map((name) => () => createInvite([name]))
+    const sender = values.sender ? values.sender : null
+    const invites = values.names.map(
+      (name) => () => createInvite(name ? [name] : null, sender)
+    )
     if (values.names.length > 1) {
-      // Add a miulti invite
-      invites = [() => createInvite(values.names), ...invites]
+      // Add a multi invite
+      invites.push(() => createInvite(values.names, sender))
+    }
+
+    // If no name is entered, a general invite will ge genrated already
+    // This will only add a general invite on top of individual ones
+    if (values.names[0]) {
+      // Add a general invite
+      invites.push(() => createInvite(null, sender))
     }
 
     setVisible(true)
@@ -84,6 +93,12 @@ export const Success = ({
           name="dynamic_invitees"
           onFinish={createInvites}
         >
+          <Form.Item name="sender">
+            <Input placeholder="Your Name" />
+          </Form.Item>
+
+          <Divider />
+
           <Form.List
             name="names"
             rules={[
@@ -104,15 +119,20 @@ export const Success = ({
                   <Form.Item key={field.key} required={false}>
                     <Form.Item
                       {...field}
-                      rules={[
-                        {
-                          message: 'Please input a name or delete this field.',
-                          required: true,
-                        },
-                      ]}
+                      rules={
+                        fields.length > 1
+                          ? [
+                              {
+                                message:
+                                  'Please input a name or delete this field.',
+                                required: true,
+                              },
+                            ]
+                          : undefined
+                      }
                       validateTrigger={['onChange', 'onBlur']}
                     >
-                      <Input placeholder="Name" />
+                      <Input placeholder="A Friend's Name" />
                     </Form.Item>
                     {fields.length > 1 ? (
                       <MinusCircleOutlined
@@ -176,7 +196,7 @@ export const Success = ({
             {isGeneratingToken ? (
               <LoadingSpinner className="dark" label="...generating link" />
             ) : (
-              <Share imageInviteText={imageInviteText} invites={invites} />
+              <Share invites={invites} />
             )}
           </div>
         )}
@@ -184,20 +204,20 @@ export const Success = ({
     </>
   )
 
-  async function createInvite(names) {
+  async function createInvite(names, sender = null) {
     setError('')
     // Gereate the share token
     try {
       const response = await fetch('/api/create-shareable-link', {
         body: JSON.stringify({
           actionCollectionSlug,
-          actionId: id,
           color: imageInviteColor,
           message: imageInviteText,
           names,
+          sender,
           socialDescription,
           socialTitle: text(socialTitle, {
-            name: names.length === 1 ? names[0] : socialNameFallback,
+            name: names?.length === 1 && names[0] ? names[0] : fallbackName,
           }).replace(/\*/g, ''),
           uid: getCookie(UID_COOKIE_NAME) || getWindowUid(),
         }),
@@ -207,12 +227,12 @@ export const Success = ({
         method: 'POST',
       })
 
-      const data = await response.json()
+      const { ogImageUrl, shortLink } = await response.json()
 
       return {
-        ...data,
-        actionId: id,
         names,
+        ogImageUrl,
+        shortLink,
       }
     } catch (e) {
       setError('Failed to generate link')
