@@ -59,13 +59,11 @@ export const Question = ({
     <div className="step">
       <Category
         addOn={
-          activeQuestion?.number === 1 ? null : (
-            <GameProgress
-              answers={store?.answers}
-              questionNumber={activeQuestion?.number}
-              totalQuestionCount={quizLength}
-            />
-          )
+          <GameProgress
+            answers={store?.answers}
+            questionNumber={activeQuestion?.number}
+            totalQuestionCount={quizLength}
+          />
         }
         goBack={prevKey ? () => goTo(prevKey) : undefined}
         icon={icon.url}
