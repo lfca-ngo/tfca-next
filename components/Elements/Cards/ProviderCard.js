@@ -1,11 +1,9 @@
 require('./providerCard.less')
 
 import { CheckCircleOutlined, InfoCircleOutlined } from '@ant-design/icons'
-import { Button, Card, List, Tag } from 'antd'
+import { Button, Card, Col, List, Row, Tag } from 'antd'
 import Image from 'next/image'
 import React from 'react'
-
-import { Labels } from '../EnergyLabels'
 
 export const ProviderCard = ({ energyKwh, item, onNext, showDetails }) => {
   const handleSwitch = () => onNext()
@@ -63,24 +61,28 @@ export const ProviderCard = ({ energyKwh, item, onNext, showDetails }) => {
             </List.Item>
           )}
         />
-        <Button
-          className="no-padding"
-          icon={<InfoCircleOutlined />}
-          onClick={() => showDetails(item)}
-          type="link"
-        >
-          Tarif Details
-        </Button>
       </main>
 
       <footer>
-        <Labels labels={item.labels} />
-
-        <div className="actions">
-          <Button onClick={handleSwitch} size="small" type="primary">
-            Jetzt wechseln
-          </Button>
-        </div>
+        <Row className="actions" gutter={8}>
+          <Col xs={12}>
+            <Button
+              block
+              ghost
+              icon={<InfoCircleOutlined />}
+              onClick={() => showDetails(item)}
+              size="small"
+              type="primary"
+            >
+              Details
+            </Button>
+          </Col>
+          <Col xs={12}>
+            <Button block onClick={handleSwitch} size="small" type="primary">
+              Wechseln
+            </Button>
+          </Col>
+        </Row>
       </footer>
     </Card>
   )
