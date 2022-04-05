@@ -4,6 +4,7 @@ import React from 'react'
 import ActionModules from '../../../components/ActionModules'
 import { Layout } from '../../../components/Layout'
 import { fetchAllStaticData } from '../../../services'
+import { fetchContent } from '../../../services/contentful'
 import { fetchData } from '../../../services/lfca'
 import { QualifiedCompanyItemFragment } from '../../../services/lfca/fragments'
 import { WITH_SIDEBAR } from '../../../utils'
@@ -69,23 +70,18 @@ export async function getStaticProps({ locale, params }) {
   }
 }
 
-export async function getStaticPaths(
-  {
-    // locales
-  }
-) {
-  // const actionsLocalCollectionQuery = gql`
-  //   query {
-  //     actionsLocalCollection(limit: 50) {
-  //       items {
-  //         slug
-  //       }
-  //     }
-  //   }
-  // `
-  // const { actionsLocalCollection } = await fetchContent(
-  //   actionsLocalCollectionQuery
-  // )
+export async function getStaticPaths({ locales }) {
+  const query = gql`
+    query {
+      actionsLocalCollection(limit: 50) {
+        items {
+          layout
+          slug
+        }
+      }
+    }
+  `
+  const { actionsLocalCollection } = await fetchContent(query)
 
   const { qualifiedCompanies } = await fetchData(
     allParticipatingCompaniesQuery,
@@ -98,20 +94,33 @@ export async function getStaticPaths(
     }
   )
 
+  /**
+   * - Create paths for all possible combinations of
+   *    - `actionsLocalCollection`
+   *    - `company`
+   *    - `locale`
+   */
+  const paths = qualifiedCompanies.reduce((allPaths, { company }) => {
+    return allPaths.concat(
+      actionsLocalCollection.items.reduce((companyPaths, item) => {
+        // prevent old pages from being built
+        if (typeof item.layout !== 'string') return companyPaths
+
+        const pagePaths = locales.map((locale) => ({
+          locale,
+          params: {
+            actionCollectionSlug: item.slug,
+            companySlug: company.micrositeSlug,
+          },
+        }))
+
+        return [...companyPaths, ...pagePaths]
+      }, [])
+    )
+  }, [])
+
   return {
     fallback: false,
-    /**
-     * TODO:
-     * - Create paths for all possible combinations of
-     *    - `locales`
-     *    - `actionsLocalCollection`
-     *    - `company`
-     */
-    paths: qualifiedCompanies.map(({ company }) => ({
-      params: {
-        actionCollectionSlug: 'int',
-        companySlug: company.micrositeSlug,
-      },
-    })),
+    paths,
   }
 }
