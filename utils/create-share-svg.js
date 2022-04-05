@@ -1,4 +1,4 @@
-export function createShareSvg({ color, message, names }) {
+export function createShareSvg({ color, message, names = null }) {
   return `
       <svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
       <rect width="1200" height="630" fill="${color}"/>
@@ -79,14 +79,14 @@ export function createShareSvg({ color, message, names }) {
       })}
 
       ${
-        names.length
+        names?.length
           ? `
       <rect x="729" y="90" width="240" height="28" fill="#FA3EA6"/>
       <text x="740" y="102" fill="#FFFFFF" font-family="Manrope" font-size="42" font-weight="700">
         I nominate
       </text>
 
-      ${names.map(
+      ${names?.map(
         (name, i) => `
           <svg x="769" y="${
             144 + i * 144

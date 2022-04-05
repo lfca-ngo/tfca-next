@@ -30,10 +30,7 @@ export async function getStaticProps(props) {
     return {
       props: {
         ...staticData,
-        customization: {
-          ...customization,
-          token: shareToken,
-        },
+        customization,
       },
     }
   } catch (e) {

@@ -7,18 +7,27 @@ export default async function handler(req, res) {
 
   const {
     actionCollectionSlug,
-    actionId,
     color,
     message,
     names,
+    sender = null,
     socialDescription = '',
+    socialImage,
     socialTitle = '',
     uid,
   } = req.body
-  const token = createShareToken({ actionId, color, message, names, uid })
+
+  const token = createShareToken({
+    color,
+    message,
+    names,
+    sender,
+    uid,
+  })
 
   const shareLink = `${process.env.NEXT_PUBLIC_URL}/${actionCollectionSlug}/invite/${token}`
-  const ogImageUrl = `${process.env.NEXT_PUBLIC_URL}/api/images/${token}`
+  const ogImageUrl =
+    socialImage || `${process.env.NEXT_PUBLIC_URL}/api/images/${token}`
 
   // Create short link
   try {
