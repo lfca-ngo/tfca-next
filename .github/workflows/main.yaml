@@ -35,11 +35,12 @@ jobs:
         uses: amondnet/vercel-action@v20 #deploy
         id: vercel-deploy
         with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          scope: ${{ secrets.VERCEL_SCOPE }}
           vercel-args: ${{ steps.vercel-args.outputs.value }}
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID}}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID}}
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
 
   e2e-test:
     runs-on: ubuntu-latest
