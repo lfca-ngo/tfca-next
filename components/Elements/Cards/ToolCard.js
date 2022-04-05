@@ -14,8 +14,8 @@ export const ToolCard = ({ item, onNext }) => {
           <Image layout="fill" objectFit="contain" src={item.logo?.url} />
         </div>
         <div className="desc">
-          <div className="name">{item.name}</div>
           <div className="title">{item.title}</div>
+          <div className="name">{item.name}</div>
         </div>
       </div>
       <div className="body-content">
