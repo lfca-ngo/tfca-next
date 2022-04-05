@@ -12,20 +12,37 @@ footer.footer {
     color: fade(@white, 90%);
   }
 
+  .legal-links {
+    ul {
+      display: flex;
+      li {
+        margin: 0 6px;
+        a {
+          text-decoration: underline;
+          color: @white;
+        }
+      }
+    }
+  }
+
   .ant-collapse-borderless {
     margin-bottom: 10px;
     > .ant-collapse-item {
       border-bottom: none;
+      .ant-collapse-header {
+        padding-left: 0;
+        font-size: 16px;
+      }
       > .ant-collapse-header .ant-collapse-arrow {
         top: 16px;
-        font-size: @font-size-lg;
+        font-size: 16px;
         color: fade(@white, 90%);
       }
     }
     background-color: transparent;
     .ant-collapse-header {
       .font-regular(fade(@white, 90%));
-      border-bottom: 1px solid fade(@white, 20%);
+      border-bottom: 1px solid fade(@white, 10%);
     }
     .ant-collapse-content {
       padding: 20px 0;
