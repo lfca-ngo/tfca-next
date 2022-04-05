@@ -14,6 +14,7 @@ import { DetailView } from '../../Elements/DetailViews'
 import { FetchError } from '../../Elements/FetchError'
 import { spinnerProps } from '../../Elements/LoadingSpinner'
 import Category from '../helpers/Category'
+import { StepHeader } from '../helpers/StepHeader'
 import { EnergyForm } from './Calculate'
 
 const { Option } = Select
@@ -114,7 +115,7 @@ export const Results = ({ goTo, module, nextKey, setStore, store }) => {
           </span>
         }
       />
-      <h2>{text(blocks['results.title'])}</h2>
+      <StepHeader title={blocks['results.title']} />
       <CheckList data={lists['comparison.benefits']?.items} />
 
       {operatorError || (operatorData && !firstOperatorId) ? (

@@ -92,15 +92,21 @@ export const FormCheck = ({ goTo, module: { blocks = {}, icon = {} } }) => {
           <div style={{ marginTop: '15px' }}>
             <Alert
               description={
-                <div>
-                  {ratingResult.robinWoodRating?.reason ||
-                    'Dein Provider erfüllt nicht die höchsten Herausforderungen an Ökostrom.'}
-                  <br />
-                  Um die Challenge abzuschließen, kannst du mit wenigen Klicks
-                  deinen Anbieter wechseln!
-                </div>
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html:
+                      ratingResult.robinWoodRating?.reason ||
+                      'Dein Provider erfüllt nicht die höchsten Herausforderungen an Ökostrom.',
+                  }}
+                />
               }
-              message={ratingResult.robinWoodRating?.text}
+              message={
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: ratingResult.robinWoodRating?.text,
+                  }}
+                />
+              }
               showIcon
               type="warning"
             />
