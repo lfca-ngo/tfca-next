@@ -1,7 +1,7 @@
-const { expect, test } = require('@playwright/test')
+const { test } = require('@playwright/test')
 
-test('test', async ({ baseUrl, page }) => {
-  await page.goto(baseUrl)
+test('test', async ({ baseURL, page }) => {
+  await page.goto(baseURL)
   // Click button:has-text("Accept all")
   await page.locator('button:has-text("Accept all")').click()
   // Click button:has-text("Take action")
