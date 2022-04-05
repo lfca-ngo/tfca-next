@@ -1,7 +1,7 @@
 import { Button } from 'antd'
 import React from 'react'
 
-import { Text, text } from '../../../utils/Text'
+import { text } from '../../../utils/Text'
 import { GameProgress } from '../../Elements/GameProgress'
 import Category from '../helpers/Category'
 import { StepHeader } from '../helpers/StepHeader'
