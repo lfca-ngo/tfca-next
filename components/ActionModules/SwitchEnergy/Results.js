@@ -125,7 +125,9 @@ export const Results = ({ goTo, module, nextKey, setStore, store }) => {
         <>
           <Row>
             <Col xs={12}>
-              <RobinIcon />
+              <div className="robin-wood-icon">
+                <RobinIcon />
+              </div>
             </Col>
             <Col className="actions-bar" style={{ textAlign: 'right' }} xs={12}>
               <Space>
