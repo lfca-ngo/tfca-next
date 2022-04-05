@@ -17,6 +17,10 @@ export const Filter = ({
   store,
 }) => {
   const initialValue = store[filterOption?.fieldName]
+  const isPostcode = filterOption?.fieldName === 'countries.zip'
+  const validationRules = isPostcode
+    ? [{ validator: (_, value) => validatePostcode(value, 'input') }]
+    : []
 
   const handleNext = (v) => {
     const value = v[filterOption?.fieldName]
@@ -42,9 +46,7 @@ export const Filter = ({
         <Form.Item
           initialValue={initialValue}
           name={filterOption?.fieldName}
-          rules={[
-            { validator: (_, value) => validatePostcode(value, 'input') },
-          ]}
+          rules={validationRules}
         >
           <SelectFilter
             filterMode={filterOption?.filterMode}
