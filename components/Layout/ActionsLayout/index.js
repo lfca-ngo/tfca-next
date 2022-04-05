@@ -49,6 +49,7 @@ const CompanyMenuItem = ({ company }) => {
             onClose={() => setPopoverOpen(false)}
           />
         }
+        overlayClassName="popover-md"
         visible={popoverOpen}
       >
         {company?.company?.name}
