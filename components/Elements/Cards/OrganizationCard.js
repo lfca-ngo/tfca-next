@@ -4,12 +4,10 @@ import { Card } from 'antd'
 import Image from 'next/image'
 import React from 'react'
 
-import { text } from '../../../utils/Text'
 import { DetailButton } from './DetailButton'
 
 export const OrganizationCard = ({ item, onNext }) => {
   const handleNext = () => onNext(item)
-  console.log(item)
   return (
     <Card
       className="content-card organization"
@@ -19,7 +17,7 @@ export const OrganizationCard = ({ item, onNext }) => {
           objectFit="cover"
           src={
             item.hero?.url ||
-            'https://images.ctfassets.net/f3bw2oxveb3i/2UHSqYQDCPz0vmbdh8kHj/abb54db139c6568c1399b5ba10a99e1a/350org.jpg'
+            'https://images.ctfassets.net/f3bw2oxveb3i/49Z4fNNyNM8i3zKlk2B39z/3f34830efeb89c1751dfa53ede4e449a/placeholder.jpg'
           }
         />
       }
