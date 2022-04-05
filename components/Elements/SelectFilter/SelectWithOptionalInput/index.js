@@ -26,17 +26,13 @@ export const SelectWithOptionalInput = ({
   }
 
   const onSelectChange = (newVal) => {
-    if (!('select' in value)) {
-      setSelectValue(newVal)
-    }
+    setSelectValue(newVal)
     triggerChange({ select: newVal })
   }
 
   const onInputChange = (e) => {
     const newInput = e.target.value
-    if (!('input' in value)) {
-      setInputValue(newInput)
-    }
+    setInputValue(newInput)
     triggerChange({ input: newInput })
   }
 

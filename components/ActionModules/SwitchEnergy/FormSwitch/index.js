@@ -4,8 +4,10 @@ import React, { useEffect } from 'react'
 
 import { useSwitchOrder } from '../../../../services/switchforclimate'
 import { text } from '../../../../utils/Text'
+import { CheckList } from '../../../Elements/CheckList'
 import { FetchError } from '../../../Elements/FetchError'
 import Category from '../../helpers/Category'
+import { StepHeader } from '../../helpers/StepHeader'
 import { Approvals } from './Approvals'
 import { PaymentData } from './PaymentData'
 import { PersonalData } from './PersonalData'
@@ -14,7 +16,7 @@ import { SwitchData } from './SwitchData'
 export const FormSwitch = ({
   goTo,
   nextKey,
-  module: { blocks = {}, icon = {} },
+  module: { blocks = {}, icon = {}, lists = {} },
   store,
 }) => {
   const {
@@ -134,8 +136,8 @@ export const FormSwitch = ({
         icon={icon.url}
         title={text(blocks['category.title'])}
       />
-      <h2>Eine sehr gute Wahl. Du hast es fast geschafft!</h2>
-
+      <StepHeader title={blocks['form.title']} />
+      <CheckList data={lists['order.benefits']?.items} />
       <div>
         <Form
           autoComplete="off"

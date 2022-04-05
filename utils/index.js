@@ -14,6 +14,14 @@ export const TOGGLE_Q_AND_A = 'toggle-q-and-a'
 
 const __CSS_THEME_DARK__ = 'theme-dark'
 
+export const validatePostcode = (value, key) => {
+  if (!value || value[key]?.length === 5) {
+    return Promise.resolve()
+  }
+
+  return Promise.reject(new Error('Postleitzahl ungültig'))
+}
+
 // setting theme
 export const CSS_THEME_DARK = !isBrowser()
   ? __CSS_THEME_DARK__

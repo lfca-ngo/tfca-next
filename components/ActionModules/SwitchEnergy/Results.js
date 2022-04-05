@@ -9,7 +9,7 @@ import {
 } from '../../../services/switchforclimate'
 import { text } from '../../../utils/Text'
 import { CardView } from '../../Elements/Cards'
-import CheckList from '../../Elements/CheckList'
+import { CheckList } from '../../Elements/CheckList'
 import { DetailView } from '../../Elements/DetailViews'
 import { FetchError } from '../../Elements/FetchError'
 import { spinnerProps } from '../../Elements/LoadingSpinner'

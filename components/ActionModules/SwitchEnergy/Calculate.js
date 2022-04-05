@@ -1,8 +1,9 @@
 import { Button, Form } from 'antd'
 import React from 'react'
 
+import { validatePostcode } from '../../../utils'
 import { text } from '../../../utils/Text'
-import CheckList from '../../Elements/CheckList'
+import { CheckList } from '../../Elements/CheckList'
 import Category from '../helpers/Category'
 import { StepHeader } from '../helpers/StepHeader'
 import { SelectPostcodeEnergy } from './SelectPostcodeEnergy'
@@ -17,16 +18,8 @@ export const EnergyForm = ({
       <Form.Item
         name="postcodeEnergy"
         rules={[
-          { message: 'Gib deine Postleitzahl ein!!', required: true },
-          {
-            validator: (_, value) => {
-              if (!value || value.postcode?.length === 5) {
-                return Promise.resolve()
-              }
-
-              return Promise.reject(new Error('Postleitzahl ungültig'))
-            },
-          },
+          { message: 'Gib eine gültige Postleitzahl ein', required: true },
+          { validator: (_, value) => validatePostcode(value, 'postcode') },
         ]}
       >
         <SelectPostcodeEnergy

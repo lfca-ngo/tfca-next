@@ -1,6 +1,7 @@
 import { Button, Form } from 'antd'
 import React from 'react'
 
+import { validatePostcode } from '../../../utils'
 import { text } from '../../../utils/Text'
 import { SelectFilter } from '../../Elements/SelectFilter'
 import Category from '../helpers/Category'
@@ -38,7 +39,13 @@ export const Filter = ({
       />
 
       <Form layout="vertical" onFinish={handleNext}>
-        <Form.Item initialValue={initialValue} name={filterOption?.fieldName}>
+        <Form.Item
+          initialValue={initialValue}
+          name={filterOption?.fieldName}
+          rules={[
+            { validator: (_, value) => validatePostcode(value, 'input') },
+          ]}
+        >
           <SelectFilter
             filterMode={filterOption?.filterMode}
             options={filterOption?.options || []}
