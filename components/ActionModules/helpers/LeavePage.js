@@ -43,12 +43,7 @@ export const LeavePage = ({ destination, destinationUrl, onNext }) => {
             Count me in
           </Button>
           <a href={destinationUrl} rel="noopener noreferrer" target="_blank">
-            <Button
-              block
-              icon={<LinkOutlined />}
-              onClick={onNext}
-              type="primary"
-            >
+            <Button block icon={<LinkOutlined />} type="primary">
               {destination}
             </Button>
           </a>
