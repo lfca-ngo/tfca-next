@@ -36,7 +36,9 @@ const ActionModules = (props) => {
       name={action.name}
       otherUsers={props.stats[action.id]}
     >
-      <ErrorBoundary>{renderAction(action)}</ErrorBoundary>
+      <ErrorBoundary>
+        {renderAction({ ...action, otherUsers: props.stats[action.id] })}
+      </ErrorBoundary>
     </ActionWrapper>
   ))
 }

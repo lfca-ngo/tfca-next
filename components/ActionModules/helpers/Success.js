@@ -1,7 +1,9 @@
 import {
+  InfoCircleOutlined,
   MinusCircleOutlined,
   PlusOutlined,
   SendOutlined,
+  UserAddOutlined,
 } from '@ant-design/icons'
 import { Alert, Button, Divider, Drawer, Form, Input } from 'antd'
 import { useRouter } from 'next/router'
@@ -20,7 +22,14 @@ const MAX_INVITES = 3
 
 export const Success = ({
   goTo,
-  module: { blocks = {}, id, imageInviteText, imageInviteColor, icon = {} },
+  module: {
+    blocks = {},
+    id,
+    imageInviteText,
+    imageInviteColor,
+    icon = {},
+    otherUsers = 49,
+  },
   prevKey,
 }) => {
   const benefits = useContentLists('sharing.benefits')?.items
@@ -97,7 +106,7 @@ export const Success = ({
         />
         <h2>{text(useContentBlocks('sharing.nominate.title'))}</h2>
 
-        <CheckList data={benefits} />
+        <CheckList data={benefits} vars={{ users: otherUsers }} />
 
         <Form
           className="dynamic-form"
@@ -107,10 +116,13 @@ export const Success = ({
           onFinish={createInvites}
         >
           <Form.Item name="sender">
-            <Input placeholder="Your Name" />
+            <Input
+              addonBefore={<InfoCircleOutlined />}
+              placeholder="Your name (optional)"
+            />
           </Form.Item>
 
-          <Divider />
+          <Divider style={{ margin: '10px 0 24px', opacity: '0.2' }} />
 
           <Form.List
             name="names"
@@ -145,7 +157,10 @@ export const Success = ({
                       }
                       validateTrigger={['onChange', 'onBlur']}
                     >
-                      <Input placeholder="A Friend's Name" />
+                      <Input
+                        addonBefore={<UserAddOutlined />}
+                        placeholder="A Friend's name"
+                      />
                     </Form.Item>
                     {fields.length > 1 ? (
                       <MinusCircleOutlined
