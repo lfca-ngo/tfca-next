@@ -57,7 +57,7 @@ export const Disclosure = ({ data }) => {
         <p>{data.company.campaignGoals}</p>
         <h4>Campaign Contributions</h4>
         <p>{data.company?.campaignContribution}</p>
-        <ImageGallery images={data.company?.tfcaFiles} />
+        <ImageGallery images={data.company?.campaignFiles} />
         <Collapse
           accordion
           className="actions-wrapper"
