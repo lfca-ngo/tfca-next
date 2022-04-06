@@ -50,6 +50,11 @@ export const Success = ({
     })
   }, [id])
 
+  const buttonPrimary = text(useContentBlocks('sharing.button.primary'))
+  const addInvite = text(useContentBlocks('sharing.button.addinvite'))
+  const errorMaxFriends = text(useContentBlocks('sharing.error.maxfriends'))
+  const yourNameInput = text(useContentBlocks('sharing.input.yourname'))
+  const friendsNameInput = text(useContentBlocks('sharing.input.friendsname'))
   const socialDescription = text(useContentBlocks('header.body'))
   const socialTitle = useContentBlocks('header.title.custom')
   const fallbackName = text(
@@ -118,7 +123,7 @@ export const Success = ({
           <Form.Item name="sender">
             <Input
               addonBefore={<InfoCircleOutlined />}
-              placeholder="Your name (optional)"
+              placeholder={yourNameInput}
             />
           </Form.Item>
 
@@ -159,7 +164,7 @@ export const Success = ({
                     >
                       <Input
                         addonBefore={<UserAddOutlined />}
-                        placeholder="A Friend's name"
+                        placeholder={friendsNameInput}
                       />
                     </Form.Item>
                     {fields.length > 1 ? (
@@ -172,12 +177,7 @@ export const Success = ({
                 ))}
 
                 {fields.length >= MAX_INVITES ? (
-                  <Alert
-                    message={`You can nominate max. 3 friends personally but share a
-                  general link to invite even more!`}
-                    showIcon
-                    type="info"
-                  />
+                  <Alert message={errorMaxFriends} showIcon type="info" />
                 ) : (
                   <Form.Item>
                     <Button
@@ -187,7 +187,7 @@ export const Success = ({
                       onClick={() => add()}
                       type="dashed"
                     >
-                      Add invitee
+                      {addInvite}
                     </Button>
                     <Form.ErrorList errors={errors} />
                   </Form.Item>
@@ -204,7 +204,7 @@ export const Success = ({
               style={{ marginTop: '20px' }}
               type="primary"
             >
-              Open invite dialog
+              {buttonPrimary}
             </Button>
           </Form.Item>
         </Form>
