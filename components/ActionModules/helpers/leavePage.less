@@ -5,17 +5,34 @@
 
 .leave-page {
   display: flex;
-  padding: 0;
+  padding: 40px 0;
   flex-direction: column;
+  text-align: center;
+
+  @media @desktop {
+    padding: 0;
+    text-align: left;
+  }
+
+  .headline-icon {
+    font-size: 42px;
+    @media @desktop {
+      font-size: 26px;
+    }
+  }
 
   @media @desktop {
     flex-direction: row;
     padding: 20px;
   }
 
+  label.hint {
+    color: fade(@black, 75%);
+    font-size: @font-size-sm;
+  }
+
   .anticon {
     color: @secondary-color;
-    font-size: 24px;
     margin-left: 0;
     margin-right: auto;
   }
@@ -28,7 +45,7 @@
     }
     .title {
       .font-semi();
-      font-size: 22px;
+      font-size: 26px;
     }
     .description {
       margin: 15px 0 30px;

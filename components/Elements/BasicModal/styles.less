@@ -5,9 +5,20 @@
 
 .ant-modal-wrap.basic-modal.modal-md {
   .ant-modal {
+    margin: 0 auto;
+    max-width: 100%;
+    top: 0;
+    @media @desktop {
+      top: 100px;
+    }
+
     .ant-modal-content {
+      border-radius: 0;
       background: var(--card-background);
       color: var(--text-color);
+      .ant-modal-body {
+        padding: 50px @default-section-padding;
+      }
     }
   }
 }

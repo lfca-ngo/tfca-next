@@ -25,7 +25,7 @@ export const LeavePage = ({ destination, destinationUrl, onNext }) => {
     )
   return (
     <div className="leave-page">
-      <ExclamationCircleOutlined />
+      <ExclamationCircleOutlined className="headline-icon" />
       <div className="content">
         <div className="title">Before you leave</div>
         <div className="description">
@@ -49,10 +49,10 @@ export const LeavePage = ({ destination, destinationUrl, onNext }) => {
               onClick={onNext}
               type="primary"
             >
-              Continue to {destination}
+              {destination}
             </Button>
           </a>
-          <label>(Link opens in new window)</label>
+          <label className="hint">The link will open in a new window</label>
         </Space>
       </div>
     </div>
