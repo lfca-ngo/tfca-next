@@ -1,18 +1,16 @@
-import { isDev } from '../../utils'
-import { fetchContent } from './fetch-content'
-import { navigationCollectionQuery } from './queries'
+import { client } from './client'
+import { removeFieldsNesting } from './utils'
 
 export const fetchAllNavs = async (locale) => {
-  const { navigationCollection } = await fetchContent(
-    navigationCollectionQuery,
-    {
-      locale: locale,
-      preview: isDev,
-    }
-  )
+  const { items } = await client.getEntries({
+    content_type: 'navigation',
+    locale,
+  })
 
-  const navsById = navigationCollection?.items.reduce((allNavs, nav) => {
-    const { navigationId, ...rest } = nav
+  const parsedItems = removeFieldsNesting({ fields: { items } }).items
+
+  const navsById = parsedItems.reduce((allNavs, item) => {
+    const { navigationId, ...rest } = item
     return { ...allNavs, [navigationId]: { ...rest } }
   }, {})
 

@@ -1,24 +1,33 @@
-import { isDev } from '../../utils'
-import { fetchContent } from './fetch-content'
-import { settingsQuery } from './queries'
+import { client } from './client'
+import { removeFieldsNesting } from './utils'
 
 export const fetchMetaData = async (locale, settingsId) => {
-  const { settings } = await fetchContent(settingsQuery, {
-    locale: locale,
-    preview: isDev,
-    settingsId: settingsId,
+  const res = await client.getEntry(settingsId, {
+    include: 3,
+    locale,
+    select: 'fields',
   })
 
-  const { resourcesCollection, ...rest } = settings
+  const parsed = removeFieldsNesting(res)
 
-  const blocks = resourcesCollection?.items.reduce((allBlocks, block) => {
+  const { lists, resources, ...rest } = parsed
+
+  const blocks = resources?.reduce((allBlocks, block) => {
     const { key, value } = block
     if (!key) return allBlocks
     return { ...allBlocks, [key]: value }
   }, {})
 
-  return {
+  const listsByKey = lists?.reduce((allLists, list) => {
+    const { items, label = '', listId } = list
+    return { ...allLists, [listId]: { items, label } }
+  }, {})
+
+  const test = {
     blocks,
+    lists: listsByKey,
     ...rest,
   }
+
+  return test
 }

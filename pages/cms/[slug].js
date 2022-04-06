@@ -82,9 +82,9 @@ export async function getStaticProps({ locale, params }) {
 }
 
 export async function getStaticPaths({ locales }) {
-  const pageSLugs = await fetchPageSlugs()
+  const pageSlugs = await fetchPageSlugs()
 
-  const paths = pageSLugs.items.reduce((allPaths, item) => {
+  const paths = pageSlugs.reduce((allPaths, item) => {
     const pagePaths = locales.map((locale) => ({
       locale,
       params: { slug: item.slug },
