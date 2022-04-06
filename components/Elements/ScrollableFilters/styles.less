@@ -21,14 +21,16 @@
   display: flex;
   overflow-x: auto;
   overflow-y: hidden;
-  margin-right: -25px;
+  margin-right: -@default-section-padding;
   position: absolute;
   height: @scrollable-filter-mobile-height;
+  width: calc(100% + @default-section-padding);
 
   @media @desktop {
     margin-right: 0;
     position: initial;
     height: auto;
+    width: 100%;
   }
   .hide-scrollbar();
 
