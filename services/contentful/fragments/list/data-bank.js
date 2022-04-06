@@ -22,6 +22,11 @@ export const DataBankFragment = gql`
         ...BlockFragment
       }
     }
+    sustainabilityRankingCollection(limit: 3) {
+      items {
+        ...BlockFragment
+      }
+    }
     benefitsCollection(limit: 8) {
       items {
         ...BlockFragment
