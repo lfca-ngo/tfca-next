@@ -1,10 +1,9 @@
-import { gql } from 'graphql-request'
 import React from 'react'
 
 import ActionModules from '../../components/ActionModules'
 import { Layout } from '../../components/Layout'
 import { fetchAllStaticData } from '../../services'
-import { fetchContent } from '../../services/contentful'
+import { fetchActionSlugs } from '../../services/contentful'
 import { WITH_SIDEBAR } from '../../utils'
 
 export default function ActionCollectionPage({
@@ -38,19 +37,9 @@ export async function getStaticProps({ locale, params }) {
 }
 
 export async function getStaticPaths({ locales }) {
-  const query = gql`
-    query {
-      actionsLocalCollection(limit: 50) {
-        items {
-          layout
-          slug
-        }
-      }
-    }
-  `
-  const { actionsLocalCollection } = await fetchContent(query)
+  const actionsSlugs = await fetchActionSlugs()
 
-  const paths = actionsLocalCollection.items.reduce((allPaths, item) => {
+  const paths = actionsSlugs.items.reduce((allPaths, item) => {
     // prevent old pages from being built
     if (typeof item.layout !== 'string') return allPaths
 
