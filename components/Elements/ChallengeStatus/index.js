@@ -29,8 +29,6 @@ export const ChallengeStatus = ({ className, openGraphInfo }) => {
       const response = await fetch('/api/create-shareable-link', {
         body: JSON.stringify({
           actionCollectionSlug: query.actionCollectionSlug || '',
-          names: null,
-          sender: null,
           socialDescription: openGraphInfo?.ogdescription,
           socialImage: openGraphInfo?.ogimage?.url,
           socialTitle: openGraphInfo?.ogtitle,

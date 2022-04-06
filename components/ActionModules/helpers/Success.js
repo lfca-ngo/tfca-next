@@ -50,20 +50,33 @@ export const Success = ({
   // create multiple invite links
   // map of promises with infos
   const createInvites = async (values) => {
-    const sender = values.sender ? values.sender : null
+    const sender = values.sender ? values.sender : undefined
     const invites = values.names.map(
-      (name) => () => createInvite(name ? [name] : null, sender)
+      (name) => () =>
+        createInvite({
+          names: name ? [name] : undefined,
+          sender,
+        })
     )
     if (values.names.length > 1) {
       // Add a multi invite
-      invites.push(() => createInvite(values.names, sender))
+      invites.push(() =>
+        createInvite({
+          names: values.names,
+          sender,
+        })
+      )
     }
 
     // If no name is entered, a general invite will ge genrated already
     // This will only add a general invite on top of individual ones
     if (values.names[0]) {
       // Add a general invite
-      invites.push(() => createInvite(null, sender))
+      invites.push(() =>
+        createInvite({
+          sender,
+        })
+      )
     }
 
     setVisible(true)
@@ -82,7 +95,7 @@ export const Success = ({
           icon={icon.url}
           title={text(blocks['category.title'])}
         />
-        <h2>{text(useContentBlocks('sharing.headline'))}</h2>
+        <h2>{text(useContentBlocks('sharing.nominate.title'))}</h2>
 
         <CheckList data={benefits} />
 
@@ -196,7 +209,7 @@ export const Success = ({
             {isGeneratingToken ? (
               <LoadingSpinner className="dark" label="...generating link" />
             ) : (
-              <Share invites={invites} />
+              <Share actionInviteText={imageInviteText} invites={invites} />
             )}
           </div>
         )}
@@ -204,13 +217,14 @@ export const Success = ({
     </>
   )
 
-  async function createInvite(names, sender = null) {
+  async function createInvite({ names, sender }) {
     setError('')
     // Gereate the share token
     try {
       const response = await fetch('/api/create-shareable-link', {
         body: JSON.stringify({
           actionCollectionSlug,
+          actionId: id,
           color: imageInviteColor,
           message: imageInviteText,
           names,

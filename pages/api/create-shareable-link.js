@@ -7,10 +7,11 @@ export default async function handler(req, res) {
 
   const {
     actionCollectionSlug,
+    actionId,
     color,
     message,
     names,
-    sender = null,
+    sender,
     socialDescription = '',
     socialImage,
     socialTitle = '',
@@ -18,6 +19,7 @@ export default async function handler(req, res) {
   } = req.body
 
   const token = createShareToken({
+    actionId,
     color,
     message,
     names,

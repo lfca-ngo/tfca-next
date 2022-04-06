@@ -69,24 +69,7 @@ export async function getStaticProps({ locale, params }) {
   }
 }
 
-export async function getStaticPaths(
-  {
-    // locales
-  }
-) {
-  // const actionsLocalCollectionQuery = gql`
-  //   query {
-  //     actionsLocalCollection(limit: 50) {
-  //       items {
-  //         slug
-  //       }
-  //     }
-  //   }
-  // `
-  // const { actionsLocalCollection } = await fetchContent(
-  //   actionsLocalCollectionQuery
-  // )
-
+export async function getStaticPaths() {
   const { qualifiedCompanies } = await fetchData(
     allParticipatingCompaniesQuery,
     {
@@ -100,13 +83,7 @@ export async function getStaticPaths(
 
   return {
     fallback: false,
-    /**
-     * TODO:
-     * - Create paths for all possible combinations of
-     *    - `locales`
-     *    - `actionsLocalCollection`
-     *    - `company`
-     */
+    // We only have company pages for the `int` collection and default locale
     paths: qualifiedCompanies.map(({ company }) => ({
       params: {
         actionCollectionSlug: 'int',

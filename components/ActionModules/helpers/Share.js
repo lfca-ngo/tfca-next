@@ -22,7 +22,9 @@ import {
 } from 'react-share'
 
 import TelegramIcon from '../../../assets/icons/telegram.svg'
+import { useContentBlocks } from '../../../hooks'
 import { namesArrayToString } from '../../../utils'
+import { text } from '../../../utils/Text'
 import { CopyTextArea } from '../../Elements/CopyTextArea'
 import { SuperText } from '../../Elements/SuperText'
 
@@ -30,25 +32,21 @@ const { TabPane } = Tabs
 
 const BTN_WIDTH = '120px'
 
-export const Share = ({ invites }) => {
-  const createInviteText = (names) => {
-    let prefix = ''
-    let namesString = 'you'
-
-    if (names?.length === 1) {
-      prefix = `Hey ${names[0]}! `
-    } else if (names?.length > 1) {
-      namesString = namesArrayToString(names)
-    }
-
-    // TODO: Get text from contentful
-    return `${prefix}! I am nominating ${namesString}! It’s Earth Day, you can afford #5minForThePlanet`
-  }
+export const Share = ({ actionInviteText, invites }) => {
+  const shareTitle = text(useContentBlocks('sharing.title'))
+  const shareTitleSup = text(useContentBlocks('sharing.title.sup'))
+  const shareMessageBodyNominate = useContentBlocks(
+    'sharing.message.body.nominate'
+  )
+  const shareMessageBodyGeneric = text(
+    useContentBlocks('sharing.message.body.generic')
+  )
+  const shareMessageTitle = text(useContentBlocks('sharing.message.title'))
 
   return (
     <div className="share-dialog">
-      <SuperText text="Share the challenge" />
-      <h2>Ready! Invite your friends</h2>
+      <SuperText text={shareTitleSup} />
+      <h2>{shareTitle}</h2>
       <Tabs defaultActiveKey="0">
         {invites.map(({ names, ogImageUrl, shortLink }, i) => {
           const tabName = !names
@@ -56,14 +54,22 @@ export const Share = ({ invites }) => {
             : names.length === 1
             ? names[0]
             : 'All'
-          const inviteText = createInviteText(names)
-          const inviteTitle = `It's time to take climate action`
+
+          const shareMessageBody = names?.length
+            ? text(shareMessageBodyNominate, {
+                actionInviteText: actionInviteText
+                  ? `${actionInviteText}! `
+                  : '',
+                name: namesArrayToString(names),
+              })
+            : shareMessageBodyGeneric
+
           return (
             <TabPane key={`${i}`} tab={tabName}>
               <CopyTextArea
                 disabled
                 rows={4}
-                text={inviteText}
+                text={shareMessageBody}
                 textSize="large"
               />
 
@@ -106,7 +112,7 @@ export const Share = ({ invites }) => {
                 <WhatsappShareButton
                   className="ant-btn ant-btn-primary share-btn"
                   resetButtonStyle={false}
-                  title={inviteText}
+                  title={shareMessageBody}
                   url={shortLink}
                 >
                   <WhatsAppOutlined />
@@ -114,7 +120,7 @@ export const Share = ({ invites }) => {
                 </WhatsappShareButton>
                 <FacebookShareButton
                   className="ant-btn ant-btn-primary share-btn"
-                  quote={inviteText}
+                  quote={shareMessageBody}
                   resetButtonStyle={false}
                   url={shortLink}
                 >
@@ -124,7 +130,7 @@ export const Share = ({ invites }) => {
                 <TelegramShareButton
                   className="ant-btn ant-btn-primary share-btn"
                   resetButtonStyle={false}
-                  title={inviteText}
+                  title={shareMessageBody}
                   url={shortLink}
                 >
                   <Icon component={TelegramIcon} />
@@ -133,6 +139,7 @@ export const Share = ({ invites }) => {
                 <TwitterShareButton
                   className="ant-btn ant-btn-primary share-btn"
                   resetButtonStyle={false}
+                  title={shareMessageTitle}
                   url={shortLink}
                 >
                   <TwitterOutlined /> Share on Twitter
@@ -140,17 +147,17 @@ export const Share = ({ invites }) => {
                 <LinkedinShareButton
                   className="ant-btn ant-btn-primary share-btn"
                   resetButtonStyle={false}
-                  summary={inviteText}
-                  title={inviteTitle}
+                  summary={shareMessageBody}
+                  title={shareMessageTitle}
                   url={shortLink}
                 >
                   <LinkedinOutlined /> Share on Linkedin
                 </LinkedinShareButton>
                 <EmailShareButton
-                  body={inviteText}
+                  body={shareMessageBody}
                   className="ant-btn ant-btn-primary share-btn"
                   resetButtonStyle={false}
-                  subject={inviteTitle}
+                  subject={shareMessageTitle}
                   url={shortLink}
                 >
                   <MailOutlined /> Share via Email

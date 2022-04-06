@@ -5,8 +5,8 @@ import { DisclosureOverview } from '../../components/DisclosureOverview'
 import { Layout } from '../../components/Layout'
 import {
   fetchAllStaticContent,
-  fetchContent,
   fetchPageBySlug,
+  fetchPageSlugs,
 } from '../../services/contentful'
 import { fetchData } from '../../services/lfca'
 import { QualifiedCompanyItemFragment } from '../../services/lfca/fragments'
@@ -82,17 +82,9 @@ export async function getStaticProps({ locale, params }) {
 }
 
 export async function getStaticPaths({ locales }) {
-  const query = gql`
-    query {
-      pageLocalCollection(limit: 50) {
-        items {
-          slug
-        }
-      }
-    }
-  `
-  const { pageLocalCollection } = await fetchContent(query)
-  const paths = pageLocalCollection.items.reduce((allPaths, item) => {
+  const pageSLugs = await fetchPageSlugs()
+
+  const paths = pageSLugs.items.reduce((allPaths, item) => {
     const pagePaths = locales.map((locale) => ({
       locale,
       params: { slug: item.slug },
