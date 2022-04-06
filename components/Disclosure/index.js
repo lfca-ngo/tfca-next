@@ -1,11 +1,31 @@
 require('./styles.less')
 
 import { ArrowDownOutlined, CheckCircleFilled } from '@ant-design/icons'
-import { Col, Collapse, Row } from 'antd'
+import { Card, Col, Collapse, List, Row } from 'antd'
+import { Image as GalleryImage } from 'antd'
 import Image from 'next/image'
 import React from 'react'
 
 const { Panel } = Collapse
+
+const ImageGallery = ({ images = [] }) => {
+  if (images.length < 1) return null
+  return (
+    <div className="image-gallery">
+      <List
+        dataSource={images}
+        grid={{ column: 2, gutter: 16 }}
+        renderItem={(item) => (
+          <List.Item>
+            <Card hoverable>
+              <GalleryImage src={item?.url} />
+            </Card>
+          </List.Item>
+        )}
+      />
+    </div>
+  )
+}
 
 export const Disclosure = ({ data }) => {
   const actionsList = data?.completedCompanyActions
@@ -33,8 +53,11 @@ export const Disclosure = ({ data }) => {
       </header>
 
       <section>
-        <h4>Campaign contribution</h4>
+        <h4>Climate Goals</h4>
         <p>{data.company.campaignGoals}</p>
+        <h4>Campaign Contributions</h4>
+        <p>{data.company?.campaignContribution}</p>
+        <ImageGallery images={data.company?.campaignFiles} />
         <Collapse
           accordion
           className="actions-wrapper"
@@ -61,7 +84,7 @@ export const Disclosure = ({ data }) => {
                 >
                   {objectives && (
                     <div>
-                      <h5>Objectives</h5>
+                      <h5>Actions</h5>
                       <ul className="green-list">
                         {objectives.map((objective) => {
                           return <li key={objective}>{objective}</li>
@@ -105,8 +128,7 @@ export const Disclosure = ({ data }) => {
                   }
                   key={action.contentId}
                 >
-                  {/* TODO: Replace the fallback */}
-                  {action.description && <div>action.description</div>}
+                  {action.description && <div>{action.description}</div>}
 
                   {action.requirements && (
                     <div>

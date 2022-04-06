@@ -51,6 +51,7 @@ const CompanyMenuItem = ({ company }) => {
         }
         overlayClassName="popover-md"
         visible={popoverOpen}
+        zIndex={10}
       >
         <Button
           className="no-padding"

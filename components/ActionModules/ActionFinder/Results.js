@@ -1,3 +1,4 @@
+import { ArrowLeftOutlined } from '@ant-design/icons'
 import { Drawer, List } from 'antd'
 import React, { useState } from 'react'
 
@@ -5,6 +6,7 @@ import { LIST_GRIDS } from '../../../utils'
 import { text } from '../../../utils/Text'
 import { CardView } from '../../Elements/Cards'
 import { DetailView } from '../../Elements/DetailViews'
+import { DetailHeader } from '../../Elements/DetailViews/DetailHeader'
 import { ScrollableFilters } from '../../Elements/ScrollableFilters'
 import Category from '../helpers/Category'
 import { StepHeader } from '../helpers/StepHeader'
@@ -93,9 +95,17 @@ export const Results = ({
       {isDrawerView && (
         <Drawer
           className={`drawer-md`}
+          closeIcon={
+            <div className="back-btn-wrapper">
+              <ArrowLeftOutlined />
+            </div>
+          }
           destroyOnClose
           footer={null}
           onClose={() => setVisible(false)}
+          title={
+            <DetailHeader item={store?.item} layout={dataMain?.cardLayout} />
+          }
           visible={visible}
         >
           <DetailView

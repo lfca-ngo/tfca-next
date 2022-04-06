@@ -2,6 +2,20 @@
 @import (reference) '../../../styles/fonts.less';
 @import (reference) '../../../styles/mixins.less';
 
+.ant-drawer-body {
+  overflow: initial;
+}
+
+.ant-drawer-header-title {
+  align-items: flex-start;
+  .ant-drawer-close {
+    z-index: 100;
+  }
+  .hero-image-wrapper {
+    height: 200px;
+  }
+}
+
 .detail-view {
   // generic styles that apply to all detail views
   font-size: @font-size-sm;

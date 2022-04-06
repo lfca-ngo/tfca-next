@@ -2,52 +2,89 @@
 @import (reference) '../../../styles/fonts.less';
 
 .content-card.action {
+  @height-image: 50px;
+  @height-image-lg: 80px;
+
   .ant-card-body {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     color: @black;
 
-    @media @desktop {
-      flex-direction: row;
-      align-items: center;
-    }
-
-    .title {
-      font-size: 20px;
-      .font-semi(@black);
-    }
-
-    .tags {
-      margin: 20px 0 0;
-    }
-
-    .body-content {
+    header {
       display: flex;
-      flex-direction: row;
+      margin: 0 0 10px;
       width: 100%;
-      margin: 15px 0 0;
-      .actions {
-        margin: 0 0 0 auto;
-        display: flex;
-        align-items: center;
-        @media @desktop {
-          margin: 0 0 0 auto;
+
+      .text {
+        flex: 1;
+
+        .title {
+          flex: 1;
+          font-size: 20px;
+          min-height: @height-image;
+          .font-semi(@black);
+          padding-right: 12px;
+          @media @desktop {
+            font-size: 24px;
+            min-height: auto;
+          }
+        }
+        .description {
+          font-size: 16px;
+          margin: 10px 0 0;
+          padding-right: 0;
+          margin-right: -20px;
+          @media @desktop {
+            font-size: @font-size-sm;
+            padding-right: 12px;
+            margin-right: 0;
+          }
         }
       }
+
       .hero-image {
-        width: 110px;
-        height: 65px;
+        overflow: hidden;
+        position: relative;
+        width: @height-image;
+        height: @height-image;
         border-radius: 12px;
-        // border: 1px solid #f4f4f4;
-        background-color: @white;
         display: flex;
         align-items: center;
         justify-content: center;
-        align-self: flex-start;
         @media @desktop {
-          align-self: center;
+          width: @height-image-lg;
+          height: @height-image-lg;
         }
+      }
+    }
+
+    footer {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      align-items: center;
+      margin: 15px 0 0;
+      .actions {
+        display: flex;
+        .action-tag {
+          background: @secondary-color;
+          border-color: @secondary-color;
+          height: 30px;
+          width: 30px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 6px;
+          @media @desktop {
+            height: 34px;
+            width: 34px;
+          }
+        }
+      }
+      .details {
+        margin-right: 0;
+        margin-left: auto;
       }
     }
   }

@@ -3,7 +3,11 @@ import { gql } from 'graphql-request'
 export const DataOrganizationFragment = gql`
   fragment DataOrganizationFragment on DataOrganization {
     name
+    shortDescription
     logo {
+      url
+    }
+    hero {
       url
     }
     actionsCollection {

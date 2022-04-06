@@ -1,52 +1,50 @@
 require('./actionCard.less')
 
-import { Button, Card, Tag } from 'antd'
+import { Card, Tag } from 'antd'
 import Image from 'next/image'
 import React from 'react'
 
-import { text } from '../../../utils/Text'
+import { DetailButton } from './DetailButton'
 
 export const ActionCard = ({ item, onNext }) => {
-  const levelTags =
-    item.levelsCollection?.items?.map((level) => text(level.value)) || []
-  const typeTags =
-    item.tagsCollection?.items?.map((tag) => text(tag.value)) || []
+  const actionIcons =
+    item.actionsCollection?.items?.map((action) => action?.icon?.url) || []
 
   const handleNext = () => onNext(item)
 
   return (
     <Card className="content-card action" onClick={handleNext}>
-      <div>
-        <div className="title">{item.name}</div>
-        <div className="tags">
-          {levelTags?.map((tag, index) => (
-            <Tag className="base-tag lila" key={index}>
-              {tag}
-            </Tag>
-          ))}
-          {typeTags?.map((tag, index) => (
-            <Tag className="base-tag blue" key={index}>
-              {tag}
-            </Tag>
-          ))}
+      <header>
+        <div className="text">
+          <div className="title">{item.name}</div>
+          <div className="description">{item.shortDescription}</div>
         </div>
-      </div>
-      <div className="body-content">
+
         <div className="hero-image">
-          <Image
-            height={50}
-            layout="intrinsic"
-            objectFit="contain"
-            src={item.hero?.url}
-            width={100}
-          />
+          <Image layout="fill" objectFit="cover" src={item.hero?.url} />
         </div>
+      </header>
+      <main></main>
+      <footer>
         <div className="actions">
-          <Button onClick={handleNext} type="primary">
-            Details
-          </Button>
+          {actionIcons
+            .filter((i) => i)
+            .map((iconUrl, i) => (
+              <Tag className="action-tag" key={`icon-${i}`}>
+                <Image
+                  height={20}
+                  layout="fixed"
+                  objectFit="contain"
+                  src={iconUrl}
+                  width={20}
+                />
+              </Tag>
+            ))}
         </div>
-      </div>
+        <div className="details">
+          <DetailButton onClick={handleNext} text={'Details'} />
+        </div>
+      </footer>
     </Card>
   )
 }

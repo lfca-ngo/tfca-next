@@ -6,6 +6,11 @@ export const QualifiedCompanyItemFragment = gql`
       campaignGoalSetting
       campaignParticipationPackages
       campaignGoals
+      campaignFiles {
+        name
+        url
+      }
+      campaignContribution
       id
       logoUrl
       micrositeSlug

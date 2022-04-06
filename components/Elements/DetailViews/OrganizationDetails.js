@@ -27,6 +27,7 @@ export const OrganizationDetails = ({ item }) => {
 
         <div className="content">
           <div className="title">{item.name}</div>
+          <div className="description">{item.shortDescription}</div>
           <div className="vetted-by">
             {item?.vettedByCollection?.items?.map((item, i) => (
               <Tag className="vetted-by-org" key={`vetted-${i}`}>
