@@ -28,13 +28,7 @@ export const ActionWrapper = (props) => {
         variants={appear}
         whileInView={'visible'}
       >
-        <div className="action-body">
-          {React.cloneElement(props.children, {
-            color: props.color,
-            id: props.id,
-            name: props.name,
-          })}
-        </div>
+        <div className="action-body">{props.children}</div>
         <div className="footer">
           <ActionStats
             effort={props.effort}

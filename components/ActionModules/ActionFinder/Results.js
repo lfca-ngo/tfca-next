@@ -15,7 +15,7 @@ export const Results = ({
   goTo,
   prevKey,
   nextKey,
-  module: { blocks = {}, data = {}, icon = {} },
+  module: { blocks = {}, data = {}, icon = {}, id },
   setStore,
   store,
   availableFilters = [],
@@ -108,6 +108,7 @@ export const Results = ({
           visible={visible}
         >
           <DetailView
+            actionId={id}
             blocks={blocks}
             item={store?.item}
             layout={dataMain?.cardLayout}

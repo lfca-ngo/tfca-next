@@ -2,6 +2,10 @@ import { LockOutlined } from '@ant-design/icons'
 import { Button, Divider, Form } from 'antd'
 import React, { useEffect } from 'react'
 
+import {
+  SWITCH_ENERGY_SUCCESS,
+  trackEvent,
+} from '../../../../services/analytics'
 import { useSwitchOrder } from '../../../../services/switchforclimate'
 import { text } from '../../../../utils/Text'
 import { CheckList } from '../../../Elements/CheckList'
@@ -16,7 +20,7 @@ import { SwitchData } from './SwitchData'
 export const FormSwitch = ({
   goTo,
   nextKey,
-  module: { blocks = {}, icon = {}, lists = {} },
+  module: { blocks = {}, icon = {}, lists = {}, id },
   store,
 }) => {
   const {
@@ -124,10 +128,15 @@ export const FormSwitch = ({
   useEffect(() => {
     if (data?.state === 'received') {
       // Requets was successful
-      // TODO: track?
       goTo(nextKey)
+      trackEvent({
+        name: SWITCH_ENERGY_SUCCESS,
+        values: {
+          action_id: id,
+        },
+      })
     }
-  }, [data, goTo, nextKey])
+  }, [data, goTo, nextKey, id])
 
   return (
     <div className="step">

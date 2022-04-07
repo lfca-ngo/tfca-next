@@ -3,7 +3,7 @@ require('./styles.less')
 import { Button } from 'antd'
 import React from 'react'
 
-import { trackEvent } from '../../services/analytics'
+import { ERROR_BOUNDARY, trackEvent } from '../../services/analytics'
 
 export class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -19,7 +19,7 @@ export class ErrorBoundary extends React.Component {
     // Log the error
     trackEvent({
       collection: process.env.NEXT_PUBLIC_GRAPH_JSON_ERRORS_COLLECTION,
-      name: 'error_boundary',
+      name: ERROR_BOUNDARY,
       values: {
         message: error.message || 'Unknown message',
         ...errorInfo,

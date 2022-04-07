@@ -24,7 +24,7 @@ import {
 import TelegramIcon from '../../../assets/icons/telegram.svg'
 import { useContentBlocks } from '../../../hooks'
 import { namesArrayToString } from '../../../utils'
-import { text } from '../../../utils/Text'
+import { Text, text } from '../../../utils/Text'
 import { CopyTextArea } from '../../Elements/CopyTextArea'
 import { SuperText } from '../../Elements/SuperText'
 
@@ -34,6 +34,7 @@ const BTN_WIDTH = '120px'
 
 export const Share = ({ actionInviteText, invites }) => {
   const shareTitle = text(useContentBlocks('sharing.title'))
+  const shareHint = useContentBlocks('sharing.hint')
   const shareTitleSup = text(useContentBlocks('sharing.title.sup'))
   const shareMessageBodyNominate = useContentBlocks(
     'sharing.message.body.nominate'
@@ -47,6 +48,7 @@ export const Share = ({ actionInviteText, invites }) => {
     <div className="share-dialog">
       <SuperText text={shareTitleSup} />
       <h2>{shareTitle}</h2>
+      <Text block={shareHint} />
       <Tabs defaultActiveKey="0">
         {invites.map(({ names, ogImageUrl, shortLink }, i) => {
           const tabName = !names

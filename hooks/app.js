@@ -1,3 +1,4 @@
+import { message } from 'antd'
 import React, {
   createContext,
   useCallback,
@@ -8,27 +9,54 @@ import React, {
 import Confetti from 'react-confetti'
 import { isMobile as isMobileClient } from 'react-device-detect'
 
-import { trackEvent } from '../services/analytics'
+import { PAGE_VISIT, trackEvent } from '../services/analytics'
+import { text } from '../utils/Text'
+import { usePrevious } from './usePrevious'
 
 const AppContext = createContext()
+
+export const ACTIVE = 'active'
+export const IDLE = 'idle'
+export const SUCCESS = 'success'
+export const HAS_WARNED = 'has-warned'
+
+export const getStatusString = (id, status) => `${id}-${status}`
 
 // content is passed during the build process on every page
 // therefore the translation provider is fulled on boot up
 export const AppProvider = ({ children, content, customization = null }) => {
+  const [actionStatus, setActionStatus] = useState('idle')
   const [activeAction, setActiveAction] = useState()
   const [showConfetti, setShowConfetti] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
   const [isClient, setClient] = useState(false)
+  const prevActiveAction = usePrevious(activeAction)
+  const statusMessage = text(
+    content?.metaData?.blocks?.['message.leaving.activeaction']
+  )
 
   const key = isClient ? 'client' : 'server'
 
-  // due to SSG we only know if it's mobile after first client side render
+  // show a notification when an active action is
+  // being left before being completed
+  useEffect(() => {
+    if (
+      actionStatus === getStatusString(prevActiveAction, ACTIVE) &&
+      activeAction !== prevActiveAction
+    ) {
+      message.info({ content: statusMessage, style: { fontSize: '18px' } })
+      setActionStatus(getStatusString(activeAction, HAS_WARNED))
+    }
+  }, [prevActiveAction, actionStatus, activeAction, statusMessage])
+
+  // due to SSG we only know if it's mobile
+  // after first client side render
   useEffect(() => {
     setClient(true)
     setIsMobile(isMobileClient)
 
     trackEvent({
-      name: 'page_visit',
+      name: PAGE_VISIT,
       values: {
         inviting_uid: customization?.uid,
       },
@@ -38,12 +66,14 @@ export const AppProvider = ({ children, content, customization = null }) => {
   return (
     <AppContext.Provider
       value={{
+        actionStatus,
         activeAction,
         content,
         customization,
         isClient,
         isMobile,
         key,
+        setActionStatus,
         setActiveAction,
         setShowConfetti,
       }}
@@ -64,7 +94,7 @@ export const useCustomization = () => {
 }
 
 export const useActiveAction = () => {
-  const { activeAction, setActiveAction } = React.useContext(AppContext)
+  const { activeAction, setActiveAction } = useContext(AppContext)
   return { activeAction, setActiveAction }
 }
 
@@ -86,6 +116,14 @@ export const useContentBlocks = (key) => {
 export const useContentNavs = (key) => {
   const context = useContext(AppContext)
   return context.content?.navs?.[key] || ''
+}
+
+export const useActionStatus = () => {
+  const context = useContext(AppContext)
+  return {
+    actionStatus: context?.actionStatus,
+    setActionStatus: context?.setActionStatus,
+  }
 }
 
 export const useContentLists = (key) => {

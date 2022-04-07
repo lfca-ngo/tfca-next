@@ -92,3 +92,13 @@ export const fetchStats = () => {
     return asObject || null
   })
 }
+
+// event names
+export const BEFORE_LEAVE_PAGE = 'before_leave'
+export const EXTERNAL_LINK_CLICKED = 'external_link_clicked'
+export const STEP = 'step'
+export const PAGE_VISIT = 'page_visit'
+export const ACTION_COMPLETED = 'action_completed'
+export const ERROR_BOUNDARY = 'error_boundary'
+export const TEXT_RENDERER = 'Text_renderer'
+export const SWITCH_ENERGY_SUCCESS = 'switch_energy_success'

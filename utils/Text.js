@@ -4,7 +4,7 @@ import { INLINES } from '@contentful/rich-text-types'
 import React from 'react'
 
 import { TrackingOptOutButton } from '../components/Elements/TrackingOptOutButton'
-import { trackEvent } from '../services/analytics'
+import { TEXT_RENDERER, trackEvent } from '../services/analytics'
 
 const renderInlineNavigationElement = (entry) => {
   switch (entry.action) {
@@ -14,7 +14,7 @@ const renderInlineNavigationElement = (entry) => {
     default: {
       trackEvent({
         collection: process.env.NEXT_PUBLIC_GRAPH_JSON_ERRORS_COLLECTION,
-        name: 'Text_renderer',
+        name: TEXT_RENDERER,
         values: {
           message: `Unhandeled link action: ${entry.action}`,
         },

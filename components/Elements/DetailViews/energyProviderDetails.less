@@ -1,1 +1,29 @@
+@import (reference) '../../../styles/variables.less';
+@import (reference) '../../../styles/fonts.less';
+@import (reference) '../../../styles/mixins.less';
 
+.detail-view.energy-provider {
+  header {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+    .logo {
+      display: flex;
+      align-items: center;
+      justify-items: center;
+      .logo-wrapper {
+        border-radius: @border-radius-base;
+        overflow: hidden;
+        display: flex;
+        margin: 0 auto;
+      }
+    }
+
+    .actions {
+      width: 100%;
+      text-align: center;
+      margin-top: 20px;
+    }
+  }
+}

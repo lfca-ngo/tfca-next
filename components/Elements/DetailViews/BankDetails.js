@@ -9,7 +9,7 @@ import { text } from '../../../utils/Text'
 import CallToAction from '../CallToAction'
 import { ListSection, TextSection } from '../Sections'
 
-export const BankDetails = ({ blocks, item, onNext }) => {
+export const BankDetails = ({ actionId, blocks, item, onNext }) => {
   return (
     <div className="detail-view bank">
       <header>
@@ -30,6 +30,7 @@ export const BankDetails = ({ blocks, item, onNext }) => {
         <div className="actions">
           <Space align="center">
             <CallToAction
+              actionId={actionId}
               block
               onCountMeIn={onNext}
               shape="round"

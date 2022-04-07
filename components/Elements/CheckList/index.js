@@ -5,7 +5,7 @@ import React from 'react'
 
 import { Text } from '../../../utils/Text'
 
-export const CheckList = ({ data, limit }) => {
+export const CheckList = ({ data, limit, vars }) => {
   if (!data) return null
 
   let listData = data
@@ -20,7 +20,7 @@ export const CheckList = ({ data, limit }) => {
           <div className="list-elem" key={`el-${i}`}>
             <CheckOutlined />
             <div className="desc">
-              <Text block={el?.value} />
+              <Text block={el?.value} vars={vars} />
             </div>
           </div>
         )

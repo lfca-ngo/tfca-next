@@ -1,55 +1,52 @@
 require('./energyProviderDetails.less')
 
 import { ShareAltOutlined } from '@ant-design/icons'
-import { Button, Space } from 'antd'
+import { Button, Divider, Space } from 'antd'
 import Image from 'next/image'
 import React from 'react'
 
-import { Text } from '../../../utils/Text'
+import { text } from '../../../utils/Text'
 import CallToAction from '../CallToAction'
-import { ListSection } from '../Sections'
+import { TextSection } from '../Sections'
 
-export const EnergyProviderDetails = ({ item }) => {
+export const EnergyProviderDetails = ({ actionId, blocks, item, onNext }) => {
   return (
     <div className="detail-view energy-provider">
       <header>
-        <div className="text">
-          <div className="title">{item.name}</div>
-          <div className="description">
-            <Text block={item?.description} />
+        <div className="logo">
+          <div className="logo-wrapper">
+            <Image height={175} src={item?.logo?.url} width={331} />
           </div>
         </div>
 
-        <div className="info-wrapper">
-          <div className="logo-wrapper">
-            <Image
-              height={100}
-              layout="intrinsic"
-              src={item.logo?.url}
-              width={100}
+        <div className="actions">
+          <Space align="center">
+            <CallToAction
+              actionId={actionId}
+              block
+              onCountMeIn={onNext}
+              shape="round"
+              showLeaveModal
+              text={text(blocks['details.button.primary'], { name: item.name })}
+              type="primary"
+              url={item.referralUrl}
             />
-          </div>
-          <div className="actions">
-            <Space direction="vertical" style={{ width: '100%' }}>
-              <Button
-                block
-                icon={<ShareAltOutlined />}
-                shape="round"
-                type="primary"
-              />
-            </Space>
-          </div>
+
+            <Button
+              block
+              icon={<ShareAltOutlined />}
+              shape="round"
+              type="primary"
+            />
+          </Space>
         </div>
       </header>
 
-      <ListSection items={item?.benefits} title="Benefits" />
+      <Divider />
 
-      <CallToAction
-        block
-        showLeaveModal
-        text="Visit provider"
-        type="primary"
-        url={`https://google.de`}
+      <TextSection
+        text={item?.description}
+        title={text(blocks['label.description'])}
       />
     </div>
   )

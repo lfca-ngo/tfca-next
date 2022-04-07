@@ -10,7 +10,7 @@ import CallToAction from '../CallToAction'
 import { ListSection, TextSection } from '../Sections'
 import { SocialIcons } from '../SocialIcons'
 
-export const OrganizationDetails = ({ item }) => {
+export const OrganizationDetails = ({ actionId, blocks, item, onNext }) => {
   const socials = [
     { id: 'Facebook', url: item.facebook },
     { id: 'Instagram', url: item.instagram },
@@ -48,7 +48,7 @@ export const OrganizationDetails = ({ item }) => {
 
       <TextSection
         text={item?.description}
-        title={'About'}
+        title={text(blocks['details.description.label'])}
         titleIcon={<PlusCircleOutlined />}
       />
 
@@ -56,7 +56,7 @@ export const OrganizationDetails = ({ item }) => {
 
       <ListSection
         items={item?.activities}
-        title={'Activities'}
+        title={text(blocks['details.activities.label'])}
         titleIcon={<PlusCircleOutlined />}
       />
 
@@ -64,7 +64,7 @@ export const OrganizationDetails = ({ item }) => {
 
       <ListSection
         items={item?.areas}
-        title={'Areas'}
+        title={text(blocks['details.areas.label'])}
         titleIcon={<PlusCircleOutlined />}
       />
 
@@ -72,7 +72,7 @@ export const OrganizationDetails = ({ item }) => {
 
       <ListSection
         items={item?.needs}
-        title={'Needs'}
+        title={text(blocks['details.needs.label'])}
         titleIcon={<PlusCircleOutlined />}
       />
 
@@ -87,7 +87,9 @@ export const OrganizationDetails = ({ item }) => {
       <Space direction="vertical" style={{ width: '100%' }}>
         {item?.actions?.map((action, i) => (
           <CallToAction
+            actionId={actionId}
             key={`action-${i}`}
+            onCountMeIn={onNext}
             showLeaveModal
             {...action}
             block

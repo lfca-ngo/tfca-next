@@ -49,9 +49,9 @@ export const Results = ({
             {...action}
           />
         ))}
-        <h4>Count your action & share</h4>
+        <h4>{text(blocks['results.finish.title'])}</h4>
         <Button block onClick={() => goTo(nextKey)} size="large" type="primary">
-          Make it count
+          {text(blocks['results.finish.button.primary'])}
         </Button>
       </Space>
     </div>

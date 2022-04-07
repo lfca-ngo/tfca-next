@@ -1,14 +1,16 @@
 import {
+  InfoCircleOutlined,
   MinusCircleOutlined,
   PlusOutlined,
   SendOutlined,
+  UserAddOutlined,
 } from '@ant-design/icons'
 import { Alert, Button, Divider, Drawer, Form, Input } from 'antd'
 import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
 
 import { useConfetti, useContentBlocks, useContentLists } from '../../../hooks'
-import { trackEvent } from '../../../services/analytics'
+import { ACTION_COMPLETED, trackEvent } from '../../../services/analytics'
 import { getCookie, getWindowUid, UID_COOKIE_NAME } from '../../../utils'
 import { text } from '../../../utils/Text'
 import { CheckList } from '../../Elements/CheckList'
@@ -20,7 +22,14 @@ const MAX_INVITES = 3
 
 export const Success = ({
   goTo,
-  module: { blocks = {}, id, imageInviteText, imageInviteColor, icon = {} },
+  module: {
+    blocks = {},
+    id,
+    imageInviteText,
+    imageInviteColor,
+    icon = {},
+    otherUsers = 49,
+  },
   prevKey,
 }) => {
   const benefits = useContentLists('sharing.benefits')?.items
@@ -36,11 +45,16 @@ export const Success = ({
 
   useEffect(() => {
     trackEvent({
-      name: 'action_completed',
+      name: ACTION_COMPLETED,
       values: { action_id: id },
     })
   }, [id])
 
+  const buttonPrimary = text(useContentBlocks('sharing.button.primary'))
+  const addInvite = text(useContentBlocks('sharing.button.addinvite'))
+  const errorMaxFriends = text(useContentBlocks('sharing.error.maxfriends'))
+  const yourNameInput = text(useContentBlocks('sharing.input.yourname'))
+  const friendsNameInput = text(useContentBlocks('sharing.input.friendsname'))
   const socialDescription = text(useContentBlocks('header.body'))
   const socialTitle = useContentBlocks('header.title.custom')
   const fallbackName = text(
@@ -97,7 +111,7 @@ export const Success = ({
         />
         <h2>{text(useContentBlocks('sharing.nominate.title'))}</h2>
 
-        <CheckList data={benefits} />
+        <CheckList data={benefits} vars={{ users: otherUsers }} />
 
         <Form
           className="dynamic-form"
@@ -107,10 +121,13 @@ export const Success = ({
           onFinish={createInvites}
         >
           <Form.Item name="sender">
-            <Input placeholder="Your Name" />
+            <Input
+              addonBefore={<InfoCircleOutlined />}
+              placeholder={yourNameInput}
+            />
           </Form.Item>
 
-          <Divider />
+          <Divider style={{ margin: '10px 0 24px', opacity: '0.2' }} />
 
           <Form.List
             name="names"
@@ -145,7 +162,10 @@ export const Success = ({
                       }
                       validateTrigger={['onChange', 'onBlur']}
                     >
-                      <Input placeholder="A Friend's Name" />
+                      <Input
+                        addonBefore={<UserAddOutlined />}
+                        placeholder={friendsNameInput}
+                      />
                     </Form.Item>
                     {fields.length > 1 ? (
                       <MinusCircleOutlined
@@ -157,12 +177,7 @@ export const Success = ({
                 ))}
 
                 {fields.length >= MAX_INVITES ? (
-                  <Alert
-                    message={`You can nominate max. 3 friends personally but share a
-                  general link to invite even more!`}
-                    showIcon
-                    type="info"
-                  />
+                  <Alert message={errorMaxFriends} showIcon type="info" />
                 ) : (
                   <Form.Item>
                     <Button
@@ -172,7 +187,7 @@ export const Success = ({
                       onClick={() => add()}
                       type="dashed"
                     >
-                      Add invitee
+                      {addInvite}
                     </Button>
                     <Form.ErrorList errors={errors} />
                   </Form.Item>
@@ -189,7 +204,7 @@ export const Success = ({
               style={{ marginTop: '20px' }}
               type="primary"
             >
-              Open invite dialog
+              {buttonPrimary}
             </Button>
           </Form.Item>
         </Form>
