@@ -5,6 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React, { useState } from 'react'
 
+import { trackEvent } from '../../../services/analytics'
 import { getMailToLink } from '../../../utils'
 import { LeavePage } from '../../ActionModules/helpers/LeavePage'
 import { BasicModal } from '../BasicModal'
@@ -77,10 +78,21 @@ const CtaButton = ({
 
 const ConditionalModalWrapper = (props) => {
   const [visible, setVisible] = useState(false)
+  const openModal = () => {
+    setVisible(true)
+    trackEvent({
+      name: 'before_leave',
+      values: {
+        action_id: props.actionId,
+        destination_text: props.text,
+        destination_url: props.url,
+      },
+    })
+  }
   if (props.showLeaveModal && props.action !== 'open-email') {
     return (
       <>
-        <CallToAction {...props} onClick={() => setVisible(true)} />
+        <CallToAction {...props} onClick={openModal} />
         <BasicModal
           content={
             <LeavePage

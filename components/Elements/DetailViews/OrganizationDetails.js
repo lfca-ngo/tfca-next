@@ -10,7 +10,7 @@ import CallToAction from '../CallToAction'
 import { ListSection, TextSection } from '../Sections'
 import { SocialIcons } from '../SocialIcons'
 
-export const OrganizationDetails = ({ item }) => {
+export const OrganizationDetails = ({ actionId, item }) => {
   const socials = [
     { id: 'Facebook', url: item.facebook },
     { id: 'Instagram', url: item.instagram },
@@ -87,6 +87,7 @@ export const OrganizationDetails = ({ item }) => {
       <Space direction="vertical" style={{ width: '100%' }}>
         {item?.actionsCollection?.items?.map((action, i) => (
           <CallToAction
+            actionId={actionId}
             key={`action-${i}`}
             showLeaveModal
             {...action}

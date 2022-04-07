@@ -7,7 +7,7 @@ import React from 'react'
 import CallToAction from '../CallToAction'
 import { ListSection, TextSection } from '../Sections'
 
-export const ActionDetails = ({ item, onNext }) => {
+export const ActionDetails = ({ actionId, item, onNext }) => {
   return (
     <div className="detail-view action">
       <header>
@@ -29,6 +29,7 @@ export const ActionDetails = ({ item, onNext }) => {
       <Space direction="vertical" style={{ width: '100%' }}>
         {item?.actionsCollection?.items?.map((action, i) => (
           <CallToAction
+            actionId={actionId}
             key={`action-${i}`}
             onCountMeIn={onNext}
             showLeaveModal
