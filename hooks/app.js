@@ -10,9 +10,17 @@ import Confetti from 'react-confetti'
 import { isMobile as isMobileClient } from 'react-device-detect'
 
 import { PAGE_VISIT, trackEvent } from '../services/analytics'
+import { text } from '../utils/text'
 import { usePrevious } from './usePrevious'
 
 const AppContext = createContext()
+
+export const ACTIVE = 'active'
+export const IDLE = 'idle'
+export const SUCCESS = 'success'
+export const HAS_WARNED = 'has-warned'
+
+export const getStatusString = (id, status) => `${id}-${status}`
 
 // content is passed during the build process on every page
 // therefore the translation provider is fulled on boot up
@@ -23,21 +31,26 @@ export const AppProvider = ({ children, content, customization = null }) => {
   const [isMobile, setIsMobile] = useState(false)
   const [isClient, setClient] = useState(false)
   const prevActiveAction = usePrevious(activeAction)
+  const statusMessage = text(
+    content?.metaData?.blocks?.['message.leaving.activeaction']
+  )
 
   const key = isClient ? 'client' : 'server'
 
-  // show a notification when an active action is interrupted
+  // show a notification when an active action is
+  // being left before being completed
   useEffect(() => {
     if (
-      actionStatus === `${prevActiveAction}-active` &&
+      actionStatus === getStatusString(prevActiveAction, ACTIVE) &&
       activeAction !== prevActiveAction
     ) {
-      message.warning(`Don't forget to complete your action!`)
-      setActionStatus(`${activeAction}-has-warned`)
+      message.warning(statusMessage)
+      setActionStatus(getStatusString(activeAction, HAS_WARNED))
     }
   }, [prevActiveAction, actionStatus, activeAction])
 
-  // due to SSG we only know if it's mobile after first client side render
+  // due to SSG we only know if it's mobile
+  // after first client side render
   useEffect(() => {
     setClient(true)
     setIsMobile(isMobileClient)
