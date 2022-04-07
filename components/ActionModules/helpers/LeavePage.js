@@ -63,8 +63,8 @@ export const LeavePage = ({
           <a href={destinationUrl} rel="noopener noreferrer" target="_blank">
             <Button
               block
-              handleClick={handleClick}
               icon={<LinkOutlined />}
+              onClick={handleClick}
               type="primary"
             >
               {destination}

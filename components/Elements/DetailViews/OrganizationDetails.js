@@ -10,7 +10,7 @@ import CallToAction from '../CallToAction'
 import { ListSection, TextSection } from '../Sections'
 import { SocialIcons } from '../SocialIcons'
 
-export const OrganizationDetails = ({ actionId, item }) => {
+export const OrganizationDetails = ({ actionId, item, onNext }) => {
   const socials = [
     { id: 'Facebook', url: item.facebook },
     { id: 'Instagram', url: item.instagram },
@@ -89,6 +89,7 @@ export const OrganizationDetails = ({ actionId, item }) => {
           <CallToAction
             actionId={actionId}
             key={`action-${i}`}
+            onCountMeIn={onNext}
             showLeaveModal
             {...action}
             block

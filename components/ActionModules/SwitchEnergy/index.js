@@ -23,15 +23,13 @@ const steps = new Map([
 export const SwitchEnergy = ({ module }) => {
   const stepsKeys = [...steps.keys()]
 
-  const { goTo, index, setProgress, setStore, store } = useFlow({
+  const { goTo, index, setStore, store } = useFlow({
     id: module?.id,
     initialIndex: stepsKeys[0],
+    stepsKeys,
   })
 
   const handleGoTo = (key) => {
-    const keyIndex = stepsKeys.indexOf(key)
-    const progress = keyIndex / (stepsKeys.length - 1)
-    setProgress(progress)
     goTo(key)
   }
 
