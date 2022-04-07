@@ -10,7 +10,7 @@ import Confetti from 'react-confetti'
 import { isMobile as isMobileClient } from 'react-device-detect'
 
 import { PAGE_VISIT, trackEvent } from '../services/analytics'
-import { text } from '../utils/text'
+import { text } from '../utils/Text'
 import { usePrevious } from './usePrevious'
 
 const AppContext = createContext()
@@ -44,10 +44,10 @@ export const AppProvider = ({ children, content, customization = null }) => {
       actionStatus === getStatusString(prevActiveAction, ACTIVE) &&
       activeAction !== prevActiveAction
     ) {
-      message.warning(statusMessage)
+      message.info({ content: statusMessage, style: { fontSize: '18px' } })
       setActionStatus(getStatusString(activeAction, HAS_WARNED))
     }
-  }, [prevActiveAction, actionStatus, activeAction])
+  }, [prevActiveAction, actionStatus, activeAction, statusMessage])
 
   // due to SSG we only know if it's mobile
   // after first client side render
