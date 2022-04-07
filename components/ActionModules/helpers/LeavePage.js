@@ -8,7 +8,9 @@ import {
 import { Button, Space } from 'antd'
 import React from 'react'
 
+import { useContentBlocks } from '../../../hooks'
 import { EXTERNAL_LINK_CLICKED, trackEvent } from '../../../services/analytics'
+import { text } from '../../../utils/Text'
 
 export const LeavePage = ({
   actionId,
@@ -26,11 +28,18 @@ export const LeavePage = ({
       },
     })
   }
+  const leavePageMissingLink = text(useContentBlocks('leavepage.missing.link'))
+  const leavePageTitle = text(useContentBlocks('leavepage.title'))
+  const leavePageHint = text(useContentBlocks('leavepage.hint'))
+  const leavePageButtonPrimary = text(
+    useContentBlocks('leavepage.button.primary')
+  )
+  const leavePageButtonHint = text(useContentBlocks('leavepage.button.hint'))
 
   if (!destinationUrl)
     return (
       <span>
-        Upps, we are missing a link. Please report this item to{' '}
+        {leavePageMissingLink}
         <a
           href="mailto:support@lfca.earth"
           rel="noopener noreferrer"
@@ -45,11 +54,8 @@ export const LeavePage = ({
     <div className="leave-page">
       <ExclamationCircleOutlined className="headline-icon" />
       <div className="content">
-        <div className="title">Before you leave</div>
-        <div className="description">
-          {`Making your actions count helps motivate others to follow. So make
-          sure to return and click the "Count me in" button!`}
-        </div>
+        <div className="title">{leavePageTitle}</div>
+        <div className="description">{leavePageHint}</div>
         <Space direction="vertical" style={{ width: '100%' }}>
           <Button
             block
@@ -58,7 +64,7 @@ export const LeavePage = ({
             onClick={onNext}
             type="primary"
           >
-            Count me in
+            {leavePageButtonPrimary}
           </Button>
           <a href={destinationUrl} rel="noopener noreferrer" target="_blank">
             <Button
@@ -70,7 +76,7 @@ export const LeavePage = ({
               {destination}
             </Button>
           </a>
-          <label className="hint">The link will open in a new window</label>
+          <label className="hint">{leavePageButtonHint}</label>
         </Space>
       </div>
     </div>
