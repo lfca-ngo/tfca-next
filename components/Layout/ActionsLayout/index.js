@@ -74,7 +74,7 @@ const CompanyMenuItem = ({ company }) => {
 
 export const ActionsLayout = ({ children, company, nav, openGraphInfo }) => {
   const [collapsed, setCollapsed] = useState(true)
-  const mainNav = useContentNavs('mainHeaderNav')?.elementsCollection?.items
+  const mainNav = useContentNavs('mainHeaderNav')?.elements
   const customization = useCustomization()
 
   let addOnItems = [

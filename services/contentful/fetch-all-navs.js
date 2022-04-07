@@ -1,18 +1,13 @@
-import { isDev } from '../../utils'
-import { fetchContent } from './fetch-content'
-import { navigationCollectionQuery } from './queries'
+import { getEntries } from './api'
 
 export const fetchAllNavs = async (locale) => {
-  const { navigationCollection } = await fetchContent(
-    navigationCollectionQuery,
-    {
-      locale: locale,
-      preview: isDev,
-    }
-  )
+  const items = await getEntries({
+    content_type: 'navigation',
+    locale,
+  })
 
-  const navsById = navigationCollection?.items.reduce((allNavs, nav) => {
-    const { navigationId, ...rest } = nav
+  const navsById = items.reduce((allNavs, item) => {
+    const { navigationId, ...rest } = item
     return { ...allNavs, [navigationId]: { ...rest } }
   }, {})
 

@@ -1,9 +1,8 @@
-import { fetchContent } from './fetch-content'
-import { pageLocalCollectionSlugsQuery } from './queries'
+import { getEntries } from './api'
 
 export const fetchPageSlugs = async () => {
-  const { pageLocalCollection } = await fetchContent(
-    pageLocalCollectionSlugsQuery
-  )
-  return pageLocalCollection
+  return await getEntries({
+    content_type: 'pageLocal',
+    select: 'fields.slug',
+  })
 }

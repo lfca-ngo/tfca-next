@@ -10,11 +10,11 @@ import { text } from '../../../utils/Text'
 export const BankCard = ({ blocks, item, onNext }) => {
   const TABS_LIST = [
     {
-      key: 'benefitsCollection',
+      key: 'benefits',
       tab: text(blocks['label.benefits']),
     },
     {
-      key: 'sustainabilityCollection',
+      key: 'sustainability',
       tab: text(blocks['label.sustainability']),
     },
   ]
@@ -39,7 +39,7 @@ export const BankCard = ({ blocks, item, onNext }) => {
           </div>
 
           <div className="tags">
-            {item.tagsCollection?.items?.map((tag, i) => (
+            {item.tags?.map((tag, i) => (
               <div className="tag-wrapper" key={`tag-${i}`}>
                 <Image height={28} src={tag?.icon?.url} width={49} />
               </div>
@@ -50,7 +50,7 @@ export const BankCard = ({ blocks, item, onNext }) => {
     >
       <List
         className="simple-list summary"
-        dataSource={item[activeTab].items}
+        dataSource={item[activeTab]}
         renderItem={(item) => (
           <List.Item>
             <List.Item.Meta

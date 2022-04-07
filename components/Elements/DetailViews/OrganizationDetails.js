@@ -29,7 +29,7 @@ export const OrganizationDetails = ({ item }) => {
           <div className="title">{item.name}</div>
           <div className="description">{item.shortDescription}</div>
           <div className="vetted-by">
-            {item?.vettedByCollection?.items?.map((item, i) => (
+            {item?.vettedBy?.map((item, i) => (
               <Tag className="vetted-by-org" key={`vetted-${i}`}>
                 <Image
                   height={24}
@@ -55,7 +55,7 @@ export const OrganizationDetails = ({ item }) => {
       <Divider />
 
       <ListSection
-        items={item?.activitiesCollection?.items}
+        items={item?.activities}
         title={'Activities'}
         titleIcon={<PlusCircleOutlined />}
       />
@@ -63,7 +63,7 @@ export const OrganizationDetails = ({ item }) => {
       <Divider />
 
       <ListSection
-        items={item?.areasCollection?.items}
+        items={item?.areas}
         title={'Areas'}
         titleIcon={<PlusCircleOutlined />}
       />
@@ -71,7 +71,7 @@ export const OrganizationDetails = ({ item }) => {
       <Divider />
 
       <ListSection
-        items={item?.needsCollection?.items}
+        items={item?.needs}
         title={'Needs'}
         titleIcon={<PlusCircleOutlined />}
       />
@@ -85,7 +85,7 @@ export const OrganizationDetails = ({ item }) => {
       <Divider />
 
       <Space direction="vertical" style={{ width: '100%' }}>
-        {item?.actionsCollection?.items?.map((action, i) => (
+        {item?.actions?.map((action, i) => (
           <CallToAction
             key={`action-${i}`}
             showLeaveModal

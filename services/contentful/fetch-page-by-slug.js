@@ -1,15 +1,11 @@
-import { isDev } from '../../utils'
-import { fetchContent } from './fetch-content'
-import { pageLocalCollectionQuery } from './queries'
+import { getEntries } from './api'
 
 export const fetchPageBySlug = async (locale, slug) => {
-  const { pageLocalCollection } = await fetchContent(pageLocalCollectionQuery, {
-    locale: locale,
-    preview: isDev,
-    slug: slug,
+  const items = await getEntries({
+    content_type: 'pageLocal',
+    'fields.slug': slug,
+    locale,
   })
 
-  const [pageData] = pageLocalCollection.items
-
-  return pageData
+  return items[0]
 }

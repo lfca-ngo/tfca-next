@@ -53,7 +53,7 @@ export const EnergyProviderCard = ({ item, onNext }) => {
           <Col xs={{ span: 24 }}>
             <List
               className="simple-list"
-              dataSource={item?.benefitsCollection?.items}
+              dataSource={item?.benefits}
               renderItem={(item) => (
                 <List.Item>
                   <List.Item.Meta

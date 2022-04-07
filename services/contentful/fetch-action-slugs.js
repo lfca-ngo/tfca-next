@@ -1,10 +1,8 @@
-import { fetchContent } from './fetch-content'
-import { actionsLocalCollectionSlugsQuery } from './queries'
+import { getEntries } from './api'
 
 export const fetchActionSlugs = async () => {
-  const { actionsLocalCollection } = await fetchContent(
-    actionsLocalCollectionSlugsQuery
-  )
-
-  return actionsLocalCollection
+  return await getEntries({
+    content_type: 'actionsLocal',
+    select: 'fields.slug,fields.layout',
+  })
 }

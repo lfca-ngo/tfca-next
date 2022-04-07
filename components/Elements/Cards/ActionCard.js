@@ -7,8 +7,7 @@ import React from 'react'
 import { DetailButton } from './DetailButton'
 
 export const ActionCard = ({ item, onNext }) => {
-  const actionIcons =
-    item.actionsCollection?.items?.map((action) => action?.icon?.url) || []
+  const actionIcons = item.actions?.map((action) => action?.icon?.url) || []
 
   const handleNext = () => onNext(item)
 

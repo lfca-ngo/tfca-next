@@ -18,7 +18,7 @@ import { ConditionalWrapper, CookieSelector } from './helpers'
 const CookieConsent = () => {
   const cookieBanner = useContent()?.metaData?.cookieBanner
   // We assume that the first cookie is required and always needs to be accepted
-  const requiredCookie = cookieBanner?.levelsCollection?.items?.[0]?.key
+  const requiredCookie = cookieBanner?.levels?.[0]?.key
 
   // We show the banner when the required cookie has not been accepted, yet
   const [visible, setVisible] = useState(false)
@@ -41,7 +41,7 @@ const CookieConsent = () => {
   const accept = (all = false) => {
     if (all) {
       // Accept all cookies
-      cookieBanner?.levelsCollection?.items?.forEach((cookie) => {
+      cookieBanner?.levels?.forEach((cookie) => {
         setCookie(cookie.key, true)
       })
     } else {
@@ -83,7 +83,7 @@ const CookieConsent = () => {
           <div className="description">{text(cookieBanner?.body)}</div>
           <div className="consent">
             <ul>
-              {cookieBanner?.levelsCollection?.items.map((level, i) => {
+              {cookieBanner?.levels?.map((level, i) => {
                 return (
                   <CookieSelector
                     // The first cookie is required and can't be changed

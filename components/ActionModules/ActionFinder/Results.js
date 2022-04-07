@@ -38,8 +38,7 @@ export const Results = ({
     // as soon as one item fails a filter, return false
     for (const availableFilter of availableFilters) {
       const { fieldName } = availableFilter
-      const collectionName = `${fieldName}Collection`
-      const itemValues = item?.[collectionName]?.items?.map((i) => i.key)
+      const itemValues = item?.[fieldName]?.map((i) => i.key)
       const storeValues = store[fieldName]
       const isEmpty = !storeValues || storeValues?.length === 0
       const isArray = Array.isArray(storeValues)
