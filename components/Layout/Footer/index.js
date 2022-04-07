@@ -70,11 +70,11 @@ export const Footer = () => {
       <Row align="center" className="copyright" justify="center">
         <div className="legal-links">
           <ul>
-            {footerLegal.elementsCollection?.items.map((item) => (
+            {footerLegal.elements?.map((item) => (
               <li key={item.title}>
                 <Link href={item.slug}>{item.title}</Link>
               </li>
-            ))}
+            )) || null}
           </ul>
         </div>
 

@@ -6,12 +6,6 @@ import React from 'react'
 import { TrackingOptOutButton } from '../components/Elements/TrackingOptOutButton'
 import { TEXT_RENDERER, trackEvent } from '../services/analytics'
 
-const getInlineEntryWithId = (links, id) => {
-  const link = links.entries?.inline?.find((link) => link.sys?.id === id)
-
-  return link
-}
-
 const renderInlineNavigationElement = (entry) => {
   switch (entry.action) {
     case 'remove-analytics-cookie': {
@@ -22,7 +16,7 @@ const renderInlineNavigationElement = (entry) => {
         collection: process.env.NEXT_PUBLIC_GRAPH_JSON_ERRORS_COLLECTION,
         name: TEXT_RENDERER,
         values: {
-          message: `Unhandeled link action: ${action}`,
+          message: `Unhandeled link action: ${entry.action}`,
         },
       })
       return null
@@ -30,7 +24,7 @@ const renderInlineNavigationElement = (entry) => {
   }
 }
 
-const createRenderOptions = (vars, links) => ({
+const createRenderOptions = (vars) => ({
   renderNode: {
     [INLINES.HYPERLINK]: (node, children) => {
       const href = typeof node.data.uri === 'string' ? node.data.uri : ''
@@ -41,25 +35,19 @@ const createRenderOptions = (vars, links) => ({
       )
     },
     [INLINES.EMBEDDED_ENTRY]: (node) => {
-      const linkId = node.data?.target?.sys?.id
-      if (!linkId) return
-      const referencedEntry = getInlineEntryWithId(
-        links,
-        node.data.target.sys.id
-      )
+      const entry = node.data?.target
+      const entryType = entry?.sys?.contentType?.sys?.id
 
-      if (!referencedEntry || !referencedEntry.__typename) return null
-
-      switch (referencedEntry.__typename) {
-        case 'NavigationElement':
-          return renderInlineNavigationElement(referencedEntry)
+      switch (entryType) {
+        case 'navigationElement':
+          return renderInlineNavigationElement(entry?.fields)
 
         default:
           trackEvent({
             collection: process.env.NEXT_PUBLIC_GRAPH_JSON_ERRORS_COLLECTION,
             name: 'Text_renderer',
             values: {
-              message: `Unhandeled inline embedded entry: ${referencedEntry.__typename}`,
+              message: `Unhandeled inline embedded entry: ${entryType}`,
             },
           })
           return null
@@ -95,10 +83,10 @@ export const Text = ({ asString, block, vars }) => {
   if (!block) return null
   if (typeof block === 'string') return block
 
-  if (asString) return replaceVars(documentToPlainTextString(block.json), vars)
+  if (asString) return replaceVars(documentToPlainTextString(block), vars)
 
   return documentToReactComponents(
-    block.json,
+    block,
     createRenderOptions(vars, block.links)
   )
 }
@@ -109,7 +97,7 @@ export const text = (block, vars, parseMarkdown = false) => {
   let string =
     typeof block === 'string'
       ? replaceVars(block, vars)
-      : replaceVars(documentToPlainTextString(block?.json), vars) || ''
+      : replaceVars(documentToPlainTextString(block), vars) || ''
 
   return parseMarkdown ? parseMarkdownStringToReactComponents(string) : string
 }

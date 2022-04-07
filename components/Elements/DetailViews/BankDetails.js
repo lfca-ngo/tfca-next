@@ -20,7 +20,7 @@ export const BankDetails = ({ actionId, blocks, item, onNext }) => {
         </div>
 
         <div className="tags">
-          {item.tagsCollection?.items?.map((tag, i) => (
+          {item.tags?.map((tag, i) => (
             <div className="tag-wrapper" key={`tag-${i}`}>
               <Image height={28} src={tag?.icon?.url} width={49} />
             </div>
@@ -53,11 +53,11 @@ export const BankDetails = ({ actionId, blocks, item, onNext }) => {
       <Divider />
 
       <ListSection
-        items={item.benefitsCollection?.items}
+        items={item.benefits}
         title={text(blocks['label.benefits'])}
       />
       <ListSection
-        items={item.sustainabilityCollection?.items}
+        items={item.sustainability}
         title={text(blocks['label.sustainability'])}
       />
       <TextSection

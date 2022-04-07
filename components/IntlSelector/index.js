@@ -16,14 +16,14 @@ export const IntlSelector = () => {
     query: { actionCollectionSlug, shareToken },
   } = router
 
-  const regions = metaData?.regionsCollection?.items || []
+  const regions = metaData?.regions || []
 
   const regionsByActionCollectionSlug = React.useMemo(() => {
-    if (!metaData?.regionsCollection?.items) return {}
+    if (!metaData?.regions) return {}
 
-    return metaData.regionsCollection.items.reduce((regions, currRegion) => {
+    return metaData.regions.reduce((regions, currRegion) => {
       const actionCollectionSlug = currRegion.actionCollection.slug
-      const languagesByIsoCode = currRegion.languagesCollection.items.reduce(
+      const languagesByIsoCode = currRegion.languages.reduce(
         (languages, currLanguage) => {
           languages[currLanguage.isoCode] = currLanguage
           return languages
@@ -37,7 +37,7 @@ export const IntlSelector = () => {
 
       return regions
     }, {})
-  }, [metaData?.regionsCollection?.items])
+  }, [metaData?.regions])
 
   const activeRegion =
     regionsByActionCollectionSlug[actionCollectionSlug] ||
@@ -77,7 +77,7 @@ export const IntlSelector = () => {
                 }
                 value={activeLanguage?.isoCode}
               >
-                {activeRegion?.languagesCollection.items.map((lang) => (
+                {activeRegion?.languages.map((lang) => (
                   <Select.Option key={lang.isoCode}>
                     <div
                       className="intl-icon-full"

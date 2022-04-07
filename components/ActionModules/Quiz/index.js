@@ -13,7 +13,7 @@ const { TabPane } = Tabs
 export const ANSWER_SUFFIX = '_answer'
 
 export const Quiz = ({ module }) => {
-  const quizItems = module?.quizCollection?.items
+  const quizItems = module?.quiz
   const quizLength = quizItems?.length
 
   // for every question and answer pair we create one page component

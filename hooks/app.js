@@ -128,7 +128,7 @@ export const useActionStatus = () => {
 
 export const useContentLists = (key) => {
   const context = useContext(AppContext)
-  return context.content?.metaDataLists?.[key] || { items: [] }
+  return context.content?.metaData?.lists[key] || { items: [] }
 }
 
 export const useConfetti = () => {

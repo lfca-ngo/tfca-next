@@ -10,7 +10,7 @@ import { Nav } from '../Nav'
 import { Template } from '../Template'
 
 export const BasicLayout = ({ children, style, subtitle, title }) => {
-  const mainNav = useContentNavs('mainHeaderNav')?.elementsCollection?.items
+  const mainNav = useContentNavs('mainHeaderNav')?.elements
   return (
     <Template className="default-layout">
       <Nav className={style} menuItems={mainNav} />

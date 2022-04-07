@@ -18,7 +18,7 @@ export const ChallengeStatus = ({ className, openGraphInfo }) => {
   const [invite, setInvite] = React.useState(null)
 
   const customization = useCustomization()
-  const { query } = useRouter()
+  const { locale, query } = useRouter()
 
   const createInvite = async () => {
     setOpen(true)
@@ -29,6 +29,7 @@ export const ChallengeStatus = ({ className, openGraphInfo }) => {
       const response = await fetch('/api/create-shareable-link', {
         body: JSON.stringify({
           actionCollectionSlug: query.actionCollectionSlug || '',
+          locale,
           socialDescription: openGraphInfo?.ogdescription,
           socialImage: openGraphInfo?.ogimage?.url,
           socialTitle: openGraphInfo?.ogtitle,

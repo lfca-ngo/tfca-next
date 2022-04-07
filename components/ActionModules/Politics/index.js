@@ -37,7 +37,7 @@ export const Politics = ({ module }) => {
         if (option.delegationsCommittees) {
           value = option.delegationsCommittees.join(',')
           // The messages can be looked up by the joined value
-          messagesByFilterValue[value] = option.messagesCollection?.items || []
+          messagesByFilterValue[value] = option.messages || []
           messagesRelatedFilterKey = filterMeta.key
         }
 

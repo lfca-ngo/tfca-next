@@ -24,7 +24,7 @@ export const ActionDetails = ({ actionId, blocks, item, onNext }) => {
       />
 
       <ListSection
-        items={item?.reasonsCollection?.items}
+        items={item?.reasons}
         title={text(blocks['details.why.label'])}
       />
 
@@ -34,7 +34,7 @@ export const ActionDetails = ({ actionId, blocks, item, onNext }) => {
       />
 
       <Space direction="vertical" style={{ width: '100%' }}>
-        {item?.actionsCollection?.items?.map((action, i) => (
+        {item?.actions?.map((action, i) => (
           <CallToAction
             actionId={actionId}
             key={`action-${i}`}

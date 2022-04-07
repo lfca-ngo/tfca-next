@@ -33,7 +33,7 @@ export const CSS_THEME_DARK = !isBrowser()
 
 export const getFilterOptions = (items, fieldName) => {
   const types = items?.reduce((acc, action) => {
-    action?.[fieldName]?.items?.forEach((tag) => {
+    action?.[fieldName]?.forEach((tag) => {
       if (!acc[tag.key]) {
         acc[tag.key] = transformOption(tag, tag.key)
       }
