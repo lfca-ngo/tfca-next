@@ -6,11 +6,7 @@
  * @param  {Object} data
  * @return {Object}
  */
-export function parseResponse(
-  data,
-  props = { include: 10 },
-  options = { parseArrays: true, parseRefs: true }
-) {
+export function parseResponse(data) {
   /**
    * Check to see if the object passed is an object that contains only a `sys`
    * property and no feields. If so, either the model is empty, draft, or unpublished.
@@ -42,14 +38,14 @@ export function parseResponse(
       return null
     }
 
-    if (Array.isArray(value) && options.parseArrays) {
+    if (Array.isArray(value)) {
       return value
         .filter((item) => {
           return !emptyModel(item)
         })
         .map((item) => {
           return item && typeof item === 'object' && item.fields
-            ? parseFields(item.fields, item.sys, {}, depth + 1)
+            ? parseFields(item.fields, {}, depth + 1)
             : parseValue(item, depth + 1)
         })
     }
@@ -61,11 +57,10 @@ export function parseResponse(
    * Parse over a fields object, parsing child fields or building rest of object.
    *
    * @param  {Object} fieldsObject - fields object to iterate over and flatten into objectRef
-   * @param  {Object} sys - sys object associated with fieldsObject
    * @param  {Object} objectRef - Compiled object that flattens the field objects
    * @return {Object}
    */
-  function parseFields(fieldsObject, sys, objectRef = {}, depth = 0) {
+  function parseFields(fieldsObject, objectRef = {}, depth = 0) {
     // Remove the extra `file` nesting for assets
     if (fieldsObject?.file?.url) {
       fieldsObject = {
@@ -84,20 +79,15 @@ export function parseResponse(
       return objectRef
     }
 
-    if (depth >= props.include) {
-      return objectRef
-    }
-
     const objectRefClone = Object.assign({}, objectRef)
 
     // Iterate over fieldObject keys, rercursively parsing child objects that
     // contain fields, or parsing non-fields-child objects/entries
     Object.keys(fieldsObject).forEach((key) => {
       objectRefClone[key] =
-        fieldsObject[key] && fieldsObject[key].fields && options.parseRefs
+        fieldsObject[key] && fieldsObject[key].fields
           ? parseFields(
               fieldsObject[key].fields,
-              fieldsObject[key].sys,
               objectRefClone[key],
               depth + 1
             )
@@ -109,5 +99,5 @@ export function parseResponse(
 
   const dataClone = Object.assign({}, data)
 
-  return parseFields(dataClone.fields, dataClone.sys)
+  return parseFields(dataClone.fields)
 }
