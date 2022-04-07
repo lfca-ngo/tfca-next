@@ -1,15 +1,12 @@
-import { client } from './client'
-import { removeFieldsNesting } from './utils'
+import { getEntries } from './api'
 
 export const fetchAllNavs = async (locale) => {
-  const { items } = await client.getEntries({
+  const items = await getEntries({
     content_type: 'navigation',
     locale,
   })
 
-  const parsedItems = removeFieldsNesting({ fields: { items } }).items
-
-  const navsById = parsedItems.reduce((allNavs, item) => {
+  const navsById = items.reduce((allNavs, item) => {
     const { navigationId, ...rest } = item
     return { ...allNavs, [navigationId]: { ...rest } }
   }, {})

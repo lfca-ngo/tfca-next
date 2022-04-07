@@ -1,6 +1,6 @@
 import * as contentful from 'contentful'
 
-import { isDev } from '../../utils'
+import { isDev } from '../../../utils'
 
 export const client = contentful.createClient({
   accessToken: isDev

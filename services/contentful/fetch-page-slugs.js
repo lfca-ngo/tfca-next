@@ -1,15 +1,8 @@
-import { client } from './client'
-import { removeFieldsNesting } from './utils'
+import { getEntries } from './api'
 
 export const fetchPageSlugs = async () => {
-  try {
-    const { items } = await client.getEntries({
-      content_type: 'pageLocal',
-      select: 'fields.slug',
-    })
-
-    return removeFieldsNesting({ fields: { items } }).items
-  } catch (e) {
-    console.error(e)
-  }
+  return await getEntries({
+    content_type: 'pageLocal',
+    select: 'fields.slug',
+  })
 }

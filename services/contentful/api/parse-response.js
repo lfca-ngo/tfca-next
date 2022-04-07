@@ -1,11 +1,12 @@
 /**
  * Flattens a Contentful data response, extracting the fields from child
  * objects and setting them to the parent name.
+ * Taken from: https://github.com/ryanhefner/contentful-parsers
  *
  * @param  {Object} data
  * @return {Object}
  */
-export function removeFieldsNesting(
+export function parseResponse(
   data,
   props = { include: 10 },
   options = { parseArrays: true, parseRefs: true }
