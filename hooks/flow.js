@@ -1,5 +1,6 @@
 import { useState } from 'react'
 
+import { trackEvent } from '../services/analytics'
 import { scrollToId } from '../utils'
 
 // helper hook for managing the flow state of
@@ -12,6 +13,11 @@ export const useFlow = ({ id, initialIndex, initialStore = {} }) => {
   const goTo = (page) => {
     set(page)
     scrollToId(id)
+    // track event for every funnel step
+    trackEvent({
+      name: 'step',
+      values: { action_id: id, step: page },
+    })
   }
 
   return {
