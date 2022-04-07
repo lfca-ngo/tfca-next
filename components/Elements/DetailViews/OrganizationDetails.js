@@ -48,7 +48,7 @@ export const OrganizationDetails = ({ actionId, item, onNext }) => {
 
       <TextSection
         text={item?.description}
-        title={'About'}
+        title={text(blocks['details.description.label'])}
         titleIcon={<PlusCircleOutlined />}
       />
 
@@ -56,7 +56,7 @@ export const OrganizationDetails = ({ actionId, item, onNext }) => {
 
       <ListSection
         items={item?.activitiesCollection?.items}
-        title={'Activities'}
+        title={text(blocks['details.activities.label'])}
         titleIcon={<PlusCircleOutlined />}
       />
 
@@ -64,7 +64,7 @@ export const OrganizationDetails = ({ actionId, item, onNext }) => {
 
       <ListSection
         items={item?.areasCollection?.items}
-        title={'Areas'}
+        title={text(blocks['details.areas.label'])}
         titleIcon={<PlusCircleOutlined />}
       />
 
@@ -72,7 +72,7 @@ export const OrganizationDetails = ({ actionId, item, onNext }) => {
 
       <ListSection
         items={item?.needsCollection?.items}
-        title={'Needs'}
+        title={text(blocks['details.needs.label'])}
         titleIcon={<PlusCircleOutlined />}
       />
 
