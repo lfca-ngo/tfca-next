@@ -39,7 +39,7 @@ export async function getStaticProps({ locale, params }) {
 export async function getStaticPaths({ locales }) {
   const actionsSlugs = await fetchActionSlugs()
 
-  const paths = actionsSlugs.items.reduce((allPaths, item) => {
+  const paths = actionsSlugs.reduce((allPaths, item) => {
     // prevent old pages from being built
     if (typeof item.layout !== 'string') return allPaths
 

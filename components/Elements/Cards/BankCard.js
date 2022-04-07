@@ -39,7 +39,7 @@ export const BankCard = ({ blocks, item, onNext }) => {
           </div>
 
           <div className="tags">
-            {item.tagsCollection?.items?.map((tag, i) => (
+            {item.tags?.map((tag, i) => (
               <div className="tag-wrapper" key={`tag-${i}`}>
                 <Image height={28} src={tag?.icon?.url} width={49} />
               </div>

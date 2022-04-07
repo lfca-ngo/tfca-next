@@ -26,12 +26,10 @@ export const Question = ({
 
   const answers = useMemo(() => {
     const correctAnswers = []
-    const answerOptions = activeQuestion?.answersCollection?.items?.map(
-      (item) => {
-        if (item.isCorrect) correctAnswers.push(item.key)
-        return transformOption(item, item.key, { isCorrect: item.isCorrect })
-      }
-    )
+    const answerOptions = activeQuestion?.answers?.map((item) => {
+      if (item.isCorrect) correctAnswers.push(item.key)
+      return transformOption(item, item.key, { isCorrect: item.isCorrect })
+    })
     return {
       correctAnswers,
       options: answerOptions,

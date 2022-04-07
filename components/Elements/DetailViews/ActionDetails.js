@@ -19,15 +19,12 @@ export const ActionDetails = ({ item, onNext }) => {
 
       <TextSection text={item?.shortDescription} title="Description" />
 
-      <ListSection
-        items={item?.reasonsCollection?.items}
-        title="Why should I do this?"
-      />
+      <ListSection items={item?.reasons} title="Why should I do this?" />
 
       <TextSection text={item?.description} title="How to do this" />
 
       <Space direction="vertical" style={{ width: '100%' }}>
-        {item?.actionsCollection?.items?.map((action, i) => (
+        {item?.actions?.map((action, i) => (
           <CallToAction
             key={`action-${i}`}
             onCountMeIn={onNext}

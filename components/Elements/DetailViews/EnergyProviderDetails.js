@@ -42,7 +42,7 @@ export const EnergyProviderDetails = ({ item }) => {
         </div>
       </header>
 
-      <ListSection items={item?.benefitsCollection?.items} title="Benefits" />
+      <ListSection items={item?.benefits} title="Benefits" />
 
       <CallToAction
         block

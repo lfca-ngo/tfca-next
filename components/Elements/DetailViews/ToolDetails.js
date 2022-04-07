@@ -20,7 +20,7 @@ export const ToolDetails = ({ item }) => {
           <div className="title">{item.title}</div>
           <Divider />
           <div className="actions">
-            {item?.actionsCollection?.items?.map((action, i) => (
+            {item?.actions?.map((action, i) => (
               <CallToAction key={`action-${i}`} showLeaveModal {...action} />
             ))}
           </div>
@@ -28,7 +28,7 @@ export const ToolDetails = ({ item }) => {
       </header>
 
       <main>
-        <ListSection items={item?.benefitsCollection?.items} title="Benefits" />
+        <ListSection items={item?.benefits} title="Benefits" />
 
         <div>
           <div className="section-title title">
