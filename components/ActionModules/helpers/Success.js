@@ -29,8 +29,8 @@ export const Success = ({
   const [visible, setVisible] = React.useState('')
   const [invites, setInvites] = React.useState([])
 
-  const router = useRouter()
-  const { actionCollectionSlug } = router.query
+  const { locale, query } = useRouter()
+  const { actionCollectionSlug } = query
 
   useConfetti()
 
@@ -226,6 +226,7 @@ export const Success = ({
           actionCollectionSlug,
           actionId: id,
           color: imageInviteColor,
+          locale,
           message: imageInviteText,
           names,
           sender,

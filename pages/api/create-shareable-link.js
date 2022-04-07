@@ -9,6 +9,7 @@ export default async function handler(req, res) {
     actionCollectionSlug,
     actionId,
     color,
+    locale,
     message,
     names,
     sender,
@@ -27,7 +28,9 @@ export default async function handler(req, res) {
     uid,
   })
 
-  const shareLink = `${process.env.NEXT_PUBLIC_URL}/${actionCollectionSlug}/invite/${token}`
+  const shareLink = `${process.env.NEXT_PUBLIC_URL}/${
+    locale ? `${locale}/` : ''
+  }${actionCollectionSlug}/invite/${token}`
   const ogImageUrl =
     socialImage || `${process.env.NEXT_PUBLIC_URL}/api/images/${token}`
 
