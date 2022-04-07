@@ -10,7 +10,7 @@ import CallToAction from '../CallToAction'
 import { ListSection, TextSection } from '../Sections'
 import { SocialIcons } from '../SocialIcons'
 
-export const OrganizationDetails = ({ actionId, item, onNext }) => {
+export const OrganizationDetails = ({ actionId, blocks, item, onNext }) => {
   const socials = [
     { id: 'Facebook', url: item.facebook },
     { id: 'Instagram', url: item.instagram },
