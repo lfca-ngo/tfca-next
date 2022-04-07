@@ -12,9 +12,7 @@ export const fetchAllActions = async (locale, actionCollectionSlug) => {
 
   const transformed = transformResults(actions)
 
-  const test = { ...transformed, layout, openGraphInfo }
-
-  return test
+  return { ...transformed, layout, openGraphInfo }
 }
 
 // Helper function to transform the results into key value pairs

@@ -104,27 +104,6 @@ export function parseResponse(
           : parseValue(fieldsObject[key], depth + 1)
     })
 
-    // Apply typeNameKey/value to each fields object to define the Contentful model type
-    const contentTypeId =
-      sys && sys.contentType && sys.contentType.sys && sys.contentType.sys.id
-
-    if (contentTypeId) {
-      /* eslint-disable */
-      objectRefClone['id'] = sys.id
-      objectRefClone['__typename'] = sys.contentType.sys.id
-      /* eslint-enable */
-    }
-
-    // Apply updatedAt
-    if (sys && sys.updatedAt) {
-      objectRefClone['updatedAt'] = sys.updatedAt
-    }
-
-    // Apply createdAt
-    if (sys && sys.createdAt) {
-      objectRefClone['createdAt'] = sys.createdAt
-    }
-
     return objectRefClone
   }
 

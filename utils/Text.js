@@ -83,11 +83,10 @@ export const Text = ({ asString, block, vars }) => {
   if (!block) return null
   if (typeof block === 'string') return block
 
-  if (asString)
-    return replaceVars(documentToPlainTextString(block?.json || block), vars)
+  if (asString) return replaceVars(documentToPlainTextString(block), vars)
 
   return documentToReactComponents(
-    block?.json || block,
+    block,
     createRenderOptions(vars, block.links)
   )
 }
@@ -98,7 +97,7 @@ export const text = (block, vars, parseMarkdown = false) => {
   let string =
     typeof block === 'string'
       ? replaceVars(block, vars)
-      : replaceVars(documentToPlainTextString(block?.json || block), vars) || ''
+      : replaceVars(documentToPlainTextString(block), vars) || ''
 
   return parseMarkdown ? parseMarkdownStringToReactComponents(string) : string
 }
