@@ -8,7 +8,25 @@ import {
 import { Button, Space } from 'antd'
 import React from 'react'
 
-export const LeavePage = ({ destination, destinationUrl, onNext }) => {
+import { EXTERNAL_LINK_CLICKED, trackEvent } from '../../../services/analytics'
+
+export const LeavePage = ({
+  actionId,
+  destination,
+  destinationUrl,
+  onNext,
+}) => {
+  const handleClick = () => {
+    trackEvent({
+      name: EXTERNAL_LINK_CLICKED,
+      values: {
+        action_id: actionId,
+        destination_text: destination,
+        destination_url: destinationUrl,
+      },
+    })
+  }
+
   if (!destinationUrl)
     return (
       <span>
@@ -43,7 +61,12 @@ export const LeavePage = ({ destination, destinationUrl, onNext }) => {
             Count me in
           </Button>
           <a href={destinationUrl} rel="noopener noreferrer" target="_blank">
-            <Button block icon={<LinkOutlined />} type="primary">
+            <Button
+              block
+              handleClick={handleClick}
+              icon={<LinkOutlined />}
+              type="primary"
+            >
               {destination}
             </Button>
           </a>

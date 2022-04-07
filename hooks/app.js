@@ -8,7 +8,7 @@ import React, {
 import Confetti from 'react-confetti'
 import { isMobile as isMobileClient } from 'react-device-detect'
 
-import { trackEvent } from '../services/analytics'
+import { PAGE_VISIT, trackEvent } from '../services/analytics'
 
 const AppContext = createContext()
 
@@ -28,7 +28,7 @@ export const AppProvider = ({ children, content, customization = null }) => {
     setIsMobile(isMobileClient)
 
     trackEvent({
-      name: 'page_visit',
+      name: PAGE_VISIT,
       values: {
         inviting_uid: customization?.uid,
       },

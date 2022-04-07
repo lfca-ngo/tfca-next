@@ -5,7 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React, { useState } from 'react'
 
-import { trackEvent } from '../../../services/analytics'
+import { BEFORE_LEAVE_PAGE, trackEvent } from '../../../services/analytics'
 import { getMailToLink } from '../../../utils'
 import { LeavePage } from '../../ActionModules/helpers/LeavePage'
 import { BasicModal } from '../BasicModal'
@@ -81,7 +81,7 @@ const ConditionalModalWrapper = (props) => {
   const openModal = () => {
     setVisible(true)
     trackEvent({
-      name: 'before_leave',
+      name: BEFORE_LEAVE_PAGE,
       values: {
         action_id: props.actionId,
         destination_text: props.text,

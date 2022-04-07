@@ -10,7 +10,7 @@ import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
 
 import { useConfetti, useContentBlocks, useContentLists } from '../../../hooks'
-import { trackEvent } from '../../../services/analytics'
+import { ACTION_COMPLETED, trackEvent } from '../../../services/analytics'
 import { getCookie, getWindowUid, UID_COOKIE_NAME } from '../../../utils'
 import { text } from '../../../utils/Text'
 import { CheckList } from '../../Elements/CheckList'
@@ -45,7 +45,7 @@ export const Success = ({
 
   useEffect(() => {
     trackEvent({
-      name: 'action_completed',
+      name: ACTION_COMPLETED,
       values: { action_id: id },
     })
   }, [id])
