@@ -9,8 +9,13 @@ import { Alert, Button, Divider, Drawer, Form, Input } from 'antd'
 import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
 
-import { useConfetti, useContentBlocks, useContentLists } from '../../../hooks'
-import { ACTION_COMPLETED, useTrackEvent } from '../../../services/analytics'
+import {
+  useAnalytics,
+  useConfetti,
+  useContentBlocks,
+  useContentLists,
+} from '../../../hooks'
+import { ACTION_COMPLETED } from '../../../services/analytics'
 import { getCookie, getWindowUid, UID_COOKIE_NAME } from '../../../utils'
 import { text } from '../../../utils/Text'
 import { CheckList } from '../../Elements/CheckList'
@@ -40,7 +45,7 @@ export const Success = ({
 
   const { locale, query } = useRouter()
   const { actionCollectionSlug } = query
-  const trackEvent = useTrackEvent()
+  const { trackEvent } = useAnalytics()
 
   useConfetti()
 

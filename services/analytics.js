@@ -1,7 +1,5 @@
 import axios from 'axios'
-import { useRouter } from 'next/router'
 
-import { useCustomization } from '../hooks/app'
 import {
   getCookie,
   getWindowUid,
@@ -66,22 +64,6 @@ export const trackEvent = ({
     method: 'POST',
     url: `${process.env.NEXT_PUBLIC_GRAPH_JSON_URL}/log`,
   })
-}
-
-export const useTrackEvent = () => {
-  const { locale, query } = useRouter()
-  const customization = useCustomization()
-
-  return ({ collection, name, values }) => {
-    trackEvent({
-      action_collection_slug: query.actionCollectionSlug,
-      collection,
-      inviting_uid: customization?.uid,
-      locale,
-      name,
-      values,
-    })
-  }
 }
 
 export const fetchStats = () => {
