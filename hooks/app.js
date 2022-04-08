@@ -1,4 +1,5 @@
 import { message } from 'antd'
+import { useRouter } from 'next/router'
 import React, {
   createContext,
   useCallback,
@@ -9,7 +10,7 @@ import React, {
 import Confetti from 'react-confetti'
 import { isMobile as isMobileClient } from 'react-device-detect'
 
-import { PAGE_VISIT, useTrackEvent } from '../services/analytics'
+import { PAGE_VISIT, trackEvent } from '../services/analytics'
 import { text } from '../utils/Text'
 import { usePrevious } from './usePrevious'
 
@@ -31,7 +32,7 @@ export const AppProvider = ({ children, content, customization = null }) => {
   const [isMobile, setIsMobile] = useState(false)
   const [isClient, setClient] = useState(false)
   const prevActiveAction = usePrevious(activeAction)
-  const trackEvent = useTrackEvent()
+  const { locale, query } = useRouter()
 
   const statusMessage = text(
     content?.metaData?.blocks?.['message.leaving.activeaction']
@@ -58,12 +59,12 @@ export const AppProvider = ({ children, content, customization = null }) => {
     setIsMobile(isMobileClient)
 
     trackEvent({
+      action_collection_slug: query.actionCollectionSlug,
+      inviting_uid: customization?.uid,
+      locale,
       name: PAGE_VISIT,
-      values: {
-        inviting_uid: customization?.uid,
-      },
     })
-  }, [customization, trackEvent])
+  }, [customization, locale, query])
 
   return (
     <AppContext.Provider
