@@ -28,7 +28,7 @@ const getCleanPathName = () => {
 }
 
 export const trackEvent = ({
-  actionCollectionSlug,
+  action_collection_slug,
   collection = process.env.NEXT_PUBLIC_GRAPH_JSON_EVENTS_COLLECTION,
   locale,
   name,
@@ -41,7 +41,7 @@ export const trackEvent = ({
   const userId = uidCookie || getWindowUid()
 
   const event = {
-    actionCollectionSlug,
+    action_collection_slug,
     consent,
     Event: name,
     locale,
@@ -67,10 +67,9 @@ export const trackEvent = ({
 
 export const useTrackEvent = () => {
   const { locale, query } = useRouter()
-
   return ({ collection, name, values }) => {
     trackEvent({
-      actionCollectionSlug: query.actionCollectionSlug,
+      action_collection_slug: query.actionCollectionSlug,
       collection,
       locale,
       name,
