@@ -1,4 +1,5 @@
 import { message } from 'antd'
+import { useRouter } from 'next/router'
 import React, {
   createContext,
   useCallback,
@@ -31,6 +32,8 @@ export const AppProvider = ({ children, content, customization = null }) => {
   const [isMobile, setIsMobile] = useState(false)
   const [isClient, setClient] = useState(false)
   const prevActiveAction = usePrevious(activeAction)
+  const { locale, query } = useRouter()
+
   const statusMessage = text(
     content?.metaData?.blocks?.['message.leaving.activeaction']
   )
@@ -56,12 +59,12 @@ export const AppProvider = ({ children, content, customization = null }) => {
     setIsMobile(isMobileClient)
 
     trackEvent({
+      action_collection_slug: query.actionCollectionSlug,
+      inviting_uid: customization?.uid,
+      locale,
       name: PAGE_VISIT,
-      values: {
-        inviting_uid: customization?.uid,
-      },
     })
-  }, [customization])
+  }, [customization, locale, query])
 
   return (
     <AppContext.Provider

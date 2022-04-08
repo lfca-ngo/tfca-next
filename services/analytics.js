@@ -27,7 +27,10 @@ const getCleanPathName = () => {
 }
 
 export const trackEvent = ({
+  action_collection_slug,
   collection = process.env.NEXT_PUBLIC_GRAPH_JSON_EVENTS_COLLECTION,
+  inviting_uid,
+  locale,
   name,
   values = {},
 }) => {
@@ -38,8 +41,11 @@ export const trackEvent = ({
   const userId = uidCookie || getWindowUid()
 
   const event = {
+    action_collection_slug,
     consent,
     Event: name,
+    inviting_uid,
+    locale,
     path: getCleanPathName(),
     User_ID: userId,
     ...values,

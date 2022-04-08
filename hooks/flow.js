@@ -1,7 +1,8 @@
 import { useState } from 'react'
 
-import { STEP, trackEvent } from '../services/analytics'
+import { STEP } from '../services/analytics'
 import { scrollToId } from '../utils'
+import { useAnalytics } from './analytics'
 import { useActionStatus } from './app'
 
 // helper hook for managing the flow state of
@@ -11,6 +12,7 @@ export const useFlow = ({ id, initialIndex, initialStore = {}, stepsKeys }) => {
   const [progress, setProgress] = useState(0)
   const [store, setStore] = useState(initialStore)
   const { setActionStatus } = useActionStatus()
+  const { trackEvent } = useAnalytics()
 
   const goTo = (page) => {
     // track progress

@@ -9,8 +9,13 @@ import { Alert, Button, Divider, Drawer, Form, Input } from 'antd'
 import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
 
-import { useConfetti, useContentBlocks, useContentLists } from '../../../hooks'
-import { ACTION_COMPLETED, trackEvent } from '../../../services/analytics'
+import {
+  useAnalytics,
+  useConfetti,
+  useContentBlocks,
+  useContentLists,
+} from '../../../hooks'
+import { ACTION_COMPLETED } from '../../../services/analytics'
 import { getCookie, getWindowUid, UID_COOKIE_NAME } from '../../../utils'
 import { text } from '../../../utils/Text'
 import { CheckList } from '../../Elements/CheckList'
@@ -40,6 +45,7 @@ export const Success = ({
 
   const { locale, query } = useRouter()
   const { actionCollectionSlug } = query
+  const { trackEvent } = useAnalytics()
 
   useConfetti()
 
@@ -48,7 +54,7 @@ export const Success = ({
       name: ACTION_COMPLETED,
       values: { action_id: id },
     })
-  }, [id])
+  }, [id, trackEvent])
 
   const buttonPrimary = text(useContentBlocks('sharing.button.primary'))
   const addInvite = text(useContentBlocks('sharing.button.addinvite'))
