@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { STEP, trackEvent } from '../services/analytics'
+import { STEP, useTrackEvent } from '../services/analytics'
 import { scrollToId } from '../utils'
 import { useActionStatus } from './app'
 
@@ -11,6 +11,7 @@ export const useFlow = ({ id, initialIndex, initialStore = {}, stepsKeys }) => {
   const [progress, setProgress] = useState(0)
   const [store, setStore] = useState(initialStore)
   const { setActionStatus } = useActionStatus()
+  const trackEvent = useTrackEvent()
 
   const goTo = (page) => {
     // track progress

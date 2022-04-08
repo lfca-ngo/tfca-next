@@ -9,7 +9,7 @@ import React, {
 import Confetti from 'react-confetti'
 import { isMobile as isMobileClient } from 'react-device-detect'
 
-import { PAGE_VISIT, trackEvent } from '../services/analytics'
+import { PAGE_VISIT, useTrackEvent } from '../services/analytics'
 import { text } from '../utils/Text'
 import { usePrevious } from './usePrevious'
 
@@ -31,6 +31,8 @@ export const AppProvider = ({ children, content, customization = null }) => {
   const [isMobile, setIsMobile] = useState(false)
   const [isClient, setClient] = useState(false)
   const prevActiveAction = usePrevious(activeAction)
+  const trackEvent = useTrackEvent()
+
   const statusMessage = text(
     content?.metaData?.blocks?.['message.leaving.activeaction']
   )
@@ -61,7 +63,7 @@ export const AppProvider = ({ children, content, customization = null }) => {
         inviting_uid: customization?.uid,
       },
     })
-  }, [customization])
+  }, [customization, trackEvent])
 
   return (
     <AppContext.Provider

@@ -9,7 +9,10 @@ import { Button, Space } from 'antd'
 import React from 'react'
 
 import { useContentBlocks } from '../../../hooks'
-import { EXTERNAL_LINK_CLICKED, trackEvent } from '../../../services/analytics'
+import {
+  EXTERNAL_LINK_CLICKED,
+  useTrackEvent,
+} from '../../../services/analytics'
 import { text } from '../../../utils/Text'
 
 export const LeavePage = ({
@@ -18,6 +21,8 @@ export const LeavePage = ({
   destinationUrl,
   onNext,
 }) => {
+  const trackEvent = useTrackEvent()
+
   const handleClick = () => {
     trackEvent({
       name: EXTERNAL_LINK_CLICKED,

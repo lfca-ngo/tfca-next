@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { useRouter } from 'next/router'
 
 import {
   getCookie,
@@ -27,7 +28,9 @@ const getCleanPathName = () => {
 }
 
 export const trackEvent = ({
+  actionCollectionSlug,
   collection = process.env.NEXT_PUBLIC_GRAPH_JSON_EVENTS_COLLECTION,
+  locale,
   name,
   values = {},
 }) => {
@@ -38,8 +41,10 @@ export const trackEvent = ({
   const userId = uidCookie || getWindowUid()
 
   const event = {
+    actionCollectionSlug,
     consent,
     Event: name,
+    locale,
     path: getCleanPathName(),
     User_ID: userId,
     ...values,
@@ -58,6 +63,20 @@ export const trackEvent = ({
     method: 'POST',
     url: `${process.env.NEXT_PUBLIC_GRAPH_JSON_URL}/log`,
   })
+}
+
+export const useTrackEvent = () => {
+  const { locale, query } = useRouter()
+
+  return ({ collection, name, values }) => {
+    trackEvent({
+      actionCollectionSlug: query.actionCollectionSlug,
+      collection,
+      locale,
+      name,
+      values,
+    })
+  }
 }
 
 export const fetchStats = () => {

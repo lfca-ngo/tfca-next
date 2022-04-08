@@ -4,7 +4,7 @@ import React, { useEffect } from 'react'
 
 import {
   SWITCH_ENERGY_SUCCESS,
-  trackEvent,
+  useTrackEvent,
 } from '../../../../services/analytics'
 import { useSwitchOrder } from '../../../../services/switchforclimate'
 import { text } from '../../../../utils/Text'
@@ -31,6 +31,7 @@ export const FormSwitch = ({
     reset,
   } = useSwitchOrder()
   const [form] = Form.useForm()
+  const trackEvent = useTrackEvent()
 
   const onFinish = async (props) => {
     // Reset potentially set errors
@@ -136,7 +137,7 @@ export const FormSwitch = ({
         },
       })
     }
-  }, [data, goTo, nextKey, id])
+  }, [data, goTo, id, nextKey, trackEvent])
 
   return (
     <div className="step">
