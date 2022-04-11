@@ -3,13 +3,14 @@ import classNames from 'classnames'
 import React from 'react'
 
 import { usePoliticians } from '../../../services/politicians'
-import { LIST_GRIDS } from '../../../utils'
-import { text } from '../../../utils/Text'
-import { CardView } from '../../Elements/Cards'
-import { FetchError } from '../../Elements/FetchError'
-import { spinnerProps } from '../../Elements/LoadingSpinner'
-import Category from '../helpers/Category'
-import { StepHeader } from '../helpers/StepHeader'
+import { LIST_GRIDS, textBlockToString } from '../../../utils'
+import {
+  CardView,
+  Category,
+  FetchError,
+  spinnerProps,
+  StepHeader,
+} from '../../Elements'
 
 export const Results = ({
   availableFilters,
@@ -43,7 +44,7 @@ export const Results = ({
       <Category
         goBack={prevKey ? () => goTo(prevKey) : undefined}
         icon={icon.url}
-        title={text(blocks['category.title'])}
+        title={textBlockToString(blocks['category.title'])}
       />
 
       <StepHeader
@@ -62,7 +63,7 @@ export const Results = ({
             count={countSelected}
             style={{ background: 'transparent', marginRight: '12px' }}
           />
-          {text(blocks['results.button.primary'])}
+          {textBlockToString(blocks['results.button.primary'])}
         </Button>
       )}
 

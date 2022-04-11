@@ -7,8 +7,7 @@ import Image from 'next/image'
 import React from 'react'
 
 import { useContentBlocks } from '../../hooks'
-import { stringToLowerCase } from '../../utils'
-import { text } from '../../utils/Text'
+import { stringToLowerCase, textBlockToString } from '../../utils'
 
 const { Panel } = Collapse
 
@@ -34,7 +33,8 @@ const ImageGallery = ({ images = [] }) => {
 const ContributionPanelContent = ({ participationPackage }) => {
   const stringAsId = stringToLowerCase(participationPackage)
   const customTitle =
-    text(useContentBlocks(`disclosure.${stringAsId}`)) || participationPackage
+    textBlockToString(useContentBlocks(`disclosure.${stringAsId}`)) ||
+    participationPackage
   return (
     <Panel
       className="actions-container"
@@ -77,14 +77,16 @@ export const Disclosure = ({ data }) => {
       </header>
 
       <section>
-        <h4>{text(useContentBlocks('disclosure.goals.title'))}</h4>
+        <h4>{textBlockToString(useContentBlocks('disclosure.goals.title'))}</h4>
         <div
           className="content-text"
           dangerouslySetInnerHTML={{
             __html: data.company?.campaignGoals,
           }}
         />
-        <h4>{text(useContentBlocks('disclosure.additional.title'))}</h4>
+        <h4>
+          {textBlockToString(useContentBlocks('disclosure.additional.title'))}
+        </h4>
         <div
           className="content-text"
           dangerouslySetInnerHTML={{
@@ -111,8 +113,12 @@ export const Disclosure = ({ data }) => {
       </section>
 
       <section>
-        <h4>{text(useContentBlocks('disclosure.reduction.title'))}</h4>
-        <p>{text(useContentBlocks('disclosure.reduction.text'))}</p>
+        <h4>
+          {textBlockToString(useContentBlocks('disclosure.reduction.title'))}
+        </h4>
+        <p>
+          {textBlockToString(useContentBlocks('disclosure.reduction.text'))}
+        </p>
         <Collapse
           accordion
           className="actions-wrapper"

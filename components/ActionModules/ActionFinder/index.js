@@ -3,7 +3,7 @@ import React, { useMemo } from 'react'
 
 import { useFlow } from '../../../hooks'
 import { getFilterOptions } from '../../../utils'
-import { Success } from '../helpers/Success'
+import { Success } from '../../Success'
 import { Filter } from './Filter'
 import { Results } from './Results'
 

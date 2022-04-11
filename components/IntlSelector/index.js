@@ -2,7 +2,7 @@ require('./styles.less')
 
 import { Form, Popover, Select } from 'antd'
 import { useRouter } from 'next/router'
-import React from 'react'
+import React, { useMemo } from 'react'
 import { isMobile } from 'react-device-detect'
 
 import { useContent } from '../../hooks'
@@ -18,7 +18,7 @@ export const IntlSelector = () => {
 
   const regions = metaData?.regions || []
 
-  const regionsByActionCollectionSlug = React.useMemo(() => {
+  const regionsByActionCollectionSlug = useMemo(() => {
     if (!metaData?.regions) return {}
 
     return metaData.regions.reduce((regions, currRegion) => {

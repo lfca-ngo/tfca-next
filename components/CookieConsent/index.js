@@ -10,12 +10,12 @@ import {
   getCookie,
   getWindowUid,
   setCookie,
+  textBlockToString,
   UID_COOKIE_NAME,
 } from '../../utils'
-import { text } from '../../utils/Text'
 import { ConditionalWrapper, CookieSelector } from './helpers'
 
-const CookieConsent = () => {
+export const CookieConsent = () => {
   const cookieBanner = useContent()?.metaData?.cookieBanner
   // We assume that the first cookie is required and always needs to be accepted
   const requiredCookie = cookieBanner?.levels?.[0]?.key
@@ -80,7 +80,9 @@ const CookieConsent = () => {
       >
         <div className="cookie-content">
           <div className="title">{cookieBanner?.title}</div>
-          <div className="description">{text(cookieBanner?.body)}</div>
+          <div className="description">
+            {textBlockToString(cookieBanner?.body)}
+          </div>
           <div className="consent">
             <ul>
               {cookieBanner?.levels?.map((level, i) => {
@@ -135,5 +137,3 @@ const CookieConsent = () => {
     </ConditionalWrapper>
   )
 }
-
-export default CookieConsent

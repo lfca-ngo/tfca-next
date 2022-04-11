@@ -1,9 +1,8 @@
 import { Button } from 'antd'
 import React from 'react'
 
-import { Text, text } from '../../../utils/Text'
-import { GameProgress } from '../../Elements/GameProgress'
-import Category from '../helpers/Category'
+import { textBlockToString } from '../../../utils'
+import { Category, GameProgress, Text } from '../../Elements'
 
 export const Answer = ({
   activeQuestion,
@@ -30,12 +29,12 @@ export const Answer = ({
         }
         goBack={prevKey ? () => goTo(prevKey) : undefined}
         icon={icon.url}
-        title={text(blocks['category.title'])}
+        title={textBlockToString(blocks['category.title'])}
       />
       <Text block={activeQuestion?.result} vars={{ response }} />
 
       <Button block onClick={() => goTo(nextKey)} size="large" type="primary">
-        {text(blocks['answer.button.primary'])}
+        {textBlockToString(blocks['answer.button.primary'])}
       </Button>
     </div>
   )

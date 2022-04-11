@@ -1,11 +1,8 @@
 import { Button, Form } from 'antd'
 import React from 'react'
 
-import { validatePostcode } from '../../../utils'
-import { text } from '../../../utils/Text'
-import { SelectFilter } from '../../Elements/SelectFilter'
-import Category from '../helpers/Category'
-import { StepHeader } from '../helpers/StepHeader'
+import { textBlockToString, validatePostcode } from '../../../utils'
+import { Category, SelectFilter, StepHeader } from '../../Elements'
 
 export const Filter = ({
   filterOption,
@@ -34,7 +31,7 @@ export const Filter = ({
       <Category
         goBack={prevKey ? () => goTo(prevKey) : undefined}
         icon={icon.url}
-        title={text(blocks['category.title'])}
+        title={textBlockToString(blocks['category.title'])}
       />
 
       <StepHeader
@@ -57,7 +54,7 @@ export const Filter = ({
         </Form.Item>
         <Form.Item>
           <Button block htmlType="submit" size="large" type="primary">
-            {text(blocks['filter.button.primary'])}
+            {textBlockToString(blocks['filter.button.primary'])}
           </Button>
         </Form.Item>
       </Form>

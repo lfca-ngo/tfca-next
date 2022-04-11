@@ -9,7 +9,7 @@ import React from 'react'
 
 import { useActiveAction, useIsClient, useIsMobile } from '../../../hooks'
 import { getLogoSrc, scrollToId } from '../../../utils'
-import { Hamburger } from '../../Elements/Hamburger'
+import { Hamburger } from '../../Elements'
 
 const DARK_BLUE = '#081022'
 const LIGHT_WHITE = '#fdfaf5'

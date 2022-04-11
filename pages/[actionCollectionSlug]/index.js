@@ -1,6 +1,6 @@
 import React from 'react'
 
-import ActionModules from '../../components/ActionModules'
+import { ActionModules } from '../../components/ActionModules'
 import { Layout } from '../../components/Layout'
 import { fetchAllStaticData } from '../../services'
 import { fetchActionSlugs } from '../../services/contentful'

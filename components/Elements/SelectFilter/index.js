@@ -1,9 +1,9 @@
 import React from 'react'
 
-import { DropdownSelect } from './DropdownSelect'
-import { Radio } from './Radio'
-import { Select } from './Select'
-import { SelectWithOptionalInput } from './SelectWithOptionalInput'
+import { DropdownSelect } from '../DropdownSelect'
+import { Radio } from '../Radio'
+import { Select } from '../Select'
+import { SelectWithOptionalInput } from '../SelectWithOptionalInput'
 
 export const SelectFilter = ({ filterMode, options, ...props }) => {
   const renderFilterType = () => {

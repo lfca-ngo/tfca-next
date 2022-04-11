@@ -4,7 +4,7 @@ import classNames from 'classnames'
 import Head from 'next/head'
 import React, { Fragment } from 'react'
 
-import CookieConsent from '../../CookieConsent'
+import { CookieConsent } from '../../CookieConsent'
 
 export const Template = ({ children, className }) => {
   return (

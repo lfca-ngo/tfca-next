@@ -2,11 +2,8 @@ import { Button, Form } from 'antd'
 import React from 'react'
 
 import { useContentBlocks } from '../../../hooks'
-import { SINGLE } from '../../../utils'
-import { text } from '../../../utils/Text'
-import { SelectFilter } from '../../Elements/SelectFilter'
-import Category from '../helpers/Category'
-import { StepHeader } from '../helpers/StepHeader'
+import { SINGLE, textBlockToString } from '../../../utils'
+import { Category, SelectFilter, StepHeader } from '../../Elements'
 
 export const Filter = ({
   filterElement,
@@ -18,8 +15,10 @@ export const Filter = ({
   store,
 }) => {
   const isSingleMode = filterElement?.filterMode.indexOf(SINGLE) > -1
-  const labelSingleMode = text(useContentBlocks('label.singlemode'))
-  const labelMultiMode = text(useContentBlocks('label.multimode'))
+  const labelSingleMode = textBlockToString(
+    useContentBlocks('label.singlemode')
+  )
+  const labelMultiMode = textBlockToString(useContentBlocks('label.multimode'))
   const filterOption = filterElement || {}
 
   const handleNext = (v) => {
@@ -33,7 +32,7 @@ export const Filter = ({
       <Category
         goBack={prevKey ? () => goTo(prevKey) : undefined}
         icon={icon.url}
-        title={text(blocks['category.title'])}
+        title={textBlockToString(blocks['category.title'])}
       />
 
       <StepHeader
@@ -54,7 +53,7 @@ export const Filter = ({
         </Form.Item>
         <Form.Item>
           <Button block htmlType="submit" size="large" type="primary">
-            {text(blocks['filter.button.primary'])}
+            {textBlockToString(blocks['filter.button.primary'])}
           </Button>
         </Form.Item>
       </Form>
