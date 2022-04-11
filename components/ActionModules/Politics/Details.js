@@ -2,11 +2,13 @@ import { Carousel } from 'antd'
 import React, { useRef } from 'react'
 
 import { text } from '../../../utils/Text'
-import { ArrowButton } from '../../Elements/ArrowButton'
-import { CardView } from '../../Elements/Cards'
-import { Category } from '../../Elements/Category'
-import { DetailView } from '../../Elements/DetailViews'
-import { StepHeader } from '../../Elements/StepHeader'
+import {
+  ArrowButton,
+  CardView,
+  Category,
+  DetailView,
+  StepHeader,
+} from '../../Elements'
 
 export const Details = ({
   availableFilters,

@@ -2,9 +2,7 @@ import { Button } from 'antd'
 import React from 'react'
 
 import { text } from '../../../utils/Text'
-import { Category } from '../../Elements/Category'
-import { GameProgress } from '../../Elements/GameProgress'
-import { StepHeader } from '../../Elements/StepHeader'
+import { Category, GameProgress, StepHeader } from '../../Elements'
 
 export const Intro = ({
   quizLength,

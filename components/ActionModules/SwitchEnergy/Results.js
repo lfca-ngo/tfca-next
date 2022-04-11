@@ -8,13 +8,15 @@ import {
   useSwitchRates,
 } from '../../../services/switchforclimate'
 import { text } from '../../../utils/Text'
-import { CardView } from '../../Elements/Cards'
-import { Category } from '../../Elements/Category'
-import { CheckList } from '../../Elements/CheckList'
-import { DetailView } from '../../Elements/DetailViews'
-import { FetchError } from '../../Elements/FetchError'
-import { spinnerProps } from '../../Elements/LoadingSpinner'
-import { StepHeader } from '../../Elements/StepHeader'
+import {
+  CardView,
+  Category,
+  CheckList,
+  DetailView,
+  FetchError,
+  spinnerProps,
+  StepHeader,
+} from '../../Elements'
 import { EnergyForm } from './Calculate'
 
 const { Option } = Select

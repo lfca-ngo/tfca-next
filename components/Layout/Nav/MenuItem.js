@@ -3,8 +3,7 @@ import Link from 'next/link'
 import React, { useState } from 'react'
 
 import { TOGGLE_Q_AND_A } from '../../../utils'
-import { MenuSection } from '../../Elements/MenuSection'
-import { QuestionAnswer } from '../../Elements/QuestionAnswer'
+import { MenuSection, QuestionAnswer } from '../../Elements'
 
 export const MenuItem = ({ link }) => {
   const [qaVisible, setQaVisible] = useState(false)

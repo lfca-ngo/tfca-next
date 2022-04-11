@@ -4,10 +4,12 @@ import React, { useMemo, useState } from 'react'
 import { useContentBlocks } from '../../../hooks'
 import { checkAnswers, SINGLE, transformOption } from '../../../utils'
 import { text } from '../../../utils/Text'
-import { Category } from '../../Elements/Category'
-import { GameProgress } from '../../Elements/GameProgress'
-import { SelectFilter } from '../../Elements/SelectFilter'
-import { StepHeader } from '../../Elements/StepHeader'
+import {
+  Category,
+  GameProgress,
+  SelectFilter,
+  StepHeader,
+} from '../../Elements'
 
 export const Question = ({
   activeQuestion,

@@ -7,10 +7,12 @@ import React, { useState } from 'react'
 import { useContentNavs, useCustomization } from '../../../hooks'
 import { scrollToId } from '../../../utils'
 import { Disclosure } from '../../Disclosure'
-import { ChallengeStatus } from '../../Elements/ChallengeStatus'
-import { Hero } from '../../Elements/Hero'
-import { MenuSection } from '../../Elements/MenuSection'
-import { QuestionAnswer } from '../../Elements/QuestionAnswer'
+import {
+  ChallengeStatus,
+  Hero,
+  MenuSection,
+  QuestionAnswer,
+} from '../../Elements'
 import { ErrorBoundary } from '../../ErrorBoundary'
 import { IntlSelector } from '../../IntlSelector'
 import { ActionsNav } from '../ActionsNav'

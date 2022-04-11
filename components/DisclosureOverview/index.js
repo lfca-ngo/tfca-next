@@ -5,7 +5,7 @@ import Image from 'next/image'
 import React, { useState } from 'react'
 
 import { Disclosure } from '../Disclosure'
-import { CheckList } from '../Elements/CheckList'
+import { CheckList } from '../Elements'
 
 const { Search } = Input
 const { TabPane } = Tabs

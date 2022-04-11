@@ -2,8 +2,7 @@ import { Button, Col, Row } from 'antd'
 import React from 'react'
 
 import { Text, text } from '../../../utils/Text'
-import { Category } from '../../Elements/Category'
-import { StepHeader } from '../../Elements/StepHeader'
+import { Category, StepHeader } from '../../Elements'
 
 export const Intro = ({ goTo, module: { blocks = {}, icon = {} } }) => {
   return (

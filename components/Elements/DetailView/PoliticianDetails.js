@@ -7,8 +7,8 @@ import React, { useEffect } from 'react'
 import { getMailToLink } from '../../../utils'
 import { text as replaceVars } from '../../../utils/Text'
 import { CopyTextArea } from '../CopyTextArea'
+import { DropdownSelect } from '../DropdownSelect'
 import { ScrollableFilters } from '../ScrollableFilters'
-import { DropdownSelect } from '../SelectFilter/DropdownSelect'
 
 export const PoliticianDetails = ({
   activeMessageIndex,

@@ -3,7 +3,7 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { INLINES } from '@contentful/rich-text-types'
 import React from 'react'
 
-import { TrackingOptOutButton } from '../components/Elements/TrackingOptOutButton'
+import { TrackingOptOutButton } from '../components/Elements'
 import { TEXT_RENDERER, trackEvent } from '../services/analytics'
 
 const renderInlineNavigationElement = (entry) => {

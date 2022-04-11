@@ -1,7 +1,7 @@
 import { Input } from 'antd'
 import React from 'react'
 
-import { Select } from '../../Elements/SelectFilter/Select'
+import { Select } from '../../Elements'
 
 export const SelectPostcodeEnergy = ({
   items = [],

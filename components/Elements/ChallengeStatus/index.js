@@ -8,7 +8,7 @@ import React, { useState } from 'react'
 
 import { useCustomization } from '../../../hooks'
 import { getCookie, getWindowUid, UID_COOKIE_NAME } from '../../../utils'
-import { LoadingSpinner } from '../../Elements/LoadingSpinner'
+import { LoadingSpinner } from '../../Elements'
 import { Share } from '../../Share'
 
 export const ChallengeStatus = ({ className, openGraphInfo }) => {

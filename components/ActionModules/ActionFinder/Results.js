@@ -4,12 +4,14 @@ import React, { useState } from 'react'
 
 import { LIST_GRIDS } from '../../../utils'
 import { text } from '../../../utils/Text'
-import { CardView } from '../../Elements/Cards'
-import { Category } from '../../Elements/Category'
-import { DetailView } from '../../Elements/DetailViews'
-import { DetailHeader } from '../../Elements/DetailViews/DetailHeader'
-import { ScrollableFilters } from '../../Elements/ScrollableFilters'
-import { StepHeader } from '../../Elements/StepHeader'
+import {
+  CardView,
+  Category,
+  DetailHeader,
+  DetailView,
+  ScrollableFilters,
+  StepHeader,
+} from '../../Elements'
 
 export const Results = ({
   goTo,

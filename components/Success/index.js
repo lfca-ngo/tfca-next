@@ -18,9 +18,7 @@ import {
 import { ACTION_COMPLETED } from '../../services/analytics'
 import { getCookie, getWindowUid, UID_COOKIE_NAME } from '../../utils'
 import { text } from '../../utils/Text'
-import { Category } from '../Elements/Category'
-import { CheckList } from '../Elements/CheckList'
-import { LoadingSpinner } from '../Elements/LoadingSpinner'
+import { Category, CheckList, LoadingSpinner } from '../Elements'
 import { Share } from '../Share'
 
 const MAX_INVITES = 3

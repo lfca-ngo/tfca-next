@@ -5,11 +5,13 @@ import React from 'react'
 import { usePoliticians } from '../../../services/politicians'
 import { LIST_GRIDS } from '../../../utils'
 import { text } from '../../../utils/Text'
-import { CardView } from '../../Elements/Cards'
-import { Category } from '../../Elements/Category'
-import { FetchError } from '../../Elements/FetchError'
-import { spinnerProps } from '../../Elements/LoadingSpinner'
-import { StepHeader } from '../../Elements/StepHeader'
+import {
+  CardView,
+  Category,
+  FetchError,
+  spinnerProps,
+  StepHeader,
+} from '../../Elements'
 
 export const Results = ({
   availableFilters,

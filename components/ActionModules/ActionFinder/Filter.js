@@ -4,9 +4,7 @@ import React from 'react'
 import { useContentBlocks } from '../../../hooks'
 import { SINGLE } from '../../../utils'
 import { text } from '../../../utils/Text'
-import { Category } from '../../Elements/Category'
-import { SelectFilter } from '../../Elements/SelectFilter'
-import { StepHeader } from '../../Elements/StepHeader'
+import { Category, SelectFilter, StepHeader } from '../../Elements'
 
 export const Filter = ({
   filterElement,
