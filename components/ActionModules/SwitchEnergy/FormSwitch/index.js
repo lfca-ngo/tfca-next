@@ -2,10 +2,8 @@ import { LockOutlined } from '@ant-design/icons'
 import { Button, Divider, Form } from 'antd'
 import React, { useEffect } from 'react'
 
-import {
-  SWITCH_ENERGY_SUCCESS,
-  trackEvent,
-} from '../../../../services/analytics'
+import { useAnalytics } from '../../../../hooks'
+import { SWITCH_ENERGY_SUCCESS } from '../../../../services/analytics'
 import { useSwitchOrder } from '../../../../services/switchforclimate'
 import { text } from '../../../../utils/Text'
 import { CheckList } from '../../../Elements/CheckList'
@@ -31,6 +29,7 @@ export const FormSwitch = ({
     reset,
   } = useSwitchOrder()
   const [form] = Form.useForm()
+  const { trackEvent } = useAnalytics()
 
   const onFinish = async (props) => {
     // Reset potentially set errors
@@ -136,7 +135,7 @@ export const FormSwitch = ({
         },
       })
     }
-  }, [data, goTo, nextKey, id])
+  }, [data, goTo, id, nextKey, trackEvent])
 
   return (
     <div className="step">
