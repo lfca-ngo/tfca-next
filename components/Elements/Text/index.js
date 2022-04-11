@@ -5,6 +5,7 @@ import React from 'react'
 import { TEXT_RENDERER, trackEvent } from '../../../services/analytics'
 import { replaceTextVars } from '../../../utils/text'
 import { HeroWithImage } from '../HeroWithImage'
+import { HeroWithStats } from '../HeroWithStats'
 import { ImageText } from '../ImageText'
 import { TrackingOptOutButton } from '../TrackingOptOutButton'
 import { VideoText } from '../VideoText'
@@ -13,6 +14,9 @@ const renderBlockSection = (entry) => {
   switch (entry.layout) {
     case 'hero-with-image': {
       return <HeroWithImage {...entry} />
+    }
+    case 'hero-with-stats': {
+      return <HeroWithStats {...entry} />
     }
     case 'image-text': {
       return <ImageText {...entry} variant={entry.layout} />

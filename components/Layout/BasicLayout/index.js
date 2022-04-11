@@ -8,13 +8,11 @@ import { ErrorBoundary } from '../../ErrorBoundary'
 import { Footer } from '../Footer'
 import { Nav } from '../Nav'
 import { Template } from '../Template'
-import { TopBar } from '../TopBar'
 
 // simple pages like imprint, privacy, etc.
 const DefaultLayout = ({ children, mainNav, style, subtitle, title }) => {
   return (
-    <Template className="default-layout">
-      <TopBar />
+    <Template className="default-layout" withTopbar>
       <Nav className={style} menuItems={mainNav} />
       <DefaultHero className={style} subtitle={subtitle} title={title} />
       <main className="container">
@@ -28,9 +26,12 @@ const DefaultLayout = ({ children, mainNav, style, subtitle, title }) => {
 // pages with custom sections like about campaign etc.
 const LandingLayout = ({ children, mainNav, navigationStyle, style }) => {
   return (
-    <Template className="landing-layout">
-      <TopBar />
-      <Nav className={style} menuItems={mainNav} mode={navigationStyle} />
+    <Template className="landing-layout" withTopbar>
+      <Nav
+        className={`${style || ''} absolute`}
+        menuItems={mainNav}
+        mode={navigationStyle}
+      />
       <main>
         <ErrorBoundary>{children}</ErrorBoundary>
       </main>

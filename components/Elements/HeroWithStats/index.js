@@ -1,7 +1,7 @@
 require('./styles.less')
 
 import { Col, Row, Space } from 'antd'
-import Image from 'next/image'
+import classNames from 'classnames'
 import React from 'react'
 
 import { getCustomStyles } from '../../../utils'
@@ -9,17 +9,17 @@ import { textBlockToString } from '../../../utils/text'
 import { CallToAction } from '../CallToAction'
 import { SuperText } from '../SuperText'
 
-export const HeroWithImage = ({
+export const HeroWithStats = ({
   actions,
-  assets,
   backgroundImage,
   backgroundPosition,
   backgroundSize,
   body,
+  elements,
+  style,
   superText,
   title,
 }) => {
-  const heroImageUrl = assets?.[0]?.fields?.file?.url
   const customStyles = getCustomStyles(
     backgroundImage,
     backgroundPosition,
@@ -27,9 +27,12 @@ export const HeroWithImage = ({
   )
 
   return (
-    <section className="hero-with-image" style={customStyles}>
+    <section
+      className={classNames('section-block hero-with-stats', style)}
+      style={customStyles}
+    >
       <Row className="container-max">
-        <Col md={16} xs={24}>
+        <Col md={24} xs={24}>
           <div className="content">
             {superText && <SuperText text={superText} />}
             <h1>{title}</h1>
@@ -44,17 +47,8 @@ export const HeroWithImage = ({
             </div>
           </div>
         </Col>
-        <Col md={8} xs={24}>
-          <div className="img-container">
-            <div className="img-wrapper">
-              <Image
-                layout="fill"
-                objectFit="contain"
-                objectPosition={'center'}
-                src={`https://${heroImageUrl}`}
-              />
-            </div>
-          </div>
+        <Col md={24} xs={24}>
+          Stats
         </Col>
       </Row>
     </section>

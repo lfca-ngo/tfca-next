@@ -59,7 +59,7 @@ const CtaButton = ({
       className={`cta-button`}
       ghost={ghost}
       icon={
-        icon ? (
+        icon && icon?.url ? (
           <Image
             height={24}
             layout="fixed"

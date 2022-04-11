@@ -18,7 +18,7 @@ const Content = ({ actions, body, superText, title }) => {
 
       <div className="actions">
         <Space>
-          {actions.map((action, i) => (
+          {actions?.map((action, i) => (
             <CallToAction key={`action-${i}`} {...action.fields} />
           ))}
         </Space>

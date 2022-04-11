@@ -20,7 +20,6 @@ import { Footer } from '../Footer'
 import { Nav } from '../Nav'
 import { MainMenu } from '../Nav'
 import { Template } from '../Template'
-import { TopBar } from '../TopBar'
 
 const PopoverContent = ({ name, onClose }) => {
   return (
@@ -95,9 +94,7 @@ export const ActionsLayout = ({ children, company, nav, openGraphInfo }) => {
   }
 
   return (
-    <Template>
-      <TopBar />
-
+    <Template withTopbar>
       <ActionsNav
         actions={nav}
         collapsed={collapsed}
