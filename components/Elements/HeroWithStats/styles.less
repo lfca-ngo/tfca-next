@@ -3,8 +3,41 @@
 @import (reference) '../../../styles/mixins.less';
 
 section.hero-with-stats {
+  @stats-bar-height: 110px;
+
+  padding-bottom: calc(@stats-bar-height / 2 + @default-section-padding);
   text-align: center;
+  position: relative;
+
   h1 {
     .h1-hero-page();
+    margin-bottom: 30px;
+  }
+  .stats-container {
+    position: absolute;
+    bottom: calc(-@stats-bar-height / 2);
+    width: 100%;
+    padding: 0 100px;
+  }
+  .stats-wrapper {
+    display: flex;
+    background: @white;
+    align-items: center;
+    justify-content: space-between;
+    height: @stats-bar-height;
+    box-shadow: @box-shadow-base;
+    .stat-wrapper {
+      border-right: 1px solid @medium-grey;
+      flex: 1;
+
+      &:last-child {
+        border-right: none;
+      }
+
+      .ant-statistic-content {
+        font-size: 32px;
+        .font-semi();
+      }
+    }
   }
 }

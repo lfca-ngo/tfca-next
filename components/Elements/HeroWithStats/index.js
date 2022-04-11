@@ -1,6 +1,6 @@
 require('./styles.less')
 
-import { Col, Row, Space } from 'antd'
+import { Col, Row, Space, Statistic } from 'antd'
 import classNames from 'classnames'
 import React from 'react'
 
@@ -32,7 +32,7 @@ export const HeroWithStats = ({
       style={customStyles}
     >
       <Row className="container-max">
-        <Col md={24} xs={24}>
+        <Col md={{ offset: 3, span: 18 }} xs={24}>
           <div className="content">
             {superText && <SuperText text={superText} />}
             <h1>{title}</h1>
@@ -47,10 +47,23 @@ export const HeroWithStats = ({
             </div>
           </div>
         </Col>
-        <Col md={24} xs={24}>
-          Stats
-        </Col>
       </Row>
+      <div className="stats-container">
+        <div className="stats-wrapper">
+          {elements.map((element, i) => {
+            const stat = element?.fields
+            return (
+              <div className="stat-wrapper" key={`stat-${i}`}>
+                <Statistic
+                  suffix={stat.suffix}
+                  title={stat.label}
+                  value={stat.value}
+                />
+              </div>
+            )
+          })}
+        </div>
+      </div>
     </section>
   )
 }
