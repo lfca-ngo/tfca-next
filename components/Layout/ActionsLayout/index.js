@@ -2,7 +2,7 @@ require('./styles.less')
 
 import { CloseOutlined } from '@ant-design/icons'
 import { Button, Drawer, Popover } from 'antd'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { useContentNavs, useCustomization } from '../../../hooks'
 import { scrollToId } from '../../../utils'
@@ -40,7 +40,13 @@ const PopoverContent = ({ name, onClose }) => {
 
 const CompanyMenuItem = ({ company }) => {
   const [isOpen, setIsOpen] = useState(false)
-  const [popoverOpen, setPopoverOpen] = useState(true)
+  const [popoverOpen, setPopoverOpen] = useState(false)
+
+  // We need to set this to open with a useEffect in orde to keep the server and client HTML in sync
+  // See: https://github.com/vercel/next.js/discussions/17443#discussioncomment-87097
+  useEffect(() => {
+    setPopoverOpen(true)
+  }, [])
 
   return (
     <li>
