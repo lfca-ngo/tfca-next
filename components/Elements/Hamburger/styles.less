@@ -4,6 +4,15 @@
     display: none;
   }
 
+  &.dark {
+    .hamburger {
+      .hamburger-inner,
+      .hamburger-inner::after {
+        background-color: @black;
+      }
+    }
+  }
+
   &.is-floating {
     position: absolute;
     z-index: 100;

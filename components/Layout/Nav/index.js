@@ -29,6 +29,7 @@ export const Nav = ({ addOnItems, className, menuItems, mode }) => {
         />
         <Hamburger
           content={<MainMenu addOnItems={addOnItems} items={menuItems} />}
+          mode={mode}
         />
       </div>
     </nav>

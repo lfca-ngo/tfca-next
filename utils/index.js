@@ -148,3 +148,18 @@ export const getMailToLink = ({ body, cc, subject, to }) => {
   }
   return url
 }
+
+export const getCustomStyles = (
+  backgroundImage,
+  backgroundPosition = 'center',
+  backgroundSize = 'contain'
+) => {
+  const imageUrl = backgroundImage?.fields?.file?.url
+  if (!imageUrl) return {}
+  return {
+    backgroundImage: `url(${imageUrl})`,
+    backgroundPosition: backgroundPosition,
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: backgroundSize,
+  }
+}

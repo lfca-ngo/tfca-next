@@ -4,7 +4,7 @@ import { Drawer } from 'antd'
 import classNames from 'classnames'
 import React, { useState } from 'react'
 
-export const Hamburger = ({ content, isFloating, title }) => {
+export const Hamburger = ({ content, isFloating, mode, title }) => {
   const [open, setOpen] = useState(false)
 
   const toggleMenu = () => {
@@ -13,7 +13,7 @@ export const Hamburger = ({ content, isFloating, title }) => {
 
   return (
     <div
-      className={classNames('hamburger-wrapper', {
+      className={classNames('hamburger-wrapper', mode, {
         'is-floating': isFloating,
       })}
     >
