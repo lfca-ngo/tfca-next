@@ -28,7 +28,7 @@ const LandingLayout = ({ children, mainNav, navigationStyle, style }) => {
   return (
     <Template className="default-layout">
       <Nav className={style} menuItems={mainNav} mode={navigationStyle} />
-      <main className="container">
+      <main>
         <ErrorBoundary>{children}</ErrorBoundary>
       </main>
       <Footer />

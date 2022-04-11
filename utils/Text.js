@@ -3,13 +3,14 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { BLOCKS, INLINES } from '@contentful/rich-text-types'
 import React from 'react'
 
+import { HeroWithImage } from '../components/Elements/HeroWithImage'
 import { TrackingOptOutButton } from '../components/Elements/TrackingOptOutButton'
 import { TEXT_RENDERER, trackEvent } from '../services/analytics'
 
 const renderBlockSection = (entry) => {
   switch (entry.layout) {
     case 'hero-with-image': {
-      return 'hero'
+      return <HeroWithImage {...entry} />
     }
     default: {
       return null
