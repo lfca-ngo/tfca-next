@@ -1,10 +1,21 @@
 import { documentToPlainTextString } from '@contentful/rich-text-plain-text-renderer'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
-import { INLINES } from '@contentful/rich-text-types'
+import { BLOCKS, INLINES } from '@contentful/rich-text-types'
 import React from 'react'
 
 import { TrackingOptOutButton } from '../components/Elements/TrackingOptOutButton'
 import { TEXT_RENDERER, trackEvent } from '../services/analytics'
+
+const renderBlockSection = (entry) => {
+  switch (entry.layout) {
+    case 'hero-with-image': {
+      return 'hero'
+    }
+    default: {
+      return null
+    }
+  }
+}
 
 const renderInlineNavigationElement = (entry) => {
   switch (entry.action) {
@@ -33,6 +44,17 @@ const createRenderOptions = (vars) => ({
           {children}
         </a>
       )
+    },
+    [BLOCKS.EMBEDDED_ENTRY]: (node) => {
+      const entry = node.data?.target
+      const entryType = entry?.sys?.contentType?.sys?.id
+      switch (entryType) {
+        case 'section':
+          return renderBlockSection(entry?.fields)
+
+        default:
+          return null
+      }
     },
     [INLINES.EMBEDDED_ENTRY]: (node) => {
       const entry = node.data?.target

@@ -2,13 +2,33 @@
 @import (reference) '../../../styles/fonts.less';
 @import (reference) '../../../styles/mixins.less';
 
-.link-font-style() {
-  .font-regular(@white);
+.link-font-style(@color) {
+  .font-regular(@color);
   font-size: @font-size-sm;
 }
 
 nav.nav {
   .apply-color-scheme();
+
+  &.light {
+    background-color: transparent;
+    background-image: none;
+  }
+  &.dark {
+    background-color: transparent;
+    background-image: none;
+    ul {
+      li {
+        .link-font-style(@black);
+        a {
+          .link-font-style(@black);
+        }
+        .ant-btn-link {
+          .link-font-style(@black);
+        }
+      }
+    }
+  }
 
   .nav-container {
     display: flex;
@@ -35,12 +55,12 @@ nav.nav {
       padding: 20px 30px;
       align-items: center;
       display: flex;
-      .link-font-style();
+      .link-font-style(@white);
       a {
-        .link-font-style();
+        .link-font-style(@white);
       }
       .ant-btn-link {
-        .link-font-style();
+        .link-font-style(@white);
       }
     }
   }
