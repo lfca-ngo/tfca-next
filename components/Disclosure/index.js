@@ -6,6 +6,9 @@ import { Image as GalleryImage } from 'antd'
 import Image from 'next/image'
 import React from 'react'
 
+import { useContentBlocks } from '../../hooks'
+import { text } from '../../utils/Text'
+
 const { Panel } = Collapse
 
 const ImageGallery = ({ images = [] }) => {
@@ -53,10 +56,21 @@ export const Disclosure = ({ data }) => {
       </header>
 
       <section>
-        <h4>Climate Goals</h4>
-        <p>{data.company.campaignGoals}</p>
-        <h4>Campaign Contributions</h4>
-        <p>{data.company?.campaignContribution}</p>
+        <h4>{text(useContentBlocks('disclosure.goals.title'))}</h4>
+        <div
+          className="content-text"
+          dangerouslySetInnerHTML={{
+            __html: data.company?.campaignGoals,
+          }}
+        />
+        <h4>{text(useContentBlocks('disclosure.additional.title'))}</h4>
+        <div
+          className="content-text"
+          dangerouslySetInnerHTML={{
+            __html: data.company?.campaignContribution,
+          }}
+        />
+
         <ImageGallery images={data.company?.campaignFiles} />
         <Collapse
           accordion
@@ -99,12 +113,8 @@ export const Disclosure = ({ data }) => {
       </section>
 
       <section>
-        <h4>Reduction Actions</h4>
-        <p>
-          The requirements mentioned for each of the actions are a general
-          summary from all the campaign supporters, the detailed requirements
-          may vary depending on the companies.
-        </p>
+        <h4>{text(useContentBlocks('disclosure.reduction.title'))}</h4>
+        <p>{text(useContentBlocks('disclosure.reduction.text'))}</p>
         <Collapse
           accordion
           className="actions-wrapper"
