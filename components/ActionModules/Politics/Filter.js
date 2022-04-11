@@ -3,9 +3,9 @@ import React from 'react'
 
 import { validatePostcode } from '../../../utils'
 import { text } from '../../../utils/Text'
+import { Category } from '../../Elements/Category'
 import { SelectFilter } from '../../Elements/SelectFilter'
-import Category from '../helpers/Category'
-import { StepHeader } from '../helpers/StepHeader'
+import { StepHeader } from '../../Elements/StepHeader'
 
 export const Filter = ({
   filterOption,

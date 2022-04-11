@@ -14,14 +14,14 @@ import {
   useConfetti,
   useContentBlocks,
   useContentLists,
-} from '../../../hooks'
-import { ACTION_COMPLETED } from '../../../services/analytics'
-import { getCookie, getWindowUid, UID_COOKIE_NAME } from '../../../utils'
-import { text } from '../../../utils/Text'
-import { CheckList } from '../../Elements/CheckList'
-import { LoadingSpinner } from '../../Elements/LoadingSpinner'
-import Category from './Category'
-import { Share } from './Share'
+} from '../../hooks'
+import { ACTION_COMPLETED } from '../../services/analytics'
+import { getCookie, getWindowUid, UID_COOKIE_NAME } from '../../utils'
+import { text } from '../../utils/Text'
+import { Category } from '../Elements/Category'
+import { CheckList } from '../Elements/CheckList'
+import { LoadingSpinner } from '../Elements/LoadingSpinner'
+import { Share } from '../Share'
 
 const MAX_INVITES = 3
 

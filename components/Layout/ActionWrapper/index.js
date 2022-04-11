@@ -6,7 +6,7 @@ import { useInView } from 'react-intersection-observer'
 
 import { useActiveAction } from '../../../hooks'
 import { appear } from '../../../utils/animations'
-import ActionStats from './ActionStats'
+import { ActionStats } from '../../Elements/ActionStats'
 
 export const ActionWrapper = (props) => {
   const { inView, ref } = useInView({ threshold: 0.5 })

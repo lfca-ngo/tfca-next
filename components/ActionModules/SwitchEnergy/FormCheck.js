@@ -7,10 +7,10 @@ import {
   useSearchRobinWoodProvider,
 } from '../../../services/switchforclimate'
 import { text } from '../../../utils/Text'
+import { Category } from '../../Elements/Category'
 import { FetchError } from '../../Elements/FetchError'
 import { LoadingSpinner } from '../../Elements/LoadingSpinner'
-import Category from '../helpers/Category'
-import { StepHeader } from '../helpers/StepHeader'
+import { StepHeader } from '../../Elements/StepHeader'
 
 const { Option } = Select
 

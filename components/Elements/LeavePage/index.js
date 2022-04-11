@@ -1,4 +1,4 @@
-require('./leavePage.less')
+require('./styles .less')
 
 import {
   ExclamationCircleOutlined,

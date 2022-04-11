@@ -1,4 +1,4 @@
-require('./category.less')
+require('./styles.less')
 
 import { ArrowLeftOutlined } from '@ant-design/icons'
 import { Button } from 'antd'
@@ -8,7 +8,7 @@ import React from 'react'
 import { useContentBlocks } from '../../../hooks'
 import { text } from '../../../utils/Text'
 
-const Category = ({ addOn, goBack, icon, title }) => {
+export const Category = ({ addOn, goBack, icon, title }) => {
   const backString = useContentBlocks('nav.back')
 
   return (
@@ -31,5 +31,3 @@ const Category = ({ addOn, goBack, icon, title }) => {
     </div>
   )
 }
-
-export default Category

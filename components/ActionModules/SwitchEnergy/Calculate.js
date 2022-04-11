@@ -3,9 +3,9 @@ import React from 'react'
 
 import { validatePostcode } from '../../../utils'
 import { text } from '../../../utils/Text'
+import { Category } from '../../Elements/Category'
 import { CheckList } from '../../Elements/CheckList'
-import Category from '../helpers/Category'
-import { StepHeader } from '../helpers/StepHeader'
+import { StepHeader } from '../../Elements/StepHeader'
 import { SelectPostcodeEnergy } from './SelectPostcodeEnergy'
 
 export const EnergyForm = ({

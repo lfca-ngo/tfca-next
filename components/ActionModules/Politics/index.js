@@ -4,7 +4,7 @@ import React from 'react'
 
 import { useFlow } from '../../../hooks'
 import { text } from '../../../utils/Text'
-import { Success } from '../helpers/Success'
+import { Success } from '../../Success'
 import { Details } from './Details'
 import { Filter } from './Filter'
 import { Results } from './Results'

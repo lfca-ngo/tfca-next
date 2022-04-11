@@ -6,10 +6,10 @@ import { usePoliticians } from '../../../services/politicians'
 import { LIST_GRIDS } from '../../../utils'
 import { text } from '../../../utils/Text'
 import { CardView } from '../../Elements/Cards'
+import { Category } from '../../Elements/Category'
 import { FetchError } from '../../Elements/FetchError'
 import { spinnerProps } from '../../Elements/LoadingSpinner'
-import Category from '../helpers/Category'
-import { StepHeader } from '../helpers/StepHeader'
+import { StepHeader } from '../../Elements/StepHeader'
 
 export const Results = ({
   availableFilters,

@@ -8,8 +8,8 @@ import React, { useState } from 'react'
 
 import { useCustomization } from '../../../hooks'
 import { getCookie, getWindowUid, UID_COOKIE_NAME } from '../../../utils'
-import { Share } from '../../ActionModules/helpers/Share'
 import { LoadingSpinner } from '../../Elements/LoadingSpinner'
+import { Share } from '../../Share'
 
 export const ChallengeStatus = ({ className, openGraphInfo }) => {
   const [open, setOpen] = useState(false)

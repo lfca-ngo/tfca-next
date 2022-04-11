@@ -8,8 +8,8 @@ import React, { useState } from 'react'
 import { useAnalytics } from '../../../hooks'
 import { BEFORE_LEAVE_PAGE } from '../../../services/analytics'
 import { getMailToLink } from '../../../utils'
-import { LeavePage } from '../../ActionModules/helpers/LeavePage'
 import { BasicModal } from '../BasicModal'
+import { LeavePage } from '../LeavePage'
 
 const DEFAULT_RECIPIENT = 'someone@mail.org'
 

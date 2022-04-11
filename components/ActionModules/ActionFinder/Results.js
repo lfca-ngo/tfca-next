@@ -5,11 +5,11 @@ import React, { useState } from 'react'
 import { LIST_GRIDS } from '../../../utils'
 import { text } from '../../../utils/Text'
 import { CardView } from '../../Elements/Cards'
+import { Category } from '../../Elements/Category'
 import { DetailView } from '../../Elements/DetailViews'
 import { DetailHeader } from '../../Elements/DetailViews/DetailHeader'
 import { ScrollableFilters } from '../../Elements/ScrollableFilters'
-import Category from '../helpers/Category'
-import { StepHeader } from '../helpers/StepHeader'
+import { StepHeader } from '../../Elements/StepHeader'
 
 export const Results = ({
   goTo,

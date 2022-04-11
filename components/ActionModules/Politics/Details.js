@@ -4,9 +4,9 @@ import React, { useRef } from 'react'
 import { text } from '../../../utils/Text'
 import { ArrowButton } from '../../Elements/ArrowButton'
 import { CardView } from '../../Elements/Cards'
+import { Category } from '../../Elements/Category'
 import { DetailView } from '../../Elements/DetailViews'
-import Category from '../helpers/Category'
-import { StepHeader } from '../helpers/StepHeader'
+import { StepHeader } from '../../Elements/StepHeader'
 
 export const Details = ({
   availableFilters,

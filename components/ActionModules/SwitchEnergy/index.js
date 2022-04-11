@@ -2,7 +2,7 @@ import { Tabs } from 'antd'
 import React from 'react'
 
 import { useFlow } from '../../../hooks'
-import { Success } from '../helpers/Success'
+import { Success } from '../../Success'
 import { Calculate } from './Calculate'
 import { FormCheck } from './FormCheck'
 import { FormSwitch } from './FormSwitch'

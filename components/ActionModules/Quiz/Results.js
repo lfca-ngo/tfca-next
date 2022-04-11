@@ -3,9 +3,9 @@ import React from 'react'
 
 import { text } from '../../../utils/Text'
 import CallToAction from '../../Elements/CallToAction'
+import { Category } from '../../Elements/Category'
 import { GameProgress } from '../../Elements/GameProgress'
-import Category from '../helpers/Category'
-import { StepHeader } from '../helpers/StepHeader'
+import { StepHeader } from '../../Elements/StepHeader'
 
 export const Results = ({
   quizLength,

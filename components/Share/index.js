@@ -1,4 +1,4 @@
-require('./share.less')
+require('./styles.less')
 
 import Icon from '@ant-design/icons'
 import {
@@ -21,12 +21,12 @@ import {
   WhatsappShareButton,
 } from 'react-share'
 
-import TelegramIcon from '../../../assets/icons/telegram.svg'
-import { useContentBlocks } from '../../../hooks'
-import { namesArrayToString } from '../../../utils'
-import { Text, text } from '../../../utils/Text'
-import { CopyTextArea } from '../../Elements/CopyTextArea'
-import { SuperText } from '../../Elements/SuperText'
+import TelegramIcon from '../../assets/icons/telegram.svg'
+import { useContentBlocks } from '../../hooks'
+import { namesArrayToString } from '../../utils'
+import { Text, text } from '../../utils/Text'
+import { CopyTextArea } from '../Elements/CopyTextArea'
+import { SuperText } from '../Elements/SuperText'
 
 const { TabPane } = Tabs
 

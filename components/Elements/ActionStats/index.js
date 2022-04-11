@@ -1,4 +1,4 @@
-require('./actionStats.less')
+require('./styles.less')
 
 import {
   CoffeeOutlined,
@@ -28,7 +28,7 @@ const Stat = (props) => {
   )
 }
 
-const ActionStats = (props) => {
+export const ActionStats = (props) => {
   return (
     <div className="action-stats">
       <Stat
@@ -73,5 +73,3 @@ const ActionStats = (props) => {
     </div>
   )
 }
-
-export default ActionStats
