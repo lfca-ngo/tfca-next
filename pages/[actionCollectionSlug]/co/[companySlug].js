@@ -66,6 +66,7 @@ export async function getStaticProps({ locale, params }) {
       ...staticData,
       company,
     },
+    revalidate: 3600, // 1h
   }
 }
 
@@ -82,7 +83,7 @@ export async function getStaticPaths() {
   )
 
   return {
-    fallback: false,
+    fallback: 'blocking',
     // We only have company pages for the `int` collection and default locale
     paths: qualifiedCompanies.map(({ company }) => ({
       params: {
