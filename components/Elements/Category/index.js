@@ -6,7 +6,7 @@ import Image from 'next/image'
 import React from 'react'
 
 import { useContentBlocks } from '../../../hooks'
-import { text } from '../../../utils/text'
+import { textBlockToString } from '../../../utils'
 
 export const Category = ({ addOn, goBack, icon, title }) => {
   const backString = useContentBlocks('nav.back')
@@ -16,7 +16,7 @@ export const Category = ({ addOn, goBack, icon, title }) => {
       <div className="content">
         {goBack ? (
           <Button onClick={goBack} type="link">
-            <ArrowLeftOutlined /> {text(backString)}
+            <ArrowLeftOutlined /> {textBlockToString(backString)}
           </Button>
         ) : (
           <>

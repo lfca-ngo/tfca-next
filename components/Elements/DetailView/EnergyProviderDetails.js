@@ -5,7 +5,7 @@ import { Button, Divider, Space } from 'antd'
 import Image from 'next/image'
 import React from 'react'
 
-import { text } from '../../../utils/text'
+import { textBlockToString } from '../../../utils'
 import { CallToAction } from '../CallToAction'
 import { TextSection } from '../Sections'
 
@@ -27,7 +27,9 @@ export const EnergyProviderDetails = ({ actionId, blocks, item, onNext }) => {
               onCountMeIn={onNext}
               shape="round"
               showLeaveModal
-              text={text(blocks['details.button.primary'], { name: item.name })}
+              text={textBlockToString(blocks['details.button.primary'], {
+                name: item.name,
+              })}
               type="primary"
               url={item.referralUrl}
             />
@@ -46,7 +48,7 @@ export const EnergyProviderDetails = ({ actionId, blocks, item, onNext }) => {
 
       <TextSection
         text={item?.description}
-        title={text(blocks['label.description'])}
+        title={textBlockToString(blocks['label.description'])}
       />
     </div>
   )

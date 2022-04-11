@@ -16,8 +16,12 @@ import {
   useContentLists,
 } from '../../hooks'
 import { ACTION_COMPLETED } from '../../services/analytics'
-import { getCookie, getWindowUid, UID_COOKIE_NAME } from '../../utils'
-import { text } from '../../utils/text'
+import {
+  getCookie,
+  getWindowUid,
+  textBlockToString,
+  UID_COOKIE_NAME,
+} from '../../utils'
 import { Category, CheckList, LoadingSpinner } from '../Elements'
 import { Share } from '../Share'
 
@@ -54,14 +58,24 @@ export const Success = ({
     })
   }, [id, trackEvent])
 
-  const buttonPrimary = text(useContentBlocks('sharing.button.primary'))
-  const addInvite = text(useContentBlocks('sharing.button.addinvite'))
-  const errorMaxFriends = text(useContentBlocks('sharing.error.maxfriends'))
-  const yourNameInput = text(useContentBlocks('sharing.input.yourname'))
-  const friendsNameInput = text(useContentBlocks('sharing.input.friendsname'))
-  const socialDescription = text(useContentBlocks('header.body'))
+  const buttonPrimary = textBlockToString(
+    useContentBlocks('sharing.button.primary')
+  )
+  const addInvite = textBlockToString(
+    useContentBlocks('sharing.button.addinvite')
+  )
+  const errorMaxFriends = textBlockToString(
+    useContentBlocks('sharing.error.maxfriends')
+  )
+  const yourNameInput = textBlockToString(
+    useContentBlocks('sharing.input.yourname')
+  )
+  const friendsNameInput = textBlockToString(
+    useContentBlocks('sharing.input.friendsname')
+  )
+  const socialDescription = textBlockToString(useContentBlocks('header.body'))
   const socialTitle = useContentBlocks('header.title.custom')
-  const fallbackName = text(
+  const fallbackName = textBlockToString(
     useContentBlocks('header.title.recipients.fallback')
   )
 
@@ -111,9 +125,9 @@ export const Success = ({
         <Category
           goBack={prevKey ? () => goTo(prevKey) : undefined}
           icon={icon.url}
-          title={text(blocks['category.title'])}
+          title={textBlockToString(blocks['category.title'])}
         />
-        <h2>{text(useContentBlocks('sharing.nominate.title'))}</h2>
+        <h2>{textBlockToString(useContentBlocks('sharing.nominate.title'))}</h2>
 
         <CheckList data={benefits} vars={{ users: otherUsers }} />
 
@@ -250,7 +264,7 @@ export const Success = ({
           names,
           sender,
           socialDescription,
-          socialTitle: text(socialTitle, {
+          socialTitle: textBlockToString(socialTitle, {
             name: names?.length === 1 && names[0] ? names[0] : fallbackName,
           }).replace(/\*/g, ''),
           uid: getCookie(UID_COOKIE_NAME) || getWindowUid(),

@@ -9,7 +9,7 @@ import { Popover, Progress, Tag } from 'antd'
 import React from 'react'
 
 import { useContentBlocks } from '../../../hooks'
-import { text } from '../../../utils/text'
+import { textBlockToString } from '../../../utils'
 
 const STEPS = 5
 
@@ -34,7 +34,7 @@ export const ActionStats = (props) => {
       <Stat
         data={props.otherUsers || 0}
         icon={<UsergroupAddOutlined />}
-        text={text(useContentBlocks('stats.usersdoingthis'))}
+        text={textBlockToString(useContentBlocks('stats.usersdoingthis'))}
       />
 
       <Stat
@@ -42,8 +42,8 @@ export const ActionStats = (props) => {
           <Popover
             content={
               <div>
-                {text(useContentBlocks('stats.popover.impact'))}
-                {text(props.impactDisclaimer)}
+                {textBlockToString(useContentBlocks('stats.popover.impact'))}
+                {textBlockToString(props.impactDisclaimer)}
               </div>
             }
             overlayClassName="popover-md"
@@ -56,7 +56,7 @@ export const ActionStats = (props) => {
           </Popover>
         }
         icon={<LikeOutlined />}
-        text={text(useContentBlocks('stats.impact'))}
+        text={textBlockToString(useContentBlocks('stats.impact'))}
       />
 
       <Stat
@@ -68,7 +68,7 @@ export const ActionStats = (props) => {
           />
         }
         icon={<CoffeeOutlined />}
-        text={text(useContentBlocks('stats.effort'))}
+        text={textBlockToString(useContentBlocks('stats.effort'))}
       />
     </div>
   )

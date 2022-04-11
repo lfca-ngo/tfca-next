@@ -2,7 +2,7 @@ import { CheckOutlined, PlusCircleOutlined } from '@ant-design/icons'
 import { List } from 'antd'
 import React from 'react'
 
-import { text } from '../../../utils/text'
+import { textBlockToString } from '../../../utils'
 
 export const ListSection = ({ items, listIcon, title, titleIcon }) => {
   return (
@@ -19,7 +19,7 @@ export const ListSection = ({ items, listIcon, title, titleIcon }) => {
           <List.Item>
             <List.Item.Meta
               avatar={listIcon || <CheckOutlined />}
-              description={text(item.value)}
+              description={textBlockToString(item.value)}
             />
           </List.Item>
         )}

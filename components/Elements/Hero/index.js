@@ -5,7 +5,7 @@ import Image from 'next/image'
 import React from 'react'
 
 import { useContentBlocks, useCustomization } from '../../../hooks'
-import { text } from '../../../utils/text'
+import { textBlockToString } from '../../../utils'
 import { ChallengeStatus } from '../ChallengeStatus'
 import World from './world.png'
 
@@ -14,7 +14,7 @@ export const Hero = ({ onClick, openGraphInfo }) => {
 
   const defaultBlock = useContentBlocks('header.title')
   const customBlock = useContentBlocks('header.title.custom')
-  const recipientsFallback = text(
+  const recipientsFallback = textBlockToString(
     useContentBlocks('header.title.recipients.fallback')
   )
 
@@ -33,7 +33,7 @@ export const Hero = ({ onClick, openGraphInfo }) => {
 
           <Typography.Title>
             {customization?.names?.length
-              ? text(
+              ? textBlockToString(
                   customBlock,
                   {
                     name:
@@ -44,9 +44,9 @@ export const Hero = ({ onClick, openGraphInfo }) => {
                   {},
                   true
                 )
-              : text(defaultBlock, {}, true)}
+              : textBlockToString(defaultBlock, {}, true)}
           </Typography.Title>
-          <p>{text(useContentBlocks('header.body'))}</p>
+          <p>{textBlockToString(useContentBlocks('header.body'))}</p>
 
           <div className="start-btn">
             <Button
@@ -55,7 +55,7 @@ export const Hero = ({ onClick, openGraphInfo }) => {
               size="large"
               type="primary"
             >
-              {text(useContentBlocks('header.button.primary'))}
+              {textBlockToString(useContentBlocks('header.button.primary'))}
             </Button>
           </div>
         </div>

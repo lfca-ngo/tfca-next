@@ -2,8 +2,7 @@ import { ArrowLeftOutlined } from '@ant-design/icons'
 import { Drawer, List } from 'antd'
 import React, { useState } from 'react'
 
-import { LIST_GRIDS } from '../../../utils'
-import { text } from '../../../utils/text'
+import { LIST_GRIDS, textBlockToString } from '../../../utils'
 import {
   CardView,
   Category,
@@ -63,7 +62,7 @@ export const Results = ({
       <Category
         goBack={prevKey ? () => goTo(prevKey) : undefined}
         icon={icon.url}
-        title={text(blocks['category.title'])}
+        title={textBlockToString(blocks['category.title'])}
       />
 
       <StepHeader

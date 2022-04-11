@@ -10,7 +10,7 @@ import React from 'react'
 
 import { useAnalytics, useContentBlocks } from '../../../hooks'
 import { EXTERNAL_LINK_CLICKED } from '../../../services/analytics'
-import { text } from '../../../utils/text'
+import { textBlockToString } from '../../../utils'
 
 export const LeavePage = ({
   actionId,
@@ -30,13 +30,17 @@ export const LeavePage = ({
       },
     })
   }
-  const leavePageMissingLink = text(useContentBlocks('leavepage.missing.link'))
-  const leavePageTitle = text(useContentBlocks('leavepage.title'))
-  const leavePageHint = text(useContentBlocks('leavepage.hint'))
-  const leavePageButtonPrimary = text(
+  const leavePageMissingLink = textBlockToString(
+    useContentBlocks('leavepage.missing.link')
+  )
+  const leavePageTitle = textBlockToString(useContentBlocks('leavepage.title'))
+  const leavePageHint = textBlockToString(useContentBlocks('leavepage.hint'))
+  const leavePageButtonPrimary = textBlockToString(
     useContentBlocks('leavepage.button.primary')
   )
-  const leavePageButtonHint = text(useContentBlocks('leavepage.button.hint'))
+  const leavePageButtonHint = textBlockToString(
+    useContentBlocks('leavepage.button.hint')
+  )
 
   if (!destinationUrl)
     return (

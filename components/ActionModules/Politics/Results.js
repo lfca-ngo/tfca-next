@@ -3,8 +3,7 @@ import classNames from 'classnames'
 import React from 'react'
 
 import { usePoliticians } from '../../../services/politicians'
-import { LIST_GRIDS } from '../../../utils'
-import { text } from '../../../utils/text'
+import { LIST_GRIDS, textBlockToString } from '../../../utils'
 import {
   CardView,
   Category,
@@ -45,7 +44,7 @@ export const Results = ({
       <Category
         goBack={prevKey ? () => goTo(prevKey) : undefined}
         icon={icon.url}
-        title={text(blocks['category.title'])}
+        title={textBlockToString(blocks['category.title'])}
       />
 
       <StepHeader
@@ -64,7 +63,7 @@ export const Results = ({
             count={countSelected}
             style={{ background: 'transparent', marginRight: '12px' }}
           />
-          {text(blocks['results.button.primary'])}
+          {textBlockToString(blocks['results.button.primary'])}
         </Button>
       )}
 

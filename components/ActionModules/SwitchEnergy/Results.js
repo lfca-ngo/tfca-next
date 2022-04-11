@@ -7,7 +7,7 @@ import {
   useOperatorId,
   useSwitchRates,
 } from '../../../services/switchforclimate'
-import { text } from '../../../utils/text'
+import { textBlockToString } from '../../../utils'
 import {
   CardView,
   Category,
@@ -113,7 +113,8 @@ export const Results = ({ goTo, module, nextKey, setStore, store }) => {
         icon={icon.url}
         title={
           <span>
-            {text(blocks['category.title'])} {loading && <LoadingOutlined />}{' '}
+            {textBlockToString(blocks['category.title'])}{' '}
+            {loading && <LoadingOutlined />}{' '}
           </span>
         }
       />

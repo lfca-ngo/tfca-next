@@ -5,17 +5,17 @@ import { Button, Card, List } from 'antd'
 import Image from 'next/image'
 import React, { useState } from 'react'
 
-import { text } from '../../../utils/text'
+import { textBlockToString } from '../../../utils'
 
 export const BankCard = ({ blocks, item, onNext }) => {
   const TABS_LIST = [
     {
       key: 'benefits',
-      tab: text(blocks['label.benefits']),
+      tab: textBlockToString(blocks['label.benefits']),
     },
     {
       key: 'sustainability',
-      tab: text(blocks['label.sustainability']),
+      tab: textBlockToString(blocks['label.sustainability']),
     },
   ]
 
@@ -55,7 +55,7 @@ export const BankCard = ({ blocks, item, onNext }) => {
           <List.Item>
             <List.Item.Meta
               avatar={<CheckCircleOutlined />}
-              description={text(item.value)}
+              description={textBlockToString(item.value)}
             />
           </List.Item>
         )}
@@ -63,7 +63,7 @@ export const BankCard = ({ blocks, item, onNext }) => {
 
       <div className="actions">
         <Button block onClick={handleNext} type="primary">
-          {text(blocks['results.button.details'])}
+          {textBlockToString(blocks['results.button.details'])}
         </Button>
       </div>
     </Card>

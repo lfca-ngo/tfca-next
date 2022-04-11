@@ -23,8 +23,7 @@ import {
 
 import TelegramIcon from '../../assets/icons/telegram.svg'
 import { useContentBlocks } from '../../hooks'
-import { namesArrayToString } from '../../utils'
-import { text } from '../../utils/text'
+import { namesArrayToString, textBlockToString } from '../../utils'
 import { CopyTextArea, SuperText, Text } from '../Elements'
 
 const { TabPane } = Tabs
@@ -32,16 +31,18 @@ const { TabPane } = Tabs
 const BTN_WIDTH = '120px'
 
 export const Share = ({ actionInviteText, invites }) => {
-  const shareTitle = text(useContentBlocks('sharing.title'))
+  const shareTitle = textBlockToString(useContentBlocks('sharing.title'))
   const shareHint = useContentBlocks('sharing.hint')
-  const shareTitleSup = text(useContentBlocks('sharing.title.sup'))
+  const shareTitleSup = textBlockToString(useContentBlocks('sharing.title.sup'))
   const shareMessageBodyNominate = useContentBlocks(
     'sharing.message.body.nominate'
   )
-  const shareMessageBodyGeneric = text(
+  const shareMessageBodyGeneric = textBlockToString(
     useContentBlocks('sharing.message.body.generic')
   )
-  const shareMessageTitle = text(useContentBlocks('sharing.message.title'))
+  const shareMessageTitle = textBlockToString(
+    useContentBlocks('sharing.message.title')
+  )
 
   return (
     <div className="share-dialog">
@@ -57,7 +58,7 @@ export const Share = ({ actionInviteText, invites }) => {
             : 'All'
 
           const shareMessageBody = names?.length
-            ? text(shareMessageBodyNominate, {
+            ? textBlockToString(shareMessageBodyNominate, {
                 actionInviteText: actionInviteText
                   ? `${actionInviteText}! `
                   : '',

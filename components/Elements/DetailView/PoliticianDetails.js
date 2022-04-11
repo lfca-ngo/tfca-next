@@ -4,8 +4,7 @@ import { MailOutlined } from '@ant-design/icons'
 import { Button, Form, Space } from 'antd'
 import React, { useEffect } from 'react'
 
-import { getMailToLink } from '../../../utils'
-import { text as replaceVars } from '../../../utils/text'
+import { getMailToLink, textBlockToString } from '../../../utils'
 import { CopyTextArea } from '../CopyTextArea'
 import { DropdownSelect } from '../DropdownSelect'
 import { ScrollableFilters } from '../ScrollableFilters'
@@ -27,11 +26,11 @@ export const PoliticianDetails = ({
   useEffect(() => {
     const activeMessage = messages[activeMessageIndex]
     setSubject(
-      replaceVars(activeMessage.subject, {
+      textBlockToString(activeMessage.subject, {
         name: item.name,
       })
     )
-    setText(replaceVars(activeMessage.text, { name: item.name }))
+    setText(textBlockToString(activeMessage.text, { name: item.name }))
   }, [messages, activeMessageIndex, item])
 
   const handleSend = () => {
@@ -95,7 +94,7 @@ export const PoliticianDetails = ({
           size="large"
           type="primary"
         >
-          {replaceVars(blocks['contact.button.primary'])}
+          {textBlockToString(blocks['contact.button.primary'])}
         </Button>
       </Space>
     </div>

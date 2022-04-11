@@ -1,7 +1,7 @@
 import { Carousel } from 'antd'
 import React, { useRef } from 'react'
 
-import { text } from '../../../utils/text'
+import { textBlockToString } from '../../../utils'
 import {
   ArrowButton,
   CardView,
@@ -31,7 +31,7 @@ export const Details = ({
       <Category
         goBack={prevKey ? () => goTo(prevKey) : undefined}
         icon={icon.url}
-        title={text(blocks['details.title'])}
+        title={textBlockToString(blocks['details.title'])}
       />
 
       <StepHeader

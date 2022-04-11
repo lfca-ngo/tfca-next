@@ -1,7 +1,7 @@
 import { Button, Space } from 'antd'
 import React from 'react'
 
-import { text } from '../../../utils/text'
+import { textBlockToString } from '../../../utils'
 import {
   CallToAction,
   Category,
@@ -34,7 +34,7 @@ export const Results = ({
         }
         goBack={prevKey ? () => goTo(prevKey) : undefined}
         icon={icon.url}
-        title={text(blocks['category.title'])}
+        title={textBlockToString(blocks['category.title'])}
       />
       <StepHeader
         subtitle={blocks['results.content']}
@@ -51,9 +51,9 @@ export const Results = ({
             {...action}
           />
         ))}
-        <h4>{text(blocks['results.finish.title'])}</h4>
+        <h4>{textBlockToString(blocks['results.finish.title'])}</h4>
         <Button block onClick={() => goTo(nextKey)} size="large" type="primary">
-          {text(blocks['results.finish.button.primary'])}
+          {textBlockToString(blocks['results.finish.button.primary'])}
         </Button>
       </Space>
     </div>

@@ -4,7 +4,7 @@ import { ShareAltOutlined } from '@ant-design/icons'
 import { Button, Space } from 'antd'
 import React from 'react'
 
-import { text } from '../../../utils/text'
+import { textBlockToString } from '../../../utils'
 import { CallToAction } from '../CallToAction'
 import { ListSection, TextSection } from '../Sections'
 
@@ -20,17 +20,17 @@ export const ActionDetails = ({ actionId, blocks, item, onNext }) => {
 
       <TextSection
         text={item?.shortDescription}
-        title={text(blocks['details.description.label'])}
+        title={textBlockToString(blocks['details.description.label'])}
       />
 
       <ListSection
         items={item?.reasons}
-        title={text(blocks['details.why.label'])}
+        title={textBlockToString(blocks['details.why.label'])}
       />
 
       <TextSection
         text={item?.description}
-        title={text(blocks['details.how.label'])}
+        title={textBlockToString(blocks['details.how.label'])}
       />
 
       <Space direction="vertical" style={{ width: '100%' }}>

@@ -1,9 +1,10 @@
 import { v4 as uuidv4 } from 'uuid'
 
-import { text } from './Text'
+import { textBlockToString } from './text'
 export * from './create-share-svg'
 export * from './names-array-to-string'
 export * from './share-token'
+export * from './text'
 
 export const isDev = process.env.NODE_ENV === 'development'
 export const isBrowser = () => typeof window !== 'undefined'
@@ -46,7 +47,7 @@ export const getFilterOptions = (items, fieldName) => {
 
 export const transformOption = (item, key, addOn) => ({
   iconUrl: item.icon?.url,
-  label: text(item.value),
+  label: textBlockToString(item.value),
   value: key,
   ...addOn,
 })

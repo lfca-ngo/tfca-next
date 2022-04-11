@@ -11,7 +11,7 @@ import Confetti from 'react-confetti'
 import { isMobile as isMobileClient } from 'react-device-detect'
 
 import { PAGE_VISIT, trackEvent } from '../services/analytics'
-import { text } from '../utils/text'
+import { textBlockToString } from '../utils'
 import { usePrevious } from './usePrevious'
 
 const AppContext = createContext()
@@ -34,7 +34,7 @@ export const AppProvider = ({ children, content, customization = null }) => {
   const prevActiveAction = usePrevious(activeAction)
   const { locale, query } = useRouter()
 
-  const statusMessage = text(
+  const statusMessage = textBlockToString(
     content?.metaData?.blocks?.['message.leaving.activeaction']
   )
 

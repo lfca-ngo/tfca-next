@@ -7,7 +7,7 @@ import React from 'react'
 import IconEurope from '../../../assets/icons/eu.svg'
 import IconGermany from '../../../assets/icons/germany.svg'
 import { useContentBlocks } from '../../../hooks'
-import { text } from '../../../utils/text'
+import { textBlockToString } from '../../../utils'
 import { CircleImage } from '../CircleImage'
 
 const MAP_PARLIAMENT = {
@@ -24,8 +24,10 @@ const MAP_PARLIAMENT = {
 export const PoliticianCard = ({ isSelected, item, minimal, onSelect }) => {
   const handleSelect = onSelect ? () => onSelect(isSelected, item) : undefined
   const parliamentInfo = MAP_PARLIAMENT[item?.parliament]
-  const selectString = text(useContentBlocks('card.button.select'))
-  const unSelectString = text(useContentBlocks('card.button.unselect'))
+  const selectString = textBlockToString(useContentBlocks('card.button.select'))
+  const unSelectString = textBlockToString(
+    useContentBlocks('card.button.unselect')
+  )
 
   return (
     <Card className={classNames('content-card politician', { minimal })}>

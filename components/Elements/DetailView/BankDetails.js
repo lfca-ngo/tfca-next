@@ -5,7 +5,7 @@ import { Button, Divider, Space } from 'antd'
 import Image from 'next/image'
 import React from 'react'
 
-import { text } from '../../../utils/text'
+import { textBlockToString } from '../../../utils'
 import { CallToAction } from '../CallToAction'
 import { ListSection, TextSection } from '../Sections'
 
@@ -35,7 +35,9 @@ export const BankDetails = ({ actionId, blocks, item, onNext }) => {
               onCountMeIn={onNext}
               shape="round"
               showLeaveModal
-              text={text(blocks['details.button.primary'], { name: item.name })}
+              text={textBlockToString(blocks['details.button.primary'], {
+                name: item.name,
+              })}
               type="primary"
               url={item.referralUrl}
             />
@@ -54,15 +56,15 @@ export const BankDetails = ({ actionId, blocks, item, onNext }) => {
 
       <ListSection
         items={item.benefits}
-        title={text(blocks['label.benefits'])}
+        title={textBlockToString(blocks['label.benefits'])}
       />
       <ListSection
         items={item.sustainability}
-        title={text(blocks['label.sustainability'])}
+        title={textBlockToString(blocks['label.sustainability'])}
       />
       <TextSection
         text={item?.description}
-        title={text(blocks['label.about'])}
+        title={textBlockToString(blocks['label.about'])}
       />
     </div>
   )

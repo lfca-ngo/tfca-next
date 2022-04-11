@@ -6,7 +6,7 @@ import {
   useRobinWoodRating,
   useSearchRobinWoodProvider,
 } from '../../../services/switchforclimate'
-import { text } from '../../../utils/text'
+import { textBlockToString } from '../../../utils'
 import {
   Category,
   FetchError,
@@ -40,7 +40,7 @@ export const FormCheck = ({ goTo, module: { blocks = {}, icon = {} } }) => {
       <Category
         goBack={() => goTo('intro')}
         icon={icon.url}
-        title={text(blocks['category.title'])}
+        title={textBlockToString(blocks['category.title'])}
       />
 
       <StepHeader

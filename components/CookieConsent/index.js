@@ -10,9 +10,9 @@ import {
   getCookie,
   getWindowUid,
   setCookie,
+  textBlockToString,
   UID_COOKIE_NAME,
 } from '../../utils'
-import { text } from '../../utils/text'
 import { ConditionalWrapper, CookieSelector } from './helpers'
 
 export const CookieConsent = () => {
@@ -80,7 +80,9 @@ export const CookieConsent = () => {
       >
         <div className="cookie-content">
           <div className="title">{cookieBanner?.title}</div>
-          <div className="description">{text(cookieBanner?.body)}</div>
+          <div className="description">
+            {textBlockToString(cookieBanner?.body)}
+          </div>
           <div className="consent">
             <ul>
               {cookieBanner?.levels?.map((level, i) => {

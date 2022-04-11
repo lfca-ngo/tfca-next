@@ -1,7 +1,7 @@
 import { documentToPlainTextString } from '@contentful/rich-text-plain-text-renderer'
 import React from 'react'
 
-export const replaceVars = (text, vars) => {
+export const replaceTextVars = (text, vars) => {
   let s = text
   for (const prop in vars) {
     s =
@@ -22,12 +22,12 @@ const parseMarkdownStringToReactComponents = (string) => {
 }
 
 // Returns the plain text from a block
-export const text = (block, vars, parseMarkdown = false) => {
+export const textBlockToString = (block, vars, parseMarkdown = false) => {
   if (!block) return null
   let string =
     typeof block === 'string'
-      ? replaceVars(block, vars)
-      : replaceVars(documentToPlainTextString(block), vars) || ''
+      ? replaceTextVars(block, vars)
+      : replaceTextVars(documentToPlainTextString(block), vars) || ''
 
   return parseMarkdown ? parseMarkdownStringToReactComponents(string) : string
 }

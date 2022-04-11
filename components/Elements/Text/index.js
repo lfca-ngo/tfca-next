@@ -3,7 +3,7 @@ import { INLINES } from '@contentful/rich-text-types'
 import React from 'react'
 
 import { TEXT_RENDERER, trackEvent } from '../../../services/analytics'
-import { replaceVars } from '../../../utils/text'
+import { replaceTextVars } from '../../../utils'
 import { TrackingOptOutButton } from '../TrackingOptOutButton'
 
 const renderInlineNavigationElement = (entry) => {
@@ -55,7 +55,7 @@ const createRenderOptions = (vars) => ({
     },
   },
   renderText: (text) => {
-    return replaceVars(text, vars)
+    return replaceTextVars(text, vars)
   },
 })
 

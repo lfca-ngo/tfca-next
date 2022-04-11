@@ -1,7 +1,7 @@
 import { Button } from 'antd'
 import React from 'react'
 
-import { text } from '../../../utils/text'
+import { textBlockToString } from '../../../utils'
 import { Category, GameProgress, StepHeader } from '../../Elements'
 
 export const Intro = ({
@@ -17,7 +17,7 @@ export const Intro = ({
         addOn={<GameProgress answers={{}} totalQuestionCount={quizLength} />}
         goBack={prevKey ? () => goTo(prevKey) : undefined}
         icon={icon.url}
-        title={text(blocks['category.title'])}
+        title={textBlockToString(blocks['category.title'])}
       />
       <StepHeader
         subtitle={blocks['intro.hint']}
@@ -25,7 +25,7 @@ export const Intro = ({
       />
 
       <Button block onClick={() => goTo(nextKey)} size="large" type="primary">
-        {text(blocks['intro.button.primary'])}
+        {textBlockToString(blocks['intro.button.primary'])}
       </Button>
     </div>
   )

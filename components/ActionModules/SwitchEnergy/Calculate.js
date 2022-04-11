@@ -1,8 +1,7 @@
 import { Button, Form } from 'antd'
 import React from 'react'
 
-import { validatePostcode } from '../../../utils'
-import { text } from '../../../utils/text'
+import { textBlockToString, validatePostcode } from '../../../utils'
 import { Category, CheckList, StepHeader } from '../../Elements'
 import { SelectPostcodeEnergy } from './SelectPostcodeEnergy'
 
@@ -22,7 +21,9 @@ export const EnergyForm = ({
       >
         <SelectPostcodeEnergy
           items={data['input.energy']?.items}
-          placeholderInput={text(blocks['form.postcode.placeholder'])}
+          placeholderInput={textBlockToString(
+            blocks['form.postcode.placeholder']
+          )}
           placeholderSelect="Please select"
         />
       </Form.Item>
@@ -53,7 +54,7 @@ export const Calculate = ({ goTo, module, setStore, store }) => {
       <Category
         goBack={() => goTo('intro')}
         icon={icon.url}
-        title={text(blocks['category.title'])}
+        title={textBlockToString(blocks['category.title'])}
       />
 
       <StepHeader title={blocks['calculate.title']} />
