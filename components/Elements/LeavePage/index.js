@@ -1,4 +1,4 @@
-require('./styles .less')
+require('./styles.less')
 
 import {
   ExclamationCircleOutlined,
