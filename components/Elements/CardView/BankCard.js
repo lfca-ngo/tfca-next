@@ -5,7 +5,7 @@ import { Button, Card, List } from 'antd'
 import Image from 'next/image'
 import React, { useState } from 'react'
 
-import { text } from '../../../utils/Text'
+import { text } from '../../../utils/text'
 
 export const BankCard = ({ blocks, item, onNext }) => {
   const TABS_LIST = [

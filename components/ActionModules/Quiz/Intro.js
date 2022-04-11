@@ -1,7 +1,7 @@
 import { Button } from 'antd'
 import React from 'react'
 
-import { text } from '../../../utils/Text'
+import { text } from '../../../utils/text'
 import { Category, GameProgress, StepHeader } from '../../Elements'
 
 export const Intro = ({

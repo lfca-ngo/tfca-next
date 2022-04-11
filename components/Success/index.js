@@ -17,7 +17,7 @@ import {
 } from '../../hooks'
 import { ACTION_COMPLETED } from '../../services/analytics'
 import { getCookie, getWindowUid, UID_COOKIE_NAME } from '../../utils'
-import { text } from '../../utils/Text'
+import { text } from '../../utils/text'
 import { Category, CheckList, LoadingSpinner } from '../Elements'
 import { Share } from '../Share'
 

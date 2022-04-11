@@ -5,7 +5,7 @@ import Image from 'next/image'
 import React from 'react'
 
 import { useContentBlocks, useCustomization } from '../../../hooks'
-import { text } from '../../../utils/Text'
+import { text } from '../../../utils/text'
 import { ChallengeStatus } from '../ChallengeStatus'
 import World from './world.png'
 

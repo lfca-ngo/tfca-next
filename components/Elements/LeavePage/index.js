@@ -10,7 +10,7 @@ import React from 'react'
 
 import { useAnalytics, useContentBlocks } from '../../../hooks'
 import { EXTERNAL_LINK_CLICKED } from '../../../services/analytics'
-import { text } from '../../../utils/Text'
+import { text } from '../../../utils/text'
 
 export const LeavePage = ({
   actionId,

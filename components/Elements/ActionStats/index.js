@@ -9,7 +9,7 @@ import { Popover, Progress, Tag } from 'antd'
 import React from 'react'
 
 import { useContentBlocks } from '../../../hooks'
-import { text } from '../../../utils/Text'
+import { text } from '../../../utils/text'
 
 const STEPS = 5
 

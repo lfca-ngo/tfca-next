@@ -6,7 +6,7 @@ import {
   useRobinWoodRating,
   useSearchRobinWoodProvider,
 } from '../../../services/switchforclimate'
-import { text } from '../../../utils/Text'
+import { text } from '../../../utils/text'
 import {
   Category,
   FetchError,

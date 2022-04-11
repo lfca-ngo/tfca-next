@@ -12,7 +12,7 @@ import {
   setCookie,
   UID_COOKIE_NAME,
 } from '../../utils'
-import { text } from '../../utils/Text'
+import { text } from '../../utils/text'
 import { ConditionalWrapper, CookieSelector } from './helpers'
 
 export const CookieConsent = () => {

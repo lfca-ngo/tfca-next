@@ -5,7 +5,7 @@ import { Divider, Space, Tag } from 'antd'
 import Image from 'next/image'
 import React from 'react'
 
-import { text } from '../../../utils/Text'
+import { text } from '../../../utils/text'
 import { CallToAction } from '../CallToAction'
 import { ListSection, TextSection } from '../Sections'
 import { SocialIcons } from '../SocialIcons'

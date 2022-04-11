@@ -7,7 +7,7 @@ import {
   useOperatorId,
   useSwitchRates,
 } from '../../../services/switchforclimate'
-import { text } from '../../../utils/Text'
+import { text } from '../../../utils/text'
 import {
   CardView,
   Category,

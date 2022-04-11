@@ -1,8 +1,8 @@
 import { Button } from 'antd'
 import React from 'react'
 
-import { Text, text } from '../../../utils/Text'
-import { Category, GameProgress } from '../../Elements'
+import { text } from '../../../utils/text'
+import { Category, GameProgress, Text } from '../../Elements'
 
 export const Answer = ({
   activeQuestion,

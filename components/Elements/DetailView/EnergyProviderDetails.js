@@ -5,7 +5,7 @@ import { Button, Divider, Space } from 'antd'
 import Image from 'next/image'
 import React from 'react'
 
-import { text } from '../../../utils/Text'
+import { text } from '../../../utils/text'
 import { CallToAction } from '../CallToAction'
 import { TextSection } from '../Sections'
 

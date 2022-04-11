@@ -2,7 +2,7 @@ import { Collapse } from 'antd'
 import React from 'react'
 
 import { useContentLists } from '../../../hooks'
-import { Text } from '../../../utils/Text'
+import { Text } from '../Text'
 
 const { Panel } = Collapse
 

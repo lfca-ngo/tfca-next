@@ -4,7 +4,7 @@ import React from 'react'
 
 import { usePoliticians } from '../../../services/politicians'
 import { LIST_GRIDS } from '../../../utils'
-import { text } from '../../../utils/Text'
+import { text } from '../../../utils/text'
 import {
   CardView,
   Category,

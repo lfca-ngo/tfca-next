@@ -1,8 +1,8 @@
 import { Button, Col, Row } from 'antd'
 import React from 'react'
 
-import { Text, text } from '../../../utils/Text'
-import { Category, StepHeader } from '../../Elements'
+import { text } from '../../../utils/text'
+import { Category, StepHeader, Text } from '../../Elements'
 
 export const Intro = ({ goTo, module: { blocks = {}, icon = {} } }) => {
   return (
@@ -19,7 +19,7 @@ export const Intro = ({ goTo, module: { blocks = {}, icon = {} } }) => {
             size="large"
             type="primary"
           >
-            <Text asString block={blocks['intro.button.primary']} />
+            {text(blocks['intro.button.primary'])}
           </Button>
         </Col>
         <Col md={12} xs={24}>
@@ -30,7 +30,7 @@ export const Intro = ({ goTo, module: { blocks = {}, icon = {} } }) => {
             size="large"
             type="primary"
           >
-            <Text asString block={blocks['intro.button.secondary']} />
+            {text(blocks['intro.button.secondary'])}
           </Button>
         </Col>
       </Row>

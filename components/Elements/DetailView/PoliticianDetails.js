@@ -5,7 +5,7 @@ import { Button, Form, Space } from 'antd'
 import React, { useEffect } from 'react'
 
 import { getMailToLink } from '../../../utils'
-import { text as replaceVars } from '../../../utils/Text'
+import { text as replaceVars } from '../../../utils/text'
 import { CopyTextArea } from '../CopyTextArea'
 import { DropdownSelect } from '../DropdownSelect'
 import { ScrollableFilters } from '../ScrollableFilters'

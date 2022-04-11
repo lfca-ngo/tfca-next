@@ -2,7 +2,7 @@ import { Button, Form } from 'antd'
 import React from 'react'
 
 import { validatePostcode } from '../../../utils'
-import { text } from '../../../utils/Text'
+import { text } from '../../../utils/text'
 import { Category, CheckList, StepHeader } from '../../Elements'
 import { SelectPostcodeEnergy } from './SelectPostcodeEnergy'
 

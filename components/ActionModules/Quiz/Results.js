@@ -1,7 +1,7 @@
 import { Button, Space } from 'antd'
 import React from 'react'
 
-import { text } from '../../../utils/Text'
+import { text } from '../../../utils/text'
 import {
   CallToAction,
   Category,

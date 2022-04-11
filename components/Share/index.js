@@ -24,8 +24,8 @@ import {
 import TelegramIcon from '../../assets/icons/telegram.svg'
 import { useContentBlocks } from '../../hooks'
 import { namesArrayToString } from '../../utils'
-import { Text, text } from '../../utils/Text'
-import { CopyTextArea, SuperText } from '../Elements'
+import { text } from '../../utils/text'
+import { CopyTextArea, SuperText, Text } from '../Elements'
 
 const { TabPane } = Tabs
 

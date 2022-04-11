@@ -7,7 +7,7 @@ import React from 'react'
 import IconEurope from '../../../assets/icons/eu.svg'
 import IconGermany from '../../../assets/icons/germany.svg'
 import { useContentBlocks } from '../../../hooks'
-import { text } from '../../../utils/Text'
+import { text } from '../../../utils/text'
 import { CircleImage } from '../CircleImage'
 
 const MAP_PARLIAMENT = {

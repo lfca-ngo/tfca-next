@@ -3,7 +3,7 @@ import React, { useMemo, useState } from 'react'
 
 import { useContentBlocks } from '../../../hooks'
 import { checkAnswers, SINGLE, transformOption } from '../../../utils'
-import { text } from '../../../utils/Text'
+import { text } from '../../../utils/text'
 import {
   Category,
   GameProgress,

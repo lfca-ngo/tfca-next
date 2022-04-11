@@ -1,7 +1,7 @@
 import { PlusCircleOutlined } from '@ant-design/icons'
 import React from 'react'
 
-import { Text } from '../../../utils/Text'
+import { Text } from '../Text'
 
 export const TextSection = ({ text, title, titleIcon }) => {
   return (

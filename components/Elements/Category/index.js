@@ -6,7 +6,7 @@ import Image from 'next/image'
 import React from 'react'
 
 import { useContentBlocks } from '../../../hooks'
-import { text } from '../../../utils/Text'
+import { text } from '../../../utils/text'
 
 export const Category = ({ addOn, goBack, icon, title }) => {
   const backString = useContentBlocks('nav.back')

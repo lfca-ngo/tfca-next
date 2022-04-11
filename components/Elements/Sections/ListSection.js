@@ -2,7 +2,7 @@ import { CheckOutlined, PlusCircleOutlined } from '@ant-design/icons'
 import { List } from 'antd'
 import React from 'react'
 
-import { text } from '../../../utils/Text'
+import { text } from '../../../utils/text'
 
 export const ListSection = ({ items, listIcon, title, titleIcon }) => {
   return (

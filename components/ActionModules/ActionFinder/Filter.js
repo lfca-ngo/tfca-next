@@ -3,7 +3,7 @@ import React from 'react'
 
 import { useContentBlocks } from '../../../hooks'
 import { SINGLE } from '../../../utils'
-import { text } from '../../../utils/Text'
+import { text } from '../../../utils/text'
 import { Category, SelectFilter, StepHeader } from '../../Elements'
 
 export const Filter = ({

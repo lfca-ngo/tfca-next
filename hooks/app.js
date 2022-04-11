@@ -11,7 +11,7 @@ import Confetti from 'react-confetti'
 import { isMobile as isMobileClient } from 'react-device-detect'
 
 import { PAGE_VISIT, trackEvent } from '../services/analytics'
-import { text } from '../utils/Text'
+import { text } from '../utils/text'
 import { usePrevious } from './usePrevious'
 
 const AppContext = createContext()

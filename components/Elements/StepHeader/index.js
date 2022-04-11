@@ -1,6 +1,7 @@
 import React from 'react'
 
-import { Text, text } from '../../../utils/Text'
+import { text } from '../../../utils/text'
+import { Text } from '../Text'
 
 export const StepHeader = ({ subtitle, title, vars }) => {
   return (

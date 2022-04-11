@@ -3,7 +3,7 @@ import { Drawer, List } from 'antd'
 import React, { useState } from 'react'
 
 import { LIST_GRIDS } from '../../../utils'
-import { text } from '../../../utils/Text'
+import { text } from '../../../utils/text'
 import {
   CardView,
   Category,

@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import React from 'react'
 
 import { useFlow } from '../../../hooks'
-import { text } from '../../../utils/Text'
+import { text } from '../../../utils/text'
 import { Success } from '../../Success'
 import { Details } from './Details'
 import { Filter } from './Filter'

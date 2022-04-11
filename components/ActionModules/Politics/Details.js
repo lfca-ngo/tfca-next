@@ -1,7 +1,7 @@
 import { Carousel } from 'antd'
 import React, { useRef } from 'react'
 
-import { text } from '../../../utils/Text'
+import { text } from '../../../utils/text'
 import {
   ArrowButton,
   CardView,
