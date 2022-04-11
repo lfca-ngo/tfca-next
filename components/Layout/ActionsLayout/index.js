@@ -1,7 +1,7 @@
 require('./styles.less')
 
 import { CloseOutlined } from '@ant-design/icons'
-import { Button, Drawer, Popover } from 'antd'
+import { Button, Drawer, Menu, Popover } from 'antd'
 import React, { useEffect, useState } from 'react'
 
 import { useContentNavs, useCustomization } from '../../../hooks'
@@ -85,9 +85,9 @@ export const ActionsLayout = ({ children, company, nav, openGraphInfo }) => {
   const customization = useCustomization()
 
   let addOnItems = [
-    <li key="intl">
+    <Menu.Item key="intl">
       <IntlSelector />
-    </li>,
+    </Menu.Item>,
   ]
   if (company) {
     addOnItems = [<CompanyMenuItem company={company} key="co" />, ...addOnItems]

@@ -16,12 +16,23 @@ nav.nav {
     flex: 1;
     background: transparent;
     border-bottom: none;
-  }
+    display: flex;
+    justify-content: flex-end;
+    margin: 0;
+    align-self: flex-start;
 
-  .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-selected {
-    color: @white;
-    &::after {
-      border-color: @white;
+    .ant-menu-submenu,
+    .ant-menu-item {
+      padding: 20px 30px;
+      .link-font-style(@white);
+      display: flex;
+      align-items: center;
+      line-height: 1;
+    }
+
+    .ant-menu-title-content {
+      display: flex;
+      align-items: center;
     }
   }
 
@@ -38,16 +49,9 @@ nav.nav {
   &.dark {
     background-color: transparent;
     background-image: none;
-    ul {
-      li {
-        .link-font-style(@black);
-        a {
-          .link-font-style(@black);
-        }
-        .ant-btn-link {
-          .link-font-style(@black);
-        }
-      }
+    .ant-menu-submenu,
+    .ant-menu-item {
+      .link-font-style(@black);
     }
   }
 
@@ -66,25 +70,6 @@ nav.nav {
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-
-  ul {
-    display: flex;
-    justify-content: flex-end;
-    margin: 0;
-    align-self: flex-start;
-    li {
-      padding: 20px 30px;
-      align-items: center;
-      display: flex;
-      .link-font-style(@white);
-      a {
-        .link-font-style(@white);
-      }
-      .ant-btn-link {
-        .link-font-style(@white);
-      }
-    }
   }
 }
 
