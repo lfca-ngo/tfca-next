@@ -25,6 +25,10 @@ export const validatePostcode = (value, key) => {
   return Promise.reject(new Error('Postleitzahl ungültig'))
 }
 
+export const stringToLowerCase = (string) => {
+  return string.replace(/\s+/g, '_').toLowerCase()
+}
+
 // setting theme
 export const CSS_THEME_DARK = !isBrowser()
   ? __CSS_THEME_DARK__

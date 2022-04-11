@@ -6,6 +6,10 @@ import { Image as GalleryImage } from 'antd'
 import Image from 'next/image'
 import React from 'react'
 
+import { useContentBlocks } from '../../hooks'
+import { stringToLowerCase } from '../../utils'
+import { text } from '../../utils/Text'
+
 const { Panel } = Collapse
 
 const ImageGallery = ({ images = [] }) => {
@@ -24,6 +28,26 @@ const ImageGallery = ({ images = [] }) => {
         )}
       />
     </div>
+  )
+}
+
+const ContributionPanelContent = ({ participationPackage }) => {
+  const stringAsId = stringToLowerCase(participationPackage)
+  const customTitle =
+    text(useContentBlocks(`disclosure.${stringAsId}`)) || participationPackage
+  return (
+    <Panel
+      className="actions-container"
+      header={
+        <span className="action">
+          <div className="icon">
+            <CheckCircleFilled />
+          </div>
+          <div className="inline">{customTitle}</div>
+        </span>
+      }
+      key={participationPackage}
+    />
   )
 }
 
@@ -53,58 +77,42 @@ export const Disclosure = ({ data }) => {
       </header>
 
       <section>
-        <h4>Climate Goals</h4>
-        <p>{data.company.campaignGoals}</p>
-        <h4>Campaign Contributions</h4>
-        <p>{data.company?.campaignContribution}</p>
+        <h4>{text(useContentBlocks('disclosure.goals.title'))}</h4>
+        <div
+          className="content-text"
+          dangerouslySetInnerHTML={{
+            __html: data.company?.campaignGoals,
+          }}
+        />
+        <h4>{text(useContentBlocks('disclosure.additional.title'))}</h4>
+        <div
+          className="content-text"
+          dangerouslySetInnerHTML={{
+            __html: data.company?.campaignContribution,
+          }}
+        />
+
         <ImageGallery images={data.company?.campaignFiles} />
         <Collapse
           accordion
           className="actions-wrapper"
-          expandIcon={({ isActive }) => (
-            <ArrowDownOutlined rotate={isActive ? 180 : 0} />
-          )}
+          collapsible="disabled"
+          expandIcon={() => null}
           expandIconPosition="right"
         >
           {campaignContributionMap &&
-            Object.keys(campaignContributionMap).map((participationPackage) => {
-              const objectives = campaignContributionMap[participationPackage]
-              return (
-                <Panel
-                  className="actions-container"
-                  header={
-                    <span className="action">
-                      <div className="icon">
-                        <CheckCircleFilled />
-                      </div>
-                      <div className="inline">{participationPackage}</div>
-                    </span>
-                  }
-                  key={participationPackage}
-                >
-                  {objectives && (
-                    <div>
-                      <h5>Actions</h5>
-                      <ul className="green-list">
-                        {objectives.map((objective) => {
-                          return <li key={objective}>{objective}</li>
-                        })}
-                      </ul>
-                    </div>
-                  )}
-                </Panel>
-              )
-            })}
+            Object.keys(campaignContributionMap).map((participationPackage) => (
+              <ContributionPanelContent
+                key={participationPackage}
+                participationPackage={participationPackage}
+              />
+            ))}
         </Collapse>
       </section>
 
       <section>
-        <h4>Reduction Actions</h4>
-        <p>
-          The requirements mentioned for each of the actions are a general
-          summary from all the campaign supporters, the detailed requirements
-          may vary depending on the companies.
-        </p>
+        <h4>{text(useContentBlocks('disclosure.reduction.title'))}</h4>
+        <p>{text(useContentBlocks('disclosure.reduction.text'))}</p>
         <Collapse
           accordion
           className="actions-wrapper"
