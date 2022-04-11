@@ -151,11 +151,11 @@ export const useConfetti = () => {
 }
 
 export const useIsMobile = () => {
-  const { isMobile } = React.useContext(AppContext)
+  const { isMobile } = useContext(AppContext)
   return isMobile
 }
 
 export const useIsClient = () => {
-  const { isClient } = React.useContext(AppContext)
+  const { isClient } = useContext(AppContext)
   return isClient
 }

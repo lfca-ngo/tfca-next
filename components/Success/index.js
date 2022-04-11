@@ -7,7 +7,7 @@ import {
 } from '@ant-design/icons'
 import { Alert, Button, Divider, Drawer, Form, Input } from 'antd'
 import { useRouter } from 'next/router'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import {
   useAnalytics,
@@ -40,10 +40,10 @@ export const Success = ({
   prevKey,
 }) => {
   const benefits = useContentLists('sharing.benefits')?.items
-  const [isGeneratingToken, setIsGeneratingToken] = React.useState(false)
-  const [error, setError] = React.useState('')
-  const [visible, setVisible] = React.useState('')
-  const [invites, setInvites] = React.useState([])
+  const [isGeneratingToken, setIsGeneratingToken] = useState(false)
+  const [error, setError] = useState('')
+  const [visible, setVisible] = useState('')
+  const [invites, setInvites] = useState([])
 
   const { locale, query } = useRouter()
   const { actionCollectionSlug } = query

@@ -2,7 +2,7 @@ require('./politicianDetails.less')
 
 import { MailOutlined } from '@ant-design/icons'
 import { Button, Form, Space } from 'antd'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { getMailToLink, textBlockToString } from '../../../utils'
 import { CopyTextArea } from '../CopyTextArea'
@@ -20,8 +20,8 @@ export const PoliticianDetails = ({
   setStore,
   store,
 }) => {
-  const [subject, setSubject] = React.useState('')
-  const [text, setText] = React.useState('')
+  const [subject, setSubject] = useState('')
+  const [text, setText] = useState('')
 
   useEffect(() => {
     const activeMessage = messages[activeMessageIndex]

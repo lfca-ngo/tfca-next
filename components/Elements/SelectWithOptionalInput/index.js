@@ -2,7 +2,7 @@ require('./styles.less')
 
 import { Input } from 'antd'
 import classNames from 'classnames'
-import React from 'react'
+import React, { useState } from 'react'
 
 import { Select } from '../Select'
 
@@ -13,8 +13,8 @@ export const SelectWithOptionalInput = ({
   placeholderOptionalInput,
   placeholder,
 }) => {
-  const [selectValue, setSelectValue] = React.useState()
-  const [inputValue, setInputValue] = React.useState('')
+  const [selectValue, setSelectValue] = useState()
+  const [inputValue, setInputValue] = useState('')
 
   const selectedItem = items.find(
     (item) => item.value === (value.select || selectValue)

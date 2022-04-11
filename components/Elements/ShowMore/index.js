@@ -1,14 +1,14 @@
 require('./styles.less')
 
 import { Button } from 'antd'
-import React from 'react'
+import React, { createRef, useEffect, useState } from 'react'
 
 export const ShowMore = ({ maxHeight, text }) => {
-  const [isShowMoreVisible, setIsShowMoreVisible] = React.useState(false)
-  const [isExpanded, setIsExpanded] = React.useState(false)
-  const contentRef = React.createRef(null)
+  const [isShowMoreVisible, setIsShowMoreVisible] = useState(false)
+  const [isExpanded, setIsExpanded] = useState(false)
+  const contentRef = createRef(null)
 
-  React.useEffect(() => {
+  useEffect(() => {
     const element = contentRef.current
     if (!element.return)
       setIsShowMoreVisible(element.scrollHeight > element.clientHeight)

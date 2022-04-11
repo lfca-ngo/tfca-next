@@ -13,9 +13,9 @@ import { Share } from '../../Share'
 
 export const ChallengeStatus = ({ className, openGraphInfo }) => {
   const [open, setOpen] = useState(false)
-  const [isGeneratingToken, setIsGeneratingToken] = React.useState(false)
+  const [isGeneratingToken, setIsGeneratingToken] = useState(false)
   const [error, setError] = useState('')
-  const [invite, setInvite] = React.useState(null)
+  const [invite, setInvite] = useState(null)
 
   const customization = useCustomization()
   const { locale, query } = useRouter()

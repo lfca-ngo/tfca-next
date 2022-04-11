@@ -1,6 +1,6 @@
 import { Tabs } from 'antd'
 import { useRouter } from 'next/router'
-import React from 'react'
+import React, { useMemo } from 'react'
 
 import { useFlow } from '../../../hooks'
 import { textBlockToString } from '../../../utils'
@@ -21,7 +21,7 @@ export const Politics = ({ module }) => {
     messagesByFilterValue,
     messagesRelatedFilterKey,
     steps,
-  } = React.useMemo(() => {
+  } = useMemo(() => {
     const steps = []
     const parsedFilters = []
     const messagesByFilterValue = {}
