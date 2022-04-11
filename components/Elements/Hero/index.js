@@ -1,6 +1,6 @@
 require('./styles.less')
 
-import { Button, Typography } from 'antd'
+import { Button } from 'antd'
 import Image from 'next/image'
 import React from 'react'
 
@@ -31,7 +31,7 @@ export const Hero = ({ onClick, openGraphInfo }) => {
             />
           </div>
 
-          <Typography.Title>
+          <h1>
             {customization?.names?.length
               ? textBlockToString(
                   customBlock,
@@ -45,7 +45,7 @@ export const Hero = ({ onClick, openGraphInfo }) => {
                   true
                 )
               : textBlockToString(defaultBlock, {}, true)}
-          </Typography.Title>
+          </h1>
           <p>{textBlockToString(useContentBlocks('header.body'))}</p>
 
           <div className="start-btn">
