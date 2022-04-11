@@ -26,7 +26,7 @@ const DefaultLayout = ({ children, mainNav, style, subtitle, title }) => {
 // pages with custom sections like about campaign etc.
 const LandingLayout = ({ children, mainNav, navigationStyle, style }) => {
   return (
-    <Template className="default-layout">
+    <Template className="landing-layout">
       <Nav className={style} menuItems={mainNav} mode={navigationStyle} />
       <main>
         <ErrorBoundary>{children}</ErrorBoundary>

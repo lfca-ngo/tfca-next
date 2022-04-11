@@ -5,16 +5,16 @@ import classNames from 'classnames'
 import Image from 'next/image'
 import React from 'react'
 
-import { text } from '../../../utils/Text'
-import CallToAction from '../CallToAction'
+import { CallToAction } from '../CallToAction'
 import { SuperText } from '../SuperText'
+import { Text } from '../Text'
 
 const Content = ({ actions, body, superText, title }) => {
   return (
     <div className="content">
       {superText && <SuperText text={superText} />}
       <h1>{title}</h1>
-      <p>{text(body)}</p>
+      <Text block={body} />
 
       <div className="actions">
         <Space>
@@ -49,7 +49,6 @@ export const ImageText = (props) => {
   const sectionClassNames = classNames(
     'section-block',
     'image-text',
-    'container-max',
     props.style
   )
 
@@ -57,7 +56,7 @@ export const ImageText = (props) => {
     case 'image-text':
       return (
         <section className={sectionClassNames}>
-          <Row>
+          <Row className="container-max">
             <Col md={10} xs={24}>
               <ImageContainer src={heroImageUrl} />
             </Col>
@@ -70,7 +69,7 @@ export const ImageText = (props) => {
     default:
       return (
         <section className={sectionClassNames}>
-          <Row>
+          <Row className="container-max">
             <Col md={14} xs={24}>
               <Content {...props} />
             </Col>

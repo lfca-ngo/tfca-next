@@ -4,8 +4,8 @@ import { Col, Row, Space } from 'antd'
 import Image from 'next/image'
 import React from 'react'
 
-import { text } from '../../../utils/Text'
-import CallToAction from '../CallToAction'
+import { textBlockToString } from '../../../utils/text'
+import { CallToAction } from '../CallToAction'
 import { SuperText } from '../SuperText'
 
 export const HeroWithImage = ({ actions, assets, body, superText, title }) => {
@@ -18,7 +18,7 @@ export const HeroWithImage = ({ actions, assets, body, superText, title }) => {
           <div className="content">
             {superText && <SuperText text={superText} />}
             <h1>{title}</h1>
-            <p>{text(body)}</p>
+            <p>{textBlockToString(body)}</p>
 
             <div className="actions">
               <Space>

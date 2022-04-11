@@ -3,9 +3,11 @@ import { BLOCKS, INLINES } from '@contentful/rich-text-types'
 import React from 'react'
 
 import { TEXT_RENDERER, trackEvent } from '../../../services/analytics'
+import { replaceTextVars } from '../../../utils/text'
 import { HeroWithImage } from '../HeroWithImage'
 import { ImageText } from '../ImageText'
 import { TrackingOptOutButton } from '../TrackingOptOutButton'
+import { VideoText } from '../VideoText'
 
 const renderBlockSection = (entry) => {
   switch (entry.layout) {
@@ -14,6 +16,9 @@ const renderBlockSection = (entry) => {
     }
     case 'image-text': {
       return <ImageText {...entry} variant={entry.layout} />
+    }
+    case 'text-video': {
+      return <VideoText {...entry} variant={entry.layout} />
     }
     case 'text-image': {
       return <ImageText {...entry} variant={entry.layout} />
