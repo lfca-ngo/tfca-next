@@ -7,7 +7,7 @@ import { Politics } from './Politics'
 import { Quiz } from './Quiz'
 import { SwitchEnergy } from './SwitchEnergy'
 
-const ActionModules = (props) => {
+export const ActionModules = (props) => {
   if (!props.actions) return null
 
   const renderAction = (action) => {
@@ -42,5 +42,3 @@ const ActionModules = (props) => {
     </ActionWrapper>
   ))
 }
-
-export default ActionModules

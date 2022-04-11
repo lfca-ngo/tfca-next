@@ -3,7 +3,7 @@ require('./styles.less')
 import { Button } from 'antd'
 import React from 'react'
 
-const ShowMore = ({ maxHeight, text }) => {
+export const ShowMore = ({ maxHeight, text }) => {
   const [isShowMoreVisible, setIsShowMoreVisible] = React.useState(false)
   const [isExpanded, setIsExpanded] = React.useState(false)
   const contentRef = React.createRef(null)
@@ -45,5 +45,3 @@ const ShowMore = ({ maxHeight, text }) => {
     </div>
   )
 }
-
-export default ShowMore

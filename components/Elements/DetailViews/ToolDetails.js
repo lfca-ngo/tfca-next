@@ -5,7 +5,7 @@ import { Divider } from 'antd'
 import Image from 'next/image'
 import React from 'react'
 
-import CallToAction from '../CallToAction'
+import { CallToAction } from '../CallToAction'
 import { ListSection, TextSection } from '../Sections'
 
 export const ToolDetails = ({ item }) => {

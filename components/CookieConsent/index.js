@@ -15,7 +15,7 @@ import {
 import { text } from '../../utils/Text'
 import { ConditionalWrapper, CookieSelector } from './helpers'
 
-const CookieConsent = () => {
+export const CookieConsent = () => {
   const cookieBanner = useContent()?.metaData?.cookieBanner
   // We assume that the first cookie is required and always needs to be accepted
   const requiredCookie = cookieBanner?.levels?.[0]?.key
@@ -135,5 +135,3 @@ const CookieConsent = () => {
     </ConditionalWrapper>
   )
 }
-
-export default CookieConsent

@@ -119,5 +119,3 @@ export const Results = ({
     </div>
   )
 }
-
-export default Results

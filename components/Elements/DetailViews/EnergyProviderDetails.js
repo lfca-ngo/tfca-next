@@ -6,7 +6,7 @@ import Image from 'next/image'
 import React from 'react'
 
 import { text } from '../../../utils/Text'
-import CallToAction from '../CallToAction'
+import { CallToAction } from '../CallToAction'
 import { TextSection } from '../Sections'
 
 export const EnergyProviderDetails = ({ actionId, blocks, item, onNext }) => {

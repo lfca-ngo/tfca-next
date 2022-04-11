@@ -20,7 +20,7 @@ import React from 'react'
 import IconCheck from '../../../assets/icons/g-check.svg'
 import { Labels } from '../EnergyLabels'
 import { EnergyMix } from '../EnergyMix'
-import ShowMore from '../ShowMore'
+import { ShowMore } from '../ShowMore'
 
 const { TabPane } = Tabs
 

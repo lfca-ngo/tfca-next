@@ -13,7 +13,7 @@ import { LeavePage } from '../LeavePage'
 
 const DEFAULT_RECIPIENT = 'someone@mail.org'
 
-const CallToAction = (props) => {
+const CallToActionWrapper = (props) => {
   const onClickType = props.onClick && 'click'
   const type = onClickType || props.action || 'link'
 
@@ -77,7 +77,7 @@ const CtaButton = ({
   )
 }
 
-const ConditionalModalWrapper = (props) => {
+export const CallToAction = (props) => {
   const [visible, setVisible] = useState(false)
   const { trackEvent } = useAnalytics()
 
@@ -96,7 +96,7 @@ const ConditionalModalWrapper = (props) => {
   if (props.showLeaveModal && props.action !== 'open-email') {
     return (
       <>
-        <CallToAction {...props} onClick={openModal} />
+        <CallToActionWrapper {...props} onClick={openModal} />
         <BasicModal
           content={
             <LeavePage
@@ -111,7 +111,5 @@ const ConditionalModalWrapper = (props) => {
         />
       </>
     )
-  } else return <CallToAction {...props} />
+  } else return <CallToActionWrapper {...props} />
 }
-
-export default ConditionalModalWrapper

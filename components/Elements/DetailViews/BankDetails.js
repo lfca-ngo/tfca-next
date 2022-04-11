@@ -6,7 +6,7 @@ import Image from 'next/image'
 import React from 'react'
 
 import { text } from '../../../utils/Text'
-import CallToAction from '../CallToAction'
+import { CallToAction } from '../CallToAction'
 import { ListSection, TextSection } from '../Sections'
 
 export const BankDetails = ({ actionId, blocks, item, onNext }) => {

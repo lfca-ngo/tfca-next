@@ -5,7 +5,7 @@ import { Button, Space } from 'antd'
 import React from 'react'
 
 import { text } from '../../../utils/Text'
-import CallToAction from '../CallToAction'
+import { CallToAction } from '../CallToAction'
 import { ListSection, TextSection } from '../Sections'
 
 export const ActionDetails = ({ actionId, blocks, item, onNext }) => {

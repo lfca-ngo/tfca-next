@@ -1,7 +1,7 @@
 import { gql } from 'graphql-request'
 import React from 'react'
 
-import ActionModules from '../../../components/ActionModules'
+import { ActionModules } from '../../../components/ActionModules'
 import { Layout } from '../../../components/Layout'
 import { fetchAllStaticData } from '../../../services'
 import { fetchData } from '../../../services/lfca'
