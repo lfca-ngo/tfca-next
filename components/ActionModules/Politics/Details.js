@@ -1,12 +1,14 @@
 import { Carousel } from 'antd'
 import React, { useRef } from 'react'
 
-import { text } from '../../../utils/Text'
-import { ArrowButton } from '../../Elements/ArrowButton'
-import { CardView } from '../../Elements/Cards'
-import { DetailView } from '../../Elements/DetailViews'
-import Category from '../helpers/Category'
-import { StepHeader } from '../helpers/StepHeader'
+import { textBlockToString } from '../../../utils'
+import {
+  ArrowButton,
+  CardView,
+  Category,
+  DetailView,
+  StepHeader,
+} from '../../Elements'
 
 export const Details = ({
   availableFilters,
@@ -29,7 +31,7 @@ export const Details = ({
       <Category
         goBack={prevKey ? () => goTo(prevKey) : undefined}
         icon={icon.url}
-        title={text(blocks['details.title'])}
+        title={textBlockToString(blocks['details.title'])}
       />
 
       <StepHeader

@@ -3,8 +3,7 @@ require('./styles.less')
 import classNames from 'classnames'
 import React from 'react'
 
-import { DefaultLogo } from '../../Elements/DefaultLogo'
-import { Hamburger } from '../../Elements/Hamburger'
+import { DefaultLogo, Hamburger } from '../../Elements'
 import { MenuItem } from './MenuItem'
 
 export const MainMenu = ({ addOnItems, className = '', items }) => {

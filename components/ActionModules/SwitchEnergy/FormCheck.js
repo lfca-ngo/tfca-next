@@ -6,11 +6,13 @@ import {
   useRobinWoodRating,
   useSearchRobinWoodProvider,
 } from '../../../services/switchforclimate'
-import { text } from '../../../utils/Text'
-import { FetchError } from '../../Elements/FetchError'
-import { LoadingSpinner } from '../../Elements/LoadingSpinner'
-import Category from '../helpers/Category'
-import { StepHeader } from '../helpers/StepHeader'
+import { textBlockToString } from '../../../utils'
+import {
+  Category,
+  FetchError,
+  LoadingSpinner,
+  StepHeader,
+} from '../../Elements'
 
 const { Option } = Select
 
@@ -38,7 +40,7 @@ export const FormCheck = ({ goTo, module: { blocks = {}, icon = {} } }) => {
       <Category
         goBack={() => goTo('intro')}
         icon={icon.url}
-        title={text(blocks['category.title'])}
+        title={textBlockToString(blocks['category.title'])}
       />
 
       <StepHeader

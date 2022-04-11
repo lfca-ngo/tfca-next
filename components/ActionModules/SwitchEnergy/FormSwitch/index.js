@@ -5,11 +5,8 @@ import React, { useEffect } from 'react'
 import { useAnalytics } from '../../../../hooks'
 import { SWITCH_ENERGY_SUCCESS } from '../../../../services/analytics'
 import { useSwitchOrder } from '../../../../services/switchforclimate'
-import { text } from '../../../../utils/Text'
-import { CheckList } from '../../../Elements/CheckList'
-import { FetchError } from '../../../Elements/FetchError'
-import Category from '../../helpers/Category'
-import { StepHeader } from '../../helpers/StepHeader'
+import { textBlockToString } from '../../../../utils'
+import { Category, CheckList, FetchError, StepHeader } from '../../../Elements'
 import { Approvals } from './Approvals'
 import { PaymentData } from './PaymentData'
 import { PersonalData } from './PersonalData'
@@ -142,7 +139,7 @@ export const FormSwitch = ({
       <Category
         goBack={() => goTo('results')}
         icon={icon.url}
-        title={text(blocks['category.title'])}
+        title={textBlockToString(blocks['category.title'])}
       />
       <StepHeader title={blocks['form.title']} />
       <CheckList data={lists['order.benefits']?.items} />

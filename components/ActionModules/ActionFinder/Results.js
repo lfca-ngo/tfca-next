@@ -2,14 +2,15 @@ import { ArrowLeftOutlined } from '@ant-design/icons'
 import { Drawer, List } from 'antd'
 import React, { useState } from 'react'
 
-import { LIST_GRIDS } from '../../../utils'
-import { text } from '../../../utils/Text'
-import { CardView } from '../../Elements/Cards'
-import { DetailView } from '../../Elements/DetailViews'
-import { DetailHeader } from '../../Elements/DetailViews/DetailHeader'
-import { ScrollableFilters } from '../../Elements/ScrollableFilters'
-import Category from '../helpers/Category'
-import { StepHeader } from '../helpers/StepHeader'
+import { LIST_GRIDS, textBlockToString } from '../../../utils'
+import {
+  CardView,
+  Category,
+  DetailHeader,
+  DetailView,
+  ScrollableFilters,
+  StepHeader,
+} from '../../Elements'
 
 export const Results = ({
   goTo,
@@ -61,7 +62,7 @@ export const Results = ({
       <Category
         goBack={prevKey ? () => goTo(prevKey) : undefined}
         icon={icon.url}
-        title={text(blocks['category.title'])}
+        title={textBlockToString(blocks['category.title'])}
       />
 
       <StepHeader
@@ -119,5 +120,3 @@ export const Results = ({
     </div>
   )
 }
-
-export default Results

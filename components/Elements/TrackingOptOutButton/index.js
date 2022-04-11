@@ -1,5 +1,5 @@
 import { Button } from 'antd'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import {
   ANALYTICS_CONSENT_COOKIE_NAME,
@@ -9,7 +9,13 @@ import {
 } from '../../../utils'
 
 export const TrackingOptOutButton = ({ label = 'Opt out from analytics' }) => {
-  const [uid, setUid] = useState(getCookie(UID_COOKIE_NAME))
+  const [uid, setUid] = useState(null)
+
+  // We need to set this to open with a useEffect in orde to keep the server and client HTML in sync
+  // See: https://github.com/vercel/next.js/discussions/17443#discussioncomment-87097
+  useEffect(() => {
+    setUid(getCookie(UID_COOKIE_NAME))
+  }, [])
 
   return (
     uid && (

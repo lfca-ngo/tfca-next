@@ -1,13 +1,13 @@
 import React from 'react'
 
 import { ErrorBoundary } from '../ErrorBoundary'
+import { ActionWrapper } from '../Layout/ActionWrapper'
 import { ActionFinderFlow } from './ActionFinder'
-import { ActionWrapper } from './helpers/ActionWrapper'
 import { Politics } from './Politics'
 import { Quiz } from './Quiz'
 import { SwitchEnergy } from './SwitchEnergy'
 
-const ActionModules = (props) => {
+export const ActionModules = (props) => {
   if (!props.actions) return null
 
   const renderAction = (action) => {
@@ -42,5 +42,3 @@ const ActionModules = (props) => {
     </ActionWrapper>
   ))
 }
-
-export default ActionModules

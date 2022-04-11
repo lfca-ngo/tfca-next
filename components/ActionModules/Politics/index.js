@@ -1,10 +1,10 @@
 import { Tabs } from 'antd'
 import { useRouter } from 'next/router'
-import React from 'react'
+import React, { useMemo } from 'react'
 
 import { useFlow } from '../../../hooks'
-import { text } from '../../../utils/Text'
-import { Success } from '../helpers/Success'
+import { textBlockToString } from '../../../utils'
+import { Success } from '../../Success'
 import { Details } from './Details'
 import { Filter } from './Filter'
 import { Results } from './Results'
@@ -21,7 +21,7 @@ export const Politics = ({ module }) => {
     messagesByFilterValue,
     messagesRelatedFilterKey,
     steps,
-  } = React.useMemo(() => {
+  } = useMemo(() => {
     const steps = []
     const parsedFilters = []
     const messagesByFilterValue = {}
@@ -42,7 +42,7 @@ export const Politics = ({ module }) => {
         }
 
         return {
-          description: text(option?.description),
+          description: textBlockToString(option?.description),
           hasOptionalInput: option.hasOptionalInput,
           iconUrl: option.icon?.url,
           label: option.label,

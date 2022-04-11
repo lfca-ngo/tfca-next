@@ -1,7 +1,7 @@
 import { Input } from 'antd'
-import React from 'react'
+import React, { useState } from 'react'
 
-import { Select } from '../../Elements/SelectFilter/Select'
+import { Select } from '../../Elements'
 
 export const SelectPostcodeEnergy = ({
   items = [],
@@ -10,8 +10,8 @@ export const SelectPostcodeEnergy = ({
   placeholderInput,
   placeholderSelect,
 }) => {
-  const [selectValue, setSelectValue] = React.useState()
-  const [inputValue, setInputValue] = React.useState('')
+  const [selectValue, setSelectValue] = useState()
+  const [inputValue, setInputValue] = useState('')
 
   const triggerChange = (changedValue) => {
     onChange?.({

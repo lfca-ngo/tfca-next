@@ -7,14 +7,16 @@ import {
   useOperatorId,
   useSwitchRates,
 } from '../../../services/switchforclimate'
-import { text } from '../../../utils/Text'
-import { CardView } from '../../Elements/Cards'
-import { CheckList } from '../../Elements/CheckList'
-import { DetailView } from '../../Elements/DetailViews'
-import { FetchError } from '../../Elements/FetchError'
-import { spinnerProps } from '../../Elements/LoadingSpinner'
-import Category from '../helpers/Category'
-import { StepHeader } from '../helpers/StepHeader'
+import { textBlockToString } from '../../../utils'
+import {
+  CardView,
+  Category,
+  CheckList,
+  DetailView,
+  FetchError,
+  spinnerProps,
+  StepHeader,
+} from '../../Elements'
 import { EnergyForm } from './Calculate'
 
 const { Option } = Select
@@ -111,7 +113,8 @@ export const Results = ({ goTo, module, nextKey, setStore, store }) => {
         icon={icon.url}
         title={
           <span>
-            {text(blocks['category.title'])} {loading && <LoadingOutlined />}{' '}
+            {textBlockToString(blocks['category.title'])}{' '}
+            {loading && <LoadingOutlined />}{' '}
           </span>
         }
       />

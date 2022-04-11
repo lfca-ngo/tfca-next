@@ -1,14 +1,16 @@
 import { Button, Col, Row } from 'antd'
 import React from 'react'
 
-import { Text, text } from '../../../utils/Text'
-import Category from '../helpers/Category'
-import { StepHeader } from '../helpers/StepHeader'
+import { textBlockToString } from '../../../utils'
+import { Category, StepHeader, Text } from '../../Elements'
 
 export const Intro = ({ goTo, module: { blocks = {}, icon = {} } }) => {
   return (
     <div className="step">
-      <Category icon={icon.url} title={text(blocks['category.title'])} />
+      <Category
+        icon={icon.url}
+        title={textBlockToString(blocks['category.title'])}
+      />
 
       <StepHeader title={blocks['intro.title']} />
 
@@ -20,7 +22,7 @@ export const Intro = ({ goTo, module: { blocks = {}, icon = {} } }) => {
             size="large"
             type="primary"
           >
-            <Text asString block={blocks['intro.button.primary']} />
+            {textBlockToString(blocks['intro.button.primary'])}
           </Button>
         </Col>
         <Col md={12} xs={24}>
@@ -31,7 +33,7 @@ export const Intro = ({ goTo, module: { blocks = {}, icon = {} } }) => {
             size="large"
             type="primary"
           >
-            <Text asString block={blocks['intro.button.secondary']} />
+            {textBlockToString(blocks['intro.button.secondary'])}
           </Button>
         </Col>
       </Row>

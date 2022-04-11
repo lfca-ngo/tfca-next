@@ -2,7 +2,7 @@ import { Tabs } from 'antd'
 import React, { useMemo } from 'react'
 
 import { useFlow } from '../../../hooks'
-import { Success } from '../helpers/Success'
+import { Success } from '../../Success'
 import { Answer } from './Answer'
 import { Intro } from './Intro'
 import { Question } from './Question'

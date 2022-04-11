@@ -2,6 +2,7 @@ import { gql } from 'graphql-request'
 import React from 'react'
 
 import { DisclosureOverview } from '../../components/DisclosureOverview'
+import { Text } from '../../components/Elements'
 import { Layout } from '../../components/Layout'
 import {
   fetchAllStaticContent,
@@ -10,7 +11,6 @@ import {
 } from '../../services/contentful'
 import { fetchData } from '../../services/lfca'
 import { QualifiedCompanyItemFragment } from '../../services/lfca/fragments'
-import { Text } from '../../utils/Text'
 
 const DISCLOSURE_OVERVIEW = 'disclosureOverview'
 
