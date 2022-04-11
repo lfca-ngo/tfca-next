@@ -52,7 +52,7 @@ export const ImageText = (props) => {
     'container-max',
     props.style
   )
-  console.log(props)
+
   switch (props.variant) {
     case 'image-text':
       return (

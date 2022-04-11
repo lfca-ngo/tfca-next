@@ -2,10 +2,10 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { BLOCKS, INLINES } from '@contentful/rich-text-types'
 import React from 'react'
 
-import { HeroWithImage } from '../components/Elements/HeroWithImage'
-import { ImageText } from '../components/Elements/ImageText'
-import { TrackingOptOutButton } from '../components/Elements/TrackingOptOutButton'
-import { TEXT_RENDERER, trackEvent } from '../services/analytics'
+import { TEXT_RENDERER, trackEvent } from '../../../services/analytics'
+import { HeroWithImage } from '../HeroWithImage'
+import { ImageText } from '../ImageText'
+import { TrackingOptOutButton } from '../TrackingOptOutButton'
 
 const renderBlockSection = (entry) => {
   switch (entry.layout) {
