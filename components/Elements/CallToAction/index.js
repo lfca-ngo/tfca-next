@@ -35,7 +35,9 @@ const CallToAction = (props) => {
     default:
       return (
         <Link href={props.slug || props.url || ''} passHref>
-          <CtaButton {...props} />
+          <a>
+            <CtaButton {...props} />
+          </a>
         </Link>
       )
   }

@@ -12,9 +12,9 @@ export const HeroWithImage = ({ actions, assets, body, superText, title }) => {
   const heroImageUrl = assets?.[0]?.fields?.file?.url
 
   return (
-    <div className="hero-with-image container-max">
+    <section className="hero-with-image container-max">
       <Row>
-        <Col md={12} xs={24}>
+        <Col md={15} xs={24}>
           <div className="content">
             {superText && <SuperText text={superText} />}
             <h1>{title}</h1>
@@ -29,7 +29,7 @@ export const HeroWithImage = ({ actions, assets, body, superText, title }) => {
             </div>
           </div>
         </Col>
-        <Col md={12} xs={24}>
+        <Col md={9} xs={24}>
           <div className="img-wrapper">
             <Image
               layout="fill"
@@ -40,6 +40,6 @@ export const HeroWithImage = ({ actions, assets, body, superText, title }) => {
           </div>
         </Col>
       </Row>
-    </div>
+    </section>
   )
 }

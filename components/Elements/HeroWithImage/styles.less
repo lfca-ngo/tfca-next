@@ -1,2 +1,26 @@
-.hero-with-image {
+@import (reference) '../../../styles/variables.less';
+@import (reference) '../../../styles/fonts.less';
+
+section.hero-with-image {
+  padding: 0 0 50px;
+  @media @desktop {
+    padding: 0 0 100px;
+  }
+  .content {
+    @media @desktop {
+      padding: 30px 60px;
+    }
+    h1 {
+      line-height: 1;
+      margin-bottom: 20px;
+      @media @desktop {
+        font-size: 92px;
+      }
+    }
+    p {
+      @media @desktop {
+        font-size: 24px;
+      }
+    }
+  }
 }

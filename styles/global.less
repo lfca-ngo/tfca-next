@@ -380,3 +380,25 @@ label.ant-radio-wrapper {
     padding-left: 0;
   }
 }
+
+// Section blocks for landingpages
+section.section-block {
+  padding: 50px @default-section-padding;
+  @media @desktop {
+    padding: 140px @default-section-padding;
+  }
+  .apply-color-scheme();
+  // for the 4 background colors, we use  white text
+  &.color-1,
+  &.color-2,
+  &.color-3,
+  &.color-4 {
+    .content {
+      color: @white;
+      h1,
+      p {
+        color: @white;
+      }
+    }
+  }
+}
