@@ -1,24 +1,18 @@
-import { Button, Drawer } from 'antd'
+import { Drawer, Menu } from 'antd'
 import Link from 'next/link'
 import React, { useState } from 'react'
 
 import { TOGGLE_Q_AND_A } from '../../../utils'
 import { MenuSection, QuestionAnswer } from '../../Elements'
 
-export const MenuItem = ({ link }) => {
+export const MenuItem = ({ link, ...props }) => {
   const [qaVisible, setQaVisible] = useState(false)
 
   switch (link.action) {
     case TOGGLE_Q_AND_A:
       return (
-        <li key="qa">
-          <Button
-            className="no-padding"
-            onClick={() => setQaVisible(true)}
-            type="link"
-          >
-            {link?.title}
-          </Button>
+        <Menu.Item key="qa" {...props} onClick={() => setQaVisible(!qaVisible)}>
+          {link?.title}
           <Drawer
             className="drawer-md"
             onClose={() => setQaVisible(!qaVisible)}
@@ -26,13 +20,13 @@ export const MenuItem = ({ link }) => {
           >
             <MenuSection content={<QuestionAnswer />} title="Questions?" />
           </Drawer>
-        </li>
+        </Menu.Item>
       )
     default:
       return (
-        <li key={`link-${link.slug}`}>
+        <Menu.Item key={`link-${link.slug}`} {...props}>
           <Link href={link.slug || link.url || '/'}>{link.title}</Link>
-        </li>
+        </Menu.Item>
       )
   }
 }

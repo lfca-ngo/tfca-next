@@ -5,33 +5,71 @@
 section.hero-with-stats {
   @stats-bar-height: 110px;
 
-  padding-bottom: calc(@stats-bar-height / 2 + @default-section-padding);
+  padding-bottom: 0;
   text-align: center;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  @media @desktop {
+    padding-bottom: calc(@stats-bar-height / 2 + @default-section-padding);
+  }
 
   h1 {
     .h1-hero-page();
     margin-bottom: 30px;
   }
   .stats-container {
-    position: absolute;
-    bottom: calc(-@stats-bar-height / 2);
     width: 100%;
-    padding: 0 100px;
+
+    @media @desktop {
+      position: absolute;
+      bottom: calc(-@stats-bar-height / 2);
+      width: calc(100% - 2 * 100px);
+    }
   }
   .stats-wrapper {
     display: flex;
     background: @white;
     align-items: center;
     justify-content: space-between;
-    height: @stats-bar-height;
+    height: auto;
     box-shadow: @box-shadow-base;
+    flex-wrap: wrap;
+
+    @media @desktop {
+      height: @stats-bar-height;
+      flex-wrap: initial;
+    }
+
     .stat-wrapper {
       border-right: 1px solid @medium-grey;
-      flex: 1;
+      flex: 1 0 50%;
+      padding: 12px;
+
+      &:nth-child(1),
+      &:nth-child(2) {
+        border-bottom: 1px solid @medium-grey;
+        @media @desktop {
+          border-bottom: none;
+        }
+      }
+
+      @media @desktop {
+        flex: 1;
+      }
 
       &:last-child {
         border-right: none;
+      }
+
+      .ant-statistic-title {
+        font-size: @font-size-sm;
+        @media @desktop {
+          font-size: @font-size-base;
+        }
       }
 
       .ant-statistic-content {

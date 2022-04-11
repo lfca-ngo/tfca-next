@@ -9,6 +9,21 @@
 
 nav.nav {
   .apply-color-scheme();
+  display: flex;
+  width: 100%;
+
+  .ant-menu {
+    flex: 1;
+    background: transparent;
+    border-bottom: none;
+  }
+
+  .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-selected {
+    color: @white;
+    &::after {
+      border-color: @white;
+    }
+  }
 
   &.absolute {
     position: absolute;
@@ -39,6 +54,7 @@ nav.nav {
   .nav-container {
     display: flex;
     justify-content: space-between;
+    width: 100%;
     @media @desktop {
       max-width: @container-max-width;
       margin: 0 auto;
