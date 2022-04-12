@@ -5,9 +5,9 @@ import classNames from 'classnames'
 import Image from 'next/image'
 import React from 'react'
 
-import { CallToAction } from '../CallToAction'
-import { SuperText } from '../SuperText'
-import { Text } from '../Text'
+import { CallToAction } from '../../Elements/CallToAction'
+import { SuperText } from '../../Elements/SuperText'
+import { Text } from '../../Elements/Text'
 
 const Content = ({ actions, body, superText, title }) => {
   return (
