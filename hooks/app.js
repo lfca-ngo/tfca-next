@@ -8,10 +8,9 @@ import React, {
   useState,
 } from 'react'
 import Confetti from 'react-confetti'
-import { isMobile as isMobileClient } from 'react-device-detect'
 
 import { PAGE_VISIT, trackEvent } from '../services/analytics'
-import { textBlockToString } from '../utils'
+import { MOBILE_BREAKPOINT, textBlockToString } from '../utils'
 import { usePrevious } from './usePrevious'
 
 const AppContext = createContext()
@@ -55,8 +54,13 @@ export const AppProvider = ({ children, content, customization = null }) => {
   // due to SSG we only know if it's mobile
   // after first client side render
   useEffect(() => {
+    const screenWidth =
+      window.innerWidth ||
+      document.documentElement.clientWidth ||
+      document.body.clientWidth
+
     setClient(true)
-    setIsMobile(isMobileClient)
+    setIsMobile(screenWidth <= MOBILE_BREAKPOINT)
 
     trackEvent({
       action_collection_slug: query.actionCollectionSlug,

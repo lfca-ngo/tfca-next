@@ -33,7 +33,7 @@ nav.nav {
         border-color: transparent;
       }
       &:hover {
-        color: fade(@white, 80%);
+        .link-font-style(fade(@white, 80%));
         &::after {
           border-color: transparent;
         }
@@ -70,6 +70,9 @@ nav.nav {
     .ant-menu-submenu,
     .ant-menu-item {
       .link-font-style(@black);
+      &:hover {
+        .link-font-style(fade(@black, 80%));
+      }
     }
   }
 
