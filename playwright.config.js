@@ -1,15 +1,13 @@
-// playwright.config.js
-// @ts-check
-const { devices } = require('@playwright/test')
-
 /** @type {import('@playwright/test').PlaywrightTestConfig} */
 const config = {
   use: {
+    baseURL: process.env.PLAYWRIGHT_TEST_BASE_URL || 'http://localhost:3000',
     browserName: 'chromium',
-    headless: true,
+    headless: false,
     launchOptions: {
-      slowMo: 0,
+      slowMo: 300,
     },
+    permissions: ['clipboard-read'],
     screenshot: 'only-on-failure',
   },
 }
