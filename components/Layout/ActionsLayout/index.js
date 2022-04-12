@@ -48,7 +48,7 @@ const CompanyMenuItem = ({ company }) => {
   }, [])
 
   return (
-    <li>
+    <Menu.Item key="company">
       <Popover
         content={
           <PopoverContent
@@ -75,7 +75,7 @@ const CompanyMenuItem = ({ company }) => {
       >
         <Disclosure data={company} />
       </Drawer>
-    </li>
+    </Menu.Item>
   )
 }
 
