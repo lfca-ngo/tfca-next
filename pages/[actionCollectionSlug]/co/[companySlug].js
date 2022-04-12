@@ -112,11 +112,13 @@ export async function getStaticPaths() {
   return {
     fallback: 'blocking',
     // We only have company pages for the `int` collection and default locale
-    paths: qualifiedCompanies.map(({ company }) => ({
-      params: {
-        actionCollectionSlug: 'int',
-        companySlug: company.micrositeSlug,
-      },
-    })),
+    paths: qualifiedCompanies
+      .filter((c) => c.micrositeSlug)
+      .map(({ company }) => ({
+        params: {
+          actionCollectionSlug: 'int',
+          companySlug: company.micrositeSlug,
+        },
+      })),
   }
 }
