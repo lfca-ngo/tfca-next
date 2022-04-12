@@ -61,6 +61,13 @@ export async function getStaticProps({ locale, params }) {
     ({ company }) => company.micrositeSlug === companySlug
   )
 
+  if (!company) {
+    return {
+      notFound: true,
+      revalidate: 300, // 5min
+    }
+  }
+
   return {
     props: {
       ...staticData,
