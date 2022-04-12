@@ -10,6 +10,7 @@ import React from 'react'
 
 import { useContentBlocks } from '../../../hooks'
 import { textBlockToString } from '../../../utils'
+import { Text } from '../Text'
 
 const STEPS = 5
 
@@ -42,8 +43,8 @@ export const ActionStats = (props) => {
           <Popover
             content={
               <div>
-                {textBlockToString(useContentBlocks('stats.popover.impact'))}
-                {textBlockToString(props.impactDisclaimer)}
+                <Text block={useContentBlocks('stats.popover.impact')} />
+                <Text block={props.impactDisclaimer} />
               </div>
             }
             overlayClassName="popover-md"

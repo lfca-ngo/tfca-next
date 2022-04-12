@@ -4,8 +4,13 @@ import { CloseOutlined } from '@ant-design/icons'
 import { Button, Drawer, Menu, Popover } from 'antd'
 import React, { useEffect, useState } from 'react'
 
-import { useContentNavs, useCustomization } from '../../../hooks'
+import {
+  useContentBlocks,
+  useContentNavs,
+  useCustomization,
+} from '../../../hooks'
 import { scrollToId } from '../../../utils'
+import { textBlockToString } from '../../../utils'
 import { Disclosure } from '../../Disclosure'
 import {
   ChallengeStatus,
@@ -25,7 +30,9 @@ const PopoverContent = ({ name, onClose }) => {
   return (
     <div className="popover-content">
       <div className="content">
-        Find out what {name} is doing for the climate 🌍
+        {textBlockToString(useContentBlocks('menu.company.popover'), {
+          name: name,
+        })}
       </div>
       <Button
         className="no-padding"
