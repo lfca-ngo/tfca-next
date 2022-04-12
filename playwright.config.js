@@ -3,9 +3,9 @@ const config = {
   use: {
     baseURL: process.env.PLAYWRIGHT_TEST_BASE_URL || 'http://localhost:3000',
     browserName: 'chromium',
-    headless: false,
+    headless: true,
     launchOptions: {
-      slowMo: 300,
+      slowMo: 0,
     },
     permissions: ['clipboard-read'],
     screenshot: 'only-on-failure',
