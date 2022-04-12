@@ -11,8 +11,9 @@ export const MenuItem = ({ link, ...props }) => {
   switch (link.action) {
     case TOGGLE_Q_AND_A:
       return (
-        <Menu.Item key="qa" {...props} onClick={() => setQaVisible(!qaVisible)}>
-          {link?.title}
+        <Menu.Item key="qa" {...props}>
+          <span onClick={() => setQaVisible(!qaVisible)}>{link?.title}</span>
+
           <Drawer
             className="drawer-md"
             onClose={() => setQaVisible(!qaVisible)}
