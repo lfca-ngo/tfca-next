@@ -1,8 +1,15 @@
+@import (reference) '../../../styles/variables.less';
+@import (reference) '../../../styles/fonts.less';
+
 .ant-btn.cta-button {
   display: flex;
   align-items: center;
   justify-content: center;
   span:nth-child(2) {
     margin-left: 8px;
+  }
+  &.ant-btn-link {
+    padding: 0;
+    color: @secondary-color;
   }
 }

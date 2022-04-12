@@ -26,6 +26,8 @@ const renderCustomComponent = (id, data) => {
 export default function Page({ items, pageData }) {
   return (
     <Layout
+      layout={pageData?.layout}
+      navigationStyle={pageData?.navigationStyle}
       style={pageData?.style}
       subtitle={pageData?.subtitle}
       title={pageData?.title}

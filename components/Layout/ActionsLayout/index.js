@@ -1,7 +1,7 @@
 require('./styles.less')
 
 import { CloseOutlined } from '@ant-design/icons'
-import { Button, Drawer, Popover } from 'antd'
+import { Button, Drawer, Menu, Popover } from 'antd'
 import React, { useEffect, useState } from 'react'
 
 import { useContentNavs, useCustomization } from '../../../hooks'
@@ -20,7 +20,6 @@ import { Footer } from '../Footer'
 import { Nav } from '../Nav'
 import { MainMenu } from '../Nav'
 import { Template } from '../Template'
-import { TopBar } from '../TopBar'
 
 const PopoverContent = ({ name, onClose }) => {
   return (
@@ -86,18 +85,16 @@ export const ActionsLayout = ({ children, company, nav, openGraphInfo }) => {
   const customization = useCustomization()
 
   let addOnItems = [
-    <li key="intl">
+    <Menu.Item key="intl">
       <IntlSelector />
-    </li>,
+    </Menu.Item>,
   ]
   if (company) {
     addOnItems = [<CompanyMenuItem company={company} key="co" />, ...addOnItems]
   }
 
   return (
-    <Template>
-      <TopBar />
-
+    <Template withTopbar>
       <ActionsNav
         actions={nav}
         collapsed={collapsed}
@@ -109,7 +106,12 @@ export const ActionsLayout = ({ children, company, nav, openGraphInfo }) => {
             />
             <MenuSection content={<QuestionAnswer />} title="Questions" />
             <MenuSection
-              content={<MainMenu items={mainNav.filter((i) => !i.action)} />}
+              content={
+                <MainMenu
+                  items={mainNav.filter((i) => !i.action)}
+                  mode="inline"
+                />
+              }
               title="Menu"
             />
           </div>

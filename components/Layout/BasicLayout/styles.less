@@ -16,3 +16,18 @@
     }
   }
 }
+
+.landing-layout {
+  background: @light-white;
+  overflow-x: hidden;
+  .page-body {
+    section {
+      &:first-child {
+        padding-top: @navbar-height;
+        @media @desktop {
+          padding-top: @navbar-height + 50px;
+        }
+      }
+    }
+  }
+}

@@ -9,10 +9,10 @@ import { Footer } from '../Footer'
 import { Nav } from '../Nav'
 import { Template } from '../Template'
 
-export const BasicLayout = ({ children, style, subtitle, title }) => {
-  const mainNav = useContentNavs('mainHeaderNav')?.elements
+// simple pages like imprint, privacy, etc.
+const DefaultLayout = ({ children, mainNav, style, subtitle, title }) => {
   return (
-    <Template className="default-layout">
+    <Template className="default-layout" withTopbar>
       <Nav className={style} menuItems={mainNav} />
       <DefaultHero className={style} subtitle={subtitle} title={title} />
       <main className="container">
@@ -21,4 +21,31 @@ export const BasicLayout = ({ children, style, subtitle, title }) => {
       <Footer />
     </Template>
   )
+}
+
+// pages with custom sections like about campaign etc.
+const LandingLayout = ({ children, mainNav, navigationStyle, style }) => {
+  return (
+    <Template className="landing-layout" withTopbar>
+      <Nav
+        className={`${style || ''} absolute`}
+        menuItems={mainNav}
+        mode={navigationStyle}
+      />
+      <main>
+        <ErrorBoundary>{children}</ErrorBoundary>
+      </main>
+      <Footer />
+    </Template>
+  )
+}
+
+export const BasicLayout = (props) => {
+  const mainNav = useContentNavs('mainHeaderNav')?.elements
+  switch (props.layout) {
+    case 'landing':
+      return <LandingLayout {...props} mainNav={mainNav} />
+    default:
+      return <DefaultLayout {...props} mainNav={mainNav} />
+  }
 }

@@ -3,7 +3,6 @@ require('./styles.less')
 import { Form, Popover, Select } from 'antd'
 import { useRouter } from 'next/router'
 import React, { useMemo } from 'react'
-import { isMobile } from 'react-device-detect'
 
 import { useContent } from '../../hooks'
 
@@ -94,7 +93,6 @@ export const IntlSelector = () => {
         }
         destroyTooltipOnHide={true}
         overlayClassName="intl-selector-popover"
-        placement={isMobile ? 'right' : 'right'}
       >
         <div className="intl-icon">
           <div
