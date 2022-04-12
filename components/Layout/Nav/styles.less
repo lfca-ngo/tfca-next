@@ -28,6 +28,23 @@ nav.nav {
       display: flex;
       align-items: center;
       line-height: 1;
+      &::after {
+        border-color: transparent;
+      }
+      &:hover {
+        color: fade(@white, 80%);
+        &::after {
+          border-color: transparent;
+        }
+      }
+      .submenu-icon {
+        font-size: 14px;
+        margin-left: 8px;
+        transition: all 0.2s ease;
+        &.open {
+          transform: rotate(180deg);
+        }
+      }
     }
 
     .ant-menu-title-content {

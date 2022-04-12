@@ -1,28 +1,47 @@
 require('./styles.less')
 
+import { DownOutlined } from '@ant-design/icons'
 import { Menu } from 'antd'
 import classNames from 'classnames'
-import React from 'react'
+import React, { useState } from 'react'
 
 import { DefaultLogo, Hamburger } from '../../Elements'
 import { MenuItem } from './MenuItem'
 
 const { SubMenu } = Menu
 
-export const MainMenu = ({ addOnItems, className = '', items }) => {
+export const MainMenu = ({ addOnItems, className = '', items, mode }) => {
+  const [openSubKeys, setOpenSubKeys] = useState([])
   return (
-    <Menu className={`main-menu ${className}`} mode="horizontal">
+    <Menu
+      className={`main-menu ${className}`}
+      mode={mode || 'horizontal'}
+      onOpenChange={(keys) => setOpenSubKeys(keys)}
+      selectedKeys={[]}
+    >
       {items?.map((item, i) => {
+        const itemKey = `item-${i}`
+        const isOpen = openSubKeys.includes(itemKey)
         if (item?.elements) {
           return (
-            <SubMenu key={`item-${i}`} title={item.title}>
+            <SubMenu
+              key={itemKey}
+              title={
+                <span>
+                  {item.title}
+                  <DownOutlined
+                    className={classNames('submenu-icon', { open: isOpen })}
+                  />
+                </span>
+              }
+            >
               {item.elements.map((item, j) => (
-                <MenuItem key={`sub-${{ j }}`} link={item} />
+                <MenuItem key={`sub-${j}`} link={item} />
               ))}
             </SubMenu>
           )
         }
-        return <MenuItem key={`item-${i}`} link={item} />
+        return <MenuItem key={itemKey} link={item} />
       })}
       {addOnItems && addOnItems.map((item) => item)}
     </Menu>
@@ -40,7 +59,13 @@ export const Nav = ({ addOnItems, className, menuItems, mode }) => {
           items={menuItems}
         />
         <Hamburger
-          content={<MainMenu addOnItems={addOnItems} items={menuItems} />}
+          content={
+            <MainMenu
+              addOnItems={addOnItems}
+              items={menuItems}
+              mode="vertical"
+            />
+          }
           mode={mode}
         />
       </div>
