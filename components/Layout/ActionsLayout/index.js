@@ -106,7 +106,12 @@ export const ActionsLayout = ({ children, company, nav, openGraphInfo }) => {
             />
             <MenuSection content={<QuestionAnswer />} title="Questions" />
             <MenuSection
-              content={<MainMenu items={mainNav.filter((i) => !i.action)} />}
+              content={
+                <MainMenu
+                  items={mainNav.filter((i) => !i.action)}
+                  mode="inline"
+                />
+              }
               title="Menu"
             />
           </div>

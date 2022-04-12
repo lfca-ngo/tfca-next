@@ -12,6 +12,7 @@ const { SubMenu } = Menu
 
 export const MainMenu = ({ addOnItems, className = '', items, mode }) => {
   const [openSubKeys, setOpenSubKeys] = useState([])
+  console.log('mode', mode)
   return (
     <Menu
       className={`main-menu ${className}`}
@@ -60,11 +61,7 @@ export const Nav = ({ addOnItems, className, menuItems, mode }) => {
         />
         <Hamburger
           content={
-            <MainMenu
-              addOnItems={addOnItems}
-              items={menuItems}
-              mode="vertical"
-            />
+            <MainMenu addOnItems={addOnItems} items={menuItems} mode="inline" />
           }
           mode={mode}
         />
