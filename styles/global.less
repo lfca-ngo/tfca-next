@@ -147,13 +147,17 @@ body {
 
   // on inline menu there is
   // a default caret icon
-  .ant-menu-submenu-inline {
-    .submenu-icon {
-      display: none;
+  .main-menu.ant-menu-inline {
+    border-right: none;
+    .ant-menu-submenu-inline {
+      .submenu-icon {
+        display: none;
+      }
     }
-  }
-  .ant-menu-submenu-title {
-    padding-left: 0 !important;
+    .ant-menu-item,
+    .ant-menu-submenu-title {
+      padding-left: 0 !important;
+    }
   }
 
   .back-btn-wrapper {
