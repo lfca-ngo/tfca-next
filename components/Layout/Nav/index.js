@@ -12,7 +12,6 @@ const { SubMenu } = Menu
 
 export const MainMenu = ({ addOnItems, className = '', items, mode }) => {
   const [openSubKeys, setOpenSubKeys] = useState([])
-  console.log('mode', mode)
   return (
     <Menu
       className={`main-menu ${className}`}

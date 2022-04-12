@@ -6,6 +6,7 @@
   .font-medium(@color);
   letter-spacing: 0;
   font-size: @font-size-sm;
+  line-height: 1;
 }
 
 nav.nav {
@@ -23,20 +24,25 @@ nav.nav {
     align-self: flex-start;
 
     .ant-menu-submenu,
+    .ant-menu-submenu-open,
     .ant-menu-item {
       padding: 20px 30px;
-      .link-font-style(@white);
       display: flex;
       align-items: center;
-      line-height: 1;
+
       &::after {
         border-color: transparent;
       }
       &:hover {
-        .link-font-style(fade(@white, 80%));
+        .ant-menu-title-content {
+          .link-font-style(fade(@white, 80%));
+        }
         &::after {
           border-color: transparent;
         }
+      }
+      .ant-menu-title-content {
+        .link-font-style(@white);
       }
       .submenu-icon {
         font-size: 14px;
@@ -69,9 +75,13 @@ nav.nav {
     background-image: none;
     .ant-menu-submenu,
     .ant-menu-item {
-      .link-font-style(@black);
       &:hover {
-        .link-font-style(fade(@black, 80%));
+        .ant-menu-title-content {
+          .link-font-style(fade(@black, 80%));
+        }
+      }
+      .ant-menu-title-content {
+        .link-font-style(@black);
       }
     }
   }
