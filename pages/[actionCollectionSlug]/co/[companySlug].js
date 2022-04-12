@@ -45,22 +45,42 @@ export async function getStaticProps({ locale, params }) {
   /**
    * NOTE:
    * We fetch ALL companies once (already on `getStaticPaths`)
-   * and re-use the result from cache
+   * and re-use the result from cache here
    */
-  const { qualifiedCompanies } = await fetchData(
-    allParticipatingCompaniesQuery,
-    {
+  const cachedQualifiedCompanies = await fetchData({
+    query: allParticipatingCompaniesQuery,
+    variables: {
       input: {
         filter: {
           achievementContentIds: ['tfca2022Qualification'],
         },
       },
-    }
-  )
-  const company = qualifiedCompanies.find(
+    },
+  })
+  let company = cachedQualifiedCompanies?.qualifiedCompanies?.find(
     ({ company }) => company.micrositeSlug === companySlug
   )
 
+  if (!company) {
+    // If the company was not part of the initial build,
+    // we double check if the company has qualified in the meantime (after the initial build)
+    const freshQualifiedCompanies = await fetchData({
+      query: allParticipatingCompaniesQuery,
+      skipCache: true,
+      variables: {
+        input: {
+          filter: {
+            achievementContentIds: ['tfca2022Qualification'],
+            companyMicrositeSlugs: [companySlug],
+          },
+        },
+      },
+    })
+
+    company = freshQualifiedCompanies?.qualifiedCompanies[0]
+  }
+
+  // If the company is still not qualified, we cache the 404 for 5 mins.
   if (!company) {
     return {
       notFound: true,
@@ -78,16 +98,16 @@ export async function getStaticProps({ locale, params }) {
 }
 
 export async function getStaticPaths() {
-  const { qualifiedCompanies } = await fetchData(
-    allParticipatingCompaniesQuery,
-    {
+  const { qualifiedCompanies } = await fetchData({
+    query: allParticipatingCompaniesQuery,
+    variables: {
       input: {
         filter: {
           achievementContentIds: ['tfca2022Qualification'],
         },
       },
-    }
-  )
+    },
+  })
 
   return {
     fallback: 'blocking',

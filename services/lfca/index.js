@@ -3,7 +3,7 @@ import fs from 'fs'
 import { request } from 'graphql-request'
 import path from 'path'
 
-export const fetchData = async (query, variables) => {
+export const fetchData = async ({ query, skipCache = false, variables }) => {
   const hash = crypto
     .createHash('md5')
     .update(query + JSON.stringify(variables || {}))
@@ -13,7 +13,7 @@ export const fetchData = async (query, variables) => {
 
   let data
 
-  if (!process.env.DISABLE_LFCA_SERVICE_CACHE) {
+  if (!process.env.DISABLE_LFCA_SERVICE_CACHE && !skipCache) {
     // Try getting the data from cache
     try {
       data = JSON.parse(fs.readFileSync(CACHE_PATH, 'utf8'))

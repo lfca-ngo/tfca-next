@@ -65,16 +65,16 @@ export async function getStaticProps({ locale, params }) {
 
   // fetch qualified companies only if needed
   if (pageData?.componentId === DISCLOSURE_OVERVIEW) {
-    const { qualifiedCompanies } = await fetchData(
-      allParticipatingCompaniesQuery,
-      {
+    const { qualifiedCompanies } = await fetchData({
+      query: allParticipatingCompaniesQuery,
+      variables: {
         input: {
           filter: {
             achievementContentIds: ['tfca2022Qualification'],
           },
         },
-      }
-    )
+      },
+    })
     data.items = qualifiedCompanies
   }
 
