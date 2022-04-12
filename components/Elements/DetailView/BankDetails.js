@@ -1,7 +1,6 @@
 require('./bankDetails.less')
 
-import { ShareAltOutlined } from '@ant-design/icons'
-import { Button, Divider, Space } from 'antd'
+import { Divider, Space } from 'antd'
 import Image from 'next/image'
 import React from 'react'
 
@@ -40,13 +39,6 @@ export const BankDetails = ({ actionId, blocks, item, onNext }) => {
               })}
               type="primary"
               url={item.referralUrl}
-            />
-
-            <Button
-              block
-              icon={<ShareAltOutlined />}
-              shape="round"
-              type="primary"
             />
           </Space>
         </div>

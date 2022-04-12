@@ -1,7 +1,6 @@
 require('./actionDetails.less')
 
-import { ShareAltOutlined } from '@ant-design/icons'
-import { Button, Space } from 'antd'
+import { Space } from 'antd'
 import React from 'react'
 
 import { textBlockToString } from '../../../utils'
@@ -13,9 +12,6 @@ export const ActionDetails = ({ actionId, blocks, item, onNext }) => {
     <div className="detail-view action">
       <header>
         <div className="title">{item.name}</div>
-        <div className="actions">
-          <Button icon={<ShareAltOutlined />} shape="round" type="primary" />
-        </div>
       </header>
 
       <TextSection
