@@ -1,7 +1,7 @@
-import { expect, test } from '@playwright/test'
+import { test } from '@playwright/test'
 import clipboard from 'clipboardy'
 
-test('Action Politics', async ({ baseURL, page }) => {
+test('Basic share', async ({ baseURL, page }) => {
   await page.goto(baseURL)
 
   await page.locator('button:has-text("Accept all")').click()
