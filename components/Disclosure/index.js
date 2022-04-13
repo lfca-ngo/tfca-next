@@ -154,7 +154,7 @@ export const Disclosure = ({ data }) => {
                 >
                   {action.description && <div>{action.description}</div>}
 
-                  {action.requirements && (
+                  {action.requirements.length > 0 ? (
                     <div>
                       <h5>Requirements</h5>
                       <ul className="green-list">
@@ -167,6 +167,8 @@ export const Disclosure = ({ data }) => {
                         })}
                       </ul>
                     </div>
+                  ) : (
+                    'This action does not have further requirements.'
                   )}
                 </Panel>
               )
