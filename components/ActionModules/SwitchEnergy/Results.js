@@ -141,8 +141,11 @@ export const Results = ({ goTo, module, nextKey, setStore, store }) => {
                   type="primary"
                 />
                 <Select onChange={changeSorting} value={sorting}>
-                  <Option value="price">Price</Option>
-                  <Option value="impact">Impact</Option>
+                  {SORT.map((item) => (
+                    <Option key={item.type} value={item.type}>
+                      {item.label}
+                    </Option>
+                  ))}
                 </Select>
               </Space>
             </Col>
