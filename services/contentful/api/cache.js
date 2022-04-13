@@ -8,7 +8,11 @@ export const createKey = (query) => {
 
 export const setData = (key, data) => {
   const CACHE_PATH = path.join(__dirname, `.${key}`)
-  fs.writeFileSync(CACHE_PATH, JSON.stringify(data), 'utf8')
+  try {
+    fs.writeFileSync(CACHE_PATH, JSON.stringify(data), 'utf8')
+  } catch (e) {
+    // Nothing to do here
+  }
 }
 
 export const getData = (key) => {
