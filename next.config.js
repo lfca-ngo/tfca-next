@@ -6,10 +6,10 @@ const withPWA = require('next-pwa')
 const nextConfig = {
   i18n: {
     defaultLocale: 'en',
-    localeDetection: false,
+    localeDetection: true,
     // IMPORTANT: This must! match all possible isoCodes in the `languagesCollection` in contentful!!!
     // TODO: fetch contentful languages dynamically
-    locales: ['de', 'en', 'en-US', 'tr', 'es', 'fr'],
+    locales: ['de', 'en-GB', 'en-US', 'en', 'es', 'fr', 'tr'],
   },
   images: {
     domains: [
@@ -32,11 +32,50 @@ const nextConfig = {
      * - change permanent redirect from `false` to `true`
      */
     return [
+      // Redirects for root
+      {
+        destination: '/de/deu',
+        locale: false,
+        permanent: false,
+        source: '/de',
+      },
+      {
+        destination: '/gbr',
+        locale: false,
+        permanent: false,
+        source: '/en-GB',
+      },
+      {
+        destination: '/int', // TODO: Redirct to US collection once it is configured
+        locale: false,
+        permanent: false,
+        source: '/en-US',
+      },
       {
         destination: '/int',
+        locale: false,
         permanent: false,
-        source: '/',
+        source: '/en',
       },
+      {
+        destination: '/es/esp',
+        locale: false,
+        permanent: false,
+        source: '/es',
+      },
+      {
+        destination: '/fr/fra',
+        locale: false,
+        permanent: false,
+        source: '/fr',
+      },
+      {
+        destination: '/tr/tur',
+        locale: false,
+        permanent: false,
+        source: '/tr',
+      },
+      // Redirects for company & intite pages that fo not provide any region
       {
         destination: '/int/co/:companySlug',
         permanent: false,
