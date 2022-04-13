@@ -11,16 +11,7 @@ export const OrganizationCard = ({ item, onNext }) => {
   return (
     <Card
       className="content-card organization"
-      cover={
-        <Image
-          layout="fill"
-          objectFit="cover"
-          src={
-            item.hero?.url ||
-            'https://images.ctfassets.net/f3bw2oxveb3i/49Z4fNNyNM8i3zKlk2B39z/3f34830efeb89c1751dfa53ede4e449a/placeholder.jpg'
-          }
-        />
-      }
+      cover={<Image layout="fill" objectFit="cover" src={item.hero?.url} />}
       onClick={handleNext}
     >
       <header>

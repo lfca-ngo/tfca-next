@@ -52,11 +52,13 @@ export const Footer = () => {
                   <Panel header={partners?.title} key={`${i}`}>
                     {partners?.data.map((partner, j) => (
                       <div className="partner" key={`partner-${j}`}>
-                        <Image
-                          layout="fill"
-                          objectFit="contain"
-                          src={partner.icon?.url}
-                        />
+                        {partner.icon?.url && (
+                          <Image
+                            layout="fill"
+                            objectFit="contain"
+                            src={partner.icon?.url}
+                          />
+                        )}
                       </div>
                     ))}
                   </Panel>

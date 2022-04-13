@@ -87,7 +87,7 @@ export const DisclosureOverview = ({ items }) => {
                         height={60}
                         layout="intrinsic"
                         objectFit="contain"
-                        src={item.company.logoUrl}
+                        src={item.company?.logoUrl}
                         width={120}
                       />
                     </div>
@@ -110,22 +110,6 @@ export const DisclosureOverview = ({ items }) => {
                         </div>
                       )}
                     </TabPane>
-                    {/* {item.campaignImages && (
-                        <TabPane key="c" tab={'Material'}>
-                          <Carousel
-                            className="preview-images"
-                            infinite={false}
-                            slidesToShow={2}
-                          >
-                            {item.campaignImages.map((image, i) => (
-                              <Image
-                                key={`img-${i}`}
-                                src={image.campaignImageUrl}
-                              />
-                            ))}
-                          </Carousel>
-                        </TabPane>
-                      )} */}
                   </Tabs>
 
                   <Button
