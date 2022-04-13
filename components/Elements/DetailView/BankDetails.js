@@ -1,6 +1,6 @@
 require('./bankDetails.less')
 
-import { Divider, Popover, Space } from 'antd'
+import { Divider, Space } from 'antd'
 import Image from 'next/image'
 import React from 'react'
 
@@ -10,7 +10,6 @@ import { ListSection, TextSection } from '../Sections'
 import { Text } from '../Text'
 
 export const BankDetails = ({ actionId, blocks, item, onNext }) => {
-  console.log(item)
   return (
     <div className="detail-view bank">
       <header>
