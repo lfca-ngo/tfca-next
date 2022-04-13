@@ -2,7 +2,7 @@ import { InfoCircleOutlined } from '@ant-design/icons'
 import { Form, Input, Popover, Select } from 'antd'
 import React from 'react'
 
-export const MeterInput = () => {
+export const MeterInput = ({ blocks }) => {
   return (
     <>
       <Form.Item

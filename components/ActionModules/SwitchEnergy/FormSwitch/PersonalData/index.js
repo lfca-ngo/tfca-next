@@ -38,6 +38,7 @@ export const PersonalData = ({
         {({ getFieldValue }) =>
           getFieldValue('separateBillingAddress') ? (
             <AddressInput
+              blocks={blocks}
               name="billingAddress"
               requireSalutation={requireSalutation}
             />
