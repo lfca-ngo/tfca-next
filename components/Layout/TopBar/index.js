@@ -14,7 +14,8 @@ export const TopBar = () => {
   if (!topbarContent.active) return null
   return (
     <div className={classNames('top-bar', { hidden })}>
-      <div className="text">{topbarContent.text}</div>
+      <div className="text hidden md-max">{topbarContent.text}</div>
+      <div className="text hidden md">{topbarContent.mobileText}</div>
       <Button className="no-padding" type="link">
         {topbarContent?.link?.title}
       </Button>
