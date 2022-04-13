@@ -149,7 +149,7 @@ export const Approvals = ({
       >
         <Checkbox>
           <span>
-            {textBlockToString(blocks['switch.approvals.switchterms.text1'])}
+            {textBlockToString(blocks['switch.approvals.switchterms.text1'])}{' '}
             <a
               href="https://switch-for-climate.de/agb"
               rel="noopener noreferrer"
@@ -157,7 +157,7 @@ export const Approvals = ({
             >
               {textBlockToString(blocks['switch.approvals.switchterms.text2'])}
             </a>{' '}
-            {textBlockToString(blocks['switch.approvals.switchterms.text3'])}
+            {textBlockToString(blocks['switch.approvals.switchterms.text3'])}{' '}
             <Popover
               content={textBlockToString(
                 blocks['switch.approvals.switchterms.popover.content']
