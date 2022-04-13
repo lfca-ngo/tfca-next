@@ -52,11 +52,11 @@ export const VideoText = (props) => {
   return (
     <section className={sectionClassNames}>
       <Row className="container-max">
-        <Col md={10} xs={24}>
-          <VideoContainer src={heroVideoUrl} />
-        </Col>
-        <Col md={14} xs={24}>
+        <Col md={{ offset: 4, span: 16 }} xs={24}>
           <Content {...props} />
+        </Col>
+        <Col md={{ offset: 4, span: 16 }} xs={24}>
+          <VideoContainer src={heroVideoUrl} />
         </Col>
       </Row>
     </section>

@@ -1,0 +1,52 @@
+@import (reference) '../../../styles/variables.less';
+@import (reference) '../../../styles/fonts.less';
+
+.tips-carousel {
+  @space-bottom: 30px;
+  @button-size: 20px;
+
+  margin: 20px 0 0;
+  position: relative;
+  padding-bottom: @space-bottom;
+  .tip {
+    display: flex;
+    flex-direction: row;
+    @media @desktop {
+      flex-direction: row;
+    }
+    .tip-icon {
+      color: @white;
+      width: 40px;
+      font-size: 28px;
+      display: flex;
+      path {
+        stroke: @white;
+      }
+      @media @desktop {
+        width: 50px;
+      }
+    }
+    .tip-description {
+      flex: 1;
+      color: @white;
+    }
+  }
+  .custom-arrow {
+    top: auto;
+    bottom: calc(-@space-bottom / 2 - @button-size / 2);
+    left: auto;
+    .anticon {
+      font-size: @button-size;
+      color: @white;
+    }
+    &.slick-disabled {
+      opacity: 0.5;
+    }
+  }
+  .custom-arrow.slick-next {
+    right: 0;
+  }
+  .custom-arrow.slick-prev {
+    right: 30px;
+  }
+}

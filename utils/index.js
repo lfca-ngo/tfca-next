@@ -65,6 +65,11 @@ export const scrollToId = (id) => {
   section?.scrollIntoView({ behavior: 'smooth', block: 'start' })
 }
 
+export const scrollToSecondSection = () => {
+  const section = document.querySelector(`section:nth-child(2)`)
+  section?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+}
+
 export const LIST_GRIDS = {
   '1-col': {
     gutter: 16,
