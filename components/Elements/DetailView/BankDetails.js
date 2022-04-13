@@ -1,12 +1,13 @@
 require('./bankDetails.less')
 
-import { Divider, Space } from 'antd'
+import { Divider, Popover, Space } from 'antd'
 import Image from 'next/image'
 import React from 'react'
 
 import { textBlockToString } from '../../../utils'
 import { CallToAction } from '../CallToAction'
 import { ListSection, TextSection } from '../Sections'
+import { Text } from '../Text'
 
 export const BankDetails = ({ actionId, blocks, item, onNext }) => {
   return (
@@ -54,9 +55,23 @@ export const BankDetails = ({ actionId, blocks, item, onNext }) => {
         items={item.sustainability}
         title={textBlockToString(blocks['label.sustainability'])}
       />
+      <ListSection
+        items={item.sustainabilityRating}
+        title={textBlockToString(blocks['label.rating'])}
+      />
       <TextSection
         text={item?.description}
-        title={textBlockToString(blocks['label.about'])}
+        title={
+          <Popover
+            content={<Text block={blocks['sustainability.rating.explainer']} />}
+          >
+            {textBlockToString(blocks['label.about'])}
+          </Popover>
+        }
+      />
+      <TextSection
+        text={blocks['finance.disclaimer']}
+        title={textBlockToString(blocks['label.additional'])}
       />
     </div>
   )

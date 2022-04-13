@@ -72,7 +72,11 @@ export const LeavePage = ({
           >
             {leavePageButtonPrimary}
           </Button>
-          <a href={destinationUrl} rel="noopener noreferrer" target="_blank">
+          <a
+            href={`${destinationUrl}?ref=tfca`}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
             <Button
               block
               icon={<LinkOutlined />}
