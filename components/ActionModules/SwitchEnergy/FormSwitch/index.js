@@ -140,7 +140,6 @@ export const FormSwitch = ({
     }
   }, [data, goTo, id, nextKey, trackEvent])
 
-  console.log('blocks', blocks)
   return (
     <div className="step">
       <Category
