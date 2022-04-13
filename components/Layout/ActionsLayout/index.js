@@ -71,17 +71,11 @@ const CompanyMenuItem = ({ company }) => {
             onClose={() => setPopoverOpen(false)}
           />
         }
-        overlayClassName="popover-md"
+        overlayClassName="popover-md hidden md-max"
         visible={popoverOpen}
         zIndex={10}
       >
-        <Button
-          className="no-padding"
-          onClick={() => setIsOpen(true)}
-          type="link"
-        >
-          {company?.company?.name}
-        </Button>
+        <span onClick={() => setIsOpen(true)}>{company?.company?.name}</span>
       </Popover>
       <Drawer
         className="drawer-md"
@@ -123,6 +117,7 @@ export const ActionsLayout = ({ children, company, nav, openGraphInfo }) => {
             <MenuSection
               content={
                 <MainMenu
+                  addOnItems={addOnItems}
                   items={mainNav.filter((i) => !i.action)}
                   mode="inline"
                 />
