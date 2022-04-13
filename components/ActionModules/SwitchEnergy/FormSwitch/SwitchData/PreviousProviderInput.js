@@ -33,7 +33,7 @@ export const PreviousProviderInput = ({
             <div>
               {textBlockToString(
                 blocks['switch.connect.prevprovider.customerid.label.text1']
-              )}
+              )}{' '}
               <Popover
                 content={
                   <div>

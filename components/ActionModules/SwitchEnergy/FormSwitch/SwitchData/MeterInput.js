@@ -46,7 +46,7 @@ export const MeterInput = ({ blocks }) => {
                 <div>
                   {textBlockToString(
                     blocks['switch.connect.meter.number.label.text1']
-                  )}
+                  )}{' '}
                   <Popover
                     content={
                       <div>
@@ -83,8 +83,7 @@ export const MeterInput = ({ blocks }) => {
                 <div>
                   {textBlockToString(
                     blocks['switch.connect.meter.maloid.label.text1']
-                  )}
-
+                  )}{' '}
                   <Popover
                     content={
                       <div>
