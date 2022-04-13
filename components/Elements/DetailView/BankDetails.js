@@ -10,6 +10,7 @@ import { ListSection, TextSection } from '../Sections'
 import { Text } from '../Text'
 
 export const BankDetails = ({ actionId, blocks, item, onNext }) => {
+  console.log(item)
   return (
     <div className="detail-view bank">
       <header>
@@ -47,6 +48,11 @@ export const BankDetails = ({ actionId, blocks, item, onNext }) => {
 
       <Divider />
 
+      <TextSection
+        text={item?.description}
+        title={textBlockToString(blocks['label.about'])}
+      />
+
       <ListSection
         items={item.benefits}
         title={textBlockToString(blocks['label.benefits'])}
@@ -56,19 +62,10 @@ export const BankDetails = ({ actionId, blocks, item, onNext }) => {
         title={textBlockToString(blocks['label.sustainability'])}
       />
       <ListSection
-        items={item.sustainabilityRating}
+        items={item.sustainabilityRanking}
         title={textBlockToString(blocks['label.rating'])}
       />
-      <TextSection
-        text={item?.description}
-        title={
-          <Popover
-            content={<Text block={blocks['sustainability.rating.explainer']} />}
-          >
-            {textBlockToString(blocks['label.about'])}
-          </Popover>
-        }
-      />
+      <Text block={blocks['sustainability.rating.explainer']} />
       <TextSection
         text={blocks['finance.disclaimer']}
         title={textBlockToString(blocks['label.additional'])}
