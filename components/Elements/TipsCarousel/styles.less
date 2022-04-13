@@ -10,13 +10,21 @@
   padding-bottom: @space-bottom;
   .tip {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     @media @desktop {
       flex-direction: row;
     }
     .tip-icon {
-      width: 50px;
-      font-size: 24px;
+      color: @white;
+      width: 40px;
+      font-size: 28px;
+      display: flex;
+      path {
+        stroke: @white;
+      }
+      @media @desktop {
+        width: 50px;
+      }
     }
     .tip-description {
       flex: 1;
