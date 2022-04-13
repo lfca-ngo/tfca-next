@@ -2,6 +2,8 @@ import { InfoCircleOutlined } from '@ant-design/icons'
 import { Form, Input, Popover, Select } from 'antd'
 import React from 'react'
 
+import { textBlockToString } from '../../../../../utils'
+
 export const MeterInput = ({ blocks }) => {
   return (
     <>

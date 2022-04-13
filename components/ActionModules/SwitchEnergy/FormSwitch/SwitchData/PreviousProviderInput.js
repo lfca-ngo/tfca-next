@@ -24,7 +24,7 @@ export const PreviousProviderInput = ({
           },
         ]}
       >
-        <ProviderSearchInput />
+        <ProviderSearchInput blocks={blocks} />
       </Form.Item>
 
       {requirePreviousContractCustomerId && (

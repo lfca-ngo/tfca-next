@@ -2,9 +2,10 @@ import { Form, Input, Select } from 'antd'
 import moment from 'moment'
 import React from 'react'
 
+import { textBlockToString } from '../../../../../utils'
 import { DateStringPicker } from '../DateStringPicker'
 
-export const DesiredDeliveryInput = ({ disableDesiredDelivery }) => {
+export const DesiredDeliveryInput = ({ blocks, disableDesiredDelivery }) => {
   return (
     <>
       <Form.Item
