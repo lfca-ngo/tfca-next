@@ -249,6 +249,7 @@ export const FormSwitch = ({
           <Form.Item>
             <Button
               block
+              disabled={isLoading}
               htmlType="submit"
               icon={<LockOutlined />}
               loading={isLoading}
@@ -258,6 +259,18 @@ export const FormSwitch = ({
               {error ? 'Retry' : 'Testorder platzieren (BETA)'}
             </Button>
           </Form.Item>
+
+          <p>
+            Du erhältst im Anschluss eine E-Mail mit allen Informationen von
+            Switch for Climate. Trotzdem noch unsicher? Dann melde dich einfach
+            bei{' '}
+            <a href="mailto:kontakt@switch-for-climate.de">
+              kontakt@switch-for-climate.de
+            </a>
+            . Zwischen 9.00 und 18.00 gern auch telefonisch unter{' '}
+            <a href="tel:+494022858163">+49 40 22858163</a>. Wir helfen dir
+            gerne weiter.
+          </p>
         </Form>
         {error && <FetchError />}
       </div>
