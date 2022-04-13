@@ -6,13 +6,28 @@ export const MeterInput = ({ blocks }) => {
   return (
     <>
       <Form.Item
-        label="Zur Ermittlung Deines Stromzählers benötigen wir eine Angabe"
+        label={textBlockToString(blocks['switch.connect.meter.type.label'])}
         name={['meter', 'mid', 'type']}
-        rules={[{ message: 'Bitte auswählen!', required: true }]}
+        rules={[
+          {
+            message: textBlockToString(
+              blocks['switch.connect.meter.type.error']
+            ),
+            required: true,
+          },
+        ]}
       >
         <Select>
-          <Select.Option value="number">Zählernummer</Select.Option>
-          <Select.Option value="maLoId">Marktlokations-ID</Select.Option>
+          <Select.Option value="number">
+            {textBlockToString(
+              blocks['switch.connect.meter.type.option.number']
+            )}
+          </Select.Option>
+          <Select.Option value="maLoId">
+            {textBlockToString(
+              blocks['switch.connect.meter.type.option.maloid']
+            )}
+          </Select.Option>
         </Select>
       </Form.Item>
 
@@ -27,12 +42,15 @@ export const MeterInput = ({ blocks }) => {
             <Form.Item
               label={
                 <div>
-                  Zählernummer{' '}
+                  {textBlockToString(
+                    blocks['switch.connect.meter.number.label.text1']
+                  )}
                   <Popover
                     content={
                       <div>
-                        Deine Zählernummer findest Du auf Deiner letzten
-                        Stromrechnung.
+                        {textBlockToString(
+                          blocks['switch.connect.meter.number.label.text2']
+                        )}
                       </div>
                     }
                   >
@@ -43,23 +61,34 @@ export const MeterInput = ({ blocks }) => {
               name={['meter', 'mid', 'number']}
               rules={[
                 {
-                  message: 'Bitte gebe deine Zählernummer ein!',
+                  message: textBlockToString(
+                    blocks['switch.connect.meter.number.error']
+                  ),
                   required: true,
                 },
               ]}
             >
-              <Input placeholder="9128310" size="large" />
+              <Input
+                placeholder={textBlockToString(
+                  blocks['switch.connect.meter.number.placeholder']
+                )}
+                size="large"
+              />
             </Form.Item>
           ) : (
             <Form.Item
               label={
                 <div>
-                  Marktlokations-ID{' '}
+                  {textBlockToString(
+                    blocks['switch.connect.meter.maloid.label.text1']
+                  )}
+
                   <Popover
                     content={
                       <div>
-                        Deine Marktlokations-ID oder -Nummer findest Du auf
-                        Deiner letzten Stromrechnung.
+                        {textBlockToString(
+                          blocks['switch.connect.meter.maloid.label.text2']
+                        )}
                       </div>
                     }
                   >
@@ -70,12 +99,15 @@ export const MeterInput = ({ blocks }) => {
               name={['meter', 'mid', 'maLoId']}
               rules={[
                 {
-                  message: 'Bitte gebe deine Marktlokations-ID ein!',
+                  message: textBlockToString(
+                    blocks['switch.connect.meter.maloid.error']
+                  ),
                   required: true,
                 },
                 {
-                  message:
-                    'Diese Marktlokations-ID scheint nicht korrekt zu sein.',
+                  message: textBlockToString(
+                    blocks['switch.connect.meter.maloid.error.invalid']
+                  ),
                   pattern: /^\d{11}$/,
                 },
               ]}
@@ -83,7 +115,9 @@ export const MeterInput = ({ blocks }) => {
               <Input
                 inputMode="numeric"
                 pattern="[0-9]*"
-                placeholder="9128310"
+                placeholder={textBlockToString(
+                  blocks['switch.connect.meter.maloid.placeholder']
+                )}
                 size="large"
                 type="number"
               />

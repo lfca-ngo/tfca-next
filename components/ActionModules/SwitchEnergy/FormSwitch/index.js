@@ -229,6 +229,7 @@ export const FormSwitch = ({
           <Divider />
 
           <SwitchData
+            blocks={blocks}
             disableDesiredDelivery={
               store.item?.provider?.connectionDetails?.fields
                 ?.desiredDelivery === 'hidden'

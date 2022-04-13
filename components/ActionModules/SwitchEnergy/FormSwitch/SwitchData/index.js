@@ -1,28 +1,39 @@
 import { Form, Radio } from 'antd'
 import React from 'react'
 
+import { textBlockToString } from '../../../../../utils'
 import { GroupWrapper } from '../GroupWrapper'
 import { DesiredDeliveryInput } from './DesiredDeliveryInput'
 import { MeterInput } from './MeterInput'
 import { PreviousProviderInput } from './PreviousProviderInput'
 
 export const SwitchData = ({
+  blocks,
   disableDesiredDelivery,
   requirePreviousContractCustomerId,
 }) => {
   return (
     <GroupWrapper
-      description="Wenn du in den letzten 6 Wochen umgezogen bist oder in Kürze umziehen wirst, dann wähle die Umzugsoption."
-      label="Anschlussdaten"
+      description={textBlockToString(blocks['switch.connect.description'])}
+      label={textBlockToString(blocks['switch.connect.label'])}
     >
       <Form.Item
-        label="Anlass für deinen Wechsel"
+        label={textBlockToString(blocks['switch.connect.type.label'])}
         name="type"
-        rules={[{ message: 'Bitte auswählen!', required: true }]}
+        rules={[
+          {
+            message: textBlockToString(blocks['switch.connect.type.error']),
+            required: true,
+          },
+        ]}
       >
         <Radio.Group>
-          <Radio value="switch">Anbieterwechsel</Radio>
-          <Radio value="relocation">Umzug</Radio>
+          <Radio value="switch">
+            {textBlockToString(blocks['switch.connect.type.option.switch'])}
+          </Radio>
+          <Radio value="relocation">
+            {textBlockToString(blocks['switch.connect.type.option.relocation'])}
+          </Radio>
         </Radio.Group>
       </Form.Item>
 
@@ -36,6 +47,7 @@ export const SwitchData = ({
           getFieldValue('type') === 'switch' ? (
             <>
               <PreviousProviderInput
+                blocks={blocks}
                 requirePreviousContractCustomerId={
                   requirePreviousContractCustomerId
                 }
@@ -45,7 +57,7 @@ export const SwitchData = ({
         }
       </Form.Item>
 
-      <MeterInput />
+      <MeterInput blocks={blocks} />
 
       <Form.Item
         noStyle
@@ -58,6 +70,7 @@ export const SwitchData = ({
           getFieldValue(['previousContract', 'cancellation', 'instructed']) ===
           true ? null : (
             <DesiredDeliveryInput
+              blocks={blocks}
               disableDesiredDelivery={disableDesiredDelivery}
             />
           )
