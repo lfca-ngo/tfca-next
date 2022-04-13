@@ -6,7 +6,6 @@ section.hero-with-stats {
   @stats-bar-height: 110px;
 
   padding-bottom: 0;
-  text-align: center;
   position: relative;
   display: flex;
   align-items: center;
@@ -15,6 +14,7 @@ section.hero-with-stats {
 
   @media @desktop {
     padding-bottom: calc(@stats-bar-height / 2 + @default-section-padding);
+    text-align: center;
   }
 
   h1 {
@@ -23,6 +23,7 @@ section.hero-with-stats {
   }
   .stats-container {
     width: 100%;
+    text-align: center;
 
     @media @desktop {
       position: absolute;
@@ -46,13 +47,13 @@ section.hero-with-stats {
     }
 
     .stat-wrapper {
-      border-right: 1px solid @medium-grey;
+      border-right: 1px solid @light-grey;
       flex: 1 0 50%;
       padding: 12px;
 
       &:nth-child(1),
       &:nth-child(2) {
-        border-bottom: 1px solid @medium-grey;
+        border-bottom: 1px solid @light-grey;
         @media @desktop {
           border-bottom: none;
         }
@@ -74,8 +75,11 @@ section.hero-with-stats {
       }
 
       .ant-statistic-content {
-        font-size: 32px;
+        font-size: 26px;
         .font-semi();
+        @media @desktop {
+          font-size: 32px;
+        }
       }
     }
   }
