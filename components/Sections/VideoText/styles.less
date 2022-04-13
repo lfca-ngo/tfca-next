@@ -4,11 +4,17 @@ section.section-block.video-text {
       padding: 30px;
     }
   }
-  .video-wrapper {
-    position: relative;
+  .video-container {
     @media @desktop {
       padding: 0 30px;
     }
+  }
+  .video-wrapper {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+
     video {
       width: 100%;
     }

@@ -7,7 +7,7 @@ import React, { useState } from 'react'
 
 import { useAnalytics } from '../../../hooks'
 import { BEFORE_LEAVE_PAGE } from '../../../services/analytics'
-import { getMailToLink } from '../../../utils'
+import { getMailToLink, scrollToSecondSection } from '../../../utils'
 import { BasicModal } from '../BasicModal'
 import { LeavePage } from '../LeavePage'
 
@@ -18,6 +18,8 @@ const CallToActionWrapper = (props) => {
   const type = onClickType || props.action || 'link'
 
   switch (type) {
+    case 'scroll-to-second-section':
+      return <CtaButton {...props} onClick={scrollToSecondSection} />
     case 'click':
       return <CtaButton {...props} />
     case 'open-email':

@@ -2,9 +2,10 @@ import { Button, Col, Row } from 'antd'
 import React from 'react'
 
 import { textBlockToString } from '../../../utils'
-import { Category, StepHeader, Text } from '../../Elements'
+import { Category, StepHeader, TipsCarousel } from '../../Elements'
 
 export const Intro = ({ goTo, module: { blocks = {}, icon = {} } }) => {
+  const tips = [blocks['intro.hint.wars'], blocks['intro.hint']]
   return (
     <div className="step">
       <Category
@@ -40,7 +41,7 @@ export const Intro = ({ goTo, module: { blocks = {}, icon = {} } }) => {
 
       <Row>
         <Col xs={24}>
-          <Text block={blocks['intro.hint']} />
+          <TipsCarousel tips={tips} />
         </Col>
       </Row>
     </div>
