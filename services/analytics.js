@@ -91,7 +91,7 @@ export const fetchStats = () => {
 
     const asObject = result.reduce((acc, curr) => {
       // adding last year's stats
-      acc[curr.action_id] = curr.Count + INITIAL_STATS[curr.action_id]
+      acc[curr.action_id] = curr.Count + (INITIAL_STATS[curr.action_id] || 0)
       return acc
     }, {})
 
