@@ -3,10 +3,11 @@ import debounce from 'lodash/debounce'
 import React, { useRef, useState } from 'react'
 
 import { useSearchProvider } from '../../../../../services/switchforclimate'
+import { textBlockToString } from '../../../../../utils'
 
 const { Option } = Select
 
-export const ProviderSearchInput = ({ value = {}, onChange }) => {
+export const ProviderSearchInput = ({ value = {}, onChange, blocks }) => {
   const [selectedProvider, setSelectedProvider] = useState({})
   const [searchText, setSearchText] = useState('')
   const { data: searchResult, isLoading } = useSearchProvider(searchText)
@@ -34,7 +35,9 @@ export const ProviderSearchInput = ({ value = {}, onChange }) => {
       notFoundContent={null}
       onChange={onSelect}
       onSearch={debouncedSearch}
-      placeholder="Wähle einen Versorger"
+      placeholder={textBlockToString(
+        blocks['switch.connect.prevprovider.search.placeholder']
+      )}
       showSearch
       value={value.pid || selectedProvider.pid}
     >
