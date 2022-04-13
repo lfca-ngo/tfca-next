@@ -212,6 +212,7 @@ export const FormSwitch = ({
           <Divider />
 
           <PersonalData
+            blocks={blocks}
             requireBirthday={
               store.item?.provider?.connectionDetails?.fields
                 ?.personal_birthday === 'required'
@@ -241,7 +242,10 @@ export const FormSwitch = ({
 
           <Divider />
 
-          <PaymentData />
+          <PaymentData
+            blocks={blocks}
+            providerLegalName={store.item?.provider.legalName || ''}
+          />
 
           <Divider />
 

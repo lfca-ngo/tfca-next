@@ -2,6 +2,7 @@ import { Checkbox, Form, Input } from 'antd'
 import { isValidBIC, isValidIBAN } from 'ibantools'
 import React from 'react'
 
+import { textBlockToString } from '../../../../../utils'
 import { GroupWrapper } from '../GroupWrapper'
 
 const onlyAllowBankChars = (e) => {
@@ -13,14 +14,14 @@ const onlyAllowBankChars = (e) => {
   }
 }
 
-export const PaymentData = () => {
+export const PaymentData = ({ blocks, providerLegalName }) => {
   return (
     <GroupWrapper
-      description="Du zahlst bequem per Lastschrift. Wir übermitteln deine Daten direkt an den Provider."
-      label="Zahlungsdaten"
+      description={textBlockToString(blocks['switch.payment.description'])}
+      label={textBlockToString(blocks['switch.payment.label'])}
     >
       <Form.Item
-        label="IBAN"
+        label={textBlockToString(blocks['switch.payment.iban.label'])}
         name={['payment', 'accountDetails', 'iban']}
         required
         rules={[
@@ -29,20 +30,26 @@ export const PaymentData = () => {
               if (!value || isValidIBAN(value)) {
                 return Promise.resolve()
               }
-              return Promise.reject(new Error('Bitte überprüfe Deine IBAN.'))
+              return Promise.reject(
+                new Error(
+                  textBlockToString(blocks['switch.payment.iban.error'])
+                )
+              )
             },
           },
         ]}
       >
         <Input
           onKeyPress={onlyAllowBankChars}
-          placeholder="DE68500105178297336485"
+          placeholder={textBlockToString(
+            blocks['switch.payment.iban.placeholder']
+          )}
           size="large"
         />
       </Form.Item>
 
       <Form.Item
-        label="BIC"
+        label={textBlockToString(blocks['switch.payment.bic.label'])}
         name={['payment', 'accountDetails', 'bic']}
         required
         rules={[
@@ -51,26 +58,38 @@ export const PaymentData = () => {
               if (!value || isValidBIC(value)) {
                 return Promise.resolve()
               }
-              return Promise.reject(new Error('Bitte überprüfe Deine BIC.'))
+              return Promise.reject(
+                new Error(textBlockToString(blocks['switch.payment.bic.error']))
+              )
             },
           },
         ]}
       >
         <Input
           onKeyPress={onlyAllowBankChars}
-          placeholder="LOYDCHGGZCH"
+          placeholder={textBlockToString(
+            blocks['switch.payment.bic.placeholder']
+          )}
           size="large"
         />
       </Form.Item>
 
       <Form.Item
-        label="Name der Bank"
+        label={textBlockToString(blocks['switch.payment.bankname.label'])}
         name={['payment', 'accountDetails', 'bankName']}
         rules={[
-          { message: '„Name der Bank“ muss angegeben werden.', required: true },
+          {
+            message: textBlockToString(blocks['switch.payment.bankname.error']),
+            required: true,
+          },
         ]}
       >
-        <Input placeholder="GLS Bank" size="large" />
+        <Input
+          placeholder={textBlockToString(
+            blocks['switch.payment.bankname.placeholder']
+          )}
+          size="large"
+        />
       </Form.Item>
 
       <Form.Item
@@ -88,7 +107,9 @@ export const PaymentData = () => {
               }
               return Promise.reject(
                 new Error(
-                  'Bitte gib Dein Einverständnis für den Einzug per Lastschrift.'
+                  textBlockToString(
+                    blocks['switch.payment.authorization.error']
+                  )
                 )
               )
             },
@@ -97,9 +118,9 @@ export const PaymentData = () => {
         valuePropName="checked"
       >
         <Checkbox>
-          Ich ermächtige Fair Trade Power Deutschland GmbH, Zahlungen von meinem
-          Konto mittels Lastschrift einzuziehen. Zugleich weise ich mein
-          Kreditinstitut an, diese Lastschriften einzulösen.
+          {textBlockToString(blocks['switch.payment.authorization.label'], {
+            providerLegalName,
+          })}
         </Checkbox>
       </Form.Item>
     </GroupWrapper>
