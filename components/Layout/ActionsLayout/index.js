@@ -2,6 +2,7 @@ require('./styles.less')
 
 import { CloseOutlined } from '@ant-design/icons'
 import { Button, Drawer, Menu, Popover } from 'antd'
+import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 
 import {
@@ -26,13 +27,20 @@ import { Nav } from '../Nav'
 import { MainMenu } from '../Nav'
 import { Template } from '../Template'
 
-const PopoverContent = ({ name, onClose }) => {
+const PopoverContent = ({ company, onClose }) => {
   return (
     <div className="popover-content">
       <div className="content">
-        {textBlockToString(useContentBlocks('menu.company.popover'), {
-          name: name,
-        })}
+        <div className="logo">
+          <div className="logo-wrapper">
+            <Image layout="fill" objectFit="contain" src={company?.logoUrl} />
+          </div>
+        </div>
+        <div className="text">
+          {textBlockToString(useContentBlocks('menu.company.popover'), {
+            name: company?.name,
+          })}
+        </div>
       </div>
       <Button
         className="no-padding"
@@ -59,7 +67,7 @@ const CompanyMenuItem = ({ company }) => {
       <Popover
         content={
           <PopoverContent
-            name={company?.company?.name}
+            company={company?.company}
             onClose={() => setPopoverOpen(false)}
           />
         }
