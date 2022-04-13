@@ -19,24 +19,18 @@ export default function InvitePage({ actions, openGraphInfo, stats }) {
 
 export async function getStaticProps(props) {
   const { locale, params } = props
-  try {
-    const { actionCollectionSlug, shareToken } = params
+  const { actionCollectionSlug, shareToken } = params
 
-    const customization = decodeShareToken(shareToken)
+  const customization = decodeShareToken(shareToken)
 
-    // Fetch content
-    const staticData = await fetchAllStaticData(locale, actionCollectionSlug)
+  // Fetch content
+  const staticData = await fetchAllStaticData(locale, actionCollectionSlug)
 
-    return {
-      props: {
-        ...staticData,
-        customization,
-      },
-    }
-  } catch (e) {
-    return {
-      notFound: true,
-    }
+  return {
+    props: {
+      ...staticData,
+      customization,
+    },
   }
 }
 

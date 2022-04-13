@@ -45,7 +45,7 @@ export const fetchData = async ({ query, skipCache = false, variables }) => {
     try {
       fs.writeFileSync(CACHE_PATH, JSON.stringify(data), 'utf8')
     } catch (e) {
-      console.error('Error writing to cache', e)
+      // Nothing to do here
     }
   }
 
