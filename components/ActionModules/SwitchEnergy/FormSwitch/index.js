@@ -6,7 +6,13 @@ import { useAnalytics } from '../../../../hooks'
 import { SWITCH_ENERGY_SUCCESS } from '../../../../services/analytics'
 import { useSwitchOrder } from '../../../../services/switchforclimate'
 import { textBlockToString } from '../../../../utils'
-import { Category, CheckList, FetchError, StepHeader } from '../../../Elements'
+import {
+  Category,
+  CheckList,
+  FetchError,
+  StepHeader,
+  Text,
+} from '../../../Elements'
 import { Approvals } from './Approvals'
 import { PaymentData } from './PaymentData'
 import { PersonalData } from './PersonalData'
@@ -134,6 +140,7 @@ export const FormSwitch = ({
     }
   }, [data, goTo, id, nextKey, trackEvent])
 
+  console.log('blocks', blocks)
   return (
     <div className="step">
       <Category
@@ -239,6 +246,7 @@ export const FormSwitch = ({
           <Divider />
 
           <Approvals
+            blocks={blocks}
             cancellationLink={store.item?.provider.legalInfo?.cancellationLink}
             privacyLink={store.item?.provider.legalInfo?.privacyLink}
             providerAddress={store.item?.provider.address || ''}
@@ -256,21 +264,13 @@ export const FormSwitch = ({
               size="large"
               type="primary"
             >
-              {error ? 'Retry' : 'Testorder platzieren (BETA)'}
+              {error
+                ? textBlockToString(blocks['switch.button.order.retry'])
+                : textBlockToString(blocks['switch.button.order'])}
             </Button>
           </Form.Item>
 
-          <p>
-            Du erhältst im Anschluss eine E-Mail mit allen Informationen von
-            Switch for Climate. Trotzdem noch unsicher? Dann melde dich einfach
-            bei{' '}
-            <a href="mailto:kontakt@switch-for-climate.de">
-              kontakt@switch-for-climate.de
-            </a>
-            . Zwischen 9.00 und 18.00 gern auch telefonisch unter{' '}
-            <a href="tel:+494022858163">+49 40 22858163</a>. Wir helfen dir
-            gerne weiter.
-          </p>
+          <Text block={blocks['switch.order.hint']} />
         </Form>
         {error && <FetchError />}
       </div>
