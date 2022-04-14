@@ -46,6 +46,7 @@ export const Filter = ({
           name={filterOption?.fieldName}
         >
           <SelectFilter
+            enableSelectAll={filterOption?.enableSelectAll}
             filterMode={filterOption?.filterMode}
             options={filterOption?.options || []}
             placeholder={filterOption?.placeholder}
