@@ -41,6 +41,14 @@ export const ErrorLayout = ({ errorCode }) => {
       ),
       title: textBlockToString(useContentBlocks('page.error.404.title')),
     },
+    500: {
+      body: textBlockToString(useContentBlocks('page.error.500.body')),
+      button: textBlockToString(useContentBlocks('page.error.500.button')),
+      superText: textBlockToString(
+        useContentBlocks('page.error.500.supertext')
+      ),
+      title: textBlockToString(useContentBlocks('page.error.500.title')),
+    },
   }
 
   switch (errorCode) {
