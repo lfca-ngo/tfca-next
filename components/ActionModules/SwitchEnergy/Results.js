@@ -30,7 +30,7 @@ export const getFullPrice = (item, kwh) =>
   item.price.workingPrice * kwh + item.price.basePrice || 0
 
 export const Results = ({ goTo, module, nextKey, setStore, store }) => {
-  const { blocks = {}, lists = {}, icon = {} } = module
+  const { blocks = {}, lists = {}, icon = {}, color } = module
   const [visible, setVisible] = useState(false)
   const [drawerVisible, setDrawerVisible] = useState(false)
   const [sorting, setSorting] = useState(SORT[0].type)
@@ -160,7 +160,7 @@ export const Results = ({ goTo, module, nextKey, setStore, store }) => {
           <List
             className="comparison-list"
             dataSource={sortedList}
-            loading={spinnerProps(loading)}
+            loading={spinnerProps({ color, spinning: loading, type: 'energy' })}
             renderItem={(item, i) => (
               <CardView
                 energyKwh={store?.energy}

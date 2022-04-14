@@ -78,6 +78,9 @@ export const Success = ({
   const fallbackName = textBlockToString(
     useContentBlocks('header.title.recipients.fallback')
   )
+  const linkGenerationLabel = textBlockToString(
+    useContentBlocks('challenge.status.create.link')
+  )
 
   // create multiple invite links
   // map of promises with infos
@@ -240,7 +243,11 @@ export const Success = ({
         ) : (
           <div>
             {isGeneratingToken ? (
-              <LoadingSpinner className="dark" label="...generating link" />
+              <LoadingSpinner
+                additionalSpinnerProps={{ color: 'pink', type: 'home' }}
+                className="dark"
+                label={linkGenerationLabel}
+              />
             ) : (
               <Share actionInviteText={imageInviteText} invites={invites} />
             )}

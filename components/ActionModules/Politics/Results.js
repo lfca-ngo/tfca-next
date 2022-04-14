@@ -15,7 +15,7 @@ import {
 export const Results = ({
   availableFilters,
   goTo,
-  module: { blocks = {}, icon = {} },
+  module: { blocks = {}, icon = {}, color },
   nextKey,
   prevKey,
   setStore,
@@ -80,7 +80,11 @@ export const Results = ({
             tags: [item.nationalPoliticalGroup],
           }))}
           grid={LIST_GRIDS['1-col']}
-          loading={spinnerProps(isLoading)}
+          loading={spinnerProps({
+            color,
+            spinning: isLoading,
+            type: 'politics',
+          })}
           renderItem={(item) => {
             const isSelected =
               (store.selectedPoliticians || []).findIndex(
