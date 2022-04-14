@@ -80,6 +80,7 @@ export const LeavePage = ({
           </a>
           <Button
             block
+            className="colored"
             ghost
             icon={<LikeOutlined />}
             onClick={onNext}

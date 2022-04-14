@@ -1,5 +1,6 @@
 require('./actionDetails.less')
 
+import { CarryOutOutlined, QuestionCircleOutlined } from '@ant-design/icons'
 import { Space } from 'antd'
 import React from 'react'
 
@@ -22,11 +23,13 @@ export const ActionDetails = ({ actionId, blocks, item, onNext }) => {
       <ListSection
         items={item?.reasons}
         title={textBlockToString(blocks['details.why.label'])}
+        titleIcon={<QuestionCircleOutlined />}
       />
 
       <TextSection
         text={item?.description}
         title={textBlockToString(blocks['details.how.label'])}
+        titleIcon={<CarryOutOutlined />}
       />
 
       <Space direction="vertical" style={{ width: '100%' }}>

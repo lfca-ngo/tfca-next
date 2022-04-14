@@ -111,9 +111,16 @@ export const ActionsLayout = ({ children, company, nav, openGraphInfo }) => {
           <div>
             <MenuSection
               content={<ChallengeStatus openGraphInfo={openGraphInfo} />}
-              title="Challenge"
+              title={textBlockToString(
+                useContentBlocks('menu.section.challenge')
+              )}
             />
-            <MenuSection content={<QuestionAnswer />} title="Questions" />
+            <MenuSection
+              content={<QuestionAnswer />}
+              title={textBlockToString(
+                useContentBlocks('menu.section.questions')
+              )}
+            />
             <MenuSection
               content={
                 <MainMenu
@@ -122,7 +129,7 @@ export const ActionsLayout = ({ children, company, nav, openGraphInfo }) => {
                   mode="inline"
                 />
               }
-              title="Menu"
+              title={textBlockToString(useContentBlocks('menu.section.menu'))}
             />
           </div>
         }

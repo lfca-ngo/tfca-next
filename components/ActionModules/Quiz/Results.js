@@ -51,7 +51,9 @@ export const Results = ({
             {...action}
           />
         ))}
-        <h4>{textBlockToString(blocks['results.finish.title'])}</h4>
+        <h4 style={{ marginTop: '15px' }}>
+          {textBlockToString(blocks['results.finish.title'])}
+        </h4>
         <Button block onClick={() => goTo(nextKey)} size="large" type="primary">
           {textBlockToString(blocks['results.finish.button.primary'])}
         </Button>

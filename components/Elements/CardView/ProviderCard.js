@@ -68,6 +68,7 @@ export const ProviderCard = ({ energyKwh, item, onNext, showDetails }) => {
           <Col xs={12}>
             <Button
               block
+              className="colored"
               ghost
               icon={<InfoCircleOutlined />}
               onClick={() => showDetails(item)}

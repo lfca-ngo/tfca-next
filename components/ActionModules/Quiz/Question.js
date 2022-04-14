@@ -11,6 +11,7 @@ import {
 import {
   Category,
   GameProgress,
+  SELECT_ALL,
   SelectFilter,
   StepHeader,
 } from '../../Elements'
@@ -47,7 +48,8 @@ export const Question = ({
   const handleNext = (v) => {
     const correctAnswers = answers?.correctAnswers
     const selectedAnswers = v[activeQuestion?.questionId]
-    const isCorrect = checkAnswers(correctAnswers, selectedAnswers)
+    const withoutSelectAll = selectedAnswers.filter((i) => i !== SELECT_ALL)
+    const isCorrect = checkAnswers(correctAnswers, withoutSelectAll)
     // save if it was correct in the answers in store
     setStore({
       ...store,
@@ -88,6 +90,7 @@ export const Question = ({
           validateStatus={status}
         >
           <SelectFilter
+            enableSelectAll={activeQuestion?.enableSelectAll}
             filterMode={activeQuestion?.inputType}
             items={answers?.options}
             onSelect={() => setStatus(null)}
