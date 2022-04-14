@@ -3,7 +3,8 @@ import React from 'react'
 import { ActionModules } from '../../../components/ActionModules'
 import { Layout } from '../../../components/Layout'
 import { fetchAllStaticData } from '../../../services'
-import { decodeShareToken, WITH_SIDEBAR } from '../../../utils'
+import { WITH_SIDEBAR } from '../../../utils'
+import { decodeShareToken } from '../../../utils-server-only'
 
 export default function InvitePage({ actions, openGraphInfo, stats }) {
   return (

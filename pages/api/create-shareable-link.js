@@ -1,4 +1,4 @@
-import { createShareToken } from '../../utils'
+import { createShareToken } from '../../utils-server-only'
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
