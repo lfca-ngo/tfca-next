@@ -29,6 +29,7 @@ function MyApp({ Component, pageProps }) {
           <meta content={ogDescription} property="og:description" />
         )}
         {ogImage && <meta content={ogImage} property="og:image" />}
+        {ogDescription && <meta content={ogDescription} name="description" />}
         <meta content="summary_large_image" name="twitter:card" />
       </Head>
       <QueryClientProvider client={apiClient}>
