@@ -73,7 +73,7 @@ export const Radio = ({
     // in single mode only one value can be selected
     if (singleMode) {
       // get the latest change by checking the difference to the state
-      newValues = [latestChange]
+      newValues = latestChange ? [latestChange] : []
     }
 
     setSelected(newValues)

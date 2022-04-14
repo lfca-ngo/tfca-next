@@ -52,10 +52,23 @@ export const Filter = ({
             placeholderOptionalInput={filterOption?.placeholderOptionalInput}
           />
         </Form.Item>
-        <Form.Item>
-          <Button block htmlType="submit" size="large" type="primary">
-            {textBlockToString(blocks['filter.button.primary'])}
-          </Button>
+
+        <Form.Item noStyle shouldUpdate>
+          {({ getFieldsValue }) => {
+            const value = getFieldsValue()[filterOption?.fieldName]
+            const isValid = Array.isArray(value) ? !!value.length : !!value
+            return (
+              <Button
+                block
+                disabled={!isValid}
+                htmlType="submit"
+                size="large"
+                type="primary"
+              >
+                {textBlockToString(blocks['filter.button.primary'])}
+              </Button>
+            )
+          }}
         </Form.Item>
       </Form>
     </div>
