@@ -2,14 +2,17 @@
 @import (reference) '../../../styles/fonts.less';
 
 @topbar-font-size: 17px;
+@topbar-font-size-mobile: 18px;
+@top-bar-height: 60px;
+@top-bar-height-mobile: 50px;
 
 .top-bar {
-  height: 60px;
+  height: @top-bar-height-mobile;
   display: flex;
   align-items: center;
   justify-content: center;
   background: @purple;
-  font-size: @topbar-font-size;
+  font-size: @topbar-font-size-mobile;
   position: relative;
   padding: 0 @default-section-padding;
   .font-medium(@purple-light);
@@ -17,12 +20,19 @@
   &.hidden {
     display: none;
   }
+  @media @desktop {
+    font-size: @topbar-font-size;
+    height: @top-bar-height;
+  }
   .ant-btn.ant-btn-link {
     margin-left: 10px;
     text-decoration: underline;
-    font-size: @topbar-font-size;
+    font-size: @topbar-font-size-mobile;
     .font-medium(@white);
     letter-spacing: 0;
+    @media @desktop {
+      font-size: @topbar-font-size;
+    }
     .anticon {
       color: @purple-light;
       font-size: 15px;
