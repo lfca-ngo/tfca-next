@@ -111,14 +111,31 @@ export async function getStaticPaths() {
 
   return {
     fallback: 'blocking',
-    // We only have company pages for the `int` collection and default locale
+    /**
+     * NOTE:
+     * We only create company pages for `en/int` and `de/deu` during build time.
+     * All other combinations will be built incrementally once requested.
+     */
     paths: qualifiedCompanies
       .filter(({ company }) => !!company.micrositeSlug)
-      .map(({ company }) => ({
-        params: {
-          actionCollectionSlug: 'int',
-          companySlug: company.micrositeSlug,
-        },
-      })),
+      .reduce((allPaths, { company }) => {
+        return [
+          ...allPaths,
+          {
+            locale: 'en',
+            params: {
+              actionCollectionSlug: 'int',
+              companySlug: company.micrositeSlug,
+            },
+          },
+          {
+            locale: 'de',
+            params: {
+              actionCollectionSlug: 'deu',
+              companySlug: company.micrositeSlug,
+            },
+          },
+        ]
+      }, []),
   }
 }
