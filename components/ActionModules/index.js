@@ -25,20 +25,27 @@ export const ActionModules = (props) => {
     }
   }
 
-  return props.actions.map((action, i) => (
-    <ActionWrapper
-      color={`color-${(i % 4) + 1}`}
-      effort={action.effort}
-      id={action.id}
-      impact={action.impact}
-      impactDisclaimer={action.impactDisclaimer}
-      key={action.id}
-      name={action.name}
-      otherUsers={props.stats[action.id]}
-    >
-      <ErrorBoundary>
-        {renderAction({ ...action, otherUsers: props.stats[action.id] })}
-      </ErrorBoundary>
-    </ActionWrapper>
-  ))
+  return props.actions.map((action, i) => {
+    const color = `color-${(i % 4) + 1}`
+    return (
+      <ActionWrapper
+        color={color}
+        effort={action.effort}
+        id={action.id}
+        impact={action.impact}
+        impactDisclaimer={action.impactDisclaimer}
+        key={action.id}
+        name={action.name}
+        otherUsers={props.stats[action.id]}
+      >
+        <ErrorBoundary>
+          {renderAction({
+            ...action,
+            color: color,
+            otherUsers: props.stats[action.id],
+          })}
+        </ErrorBoundary>
+      </ActionWrapper>
+    )
+  })
 }
