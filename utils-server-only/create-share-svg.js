@@ -69,10 +69,9 @@ export function createShareSvg({ color, message, names = null }) {
 
 
       ${createMultilineText({
-        fontSize: 97,
+        fontSize: 90,
         fontWeight: 800,
         letterSpacing: -1.66,
-        maxWidth: 790,
         text: message,
         x: 74,
         y: 246,
@@ -107,28 +106,11 @@ function createMultilineText({
   fontSize = 24,
   fontWeight = '400',
   letterSpacing = 0,
-  maxWidth,
   text,
   x,
   y,
 }) {
-  const words = text.split(' ')
-  const charactersPerLine = Math.round(maxWidth / (fontSize * 0.6))
-
-  const lines = words.reduce((acc, word) => {
-    if (!acc.length) {
-      acc.push(word)
-    } else {
-      const currentLine = acc[acc.length - 1]
-      if (currentLine.length + word.length < charactersPerLine) {
-        acc[acc.length - 1] = `${currentLine} ${word}`
-      } else {
-        acc.push(word)
-      }
-    }
-
-    return acc
-  }, [])
+  const lines = text.split('|')
 
   return `
     <text x="${x}" y="${y}" fill="#FFFFFF" font-family="Manrope" font-size="${fontSize}" font-weight="${fontWeight}" letter-spacing="${letterSpacing}">
