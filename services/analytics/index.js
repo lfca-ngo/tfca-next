@@ -88,7 +88,6 @@ export const fetchStats = () => {
     url: `${process.env.NEXT_PUBLIC_GRAPH_JSON_URL}/visualize/data`,
   }).then(({ data }) => {
     const { result } = data
-
     const asObject = result.reduce((acc, curr) => {
       // adding last year's stats
       acc[curr.action_id] = curr.Count + (INITIAL_STATS[curr.action_id] || 0)

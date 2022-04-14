@@ -16,19 +16,24 @@
     }
     .tip-icon {
       color: @white;
-      width: 40px;
-      font-size: 28px;
+      width: 36px;
+      font-size: 22px;
       display: flex;
       path {
         stroke: @white;
       }
       @media @desktop {
         width: 50px;
+        font-size: 28px;
       }
     }
     .tip-description {
       flex: 1;
       color: @white;
+      font-size: @font-size-sm;
+      @media @desktop {
+        font-size: @font-size-base;
+      }
     }
   }
   .custom-arrow {
