@@ -1,6 +1,12 @@
 require('./organizationDetails.less')
 
-import { PlusCircleOutlined } from '@ant-design/icons'
+import {
+  BuildOutlined,
+  HeartOutlined,
+  InfoCircleOutlined,
+  PlayCircleOutlined,
+  PlusCircleOutlined,
+} from '@ant-design/icons'
 import { Divider, Space, Tag } from 'antd'
 import Image from 'next/image'
 import React from 'react'
@@ -49,7 +55,7 @@ export const OrganizationDetails = ({ actionId, blocks, item, onNext }) => {
       <TextSection
         text={item?.description}
         title={textBlockToString(blocks['details.description.label'])}
-        titleIcon={<PlusCircleOutlined />}
+        titleIcon={<InfoCircleOutlined />}
       />
 
       <Divider />
@@ -57,7 +63,7 @@ export const OrganizationDetails = ({ actionId, blocks, item, onNext }) => {
       <ListSection
         items={item?.activities}
         title={textBlockToString(blocks['details.activities.label'])}
-        titleIcon={<PlusCircleOutlined />}
+        titleIcon={<PlayCircleOutlined />}
       />
 
       <Divider />
@@ -65,7 +71,7 @@ export const OrganizationDetails = ({ actionId, blocks, item, onNext }) => {
       <ListSection
         items={item?.areas}
         title={textBlockToString(blocks['details.areas.label'])}
-        titleIcon={<PlusCircleOutlined />}
+        titleIcon={<BuildOutlined />}
       />
 
       <Divider />
@@ -73,7 +79,7 @@ export const OrganizationDetails = ({ actionId, blocks, item, onNext }) => {
       <ListSection
         items={item?.needs}
         title={textBlockToString(blocks['details.needs.label'])}
-        titleIcon={<PlusCircleOutlined />}
+        titleIcon={<HeartOutlined />}
       />
 
       <Divider />

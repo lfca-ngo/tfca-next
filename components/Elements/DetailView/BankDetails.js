@@ -1,5 +1,11 @@
 require('./bankDetails.less')
 
+import {
+  GlobalOutlined,
+  HeartOutlined,
+  InfoCircleOutlined,
+  LikeOutlined,
+} from '@ant-design/icons'
 import { Divider, Space } from 'antd'
 import Image from 'next/image'
 import React from 'react'
@@ -50,19 +56,23 @@ export const BankDetails = ({ actionId, blocks, item, onNext }) => {
       <TextSection
         text={item?.description}
         title={textBlockToString(blocks['label.about'])}
+        titleIcon={<InfoCircleOutlined />}
       />
 
       <ListSection
         items={item.benefits}
         title={textBlockToString(blocks['label.benefits'])}
+        titleIcon={<LikeOutlined />}
       />
       <ListSection
         items={item.sustainability}
         title={textBlockToString(blocks['label.sustainability'])}
+        titleIcon={<GlobalOutlined />}
       />
       <ListSection
         items={item.sustainabilityRanking}
         title={textBlockToString(blocks['label.rating'])}
+        titleIcon={<HeartOutlined />}
       />
       <Text block={blocks['sustainability.rating.explainer']} />
       <TextSection
