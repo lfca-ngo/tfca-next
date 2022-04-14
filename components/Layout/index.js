@@ -9,7 +9,7 @@ import { ErrorLayout } from './ErrorLayout'
 export const Layout = (props) => {
   switch (props.layout) {
     case ERROR:
-      return <ErrorLayout {...props}>{props.children}</ErrorLayout>
+      return <ErrorLayout {...props} />
     case EMBED:
       return <EmbedLayout {...props}>{props.children}</EmbedLayout>
     case WITH_SIDEBAR:

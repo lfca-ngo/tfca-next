@@ -31,7 +31,7 @@ const ErrorTemplate = ({ data }) => {
 }
 
 // pages with custom sections like about campaign etc.
-export const ErrorLayout = ({ errorCode }) => {
+export const ErrorLayout = ({ errorCode = 500 }) => {
   const ERROR_MAP = {
     404: {
       body: textBlockToString(useContentBlocks('page.error.404.body')),
@@ -51,10 +51,5 @@ export const ErrorLayout = ({ errorCode }) => {
     },
   }
 
-  switch (errorCode) {
-    case 404:
-      return <ErrorTemplate data={ERROR_MAP[404]} />
-    default:
-      return null
-  }
+  return <ErrorTemplate data={ERROR_MAP[errorCode]} />
 }
