@@ -7,6 +7,7 @@ import React from 'react'
 
 import { useContentBlocks } from '../../../hooks'
 import { textBlockToString } from '../../../utils'
+import { Text } from '../../Elements'
 import { SuperText } from '../../Elements'
 import ErrorImage from './error.png'
 
@@ -17,7 +18,7 @@ const ErrorTemplate = ({ data }) => {
         <div className="content">
           <SuperText text={data.superText} />
           <h1>{data.title}</h1>
-          <p>{data.body}</p>
+          {data.body}
           <Button className="ant-btn-xl" size="large" type="primary">
             <Link href="/">{data.button}</Link>
           </Button>
@@ -34,7 +35,7 @@ const ErrorTemplate = ({ data }) => {
 export const ErrorLayout = ({ errorCode = 500 }) => {
   const ERROR_MAP = {
     404: {
-      body: textBlockToString(useContentBlocks('page.error.404.body')),
+      body: <Text block={useContentBlocks('page.error.404.body')} />,
       button: textBlockToString(useContentBlocks('page.error.404.button')),
       superText: textBlockToString(
         useContentBlocks('page.error.404.supertext')
@@ -42,7 +43,7 @@ export const ErrorLayout = ({ errorCode = 500 }) => {
       title: textBlockToString(useContentBlocks('page.error.404.title')),
     },
     500: {
-      body: textBlockToString(useContentBlocks('page.error.500.body')),
+      body: <Text block={useContentBlocks('page.error.500.body')} />,
       button: textBlockToString(useContentBlocks('page.error.500.button')),
       superText: textBlockToString(
         useContentBlocks('page.error.500.supertext')
