@@ -5,10 +5,11 @@ import { Divider } from 'antd'
 import Image from 'next/image'
 import React from 'react'
 
+import { textBlockToString } from '../../../utils'
 import { CallToAction } from '../CallToAction'
 import { ListSection, TextSection } from '../Sections'
 
-export const ToolDetails = ({ item, onNext }) => {
+export const ToolDetails = ({ blocks, item, onNext }) => {
   return (
     <div className="detail-view tool">
       <header>
@@ -33,12 +34,15 @@ export const ToolDetails = ({ item, onNext }) => {
       </header>
 
       <main>
-        <ListSection items={item?.benefits} title="Benefits" />
+        <ListSection
+          items={item?.benefits}
+          title={textBlockToString(blocks['label.benefits'])}
+        />
 
         <div>
           <div className="section-title title">
             <PlusCircleOutlined />
-            How it works
+            {textBlockToString(blocks['label.howitworks'])}
           </div>
           <div className="screen">
             <Image
@@ -51,7 +55,10 @@ export const ToolDetails = ({ item, onNext }) => {
           </div>
         </div>
 
-        <TextSection text={item?.description} title="About" />
+        <TextSection
+          text={item?.description}
+          title={textBlockToString(blocks['label.about'])}
+        />
       </main>
     </div>
   )
