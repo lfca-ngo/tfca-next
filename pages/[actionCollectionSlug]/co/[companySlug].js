@@ -1,12 +1,16 @@
 import { gql } from 'graphql-request'
+import { useRouter } from 'next/router'
 import React from 'react'
 
 import { ActionModules } from '../../../components/ActionModules'
+import { LoadingSpinner } from '../../../components/Elements'
 import { Layout } from '../../../components/Layout'
+import { useContentBlocks } from '../../../hooks'
 import { fetchAllStaticData } from '../../../services'
 import { fetchData } from '../../../services/lfca'
 import { QualifiedCompanyItemFragment } from '../../../services/lfca/fragments'
 import { WITH_SIDEBAR } from '../../../utils'
+import { textBlockToString } from '../../../utils'
 
 export default function SupporterPage({
   actions,
@@ -14,6 +18,24 @@ export default function SupporterPage({
   openGraphInfo,
   stats,
 }) {
+  const router = useRouter()
+  const loadingMessage = textBlockToString(
+    useContentBlocks('page.route.loading.message')
+  )
+  // If the page is not yet generated, this will be displayed
+  // initially until getStaticProps() finishes running
+  // router.isFallback
+  if (router.isFallback) {
+    return (
+      <div>
+        <LoadingSpinner
+          additionalSpinnerProps={{ color: 'color-3', type: 'leaf' }}
+          className="home-loader"
+          label={loadingMessage}
+        />
+      </div>
+    )
+  }
   return (
     <Layout
       company={company}
@@ -110,7 +132,7 @@ export async function getStaticPaths() {
   })
 
   return {
-    fallback: 'blocking',
+    fallback: true,
     /**
      * NOTE:
      * We only create company pages for `en/int` and `de/deu` during build time.

@@ -80,7 +80,11 @@ export const Results = ({
             tags: [item.nationalPoliticalGroup],
           }))}
           grid={LIST_GRIDS['1-col']}
-          loading={spinnerProps(isLoading, 'politics', color)}
+          loading={spinnerProps({
+            color,
+            spinning: isLoading,
+            type: 'politics',
+          })}
           renderItem={(item) => {
             const isSelected =
               (store.selectedPoliticians || []).findIndex(

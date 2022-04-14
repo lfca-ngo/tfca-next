@@ -7,6 +7,7 @@ import { WITH_SIDEBAR } from '../../../utils'
 import { decodeShareToken } from '../../../utils-server-only'
 
 export default function InvitePage({ actions, openGraphInfo, stats }) {
+  // @TODO: loading spinner
   return (
     <Layout
       layout={actions?.layout || WITH_SIDEBAR}
@@ -36,5 +37,5 @@ export async function getStaticProps(props) {
 }
 
 export async function getStaticPaths() {
-  return { fallback: 'blocking', paths: [] }
+  return { fallback: true, paths: [] }
 }

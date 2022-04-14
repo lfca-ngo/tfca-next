@@ -160,7 +160,7 @@ export const Results = ({ goTo, module, nextKey, setStore, store }) => {
           <List
             className="comparison-list"
             dataSource={sortedList}
-            loading={spinnerProps(loading, 'energy', color)}
+            loading={spinnerProps({ color, spinning: loading, type: 'energy' })}
             renderItem={(item, i) => (
               <CardView
                 energyKwh={store?.energy}

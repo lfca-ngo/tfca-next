@@ -63,6 +63,53 @@ const BullhornSpinner = ({ color }) => {
   )
 }
 
+const LeafSpinner = ({ color }) => {
+  const transition = { duration: 2, ease: 'easeInOut', yoyo: Infinity }
+  const pathVariants = variants(color)
+
+  return (
+    <svg height="88" viewBox="0 0 43.06 44" width="86">
+      <title>leaf</title>
+      <motion.path
+        animate="animate"
+        d="M1,42.881c5.429.576,11.369-.938,14.11-4.593,2.513,2.208,14.322,5.388,22.665-4.715,5.583-6.763,4.872-18.128,2.572-23.888C38.127,3.636,35.115,1.072,34.854,1a20.465,20.465,0,0,1-3.893,8.942c-3.588,4.724-9.29,6.98-12.707,9.453-6.465,4.677-6.889,8.658-5.022,14.689,7.05-.513,11.562-3.14,16.37-7.271a18.909,18.909,0,0,0,5.582-9.428"
+        fill="none"
+        fillRule="evenodd"
+        initial="initial"
+        stroke="#000"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+        transition={transition}
+        variants={pathVariants}
+      />
+    </svg>
+  )
+}
+
+const LayerSpinner = ({ color }) => {
+  const transition = { duration: 2, ease: 'easeInOut', yoyo: Infinity }
+  const pathVariants = variants(color)
+
+  return (
+    <svg height="72" viewBox="0 0 44 36" width="88">
+      <title>layers</title>
+      <motion.polyline
+        animate="animate"
+        fill="none"
+        initial="initial"
+        points="38.021 23.008 43 25 21 35 1 27 10.362 22.745 21 27 43 17 33.638 13.255 21 19 1 11 23 1 43 9 38.396 11.093"
+        stroke="#000"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+        transition={transition}
+        variants={pathVariants}
+      />
+    </svg>
+  )
+}
+
 const CheckmarkSpinner = ({ color }) => {
   const transition = { duration: 2, ease: 'easeInOut', yoyo: Infinity }
   const pathVariants = variants(color)
@@ -117,21 +164,29 @@ const IconSelector = ({ color, type }) => {
       return <EnergySpinner color={color} />
     case 'check':
       return <CheckmarkSpinner color={color} />
+    case 'home':
+      return <LayerSpinner color={color} />
+    case 'leaf':
+      return <LeafSpinner color={color} />
     default:
       return <LoadingOutlined />
   }
 }
 
-export const spinnerProps = (spinning = true, type, color) => ({
+export const spinnerProps = ({ color, spinning = true, type }) => ({
   indicator: <IconSelector color={color} type={type} />,
   spinning: spinning,
   wrapperClassName: 'loading-wrapper',
 })
 
-export const LoadingSpinner = ({ className, label }) => {
+export const LoadingSpinner = ({
+  additionalSpinnerProps,
+  className,
+  label,
+}) => {
   return (
     <div className={classNames('loading-wrapper', 'centered', className)}>
-      <Spin {...spinnerProps()} />
+      <Spin {...spinnerProps(additionalSpinnerProps)} />
       {label && <p className="label">{label}</p>}
     </div>
   )
