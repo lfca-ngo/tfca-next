@@ -12,7 +12,7 @@ export const IntlSelector = () => {
 
   const {
     locale,
-    query: { actionCollectionSlug, shareToken },
+    query: { actionCollectionSlug, companySlug, shareToken },
   } = router
 
   const regions = metaData?.regions || []
@@ -123,6 +123,8 @@ export const IntlSelector = () => {
 
     if (shareToken) {
       path += `/invite/${shareToken}`
+    } else if (companySlug) {
+      path += `/co/${companySlug}`
     }
 
     router.push(path, path, {

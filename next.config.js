@@ -8,8 +8,7 @@ const nextConfig = {
     defaultLocale: 'en',
     localeDetection: true,
     // IMPORTANT: This must! match all possible isoCodes in the `languagesCollection` in contentful!!!
-    // TODO: fetch contentful languages dynamically
-    locales: ['de', 'en-GB', 'en-US', 'en', 'es', 'fr', 'tr'],
+    locales: ['de', 'en', 'es', 'fr', 'tr'],
   },
   images: {
     domains: [
