@@ -53,9 +53,7 @@ export function createShareSvg({ color, message, names = null }) {
         <ellipse cx="89.3351" cy="118.465" rx="16.3351" ry="16.3663" fill="#D82086"/>
         <path d="M81.4497 119.594L85.9559 124.108L97.2215 112.821" stroke="white" stroke-width="1.94702" stroke-linecap="square"/>
       </g>
-
-      
-      
+     
       <text x="120" y="128" fill="#FFFFFF" font-family="Manrope" font-size="25" font-weight="500" letter-spacing="-0.1">
       Challenge completed
       </text>
@@ -65,13 +63,11 @@ export function createShareSvg({ color, message, names = null }) {
         are you joining?
       </text>
 
-
-
-
       ${createMultilineText({
-        fontSize: 90,
+        fontSize: 97,
         fontWeight: 800,
         letterSpacing: -1.66,
+        maxWidth: 790,
         text: message,
         x: 74,
         y: 246,
@@ -106,11 +102,32 @@ function createMultilineText({
   fontSize = 24,
   fontWeight = '400',
   letterSpacing = 0,
+  maxWidth,
   text,
   x,
   y,
 }) {
-  const lines = text.split('|')
+  let lines = text.split('|')
+
+  if (lines.length === 1) {
+    const words = text.split(' ')
+    const charactersPerLine = Math.round(maxWidth / (fontSize * 0.7))
+
+    lines = words.reduce((acc, word) => {
+      if (!acc.length) {
+        acc.push(word)
+      } else {
+        const currentLine = acc[acc.length - 1]
+        if (currentLine.length + word.length < charactersPerLine) {
+          acc[acc.length - 1] = `${currentLine} ${word}`
+        } else {
+          acc.push(word)
+        }
+      }
+
+      return acc
+    }, [])
+  }
 
   return `
     <text x="${x}" y="${y}" fill="#FFFFFF" font-family="Manrope" font-size="${fontSize}" font-weight="${fontWeight}" letter-spacing="${letterSpacing}">
