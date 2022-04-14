@@ -59,9 +59,6 @@ export const Share = ({ actionInviteText, invites }) => {
 
           const shareMessageBody = names?.length
             ? textBlockToString(shareMessageBodyNominate, {
-                actionInviteText: actionInviteText
-                  ? `${actionInviteText}! `
-                  : '',
                 name: namesArrayToString(names),
               })
             : shareMessageBodyGeneric
