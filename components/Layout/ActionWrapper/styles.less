@@ -25,8 +25,10 @@
   }
 
   .ant-btn-background-ghost.ant-btn-primary {
-    color: @white;
-    border-color: @white;
+    &:not(.colored) {
+      color: @white;
+      border-color: @white;
+    }
   }
 
   a {

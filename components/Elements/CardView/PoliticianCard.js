@@ -58,7 +58,7 @@ export const PoliticianCard = ({ isSelected, item, minimal, onSelect }) => {
           <div className="actions">
             {handleSelect && (
               <Button
-                className="button"
+                className="colored"
                 ghost={isSelected}
                 onClick={handleSelect}
                 size="small"

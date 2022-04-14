@@ -33,6 +33,7 @@ export const ShowMore = ({ maxHeight, text }) => {
             }}
           />
           <Button
+            className="colored"
             ghost
             onClick={() => setIsExpanded((v) => !v)}
             size="small"

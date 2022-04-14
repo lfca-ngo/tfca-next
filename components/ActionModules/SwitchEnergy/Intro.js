@@ -29,6 +29,7 @@ export const Intro = ({ goTo, module: { blocks = {}, icon = {} } }) => {
         <Col md={12} xs={24}>
           <Button
             block
+            className="colored"
             ghost
             onClick={() => goTo('form-check')}
             size="large"
