@@ -24,7 +24,6 @@ export default function SupporterPage({
   )
   // If the page is not yet generated, this will be displayed
   // initially until getStaticProps() finishes running
-  // router.isFallback
   if (router.isFallback) {
     return (
       <div>
