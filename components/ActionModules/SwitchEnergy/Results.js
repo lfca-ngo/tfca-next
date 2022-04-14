@@ -130,7 +130,13 @@ export const Results = ({ goTo, module, nextKey, setStore, store }) => {
           <Row>
             <Col xs={12}>
               <div className="robin-wood-icon">
-                <RobinIcon />
+                <a
+                  href="https://www.robinwood.de/willkommen-bei-robin-wood"
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  <RobinIcon />
+                </a>
               </div>
             </Col>
             <Col className="actions-bar" style={{ textAlign: 'right' }} xs={12}>
@@ -141,8 +147,11 @@ export const Results = ({ goTo, module, nextKey, setStore, store }) => {
                   type="primary"
                 />
                 <Select onChange={changeSorting} value={sorting}>
-                  <Option value="price">Price</Option>
-                  <Option value="impact">Impact</Option>
+                  {SORT.map((item) => (
+                    <Option key={item.type} value={item.type}>
+                      {item.label}
+                    </Option>
+                  ))}
                 </Select>
               </Space>
             </Col>

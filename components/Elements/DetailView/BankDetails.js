@@ -7,6 +7,7 @@ import React from 'react'
 import { textBlockToString } from '../../../utils'
 import { CallToAction } from '../CallToAction'
 import { ListSection, TextSection } from '../Sections'
+import { Text } from '../Text'
 
 export const BankDetails = ({ actionId, blocks, item, onNext }) => {
   return (
@@ -46,6 +47,11 @@ export const BankDetails = ({ actionId, blocks, item, onNext }) => {
 
       <Divider />
 
+      <TextSection
+        text={item?.description}
+        title={textBlockToString(blocks['label.about'])}
+      />
+
       <ListSection
         items={item.benefits}
         title={textBlockToString(blocks['label.benefits'])}
@@ -54,9 +60,14 @@ export const BankDetails = ({ actionId, blocks, item, onNext }) => {
         items={item.sustainability}
         title={textBlockToString(blocks['label.sustainability'])}
       />
+      <ListSection
+        items={item.sustainabilityRanking}
+        title={textBlockToString(blocks['label.rating'])}
+      />
+      <Text block={blocks['sustainability.rating.explainer']} />
       <TextSection
-        text={item?.description}
-        title={textBlockToString(blocks['label.about'])}
+        text={blocks['finance.disclaimer']}
+        title={textBlockToString(blocks['label.additional'])}
       />
     </div>
   )

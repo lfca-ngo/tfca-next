@@ -8,6 +8,7 @@ export const DateStringPicker = ({ onChange, value, ...props }) => {
   return (
     <DatePicker
       format={FORMAT}
+      inputReadOnly
       onChange={(date) => {
         onChange(date.toISOString())
       }}

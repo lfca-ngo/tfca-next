@@ -55,7 +55,9 @@ export const FormCheck = ({ goTo, module: { blocks = {}, icon = {} } }) => {
         notFoundContent={null}
         onChange={setSelectedProviderName}
         onSearch={debouncedSearch}
-        placeholder="Wähle einen Versorger"
+        placeholder={textBlockToString(
+          blocks['checkprovider.select.placeholder']
+        )}
         showSearch
         style={{ width: '100%' }}
         value={selectedProviderName}
@@ -75,8 +77,12 @@ export const FormCheck = ({ goTo, module: { blocks = {}, icon = {} } }) => {
         ratingResult.robinWoodRating?.recommendation === 'yes' ? (
           <div style={{ marginTop: '15px' }}>
             <Alert
-              description="Dein Provider erfüllt bereits alle Vorgaben als unabhängiger Ökostromlieferant. Klick auf den Button, um deine Challenge erfolgreich abzuschließen!"
-              message="Wunderbar!"
+              description={textBlockToString(
+                blocks['checkprovider.result.success']
+              )}
+              message={textBlockToString(
+                blocks['checkprovider.result.success.title']
+              )}
               showIcon
               type="success"
             />
@@ -87,7 +93,7 @@ export const FormCheck = ({ goTo, module: { blocks = {}, icon = {} } }) => {
               style={{ marginTop: '15px' }}
               type="primary"
             >
-              Challenge abschließen
+              {textBlockToString(blocks['checkprovider.button.primary'])}
             </Button>
           </div>
         ) : (
@@ -98,7 +104,9 @@ export const FormCheck = ({ goTo, module: { blocks = {}, icon = {} } }) => {
                   dangerouslySetInnerHTML={{
                     __html:
                       ratingResult.robinWoodRating?.reason ||
-                      'Dein Provider erfüllt nicht die höchsten Herausforderungen an Ökostrom.',
+                      textBlockToString(
+                        blocks['checkprovider.result.fail.fallback']
+                      ),
                   }}
                 />
               }
@@ -119,7 +127,9 @@ export const FormCheck = ({ goTo, module: { blocks = {}, icon = {} } }) => {
               style={{ marginTop: '15px' }}
               type="primary"
             >
-              Jetzt Provider wechseln
+              {textBlockToString(
+                blocks['checkprovider.result.button.changenow']
+              )}
             </Button>
           </div>
         )

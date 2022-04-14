@@ -1,6 +1,7 @@
 require('./providerDetails.less')
 
 import Icon, {
+  ArrowRightOutlined,
   EuroCircleOutlined,
   FileDoneOutlined,
   GlobalOutlined,
@@ -9,7 +10,6 @@ import Icon, {
   MessageOutlined,
   PhoneOutlined,
   SafetyOutlined,
-  ShareAltOutlined,
   TagOutlined,
   ThunderboltOutlined,
 } from '@ant-design/icons'
@@ -67,15 +67,16 @@ export const ProviderDetails = ({ energyKwh, item, onNext }) => {
 
         <div className="actions">
           <Space align="center">
-            <Button block onClick={onNext} shape="round" type="primary">
-              Switch now
-            </Button>
             <Button
               block
-              icon={<ShareAltOutlined />}
+              icon={<ArrowRightOutlined />}
+              onClick={onNext}
               shape="round"
+              size="large"
               type="primary"
-            />
+            >
+              Switch now
+            </Button>
           </Space>
         </div>
       </header>

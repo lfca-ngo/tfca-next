@@ -1,43 +1,31 @@
-import { InfoCircleOutlined } from '@ant-design/icons'
-import { Button, Checkbox, Form, Input, Popover } from 'antd'
+import { Checkbox, Form, Input } from 'antd'
 import moment from 'moment'
 import React from 'react'
 
+import { textBlockToString } from '../../../../../utils'
 import { DateStringPicker } from '../DateStringPicker'
 import { GroupWrapper } from '../GroupWrapper'
 import { AddressInput } from './AddressInput'
 
 export const PersonalData = ({
+  blocks,
   requireBirthday = false,
   requirePhone = false,
   requireSalutation = false,
 }) => {
   return (
-    <GroupWrapper
-      label={
-        <div>
-          Persönliche Daten{' '}
-          <Popover
-            content={
-              <div>
-                Wenn du weitere Fragen hast, schau doch mal in unsere{' '}
-                <Button type="link">FAQs</Button>
-              </div>
-            }
-          >
-            <InfoCircleOutlined />
-          </Popover>
-        </div>
-      }
-    >
+    <GroupWrapper label={textBlockToString(blocks['switch.personal.label'])}>
       <AddressInput
+        blocks={blocks}
         cityAnZipDisabled={true}
         name="shippingAddress"
         requireSalutation={requireSalutation}
       />
 
       <Form.Item name="separateBillingAddress" valuePropName="checked">
-        <Checkbox>Abweichende Rechnungsadresse</Checkbox>
+        <Checkbox>
+          {textBlockToString(blocks['switch.personal.separatebilling.label'])}
+        </Checkbox>
       </Form.Item>
 
       <Form.Item
@@ -50,6 +38,7 @@ export const PersonalData = ({
         {({ getFieldValue }) =>
           getFieldValue('separateBillingAddress') ? (
             <AddressInput
+              blocks={blocks}
               name="billingAddress"
               requireSalutation={requireSalutation}
             />
@@ -58,42 +47,64 @@ export const PersonalData = ({
       </Form.Item>
 
       <Form.Item
-        label="Email"
+        label={textBlockToString(blocks['switch.personal.email.label'])}
         name={['contact', 'email']}
         rules={[
-          { message: 'Gib deine Email an!', required: true },
-          { message: 'Die eingegebene Email ist nicht gültig', type: 'email' },
+          {
+            message: textBlockToString(blocks['switch.personal.email.error']),
+            required: true,
+          },
+          {
+            message: textBlockToString(
+              blocks['switch.personal.email.error.invalid']
+            ),
+            type: 'email',
+          },
         ]}
       >
-        <Input placeholder="greta.thunberg@earth.io" size="large" />
+        <Input
+          placeholder={textBlockToString(
+            blocks['switch.personal.email.placeholder']
+          )}
+          size="large"
+        />
       </Form.Item>
 
       {requirePhone && (
         <Form.Item
-          label="Telefon"
+          label={textBlockToString(blocks['switch.personal.phone.label'])}
           name={['contact', 'phone']}
           rules={[
             {
-              message: 'Gib Telefonnummer an!',
+              message: textBlockToString(blocks['switch.personal.phone.error']),
               required: true,
             },
             {
-              message: 'Die eingegebene Telefonnummer ist nicht gültig.',
+              message: textBlockToString(
+                blocks['switch.personal.phone.error.invalid']
+              ),
               pattern: /^[+]?\d+$/g,
             },
           ]}
         >
-          <Input placeholder="+49 123456789" size="large" />
+          <Input
+            placeholder={textBlockToString(
+              blocks['switch.personal.phone.placeholder']
+            )}
+            size="large"
+          />
         </Form.Item>
       )}
 
       {requireBirthday && (
         <Form.Item
-          label="Geburtstag"
+          label={textBlockToString(blocks['switch.personal.birthday.label'])}
           name={['personal', 'birthday']}
           rules={[
             {
-              message: 'Gib dein Geburtsdatum an!',
+              message: textBlockToString(
+                blocks['switch.personal.birthday.error']
+              ),
               required: true,
             },
             {
@@ -106,7 +117,13 @@ export const PersonalData = ({
                 ) {
                   return Promise.resolve()
                 }
-                return Promise.reject(new Error('Ungültiges Datum.'))
+                return Promise.reject(
+                  new Error(
+                    textBlockToString(
+                      blocks['switch.personal.birthday.error.invalid']
+                    )
+                  )
+                )
               },
             },
           ]}

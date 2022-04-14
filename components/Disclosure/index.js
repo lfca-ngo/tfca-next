@@ -54,6 +54,9 @@ const ContributionPanelContent = ({ participationPackage }) => {
 export const Disclosure = ({ data }) => {
   const actionsList = data?.completedCompanyActions
   const campaignContributionMap = data.company.campaignParticipationPackages
+  const additionalTitle = textBlockToString(
+    useContentBlocks('disclosure.additional.title')
+  )
 
   return (
     <div className="disclosure">
@@ -84,17 +87,24 @@ export const Disclosure = ({ data }) => {
             __html: data.company?.campaignGoals,
           }}
         />
-        <h4>
-          {textBlockToString(useContentBlocks('disclosure.additional.title'))}
-        </h4>
-        <div
-          className="content-text"
-          dangerouslySetInnerHTML={{
-            __html: data.company?.campaignContribution,
-          }}
-        />
+        {data.company?.campaignContribution && (
+          <>
+            <h4>{additionalTitle}</h4>
+            <div
+              className="content-text"
+              dangerouslySetInnerHTML={{
+                __html: data.company?.campaignContribution,
+              }}
+            />
+          </>
+        )}
 
         <ImageGallery images={data.company?.campaignFiles} />
+
+        <h4>
+          {textBlockToString(useContentBlocks('disclosure.contribution.title'))}
+        </h4>
+
         <Collapse
           accordion
           className="actions-wrapper"
@@ -144,7 +154,7 @@ export const Disclosure = ({ data }) => {
                 >
                   {action.description && <div>{action.description}</div>}
 
-                  {action.requirements && (
+                  {action.requirements.length > 0 ? (
                     <div>
                       <h5>Requirements</h5>
                       <ul className="green-list">
@@ -157,6 +167,8 @@ export const Disclosure = ({ data }) => {
                         })}
                       </ul>
                     </div>
+                  ) : (
+                    'This action does not have further requirements.'
                   )}
                 </Panel>
               )

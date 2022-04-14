@@ -15,7 +15,10 @@ export const EnergyForm = ({
       <Form.Item
         name="postcodeEnergy"
         rules={[
-          { message: 'Gib eine gültige Postleitzahl ein', required: true },
+          {
+            message: textBlockToString(blocks['form.postcode.error']),
+            required: true,
+          },
           { validator: (_, value) => validatePostcode(value, 'postcode') },
         ]}
       >
@@ -24,12 +27,14 @@ export const EnergyForm = ({
           placeholderInput={textBlockToString(
             blocks['form.postcode.placeholder']
           )}
-          placeholderSelect="Please select"
+          placeholderSelect={textBlockToString(
+            blocks['form.postcode.select.placeholder']
+          )}
         />
       </Form.Item>
       <Form.Item>
         <Button block htmlType="submit" size="large" type="primary">
-          Finde passende Tarife
+          {textBlockToString(blocks['form.postcode.energy.button.primary'])}
         </Button>
       </Form.Item>
     </Form>

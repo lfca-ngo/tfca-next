@@ -2,34 +2,46 @@ import { InfoCircleOutlined } from '@ant-design/icons'
 import { Form, Input, Popover, Radio } from 'antd'
 import React from 'react'
 
+import { textBlockToString } from '../../../../../utils'
 import { DateStringPicker } from '../DateStringPicker'
 import { ProviderSearchInput } from './ProviderSearchInput'
 
 export const PreviousProviderInput = ({
+  blocks,
   requirePreviousContractCustomerId,
 }) => {
   return (
     <>
       <Form.Item
-        label="Vorheriger Versorger"
+        label={textBlockToString(blocks['switch.connect.prevprovider.label'])}
         name={['previousContract', 'provider']}
         rules={[
-          { message: 'Bitte wähle einen Versorger aus!', required: true },
+          {
+            message: textBlockToString(
+              blocks['switch.connect.prevprovider.error']
+            ),
+            required: true,
+          },
         ]}
       >
-        <ProviderSearchInput />
+        <ProviderSearchInput blocks={blocks} />
       </Form.Item>
 
       {requirePreviousContractCustomerId && (
         <Form.Item
           label={
             <div>
-              Kundennummer{' '}
+              {textBlockToString(
+                blocks['switch.connect.prevprovider.customerid.label.text1']
+              )}{' '}
               <Popover
                 content={
                   <div>
-                    Deine Kundennummer findest Du auf Deiner letzten
-                    Stromrechnung.
+                    {textBlockToString(
+                      blocks[
+                        'switch.connect.prevprovider.customerid.label.text2'
+                      ]
+                    )}
                   </div>
                 }
               >
@@ -39,21 +51,48 @@ export const PreviousProviderInput = ({
           }
           name={['previousContract', 'customerId']}
           rules={[
-            { message: 'Bitte gib deine Kundennummer an!', required: true },
+            {
+              message: textBlockToString(
+                blocks['switch.connect.prevprovider.customerid.error']
+              ),
+              required: true,
+            },
           ]}
         >
-          <Input placeholder="012345678" size="large" />
+          <Input
+            placeholder={textBlockToString(
+              blocks['switch.connect.prevprovider.customerid.placeholder']
+            )}
+            size="large"
+          />
         </Form.Item>
       )}
 
       <Form.Item
-        label="Hast Du Deinen Vertrag bereits gekündigt?"
+        label={textBlockToString(
+          blocks['switch.connect.prevprovider.cancellation.label']
+        )}
         name={['previousContract', 'cancellation', 'instructed']}
-        rules={[{ message: 'Bitte auswählen!', required: true }]}
+        rules={[
+          {
+            message: textBlockToString(
+              blocks['switch.connect.prevprovider.cancellation.error']
+            ),
+            required: true,
+          },
+        ]}
       >
         <Radio.Group>
-          <Radio value={true}>Ja</Radio>
-          <Radio value={false}>Nein</Radio>
+          <Radio value={true}>
+            {textBlockToString(
+              blocks['switch.connect.prevprovider.cancellation.option.yes']
+            )}
+          </Radio>
+          <Radio value={false}>
+            {textBlockToString(
+              blocks['switch.connect.prevprovider.cancellation.option.no']
+            )}
+          </Radio>
         </Radio.Group>
       </Form.Item>
 
@@ -68,21 +107,34 @@ export const PreviousProviderInput = ({
           getFieldValue(['previousContract', 'cancellation', 'instructed']) ===
           true ? (
             <Form.Item
-              label="Kündigungsdatum"
+              label={textBlockToString(
+                blocks['switch.connect.prevprovider.cancellation.date.label']
+              )}
               name={['previousContract', 'cancellation', 'date']}
               rules={[
                 {
-                  message: 'Bitte gib deinen Kündigungsdatum an!',
+                  message: textBlockToString(
+                    blocks[
+                      'switch.connect.prevprovider.cancellation.date.error'
+                    ]
+                  ),
                   required: true,
                 },
               ]}
             >
-              <DateStringPicker placeholder="dd.mm.yyyy" />
+              <DateStringPicker
+                placeholder={textBlockToString(
+                  blocks[
+                    'switch.connect.prevprovider.cancellation.date.placeholder'
+                  ]
+                )}
+              />
             </Form.Item>
           ) : (
             <p>
-              Kein Problem, wir kündigen den Vertrag bei Deinem alten
-              Energieversorger.
+              {textBlockToString(
+                blocks['switch.connect.prevprovider.cancellation.hint']
+              )}
             </p>
           )
         }

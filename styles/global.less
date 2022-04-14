@@ -195,6 +195,18 @@ body {
   font-size: @font-size-sm;
 }
 
+.ant-form {
+  @disabled-color: #ffffff9e;
+  .ant-input[disabled] {
+    background-color: @disabled-color;
+    color: rgba(0, 0, 0, 0.5);
+    border-color: transparent;
+    &:hover {
+      border-color: transparent;
+    }
+  }
+}
+
 .dynamic-form.ant-form {
   > .ant-form-item {
     margin-bottom: 0;

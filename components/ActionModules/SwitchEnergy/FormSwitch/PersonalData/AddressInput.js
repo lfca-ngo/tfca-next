@@ -1,7 +1,10 @@
 import { Checkbox, Col, Form, Input, Radio, Row } from 'antd'
 import React, { useState } from 'react'
 
+import { textBlockToString } from '../../../../../utils'
+
 export const AddressInput = ({
+  blocks,
   cityAnZipDisabled = false,
   name,
   requireSalutation = false,
@@ -12,14 +15,33 @@ export const AddressInput = ({
     <>
       {requireSalutation && (
         <Form.Item
-          label="Anrede"
+          label={textBlockToString(blocks['switch.personal.salutation.label'])}
           name={[name, 'salutation']}
-          rules={[{ message: 'Bitte wähle eine Option!', required: true }]}
+          rules={[
+            {
+              message: textBlockToString(
+                blocks['switch.personal.salutation.error']
+              ),
+              required: true,
+            },
+          ]}
         >
           <Radio.Group>
-            <Radio value="ms">Frau</Radio>
-            <Radio value="mr">Herr</Radio>
-            <Radio value="neutral">Divers</Radio>
+            <Radio value="ms">
+              {textBlockToString(
+                blocks['switch.personal.salutation.option.ms']
+              )}
+            </Radio>
+            <Radio value="mr">
+              {textBlockToString(
+                blocks['switch.personal.salutation.option.mr']
+              )}
+            </Radio>
+            <Radio value="neutral">
+              {textBlockToString(
+                blocks['switch.personal.salutation.option.neutral']
+              )}
+            </Radio>
           </Radio.Group>
         </Form.Item>
       )}
@@ -27,43 +49,70 @@ export const AddressInput = ({
       <Row gutter={16}>
         <Col xs={12}>
           <Form.Item
-            label="Vorname"
+            label={textBlockToString(blocks['switch.personal.firstname.label'])}
             name={[name, 'firstName']}
             rules={[
-              { message: 'Bitte gib deinen Vornamen an!', required: true },
+              {
+                message: textBlockToString(
+                  blocks['switch.personal.firstname.error']
+                ),
+                required: true,
+              },
             ]}
           >
-            <Input placeholder="Greta" size="large" />
+            <Input
+              placeholder={textBlockToString(
+                blocks['switch.personal.firstname.placeholder']
+              )}
+              size="large"
+            />
           </Form.Item>
         </Col>
         <Col xs={12}>
           <Form.Item
-            label="Nachname"
+            label={textBlockToString(blocks['switch.personal.lastname.label'])}
             name={[name, 'lastName']}
             rules={[
-              { message: 'Bitte gib deinen Nachnamen an!', required: true },
+              {
+                message: textBlockToString(
+                  blocks['switch.personal.lastname.error']
+                ),
+                required: true,
+              },
             ]}
           >
-            <Input placeholder="Thunberg" size="large" />
+            <Input
+              placeholder={textBlockToString(
+                blocks['switch.personal.lastname.placeholder']
+              )}
+              size="large"
+            />
           </Form.Item>
         </Col>
       </Row>
 
       <Form.Item
-        label="Straße und Hausnummer"
+        label={textBlockToString(blocks['switch.personal.street.label'])}
         name={[name, 'streetAddress']}
         rules={[
           {
-            message: 'Bitte gib deine Adresse an!',
+            message: textBlockToString(blocks['switch.personal.street.error']),
             required: true,
           },
           {
-            message: 'Die Adresse ist ungültig.',
+            message: textBlockToString(
+              blocks['switch.personal.street.error.invalid']
+            ),
             pattern: /^(.+) ([\d .-]+.*)$/,
           },
         ]}
       >
-        <Input placeholder="Auf der Erde 2" size="large" />
+        <Input
+          placeholder={textBlockToString(
+            blocks['switch.personal.street.placeholder']
+          )}
+          size="large"
+        />
       </Form.Item>
 
       {/* Do NOT add a `name` prop since we want to keep this value out of the form */}
@@ -74,30 +123,46 @@ export const AddressInput = ({
       </Form.Item>
 
       {hasAddition && (
-        <Form.Item label="Zusatz" name={[name, 'addition']}>
-          <Input placeholder="5. Stock" size="large" />
+        <Form.Item
+          label={textBlockToString(
+            blocks['switch.personal.address.additional.label']
+          )}
+          name={[name, 'addition']}
+        >
+          <Input
+            placeholder={textBlockToString(
+              blocks['switch.personal.addition.placeholder']
+            )}
+            size="large"
+          />
         </Form.Item>
       )}
 
       <Row gutter={16}>
         <Col xs={12}>
           <Form.Item
-            label="Postleitzahl"
+            label={textBlockToString(blocks['switch.personal.zipcode.label'])}
             name={[name, 'zipCode']}
             rules={[
               {
-                message: 'Wie lautet deine Postleitzahl?',
+                message: textBlockToString(
+                  blocks['switch.personal.zipcode.error']
+                ),
                 required: true,
               },
               {
-                message: 'Die eingegebene Postleitzahl ist nicht gültig.',
+                message: textBlockToString(
+                  blocks['switch.personal.zipcode.error.invalid']
+                ),
                 pattern: /^\d{5}$/,
               },
             ]}
           >
             <Input
               disabled={cityAnZipDisabled}
-              placeholder="12099"
+              placeholder={textBlockToString(
+                blocks['switch.personal.zipcode.placeholder']
+              )}
               size="large"
               type="number"
             />
@@ -105,13 +170,22 @@ export const AddressInput = ({
         </Col>
         <Col xs={12}>
           <Form.Item
-            label="Stadt"
+            label={textBlockToString(blocks['switch.personal.city.label'])}
             name={[name, 'city']}
-            rules={[{ message: 'Bitte gib deine Stadt an!', required: true }]}
+            rules={[
+              {
+                message: textBlockToString(
+                  blocks['switch.personal.city.error']
+                ),
+                required: true,
+              },
+            ]}
           >
             <Input
               disabled={cityAnZipDisabled}
-              placeholder="Paris"
+              placeholder={textBlockToString(
+                blocks['switch.personal.city.placeholder']
+              )}
               size="large"
             />
           </Form.Item>

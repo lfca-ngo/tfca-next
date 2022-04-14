@@ -1,9 +1,11 @@
 import { Checkbox, Form, Popover } from 'antd'
 import React from 'react'
 
+import { textBlockToString } from '../../../../../utils'
 import { GroupWrapper } from '../GroupWrapper'
 
 export const Approvals = ({
+  blocks,
   cancellationLink,
   privacyLink,
   providerAddress,
@@ -11,7 +13,9 @@ export const Approvals = ({
   termsLink,
 }) => {
   return (
-    <GroupWrapper label="Einverständnis und Bestätigung">
+    <GroupWrapper
+      label={textBlockToString(blocks['switch.approvals.group.label'])}
+    >
       <Form.Item
         name={['approvals', 'providerTerms']}
         rules={[
@@ -25,7 +29,11 @@ export const Approvals = ({
                 return Promise.resolve()
               }
               return Promise.reject(
-                new Error('Bitte akzeptiere die Bedingungen des Versorgers.')
+                new Error(
+                  textBlockToString(
+                    blocks['switch.approvals.providerterms.error']
+                  )
+                )
               )
             },
           },
@@ -34,28 +42,42 @@ export const Approvals = ({
       >
         <Checkbox>
           <span>
-            Ich bestätige, dass ich die{' '}
+            {textBlockToString(blocks['switch.approvals.providerterms.text1'])}
             <a href={termsLink} rel="noopener noreferrer" target="_blank">
-              AGB
+              {textBlockToString(
+                blocks['switch.approvals.providerterms.text2']
+              )}
             </a>{' '}
-            und die{' '}
+            {textBlockToString(blocks['switch.approvals.providerterms.text3'])}
             <a
               href={cancellationLink}
               rel="noopener noreferrer"
               target="_blank"
             >
-              Widerrufsbelehrung
+              {textBlockToString(
+                blocks['switch.approvals.providerterms.text4']
+              )}
             </a>{' '}
-            der {providerLegalName} gelesen habe und akzeptiere diese. Ich
-            erteile die{' '}
+            {textBlockToString(blocks['switch.approvals.providerterms.text5'], {
+              providerLegalName,
+            })}{' '}
             <Popover
-              content={`Ich beauftrage die ${providerLegalName}, ${providerAddress}, mit der Lieferung von elektrischer Energie in Höhe meines Gesamtbedarfs für die unten bezeichnete Stromabnahmestelle. Ich beauftrage und bevollmächtige die Fair Trade Power Deutschland GmbH, sofern notwendig, meine gegenwärtig mit dem bisherigen Stromversorger bestehende Stromversorgung zu kündigen und, sofern notwendig, die erforderlichen Verträge mit dem örtlichen Netzbetreiber abzuschließen.`}
-              title="Auftrag & Vollmacht"
+              content={textBlockToString(
+                blocks['switch.approvals.providerterms.power.title'],
+                { providerAddress, providerLegalName }
+              )}
+              title={textBlockToString(
+                blocks['switch.approvals.providerterms.power.title']
+              )}
               trigger="click"
             >
-              <a>Vollmacht</a>
+              <a>
+                {textBlockToString(
+                  blocks['switch.approvals.providerterms.text6']
+                )}
+              </a>
             </Popover>{' '}
-            zur Verarbeitung meiner Bestellung.
+            {textBlockToString(blocks['switch.approvals.providerterms.text7'])}
           </span>
         </Checkbox>
       </Form.Item>
@@ -73,7 +95,11 @@ export const Approvals = ({
                 return Promise.resolve()
               }
               return Promise.reject(
-                new Error('Bitte akzeptiere die Bedingungen des Versorgers.')
+                new Error(
+                  textBlockToString(
+                    blocks['switch.approvals.providerterms.error']
+                  )
+                )
               )
             },
           },
@@ -82,12 +108,17 @@ export const Approvals = ({
       >
         <Checkbox>
           <span>
-            Ich habe die{' '}
+            {textBlockToString(
+              blocks['switch.approvals.providerterms.privacy.text1']
+            )}{' '}
             <a href={privacyLink} rel="noopener noreferrer" target="_blank">
-              Datenschutzhinweise
+              {textBlockToString(
+                blocks['switch.approvals.providerterms.privacy.text2']
+              )}
             </a>{' '}
-            mit den Informationen zur Verarbeitung meiner personenbezogenen
-            Daten zur Kenntnis genommen.
+            {textBlockToString(
+              blocks['switch.approvals.providerterms.privacy.text3']
+            )}
           </span>
         </Checkbox>
       </Form.Item>
@@ -105,7 +136,11 @@ export const Approvals = ({
                 return Promise.resolve()
               }
               return Promise.reject(
-                new Error('Bitte akzeptiere unsere Bedingungen.')
+                new Error(
+                  textBlockToString(
+                    blocks['switch.approvals.providerterms.privacy.error']
+                  )
+                )
               )
             },
           },
@@ -114,40 +149,48 @@ export const Approvals = ({
       >
         <Checkbox>
           <span>
-            Desweiteren habe ich die{' '}
+            {textBlockToString(blocks['switch.approvals.switchterms.text1'])}{' '}
             <a
               href="https://switch-for-climate.de/agb"
               rel="noopener noreferrer"
               target="_blank"
             >
-              AGB
+              {textBlockToString(blocks['switch.approvals.switchterms.text2'])}
             </a>{' '}
-            von <i>Switch for Climate gUG</i> gelesen und akzeptiere diese. Ich
-            erteile die{' '}
+            {textBlockToString(blocks['switch.approvals.switchterms.text3'])}{' '}
             <Popover
-              content="Ich bevollmächtige Switch for Climate gemeinnützige UG (haftungsbeschränkt), meine persönlichen Daten zum Zweck des Abschlusses eines Stromliefervertages an das von mir gewählte Energieversorgungsunternehmen weiterzuleiten und die erforderlichen Erklärungen für den Abschluss des Energieliefervertrages gegenüber dem Energieversorgungsunternehmen abzugeben."
-              title="Auftrag & Vollmacht"
+              content={textBlockToString(
+                blocks['switch.approvals.switchterms.popover.content']
+              )}
+              title={textBlockToString(
+                blocks['switch.approvals.switchterms.popover.title']
+              )}
               trigger="click"
             >
-              <a>Vollmacht</a>
+              <a>
+                {textBlockToString(
+                  blocks['switch.approvals.switchterms.text4']
+                )}
+              </a>
             </Popover>{' '}
-            zur Verarbeitung meiner Bestellung. Die{' '}
+            {textBlockToString(blocks['switch.approvals.switchterms.text5'])}
             <a
               href="https://switch-for-climate.de/datenschutz"
               rel="noopener noreferrer"
               target="_blank"
             >
-              Datenschutzbestimmungen
+              {textBlockToString(blocks['switch.approvals.switchterms.text6'])}
             </a>{' '}
-            habe ich zur Kenntnis genommen.
+            {textBlockToString(blocks['switch.approvals.switchterms.text7'])}
           </span>
         </Checkbox>
       </Form.Item>
 
       <Form.Item name={['approvals', 'advertising']} valuePropName="checked">
         <Checkbox>
-          Ja, Switch for Climate darf mich per E-Mail zum Thema Klimaschutz
-          informieren. Wir übertreiben es nicht, versprochen!
+          {textBlockToString(
+            blocks['switch.approvals.switchterms.ads.checkbox']
+          )}
         </Checkbox>
       </Form.Item>
     </GroupWrapper>

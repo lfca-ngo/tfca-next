@@ -2,9 +2,10 @@ import { Form, Input, Select } from 'antd'
 import moment from 'moment'
 import React from 'react'
 
+import { textBlockToString } from '../../../../../utils'
 import { DateStringPicker } from '../DateStringPicker'
 
-export const DesiredDeliveryInput = ({ disableDesiredDelivery }) => {
+export const DesiredDeliveryInput = ({ blocks, disableDesiredDelivery }) => {
   return (
     <>
       <Form.Item
@@ -22,15 +23,30 @@ export const DesiredDeliveryInput = ({ disableDesiredDelivery }) => {
             ) : (
               <>
                 <Form.Item
-                  label="Hast Du einen Wunsch-Wechsel-Termin?"
+                  label={textBlockToString(
+                    blocks['switch.connect.desireddelivery.label']
+                  )}
                   name={['desiredDelivery', 'mode']}
-                  rules={[{ message: 'Bitte auswählen!', required: true }]}
+                  rules={[
+                    {
+                      message: textBlockToString(
+                        blocks['switch.connect.desireddelivery.error']
+                      ),
+                      required: true,
+                    },
+                  ]}
                 >
                   <Select>
                     <Select.Option value="asap">
-                      Nächstmöglicher Termin
+                      {textBlockToString(
+                        blocks['switch.connect.desireddelivery.option.asap']
+                      )}
                     </Select.Option>
-                    <Select.Option value="date">Termin auswählen</Select.Option>
+                    <Select.Option value="date">
+                      {textBlockToString(
+                        blocks['switch.connect.desireddelivery.option.date']
+                      )}
+                    </Select.Option>
                   </Select>
                 </Form.Item>
                 <Form.Item
@@ -46,7 +62,9 @@ export const DesiredDeliveryInput = ({ disableDesiredDelivery }) => {
                         name={['desiredDelivery', 'date']}
                         rules={[
                           {
-                            message: 'Bitte wähle einen Wechseltermin!',
+                            message: textBlockToString(
+                              blocks['switch.connect.desireddelivery.error']
+                            ),
                             required: true,
                           },
                         ]}
@@ -63,18 +81,24 @@ export const DesiredDeliveryInput = ({ disableDesiredDelivery }) => {
             )
           ) : (
             <Form.Item
-              label="Umzugsdatum"
+              label={textBlockToString(
+                blocks['switch.connect.desireddelivery.move.label']
+              )}
               name={['desiredDelivery', 'date']}
               rules={[
                 {
-                  message: 'Bitte gib deinen Umzugstermin an!',
+                  message: textBlockToString(
+                    blocks['switch.connect.desireddelivery.move.error']
+                  ),
                   required: true,
                 },
               ]}
             >
               <DateStringPicker
                 disabledDate={disabledDate}
-                placeholder="Umzugsdatum"
+                placeholder={textBlockToString(
+                  blocks['switch.connect.desireddelivery.move.placeholder']
+                )}
               />
             </Form.Item>
           )

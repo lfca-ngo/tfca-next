@@ -62,17 +62,13 @@ export const LeavePage = ({
       <div className="content">
         <div className="title">{leavePageTitle}</div>
         <div className="description">{leavePageHint}</div>
+        <label className="hint">{leavePageButtonHint}</label>
         <Space direction="vertical" style={{ width: '100%' }}>
-          <Button
-            block
-            ghost
-            icon={<LikeOutlined />}
-            onClick={onNext}
-            type="primary"
+          <a
+            href={`${destinationUrl}?ref=tfca`}
+            rel="noopener noreferrer"
+            target="_blank"
           >
-            {leavePageButtonPrimary}
-          </Button>
-          <a href={destinationUrl} rel="noopener noreferrer" target="_blank">
             <Button
               block
               icon={<LinkOutlined />}
@@ -82,7 +78,15 @@ export const LeavePage = ({
               {destination}
             </Button>
           </a>
-          <label className="hint">{leavePageButtonHint}</label>
+          <Button
+            block
+            ghost
+            icon={<LikeOutlined />}
+            onClick={onNext}
+            type="primary"
+          >
+            {leavePageButtonPrimary}
+          </Button>
         </Space>
       </div>
     </div>
