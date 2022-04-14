@@ -103,7 +103,7 @@ export const ChallengeStatus = ({ className, openGraphInfo }) => {
           <div>
             {isGeneratingToken ? (
               <LoadingSpinner
-                additionalSpinnerProps={{ type: 'home' }}
+                additionalSpinnerProps={{ color: 'pink', type: 'home' }}
                 className="dark"
                 label={linkGenerationLabel}
               />

@@ -25,6 +25,10 @@ const COLOR_MAP = {
     from: DEFAULT_COLOR,
     to: '#ff9d59',
   },
+  pink: {
+    from: '#622860',
+    to: '#d82086',
+  },
 }
 
 const variants = (color) => ({
