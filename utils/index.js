@@ -1,9 +1,7 @@
 import { v4 as uuidv4 } from 'uuid'
 
 import { textBlockToString } from './text'
-export * from './create-share-svg'
 export * from './names-array-to-string'
-export * from './share-token'
 export * from './text'
 
 export const isDev = process.env.NODE_ENV === 'development'
