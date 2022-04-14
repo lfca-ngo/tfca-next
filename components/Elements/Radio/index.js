@@ -77,7 +77,6 @@ export const Radio = ({
     }
 
     setSelected(newValues)
-
     triggerChange(newValues)
   }
 
