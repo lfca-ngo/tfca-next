@@ -6,7 +6,7 @@ import {
   INITIAL_STATS,
   isBrowser,
   UID_COOKIE_NAME,
-} from '../utils'
+} from '../../utils'
 
 const DEFAULT_PAYLOAD = {
   api_key: process.env.NEXT_PUBLIC_GRAPH_JSON_API_KEY,

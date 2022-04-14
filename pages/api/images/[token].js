@@ -1,7 +1,7 @@
 import path from 'path'
 import sharp from 'sharp'
 
-import { createShareSvg, decodeShareToken } from '../../../utils'
+import { createShareSvg, decodeShareToken } from '../../../utils-server-only'
 
 /**
  * Resolve fonts so that they are bundled

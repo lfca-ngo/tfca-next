@@ -1,5 +1,7 @@
 const withAntdLess = require('next-plugin-antd-less')
-const withBundleAnalyzer = require('@next/bundle-analyzer')
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+})
 const withPlugins = require('next-compose-plugins')
 const withPWA = require('next-pwa')
 
@@ -39,18 +41,6 @@ const nextConfig = {
         source: '/de',
       },
       {
-        destination: '/gbr',
-        locale: false,
-        permanent: false,
-        source: '/en-GB',
-      },
-      {
-        destination: '/int', // TODO: Redirct to US collection once it is configured
-        locale: false,
-        permanent: false,
-        source: '/en-US',
-      },
-      {
         destination: '/int',
         locale: false,
         permanent: false,
@@ -87,29 +77,24 @@ const nextConfig = {
       },
     ]
   },
+  webpack: (config) => {
+    config.module.rules.push({
+      issuer: /\.[jt]sx?$/,
+      test: /\.svg$/i,
+      use: ['@svgr/webpack'],
+    })
+
+    return config
+  },
 }
 
 module.exports = withPlugins(
   [
+    [withBundleAnalyzer],
     [
       withAntdLess,
       {
         lessVarsFilePath: './styles/variables.less',
-        webpack: (config) => {
-          config.module.rules.push({
-            issuer: /\.[jt]sx?$/,
-            test: /\.svg$/i,
-            use: ['@svgr/webpack'],
-          })
-
-          return config
-        },
-      },
-    ],
-    [
-      withBundleAnalyzer,
-      {
-        enabled: process.env.ANALYZE === 'true',
       },
     ],
     [
