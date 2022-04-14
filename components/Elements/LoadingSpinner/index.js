@@ -10,8 +10,20 @@ const DEFAULT_COLOR = '#fff'
 
 const COLOR_MAP = {
   'color-1': {
-    from: '#009976',
+    from: DEFAULT_COLOR,
     to: '#00e0ad',
+  },
+  'color-2': {
+    from: DEFAULT_COLOR,
+    to: '#b148ad',
+  },
+  'color-3': {
+    from: DEFAULT_COLOR,
+    to: '#375ba7',
+  },
+  'color-4': {
+    from: DEFAULT_COLOR,
+    to: '#ff9d59',
   },
 }
 
@@ -24,14 +36,60 @@ const variants = (color) => ({
   initial: {
     pathLength: 1,
     stroke: COLOR_MAP[color]?.from || DEFAULT_COLOR,
-    strokeWidth: 2,
+    strokeWidth: 1.5,
   },
 })
+
+const BullhornSpinner = ({ color }) => {
+  const transition = { duration: 2, ease: 'easeInOut', yoyo: Infinity }
+  const pathVariants = variants(color)
+
+  return (
+    <svg height="80" viewBox="0 0 44 40" width="88">
+      <title>bullhorn</title>
+      <motion.path
+        animate="animate"
+        d="M19.752,25.256a19.575,19.575,0,0,1,3.957.795C28.234,27.579,34.957,34.115,39,37.733V24.262a1.013,1.013,0,0,1,.829-.981,4,4,0,0,0,0-7.828A1.013,1.013,0,0,1,39,14.472V1C34.957,4.618,28.234,11.154,23.709,12.692a30.088,30.088,0,0,1-5.911.975H4a3,3,0,0,0-3,3v5.4a3,3,0,0,0,3,3H8.583L12.532,39h6.583l-3.95-13.933V18"
+        fill="none"
+        initial="initial"
+        stroke="#000"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        transition={transition}
+        variants={pathVariants}
+      />
+    </svg>
+  )
+}
+
+const CheckmarkSpinner = ({ color }) => {
+  const transition = { duration: 2, ease: 'easeInOut', yoyo: Infinity }
+  const pathVariants = variants(color)
+
+  return (
+    <svg height="88" viewBox="0 0 44 44" width="88">
+      <title>checkmark</title>
+      <motion.path
+        animate="animate"
+        d="M41.852,15.133a21.023,21.023,0,1,1-4.6-7.574,3.019,3.019,0,0,1,.111,4.045L21.612,29.917a1.5,1.5,0,0,1-2.142.136l-9.052-8.164"
+        fill="none"
+        initial="initial"
+        stroke="#000"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        transition={transition}
+        variants={pathVariants}
+      />
+    </svg>
+  )
+}
 
 const EnergySpinner = ({ color }) => {
   const transition = { duration: 2, ease: 'easeInOut', yoyo: Infinity }
   const pathVariants = variants(color)
-  console.log(pathVariants)
+
   return (
     <svg height="86" viewBox="0 0 25.75 43.847" width="50">
       <title>bolt</title>
@@ -53,8 +111,12 @@ const EnergySpinner = ({ color }) => {
 
 const IconSelector = ({ color, type }) => {
   switch (type) {
+    case 'politics':
+      return <BullhornSpinner color={color} />
     case 'energy':
       return <EnergySpinner color={color} />
+    case 'check':
+      return <CheckmarkSpinner color={color} />
     default:
       return <LoadingOutlined />
   }
