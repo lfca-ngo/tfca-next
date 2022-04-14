@@ -41,18 +41,6 @@ const nextConfig = {
         source: '/de',
       },
       {
-        destination: '/gbr',
-        locale: false,
-        permanent: false,
-        source: '/en-GB',
-      },
-      {
-        destination: '/int', // TODO: Redirct to US collection once it is configured
-        locale: false,
-        permanent: false,
-        source: '/en-US',
-      },
-      {
         destination: '/int',
         locale: false,
         permanent: false,
