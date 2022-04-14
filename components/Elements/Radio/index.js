@@ -61,8 +61,11 @@ export const Radio = ({
     const [latestChange] = selectedValues.filter((v) => !selected.includes(v))
     const shouldSelectAll = latestChange === SELECT_ALL
     const allValues = [...items.map((item) => item.value), SELECT_ALL]
-    const hasDeselected = !latestChange
-    const newSelectedValues = hasDeselected
+    const hasJustDeselected = !latestChange
+
+    // once an item gets deselected, the show
+    // all option should be deselected as well
+    const newSelectedValues = hasJustDeselected
       ? selectedValues.filter((v) => v !== SELECT_ALL)
       : selectedValues
 
