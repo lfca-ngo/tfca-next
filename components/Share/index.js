@@ -30,7 +30,7 @@ const { TabPane } = Tabs
 
 const BTN_WIDTH = '120px'
 
-export const Share = ({ actionInviteText, invites }) => {
+export const Share = ({ invites }) => {
   const shareTitle = textBlockToString(useContentBlocks('sharing.title'))
   const shareHint = useContentBlocks('sharing.hint')
   const shareTitleSup = textBlockToString(useContentBlocks('sharing.title.sup'))

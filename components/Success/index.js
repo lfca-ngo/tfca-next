@@ -249,7 +249,7 @@ export const Success = ({
                 label={linkGenerationLabel}
               />
             ) : (
-              <Share actionInviteText={imageInviteText} invites={invites} />
+              <Share invites={invites} />
             )}
           </div>
         )}
