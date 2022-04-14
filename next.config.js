@@ -1,5 +1,7 @@
 const withAntdLess = require('next-plugin-antd-less')
-const withBundleAnalyzer = require('@next/bundle-analyzer')
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+})
 const withPlugins = require('next-compose-plugins')
 const withPWA = require('next-pwa')
 
@@ -87,29 +89,24 @@ const nextConfig = {
       },
     ]
   },
+  webpack: (config) => {
+    config.module.rules.push({
+      issuer: /\.[jt]sx?$/,
+      test: /\.svg$/i,
+      use: ['@svgr/webpack'],
+    })
+
+    return config
+  },
 }
 
 module.exports = withPlugins(
   [
+    [withBundleAnalyzer],
     [
       withAntdLess,
       {
         lessVarsFilePath: './styles/variables.less',
-        webpack: (config) => {
-          config.module.rules.push({
-            issuer: /\.[jt]sx?$/,
-            test: /\.svg$/i,
-            use: ['@svgr/webpack'],
-          })
-
-          return config
-        },
-      },
-    ],
-    [
-      withBundleAnalyzer,
-      {
-        enabled: process.env.ANALYZE === 'true',
       },
     ],
     [
