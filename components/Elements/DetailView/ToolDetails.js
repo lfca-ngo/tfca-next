@@ -8,7 +8,7 @@ import React from 'react'
 import { CallToAction } from '../CallToAction'
 import { ListSection, TextSection } from '../Sections'
 
-export const ToolDetails = ({ item }) => {
+export const ToolDetails = ({ item, onNext }) => {
   return (
     <div className="detail-view tool">
       <header>
@@ -21,7 +21,12 @@ export const ToolDetails = ({ item }) => {
           <Divider />
           <div className="actions">
             {item?.actions?.map((action, i) => (
-              <CallToAction key={`action-${i}`} showLeaveModal {...action} />
+              <CallToAction
+                key={`action-${i}`}
+                onCountMeIn={onNext}
+                showLeaveModal
+                {...action}
+              />
             ))}
           </div>
         </div>
