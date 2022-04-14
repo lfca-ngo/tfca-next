@@ -1,0 +1,30 @@
+@import (reference) '../../../styles/variables.less';
+@import (reference) '../../../styles/fonts.less';
+
+.error-template {
+  display: flex;
+  align-items: center;
+  background: @light-white;
+  height: 100vh;
+  .container {
+    display: flex;
+    flex-direction: column;
+    @media @desktop {
+      flex-direction: row;
+    }
+    .content {
+      flex: 1;
+      @media @desktop {
+        padding-right: 60px;
+      }
+      h1 {
+        .h1-hero();
+      }
+    }
+    .img-wrapper {
+      position: relative;
+      width: 304px;
+      height: 307px;
+    }
+  }
+}
