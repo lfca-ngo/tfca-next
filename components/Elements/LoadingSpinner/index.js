@@ -180,7 +180,7 @@ export const spinnerProps = ({ color, spinning = true, type }) => ({
 })
 
 export const LoadingSpinner = ({
-  additionalSpinnerProps,
+  additionalSpinnerProps = {},
   className,
   label,
 }) => {

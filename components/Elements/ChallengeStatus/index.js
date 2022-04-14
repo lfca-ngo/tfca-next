@@ -102,7 +102,11 @@ export const ChallengeStatus = ({ className, openGraphInfo }) => {
         ) : (
           <div>
             {isGeneratingToken ? (
-              <LoadingSpinner className="dark" label={linkGenerationLabel} />
+              <LoadingSpinner
+                additionalSpinnerProps={{ type: 'home' }}
+                className="dark"
+                label={linkGenerationLabel}
+              />
             ) : (
               <Share invites={[invite]} />
             )}
