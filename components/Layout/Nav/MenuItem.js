@@ -2,11 +2,16 @@ import { Drawer, Menu } from 'antd'
 import Link from 'next/link'
 import React, { useState } from 'react'
 
+import { useContentBlocks } from '../../../hooks'
 import { TOGGLE_Q_AND_A } from '../../../utils'
+import { textBlockToString } from '../../../utils'
 import { MenuSection, QuestionAnswer } from '../../Elements'
 
 export const MenuItem = ({ link, ...props }) => {
   const [qaVisible, setQaVisible] = useState(false)
+  const questionsString = textBlockToString(
+    useContentBlocks('menu.section.questions')
+  )
 
   switch (link.action) {
     case TOGGLE_Q_AND_A:
@@ -19,7 +24,7 @@ export const MenuItem = ({ link, ...props }) => {
             onClose={() => setQaVisible(!qaVisible)}
             visible={qaVisible}
           >
-            <MenuSection content={<QuestionAnswer />} title="Questions?" />
+            <MenuSection content={<QuestionAnswer />} title={questionsString} />
           </Drawer>
         </Menu.Item>
       )

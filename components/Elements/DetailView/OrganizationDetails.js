@@ -5,7 +5,6 @@ import {
   HeartOutlined,
   InfoCircleOutlined,
   PlayCircleOutlined,
-  PlusCircleOutlined,
 } from '@ant-design/icons'
 import { Divider, Space, Tag } from 'antd'
 import Image from 'next/image'
