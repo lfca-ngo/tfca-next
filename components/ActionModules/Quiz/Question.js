@@ -49,9 +49,6 @@ export const Question = ({
     const correctAnswers = answers?.correctAnswers
     const selectedAnswers = v[activeQuestion?.questionId]
     const withoutSelectAll = selectedAnswers.filter((i) => i !== SELECT_ALL)
-
-    console.log(correctAnswers, withoutSelectAll)
-
     const isCorrect = checkAnswers(correctAnswers, withoutSelectAll)
     // save if it was correct in the answers in store
     setStore({
