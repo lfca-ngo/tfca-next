@@ -130,7 +130,13 @@ export const Results = ({ goTo, module, nextKey, setStore, store }) => {
           <Row>
             <Col xs={12}>
               <div className="robin-wood-icon">
-                <RobinIcon />
+                <a
+                  href="https://www.robinwood.de/willkommen-bei-robin-wood"
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  <RobinIcon />
+                </a>
               </div>
             </Col>
             <Col className="actions-bar" style={{ textAlign: 'right' }} xs={12}>

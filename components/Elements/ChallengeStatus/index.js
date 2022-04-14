@@ -6,7 +6,8 @@ import classNames from 'classnames'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 
-import { useCustomization } from '../../../hooks'
+import { useContentBlocks, useCustomization } from '../../../hooks'
+import { textBlockToString } from '../../../utils'
 import { getCookie, getWindowUid, UID_COOKIE_NAME } from '../../../utils'
 import { LoadingSpinner } from '../../Elements'
 import { Share } from '../../Share'
@@ -53,6 +54,22 @@ export const ChallengeStatus = ({ className, openGraphInfo }) => {
     setIsGeneratingToken(false)
   }
 
+  const invitedByLabel = textBlockToString(
+    useContentBlocks('challenge.status.invite.label')
+  )
+  const inviteLabel1 = textBlockToString(
+    useContentBlocks('challenge.status.label1')
+  )
+  const inviteLabel2 = textBlockToString(
+    useContentBlocks('challenge.status.label2')
+  )
+  const buttonLabel = textBlockToString(
+    useContentBlocks('challenge.status.button')
+  )
+  const linkGenerationLabel = textBlockToString(
+    useContentBlocks('challenge.status.create.link')
+  )
+
   return (
     <div className={classNames('challenge-status', className)}>
       <div className="status-icon">
@@ -61,18 +78,18 @@ export const ChallengeStatus = ({ className, openGraphInfo }) => {
       <div className="invited-by">
         {customization?.sender ? (
           <>
-            <label>Invited by</label>
+            <label>{invitedByLabel} </label>
             <div className="invited-by-text">{customization.sender}</div>
           </>
         ) : (
           <>
-            <label>Invite</label>
-            <div className="invited-by-text">friends</div>
+            <label>{inviteLabel1}</label>
+            <div className="invited-by-text">{inviteLabel2}</div>
           </>
         )}
       </div>
       <Button onClick={createInvite} type="primary">
-        Invite
+        {buttonLabel}
       </Button>
 
       <Drawer
@@ -85,7 +102,7 @@ export const ChallengeStatus = ({ className, openGraphInfo }) => {
         ) : (
           <div>
             {isGeneratingToken ? (
-              <LoadingSpinner className="dark" label="...generating link" />
+              <LoadingSpinner className="dark" label={linkGenerationLabel} />
             ) : (
               <Share invites={[invite]} />
             )}
