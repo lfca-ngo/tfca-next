@@ -195,3 +195,17 @@ export const LoadingSpinner = ({
     </div>
   )
 }
+
+export const HomeLoader = () => {
+  return (
+    <div>
+      <LoadingSpinner
+        additionalSpinnerProps={{ color: 'color-3', type: 'leaf' }}
+        className="home-loader"
+        label={
+          'Did you know that the last decade was the hottest in 125,000 years?'
+        }
+      />
+    </div>
+  )
+}
