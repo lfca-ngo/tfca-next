@@ -187,10 +187,12 @@ export const LoadingSpinner = ({
   additionalSpinnerProps = {},
   className,
   label,
+  title,
 }) => {
   return (
     <div className={classNames('loading-wrapper', 'centered', className)}>
       <Spin {...spinnerProps(additionalSpinnerProps)} />
+      {title && <h4>{title}</h4>}
       {label && <p className="label">{label}</p>}
     </div>
   )
@@ -205,6 +207,7 @@ export const HomeLoader = () => {
         label={
           'Did you know that the last decade was the hottest in 125,000 years?'
         }
+        title="...loading"
       />
     </div>
   )
