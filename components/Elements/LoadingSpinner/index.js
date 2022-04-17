@@ -192,7 +192,7 @@ export const LoadingSpinner = ({
   return (
     <div className={classNames('loading-wrapper', 'centered', className)}>
       <Spin {...spinnerProps(additionalSpinnerProps)} />
-      {title && <h4>{title}</h4>}
+      {title && <h4 className="title">{title}</h4>}
       {label && <p className="label">{label}</p>}
     </div>
   )
