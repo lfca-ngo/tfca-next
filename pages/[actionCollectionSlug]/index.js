@@ -33,6 +33,7 @@ export async function getStaticProps({ locale, params }) {
     props: {
       ...staticData,
     },
+    revalidate: 86400, // 1d
   }
 }
 
