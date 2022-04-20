@@ -3,8 +3,9 @@ import { expect, test } from '@playwright/test'
 import { navigateToAction } from './utils/navigate-to-action.mjs'
 
 const ACTION_ID = 'switch_energy'
+const ENERGY_PROVIDER_ID = '5f296c87efbdff0011567434'
 
-test(`Action ${ACTION_ID}`, async ({ baseURL, page }) => {
+test.only(`Action ${ACTION_ID}`, async ({ baseURL, page }) => {
   await page.goto(baseURL)
   await navigateToAction(page, ACTION_ID)
 
@@ -27,7 +28,7 @@ test(`Action ${ACTION_ID}`, async ({ baseURL, page }) => {
   // Open provider details for Polarstern (which requires the least data ion the form)
   await page
     .locator(
-      `id=${ACTION_ID} >> data-testid=provider-card-5f296bbcefbdff0011567429 >> data-testid=provider-card-details-btn`
+      `id=${ACTION_ID} >> data-testid=provider-card-${ENERGY_PROVIDER_ID} >> data-testid=provider-card-details-btn`
     )
     .click()
 
