@@ -1,45 +1,36 @@
-import { expect, test } from '@playwright/test'
+import { test } from '@playwright/test'
 
+import { leavePageAndCount } from './utils/leave-page-and-count.mjs'
 import { navigateToAction } from './utils/navigate-to-action.mjs'
 
-test.skip('Action at work', async ({ baseURL, page }) => {
+const ACTION_ID = 'share_deck'
+
+test(`Action ${ACTION_ID}`, async ({ baseURL, page }) => {
   await page.goto(baseURL)
-  await navigateToAction(page, 'Action at work')
+  await navigateToAction(page, ACTION_ID)
 
   // Select role
-  await page.locator('text=Operations & Facilities').click()
   await page
-    .locator(
-      'text=At workEvery job is a climate job — yes, yours too!Tap your role to explore acti >> button'
-    )
+    .locator(`id=${ACTION_ID} >> data-testid=radio-checkbox`)
+    .nth(0)
+    .click()
+  await page
+    .locator(`id=${ACTION_ID} >> data-testid=action-finder-filter-submit-btn`)
     .click()
 
   // Select area
-  await page.locator('#rc-tabs-2-panel-areas >> text=Energy').click()
   await page
-    .locator(
-      'text=Select one or moreEnergyInvestmentsEmissionsAdvocacyGeneralContinue >> button'
-    )
+    .locator(`id=${ACTION_ID} >> data-testid=radio-checkbox`)
+    .nth(0)
+    .click()
+  await page
+    .locator(`id=${ACTION_ID} >> data-testid=action-finder-filter-submit-btn`)
     .click()
 
   // Open details and navigate to external page
-  await page.locator('.ant-card-body').first().click()
-  await page.locator('button:has-text("Read article")').click()
-  const [externalPage] = await Promise.all([
-    page.waitForEvent('popup'),
-    page
-      .locator('div[role="document"] button:has-text("Read article")')
-      .click(),
-  ])
-
-  await externalPage.waitForLoadState()
-
-  // Make the action count
-  page.bringToFront()
-  await page.locator('button:has-text("Count me in")').click()
-
-  // Expect to see success screen
-  await expect(
-    page.locator('text=High five! Now, nominate friends to triple your impact')
-  ).toBeVisible()
+  await page
+    .locator(`id=${ACTION_ID} >> .content-card.action >> nth=0 >> button`)
+    .click()
+  await page.locator('data-testid=action-details-cta-btn').nth(0).click()
+  await leavePageAndCount(page)
 })
