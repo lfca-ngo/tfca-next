@@ -21,15 +21,15 @@ import { EnergyForm } from './Calculate'
 
 const { Option } = Select
 
-const SORT = [
-  { label: 'Preis', type: 'price' },
-  { label: 'Impact', type: 'impact' },
-]
-
 export const getFullPrice = (item, kwh) =>
   item.price.workingPrice * kwh + item.price.basePrice || 0
 
 export const Results = ({ goTo, module, nextKey, setStore, store }) => {
+  const SORT = [
+    { label: textBlockToString(blocks['sort.price.label']), type: 'price' },
+    { label: textBlockToString(blocks['sort.impact.label']), type: 'impact' },
+  ]
+
   const { blocks = {}, lists = {}, icon = {}, color } = module
   const [visible, setVisible] = useState(false)
   const [drawerVisible, setDrawerVisible] = useState(false)
@@ -163,6 +163,7 @@ export const Results = ({ goTo, module, nextKey, setStore, store }) => {
             loading={spinnerProps({ color, spinning: loading, type: 'energy' })}
             renderItem={(item, i) => (
               <CardView
+                blocks={blocks}
                 energyKwh={store?.energy}
                 item={item}
                 key={`card-${i}`}
