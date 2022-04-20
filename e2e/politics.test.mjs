@@ -4,7 +4,7 @@ import { navigateToAction } from './utils/navigate-to-action.mjs'
 
 const ACTION_ID = 'politics'
 
-test.only(`Action ${ACTION_ID}`, async ({ baseURL, page }) => {
+test(`Action ${ACTION_ID}`, async ({ baseURL, page }) => {
   await page.goto(baseURL)
   await navigateToAction(page, ACTION_ID)
 
