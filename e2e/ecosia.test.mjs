@@ -4,7 +4,7 @@ import { navigateToAction } from './utils/navigate-to-action.mjs'
 
 const ACTION_ID = 'ecosia'
 
-test('Action ecosia', async ({ baseURL, page }) => {
+test(`Action ${ACTION_ID}`, async ({ baseURL, page }) => {
   await page.goto(baseURL)
   await navigateToAction(page, ACTION_ID)
 
