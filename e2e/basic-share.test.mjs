@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test'
 
-test('Basic share', async ({ baseURL, page }) => {
+test.skip('Basic share', async ({ baseURL, page }) => {
   await page.goto(baseURL)
 
   await page.locator('data-testid=cookie-consent-accept-all-btn').click()

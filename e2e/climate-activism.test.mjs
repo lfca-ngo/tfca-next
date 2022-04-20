@@ -1,5 +1,6 @@
-import { expect, test } from '@playwright/test'
+import { test } from '@playwright/test'
 
+import { leavePageAndCount } from './utils/leave-page-and-count.mjs'
 import { navigateToAction } from './utils/navigate-to-action.mjs'
 
 const ACTION_ID = 'climate_activism'
@@ -31,17 +32,5 @@ test(`Action ${ACTION_ID}`, async ({ baseURL, page }) => {
     .locator(`id=${ACTION_ID} >> .content-card.organization >> nth=0 >> button`)
     .click()
   await page.locator('data-testid=organization-details-cta-btn').nth(0).click()
-  const [externalPage] = await Promise.all([
-    page.waitForEvent('popup'),
-    page.locator('data-testid=leave-page-link-btn').click(),
-  ])
-
-  await externalPage.waitForLoadState()
-
-  // Make the action count
-  page.bringToFront()
-  await page.locator('data-testid=leave-page-count-btn').click()
-
-  // Expect to see success screen
-  await expect(page.locator('data-testid=step-success')).toBeVisible()
+  await leavePageAndCount(page)
 })
