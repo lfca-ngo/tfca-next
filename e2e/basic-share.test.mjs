@@ -1,16 +1,18 @@
-import { test } from '@playwright/test'
+import { expect, test } from '@playwright/test'
 import clipboard from 'clipboardy'
 
 test('Basic share', async ({ baseURL, page }) => {
   await page.goto(baseURL)
 
-  await page.locator('button:has-text("Accept all")').click()
+  await page.locator('data-testid=cookie-consent-accept-all-btn').click()
 
-  // Click button:has-text("Invite")
-  await page.locator('button:has-text("Invite")').click()
-  // Click button:has-text("Copy")
-  await page.locator('button:has-text("Copy")').click()
+  // Open invite drawer and copy link
+  await page.locator('data-testid=challenge-status-invite-btn').click()
+  await page.locator('data-testid=share-copy-btn').click()
 
+  // Read link from clipboard, navigate to page and expect page to be loaded
   const inviteLink = await clipboard.read()
   await page.goto(inviteLink)
+  await page.waitForLoadState('networkidle')
+  expect(page.locator('data-testid=hero-take-action-btn')).toBeVisible()
 })

@@ -97,8 +97,13 @@ export const Share = ({ invites }) => {
                   }}
                   text={shortLink}
                 >
-                  <Button block style={{ width: BTN_WIDTH }} type="primary">
-                    Copy{' '}
+                  <Button
+                    block
+                    data-testid="share-copy-btn"
+                    style={{ width: BTN_WIDTH }}
+                    type="primary"
+                  >
+                    Copy
                   </Button>
                 </CopyToClipboard>
               </Input.Group>

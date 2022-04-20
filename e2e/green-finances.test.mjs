@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test'
 
 import { navigateToAction } from './utils/navigate-to-action.mjs'
 
-test('Action Green Finances', async ({ baseURL, page }) => {
+test.skip('Action Green Finances', async ({ baseURL, page }) => {
   await page.goto(baseURL)
   await navigateToAction(page, 'Banking')
 

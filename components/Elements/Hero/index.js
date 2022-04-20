@@ -51,6 +51,7 @@ export const Hero = ({ onClick, openGraphInfo }) => {
           <div className="start-btn">
             <Button
               className="ant-btn-xl"
+              data-testid="hero-take-action-btn"
               onClick={onClick}
               size="large"
               type="primary"
