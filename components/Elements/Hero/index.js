@@ -31,7 +31,7 @@ export const Hero = ({ onClick, openGraphInfo }) => {
             />
           </div>
 
-          <h1>
+          <h1 data-testid="hero-title">
             {customization?.names?.length
               ? textBlockToString(
                   customBlock,

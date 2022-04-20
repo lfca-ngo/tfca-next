@@ -55,7 +55,6 @@ test(`Action ${ACTION_ID}`, async ({ baseURL, page }) => {
     `id=${ACTION_ID} >> data-testid=switch-energy-form-switch-previous-priovider-search-input >> input`,
     'Vattenfall'
   )
-
   await page
     .locator('data-testid=switch-energy-form-switch-previous-priovider-option')
     .nth(0)

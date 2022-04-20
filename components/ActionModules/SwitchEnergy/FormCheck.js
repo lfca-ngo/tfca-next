@@ -49,6 +49,7 @@ export const FormCheck = ({ goTo, module: { blocks = {}, icon = {} } }) => {
       />
 
       <Select
+        data-testid="switch-energy-form-check-provider-search-input"
         defaultActiveFirstOption={false}
         filterOption={false}
         loading={isSearchLoading}
@@ -63,7 +64,11 @@ export const FormCheck = ({ goTo, module: { blocks = {}, icon = {} } }) => {
         value={selectedProviderName}
       >
         {searchResult?.robinWoodProviders?.map((item) => (
-          <Option key={item.companyName} value={item.companyName}>
+          <Option
+            data-testid="switch-energy-form-check-priovider-option"
+            key={item.companyName}
+            value={item.companyName}
+          >
             {item.companyName}
           </Option>
         ))}
@@ -88,6 +93,7 @@ export const FormCheck = ({ goTo, module: { blocks = {}, icon = {} } }) => {
             />
             <Button
               block
+              data-testid="switch-energy-form-check-complete-btn"
               onClick={() => goTo('success')}
               size="large"
               style={{ marginTop: '15px' }}
