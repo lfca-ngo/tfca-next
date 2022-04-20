@@ -45,6 +45,7 @@ export const Results = ({
         <h4>{actions?.label}</h4>
         {actions?.items?.map((action, i) => (
           <CallToAction
+            data-testid="quiz-results-cta-btn"
             key={`action-${i}`}
             onCountMeIn={() => goTo(nextKey)}
             showLeaveModal

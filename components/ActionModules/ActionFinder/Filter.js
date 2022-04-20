@@ -55,7 +55,7 @@ export const Filter = ({
         <Form.Item>
           <Button
             block
-            data-testid="filter-submit-btn"
+            data-testid="action-finder-filter-submit-btn"
             htmlType="submit"
             size="large"
             type="primary"
