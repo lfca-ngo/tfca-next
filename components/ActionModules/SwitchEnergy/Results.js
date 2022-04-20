@@ -25,15 +25,15 @@ export const getFullPrice = (item, kwh) =>
   item.price.workingPrice * kwh + item.price.basePrice || 0
 
 export const Results = ({ goTo, module, nextKey, setStore, store }) => {
-  const SORT = [
-    { label: textBlockToString(blocks['sort.price.label']), type: 'price' },
-    { label: textBlockToString(blocks['sort.impact.label']), type: 'impact' },
-  ]
-
   const { blocks = {}, lists = {}, icon = {}, color } = module
   const [visible, setVisible] = useState(false)
   const [drawerVisible, setDrawerVisible] = useState(false)
   const [sorting, setSorting] = useState(SORT[0].type)
+
+  const SORT = [
+    { label: textBlockToString(blocks['sort.price.label']), type: 'price' },
+    { label: textBlockToString(blocks['sort.impact.label']), type: 'impact' },
+  ]
 
   const changeSorting = (value) => {
     setSorting(value)
