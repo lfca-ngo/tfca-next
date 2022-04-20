@@ -2,32 +2,28 @@ import { expect, test } from '@playwright/test'
 
 import { navigateToAction } from './utils/navigate-to-action.mjs'
 
-test.skip('Action Digital', async ({ baseURL, page }) => {
-  await page.goto(baseURL)
-  await navigateToAction(page, 'Digital')
+const ACTION_ID = 'ecosia'
 
-  // Show details
-  await page
-    .locator('text=EcosiaPlant trees with your searchesDetails >> button')
-    .click()
+test('Action ecosia', async ({ baseURL, page }) => {
+  await page.goto(baseURL)
+  await navigateToAction(page, ACTION_ID)
 
   // Open details and navigate to external page
-  await page.locator('button:has-text("Download for Android")').click()
+  await page
+    .locator(`id=${ACTION_ID} >> .content-card.tool >> nth=0 >> button`)
+    .click()
+  await page.locator('data-testid=tool-details-cta-btn').nth(0).click()
   const [externalPage] = await Promise.all([
     page.waitForEvent('popup'),
-    page
-      .locator('div[role="document"] button:has-text("Download for Android")')
-      .click(),
+    page.locator('data-testid=leave-page-link-btn').click(),
   ])
 
   await externalPage.waitForLoadState()
 
   // Make the action count
   page.bringToFront()
-  await page.locator('button:has-text("Count me in")').click()
+  await page.locator('data-testid=leave-page-count-btn').click()
 
   // Expect to see success screen
-  await expect(
-    page.locator('text=High five! Now, nominate friends to triple your impact')
-  ).toBeVisible()
+  await expect(page.locator('data-testid=step-success')).toBeVisible()
 })
