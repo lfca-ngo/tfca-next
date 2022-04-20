@@ -2,136 +2,109 @@ import { expect, test } from '@playwright/test'
 
 import { navigateToAction } from './utils/navigate-to-action.mjs'
 
-test.skip('Action Switch Energy', async ({ baseURL, page }) => {
+const ACTION_ID = 'switch_energy'
+
+test(`Action ${ACTION_ID}`, async ({ baseURL, page }) => {
   await page.goto(baseURL)
-  await navigateToAction(page, 'Switch Energy')
+  await navigateToAction(page, ACTION_ID)
 
   // Start switching provider
-  await page.locator('button:has-text("No, not yet")').click()
-
-  // Select houshold size
-  await page.locator('span:has-text("1 Pers.")').nth(2).click()
-  await page.locator('text=3 Pers.').click()
-
-  // Enter zip
-  await page.locator('[placeholder="\\31 2043"]').click()
-  await page.locator('[placeholder="\\31 2043"]').fill('12557')
-
-  // Search providers
-  await page.locator('button:has-text("Finde passende Tarife")').click()
-
-  // Check details
   await page
-    .locator(
-      'text=Tarif: Wirklich Ökostrom125.91 €Basis: 9.80 €kwH: 47.18c100 % Wasserkraft aus De >> button'
-    )
-    .first()
+    .locator(`id=${ACTION_ID} >> data-testid=switch-energy-intro-start-btn`)
     .click()
 
-  // Go to form
-  await page.locator('button:has-text("Switch now")').click()
+  // Select houshold size and enter zip
+  await page.locator(`id=${ACTION_ID} >> data-testid=select`).click()
+  await page.locator('data-testid=select-item-2300').click()
+  await page.fill(
+    `id=${ACTION_ID} >> data-testid=switch-energy-select-postcode-energy-input`,
+    '12557'
+  )
+  await page
+    .locator(`id=${ACTION_ID} >> data-testid=switch-energy-calculate-next-btn`)
+    .click()
+
+  // Open provider details for Polarstern (which requires the least data ion the form)
+  await page
+    .locator(
+      `id=${ACTION_ID} >> data-testid=provider-card-5f296bbcefbdff0011567429 >> data-testid=provider-card-details-btn`
+    )
+    .click()
+
+  // Start switch
+  await page.locator('data-testid=provider-details-cta-btn').nth(0).click()
 
   // Fill out form
-  await page.locator('[placeholder="Greta"]').click()
-  await page.locator('[placeholder="Greta"]').fill('Greta')
-  await page.locator('[placeholder="Thunberg"]').click()
-  await page.locator('[placeholder="Thunberg"]').fill('Thunberg')
-  await page.locator('[placeholder="Auf der Erde 2"]').click()
-  await page.locator('[placeholder="Auf der Erde 2"]').fill('Auf der Erde 2')
+  await page.fill(
+    `id=${ACTION_ID} >> data-testid=switch-energy-form-switch-firstname-input`,
+    'Greta'
+  )
+  await page.fill(
+    `id=${ACTION_ID} >> data-testid=switch-energy-form-switch-lastname-input`,
+    'Thunberg'
+  )
+  await page.fill(
+    `id=${ACTION_ID} >> data-testid=switch-energy-form-switch-street-input`,
+    'Auf der Erde 2'
+  )
+  await page.fill(
+    `id=${ACTION_ID} >> data-testid=switch-energy-form-switch-email-input`,
+    'greta.thunberg@earth.com'
+  )
+  await page.fill(
+    `id=${ACTION_ID} >> data-testid=switch-energy-form-switch-previous-priovider-search-input >> input`,
+    'Vattenfall'
+  )
+
   await page
-    .locator(
-      'text=Persönliche Daten VornameNachnameStraße und HausnummerAddresszusatzPostleitzahlS >> input[type="checkbox"]'
-    )
-    .first()
-    .check()
-  await page.locator('[placeholder="\\35 \\. Stock"]').click()
-  await page.locator('[placeholder="\\35 \\. Stock"]').fill('5. Stock')
-  await page.locator('#switch_provider_separateBillingAddress').check()
-  await page.locator('#switch_provider_billingAddress_firstName').click()
-  await page
-    .locator('#switch_provider_billingAddress_firstName')
-    .fill("Greta's Dad")
-  await page.locator('#switch_provider_billingAddress_lastName').click()
-  await page
-    .locator('#switch_provider_billingAddress_lastName')
-    .fill('Thunberg')
-  await page.locator('#switch_provider_billingAddress_streetAddress').click()
-  await page
-    .locator('#switch_provider_billingAddress_streetAddress')
-    .fill('Auf dem Mond 1')
-  await page
-    .locator(
-      'text=Persönliche Daten VornameNachnameStraße und HausnummerAddresszusatzZusatzPostlei >> input[type="checkbox"]'
-    )
-    .nth(2)
-    .check()
-  await page.locator('#switch_provider_billingAddress_addition').click()
-  await page
-    .locator('#switch_provider_billingAddress_addition')
-    .fill('3. Stock')
-  await page.locator('#switch_provider_billingAddress_zipCode').click()
-  await page.locator('#switch_provider_billingAddress_zipCode').fill('12039')
-  await page.locator('#switch_provider_billingAddress_city').click()
-  await page.locator('#switch_provider_billingAddress_city').fill('Paris')
-  await page.locator('[placeholder="greta\\.thunberg\\@earth\\.io"]').click()
-  await page
-    .locator('[placeholder="greta\\.thunberg\\@earth\\.io"]')
-    .fill('greta.thunberg@earth.com')
-  await page
-    .locator(
-      'text=Vorheriger VersorgerWähle einen Versorger >> input[role="combobox"]'
-    )
+    .locator('data-testid=switch-energy-form-switch-previous-priovider-option')
+    .nth(0)
     .click()
+  await page.fill(
+    `id=${ACTION_ID} >> data-testid=switch-energy-form-switch-meter-input`,
+    '123456789'
+  )
+  await page.fill(
+    `id=${ACTION_ID} >> data-testid=switch-energy-form-switch-iban-input`,
+    'DE68500105178297336485'
+  )
+  await page.fill(
+    `id=${ACTION_ID} >> data-testid=switch-energy-form-switch-bic-input`,
+    'BYLADEM1001'
+  )
+  await page.fill(
+    `id=${ACTION_ID} >> data-testid=switch-energy-form-switch-bankname-input`,
+    'DKB'
+  )
   await page
     .locator(
-      'text=Vorheriger VersorgerWähle einen Versorger >> input[role="combobox"]'
-    )
-    .fill('Vatten')
-  await page.locator('text=Vattenfall Energy Solutions GmbH').click()
-  await page.locator('[placeholder="\\39 128310"]').click()
-  await page.locator('[placeholder="\\39 128310"]').fill('123456789')
-  await page.locator('text=Nächstmöglicher Termin').click()
-  await page.locator('text=Termin auswählen').click()
-  await page.locator('[placeholder="dd\\.mm\\.yyyy"]').click()
-  await page.locator('.ant-picker-header-super-next-btn').click()
-  await page
-    .locator('.ant-picker-cell.ant-picker-cell-start .ant-picker-cell-inner')
-    .first()
-    .click()
-  await page.locator('[placeholder="DE68500105178297336485"]').click()
-  await page
-    .locator('[placeholder="DE68500105178297336485"]')
-    .fill('DE02120300000000202051')
-  await page.locator('[placeholder="LOYDCHGGZCH"]').click()
-  await page.locator('[placeholder="LOYDCHGGZCH"]').fill('BYLADEM1001')
-  await page.locator('[placeholder="GLS Bank"]').click()
-  await page.locator('[placeholder="GLS Bank"]').fill('DKB')
-  await page
-    .locator(
-      'text=ZahlungsdatenDu zahlst bequem per Lastschrift. Wir übermitteln deine Daten direk >> input[type="checkbox"]'
+      `id=${ACTION_ID} >> data-testid=switch-energy-form-switch-payment-checkbox`
     )
     .check()
+
   await page
     .locator(
-      'text=Ich bestätige, dass ich die AGB und die Widerrufsbelehrung der Polarstern GmbH g'
+      `id=${ACTION_ID} >> data-testid=switch-energy-form-switch-provider-terms-checkbox`
     )
-    .click()
+    .check()
+
   await page
     .locator(
-      'text=Ich habe die Datenschutzhinweise mit den Informationen zur Verarbeitung meiner p'
+      `id=${ACTION_ID} >> data-testid=switch-energy-form-switch-privacy-checkbox`
     )
-    .click()
+    .check()
+
   await page
     .locator(
-      'text=Desweiteren habe ich die AGB von Switch for Climate gUG gelesen und akzeptiere d'
+      `id=${ACTION_ID} >> data-testid=switch-energy-form-switch-own-terms-checkbox`
     )
-    .click()
+    .check()
 
   // Submit the order
-  await page.locator('button:has-text("Testorder platzieren (BETA)")').click()
+  await page
+    .locator(`id=${ACTION_ID} >> data-testid=switch-energy-form-submit-btn`)
+    .click()
 
   // Expect to see success screen
-  await expect(
-    page.locator('text=High five! Now, nominate friends to triple your impact')
-  ).toBeVisible()
+  await expect(page.locator('data-testid=step-success')).toBeVisible()
 })

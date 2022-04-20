@@ -71,6 +71,7 @@ export const MeterInput = ({ blocks }) => {
               ]}
             >
               <Input
+                data-testid="switch-energy-form-switch-meter-input"
                 placeholder={textBlockToString(
                   blocks['switch.connect.meter.number.placeholder']
                 )}

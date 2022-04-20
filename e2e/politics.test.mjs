@@ -10,7 +10,7 @@ test(`Action ${ACTION_ID}`, async ({ baseURL, page }) => {
 
   // Select DE country and enter zip
   await page.locator(`id=${ACTION_ID} >> data-testid=select`).click()
-  await page.locator('data-testid=select-item-DE').nth(0).click()
+  await page.locator('data-testid=select-item-DE').click()
   await page.fill(
     `id=${ACTION_ID} >> data-testid=select-optional-input`,
     '12557'

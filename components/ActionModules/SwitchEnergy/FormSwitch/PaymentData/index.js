@@ -40,6 +40,7 @@ export const PaymentData = ({ blocks, providerLegalName }) => {
         ]}
       >
         <Input
+          data-testid="switch-energy-form-switch-iban-input"
           onKeyPress={onlyAllowBankChars}
           placeholder={textBlockToString(
             blocks['switch.payment.iban.placeholder']
@@ -66,6 +67,7 @@ export const PaymentData = ({ blocks, providerLegalName }) => {
         ]}
       >
         <Input
+          data-testid="switch-energy-form-switch-bic-input"
           onKeyPress={onlyAllowBankChars}
           placeholder={textBlockToString(
             blocks['switch.payment.bic.placeholder']
@@ -85,6 +87,7 @@ export const PaymentData = ({ blocks, providerLegalName }) => {
         ]}
       >
         <Input
+          data-testid="switch-energy-form-switch-bankname-input"
           placeholder={textBlockToString(
             blocks['switch.payment.bankname.placeholder']
           )}
@@ -117,7 +120,7 @@ export const PaymentData = ({ blocks, providerLegalName }) => {
         ]}
         valuePropName="checked"
       >
-        <Checkbox>
+        <Checkbox data-testid="switch-energy-form-switch-payment-checkbox">
           {textBlockToString(blocks['switch.payment.authorization.label'], {
             providerLegalName,
           })}

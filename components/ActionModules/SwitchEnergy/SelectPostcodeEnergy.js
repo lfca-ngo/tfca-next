@@ -45,6 +45,7 @@ export const SelectPostcodeEnergy = ({
 
       <Input
         className="optional-input"
+        data-testid="switch-energy-select-postcode-energy-input"
         inputMode="numeric"
         onChange={onInputChange}
         pattern="[0-9]*"

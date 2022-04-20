@@ -261,6 +261,7 @@ export const FormSwitch = ({
           <Form.Item>
             <Button
               block
+              data-testid="switch-energy-form-submit-btn"
               disabled={isLoading}
               htmlType="submit"
               icon={<LockOutlined />}

@@ -33,7 +33,13 @@ export const EnergyForm = ({
         />
       </Form.Item>
       <Form.Item>
-        <Button block htmlType="submit" size="large" type="primary">
+        <Button
+          block
+          data-testid="switch-energy-calculate-next-btn"
+          htmlType="submit"
+          size="large"
+          type="primary"
+        >
           {textBlockToString(blocks['form.postcode.energy.button.primary'])}
         </Button>
       </Form.Item>
