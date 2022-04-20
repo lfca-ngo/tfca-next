@@ -42,11 +42,15 @@ export const DropdownSelect = ({
   }
 
   const menu = (
-    <Menu onClick={onItemSelect}>
+    <Menu data-testid="dropdown-select-menu" onClick={onItemSelect}>
       {items.map((item) => {
         const isActive = selected.includes(item.value)
         return (
-          <Menu.Item icon={isActive && <CheckOutlined />} key={item.value}>
+          <Menu.Item
+            data-testid="dropdown-select-item"
+            icon={isActive && <CheckOutlined />}
+            key={item.value}
+          >
             {item.label}
           </Menu.Item>
         )
@@ -64,6 +68,7 @@ export const DropdownSelect = ({
     >
       <Button
         className={classNames('dropdown-select-btn', { 'is-empty': isEmpty })}
+        data-testid="dropdown-select-btn"
         icon={<DownCircleOutlined />}
         size="small"
       >

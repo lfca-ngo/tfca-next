@@ -1,41 +1,52 @@
-import { expect, test } from '@playwright/test'
+import { test } from '@playwright/test'
 
+import { leavePageAndCount } from './utils/leave-page-and-count.mjs'
 import { navigateToAction } from './utils/navigate-to-action.mjs'
 
-test.skip('Action Green Finances', async ({ baseURL, page }) => {
+const ACTION_ID = 'green_finances'
+
+test(`Action ${ACTION_ID}`, async ({ baseURL, page }) => {
   await page.goto(baseURL)
-  await navigateToAction(page, 'Banking')
+  await navigateToAction(page, ACTION_ID)
 
   // Select Banking
-  await page.locator('text=BankingInvestment >> img').nth(0).click()
   await page
-    .locator('text=Select one or moreBankingInvestmentContinue >> button')
+    .locator(`id=${ACTION_ID} >> data-testid=radio-checkbox`)
+    .nth(0)
+    .click()
+  await page
+    .locator(`id=${ACTION_ID} >> data-testid=action-finder-filter-submit-btn`)
     .click()
 
   // Select more filters from dropdown
-  await page.locator('button:has-text("Please select an option")').click()
-  await page.locator('text=Girokonto').click()
-  await page.locator('button:has-text("Please select")').click()
-  await page.locator('text=High').click()
+  await page
+    .locator(`id=${ACTION_ID} >> data-testid=dropdown-select-btn`)
+    .nth(1)
+    .click()
+  await page
+    .locator(
+      'data-testid=dropdown-select-menu >> nth=0 >> data-testid=dropdown-select-item'
+    )
+    .nth(0)
+    .click()
+
+  await page
+    .locator(`id=${ACTION_ID} >> data-testid=dropdown-select-btn`)
+    .nth(2)
+    .click()
+  await page
+    .locator(
+      'data-testid=dropdown-select-menu >> nth=1 >> data-testid=dropdown-select-item'
+    )
+    .nth(0)
+    .click()
 
   // Open details and navigate to external page
-  await page.locator('button:has-text("Show details")').click()
-  await page.locator('button:has-text("Continue to Tomorrow")').click()
-  const [externalPage] = await Promise.all([
-    page.waitForEvent('popup'),
-    page
-      .locator('div[role="document"] button:has-text("Continue to Tomorrow")')
-      .click(),
-  ])
-
-  await externalPage.waitForLoadState()
-
-  // Make the action count
-  page.bringToFront()
-  await page.locator('button:has-text("Count me in")').click()
-
-  // Expect to see success screen
-  await expect(
-    page.locator('text=High five! Now, nominate friends to triple your impact')
-  ).toBeVisible()
+  await page
+    .locator(
+      `id=${ACTION_ID} >> .content-card.bank >> nth=0 >> data-testid=bank-card-details-btn`
+    )
+    .click()
+  await page.locator('data-testid=bank-details-cta-btn').nth(0).click()
+  await leavePageAndCount(page)
 })

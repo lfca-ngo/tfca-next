@@ -38,6 +38,7 @@ export const BankDetails = ({ actionId, blocks, item, onNext }) => {
             <CallToAction
               actionId={actionId}
               block
+              data-testid="bank-details-cta-btn"
               onCountMeIn={onNext}
               shape="round"
               showLeaveModal
