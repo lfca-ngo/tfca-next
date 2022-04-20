@@ -33,7 +33,13 @@ export const Answer = ({
       />
       <Text block={activeQuestion?.result} vars={{ response }} />
 
-      <Button block onClick={() => goTo(nextKey)} size="large" type="primary">
+      <Button
+        block
+        data-testid="quiz-answer-next-btn"
+        onClick={() => goTo(nextKey)}
+        size="large"
+        type="primary"
+      >
         {textBlockToString(blocks['answer.button.primary'])}
       </Button>
     </div>

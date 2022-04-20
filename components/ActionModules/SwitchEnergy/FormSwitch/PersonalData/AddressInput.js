@@ -61,6 +61,7 @@ export const AddressInput = ({
             ]}
           >
             <Input
+              data-testid="switch-energy-form-switch-firstname-input"
               placeholder={textBlockToString(
                 blocks['switch.personal.firstname.placeholder']
               )}
@@ -82,6 +83,7 @@ export const AddressInput = ({
             ]}
           >
             <Input
+              data-testid="switch-energy-form-switch-lastname-input"
               placeholder={textBlockToString(
                 blocks['switch.personal.lastname.placeholder']
               )}
@@ -108,6 +110,7 @@ export const AddressInput = ({
         ]}
       >
         <Input
+          data-testid="switch-energy-form-switch-street-input"
           placeholder={textBlockToString(
             blocks['switch.personal.street.placeholder']
           )}

@@ -29,6 +29,7 @@ export const ProviderSearchInput = ({ value = {}, onChange, blocks }) => {
 
   return (
     <Select
+      data-testid="switch-energy-form-switch-previous-priovider-search-input"
       defaultActiveFirstOption={false}
       filterOption={false}
       loading={isLoading}
@@ -42,7 +43,11 @@ export const ProviderSearchInput = ({ value = {}, onChange, blocks }) => {
       value={value.pid || selectedProvider.pid}
     >
       {searchResult?.providers?.map((o) => (
-        <Option key={o.id} value={o.id}>
+        <Option
+          data-testid="switch-energy-form-switch-previous-priovider-option"
+          key={o.id}
+          value={o.id}
+        >
           {o.name}
         </Option>
       ))}

@@ -124,7 +124,7 @@ export const Success = ({
 
   return (
     <>
-      <div className="step">
+      <div className="step" data-testid="step-success">
         <Category
           goBack={prevKey ? () => goTo(prevKey) : undefined}
           icon={icon.url}
@@ -144,6 +144,7 @@ export const Success = ({
           <Form.Item name="sender">
             <Input
               addonBefore={<InfoCircleOutlined />}
+              data-testid="success-own-name-input"
               placeholder={yourNameInput}
             />
           </Form.Item>
@@ -185,6 +186,7 @@ export const Success = ({
                     >
                       <Input
                         addonBefore={<UserAddOutlined />}
+                        data-testid="success-friend-name-input"
                         placeholder={friendsNameInput}
                       />
                     </Form.Item>
@@ -203,6 +205,7 @@ export const Success = ({
                   <Form.Item>
                     <Button
                       block
+                      data-testid="success-add-name-input-btn"
                       ghost
                       icon={<PlusOutlined />}
                       onClick={() => add()}
@@ -219,6 +222,7 @@ export const Success = ({
           <Form.Item>
             <Button
               block
+              data-testid="success-share-submit-btn"
               htmlType="submit"
               icon={<SendOutlined />}
               size="large"

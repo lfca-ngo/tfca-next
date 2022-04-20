@@ -54,11 +54,13 @@ const CtaButton = ({
   style,
   text,
   type,
+  ...props
 }) => {
   return (
     <Button
       block={block}
       className={`cta-button`}
+      data-testid={props['data-testid']}
       ghost={ghost}
       icon={
         icon && icon?.url ? (

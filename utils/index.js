@@ -14,14 +14,19 @@ export const TOGGLE_Q_AND_A = 'toggle-q-and-a'
 
 const __CSS_THEME_DARK__ = 'theme-dark'
 
-export const validatePostcode = (value, key) => {
+export const validatePostcode = ({
+  key,
+  message = 'Postcode is invalid',
+  optional = false,
+  value,
+}) => {
   const postcodeValue = value[key]
 
-  if (!value || !postcodeValue || postcodeValue?.length === 5) {
+  if ((optional && !postcodeValue) || postcodeValue?.length === 5) {
     return Promise.resolve()
   }
 
-  return Promise.reject(new Error('Postleitzahl ungültig'))
+  return Promise.reject(new Error(message))
 }
 
 export const stringToLowerCase = (string) => {

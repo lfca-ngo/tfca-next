@@ -24,7 +24,13 @@ export const Intro = ({
         title={blocks['intro.title']}
       />
 
-      <Button block onClick={() => goTo(nextKey)} size="large" type="primary">
+      <Button
+        block
+        data-testid="quiz-intro-start-btn"
+        onClick={() => goTo(nextKey)}
+        size="large"
+        type="primary"
+      >
         {textBlockToString(blocks['intro.button.primary'])}
       </Button>
     </div>

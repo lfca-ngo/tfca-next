@@ -15,7 +15,10 @@ export const ProviderCard = ({ energyKwh, item, onNext, showDetails }) => {
   const advantages = item.advantages.match(/<p>.*?<\/p>/g)
 
   return (
-    <Card className="content-card provider">
+    <Card
+      className="content-card provider"
+      data-testid={`provider-card-${item.id}`}
+    >
       <header>
         <div className="basic-tarif-info">
           <div className="logo">
@@ -69,6 +72,7 @@ export const ProviderCard = ({ energyKwh, item, onNext, showDetails }) => {
             <Button
               block
               className="colored"
+              data-testid="provider-card-details-btn"
               ghost
               icon={<InfoCircleOutlined />}
               onClick={() => showDetails(item)}

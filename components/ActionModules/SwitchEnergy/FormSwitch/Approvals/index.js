@@ -40,7 +40,7 @@ export const Approvals = ({
         ]}
         valuePropName="checked"
       >
-        <Checkbox>
+        <Checkbox data-testid="switch-energy-form-switch-provider-terms-checkbox">
           <span>
             {textBlockToString(blocks['switch.approvals.providerterms.text1'])}
             <a href={termsLink} rel="noopener noreferrer" target="_blank">
@@ -106,7 +106,7 @@ export const Approvals = ({
         ]}
         valuePropName="checked"
       >
-        <Checkbox>
+        <Checkbox data-testid="switch-energy-form-switch-privacy-checkbox">
           <span>
             {textBlockToString(
               blocks['switch.approvals.providerterms.privacy.text1']
@@ -147,7 +147,7 @@ export const Approvals = ({
         ]}
         valuePropName="checked"
       >
-        <Checkbox>
+        <Checkbox data-testid="switch-energy-form-switch-own-terms-checkbox">
           <span>
             {textBlockToString(blocks['switch.approvals.switchterms.text1'])}{' '}
             <a

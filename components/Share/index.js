@@ -87,6 +87,7 @@ export const Share = ({ invites }) => {
               <Input.Group className="equal-height" compact>
                 <Input
                   className="copy-input"
+                  data-testid="share-shortlink-input"
                   disabled
                   style={{ width: `calc(100% - ${BTN_WIDTH})` }}
                   value={shortLink}
@@ -98,7 +99,7 @@ export const Share = ({ invites }) => {
                   text={shortLink}
                 >
                   <Button block style={{ width: BTN_WIDTH }} type="primary">
-                    Copy{' '}
+                    Copy
                   </Button>
                 </CopyToClipboard>
               </Input.Group>

@@ -36,6 +36,7 @@ export const ActionDetails = ({ actionId, blocks, item, onNext }) => {
         {item?.actions?.map((action, i) => (
           <CallToAction
             actionId={actionId}
+            data-testid="action-details-cta-btn"
             key={`action-${i}`}
             onCountMeIn={onNext}
             showLeaveModal

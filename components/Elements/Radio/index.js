@@ -18,7 +18,7 @@ const CustomCheckbox = ({ item }) => {
       style={{ lineHeight: '32px' }}
       value={item.value}
     >
-      <span className="label-wrapper">
+      <span className="label-wrapper" data-testid="radio-checkbox">
         {item.iconUrl && (
           <span className="icon">
             <Image layout="fill" objectFit="contain" src={item.iconUrl} />

@@ -23,6 +23,7 @@ export const ToolDetails = ({ blocks, item, onNext }) => {
           <div className="actions">
             {item?.actions?.map((action, i) => (
               <CallToAction
+                data-testid="tool-details-cta-btn"
                 key={`action-${i}`}
                 onCountMeIn={onNext}
                 showLeaveModal

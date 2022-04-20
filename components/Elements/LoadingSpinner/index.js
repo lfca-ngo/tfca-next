@@ -57,9 +57,9 @@ const BullhornSpinner = ({ color }) => {
         fill="none"
         initial="initial"
         stroke="#000"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
         transition={transition}
         variants={pathVariants}
       />
@@ -127,9 +127,9 @@ const CheckmarkSpinner = ({ color }) => {
         fill="none"
         initial="initial"
         stroke="#000"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
         transition={transition}
         variants={pathVariants}
       />
@@ -150,9 +150,9 @@ const EnergySpinner = ({ color }) => {
         initial="initial"
         points="18.5 1 8 1 1 23.34 11.5 23.34 5.5 42.847 24.75 14.628 14.25 14.628 16.678 6.842"
         stroke="#000"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
         transition={transition}
         variants={pathVariants}
       />

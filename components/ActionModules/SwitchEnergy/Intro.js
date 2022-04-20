@@ -19,6 +19,7 @@ export const Intro = ({ goTo, module: { blocks = {}, icon = {} } }) => {
         <Col md={12} xs={24}>
           <Button
             block
+            data-testid="switch-energy-intro-start-btn"
             onClick={() => goTo('calculate')}
             size="large"
             type="primary"
@@ -30,6 +31,7 @@ export const Intro = ({ goTo, module: { blocks = {}, icon = {} } }) => {
           <Button
             block
             className="colored"
+            data-testid="switch-energy-calculate-skip-btn"
             ghost
             onClick={() => goTo('form-check')}
             size="large"

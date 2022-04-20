@@ -89,6 +89,7 @@ export const PoliticianDetails = ({
 
         <Button
           block
+          data-testid="politician-details-cta-btn"
           icon={<MailOutlined />}
           onClick={handleSend}
           size="large"

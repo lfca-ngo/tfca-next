@@ -31,7 +31,7 @@ export const Hero = ({ onClick, openGraphInfo }) => {
             />
           </div>
 
-          <h1>
+          <h1 data-testid="hero-title">
             {customization?.names?.length
               ? textBlockToString(
                   customBlock,
@@ -51,6 +51,7 @@ export const Hero = ({ onClick, openGraphInfo }) => {
           <div className="start-btn">
             <Button
               className="ant-btn-xl"
+              data-testid="hero-take-action-btn"
               onClick={onClick}
               size="large"
               type="primary"

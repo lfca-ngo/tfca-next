@@ -63,6 +63,7 @@ export const PersonalData = ({
         ]}
       >
         <Input
+          data-testid="switch-energy-form-switch-email-input"
           placeholder={textBlockToString(
             blocks['switch.personal.email.placeholder']
           )}

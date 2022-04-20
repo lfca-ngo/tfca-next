@@ -69,6 +69,7 @@ export const ProviderDetails = ({ energyKwh, item, onNext }) => {
           <Space align="center">
             <Button
               block
+              data-testid="provider-details-cta-btn"
               icon={<ArrowRightOutlined />}
               onClick={onNext}
               shape="round"

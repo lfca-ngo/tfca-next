@@ -88,7 +88,11 @@ export const ChallengeStatus = ({ className, openGraphInfo }) => {
           </>
         )}
       </div>
-      <Button onClick={createInvite} type="primary">
+      <Button
+        data-testid="challenge-status-invite-btn"
+        onClick={createInvite}
+        type="primary"
+      >
         {buttonLabel}
       </Button>
 

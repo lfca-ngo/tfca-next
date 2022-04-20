@@ -98,7 +98,13 @@ export const Question = ({
           />
         </Form.Item>
         <Form.Item>
-          <Button block htmlType="submit" size="large" type="primary">
+          <Button
+            block
+            data-testid="quiz-question-submit-btn"
+            htmlType="submit"
+            size="large"
+            type="primary"
+          >
             {textBlockToString(blocks['question.button.primary'])}
           </Button>
         </Form.Item>

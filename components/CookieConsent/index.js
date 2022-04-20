@@ -112,6 +112,7 @@ export const CookieConsent = () => {
           <Col xs={12}>
             <Button
               block
+              data-testid="cookie-consent-accept-all-btn"
               key="acceptButton"
               onClick={() => accept(true)}
               size="large"
