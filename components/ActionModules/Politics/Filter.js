@@ -16,7 +16,17 @@ export const Filter = ({
   const initialValue = store[filterOption?.fieldName]
   const isPostcode = filterOption?.fieldName === 'countries.zip'
   const validationRules = isPostcode
-    ? [{ validator: (_, value) => validatePostcode(value, 'input') }]
+    ? [
+        {
+          validator: (_, value) =>
+            validatePostcode({
+              key: 'input',
+              message: textBlockToString(blocks['form.postcode.error']),
+              optional: true,
+              value,
+            }),
+        },
+      ]
     : []
 
   const handleNext = (v) => {

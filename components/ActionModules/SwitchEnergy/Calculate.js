@@ -16,10 +16,13 @@ export const EnergyForm = ({
         name="postcodeEnergy"
         rules={[
           {
-            message: textBlockToString(blocks['form.postcode.error']),
-            required: true,
+            validator: (_, value) =>
+              validatePostcode({
+                key: 'postcode',
+                message: textBlockToString(blocks['form.postcode.error']),
+                value,
+              }),
           },
-          { validator: (_, value) => validatePostcode(value, 'postcode') },
         ]}
       >
         <SelectPostcodeEnergy
