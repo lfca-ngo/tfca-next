@@ -58,6 +58,7 @@ export const SelectWithOptionalInput = ({
       {shouldShowInput && (
         <Input
           className="optional-input"
+          data-testid="select-optional-input"
           inputMode="numeric"
           onChange={onInputChange}
           pattern="[0-9]*"

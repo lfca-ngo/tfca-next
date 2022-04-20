@@ -56,6 +56,7 @@ export const Results = ({
         <Button
           block
           className="mb-30"
+          data-testid="politics-results-next-btn"
           onClick={() => goTo(nextKey)}
           type="primary"
         >

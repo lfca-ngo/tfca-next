@@ -60,6 +60,7 @@ export const Filter = ({
             return (
               <Button
                 block
+                data-testid="politics-filter-next-btn"
                 disabled={!isValid}
                 htmlType="submit"
                 size="large"

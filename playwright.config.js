@@ -7,6 +7,7 @@ const config = {
     launchOptions: {
       slowMo: 0,
     },
+    locale: 'de',
     permissions: ['clipboard-read'],
     screenshot: 'only-on-failure',
   },

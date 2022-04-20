@@ -59,6 +59,7 @@ export const PoliticianCard = ({ isSelected, item, minimal, onSelect }) => {
             {handleSelect && (
               <Button
                 className="colored"
+                data-testid="politician-card-details-btn"
                 ghost={isSelected}
                 onClick={handleSelect}
                 size="small"
