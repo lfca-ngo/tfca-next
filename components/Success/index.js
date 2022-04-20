@@ -124,7 +124,7 @@ export const Success = ({
 
   return (
     <>
-      <div className="step">
+      <div className="step" data-testid="step-success">
         <Category
           goBack={prevKey ? () => goTo(prevKey) : undefined}
           icon={icon.url}

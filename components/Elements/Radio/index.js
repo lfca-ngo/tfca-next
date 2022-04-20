@@ -15,6 +15,7 @@ const CustomCheckbox = ({ item }) => {
   return (
     <Checkbox
       className={classNames({ correct: item.isCorrect })}
+      data-testid="radio-checkbox"
       style={{ lineHeight: '32px' }}
       value={item.value}
     >

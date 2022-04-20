@@ -53,7 +53,13 @@ export const Filter = ({
           />
         </Form.Item>
         <Form.Item>
-          <Button block htmlType="submit" size="large" type="primary">
+          <Button
+            block
+            data-testid="filter-submit-btn"
+            htmlType="submit"
+            size="large"
+            type="primary"
+          >
             {textBlockToString(blocks['filter.button.primary'])}
           </Button>
         </Form.Item>

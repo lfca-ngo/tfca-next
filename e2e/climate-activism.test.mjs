@@ -2,48 +2,42 @@ import { expect, test } from '@playwright/test'
 
 import { navigateToAction } from './utils/navigate-to-action.mjs'
 
-test.skip('Action Support NGOs', async ({ baseURL, page }) => {
+const ACTION_ID = 'climate_activism'
+
+test('Action climate_activism', async ({ baseURL, page }) => {
   await page.goto(baseURL)
-  await navigateToAction(page, 'Support NGOs')
+  await navigateToAction(page, ACTION_ID)
 
   // Select what to do
-  await page.locator('span:has-text("Donate")').nth(2).click()
   await page
-    .locator(
-      'text=Select one or moreDonateVolunteerSubscribeContinue >> button'
-    )
+    .locator(`id=${ACTION_ID} >> data-testid=radio-checkbox`)
+    .nth(0)
     .click()
+  await page.locator(`id=${ACTION_ID} >> data-testid=filter-submit-btn`).click()
 
   // Select area
-  await page.locator('text=Justice').click()
   await page
-    .locator(
-      'text=Select one or moreJusticeCitiesCommunitiesLandForestsOceansContinue >> button'
-    )
+    .locator(`id=${ACTION_ID} >> data-testid=radio-checkbox`)
+    .nth(0)
     .click()
+  await page.locator(`id=${ACTION_ID} >> data-testid=filter-submit-btn`).click()
 
   // Open details and navigate to external page
   await page
-    .locator(
-      'text=350.orgWorking to end the age of fossil fuelsDetails >> button'
-    )
+    .locator(`id=${ACTION_ID} >> .content-card.organization >> nth=0 >> button`)
     .click()
-  await page.locator('button:has-text("Make a donation")').click()
+  await page.locator('data-testid=organization-details-cta-btn').nth(0).click()
   const [externalPage] = await Promise.all([
     page.waitForEvent('popup'),
-    page
-      .locator('div[role="document"] button:has-text("Make a donation")')
-      .click(),
+    page.locator('data-testid=leave-page-link-btn').click(),
   ])
 
   await externalPage.waitForLoadState()
 
   // Make the action count
   page.bringToFront()
-  await page.locator('button:has-text("Count me in")').click()
+  await page.locator('data-testid=leave-page-count-btn').click()
 
   // Expect to see success screen
-  await expect(
-    page.locator('text=High five! Now, nominate friends to triple your impact')
-  ).toBeVisible()
+  await expect(page.locator('data-testid=step-success')).toBeVisible()
 })

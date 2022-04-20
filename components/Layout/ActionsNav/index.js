@@ -94,6 +94,7 @@ export const ActionsNav = ({
             >
               <Button
                 className="no-padding"
+                data-testid={`actions-nav-${action.id}-btn`}
                 onClick={() => scrollToId(action.id)}
                 type="link"
               >

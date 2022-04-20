@@ -71,6 +71,7 @@ export const LeavePage = ({
           >
             <Button
               block
+              data-testid="leave-page-link-btn"
               icon={<LinkOutlined />}
               onClick={handleClick}
               type="primary"
@@ -81,6 +82,7 @@ export const LeavePage = ({
           <Button
             block
             className="colored"
+            data-testid="leave-page-count-btn"
             ghost
             icon={<LikeOutlined />}
             onClick={onNext}
