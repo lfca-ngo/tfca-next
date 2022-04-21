@@ -5,7 +5,15 @@ import { Button, Card, Col, List, Row, Tag } from 'antd'
 import Image from 'next/image'
 import React from 'react'
 
-export const ProviderCard = ({ energyKwh, item, onNext, showDetails }) => {
+import { textBlockToString } from '../../../utils'
+
+export const ProviderCard = ({
+  blocks,
+  energyKwh,
+  item,
+  onNext,
+  showDetails,
+}) => {
   const handleSwitch = () => onNext()
 
   const pricePerYearInCents =
@@ -79,12 +87,12 @@ export const ProviderCard = ({ energyKwh, item, onNext, showDetails }) => {
               size="small"
               type="primary"
             >
-              Details
+              {textBlockToString(blocks['card.button.details'])}
             </Button>
           </Col>
           <Col xs={12}>
             <Button block onClick={handleSwitch} size="small" type="primary">
-              Wechseln
+              {textBlockToString(blocks['card.button.switch'])}
             </Button>
           </Col>
         </Row>
