@@ -49,6 +49,8 @@ footer.footer {
     }
   }
   .ant-collapse-content-box {
+    @item-width: 70px;
+
     display: flex;
     flex-wrap: wrap;
     padding: 0;
@@ -61,8 +63,17 @@ footer.footer {
       }
     }
 
+    .ant-btn-link {
+      max-width: @item-width;
+      white-space: normal;
+      font-size: 11px;
+      line-height: 1;
+      color: @white;
+      text-decoration: underline;
+    }
+
     .partner {
-      width: 70px;
+      width: @item-width;
       height: 38px;
       position: relative;
       margin-right: 10px;

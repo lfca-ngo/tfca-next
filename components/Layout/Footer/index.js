@@ -7,6 +7,7 @@ import Link from 'next/link'
 import React from 'react'
 
 import { useContentLists, useContentNavs, useIsMobile } from '../../../hooks'
+import { CallToAction } from '../../Elements'
 
 const { Panel } = Collapse
 
@@ -50,17 +51,21 @@ export const Footer = () => {
                   expandIconPosition="right"
                 >
                   <Panel header={partners?.title} key={`${i}`}>
-                    {partners?.data.map((partner, j) => (
-                      <div className="partner" key={`partner-${j}`}>
-                        {partner.icon?.url && (
-                          <Image
-                            layout="fill"
-                            objectFit="contain"
-                            src={partner.icon?.url}
-                          />
-                        )}
-                      </div>
-                    ))}
+                    {partners?.data.map((partner, j) => {
+                      const isLink = partner.type === 'link'
+                      if (isLink) return <CallToAction {...partner} />
+                      return (
+                        <div className="partner" key={`partner-${j}`}>
+                          {partner.icon?.url && (
+                            <Image
+                              layout="fill"
+                              objectFit="contain"
+                              src={partner.icon?.url}
+                            />
+                          )}
+                        </div>
+                      )
+                    })}
                   </Panel>
                 </Collapse>
               </div>
