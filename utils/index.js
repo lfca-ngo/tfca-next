@@ -174,3 +174,9 @@ export const getCustomStyles = (
     backgroundSize: backgroundSize,
   }
 }
+
+export const appendUrlParam = (urlString, param, value) => {
+  const url = new URL(urlString)
+  const withParam = url?.searchParams?.append(param, value)
+  return withParam?.href || url
+}

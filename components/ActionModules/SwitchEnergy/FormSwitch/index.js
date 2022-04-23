@@ -130,13 +130,13 @@ export const FormSwitch = ({
   useEffect(() => {
     if (data?.state === 'received') {
       // Requets was successful
-      goTo(nextKey)
       trackEvent({
         name: SWITCH_ENERGY_SUCCESS,
         values: {
           action_id: id,
         },
       })
+      goTo(nextKey)
     }
   }, [data, goTo, id, nextKey, trackEvent])
 
