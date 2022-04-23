@@ -10,7 +10,7 @@ import React from 'react'
 
 import { useAnalytics, useContentBlocks } from '../../../hooks'
 import { EXTERNAL_LINK_CLICKED } from '../../../services/analytics'
-import { textBlockToString } from '../../../utils'
+import { appendUrlParam, textBlockToString } from '../../../utils'
 
 export const LeavePage = ({
   actionId,
@@ -41,6 +41,11 @@ export const LeavePage = ({
   const leavePageButtonHint = textBlockToString(
     useContentBlocks('leavepage.button.hint')
   )
+  const destinationUrlWithRefParam = appendUrlParam(
+    destinationUrl,
+    'ref',
+    'tfca'
+  )
 
   if (!destinationUrl)
     return (
@@ -65,7 +70,7 @@ export const LeavePage = ({
         <label className="hint">{leavePageButtonHint}</label>
         <Space direction="vertical" style={{ width: '100%' }}>
           <a
-            href={`${destinationUrl}?ref=tfca`}
+            href={destinationUrlWithRefParam}
             rel="noopener noreferrer"
             target="_blank"
           >
