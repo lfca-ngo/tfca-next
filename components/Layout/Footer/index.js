@@ -53,7 +53,10 @@ export const Footer = () => {
                   <Panel header={partners?.title} key={`${i}`}>
                     {partners?.data.map((partner, j) => {
                       const isLink = partner.type === 'link'
-                      if (isLink) return <CallToAction {...partner} />
+                      if (isLink)
+                        return (
+                          <CallToAction key={`partner-${j}`} {...partner} />
+                        )
                       return (
                         <div className="partner" key={`partner-${j}`}>
                           {partner.icon?.url && (
