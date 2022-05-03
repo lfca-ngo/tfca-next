@@ -89,27 +89,7 @@ export const FormSwitch = ({
         street: '',
         zipCode: store?.postcode || '',
       },
-      switchRate: {
-        cancellationPeriod: store?.item?.cancellationPeriod || null,
-        emissions: store?.item?.emissions || [],
-        energyMix: store?.item?.energyMix || [],
-        extendedTerm: store?.item?.extendedTerm || null,
-        id: store?.item?.id || '',
-        minimumTerm: store?.item?.minimumTerm || null,
-        name: store?.item?.name || '',
-        price: {
-          basePrice: store?.item?.price?.basePrice || 0,
-          workingPrice: store?.item?.price?.workingPrice || 0,
-        },
-        priceGuarantee: {
-          date: store?.item?.priceGuarantee?.date || null,
-          period: store?.item?.priceGuarantee?.period || null,
-        },
-        provider: {
-          id: store?.item?.provider?.id || '',
-          name: store?.item?.provider?.name || '',
-        },
-      },
+      switchRate: store?.item,
     }
 
     if (payload.previousContract.cancellation.instructed) {
