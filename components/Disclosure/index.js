@@ -53,7 +53,7 @@ const ContributionPanelContent = ({ participationPackage }) => {
 
 export const Disclosure = ({ data }) => {
   const actionsList = data?.completedCompanyActions
-  const campaignContributionMap = data.company.campaignParticipationPackages
+  const campaignContributionMap = data.campaignParticipationPackages
   const additionalTitle = textBlockToString(
     useContentBlocks('disclosure.additional.title')
   )
@@ -63,16 +63,12 @@ export const Disclosure = ({ data }) => {
       <header>
         <Row>
           <Col md={20} xs={16}>
-            <h1>{data?.company.name}</h1>
+            <h1>{data?.name}</h1>
           </Col>
           <Col md={4} xs={8}>
             <div className="logo-container">
               <div className="logo-wrapper">
-                <Image
-                  layout="fill"
-                  objectFit="contain"
-                  src={data?.company?.logoUrl}
-                />
+                <Image layout="fill" objectFit="contain" src={data?.logoUrl} />
               </div>
             </div>
           </Col>
@@ -84,22 +80,22 @@ export const Disclosure = ({ data }) => {
         <div
           className="content-text"
           dangerouslySetInnerHTML={{
-            __html: data.company?.campaignGoals,
+            __html: data?.campaignGoals,
           }}
         />
-        {data.company?.campaignContribution && (
+        {data?.campaignContribution && (
           <>
             <h4>{additionalTitle}</h4>
             <div
               className="content-text"
               dangerouslySetInnerHTML={{
-                __html: data.company?.campaignContribution,
+                __html: data?.campaignContribution,
               }}
             />
           </>
         )}
 
-        <ImageGallery images={data.company?.campaignFiles} />
+        <ImageGallery images={data?.campaignFiles} />
 
         <h4>
           {textBlockToString(useContentBlocks('disclosure.contribution.title'))}

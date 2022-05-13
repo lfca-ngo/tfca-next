@@ -7,7 +7,7 @@ import { HomeLoader } from '../../../components/Elements'
 import { Layout } from '../../../components/Layout'
 import { fetchAllStaticData } from '../../../services'
 import { fetchData } from '../../../services/lfca'
-import { QualifiedCompanyItemFragment } from '../../../services/lfca/fragments'
+import { QualifiedCompanyFragment } from '../../../services/lfca/fragments'
 import { WITH_SIDEBAR } from '../../../utils'
 
 export default function SupporterPage({
@@ -33,10 +33,10 @@ export default function SupporterPage({
 }
 
 const allParticipatingCompaniesQuery = gql`
-  ${QualifiedCompanyItemFragment}
-  query qualifiedCompanies($input: QualifiedCompaniesInput) {
+  ${QualifiedCompanyFragment}
+  query qualifiedCompanies($input: QualifiedCompaniesInput!) {
     qualifiedCompanies(input: $input) {
-      ...QualifiedCompanyItemFragment
+      ...QualifiedCompanyFragment
     }
   }
 `
@@ -57,14 +57,12 @@ export async function getStaticProps({ locale, params }) {
     query: allParticipatingCompaniesQuery,
     variables: {
       input: {
-        filter: {
-          achievementContentIds: ['tfca2022Qualification'],
-        },
+        achievementContentIds: ['tfca2022Qualification'],
       },
     },
   })
   let company = cachedQualifiedCompanies?.qualifiedCompanies?.find(
-    ({ company }) => company.micrositeSlug === companySlug
+    (company) => company.micrositeSlug === companySlug
   )
 
   if (!company) {
@@ -75,8 +73,8 @@ export async function getStaticProps({ locale, params }) {
       skipCache: true,
       variables: {
         input: {
+          achievementContentIds: ['tfca2022Qualification'],
           filter: {
-            achievementContentIds: ['tfca2022Qualification'],
             companyMicrositeSlugs: [companySlug],
           },
         },
@@ -108,9 +106,7 @@ export async function getStaticPaths() {
     query: allParticipatingCompaniesQuery,
     variables: {
       input: {
-        filter: {
-          achievementContentIds: ['tfca2022Qualification'],
-        },
+        achievementContentIds: ['tfca2022Qualification'],
       },
     },
   })
@@ -123,8 +119,8 @@ export async function getStaticPaths() {
      * All other combinations will be built incrementally once requested.
      */
     paths: qualifiedCompanies
-      .filter(({ company }) => !!company.micrositeSlug)
-      .reduce((allPaths, { company }) => {
+      .filter((company) => !!company.micrositeSlug)
+      .reduce((allPaths, company) => {
         return [
           ...allPaths,
           {
