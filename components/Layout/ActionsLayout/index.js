@@ -67,7 +67,7 @@ const CompanyMenuItem = ({ company }) => {
       <Popover
         content={
           <PopoverContent
-            company={company?.company}
+            company={company}
             onClose={() => setPopoverOpen(false)}
           />
         }
@@ -75,7 +75,7 @@ const CompanyMenuItem = ({ company }) => {
         visible={popoverOpen}
         zIndex={10}
       >
-        <span onClick={() => setIsOpen(true)}>{company?.company?.name}</span>
+        <span onClick={() => setIsOpen(true)}>{company?.name}</span>
       </Popover>
       <Drawer
         className="drawer-md"

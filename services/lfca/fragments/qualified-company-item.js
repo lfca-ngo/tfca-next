@@ -1,21 +1,15 @@
 import { gql } from 'graphql-request'
 
-export const QualifiedCompanyItemFragment = gql`
-  fragment QualifiedCompanyItemFragment on QualifiedCompanyItem {
-    company {
-      campaignGoalSetting
-      campaignParticipationPackages
-      campaignGoals
-      campaignFiles {
-        name
-        url
-      }
-      campaignContribution
-      id
-      logoUrl
-      micrositeSlug
+export const QualifiedCompanyFragment = gql`
+  fragment QualifiedCompanyFragment on Company {
+    campaignGoalSetting
+    campaignParticipationPackages
+    campaignGoals
+    campaignFiles {
       name
+      url
     }
+    campaignContribution
     completedCompanyActions {
       contentId
       description
@@ -28,5 +22,9 @@ export const QualifiedCompanyItemFragment = gql`
       }
       title
     }
+    id
+    logoUrl
+    micrositeSlug
+    name
   }
 `

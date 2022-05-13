@@ -16,7 +16,7 @@ export const DisclosureOverview = ({ items }) => {
   const [searchResults, setSearchResults] = useState([])
 
   const handleSearch = (val) => {
-    const searchResults = items.filter(({ company }) => {
+    const searchResults = items.filter((company) => {
       const name = company.name.toLowerCase()
       const key = val.toLowerCase()
       return name.indexOf(key) > -1
@@ -73,7 +73,7 @@ export const DisclosureOverview = ({ items }) => {
 
             // We only show the participation packages where the company checked at least one objective
             const contributionList = Object.keys(
-              item.company.campaignParticipationPackages
+              item.campaignParticipationPackages
             ).map((c) => ({ value: c }))
 
             return (
@@ -87,7 +87,7 @@ export const DisclosureOverview = ({ items }) => {
                         height={60}
                         layout="intrinsic"
                         objectFit="contain"
-                        src={item.company?.logoUrl}
+                        src={item?.logoUrl}
                         width={120}
                       />
                     </div>

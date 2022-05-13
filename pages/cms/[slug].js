@@ -10,7 +10,7 @@ import {
   fetchPageSlugs,
 } from '../../services/contentful'
 import { fetchData } from '../../services/lfca'
-import { QualifiedCompanyItemFragment } from '../../services/lfca/fragments'
+import { QualifiedCompanyFragment } from '../../services/lfca/fragments'
 
 const DISCLOSURE_OVERVIEW = 'disclosureOverview'
 
@@ -43,12 +43,10 @@ export default function Page({ items, pageData }) {
 }
 
 const allParticipatingCompaniesQuery = gql`
-  ${QualifiedCompanyItemFragment}
-  query qualifiedCompanies($input: QualifiedCompaniesInput) {
+  ${QualifiedCompanyFragment}
+  query qualifiedCompanies($input: QualifiedCompaniesInput!) {
     qualifiedCompanies(input: $input) {
-      ... on QualifiedCompanyItem {
-        ...QualifiedCompanyItemFragment
-      }
+      ...QualifiedCompanyFragment
     }
   }
 `
@@ -69,9 +67,7 @@ export async function getStaticProps({ locale, params }) {
       query: allParticipatingCompaniesQuery,
       variables: {
         input: {
-          filter: {
-            achievementContentIds: ['tfca2022Qualification'],
-          },
+          achievementContentIds: ['tfca2022Qualification'],
         },
       },
     })
