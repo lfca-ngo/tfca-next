@@ -97,7 +97,7 @@ export async function getStaticProps({ locale, params }) {
       ...staticData,
       company,
     },
-    revalidate: 3600, // 1h
+    revalidate: 86400, // 24h
   }
 }
 
