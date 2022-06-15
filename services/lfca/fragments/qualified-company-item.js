@@ -2,7 +2,6 @@ import { gql } from 'graphql-request'
 
 export const QualifiedCompanyFragment = gql`
   fragment QualifiedCompanyFragment on Company {
-    campaignGoalSetting
     campaignParticipationPackages
     campaignGoals
     campaignFiles {
