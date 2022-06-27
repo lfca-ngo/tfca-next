@@ -48,7 +48,7 @@ We deploy the App on vercel to make use of advanced Next.js features such as ISG
 
 ## Typescript?
 
-Unfortunately the project is written in js. This is because I (Timo) only learned Typescript in the last couple of weeks and since we were only 1,5 Devs with very limited time for the entire project, we did not want to take the risk of slowing down the project due to me learning typescript on the go.
+No Typescript unfortunately. The project is written in pure Javascript. Mainly due to time constraints and missing TS knowledge with parts of the team. We might rewrite it next year in TS.
 
 ## Tracking
 
