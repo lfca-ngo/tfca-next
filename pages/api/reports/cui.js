@@ -7,11 +7,37 @@ const pipeline = promisify(stream.pipeline)
 
 const OPTIONS_BY_TYPE = {
   actions: {
+    fields: [
+      'partner_id',
+      'action_id',
+      'action_name',
+      'action_benefit',
+      'action_level_1',
+      'action_level_2',
+      'action_level_3',
+      'action_completed_count_volunteer',
+      'action_completed_savings',
+      'action_completed_date',
+      'action_geography',
+      'action_country',
+      'volunteer_type',
+      'gender',
+      'age_group',
+      'parent_organization',
+    ],
     filename: 'cui_actions_lfca_in',
     query:
       "WITH completions AS ( SELECT toDate( toStartOfDay(toDateTime(timestamp, 'Europe/Berlin')) ) AS date, JSONExtractString(json, 'Event') as event_name, JSONExtractString(json, 'action_id') as action_id, CASE JSONExtractString(json, 'action_id') WHEN 'switch_energy' THEN 1648.7 ELSE 0 END as impact, CASE JSONExtractString(json, 'action_collection_slug') WHEN 'usa' THEN 'US' WHEN 'tur' THEN 'TR' WHEN 'deu' THEN 'DE' WHEN 'fra' THEN 'FR' WHEN 'esp' THEN 'ES' WHEN 'gbr' THEN 'UK' WHEN 'int' THEN '' ELSE '??' END as region, JSONExtractBool(json, 'consent') as consent, JSONExtractString(json, 'User_ID') as uid FROM base WHERE event_name = 'action_completed' AND consent = 1 AND date > subtractDays(yesterday(), 7) AND date < today() AND region <> '??' ) SELECT 'lfca' as partner_id, action_id, CASE action_id WHEN 'climate_activism' THEN 'Support NGOs' WHEN 'ecosia' THEN 'Digital' WHEN 'green_finances' THEN 'Banking' WHEN 'politics' THEN 'Politics' WHEN 'share_deck' THEN 'Action at work' WHEN 'switch_energy' THEN 'Switch Energy' WHEN 'food' THEN 'Food' ELSE '' END as action_name, 'Co2' as action_benefit, CASE action_id WHEN 'climate_activism' THEN 'Voice' WHEN 'ecosia' THEN 'Lifestyle' WHEN 'green_finances' THEN 'Lifestyle' WHEN 'politics' THEN 'Voice' WHEN 'share_deck' THEN 'Lifestyle' WHEN 'switch_energy' THEN 'Home' WHEN 'food' THEN 'Food' ELSE '' END as action_level_1, CASE action_id WHEN 'climate_activism' THEN 'Collective action' WHEN 'ecosia' THEN 'Digital' WHEN 'green_finances' THEN 'Financial Services' WHEN 'politics' THEN 'Collective action' WHEN 'share_deck' THEN 'Pledges' WHEN 'switch_energy' THEN 'Gas' WHEN 'food' THEN 'Not classified food' ELSE '' END as action_level_2, CASE action_id WHEN 'climate_activism' THEN 'Active citizen' WHEN 'ecosia' THEN 'Efficient usage' WHEN 'green_finances' THEN 'Divestment' WHEN 'politics' THEN 'Direct engagement' WHEN 'share_deck' THEN 'Pledge to Cut Carbon' WHEN 'switch_energy' THEN 'Green gas' WHEN 'food' THEN 'Not classified' ELSE '' END as action_level_3, COUNT(action_id) as action_completed_count_volunteer, floor(SUM(impact), 2) AS action_completed_savings, date as action_completed_date, '' as action_geography, region as action_country, '' as volunteer_type, '' as gender, '' as age_group, '' as parent_organization FROM completions GROUP BY action_id, date, region ORDER BY action_completed_date DESC",
   },
   'unique-users': {
+    fields: [
+      'partner_id',
+      'unique_user_count',
+      'action_completed_date',
+      'Geography',
+      'Total_carbon_Savings',
+      'Total_Number_of_completed_actions',
+    ],
     filename: 'cui_uniqueusers_lfca_in',
     query:
       "WITH completions AS ( SELECT toDate( toStartOfDay(toDateTime(timestamp, 'Europe/Berlin')) ) AS date, JSONExtractString(json, 'Event') as event_name, JSONExtractString(json, 'action_id') as action_id, CASE JSONExtractString(json, 'action_id') WHEN 'switch_energy' THEN 1648.7 ELSE 0 END as impact, CASE JSONExtractString(json, 'action_collection_slug') WHEN 'usa' THEN 'US' WHEN 'tur' THEN 'TR' WHEN 'deu' THEN 'DE' WHEN 'fra' THEN 'FR' WHEN 'esp' THEN 'ES' WHEN 'gbr' THEN 'UK' WHEN 'int' THEN '' ELSE '??' END as region, JSONExtractBool(json, 'consent') as consent, JSONExtractString(json, 'User_ID') as uid FROM base WHERE event_name = 'action_completed' AND consent = 1 AND region <> '??' ORDER BY date ASC LIMIT 1 BY uid, action_id ) SELECT 'lfca' as partner_id, COUNT(DISTINCT uid) as unique_user_count, date as action_completed_date, region as Geography, floor(SUM(impact), 6) AS Total_carbon_Savings, COUNT(action_id) as Total_Number_of_completed_actions FROM completions WHERE date > subtractDays(yesterday(), 7) AND date < today() GROUP BY date, region ORDER BY date DESC",
@@ -55,6 +81,7 @@ export default async function handler(req, res) {
 
   const csv = parse(response.data.result, {
     delimiter: '|',
+    fields: OPTIONS.fields,
     quote: '',
   })
 
