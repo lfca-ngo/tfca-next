@@ -14,6 +14,7 @@
     "@contentful/rich-text-plain-text-renderer": "^15.11.1",
     "@contentful/rich-text-react-renderer": "^15.12.0",
     "@contentful/rich-text-types": "^15.12.0",
+    "@mailchimp/mailchimp_transactional": "^1.0.47",
     "@next/bundle-analyzer": "^12.1.0",
     "antd": "4.18.7",
     "axios": "^0.26.1",

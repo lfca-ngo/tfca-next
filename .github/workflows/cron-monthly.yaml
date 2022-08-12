@@ -26,5 +26,5 @@ jobs:
             const jsonResponse = '${{ steps.gql.outputs.response }}'
             const parsed = JSON.parse(jsonResponse)
             if (!parsed.success) {
-              core.setFailed('API request to send CUI report failed!')
+              core.setFailed('API request to send CUI report failed! - ' + parsed.message || 'Unkown error')
             }
