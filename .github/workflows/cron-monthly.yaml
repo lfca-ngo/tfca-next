@@ -1,0 +1,30 @@
+name: Cron
+on:
+  schedule:
+    - cron: "0 * 12 * *" # 10 AM on every 1st of the month
+
+jobs:
+  send-cui-report:
+    name: Send monthly CUI report
+    runs-on: ubuntu-latest
+    steps:
+      - uses: fjogeleit/http-request-action@master
+        name: Execute API request
+        id: api
+        with:
+          bearerToken: ${{ secrets.API_ADMIN_TOKEN }}
+          contentType: 'application/json'
+          method: 'GET'
+          timeout: 10000
+          url: https://www.tfca.earth/api/reports/send-cui-report
+      - name: 'Log API Response'
+        run: echo ${{ steps.api.outputs.response }}
+      - name: Check if successful
+        uses: actions/github-script@v5
+        with:
+          script: |
+            const jsonResponse = '${{ steps.gql.outputs.response }}'
+            const parsed = JSON.parse(jsonResponse)
+            if (!parsed.success) {
+              core.setFailed('API request to send CUI report failed!')
+            }
