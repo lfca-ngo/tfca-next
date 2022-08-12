@@ -1,7 +1,7 @@
 name: Cron
 on:
   schedule:
-    - cron: "0 * 12 * *" # 10 AM on every 1st of the month
+    - cron: "0 10 1 * *" # 10 AM on every 1st of the month
 
 jobs:
   send-cui-report:
