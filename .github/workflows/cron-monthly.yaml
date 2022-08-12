@@ -23,7 +23,7 @@ jobs:
         uses: actions/github-script@v5
         with:
           script: |
-            const jsonResponse = '${{ steps.gql.outputs.response }}'
+            const jsonResponse = '${{ steps.api.outputs.response }}'
             const parsed = JSON.parse(jsonResponse)
             if (!parsed.success) {
               core.setFailed('API request to send CUI report failed! - ' + parsed.message || 'Unkown error')
