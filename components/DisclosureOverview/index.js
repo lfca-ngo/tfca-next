@@ -73,7 +73,7 @@ export const DisclosureOverview = ({ items }) => {
 
             // We only show the participation packages where the company checked at least one objective
             const contributionList = Object.keys(
-              item.campaignParticipationPackages
+              item.campaignParticipationPackages || {}
             ).map((c) => ({ value: c }))
 
             return (
