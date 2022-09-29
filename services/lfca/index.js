@@ -30,6 +30,9 @@ export const fetchData = async ({ query, skipCache = false, variables }) => {
           document: query,
           requestHeaders: {
             authorization: `Bearer ${process.env.LFCA_BE_ADMIN_TOKEN}`,
+            'x-graphql-client-name': 'tfca-next',
+            'x-graphql-client-version':
+              process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA || 'local',
           },
           url: process.env.LFCA_BE_URL,
           variables: variables,
