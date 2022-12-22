@@ -68,7 +68,7 @@ jobs:
       - name: Install dependencies
         run: yarn --frozen-lockfile
       - name: Install Playwright
-        run: npx playwright install-deps chromium
+        run: npx playwright install --with-deps
       - name: Run e2e tests
         run: yarn test:e2e
         env:
