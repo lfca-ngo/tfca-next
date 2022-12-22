@@ -5,7 +5,7 @@ import { navigateToAction } from './utils/navigate-to-action.mjs'
 const ACTION_ID = 'switch_energy'
 const ENERGY_PROVIDER_ID = '5f296c87efbdff0011567434'
 
-test.only(`Action ${ACTION_ID}`, async ({ baseURL, page }) => {
+test(`Action ${ACTION_ID}`, async ({ baseURL, page }) => {
   await page.goto(baseURL)
   await navigateToAction(page, ACTION_ID)
 
