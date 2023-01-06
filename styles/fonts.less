@@ -1,7 +1,7 @@
 @import (reference) './variables.less';
 
 .font-bold(@color: var(--heading-color)) {
-  font-family: 'Manrope', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-weight: 800;
   font-style: normal;
   color: @color;
@@ -10,16 +10,16 @@
 }
 
 .font-semi(@color: var(--heading-color)) {
-  font-family: 'Manrope', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-weight: 600;
   font-style: normal;
   color: @color;
-  letter-spacing: -0.05rem;
+  letter-spacing: -0.03rem;
   line-height: 1.2;
 }
 
 .font-medium(@color: var(--heading-color)) {
-  font-family: 'Manrope', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-weight: 400;
   font-style: normal;
   color: @color;
@@ -28,7 +28,7 @@
 }
 
 .font-regular(@color: var(--text-color)) {
-  font-family: 'Manrope', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-weight: 300;
   font-style: normal;
   color: @color;
@@ -40,16 +40,16 @@
   letter-spacing: -1.1px;
   line-height: 1.2;
   @media @desktop {
-    font-size: 62px;
+    font-size: 56px;
   }
 }
 
 .h2() {
-  .font-bold();
+  .font-semi();
   font-size: 36px;
   line-height: 1.1;
   @media @desktop {
-    font-size: 56px;
+    font-size: 50px;
   }
 }
 
@@ -85,8 +85,8 @@
   letter-spacing: -1px;
   line-height: 1;
   @media @desktop {
-    font-size: 110px;
-    letter-spacing: -2.5px;
+    font-size: 105px;
+    letter-spacing: -1.5px;
     line-height: 1;
   }
 }
@@ -98,7 +98,7 @@
   line-height: 1;
   @media @desktop {
     font-size: 95px;
-    letter-spacing: -2.5px;
+    letter-spacing: -1.5px;
     line-height: 1;
   }
 }
