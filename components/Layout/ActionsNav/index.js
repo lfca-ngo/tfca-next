@@ -58,7 +58,7 @@ export const ActionsNav = ({
     ? { backgroundColor, boxShadow }
     : { boxShadow, marginLeft }
   const headerStartStyles = isMobile ? { width: headerWidth } : {}
-  const logoSrc = getLogoSrc(isMobile)
+  const logoSrc = getLogoSrc()
 
   const { activeAction } = useActiveAction()
 

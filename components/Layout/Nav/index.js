@@ -52,7 +52,7 @@ export const Nav = ({ addOnItems, className, menuItems, mode }) => {
   return (
     <nav className={classNames('nav', className, mode)}>
       <div className="nav-container">
-        <DefaultLogo isDarkMode={mode === 'dark'} />
+        <DefaultLogo isDarkMode={false} />
         <MainMenu
           addOnItems={addOnItems}
           className="hidden md-max"
