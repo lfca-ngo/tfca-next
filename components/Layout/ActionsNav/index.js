@@ -11,7 +11,7 @@ import { useActiveAction, useIsClient, useIsMobile } from '../../../hooks'
 import { getLogoSrc, scrollToId } from '../../../utils'
 import { Hamburger } from '../../Elements'
 
-const DARK_BLUE = '#081022'
+const YELLOW = '#FDB766'
 const LIGHT_WHITE = '#fdfaf5'
 const MARGIN_LEFT_RANGE = [-75, 0]
 const MARGIN_LEFT_EXPANDED_RANGE = [-240, 0]
@@ -37,7 +37,7 @@ export const ActionsNav = ({
   const isClient = useIsClient()
   const { scrollY } = useViewportScroll()
 
-  const transitionBgColor = isMobile ? DARK_BLUE : LIGHT_WHITE
+  const transitionBgColor = isMobile ? LIGHT_WHITE : LIGHT_WHITE
   const contentWidth = useTransform(scrollY, SCROLL_RANGE, CONTENT_WIDTH_RANGE)
   const opacity = useTransform(scrollY, SCROLL_RANGE_SHORT, OPACITY_RANGE)
   const headerWidth = useTransform(scrollY, SCROLL_RANGE, HEADER_WIDTH_RANGE)
@@ -49,7 +49,7 @@ export const ActionsNav = ({
     collapsed ? MARGIN_LEFT_RANGE : MARGIN_LEFT_EXPANDED_RANGE
   )
   const backgroundColor = useTransform(scrollY, SCROLL_RANGE, [
-    'transparent',
+    YELLOW,
     transitionBgColor,
   ])
 

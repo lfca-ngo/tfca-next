@@ -7,7 +7,6 @@ import React from 'react'
 import { useContentBlocks, useCustomization } from '../../../hooks'
 import { textBlockToString } from '../../../utils'
 import { ChallengeStatus } from '../ChallengeStatus'
-import World from './world.png'
 
 export const Hero = ({ onClick, openGraphInfo }) => {
   const customization = useCustomization()
@@ -27,7 +26,7 @@ export const Hero = ({ onClick, openGraphInfo }) => {
               layout="fill"
               objectFit="contain"
               objectPosition={'center'}
-              src={World}
+              src={`/images/mouth.svg`}
             />
           </div>
 

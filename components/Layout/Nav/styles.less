@@ -13,6 +13,7 @@ nav.nav {
   .apply-color-scheme();
   display: flex;
   width: 100%;
+  background: @yellow;
 
   .ant-menu {
     flex: 1;
@@ -35,7 +36,7 @@ nav.nav {
       }
       &:hover {
         .ant-menu-title-content {
-          .link-font-style(fade(@white, 80%));
+          .link-font-style(fade(@black, 80%));
         }
         &::after {
           border-color: transparent;
@@ -43,7 +44,7 @@ nav.nav {
       }
       .ant-menu-title-content,
       .ant-btn-link {
-        .link-font-style(@white);
+        .link-font-style(@black);
       }
       .submenu-icon {
         font-size: 14px;
