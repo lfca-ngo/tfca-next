@@ -103,7 +103,7 @@ export const ActionsLayout = ({ children, company, nav, openGraphInfo }) => {
   }
 
   return (
-    <Template withTopbar>
+    <Template>
       <ActionsNav
         actions={nav}
         collapsed={collapsed}

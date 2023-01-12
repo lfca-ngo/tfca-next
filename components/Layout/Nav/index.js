@@ -5,6 +5,7 @@ import { Menu } from 'antd'
 import classNames from 'classnames'
 import React, { useState } from 'react'
 
+import { INVITE_STATUS, PERSONAL_SCORE } from '../../../utils'
 import { DefaultLogo, Hamburger } from '../../Elements'
 import { MenuItem } from './MenuItem'
 
@@ -19,6 +20,8 @@ export const MainMenu = ({ addOnItems, className = '', items, mode }) => {
       onOpenChange={(keys) => setOpenSubKeys(keys)}
       selectedKeys={[]}
     >
+      <MenuItem key="score" link={{ action: PERSONAL_SCORE }} />
+      <MenuItem key="invited" link={{ action: INVITE_STATUS }} />
       {items?.map((item, i) => {
         const itemKey = `item-${i}`
         const isOpen = openSubKeys.includes(itemKey)

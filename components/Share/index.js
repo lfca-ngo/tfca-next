@@ -46,9 +46,6 @@ export const Share = ({ invites }) => {
 
   return (
     <div className="share-dialog">
-      <SuperText text={shareTitleSup} />
-      <h2>{shareTitle}</h2>
-      <Text block={shareHint} />
       <Tabs defaultActiveKey="0">
         {invites.map(({ names, ogImageUrl, shortLink }, i) => {
           const tabName = !names

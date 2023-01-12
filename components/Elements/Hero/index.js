@@ -1,5 +1,6 @@
 require('./styles.less')
 
+import { CaretDownOutlined } from '@ant-design/icons'
 import { Button } from 'antd'
 import Image from 'next/image'
 import React from 'react'
@@ -21,7 +22,15 @@ export const Hero = ({ onClick, openGraphInfo }) => {
     <div className="hero">
       <div className="container-max">
         <div className="content">
-          <div className="bg-wrapper">
+          <div className="bg-wrapper plant">
+            <Image
+              layout="fill"
+              objectFit="contain"
+              objectPosition={'center'}
+              src={`/images/plant.svg`}
+            />
+          </div>
+          <div className="bg-wrapper mouth">
             <Image
               layout="fill"
               objectFit="contain"
@@ -49,7 +58,7 @@ export const Hero = ({ onClick, openGraphInfo }) => {
 
           <div className="start-btn">
             <Button
-              className="ant-btn-xl"
+              className="ant-btn-xl with-arrow"
               data-testid="hero-take-action-btn"
               onClick={onClick}
               size="large"
@@ -57,6 +66,10 @@ export const Hero = ({ onClick, openGraphInfo }) => {
             >
               {textBlockToString(useContentBlocks('header.button.primary'))}
             </Button>
+          </div>
+
+          <div className="scroll-continue">
+            <Button icon={<CaretDownOutlined />} shape="circle" />
           </div>
         </div>
         {/* Challenge status (floating) */}

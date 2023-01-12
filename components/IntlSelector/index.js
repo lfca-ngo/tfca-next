@@ -54,6 +54,7 @@ export const IntlSelector = () => {
                 onChange={(newActionCollectionSlug) =>
                   handleRegionOrLocaleChange({ newActionCollectionSlug })
                 }
+                size="small"
                 value={activeRegion?.actionCollection.slug}
               >
                 {regions.map((region) => (
@@ -74,6 +75,7 @@ export const IntlSelector = () => {
                 onChange={(newLocale) =>
                   handleRegionOrLocaleChange({ newLocale })
                 }
+                size="small"
                 value={activeLanguage?.isoCode}
               >
                 {activeRegion?.languages.map((lang) => (
@@ -93,6 +95,7 @@ export const IntlSelector = () => {
         }
         destroyTooltipOnHide={true}
         overlayClassName="intl-selector-popover"
+        placement="left"
       >
         <div className="intl-icon">
           <div

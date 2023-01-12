@@ -8,9 +8,17 @@ export const isDev = process.env.NODE_ENV === 'development'
 export const isBrowser = () => typeof window !== 'undefined'
 export const SETTINGS_ID = '48AtzIK5THq8u72j19vKw1'
 
-export const ERROR = 'error'
-export const WITH_SIDEBAR = 'with-sidebar'
+// Layouts
+export const ERROR_LAYOUT = 'error'
+export const BASIC_LAYOUT = 'basic-layout'
+export const LANDING_LAYOUT = 'landing-layout'
+export const WITH_SIDEBAR_LAYOUT = 'with-sidebar'
+export const EMBED_LAYOUT = 'embed'
+
+// Menu keys
 export const TOGGLE_Q_AND_A = 'toggle-q-and-a'
+export const INVITE_STATUS = 'invite-status'
+export const PERSONAL_SCORE = 'personal-score'
 
 const __CSS_THEME_DARK__ = 'theme-dark'
 
@@ -97,7 +105,6 @@ export const LIST_GRIDS = {
 
 export const SINGLE = 'single'
 export const MULTI = 'multi'
-export const EMBED = 'embed'
 export const DEFAULT = 'default'
 
 export const UID_COOKIE_NAME = 'ui'
