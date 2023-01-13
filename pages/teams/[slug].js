@@ -16,6 +16,18 @@ const INITIAL_TEAM_STATS = [
   {
     actionsTaken: 2,
     actionsTriggered: 5,
+    invited: 5,
+    name: 'Lisa75',
+  },
+  {
+    actionsTaken: 1,
+    actionsTriggered: 3,
+    invited: 5,
+    name: 'merte143',
+  },
+  {
+    actionsTaken: 2,
+    actionsTriggered: 5,
     invited: 3,
     name: 'Peter12',
   },
@@ -23,7 +35,31 @@ const INITIAL_TEAM_STATS = [
     actionsTaken: 1,
     actionsTriggered: 3,
     invited: 5,
-    name: 'merte143',
+    name: 'plantlover',
+  },
+  {
+    actionsTaken: 2,
+    actionsTriggered: 5,
+    invited: 3,
+    name: 'system-change1',
+  },
+  {
+    actionsTaken: 1,
+    actionsTriggered: 3,
+    invited: 5,
+    name: 'You12312',
+  },
+  {
+    actionsTaken: 2,
+    actionsTriggered: 5,
+    invited: 3,
+    name: 'Zarathustra91',
+  },
+  {
+    actionsTaken: 1,
+    actionsTriggered: 3,
+    invited: 5,
+    name: 'IamnotyourMD',
   },
 ]
 
@@ -49,7 +85,7 @@ export default function LeaderBoard({ team }) {
         <div className="table-col col-20">Triggered</div>
       </div>
       <List
-        className="table-list"
+        className="table-list xl"
         dataSource={teamStats}
         renderItem={(item) => (
           <List.Item>
