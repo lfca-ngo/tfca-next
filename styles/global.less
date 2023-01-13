@@ -311,12 +311,18 @@ label.ant-radio-wrapper {
 
 .ant-list.table-list.large {
   .ant-list-item {
-    padding: @side-padding-table-list 20px;
+    padding: 10px @side-padding-table-list;
     margin: 14px 0;
     background: fade(@black, 5%);
     border-radius: @border-radius-base;
     border: none;
     transition: all 0.3s ease-in-out;
+
+    .ant-badge .ant-badge-count {
+      box-shadow: none;
+      background: @pink;
+      font-size: @font-size-xs;
+    }
 
     &:hover {
       background: fade(@black, 10%);

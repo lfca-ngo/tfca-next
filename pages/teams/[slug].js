@@ -1,5 +1,5 @@
-import { List } from 'antd'
-import React, { useMemo, useState } from 'react'
+import { Badge, List } from 'antd'
+import React, { useEffect, useMemo, useState } from 'react'
 
 import { Layout } from '../../components/Layout'
 import { fetchAllStaticContent } from '../../services/contentful'
@@ -18,25 +18,25 @@ const TEAMS_LIST = [
 const INITIAL_TEAM_STATS = [
   {
     actionsTaken: 2,
-    actionsTriggered: 5,
-    invited: 5,
+    actionsTriggered: 3,
+    invited: 6,
     name: 'Lisa75',
   },
   {
     actionsTaken: 1,
-    actionsTriggered: 3,
+    actionsTriggered: 4,
     invited: 5,
     name: 'merte143',
   },
   {
     actionsTaken: 2,
-    actionsTriggered: 5,
+    actionsTriggered: 8,
     invited: 3,
     name: 'Peter12',
   },
   {
     actionsTaken: 1,
-    actionsTriggered: 3,
+    actionsTriggered: 10,
     invited: 5,
     name: 'plantlover',
   },
@@ -76,6 +76,35 @@ export default function LeaderBoard({ team }) {
     })
   }, [teamStats])
 
+  useEffect(() => {
+    const onClick = () => {
+      const getRandom = (min, max) =>
+        Math.floor(Math.random() * (max - min + 1) + min)
+
+      const randomIndex = getRandom(0, teamStats.length - 1)
+      const randomElement = teamStats[randomIndex]
+      const statsKeys = Object.keys(teamStats[0])
+      const randomKeyIndex = getRandom(0, statsKeys.length - 2)
+      const randomKey = statsKeys[randomKeyIndex]
+
+      const countUp = randomElement[randomKey] + 1
+      const newElement = {
+        ...randomElement,
+        [randomKey]: countUp,
+      }
+      const safeCopy = [...teamStats]
+      safeCopy[randomIndex] = newElement
+
+      return setTeamStats(safeCopy)
+    }
+
+    window.addEventListener('click', onClick)
+
+    return () => {
+      window.removeEventListener('click', onClick)
+    }
+  }, [teamStats])
+
   return (
     <Layout
       subtitle={
@@ -99,7 +128,7 @@ export default function LeaderBoard({ team }) {
         className="table-list large"
         dataSource={sortedStats}
         renderItem={(item, i) => {
-          const emoji = PLACES[i] || '-'
+          const emoji = PLACES[i] || '⭐️'
           return (
             <List.Item>
               <div className="table-item">
@@ -110,9 +139,15 @@ export default function LeaderBoard({ team }) {
                   {emoji}
                 </div>
                 <div className="table-col col-60 align-left">{item.name}</div>
-                <div className="table-col col-10">{item.actionsTaken}</div>
-                <div className="table-col col-10">{item.invited}</div>
-                <div className="table-col col-10">{item.actionsTriggered}</div>
+                <div className="table-col col-10">
+                  <Badge count={item.actionsTaken} />
+                </div>
+                <div className="table-col col-10">
+                  <Badge count={item.invited} />
+                </div>
+                <div className="table-col col-10">
+                  <Badge count={item.actionsTriggered} />
+                </div>
               </div>
             </List.Item>
           )
