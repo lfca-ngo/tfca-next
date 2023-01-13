@@ -1,8 +1,11 @@
 import { List } from 'antd'
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 
 import { Layout } from '../../components/Layout'
 import { fetchAllStaticContent } from '../../services/contentful'
+
+// Emoji list
+const PLACES = ['🥇', '🥈', '🥉']
 
 // Static Demo data
 const TEAMS_LIST = [
@@ -66,6 +69,13 @@ const INITIAL_TEAM_STATS = [
 export default function LeaderBoard({ team }) {
   const [teamStats, setTeamStats] = useState(INITIAL_TEAM_STATS)
 
+  const sortedStats = useMemo(() => {
+    return teamStats.sort((a, b) => {
+      const sum = (a) => a.actionsTaken + a.actionsTriggered + a.invited
+      return sum(b) - sum(a)
+    })
+  }, [teamStats])
+
   return (
     <Layout
       subtitle={
@@ -79,24 +89,34 @@ export default function LeaderBoard({ team }) {
       }
     >
       <div className="list-table-header">
-        <div className="table-col col-30">Nickname</div>
-        <div className="table-col col-30">Actions taken</div>
-        <div className="table-col col-20">Invited</div>
-        <div className="table-col col-20">Triggered</div>
+        <div className="table-col col-10 align-left" />
+        <div className="table-col col-60 align-left">Nickname</div>
+        <div className="table-col col-10">Actions taken</div>
+        <div className="table-col col-10">Invited</div>
+        <div className="table-col col-10">Triggered</div>
       </div>
       <List
-        className="table-list xl"
-        dataSource={teamStats}
-        renderItem={(item) => (
-          <List.Item>
-            <div className="table-item">
-              <div className="table-col col-30">{item.name}</div>
-              <div className="table-col col-30">{item.actionsTaken}</div>
-              <div className="table-col col-20">{item.invited}</div>
-              <div className="table-col col-20">{item.actionsTriggered}</div>
-            </div>
-          </List.Item>
-        )}
+        className="table-list large"
+        dataSource={sortedStats}
+        renderItem={(item, i) => {
+          const emoji = PLACES[i] || '-'
+          return (
+            <List.Item>
+              <div className="table-item">
+                <div
+                  className="table-col col-10 align-left"
+                  style={{ fontSize: '30px' }}
+                >
+                  {emoji}
+                </div>
+                <div className="table-col col-60 align-left">{item.name}</div>
+                <div className="table-col col-10">{item.actionsTaken}</div>
+                <div className="table-col col-10">{item.invited}</div>
+                <div className="table-col col-10">{item.actionsTriggered}</div>
+              </div>
+            </List.Item>
+          )
+        }}
       />
     </Layout>
   )

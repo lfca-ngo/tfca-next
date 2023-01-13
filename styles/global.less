@@ -303,6 +303,26 @@ label.ant-radio-wrapper {
 
 .list-table-header {
   .font-semi();
+  font-size: @font-size-xs;
+  padding: 0 @side-padding-table-list;
+}
+
+@side-padding-table-list: 10px;
+
+.ant-list.table-list.large {
+  .ant-list-item {
+    padding: @side-padding-table-list 20px;
+    margin: 14px 0;
+    background: fade(@black, 5%);
+    border-radius: @border-radius-base;
+    border: none;
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+      background: fade(@black, 10%);
+      transform: translateY(-0.25em);
+    }
+  }
 }
 
 .ant-list.table-list .table-item,
@@ -310,7 +330,14 @@ label.ant-radio-wrapper {
   display: flex;
   flex-direction: row;
   width: 100%;
+  align-items: center;
   .table-col {
+    text-align: center;
+
+    &.align-left {
+      text-align: left;
+    }
+
     &.col-10 {
       width: 10%;
     }
