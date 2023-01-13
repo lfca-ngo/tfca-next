@@ -317,6 +317,8 @@ label.ant-radio-wrapper {
     border-radius: @border-radius-base;
     border: none;
     transition: all 0.3s ease-in-out;
+    .font-medium();
+    line-height: 1.5;
 
     .ant-badge .ant-badge-count {
       box-shadow: none;
@@ -327,6 +329,19 @@ label.ant-radio-wrapper {
     &:hover {
       background: fade(@black, 10%);
       transform: translateY(-0.25em);
+
+      .ant-badge .ant-badge-count {
+        background: @pink;
+      }
+    }
+
+    &.active {
+      background: lighten(@pink, 15%);
+      color: @white;
+
+      .ant-badge .ant-badge-count {
+        background: @pink;
+      }
     }
   }
 }

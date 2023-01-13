@@ -1,4 +1,4 @@
-import { Badge, Drawer, Menu, Popover } from 'antd'
+import { Badge, Drawer, Popover } from 'antd'
 import Link from 'next/link'
 import React, { useState } from 'react'
 
@@ -18,21 +18,21 @@ export const MenuItem = ({ link, ...props }) => {
     case PERSONAL_SCORE:
       // @TODO: replace with check for team or always show
       return (
-        <Menu.Item className="score" key={PERSONAL_SCORE} {...props}>
+        <li className="menu-item score" key={PERSONAL_SCORE}>
           <Popover content="Your current score">
             <Badge count={2} /> Your score
           </Popover>
-        </Menu.Item>
+        </li>
       )
     case INVITE_STATUS:
       return customization?.sender ? (
-        <Menu.Item className="invite-status" key={INVITE_STATUS} {...props}>
+        <li className="menu-item invite-status" key={INVITE_STATUS}>
           Invited by {customization?.sender}
-        </Menu.Item>
+        </li>
       ) : null
     case TOGGLE_Q_AND_A:
       return (
-        <Menu.Item key="qa" {...props}>
+        <li className="menu-item" key="qa">
           <span onClick={() => setQaVisible(!qaVisible)}>{link?.title}</span>
 
           <Drawer
@@ -42,13 +42,13 @@ export const MenuItem = ({ link, ...props }) => {
           >
             <MenuSection content={<QuestionAnswer />} title={questionsString} />
           </Drawer>
-        </Menu.Item>
+        </li>
       )
     default:
       return (
-        <Menu.Item key={`link-${link.slug}`} {...props}>
+        <li className="menu-item" key={`link-${link.slug}`}>
           <Link href={link.slug || link.url || '/'}>{link.title}</Link>
-        </Menu.Item>
+        </li>
       )
   }
 }

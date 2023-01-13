@@ -94,13 +94,14 @@ export const ActionsLayout = ({ children, company, nav, openGraphInfo }) => {
   const customization = useCustomization()
 
   let addOnItems = [
-    <Menu.Item key="intl">
+    <li key="intl">
       <IntlSelector />
-    </Menu.Item>,
+    </li>,
   ]
-  if (company) {
-    addOnItems = [<CompanyMenuItem company={company} key="co" />, ...addOnItems]
-  }
+
+  // if (company) {
+  //   addOnItems = [<CompanyMenuItem company={company} key="co" />, ...addOnItems]
+  // }
 
   return (
     <Template>

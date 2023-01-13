@@ -1,7 +1,6 @@
 require('./styles.less')
 
 import { DownOutlined } from '@ant-design/icons'
-import { Menu } from 'antd'
 import classNames from 'classnames'
 import React, { useState } from 'react'
 
@@ -9,16 +8,13 @@ import { INVITE_STATUS, PERSONAL_SCORE } from '../../../utils'
 import { DefaultLogo, Hamburger } from '../../Elements'
 import { MenuItem } from './MenuItem'
 
-const { SubMenu } = Menu
-
 export const MainMenu = ({ addOnItems, className = '', items, mode }) => {
   const [openSubKeys, setOpenSubKeys] = useState([])
   return (
-    <Menu
+    <ul
       className={`main-menu ${className}`}
-      mode={mode || 'horizontal'}
-      onOpenChange={(keys) => setOpenSubKeys(keys)}
-      selectedKeys={[]}
+      // mode={mode || 'horizontal'}
+      // onOpenChange={(keys) => setOpenSubKeys(keys)}
     >
       <MenuItem key="score" link={{ action: PERSONAL_SCORE }} />
       <MenuItem key="invited" link={{ action: INVITE_STATUS }} />
@@ -27,31 +23,22 @@ export const MainMenu = ({ addOnItems, className = '', items, mode }) => {
         const isOpen = openSubKeys.includes(itemKey)
         if (item?.elements) {
           return (
-            <SubMenu
-              key={itemKey}
-              title={
-                <span>
-                  {item.title}
-                  <DownOutlined
-                    className={classNames('submenu-icon', { open: isOpen })}
-                  />
-                </span>
-              }
-            >
-              {item.elements.map((item, j) => (
-                <MenuItem key={`sub-${j}`} link={item} />
-              ))}
-            </SubMenu>
+            <MenuItem
+              dropdownItems={item.elements || []}
+              key={`sub-${j}`}
+              link={item}
+            />
           )
         }
         return <MenuItem key={itemKey} link={item} />
       })}
       {addOnItems && addOnItems.map((item) => item)}
-    </Menu>
+    </ul>
   )
 }
 
 export const Nav = ({ addOnItems, className, menuItems, mode, theme }) => {
+  console.log(menuItems)
   return (
     <nav className={classNames('nav', className, mode, theme)}>
       <div className="nav-container">

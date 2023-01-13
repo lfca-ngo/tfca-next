@@ -19,6 +19,7 @@ const INITIAL_TEAM_STATS = [
   {
     actionsTaken: 2,
     actionsTriggered: 3,
+    active: true,
     invited: 6,
     name: 'Lisa75',
   },
@@ -130,7 +131,7 @@ export default function LeaderBoard({ team }) {
         renderItem={(item, i) => {
           const emoji = PLACES[i] || '⭐️'
           return (
-            <List.Item>
+            <List.Item className={item.active ? 'active' : ''}>
               <div className="table-item">
                 <div
                   className="table-col col-10 align-left"
@@ -138,7 +139,9 @@ export default function LeaderBoard({ team }) {
                 >
                   {emoji}
                 </div>
-                <div className="table-col col-60 align-left">{item.name}</div>
+                <div className="table-col col-60 align-left">
+                  {item.name} {item.active ? '(You)' : ''}
+                </div>
                 <div className="table-col col-10">
                   <Badge count={item.actionsTaken} />
                 </div>

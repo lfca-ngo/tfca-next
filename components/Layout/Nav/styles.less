@@ -21,21 +21,21 @@ nav.nav {
   // Themes
   .apply-theme();
 
-  .ant-menu {
+  .main-menu {
     flex: 1;
     background: transparent;
     border-bottom: none;
     display: flex;
     justify-content: flex-end;
     margin: 0;
-    align-self: flex-start;
+    align-self: center;
+    align-items: center;
 
-    .ant-menu-submenu,
-    .ant-menu-submenu-open,
-    .ant-menu-item {
+    .menu-item {
       padding: 20px 30px;
       display: flex;
       align-items: center;
+      .link-font-style(fade(@black, 80%));
 
       &.score {
         .ant-menu-title-content {
@@ -58,74 +58,20 @@ nav.nav {
       }
 
       &.invite-status {
-        .ant-menu-title-content {
-          &::before {
-            content: '';
-            height: 10px;
-            width: 10px;
-            margin-right: 12px;
-            border-radius: 50%;
-            background-color: @pink;
-            background-size: contain;
-            background-repeat: no-repeat;
-          }
+        &::before {
+          content: '';
+          height: 10px;
+          width: 10px;
+          margin-right: 12px;
+          border-radius: 50%;
+          background-color: @pink;
+          background-size: contain;
+          background-repeat: no-repeat;
         }
       }
 
-      &::after {
-        border-color: transparent;
-      }
       &:hover {
-        .ant-menu-title-content {
-          .link-font-style(fade(@black, 80%));
-        }
-        &::after {
-          border-color: transparent;
-        }
-      }
-      .ant-menu-title-content,
-      .ant-btn-link {
-        .link-font-style(@black);
-      }
-      .submenu-icon {
-        font-size: 14px;
-        margin-left: 8px;
-        transition: all 0.2s ease;
-        &.open {
-          transform: rotate(180deg);
-        }
-      }
-    }
-
-    .ant-menu-title-content {
-      display: flex;
-      align-items: center;
-    }
-  }
-
-  &.absolute {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    z-index: 10;
-  }
-  &.light {
-    background-color: transparent;
-    background-image: none;
-  }
-  &.dark {
-    background-color: transparent;
-    background-image: none;
-    .ant-menu-submenu,
-    .ant-menu-item {
-      &:hover {
-        .ant-menu-title-content {
-          .link-font-style(fade(@black, 80%));
-        }
-      }
-      .ant-btn-link,
-      .ant-menu-title-content {
-        .link-font-style(@black);
+        opacity: 0.8;
       }
     }
   }
