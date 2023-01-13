@@ -25,7 +25,7 @@ import {
 import { Category, CheckList, LoadingSpinner } from '../Elements'
 import { Share } from '../Share'
 
-const MAX_INVITES = 3
+const MAX_INVITES = 10
 
 export const Success = ({
   goTo,

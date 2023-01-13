@@ -33,6 +33,8 @@ export const ChallengeStatus = ({ className, openGraphInfo }) => {
 
   const customization = useCustomization()
   const { locale, query } = useRouter()
+  const { actionCollectionSlug, team } = query
+  const isPartOfTeam = !!team
 
   // create multiple invite links
   // map of promises with infos
@@ -80,10 +82,10 @@ export const ChallengeStatus = ({ className, openGraphInfo }) => {
     try {
       const response = await fetch('/api/create-shareable-link', {
         body: JSON.stringify({
-          // actionCollectionSlug,
+          actionCollectionSlug,
           // actionId: id,
           // color: imageInviteColor,
-          // locale,
+          locale,
           message: 'jo',
           names,
           sender,
@@ -121,19 +123,12 @@ export const ChallengeStatus = ({ className, openGraphInfo }) => {
   const buttonLabel = textBlockToString(
     useContentBlocks('challenge.status.button')
   )
-  const buttonPrimary = textBlockToString(
-    useContentBlocks('sharing.button.primary')
-  )
   const addInvite = textBlockToString(
     useContentBlocks('sharing.button.addinvite')
   )
   const errorMaxFriends = textBlockToString(
     useContentBlocks('sharing.error.maxfriends')
   )
-
-  // @TODO: get from url param
-  const { team } = query
-  const isPartOfTeam = !!team
 
   useEffect(() => {
     if (team) {
@@ -190,7 +185,7 @@ export const ChallengeStatus = ({ className, openGraphInfo }) => {
           onFinish={createInvites}
         >
           <Form.Item label="Your team" name="team">
-            <Input placeholder="Your team code" />
+            <Input disabled placeholder="Your team code" />
           </Form.Item>
 
           <Form.Item
@@ -290,7 +285,7 @@ export const ChallengeStatus = ({ className, openGraphInfo }) => {
               style={{ marginTop: '20px' }}
               type="primary"
             >
-              {buttonPrimary}
+              Create invite links
             </Button>
           </Form.Item>
         </Form>
@@ -300,7 +295,7 @@ export const ChallengeStatus = ({ className, openGraphInfo }) => {
             <LoadingSpinner
               additionalSpinnerProps={{ color: 'pink', type: 'home' }}
               className="dark"
-              label={linkGenerationLabel}
+              label={'...loading'}
             />
           ) : (
             <>{invites && <Share invites={invites} />}</>

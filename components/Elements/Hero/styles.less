@@ -1,9 +1,10 @@
 @import (reference) '../../../styles/variables.less';
 @import (reference) '../../../styles/fonts.less';
+@import (reference) '../../../styles/mixins.less';
 
 .hero {
   background: @yellow;
-  min-height: calc(100vh - 90px);
+  min-height: calc(100vh - 180px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -19,31 +20,7 @@
 
     strong {
       .h1-hero();
-      background-color: @black;
-      background-size: 100%;
-      background-clip: text;
-      text-decoration: none;
-      position: relative;
-      z-index: 2;
-      -webkit-background-clip: text;
-      -moz-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      -moz-text-fill-color: transparent;
-
-      &::after {
-        content: '';
-        position: absolute;
-        z-index: 1;
-        left: 0;
-        right: 0;
-        bottom: -5px;
-        height: 31px;
-        width: 120%;
-        background-image: url('/images/underline-scribble.svg');
-        background-position: center;
-        background-size: contain;
-        background-repeat: no-repeat;
-      }
+      .underline-scribble();
     }
   }
   p {
@@ -66,27 +43,6 @@
       margin: 0 auto;
     }
 
-    // .start-btn {
-    //   position: relative;
-    //   .ant-btn {
-    //     &.with-arrow {
-    //       ::before {
-    //         content: '';
-    //         position: absolute;
-    //         z-index: 1;
-    //         left: -145px;
-    //         top: 30px;
-    //         height: 31px;
-    //         width: 123px;
-    //         background-image: url('/images/scribble-arrow.svg');
-    //         background-position: left;
-    //         background-size: contain;
-    //         background-repeat: no-repeat;
-    //       }
-    //     }
-    //   }
-    // }
-
     .scroll-continue {
       position: absolute;
       left: 50%;
@@ -96,6 +52,7 @@
       .ant-btn {
         background: transparent;
         border-color: transparent;
+        color: @black;
 
         .anticon {
           font-size: 28px;
@@ -112,11 +69,11 @@
         width: 230px;
         height: 241px;
         @media @desktop {
-          right: -20px;
+          right: -40px;
           bottom: auto;
           top: 30px;
-          width: 270px;
-          height: 293px;
+          width: 230px;
+          height: 263px;
         }
       }
 
@@ -126,10 +83,10 @@
         width: 230px;
         height: 241px;
         @media @desktop {
-          left: -40px;
+          left: -80px;
           bottom: -40px;
-          width: 320px;
-          height: 363px;
+          width: 280px;
+          height: 313px;
         }
       }
     }

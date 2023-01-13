@@ -58,7 +58,6 @@ export const ActionsNav = ({
     ? { backgroundColor, boxShadow }
     : { boxShadow, marginLeft }
   const headerStartStyles = isMobile ? { width: headerWidth } : {}
-  const logoSrc = getLogoSrc()
 
   const { activeAction } = useActiveAction()
 
@@ -74,7 +73,7 @@ export const ActionsNav = ({
     >
       <motion.div className="header-start" style={headerStartStyles}>
         <motion.div className="logo" style={logoStyles}>
-          <Image height={48} src={logoSrc} width={48} />
+          <Image height={48} src={'/images/logo_mobile.svg'} width={48} />
         </motion.div>
 
         <Hamburger content={hamburgerMenu} />
@@ -99,7 +98,7 @@ export const ActionsNav = ({
                 type="link"
               >
                 <div className="icon">
-                  <Image height={30} src={action.icon} width={30} />
+                  <Image height={42} src={action.icon} width={42} />
                 </div>
                 <div className="text">{action.title}</div>
               </Button>

@@ -51,9 +51,9 @@ export const MainMenu = ({ addOnItems, className = '', items, mode }) => {
   )
 }
 
-export const Nav = ({ addOnItems, className, menuItems, mode }) => {
+export const Nav = ({ addOnItems, className, menuItems, mode, theme }) => {
   return (
-    <nav className={classNames('nav', className, mode)}>
+    <nav className={classNames('nav', className, mode, theme)}>
       <div className="nav-container">
         <DefaultLogo isDarkMode={false} />
         <MainMenu

@@ -98,15 +98,60 @@
 
 .apply-color-scheme {
   &.color-1 {
-    .color-module(@rose);
+    .color-module(@blue-light);
   }
   &.color-2 {
     .color-module(@orange-light);
   }
   &.color-3 {
-    .color-module(@blue-light);
+    .color-module(@rose);
   }
   &.color-4 {
-    .color-module(@orange);
+    .color-module(@yellow);
+  }
+}
+
+.apply-theme {
+  &.rose {
+    background: @rose;
+    color: @black;
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p {
+      color: @black;
+    }
+  }
+}
+
+.underline-scribble() {
+  background-color: @black;
+  background-size: 100%;
+  background-clip: text;
+  text-decoration: none;
+  position: relative;
+  z-index: 2;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+
+  &::after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    left: -5%;
+    right: 0;
+    bottom: -4px;
+    height: 31px;
+    width: 120%;
+    background-image: url('/images/underline-scribble.svg');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
   }
 }

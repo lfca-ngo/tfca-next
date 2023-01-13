@@ -1,3 +1,6 @@
+require('./styles.less')
+
+import classNames from 'classnames'
 import React from 'react'
 
 import { DefaultHero } from '../../Elements'
@@ -12,12 +15,18 @@ export const DefaultLayout = ({
   mainNav,
   style,
   subtitle,
+  theme,
   title,
 }) => {
   return (
-    <Template className="default-layout">
-      <Nav className={style} menuItems={mainNav} />
-      <DefaultHero className={style} subtitle={subtitle} title={title} />
+    <Template className={classNames('default-layout', theme)}>
+      <Nav className={style} menuItems={mainNav} theme={theme} />
+      <DefaultHero
+        className={style}
+        subtitle={subtitle}
+        theme={theme}
+        title={title}
+      />
       <main className="container">
         <ErrorBoundary>{children}</ErrorBoundary>
       </main>
