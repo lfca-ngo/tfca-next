@@ -58,8 +58,8 @@ export const ChallengeStatus = ({ className }) => {
         visible={open}
       >
         <InviteDialog
-          imageInviteColor={'orange'}
-          imageInviteText={'Join us'}
+          imageInviteColor={'lila'}
+          imageInviteText={'I took action|for a brighter|tomorrow'}
           otherUsers={1000}
         />
       </Drawer>
