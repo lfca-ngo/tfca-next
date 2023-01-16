@@ -6,24 +6,24 @@ import classNames from 'classnames'
 import { motion } from 'framer-motion'
 import React from 'react'
 
-const DEFAULT_COLOR = '#fff'
+const DEFAULT_COLOR = '#000'
 
 const COLOR_MAP = {
   'color-1': {
     from: DEFAULT_COLOR,
-    to: '#00e0ad',
+    to: '#d82086',
   },
   'color-2': {
     from: DEFAULT_COLOR,
-    to: '#b148ad',
+    to: '#d82086',
   },
   'color-3': {
     from: DEFAULT_COLOR,
-    to: '#375ba7',
+    to: '#d82086',
   },
   'color-4': {
     from: DEFAULT_COLOR,
-    to: '#ff9d59',
+    to: '#d82086',
   },
   pink: {
     from: '#622860',

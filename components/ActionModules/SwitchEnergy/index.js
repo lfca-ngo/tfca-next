@@ -2,7 +2,7 @@ import { Tabs } from 'antd'
 import React from 'react'
 
 import { useFlow } from '../../../hooks'
-import { Success } from '../../Success'
+import { COMPLETE } from '..'
 import { Calculate } from './Calculate'
 import { FormCheck } from './FormCheck'
 import { FormSwitch } from './FormSwitch'
@@ -17,10 +17,9 @@ const steps = new Map([
   ['form-check', FormCheck],
   ['results', Results],
   ['form-switch', FormSwitch],
-  ['success', Success],
 ])
 
-export const SwitchEnergy = ({ module }) => {
+export const SwitchEnergy = ({ module, onComplete }) => {
   const stepsKeys = [...steps.keys()]
 
   const { goTo, index, setStore, store } = useFlow({
@@ -30,6 +29,7 @@ export const SwitchEnergy = ({ module }) => {
   })
 
   const handleGoTo = (key) => {
+    if (key === COMPLETE) onComplete?.()
     goTo(key)
   }
 

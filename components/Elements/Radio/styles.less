@@ -124,13 +124,13 @@
       align-items: center;
       flex-direction: row-reverse;
       width: 100%;
-      background: fade(@white, 5%);
+      background: fade(@black, 5%);
       margin-bottom: 14px;
       padding: 12px 14px;
       border-radius: @border-radius-base;
-      border: 1px solid @white;
+      border: 1px solid fade(@black, 20%);
       transition: all 0.3s ease;
-      color: @white;
+      color: @black;
 
       &:hover {
         transform: translateY(-2px);
@@ -162,7 +162,7 @@
           display: flex;
           align-items: center;
           line-height: 1.3;
-          .font-medium(@white);
+          .font-medium(@black);
           .icon {
             @icon-size: 22px;
             @icon-size-lg: 25px;
@@ -190,6 +190,7 @@
               margin-left: 12px;
               display: flex;
               align-items: center;
+              color: fade(@black, 30%);
             }
           }
         }

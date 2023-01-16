@@ -4,14 +4,14 @@ import React, { useMemo } from 'react'
 
 import { useFlow } from '../../../hooks'
 import { textBlockToString } from '../../../utils'
-import { Success } from '../../Success'
+import { COMPLETE } from '..'
 import { Details } from './Details'
 import { Filter } from './Filter'
 import { Results } from './Results'
 
 const { TabPane } = Tabs
 
-export const Politics = ({ module }) => {
+export const Politics = ({ module, onComplete }) => {
   const { locale } = useRouter()
 
   const { data = {} } = module || {}
@@ -69,7 +69,6 @@ export const Politics = ({ module }) => {
       ...steps,
       ['results', { component: Results }],
       ['details', { component: Details }],
-      ['success', { component: Success }],
     ])
 
     return {
@@ -98,7 +97,9 @@ export const Politics = ({ module }) => {
   })
 
   const handleGoTo = (key) => {
-    goTo(key)
+    // if is last item, open success drawer
+    if (key === COMPLETE) onComplete?.()
+    else goTo(key)
   }
 
   return (

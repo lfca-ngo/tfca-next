@@ -2,7 +2,7 @@ import { Tabs } from 'antd'
 import React, { useMemo } from 'react'
 
 import { useFlow } from '../../../hooks'
-import { Success } from '../../Success'
+import { COMPLETE } from '..'
 import { Answer } from './Answer'
 import { Intro } from './Intro'
 import { Question } from './Question'
@@ -12,7 +12,7 @@ const { TabPane } = Tabs
 
 export const ANSWER_SUFFIX = '_answer'
 
-export const Quiz = ({ module }) => {
+export const Quiz = ({ module, onComplete }) => {
   const quizItems = module?.quiz
   const quizLength = quizItems?.length
 
@@ -35,7 +35,6 @@ export const Quiz = ({ module }) => {
       ['intro', { component: Intro }],
       ...flattened,
       ['results', { component: Results }],
-      ['success', { component: Success }],
     ])
   }, [quizItems])
 
@@ -51,6 +50,7 @@ export const Quiz = ({ module }) => {
   })
 
   const handleGoTo = (key) => {
+    if (key === COMPLETE) onComplete?.()
     goTo(key)
   }
 

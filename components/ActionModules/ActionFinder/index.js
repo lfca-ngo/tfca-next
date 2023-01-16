@@ -3,13 +3,13 @@ import React, { useMemo } from 'react'
 
 import { useFlow } from '../../../hooks'
 import { getFilterOptions } from '../../../utils'
-import { Success } from '../../Success'
+import { COMPLETE } from '..'
 import { Filter } from './Filter'
 import { Results } from './Results'
 
 const { TabPane } = Tabs
 
-export const ActionFinderFlow = ({ module }) => {
+export const ActionFinderFlow = ({ module, onComplete }) => {
   const { filters = [], items } = module?.data['main'] || {}
 
   const { availableFilters, steps } = useMemo(() => {
@@ -36,7 +36,6 @@ export const ActionFinderFlow = ({ module }) => {
     const dynamicSteps = new Map([
       ...steps,
       ['results', { component: Results }],
-      ['success', { component: Success }],
     ])
     return { availableFilters: parsedFilters, steps: dynamicSteps }
   }, [items, filters])
@@ -50,6 +49,7 @@ export const ActionFinderFlow = ({ module }) => {
   })
 
   const handleGoTo = (key) => {
+    if (key === COMPLETE) onComplete?.()
     goTo(key)
   }
 

@@ -1,4 +1,4 @@
-import { Carousel } from 'antd'
+import { Alert, Carousel } from 'antd'
 import React, { useRef } from 'react'
 
 import { textBlockToString } from '../../../utils'
@@ -9,6 +9,7 @@ import {
   DetailView,
   StepHeader,
 } from '../../Elements'
+import { COMPLETE } from '../'
 
 export const Details = ({
   availableFilters,
@@ -16,7 +17,6 @@ export const Details = ({
   module: { blocks = {}, icon = {} },
   messagesByFilterValue,
   messagesRelatedFilterKey,
-  nextKey,
   prevKey,
   setStore,
   store,
@@ -69,12 +69,17 @@ export const Details = ({
           layout="politician"
           messages={messagesByFilterValue[store[messagesRelatedFilterKey]]}
           messagesRelatedFilterKey={messagesRelatedFilterKey}
-          onFinish={() => goTo(nextKey)}
+          onFinish={() => goTo(COMPLETE)}
           setStore={setStore}
           store={store}
         />
       ) : (
-        <div>No politicians selected, go back</div>
+        <Alert
+          description="No politicians selected. Go back if you want more."
+          message="You are done"
+          showIcon
+          type="success"
+        />
       )}
     </div>
   )

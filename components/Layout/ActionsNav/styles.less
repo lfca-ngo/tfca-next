@@ -125,6 +125,7 @@ header.header {
           display: flex;
           align-items: center;
           justify-content: center;
+          padding: 2px;
         }
         .text {
           margin-left: 12px;
@@ -151,7 +152,7 @@ header.header {
       color: @text-color;
       font-size: @font-size-sm;
       .anticon {
-        margin-right: 8px;
+        margin: 0;
         display: flex;
         color: @black;
       }
@@ -159,7 +160,9 @@ header.header {
 
     @media @desktop {
       padding: @element-padding;
-      display: block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 }

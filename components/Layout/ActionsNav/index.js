@@ -113,7 +113,6 @@ export const ActionsNav = ({
             type="link"
           >
             {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-            {collapsed ? '' : 'Collapse'}
           </Button>
         </div>
       </motion.div>

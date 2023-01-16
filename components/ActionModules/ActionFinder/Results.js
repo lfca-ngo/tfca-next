@@ -1,6 +1,7 @@
 import { ArrowLeftOutlined } from '@ant-design/icons'
 import { Drawer, List } from 'antd'
 import React, { useState } from 'react'
+import { COMPLETE } from '..'
 
 import { LIST_GRIDS, textBlockToString } from '../../../utils'
 import {
@@ -113,7 +114,7 @@ export const Results = ({
             blocks={blocks}
             item={store?.item}
             layout={dataMain?.cardLayout}
-            onNext={() => goTo('success')}
+            onNext={() => goTo(COMPLETE)}
           />
         </Drawer>
       )}
