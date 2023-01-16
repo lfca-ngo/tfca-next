@@ -29,7 +29,7 @@ const NAMES = ['Carla', 'Yasmin', 'Kim']
 export const InviteDialog = ({ otherUsers = 49 }) => {
   const benefits = useContentLists('sharing.benefits')?.items
   const [isGeneratingToken, setIsGeneratingToken] = useState(false)
-  const [error, setError] = useState('')
+  // const [error, setError] = useState('')
   const [invites, setInvites] = useState([])
   const [form] = useForm()
 
@@ -79,7 +79,7 @@ export const InviteDialog = ({ otherUsers = 49 }) => {
   }
 
   const createInvite = async ({ names, sender }) => {
-    setError('')
+    // setError('')
     // Generate the share token
     try {
       const response = await fetch('/api/create-shareable-link', {
@@ -109,7 +109,7 @@ export const InviteDialog = ({ otherUsers = 49 }) => {
         shortLink,
       }
     } catch (e) {
-      setError('Failed to generate link')
+      // setError('Failed to generate link')
     }
   }
 
