@@ -26,7 +26,12 @@ const { useForm } = Form
 const MAX_INVITES = 5
 const NAMES = ['Carla', 'Yasmin', 'Kim']
 
-export const InviteDialog = ({ otherUsers = 49 }) => {
+export const InviteDialog = ({
+  actionId,
+  imageInviteColor = 'blue',
+  imageInviteText = 'Join us!',
+  otherUsers = 49,
+}) => {
   const benefits = useContentLists('sharing.benefits')?.items
   const [isGeneratingToken, setIsGeneratingToken] = useState(false)
   // const [error, setError] = useState('')
@@ -81,18 +86,21 @@ export const InviteDialog = ({ otherUsers = 49 }) => {
   const createInvite = async ({ names, sender }) => {
     // setError('')
     // Generate the share token
+    console.log(names, actionId, imageInviteColor, imageInviteText)
     try {
       const response = await fetch('/api/create-shareable-link', {
         body: JSON.stringify({
           actionCollectionSlug,
-          // actionId: id,
-          // color: imageInviteColor,
+          actionId: actionId,
+          color: imageInviteColor,
           locale,
-          message: 'jo',
+          message: imageInviteText,
           names,
           sender,
-          socialDescription: 'jo',
-          socialTitle: 'title',
+          socialDescription: socialDescription,
+          socialTitle: textBlockToString(socialTitle, {
+            name: names?.length === 1 && names[0] ? names[0] : fallbackName,
+          }).replace(/\*/g, ''),
           uid: getCookie(UID_COOKIE_NAME) || getWindowUid(),
         }),
         headers: {
@@ -119,6 +127,8 @@ export const InviteDialog = ({ otherUsers = 49 }) => {
   const errorMaxFriends = textBlockToString(
     useContentBlocks('sharing.error.maxfriends')
   )
+  const socialDescription = textBlockToString(useContentBlocks('header.body'))
+  const socialTitle = useContentBlocks('header.title.custom')
 
   useEffect(() => {
     if (team) {

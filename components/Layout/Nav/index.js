@@ -38,7 +38,6 @@ export const MainMenu = ({ addOnItems, className = '', items, mode }) => {
 }
 
 export const Nav = ({ addOnItems, className, menuItems, mode, theme }) => {
-  console.log(menuItems)
   return (
     <nav className={classNames('nav', className, mode, theme)}>
       <div className="nav-container">

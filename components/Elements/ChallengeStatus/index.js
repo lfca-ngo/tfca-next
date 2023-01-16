@@ -57,7 +57,11 @@ export const ChallengeStatus = ({ className }) => {
         onClose={() => setOpen(!open)}
         visible={open}
       >
-        <InviteDialog />
+        <InviteDialog
+          imageInviteColor={'orange'}
+          imageInviteText={'Join us'}
+          otherUsers={1000}
+        />
       </Drawer>
     </div>
   )

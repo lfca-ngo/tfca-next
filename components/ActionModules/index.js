@@ -60,7 +60,12 @@ export const ActionModules = (props) => {
           onClose={() => setOpen(false)}
           visible={open}
         >
-          <InviteDialog />
+          <InviteDialog
+            actionId={action.id}
+            imageInviteColor={action.imageInviteColor}
+            imageInviteText={action.imageInviteText}
+            otherUsers={1000}
+          />
         </Drawer>
       </>
     )
