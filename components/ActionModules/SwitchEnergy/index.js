@@ -19,7 +19,7 @@ const steps = new Map([
   ['form-switch', FormSwitch],
 ])
 
-export const SwitchEnergy = ({ module, onComplete }) => {
+export const SwitchEnergy = ({ module }) => {
   const stepsKeys = [...steps.keys()]
 
   const { goTo, index, setStore, store } = useFlow({
@@ -29,7 +29,7 @@ export const SwitchEnergy = ({ module, onComplete }) => {
   })
 
   const handleGoTo = (key) => {
-    if (key === COMPLETE) onComplete?.()
+    if (key === COMPLETE) module?.onComplete?.()
     goTo(key)
   }
 
@@ -45,10 +45,6 @@ export const SwitchEnergy = ({ module, onComplete }) => {
           const Page = steps.get(key)
           const nextKey = i <= stepsKeys.length ? stepsKeys[i + 1] : null
           let prevKey = i > 0 ? stepsKeys[i - 1] : null
-
-          if (key === 'success') {
-            prevKey = undefined
-          }
 
           return (
             <TabPane key={key} tab={key}>

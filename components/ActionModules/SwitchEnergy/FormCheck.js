@@ -13,6 +13,7 @@ import {
   LoadingSpinner,
   StepHeader,
 } from '../../Elements'
+import { COMPLETE } from '..'
 
 const { Option } = Select
 
@@ -94,7 +95,7 @@ export const FormCheck = ({ goTo, module: { blocks = {}, icon = {} } }) => {
             <Button
               block
               data-testid="switch-energy-form-check-complete-btn"
-              onClick={() => goTo('success')}
+              onClick={() => goTo(COMPLETE)}
               size="large"
               style={{ marginTop: '15px' }}
               type="primary"

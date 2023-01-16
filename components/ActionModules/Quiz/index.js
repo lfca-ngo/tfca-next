@@ -12,7 +12,7 @@ const { TabPane } = Tabs
 
 export const ANSWER_SUFFIX = '_answer'
 
-export const Quiz = ({ module, onComplete }) => {
+export const Quiz = ({ module }) => {
   const quizItems = module?.quiz
   const quizLength = quizItems?.length
 
@@ -50,7 +50,7 @@ export const Quiz = ({ module, onComplete }) => {
   })
 
   const handleGoTo = (key) => {
-    if (key === COMPLETE) onComplete?.()
+    if (key === COMPLETE) module?.onComplete?.()
     goTo(key)
   }
 

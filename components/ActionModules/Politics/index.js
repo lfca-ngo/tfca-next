@@ -11,7 +11,7 @@ import { Results } from './Results'
 
 const { TabPane } = Tabs
 
-export const Politics = ({ module, onComplete }) => {
+export const Politics = ({ module }) => {
   const { locale } = useRouter()
 
   const { data = {} } = module || {}
@@ -98,7 +98,7 @@ export const Politics = ({ module, onComplete }) => {
 
   const handleGoTo = (key) => {
     // if is last item, open success drawer
-    if (key === COMPLETE) onComplete?.()
+    if (key === COMPLETE) module?.onComplete?.()
     else goTo(key)
   }
 

@@ -9,7 +9,7 @@ import { useContentBlocks, useCustomization } from '../../../hooks'
 import { textBlockToString } from '../../../utils'
 import { InviteDialog } from '../InviteDialog'
 
-export const ChallengeStatus = ({ className, openGraphInfo }) => {
+export const ChallengeStatus = ({ className }) => {
   const [open, setOpen] = useState(false)
   const customization = useCustomization()
 

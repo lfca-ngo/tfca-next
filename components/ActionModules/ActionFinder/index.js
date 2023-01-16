@@ -9,7 +9,7 @@ import { Results } from './Results'
 
 const { TabPane } = Tabs
 
-export const ActionFinderFlow = ({ module, onComplete }) => {
+export const ActionFinderFlow = ({ module }) => {
   const { filters = [], items } = module?.data['main'] || {}
 
   const { availableFilters, steps } = useMemo(() => {
@@ -49,7 +49,7 @@ export const ActionFinderFlow = ({ module, onComplete }) => {
   })
 
   const handleGoTo = (key) => {
-    if (key === COMPLETE) onComplete?.()
+    if (key === COMPLETE) module?.onComplete?.()
     goTo(key)
   }
 

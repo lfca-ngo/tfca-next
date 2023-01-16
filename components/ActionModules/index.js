@@ -43,13 +43,13 @@ export const ActionModules = (props) => {
           impactDisclaimer={action.impactDisclaimer}
           key={action.id}
           name={action.name}
-          onComplete={() => setOpen(true)}
           otherUsers={props.stats[action.id]}
         >
           <ErrorBoundary>
             {renderAction({
               ...action,
               color: color,
+              onComplete: () => setOpen(true),
               otherUsers: props.stats[action.id],
             })}
           </ErrorBoundary>

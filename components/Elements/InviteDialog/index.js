@@ -14,7 +14,7 @@ import React, { useEffect, useState } from 'react'
 import {
   useContentBlocks,
   useContentLists,
-  useCustomization,
+  // useCustomization,
 } from '../../../hooks'
 import { textBlockToString } from '../../../utils'
 import { getCookie, getWindowUid, UID_COOKIE_NAME } from '../../../utils'
@@ -33,7 +33,7 @@ export const InviteDialog = ({ otherUsers = 49 }) => {
   const [invites, setInvites] = useState([])
   const [form] = useForm()
 
-  const customization = useCustomization()
+  // const customization = useCustomization()
   const { locale, query } = useRouter()
   const { actionCollectionSlug, team } = query
   const isPartOfTeam = !!team

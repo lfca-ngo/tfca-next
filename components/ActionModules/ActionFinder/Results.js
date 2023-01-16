@@ -1,7 +1,6 @@
 import { ArrowLeftOutlined } from '@ant-design/icons'
 import { Drawer, List } from 'antd'
 import React, { useState } from 'react'
-import { COMPLETE } from '..'
 
 import { LIST_GRIDS, textBlockToString } from '../../../utils'
 import {
@@ -12,6 +11,7 @@ import {
   ScrollableFilters,
   StepHeader,
 } from '../../Elements'
+import { COMPLETE } from '..'
 
 export const Results = ({
   goTo,
