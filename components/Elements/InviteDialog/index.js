@@ -19,7 +19,7 @@ import {
 import { textBlockToString } from '../../../utils'
 import { getCookie, getWindowUid, UID_COOKIE_NAME } from '../../../utils'
 import { CheckList, LoadingSpinner } from '../../Elements'
-import { Share } from '../../Share'
+import { Share } from './Share'
 
 const { useForm } = Form
 
@@ -130,9 +130,9 @@ export const InviteDialog = ({ otherUsers = 49 }) => {
     <div className="invite-dialog">
       <h1>Invite friends</h1>
       <p>
-        You are part of the {`${team?.toLocaleUpperCase()}`} team! Every friend
+        You are part of the {`${team?.toLocaleUpperCase()}`} team. Every friend
         that clicks on your invitation and/or takes action, adds points to your
-        internal team score. Win the challenge and help our planet!
+        internal team score. Win the challenge and help our planet.
       </p>
 
       <CheckList data={benefits} vars={{ users: otherUsers }} />

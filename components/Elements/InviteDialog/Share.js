@@ -1,5 +1,3 @@
-require('./styles.less')
-
 import Icon from '@ant-design/icons'
 import {
   FacebookOutlined,
@@ -21,19 +19,16 @@ import {
   WhatsappShareButton,
 } from 'react-share'
 
-import TelegramIcon from '../../assets/icons/telegram.svg'
-import { useContentBlocks } from '../../hooks'
-import { namesArrayToString, textBlockToString } from '../../utils'
-import { CopyTextArea, SuperText, Text } from '../Elements'
+import TelegramIcon from '../../../assets/icons/telegram.svg'
+import { useContentBlocks } from '../../../hooks'
+import { namesArrayToString, textBlockToString } from '../../../utils'
+import { CopyTextArea } from '..'
 
 const { TabPane } = Tabs
 
 const BTN_WIDTH = '120px'
 
 export const Share = ({ invites }) => {
-  const shareTitle = textBlockToString(useContentBlocks('sharing.title'))
-  const shareHint = useContentBlocks('sharing.hint')
-  const shareTitleSup = textBlockToString(useContentBlocks('sharing.title.sup'))
   const shareMessageBodyNominate = useContentBlocks(
     'sharing.message.body.nominate'
   )
