@@ -20,8 +20,9 @@ export const MenuItem = ({ link, ...props }) => {
       return (
         <li className="menu-item score" key={PERSONAL_SCORE}>
           <Popover content="Your current score">
-            <Badge count={2} /> Your score
+            <Badge count={2} />
           </Popover>
+          Team Leaderboard
         </li>
       )
     case INVITE_STATUS:

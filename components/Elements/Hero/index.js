@@ -3,6 +3,7 @@ require('./styles.less')
 import { CaretDownOutlined } from '@ant-design/icons'
 import { Button } from 'antd'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 import React from 'react'
 
 import { useContentBlocks, useCustomization } from '../../../hooks'
@@ -10,6 +11,10 @@ import { textBlockToString } from '../../../utils'
 import { ChallengeStatus } from '../ChallengeStatus'
 
 export const Hero = ({ onClick, openGraphInfo }) => {
+  const { query } = useRouter()
+  const { team } = query
+  const teamCapitalized = team?.charAt(0).toUpperCase() + team?.slice(1)
+
   const customization = useCustomization()
 
   const defaultBlock = useContentBlocks('header.title')
@@ -17,6 +22,7 @@ export const Hero = ({ onClick, openGraphInfo }) => {
   const recipientsFallback = textBlockToString(
     useContentBlocks('header.title.recipients.fallback')
   )
+  const pageSubtitle = useContentBlocks('header.body')
 
   return (
     <div className="hero">
@@ -40,21 +46,31 @@ export const Hero = ({ onClick, openGraphInfo }) => {
           </div>
 
           <h1 data-testid="hero-title">
-            {customization?.names?.length
-              ? textBlockToString(
-                  customBlock,
-                  {
-                    name:
-                      customization.names.length === 1
-                        ? customization.names[0]
-                        : recipientsFallback,
-                  },
-                  {},
-                  true
-                )
-              : textBlockToString(defaultBlock, {}, true)}
+            {team ? (
+              <>
+                Take action with <strong>{teamCapitalized}</strong>{' '}
+              </>
+            ) : customization?.names?.length ? (
+              textBlockToString(
+                customBlock,
+                {
+                  name:
+                    customization.names.length === 1
+                      ? customization.names[0]
+                      : recipientsFallback,
+                },
+                {},
+                true
+              )
+            ) : (
+              textBlockToString(defaultBlock, {}, true)
+            )}
           </h1>
-          <p>{textBlockToString(useContentBlocks('header.body'))}</p>
+          <p>
+            {team
+              ? 'Your team is participating in the TFCA Teams Challenge. Collect points by completing actions and inviting friends!'
+              : textBlockToString(pageSubtitle)}
+          </p>
 
           <div className="start-btn">
             <Button
