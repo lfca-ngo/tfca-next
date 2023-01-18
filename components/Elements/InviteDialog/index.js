@@ -35,7 +35,7 @@ const NAMES = ['Carla', 'Yasmin', 'Kim']
 export const InviteDialog = ({
   actionId,
   imageInviteColor = 'blue',
-  imageInviteText = 'Join us!',
+  imageInviteText = 'I took action|for a brighter|tomorrow',
   otherUsers = 49,
 }) => {
   const benefits = useContentLists('sharing.benefits')?.items

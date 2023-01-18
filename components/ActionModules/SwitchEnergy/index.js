@@ -29,8 +29,9 @@ export const SwitchEnergy = ({ module }) => {
   })
 
   const handleGoTo = (key) => {
+    console.log('key', key)
     if (key === COMPLETE) module?.onComplete?.()
-    goTo(key)
+    else goTo(key)
   }
 
   return (

@@ -51,7 +51,7 @@ export const Quiz = ({ module }) => {
 
   const handleGoTo = (key) => {
     if (key === COMPLETE) module?.onComplete?.()
-    goTo(key)
+    else goTo(key)
   }
 
   return (

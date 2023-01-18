@@ -50,7 +50,7 @@ export const ActionFinderFlow = ({ module }) => {
 
   const handleGoTo = (key) => {
     if (key === COMPLETE) module?.onComplete?.()
-    goTo(key)
+    else goTo(key)
   }
 
   return (

@@ -1,5 +1,6 @@
 import { Drawer } from 'antd'
 import React, { useState } from 'react'
+import Confetti from 'react-confetti'
 
 import { InviteDialog } from '../Elements/InviteDialog'
 import { ErrorBoundary } from '../ErrorBoundary'
@@ -31,7 +32,7 @@ export const ActionModules = (props) => {
     }
   }
 
-  return props.actions.map((action, i) => {
+  const renderModules = props.actions.map((action, i) => {
     const color = `color-${(i % 4) + 1}`
     return (
       <>
@@ -54,20 +55,27 @@ export const ActionModules = (props) => {
             })}
           </ErrorBoundary>
         </ActionWrapper>
-        <Drawer
-          className={`drawer-md`}
-          destroyOnClose
-          onClose={() => setOpen(false)}
-          visible={open}
-        >
-          <InviteDialog
-            actionId={action.id}
-            imageInviteColor={action.imageInviteColor}
-            imageInviteText={action.imageInviteText}
-            otherUsers={1000}
-          />
-        </Drawer>
       </>
     )
   })
+
+  return (
+    <>
+      {renderModules}
+      <Drawer
+        className={`drawer-md`}
+        destroyOnClose
+        onClose={() => setOpen(false)}
+        visible={open}
+      >
+        <Confetti numberOfPieces={800} recycle={false} />
+        <InviteDialog
+          // actionId={action.id}
+          // imageInviteColor={action.imageInviteColor}
+          // imageInviteText={action.imageInviteText}
+          otherUsers={1000}
+        />
+      </Drawer>
+    </>
+  )
 }
