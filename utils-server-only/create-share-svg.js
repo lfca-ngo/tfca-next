@@ -81,9 +81,7 @@ export function createShareSvg({ color, message, name = null }) {
         I nominate
       </text>
 
-      <svg x="769" y="${
-        144 + i * 144
-      }" width="431" height="116" viewBox="0 0 431 116" fill="none">
+      <svg x="769" y="${144}" width="431" height="116" viewBox="0 0 431 116" fill="none">
         <path d="M432 0H17.5L0 116H432V0Z" fill="white" fill-opacity="0.90"/>
         <text x="47" y="50%" dy="0.37em" fill="#12244A" font-family="PlusJakartaSans" font-size="66" font-weight="700" letter-spacing="-2.1">
           ${name}
@@ -92,6 +90,7 @@ export function createShareSvg({ color, message, name = null }) {
       `
           : ''
       }
+
     </svg>
   `
 }
