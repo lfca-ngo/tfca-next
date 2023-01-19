@@ -1,5 +1,13 @@
 import { getApp, initializeApp } from 'firebase/app'
-import { doc, getFirestore, setDoc } from 'firebase/firestore'
+import {
+  collection,
+  doc,
+  getDocs,
+  getFirestore,
+  query,
+  setDoc,
+  where,
+} from 'firebase/firestore'
 
 const REFERRALS_COLLECTION = 'referrals'
 
@@ -56,12 +64,24 @@ export const trackInvite = ({
           shortLink: shortLink,
         },
       },
-      meta: {
-        name: userName,
-        teamId: teamId || null,
-        userId: userId,
-      },
+      name: userName,
+      teamId: teamId || null,
+      userId: userId,
     },
     { merge: true }
   )
+}
+
+export const getTeamScores = async (teamId) => {
+  try {
+    const referralsRef = collection(firestore, REFERRALS_COLLECTION)
+    const q = query(referralsRef, where('teamId', '==', teamId))
+    const querySnapshot = await getDocs(q)
+    const teamScores = []
+    querySnapshot.forEach((doc) => {
+      teamScores.push(doc.data())
+    })
+
+    return teamScores
+  } catch (error) {}
 }

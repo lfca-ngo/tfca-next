@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query'
 
-import { fetchData } from '..'
+import { fetchData } from '.'
 
 export const usePoliticians = (filters = {}) => {
   let queryString = ''
@@ -9,5 +9,7 @@ export const usePoliticians = (filters = {}) => {
     queryString += `filter.${key}=${filters[key]}&`
   })
 
-  return useQuery(['meps', queryString], async () => fetchData(queryString))
+  return useQuery(['meps', queryString], async () =>
+    fetchData('/api/politicians', queryString)
+  )
 }

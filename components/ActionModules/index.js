@@ -67,12 +67,7 @@ export const ActionModules = (props) => {
         visible={open}
       >
         <Confetti numberOfPieces={800} recycle={false} />
-        <InviteDialog
-          // actionId={action.id}
-          // imageInviteColor={action.imageInviteColor}
-          // imageInviteText={action.imageInviteText}
-          otherUsers={1000}
-        />
+        <InviteDialog otherUsers={1000} />
       </Drawer>
     </>
   )

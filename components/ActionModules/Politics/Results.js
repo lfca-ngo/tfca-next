@@ -2,7 +2,7 @@ import { Badge, Button, List } from 'antd'
 import classNames from 'classnames'
 import React from 'react'
 
-import { usePoliticians } from '../../../services/politicians'
+import { usePoliticians } from '../../../services/internal/politicians'
 import { LIST_GRIDS, textBlockToString } from '../../../utils'
 import {
   CardView,
