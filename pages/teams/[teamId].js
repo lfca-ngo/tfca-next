@@ -29,7 +29,7 @@ export default function LeaderBoard({ teamId = '' }) {
       theme="rose"
       title={
         <span>
-          Team <strong>{team?.name || ''}</strong>
+          Team <strong>{team || ''}</strong>
         </span>
       }
     >
