@@ -1,24 +1,19 @@
 import { Badge, List } from 'antd'
-import React, { useMemo } from 'react'
+import React from 'react'
 
 import { Layout } from '../../components/Layout'
 import { fetchAllStaticContent } from '../../services/contentful'
-import { getTeamScores } from '../../services/firebase'
 import { useTeamScores } from '../../services/internal/teamscores'
 
 // Emoji list
 const PLACES = ['🥇', '🥈', '🥉']
 
-export default function LeaderBoard({ teamId }) {
-  //
+export default function LeaderBoard({ teamId = '' }) {
   const { data, isLoading } = useTeamScores(teamId)
 
-  const teamStats = []
-  const team = 'test'
-  console.log('data', data, teamId)
-  // const [teamStats, setTeamStats] = useState(INITIAL_TEAM_STATS)
+  const team = teamId.charAt(0).toUpperCase() + teamId.slice(1)
 
-  const sortedStats = []
+  // const sortedStats = []
   //  useMemo(() => {
   //   return teamStats.sort((a, b) => {
   //     const sum = (a) => a.actionsTaken + a.actionsTriggered + a.invited
@@ -84,14 +79,6 @@ export default function LeaderBoard({ teamId }) {
 export async function getStaticProps(props) {
   const { locale, params } = props
   const { teamId } = params
-
-  // track the accepted invite in firestore
-  try {
-    const teamScores = await getTeamScores(teamId)
-    console.log('teamScores', teamScores)
-  } catch (e) {
-    console.error('Error tracking invite: ', e)
-  }
 
   // Fetch content
   const content = await fetchAllStaticContent(locale)
