@@ -128,10 +128,13 @@ export const deleteCookie = (name) => {
 }
 
 // gets & sets uid in window variable
-export const getWindowUid = () => {
+// if a presetUid is given, no new uid is created
+// this is important for the referral feature, where
+// the uid is set on the server side
+export const getWindowUid = (presetUid) => {
   if (!isBrowser()) return null
   if (window.ui) return window.ui
-  const newUid = uuidv4()
+  const newUid = presetUid || uuidv4()
   window.ui = newUid
   return newUid
 }

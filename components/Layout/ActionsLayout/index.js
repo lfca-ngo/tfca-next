@@ -88,7 +88,13 @@ const CompanyMenuItem = ({ company }) => {
   )
 }
 
-export const ActionsLayout = ({ children, company, nav, openGraphInfo }) => {
+export const ActionsLayout = ({
+  children,
+  company,
+  nav,
+  openGraphInfo,
+  presetUid,
+}) => {
   const [collapsed, setCollapsed] = useState(true)
   const mainNav = useContentNavs('mainHeaderNav')?.elements
   const customization = useCustomization()
@@ -104,7 +110,7 @@ export const ActionsLayout = ({ children, company, nav, openGraphInfo }) => {
   // }
 
   return (
-    <Template>
+    <Template presetUid={presetUid}>
       <ActionsNav
         actions={nav}
         collapsed={collapsed}

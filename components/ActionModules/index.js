@@ -35,27 +35,25 @@ export const ActionModules = (props) => {
   const renderModules = props.actions.map((action, i) => {
     const color = `color-${(i % 4) + 1}`
     return (
-      <>
-        <ActionWrapper
-          color={color}
-          effort={action.effort}
-          id={action.id}
-          impact={action.impact}
-          impactDisclaimer={action.impactDisclaimer}
-          key={action.id}
-          name={action.name}
-          otherUsers={props.stats[action.id]}
-        >
-          <ErrorBoundary>
-            {renderAction({
-              ...action,
-              color: color,
-              onComplete: () => setOpen(true),
-              otherUsers: props.stats[action.id],
-            })}
-          </ErrorBoundary>
-        </ActionWrapper>
-      </>
+      <ActionWrapper
+        color={color}
+        effort={action.effort}
+        id={action.id}
+        impact={action.impact}
+        impactDisclaimer={action.impactDisclaimer}
+        key={action.id}
+        name={action.name}
+        otherUsers={props.stats[action.id]}
+      >
+        <ErrorBoundary>
+          {renderAction({
+            ...action,
+            color: color,
+            onComplete: () => setOpen(true),
+            otherUsers: props.stats[action.id],
+          })}
+        </ErrorBoundary>
+      </ActionWrapper>
     )
   })
 

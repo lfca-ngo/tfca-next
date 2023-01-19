@@ -21,7 +21,7 @@ import {
 
 import TelegramIcon from '../../../assets/icons/telegram.svg'
 import { useContentBlocks } from '../../../hooks'
-import { namesArrayToString, textBlockToString } from '../../../utils'
+import { textBlockToString } from '../../../utils'
 import { CopyTextArea } from '..'
 
 const { TabPane } = Tabs
@@ -42,16 +42,12 @@ export const Share = ({ invites }) => {
   return (
     <div className="share-dialog">
       <Tabs defaultActiveKey="0">
-        {invites.map(({ names, ogImageUrl, shortLink }, i) => {
-          const tabName = !names
-            ? 'General'
-            : names.length === 1
-            ? names[0]
-            : 'All'
+        {invites.map(({ name, ogImageUrl, shortLink }, i) => {
+          const tabName = name || 'General'
 
-          const shareMessageBody = names?.length
+          const shareMessageBody = name
             ? textBlockToString(shareMessageBodyNominate, {
-                name: namesArrayToString(names),
+                name,
               })
             : shareMessageBodyGeneric
 

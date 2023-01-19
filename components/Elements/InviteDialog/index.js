@@ -66,23 +66,14 @@ export const InviteDialog = ({
     const invites = values.names.map(
       (name) => () =>
         createInvite({
-          names: name ? [name] : undefined,
+          name: name,
           sender,
         })
     )
-    if (values.names.length > 1) {
-      // Add a multi invite
-      invites.push(() =>
-        createInvite({
-          names: values.names,
-          sender,
-        })
-      )
-    }
 
     // If no name is entered, a general invite will be generated
     // This will only add a general invite on top of individual ones
-    if (values.names[0]) {
+    if (!values.names[0]) {
       // Add a general invite
       invites.push(() =>
         createInvite({
@@ -100,7 +91,7 @@ export const InviteDialog = ({
     setActiveCollapseKey(RESULTS)
   }
 
-  const createInvite = async ({ names, sender }) => {
+  const createInvite = async ({ name, sender }) => {
     // setError('')
     // Generate the share token
 
@@ -112,12 +103,13 @@ export const InviteDialog = ({
           color: imageInviteColor,
           locale,
           message: imageInviteText,
-          names,
+          name,
           sender,
           socialDescription: socialDescription,
           socialTitle: textBlockToString(socialTitle, {
-            name: names?.length === 1 && names[0] ? names[0] : '',
+            name: name || '',
           }).replace(/\*/g, ''),
+          teamId: team,
           uid: getCookie(UID_COOKIE_NAME) || getWindowUid(),
         }),
         headers: {
@@ -126,10 +118,11 @@ export const InviteDialog = ({
         method: 'POST',
       })
 
-      const { ogImageUrl, shortLink } = await response.json()
+      const { invitedUserId, ogImageUrl, shortLink } = await response.json()
 
       return {
-        names,
+        invitedUserId,
+        name,
         ogImageUrl,
         shortLink,
       }

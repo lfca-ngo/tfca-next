@@ -7,7 +7,7 @@ import React, { Fragment } from 'react'
 import { CookieConsent } from '../../CookieConsent'
 import { TopBar } from '../TopBar'
 
-export const Template = ({ children, className, withTopbar }) => {
+export const Template = ({ children, className, presetUid, withTopbar }) => {
   return (
     <Fragment>
       <div className={classNames('siteRoot', className)}>
@@ -19,7 +19,7 @@ export const Template = ({ children, className, withTopbar }) => {
         {withTopbar && <TopBar />}
         <div className="siteContent">
           {children}
-          <CookieConsent />
+          <CookieConsent presetUid={presetUid} />
         </div>
       </div>
     </Fragment>

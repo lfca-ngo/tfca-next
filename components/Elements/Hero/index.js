@@ -50,14 +50,11 @@ export const Hero = ({ onClick, openGraphInfo }) => {
               <>
                 Take action with <strong>{teamCapitalized}</strong>{' '}
               </>
-            ) : customization?.names?.length ? (
+            ) : customization?.name ? (
               textBlockToString(
                 customBlock,
                 {
-                  name:
-                    customization.names.length === 1
-                      ? customization.names[0]
-                      : recipientsFallback,
+                  name: customization.name || recipientsFallback,
                 },
                 {},
                 true

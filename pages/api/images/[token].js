@@ -20,13 +20,13 @@ export default async function handler(req, res) {
 
   try {
     const { token } = req.query
-    const { color, message, names } = decodeShareToken(token)
+    const { color, message, name } = decodeShareToken(token)
 
     const svgImage = Buffer.from(
       createShareSvg({
         color,
         message,
-        names,
+        name,
       })
     )
 
