@@ -18,7 +18,7 @@ import { IntlSelector } from '../../IntlSelector'
 export const MenuItem = ({ link }) => {
   const [qaVisible, setQaVisible] = useState(false)
   const { query } = useRouter()
-  const isTeam = !!query.team
+  const team = query.team
   const customization = useCustomization()
   const questionsString = textBlockToString(
     useContentBlocks('menu.section.questions')
@@ -26,13 +26,15 @@ export const MenuItem = ({ link }) => {
 
   switch (link.action) {
     case PERSONAL_SCORE:
-      return !isTeam ? null : (
-        <li className="menu-item score" key={PERSONAL_SCORE}>
-          <Popover content="Your current score">
-            <Badge count={2} />
-          </Popover>
-          {link?.title}
-        </li>
+      return !team ? null : (
+        <Link href={`/teams/${team}`} passHref>
+          <li className="menu-item score" key={PERSONAL_SCORE}>
+            <Popover content="Your current score">
+              <Badge count={2} />
+            </Popover>
+            {link?.title}
+          </li>
+        </Link>
       )
     case COMPANY_INFO:
       return customization?.sender ? (
