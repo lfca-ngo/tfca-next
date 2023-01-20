@@ -1,6 +1,7 @@
 import { Alert, Carousel } from 'antd'
 import React, { useRef } from 'react'
 
+import { ACTION_STATES } from '../../../hooks'
 import { textBlockToString } from '../../../utils'
 import {
   ArrowButton,
@@ -9,7 +10,6 @@ import {
   DetailView,
   StepHeader,
 } from '../../Elements'
-import { COMPLETE } from '../'
 
 export const Details = ({
   availableFilters,
@@ -69,7 +69,7 @@ export const Details = ({
           layout="politician"
           messages={messagesByFilterValue[store[messagesRelatedFilterKey]]}
           messagesRelatedFilterKey={messagesRelatedFilterKey}
-          onFinish={() => goTo(COMPLETE)}
+          onFinish={() => goTo(ACTION_STATES.SUCCESS)}
           setStore={setStore}
           store={store}
         />

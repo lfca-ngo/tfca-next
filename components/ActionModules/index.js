@@ -10,8 +10,6 @@ import { Politics } from './Politics'
 import { Quiz } from './Quiz'
 import { SwitchEnergy } from './SwitchEnergy'
 
-export const COMPLETE = 'complete'
-
 export const ActionModules = (props) => {
   const [open, setOpen] = useState()
 
@@ -49,7 +47,9 @@ export const ActionModules = (props) => {
           {renderAction({
             ...action,
             color: color,
-            onComplete: () => setOpen(true),
+            onComplete: () => {
+              setOpen(true)
+            },
             otherUsers: props.stats[action.id],
           })}
         </ErrorBoundary>

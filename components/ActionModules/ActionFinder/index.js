@@ -1,9 +1,8 @@
 import { Tabs } from 'antd'
 import React, { useMemo } from 'react'
 
-import { useFlow } from '../../../hooks'
+import { ACTION_STATES, useFlow } from '../../../hooks'
 import { getFilterOptions } from '../../../utils'
-import { COMPLETE } from '..'
 import { Filter } from './Filter'
 import { Results } from './Results'
 
@@ -42,15 +41,17 @@ export const ActionFinderFlow = ({ module }) => {
 
   const stepsKeys = [...steps.keys()]
 
-  const { goTo, index, setStore, store } = useFlow({
+  const { completeAction, goTo, index, setStore, store } = useFlow({
     id: module?.id,
     initialIndex: stepsKeys[0],
     stepsKeys,
   })
 
   const handleGoTo = (key) => {
-    if (key === COMPLETE) module?.onComplete?.()
-    else goTo(key)
+    if (key === ACTION_STATES.SUCCESS) {
+      completeAction()
+      module?.onComplete?.()
+    } else goTo(key)
   }
 
   return (
