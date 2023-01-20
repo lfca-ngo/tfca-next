@@ -24,6 +24,8 @@ export default async function handler(req, res) {
   } = req.body
 
   // we create the uid for the invited user here
+  // this will be set in the client of the user
+  // that accepted the invite
   const invitedUserId = uuidv4()
 
   const token = createShareToken({

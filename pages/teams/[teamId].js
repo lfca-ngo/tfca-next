@@ -1,5 +1,5 @@
 import { Badge, List } from 'antd'
-import React from 'react'
+import React, { useMemo } from 'react'
 
 import { Layout } from '../../components/Layout'
 import { fetchAllStaticContent } from '../../services/contentful'
@@ -13,13 +13,13 @@ export default function LeaderBoard({ teamId = '' }) {
 
   const team = teamId.charAt(0).toUpperCase() + teamId.slice(1)
 
-  // const sortedStats = []
-  //  useMemo(() => {
-  //   return teamStats.sort((a, b) => {
-  //     const sum = (a) => a.actionsTaken + a.actionsTriggered + a.invited
-  //     return sum(b) - sum(a)
-  //   })
-  // }, [teamStats])
+  console.log(data)
+  const sortedStats = useMemo(() => {
+    return data?.sort((a, b) => {
+      const sum = (a) => a.actionsTaken + a.actionsTriggered + a.invited
+      return sum(b) - sum(a)
+    })
+  }, [data])
 
   return (
     <Layout
@@ -65,7 +65,7 @@ export default function LeaderBoard({ teamId = '' }) {
                   <Badge count={Object.keys(item.invites).length} />
                 </div>
                 <div className="table-col col-10">
-                  <Badge count={0} />
+                  <Badge count={item.triggeredActionsCount} />
                 </div>
               </div>
             </List.Item>

@@ -29,12 +29,12 @@ export function createShareToken({
       actionId,
       color: colorByName[color],
       iat: 1648205376, // Prevent the default timestamp to always create the same token for the same input
-      invitedUserId,
+      invitedUserId, // uid that will be used by the invited user
       message,
       name,
       sender,
       teamId,
-      uid,
+      uid, // uid of the person that sent the invite
     },
     process.env.JWT_TOKEN_PRIVATE_KEY
   )

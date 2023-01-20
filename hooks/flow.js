@@ -1,6 +1,7 @@
 import { useState } from 'react'
 
 import { ACTION_COMPLETED, STEP } from '../services/analytics'
+import { useTrackAction } from '../services/internal/action'
 import { scrollToId } from '../utils'
 import { useAnalytics } from './analytics'
 import { useActionStatus } from './app'
@@ -18,6 +19,12 @@ export const useFlow = ({ id, initialIndex, initialStore = {}, stepsKeys }) => {
   const [store, setStore] = useState(initialStore)
   const { setActionStatus } = useActionStatus()
   const { trackEvent } = useAnalytics()
+  const {
+    mutate: trackAction,
+    // isLoading,
+    // isError,
+    // isSuccess,
+  } = useTrackAction()
 
   const updateProgress = (keyIndex) => {
     const progress = keyIndex / (stepsKeys.length - 1)
@@ -38,6 +45,8 @@ export const useFlow = ({ id, initialIndex, initialStore = {}, stepsKeys }) => {
       name: ACTION_COMPLETED,
       values: { action_id: id },
     })
+    // also update the counter in firestore
+    trackAction(id)
   }
 
   const goTo = (page) => {
