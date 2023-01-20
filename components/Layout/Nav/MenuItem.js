@@ -1,14 +1,24 @@
 import { Badge, Drawer, Popover } from 'antd'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 
 import { useContentBlocks, useCustomization } from '../../../hooks'
-import { INVITE_STATUS, PERSONAL_SCORE, TOGGLE_Q_AND_A } from '../../../utils'
+import {
+  COMPANY_INFO,
+  INTL_SELECTOR,
+  INVITE_STATUS,
+  PERSONAL_SCORE,
+  TOGGLE_Q_AND_A,
+} from '../../../utils'
 import { textBlockToString } from '../../../utils'
 import { MenuSection, QuestionAnswer } from '../../Elements'
+import { IntlSelector } from '../../IntlSelector'
 
-export const MenuItem = ({ link, ...props }) => {
+export const MenuItem = ({ link }) => {
   const [qaVisible, setQaVisible] = useState(false)
+  const { query } = useRouter()
+  const isTeam = !!query.team
   const customization = useCustomization()
   const questionsString = textBlockToString(
     useContentBlocks('menu.section.questions')
@@ -16,13 +26,24 @@ export const MenuItem = ({ link, ...props }) => {
 
   switch (link.action) {
     case PERSONAL_SCORE:
-      // @TODO: replace with check for team or always show
-      return (
+      return !isTeam ? null : (
         <li className="menu-item score" key={PERSONAL_SCORE}>
           <Popover content="Your current score">
             <Badge count={2} />
           </Popover>
-          Team Leaderboard
+          {link?.title}
+        </li>
+      )
+    case COMPANY_INFO:
+      return customization?.sender ? (
+        <li className="menu-item" key={COMPANY_INFO}>
+          {link?.title}
+        </li>
+      ) : null
+    case INTL_SELECTOR:
+      return (
+        <li className="menu-item " key={INTL_SELECTOR}>
+          <IntlSelector />
         </li>
       )
     case INVITE_STATUS:

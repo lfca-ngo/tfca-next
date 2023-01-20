@@ -16,9 +16,11 @@ export const WITH_SIDEBAR_LAYOUT = 'with-sidebar'
 export const EMBED_LAYOUT = 'embed'
 
 // Menu keys
+export const INTL_SELECTOR = 'intl'
 export const TOGGLE_Q_AND_A = 'toggle-q-and-a'
 export const INVITE_STATUS = 'invite-status'
 export const PERSONAL_SCORE = 'personal-score'
+export const COMPANY_INFO = 'company-info'
 
 const __CSS_THEME_DARK__ = 'theme-dark'
 

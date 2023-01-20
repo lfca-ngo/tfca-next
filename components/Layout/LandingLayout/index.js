@@ -10,17 +10,13 @@ import { Template } from '../Template'
 // pages with custom sections like about campaign etc.
 export const LandingLayout = ({
   children,
-  mainNav,
+
   navigationStyle,
   style,
 }) => {
   return (
     <Template className="landing-layout" withTopbar>
-      <Nav
-        className={`${style || ''} absolute`}
-        menuItems={mainNav}
-        mode={navigationStyle}
-      />
+      <Nav className={`${style || ''} absolute`} mode={navigationStyle} />
       <main>
         <ErrorBoundary>{children}</ErrorBoundary>
       </main>

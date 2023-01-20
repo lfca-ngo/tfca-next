@@ -10,17 +10,10 @@ import { Nav } from '../Nav'
 import { Template } from '../Template'
 
 // simple pages like imprint, privacy, etc.
-export const DefaultLayout = ({
-  children,
-  mainNav,
-  style,
-  subtitle,
-  theme,
-  title,
-}) => {
+export const DefaultLayout = ({ children, style, subtitle, theme, title }) => {
   return (
     <Template className={classNames('default-layout', theme)}>
-      <Nav className={style} menuItems={mainNav} theme={theme} />
+      <Nav className={style} theme={theme} />
       <DefaultHero
         className={style}
         subtitle={subtitle}

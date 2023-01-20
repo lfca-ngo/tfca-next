@@ -12,8 +12,9 @@ import {
 
 const REFERRALS_COLLECTION = 'referrals'
 
+// Helper to get count of entries in object
 const safeGetObjectsCount = (object) => {
-  if (typeof object !== object) return 0
+  if (typeof object !== 'object') return 0
   return Object.keys(object).length
 }
 
@@ -113,7 +114,8 @@ export const getTeamScores = async (teamId) => {
 
         teamScores.push({
           ...data,
-          invitedUsersCount: Object.keys().length,
+          acceptedInvitesCount: safeGetObjectsCount(data.acceptedInvites),
+          invitesCount: safeGetObjectsCount(data.invites),
           triggeredActionsCount,
         })
       })

@@ -9,14 +9,14 @@ import { useTeamScores } from '../../services/internal/teamscores'
 const PLACES = ['🥇', '🥈', '🥉']
 
 export default function LeaderBoard({ teamId = '' }) {
-  const { data, isLoading } = useTeamScores(teamId)
+  const { data = [], isLoading } = useTeamScores(teamId)
 
   const team = teamId.charAt(0).toUpperCase() + teamId.slice(1)
 
-  console.log(data)
   const sortedStats = useMemo(() => {
     return data?.sort((a, b) => {
-      const sum = (a) => a.actionsTaken + a.actionsTriggered + a.invited
+      const sum = (a) =>
+        a.triggeredActionsCount + a.invitesCount + a.acceptedInvitesCount
       return sum(b) - sum(a)
     })
   }, [data])
@@ -42,7 +42,7 @@ export default function LeaderBoard({ teamId = '' }) {
       </div>
       <List
         className="table-list large"
-        dataSource={data}
+        dataSource={sortedStats}
         loading={isLoading}
         renderItem={(item, i) => {
           const emoji = PLACES[i] || '⭐️'
@@ -59,10 +59,10 @@ export default function LeaderBoard({ teamId = '' }) {
                   {item.name} {item.active ? '(You)' : ''}
                 </div>
                 <div className="table-col col-10">
-                  <Badge count={Object.keys(item.acceptedInvites).length} />
+                  <Badge count={item.acceptedInvitesCount} />
                 </div>
                 <div className="table-col col-10">
-                  <Badge count={Object.keys(item.invites).length} />
+                  <Badge count={item.invitesCount} />
                 </div>
                 <div className="table-col col-10">
                   <Badge count={item.triggeredActionsCount} />
