@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { STEP } from '../services/analytics'
+import { ACTION_COMPLETED, STEP } from '../services/analytics'
 import { scrollToId } from '../utils'
 import { useAnalytics } from './analytics'
 import { useActionStatus } from './app'
@@ -33,6 +33,11 @@ export const useFlow = ({ id, initialIndex, initialStore = {}, stepsKeys }) => {
 
   const completeAction = () => {
     updateProgress(stepsKeys.length - 1)
+    // track completion
+    trackEvent({
+      name: ACTION_COMPLETED,
+      values: { action_id: id },
+    })
   }
 
   const goTo = (page) => {
