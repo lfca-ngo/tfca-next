@@ -120,11 +120,7 @@ export const Results = ({ goTo, module, nextKey, setStore, store }) => {
         }
       />
       <StepHeader title={blocks['results.title']} />
-      {/* <CheckList data={lists['comparison.benefits']?.items} /> */}
-      <p style={{ marginBottom: '30px' }}>
-        All providers are premiered with the RobinWood label, standing for 100%
-        renewable energy and additional investments into new power plants
-      </p>
+      <CheckList data={lists['comparison.benefits']?.items} />
 
       {operatorError || (operatorData && !firstOperatorId) ? (
         <FetchError onRefetch={handleGoBack} />

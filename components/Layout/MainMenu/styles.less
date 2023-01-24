@@ -28,6 +28,14 @@ ul.main-menu {
     li {
       margin: 8px 0;
       padding: 10px 0;
+
+      &:hover {
+        background: transparent;
+      }
+
+      &.padding-small {
+        padding: 10px 0;
+      }
     }
   }
 
@@ -38,7 +46,7 @@ ul.main-menu {
     align-items: center;
     border-radius: @border-radius-base;
     cursor: pointer;
-    .link-font-style(fade(@black, 80%));
+    .link-font-style(@black);
 
     &.padding-small {
       margin: 0;
@@ -76,7 +84,8 @@ ul.main-menu {
 
     .menu-item {
       margin: 4px 0;
-      padding: 10px 20px;
+      padding: 10px 15px;
+      .link-font-style(@black);
 
       &:hover {
         background: fade(@black, 5%);

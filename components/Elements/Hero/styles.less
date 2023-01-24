@@ -4,11 +4,14 @@
 
 .hero {
   background: @yellow;
-  min-height: calc(100vh - 80px);
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
+
+  @media @desktop {
+    min-height: calc(100vh - 80px);
+  }
 
   h1 {
     .h1-hero();
@@ -64,8 +67,8 @@
       position: absolute;
 
       &.mouth {
-        right: -90px;
-        bottom: -70px;
+        right: -300px;
+        bottom: -30px;
         width: 230px;
         height: 241px;
         @media @desktop {
@@ -78,7 +81,7 @@
       }
 
       &.plant {
-        left: -90px;
+        left: -300px;
         bottom: -70px;
         width: 230px;
         height: 241px;
