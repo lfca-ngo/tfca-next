@@ -1,7 +1,7 @@
 require('./styles.less')
 
 import { ForkOutlined, UserOutlined } from '@ant-design/icons'
-import { Avatar, Button } from 'antd'
+import { Avatar } from 'antd'
 import classNames from 'classnames'
 import { useRouter } from 'next/router'
 import React from 'react'
@@ -12,19 +12,10 @@ import { IntlSelector } from '../../IntlSelector'
 import { TimeCounter } from '../../TimeCounter'
 import { MenuItem } from './MenuItem'
 
-export const MainMenu = ({ className = '', company, mode }) => {
+export const MainMenu = ({ className = '', mode }) => {
   const { query } = useRouter()
   const team = query.team
   const customization = useCustomization()
-
-  // actionId = null,
-  // color = null,
-  // invitedUserId = null,
-  // message = null,
-  // name = null,
-  // sender = null,
-  // teamId = null,
-  // uid = null,
 
   return (
     <ul className={classNames(`main-menu`, className, mode)}>
@@ -45,7 +36,7 @@ export const MainMenu = ({ className = '', company, mode }) => {
           submenuItems={[
             <MenuItem
               key="leaderboard"
-              slug={`/leaderboard/${team}`}
+              slug={`/teams/${team}`}
               title="Leaderboard"
             />,
           ]}

@@ -7,6 +7,8 @@ import { useTeamScores } from '../../services/internal/teamscores'
 
 // Emoji list
 const PLACES = ['🥇', '🥈', '🥉']
+// Static data for testing
+const TEAM_IDS = ['blinkist', 'springer']
 
 export default function LeaderBoard({ teamId = '' }) {
   const { data = [], isLoading } = useTeamScores(teamId)
@@ -71,6 +73,7 @@ export default function LeaderBoard({ teamId = '' }) {
             </List.Item>
           )
         }}
+        style={{ margin: '0 0 80px' }}
       />
     </Layout>
   )
@@ -79,6 +82,13 @@ export default function LeaderBoard({ teamId = '' }) {
 export async function getStaticProps(props) {
   const { locale, params } = props
   const { teamId } = params
+
+  if (!teamId) {
+    return {
+      notFound: true,
+      revalidate: 300, // 5min
+    }
+  }
 
   // Fetch content
   const content = await fetchAllStaticContent(locale)
@@ -92,5 +102,9 @@ export async function getStaticProps(props) {
 }
 
 export async function getStaticPaths() {
-  return { fallback: true, paths: [] }
+  const paths = TEAM_IDS.map((id) => ({
+    params: { teamId: id },
+  }))
+
+  return { fallback: true, paths: paths }
 }

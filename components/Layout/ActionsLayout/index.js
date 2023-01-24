@@ -5,17 +5,12 @@ import React, { useState } from 'react'
 import { useContentBlocks, useCustomization } from '../../../hooks'
 import { scrollToId } from '../../../utils'
 import { textBlockToString } from '../../../utils'
-import {
-  ChallengeStatus,
-  Hero,
-  MenuSection,
-  QuestionAnswer,
-} from '../../Elements'
+import { ChallengeStatus, Hero, MenuSection } from '../../Elements'
 import { ErrorBoundary } from '../../ErrorBoundary'
 import { ActionsNav } from '../ActionsNav'
 import { Footer } from '../Footer'
-import { Nav } from '../Nav'
 import { MainMenu } from '../MainMenu'
+import { Nav } from '../Nav'
 import { Template } from '../Template'
 
 export const ActionsLayout = ({

@@ -13,7 +13,7 @@ import { Template } from '../Template'
 export const DefaultLayout = ({ children, style, subtitle, theme, title }) => {
   return (
     <Template className={classNames('default-layout', theme)}>
-      <Nav className={style} theme={theme} />
+      <Nav theme={theme} />
       <DefaultHero
         className={style}
         subtitle={subtitle}
