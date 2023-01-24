@@ -86,7 +86,6 @@ export async function getStaticProps(props) {
   if (!teamId) {
     return {
       notFound: true,
-      revalidate: 300, // 5min
     }
   }
 
@@ -100,19 +99,23 @@ export async function getStaticProps(props) {
     },
   }
 }
+// { locales }
+export async function getStaticPaths() {
+  // const paths = TEAM_IDS.reduce((allPaths, item) => {
+  //   const pagePaths = locales.map((locale) => ({
+  //     locale,
+  //     params: { teamId: item },
+  //   }))
 
-export async function getStaticPaths({ locales }) {
-  const paths = TEAM_IDS.reduce((allPaths, item) => {
-    const pagePaths = locales.map((locale) => ({
-      locale,
-      params: { teamId: item },
-    }))
+  //   return [...allPaths, ...pagePaths]
+  // }, [])
 
-    return [...allPaths, ...pagePaths]
-  }, [])
+  const paths = TEAM_IDS.map((team) => ({
+    params: { teamId: team },
+  }))
 
   return {
-    fallback: true,
+    fallback: false,
     paths,
   }
 }

@@ -144,8 +144,8 @@ export const INITIAL_STATS = {
   switch_energy: 2218,
 }
 
-export const getLogoSrc = (isDarkMode) =>
-  isDarkMode ? '/images/logo_darkmode.svg' : '/images/logo.svg'
+export const getLogoSrc = (isMobile) =>
+  isMobile ? '/images/logo_mobile.svg' : '/images/logo.svg'
 
 export const getMailToLink = ({ body, cc, subject, to }) => {
   const args = []

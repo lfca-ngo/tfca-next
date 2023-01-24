@@ -6,8 +6,8 @@ import React from 'react'
 
 import { getLogoSrc } from '../../../utils'
 
-export const DefaultLogo = ({ isDarkMode }) => {
-  const logoSrc = getLogoSrc(isDarkMode)
+export const DefaultLogo = ({ isMobile }) => {
+  const logoSrc = getLogoSrc(isMobile)
   return (
     <div className="default-logo">
       <div className="default-logo-wrapper">
