@@ -83,12 +83,6 @@ export async function getStaticProps(props) {
   const { locale, params } = props
   const { teamId } = params
 
-  if (!teamId) {
-    return {
-      notFound: true,
-    }
-  }
-
   // Fetch content
   const content = await fetchAllStaticContent(locale)
 
