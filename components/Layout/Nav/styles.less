@@ -27,3 +27,34 @@ nav.nav {
     justify-content: center;
   }
 }
+
+.popover-content {
+  display: flex;
+  align-items: center;
+  .content {
+    flex: 1;
+    font-size: 17px;
+    display: flex;
+    align-items: center;
+    padding-right: 10px;
+    .logo {
+      margin-right: 15px;
+      box-shadow: @box-shadow-base;
+      padding: 8px;
+      border-radius: @border-radius-base;
+      .logo-wrapper {
+        position: relative;
+        width: 40px;
+        height: 40px;
+      }
+    }
+  }
+  .ant-btn {
+    margin-right: 0;
+    margin-left: auto;
+    width: auto;
+    .anticon {
+      font-size: 17px;
+    }
+  }
+}

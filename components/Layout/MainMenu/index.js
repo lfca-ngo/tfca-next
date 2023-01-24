@@ -10,16 +10,17 @@ import { useCustomization } from '../../../hooks'
 import { ChallengeStatus } from '../../Elements'
 import { IntlSelector } from '../../IntlSelector'
 import { TimeCounter } from '../../TimeCounter'
+import { CompanyMenuItem } from './CompanyMenuItem'
 import { MenuItem } from './MenuItem'
 
-export const MainMenu = ({ className = '', mode }) => {
+export const MainMenu = ({ className = '', company, mode }) => {
   const { query } = useRouter()
   const team = query.team
   const customization = useCustomization()
 
   return (
     <ul className={classNames(`main-menu`, className, mode)}>
-      {/* {company && <CompanyMenuItem company={company} key="company" />} */}
+      {company && <CompanyMenuItem company={company} key="company" />}
 
       <MenuItem
         showCaret

@@ -93,17 +93,8 @@ export async function getStaticProps(props) {
     },
   }
 }
-// { locales }
+
 export async function getStaticPaths() {
-  // const paths = TEAM_IDS.reduce((allPaths, item) => {
-  //   const pagePaths = locales.map((locale) => ({
-  //     locale,
-  //     params: { teamId: item },
-  //   }))
-
-  //   return [...allPaths, ...pagePaths]
-  // }, [])
-
   const paths = TEAM_IDS.map((team) => ({
     params: { teamId: team },
   }))
