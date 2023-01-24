@@ -36,7 +36,7 @@ export const InviteDialog = ({
   actionId,
   imageInviteColor = 'blue',
   imageInviteText = 'I took action|for a brighter|tomorrow',
-  otherUsers = 49,
+  // otherUsers = 49,
 }) => {
   const benefits = useContentLists('sharing.benefits')?.items
   const [isGeneratingToken, setIsGeneratingToken] = useState(false)
@@ -141,12 +141,12 @@ export const InviteDialog = ({
     <div className="invite-dialog">
       <h1>Invite friends</h1>
       <p>
-        You are part of the {`${team?.toLocaleUpperCase()}`} team. Every friend
-        that clicks on your invitation and/or takes action, adds points to your
-        internal team score. Win the challenge and help our planet.
+        {team ? `You are part of the ${team?.toLocaleUpperCase()} team.` : ''}
+        Every friend that clicks on your invitation and/or takes action, adds
+        points to your score. Win the challenge and help our planet.
       </p>
 
-      <CheckList data={benefits} vars={{ users: otherUsers }} />
+      <CheckList data={benefits} vars={{ users: 'Hundreds of' }} />
 
       <Collapse
         accordion

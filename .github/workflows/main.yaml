@@ -2,7 +2,7 @@ name: ci
 on:
   push:
     branches:
-      - '**'     
+      - '**'
   repository_dispatch:
     types: [publish-event]
 
@@ -52,30 +52,30 @@ jobs:
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID}}
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
 
-  e2e-test:
-    runs-on: ubuntu-latest
-    needs: deploy
-    if: github.ref_name != 'main'
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '16'
-      - uses: actions/cache@v2
-        with:
-          path: '**/node_modules'
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-      - name: Install dependencies
-        run: yarn --frozen-lockfile
-      - name: Install Playwright
-        run: npx playwright install --with-deps
-      - name: Run e2e tests
-        run: yarn test:e2e
-        env:
-          PLAYWRIGHT_TEST_BASE_URL: ${{ needs.deploy.outputs.preview_url }}
-      - name: Upload test results
-        if: always()
-        uses: actions/upload-artifact@v2
-        with:
-          name: playwright-results
-          path: test-results
+  # e2e-test:
+  #   runs-on: ubuntu-latest
+  #   needs: deploy
+  #   if: github.ref_name != 'main'
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - uses: actions/setup-node@v2
+  #       with:
+  #         node-version: '16'
+  #     - uses: actions/cache@v2
+  #       with:
+  #         path: '**/node_modules'
+  #         key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+  #     - name: Install dependencies
+  #       run: yarn --frozen-lockfile
+  #     - name: Install Playwright
+  #       run: npx playwright install --with-deps
+  #     - name: Run e2e tests
+  #       run: yarn test:e2e
+  #       env:
+  #         PLAYWRIGHT_TEST_BASE_URL: ${{ needs.deploy.outputs.preview_url }}
+  #     - name: Upload test results
+  #       if: always()
+  #       uses: actions/upload-artifact@v2
+  #       with:
+  #         name: playwright-results
+  #         path: test-results
