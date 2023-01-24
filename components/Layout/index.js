@@ -1,6 +1,11 @@
 import React from 'react'
 
-import { EMBED_LAYOUT, ERROR_LAYOUT, WITH_SIDEBAR_LAYOUT } from '../../utils'
+import {
+  EMBED_LAYOUT,
+  ERROR_LAYOUT,
+  LANDING_LAYOUT,
+  WITH_SIDEBAR_LAYOUT,
+} from '../../utils'
 import { ActionsLayout } from './ActionsLayout'
 import { DefaultLayout } from './DefaultLayout'
 import { EmbedLayout } from './EmbedLayout'
@@ -14,7 +19,13 @@ export const Layout = (props) => {
       return <EmbedLayout {...props}>{props.children}</EmbedLayout>
     case WITH_SIDEBAR_LAYOUT:
       return <ActionsLayout {...props}>{props.children}</ActionsLayout>
-    default:
+    case LANDING_LAYOUT:
       return <DefaultLayout {...props}>{props.children}</DefaultLayout>
+    default:
+      return (
+        <DefaultLayout withContainer withPageTitle {...props}>
+          {props.children}
+        </DefaultLayout>
+      )
   }
 }

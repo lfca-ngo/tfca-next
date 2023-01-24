@@ -96,35 +96,56 @@
   }
 }
 
-.apply-color-scheme {
-  &.color-1 {
-    .color-module(@rose);
+.color-base(@color) {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p {
+    color: @black;
   }
-  &.color-2 {
-    .color-module(@orange-light);
-  }
-  &.color-3 {
-    .color-module(@blue-light);
-  }
-  &.color-4 {
-    .color-module(@yellow);
+
+  .nav,
+  .default-hero {
+    background: @color;
   }
 }
 
-.apply-theme {
-  &.rose {
-    background: @rose;
-    color: @black;
+.apply-color-to-module {
+  &.color-1 {
+    .color-module(@color-1);
+  }
+  &.color-2 {
+    .color-module(@color-2);
+  }
+  &.color-3 {
+    .color-module(@color-3);
+  }
+  &.color-4 {
+    .color-module(@color-4);
+  }
+}
 
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6,
-    p {
-      color: @black;
-    }
+.apply-base-theme {
+  &.color-1 {
+    .color-base(@color-1);
+  }
+  &.color-2 {
+    .color-base(@color-2);
+  }
+  &.color-3 {
+    .color-base(@color-3);
+  }
+  &.color-4 {
+    .color-base(@color-4);
+  }
+  &.color-base {
+    .color-base(@color-base);
+  }
+  &.color-white {
+    .color-base(@white);
   }
 }
 

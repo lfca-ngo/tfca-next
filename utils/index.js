@@ -10,8 +10,8 @@ export const SETTINGS_ID = '48AtzIK5THq8u72j19vKw1'
 
 // Layouts
 export const ERROR_LAYOUT = 'error'
-export const BASIC_LAYOUT = 'basic-layout'
-export const LANDING_LAYOUT = 'landing-layout'
+export const BASIC_LAYOUT = 'basic'
+export const LANDING_LAYOUT = 'landing'
 export const WITH_SIDEBAR_LAYOUT = 'with-sidebar'
 export const EMBED_LAYOUT = 'embed'
 

@@ -28,7 +28,7 @@ export default function LeaderBoard({ teamId = '' }) {
       subtitle={
         'Check how you are doing compared to your team. Who will win your teams prizes?'
       }
-      theme="rose"
+      theme="color-1"
       title={
         <span>
           Team <strong>{team || ''}</strong>
@@ -101,10 +101,18 @@ export async function getStaticProps(props) {
   }
 }
 
-export async function getStaticPaths() {
-  const paths = TEAM_IDS.map((id) => ({
-    params: { teamId: id },
-  }))
+export async function getStaticPaths({ locales }) {
+  const paths = TEAM_IDS.reduce((allPaths, item) => {
+    const pagePaths = locales.map((locale) => ({
+      locale,
+      params: { teamId: item },
+    }))
 
-  return { fallback: true, paths: paths }
+    return [...allPaths, ...pagePaths]
+  }, [])
+
+  return {
+    fallback: true,
+    paths,
+  }
 }

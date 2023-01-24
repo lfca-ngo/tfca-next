@@ -3,6 +3,8 @@
 @import (reference) '../../../styles/mixins.less';
 
 .default-layout {
+  .apply-base-theme();
+
   background: @light-white;
   overflow-x: hidden;
   header {
@@ -16,13 +18,13 @@
       .default-text();
     }
   }
-  .page-body {
-    margin: 40px 0;
-    @media @desktop {
-      margin: 60px 0;
+
+  &.with-page-title {
+    .page-body {
+      margin: 40px 0;
+      @media @desktop {
+        margin: 60px 0;
+      }
     }
   }
-
-  // themes
-  .apply-theme();
 }

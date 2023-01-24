@@ -1,5 +1,6 @@
 require('./styles.less')
 
+import classNames from 'classnames'
 import React, { useState } from 'react'
 
 import { useContentBlocks, useCustomization } from '../../../hooks'
@@ -24,7 +25,10 @@ export const ActionsLayout = ({
   const customization = useCustomization()
 
   return (
-    <Template presetUid={presetUid}>
+    <Template
+      className={classNames('actions-layout', 'color-base')}
+      presetUid={presetUid}
+    >
       <ActionsNav
         actions={nav}
         collapsed={collapsed}
