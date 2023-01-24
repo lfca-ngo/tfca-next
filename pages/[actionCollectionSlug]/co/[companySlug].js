@@ -8,7 +8,7 @@ import { Layout } from '../../../components/Layout'
 import { fetchAllStaticData } from '../../../services'
 import { fetchData } from '../../../services/lfca'
 import { QualifiedCompanyFragment } from '../../../services/lfca/fragments'
-import { WITH_SIDEBAR } from '../../../utils'
+import { WITH_SIDEBAR_LAYOUT } from '../../../utils'
 
 export default function SupporterPage({
   actions,
@@ -23,7 +23,7 @@ export default function SupporterPage({
   return (
     <Layout
       company={company}
-      layout={actions?.layout || WITH_SIDEBAR}
+      layout={actions?.layout || WITH_SIDEBAR_LAYOUT}
       nav={actions?.nav}
       openGraphInfo={openGraphInfo}
     >

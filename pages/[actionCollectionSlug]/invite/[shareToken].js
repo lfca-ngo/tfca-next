@@ -6,7 +6,7 @@ import { HomeLoader } from '../../../components/Elements'
 import { Layout } from '../../../components/Layout'
 import { fetchAllStaticData } from '../../../services'
 import { trackAcceptedInvite } from '../../../services/firebase'
-import { WITH_SIDEBAR } from '../../../utils'
+import { WITH_SIDEBAR_LAYOUT } from '../../../utils'
 import { decodeShareToken } from '../../../utils-server-only'
 
 export default function InvitePage({
@@ -22,7 +22,7 @@ export default function InvitePage({
 
   return (
     <Layout
-      layout={actions?.layout || WITH_SIDEBAR}
+      layout={actions?.layout || WITH_SIDEBAR_LAYOUT}
       nav={actions?.nav}
       openGraphInfo={openGraphInfo}
       presetUid={presetUid}
