@@ -2,7 +2,7 @@ import Link from 'next/link'
 import React from 'react'
 
 export const CustomLink = ({ children, slug, url }) => {
-  const type = url ? 'url' : 'slug'
+  const type = url ? 'url' : slug ? 'slug' : ''
 
   switch (type) {
     case 'url':
@@ -14,6 +14,6 @@ export const CustomLink = ({ children, slug, url }) => {
         </Link>
       )
     default:
-      return null
+      return <>{children}</>
   }
 }

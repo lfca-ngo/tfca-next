@@ -9,7 +9,12 @@ import { useContentBlocks, useCustomization } from '../../../hooks'
 import { textBlockToString } from '../../../utils'
 import { InviteDialog } from '../InviteDialog'
 
-export const ChallengeStatus = ({ className }) => {
+export const ChallengeStatus = ({
+  buttonOnlyLabel,
+  buttonOnlyProps,
+  className,
+  renderButtonOnly,
+}) => {
   const [open, setOpen] = useState(false)
   const customization = useCustomization()
 
@@ -26,7 +31,11 @@ export const ChallengeStatus = ({ className }) => {
     useContentBlocks('challenge.status.button')
   )
 
-  return (
+  const Trigger = renderButtonOnly ? (
+    <Button onClick={() => setOpen(true)} {...buttonOnlyProps}>
+      {buttonOnlyLabel}
+    </Button>
+  ) : (
     <div className={classNames('challenge-status', className)}>
       <div className="status-icon">
         <RocketFilled />
@@ -51,7 +60,12 @@ export const ChallengeStatus = ({ className }) => {
       >
         {buttonLabel}
       </Button>
+    </div>
+  )
 
+  return (
+    <>
+      {Trigger}
       <Drawer
         className={`drawer-md`}
         onClose={() => setOpen(!open)}
@@ -63,6 +77,6 @@ export const ChallengeStatus = ({ className }) => {
           otherUsers={1000}
         />
       </Drawer>
-    </div>
+    </>
   )
 }

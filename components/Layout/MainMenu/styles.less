@@ -32,7 +32,8 @@ ul.main-menu {
   }
 
   li {
-    padding: 20px 20px;
+    margin: 0 10px;
+    padding: 10px 10px;
     display: flex;
     align-items: center;
     border-radius: @border-radius-base;
@@ -40,11 +41,12 @@ ul.main-menu {
     .link-font-style(fade(@black, 80%));
 
     &.padding-small {
-      padding: 20px 10px;
+      margin: 0;
+      padding: 10px 10px;
     }
 
     .ant-avatar {
-      background: fade(@white, 25%);
+      background: fade(@black, 5%);
       color: @black;
     }
 
@@ -69,7 +71,22 @@ ul.main-menu {
     background: @white;
     display: flex;
     border-radius: @border-radius-base;
-    padding: 10px;
+    padding: 0;
     flex-direction: column;
+
+    .menu-item {
+      margin: 4px 0;
+      padding: 10px 20px;
+
+      &:hover {
+        background: fade(@black, 5%);
+      }
+    }
+
+    a {
+      color: @black;
+      display: flex;
+      align-items: center;
+    }
   }
 }

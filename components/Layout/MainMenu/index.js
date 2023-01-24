@@ -7,6 +7,7 @@ import { useRouter } from 'next/router'
 import React from 'react'
 
 import { useCustomization } from '../../../hooks'
+import { ChallengeStatus } from '../../Elements'
 import { IntlSelector } from '../../IntlSelector'
 import { TimeCounter } from '../../TimeCounter'
 import { MenuItem } from './MenuItem'
@@ -16,6 +17,15 @@ export const MainMenu = ({ className = '', company, mode }) => {
   const team = query.team
   const customization = useCustomization()
 
+  // actionId = null,
+  // color = null,
+  // invitedUserId = null,
+  // message = null,
+  // name = null,
+  // sender = null,
+  // teamId = null,
+  // uid = null,
+
   return (
     <ul className={classNames(`main-menu`, className, mode)}>
       {/* {company && <CompanyMenuItem company={company} key="company" />} */}
@@ -23,31 +33,48 @@ export const MainMenu = ({ className = '', company, mode }) => {
       <MenuItem
         showCaret
         submenuItems={[
-          <MenuItem key="test" title="Test" />,
-          <MenuItem key="another" title="Another" />,
+          <MenuItem key="campaign" slug="/cms/about" title="The Campagin" />,
+          <MenuItem key="about" slug="/cms/about-us" title="About us" />,
+          <MenuItem key="overview" slug="/cms/overview" title="Participants" />,
         ]}
         title={'About'}
       />
       {team && (
         <MenuItem
           icon={<Avatar icon={<ForkOutlined />} shape="square" />}
+          submenuItems={[
+            <MenuItem
+              key="leaderboard"
+              slug={`/leaderboard/${team}`}
+              title="Leaderboard"
+            />,
+          ]}
           title="Team"
         />
       )}
       <MenuItem
         icon={<Avatar icon={<UserOutlined />} shape="square" />}
+        submenuItems={[
+          <MenuItem
+            key="invited-by"
+            title={`Invited by: ${customization?.sender || '-'}`}
+          />,
+          <MenuItem key="name" title={`Name: ${customization?.name || '-'}`} />,
+        ]}
         title="You"
       />
       <MenuItem className="padding-small" title={<TimeCounter />} />
       <MenuItem
         className="padding-small"
         title={
-          <Button size="small" type="primary">
-            Share
-          </Button>
+          <ChallengeStatus
+            buttonOnlyLabel="Share"
+            buttonOnlyProps={{ size: 'small', type: 'primary' }}
+            renderButtonOnly
+          />
         }
       />
-      <MenuItem title={<IntlSelector />} />
+      <MenuItem className="padding-small" title={<IntlSelector />} />
     </ul>
   )
 }
