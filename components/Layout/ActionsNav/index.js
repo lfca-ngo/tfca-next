@@ -1,17 +1,17 @@
 require('./styles.less')
 
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons'
-import { Button } from 'antd'
+import { Button, Popover } from 'antd'
 import classNames from 'classnames'
 import { motion, useTransform, useViewportScroll } from 'framer-motion'
 import Image from 'next/image'
 import React from 'react'
 
 import { useActiveAction, useIsClient, useIsMobile } from '../../../hooks'
-import { getLogoSrc, scrollToId } from '../../../utils'
+import { scrollToId } from '../../../utils'
 import { Hamburger } from '../../Elements'
 
-const YELLOW = '#FDB766'
+const YELLOW = '#FEBA59'
 const LIGHT_WHITE = '#fdfaf5'
 const MARGIN_LEFT_RANGE = [-75, 0]
 const MARGIN_LEFT_EXPANDED_RANGE = [-240, 0]
@@ -65,7 +65,6 @@ export const ActionsNav = ({
     <motion.header
       className={classNames('header', {
         collapsed,
-        'dark-mode': isMobile,
         'is-client': isClient,
       })}
       key={`${isMobile}`}
@@ -98,7 +97,12 @@ export const ActionsNav = ({
                 type="link"
               >
                 <div className="icon">
-                  <Image height={42} src={action.icon} width={42} />
+                  <Popover
+                    content={!collapsed ? null : action.title}
+                    placement="right"
+                  >
+                    <Image height={42} src={action.icon} width={42} />
+                  </Popover>
                 </div>
                 <div className="text">{action.title}</div>
               </Button>

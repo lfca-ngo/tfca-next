@@ -15,7 +15,7 @@ import { ErrorBoundary } from '../../ErrorBoundary'
 import { ActionsNav } from '../ActionsNav'
 import { Footer } from '../Footer'
 import { Nav } from '../Nav'
-import { MainMenu } from '../Nav'
+import { MainMenu } from '../MainMenu'
 import { Template } from '../Template'
 
 export const ActionsLayout = ({
@@ -42,13 +42,7 @@ export const ActionsLayout = ({
               )}
             />
             <MenuSection
-              content={<QuestionAnswer />}
-              title={textBlockToString(
-                useContentBlocks('menu.section.questions')
-              )}
-            />
-            <MenuSection
-              content={<MainMenu mode="inline" />}
+              content={<MainMenu mode="vertical" />}
               title={textBlockToString(useContentBlocks('menu.section.menu'))}
             />
           </div>

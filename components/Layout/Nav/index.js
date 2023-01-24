@@ -4,7 +4,7 @@ import classNames from 'classnames'
 import React from 'react'
 
 import { DefaultLogo, Hamburger } from '../../Elements'
-import { MainMenu } from './MainMenu'
+import { MainMenu } from '../MainMenu'
 
 export const Nav = ({ className, mode, theme }) => {
   return (

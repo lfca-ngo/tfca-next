@@ -9,6 +9,7 @@ import React from 'react'
 import { useContentBlocks, useCustomization } from '../../../hooks'
 import { textBlockToString } from '../../../utils'
 import { ChallengeStatus } from '../ChallengeStatus'
+import { FloatingWrapper } from '../FloatingWrapper'
 
 export const Hero = ({ onClick, openGraphInfo }) => {
   const { query } = useRouter()
@@ -86,10 +87,12 @@ export const Hero = ({ onClick, openGraphInfo }) => {
           </div>
         </div>
         {/* Challenge status (floating) */}
-        <ChallengeStatus
-          className={'hidden md-max floating'}
-          openGraphInfo={openGraphInfo}
-        />
+        <FloatingWrapper>
+          <ChallengeStatus
+            className={'hidden md-max'}
+            openGraphInfo={openGraphInfo}
+          />
+        </FloatingWrapper>
       </div>
     </div>
   )

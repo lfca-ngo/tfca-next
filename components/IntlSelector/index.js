@@ -95,7 +95,7 @@ export const IntlSelector = () => {
         }
         destroyTooltipOnHide={true}
         overlayClassName="intl-selector-popover"
-        placement="left"
+        placement="bottom"
       >
         <div className="intl-icon">
           <div

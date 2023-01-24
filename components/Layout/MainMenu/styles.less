@@ -1,0 +1,75 @@
+@import (reference) '../../../styles/variables.less';
+@import (reference) '../../../styles/fonts.less';
+@import (reference) '../../../styles/mixins.less';
+
+.link-font-style(@color) {
+  .font-medium(@color);
+  letter-spacing: 0;
+  font-size: @font-size-sm;
+  line-height: 1;
+}
+
+ul.main-menu {
+  flex: 1;
+  background: transparent;
+  border-bottom: none;
+  display: flex;
+  justify-content: flex-end;
+  margin: 0;
+  align-self: center;
+  align-items: center;
+  padding: 0 20px;
+
+  &.vertical {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0;
+
+    li {
+      margin: 8px 0;
+      padding: 10px 0;
+    }
+  }
+
+  li {
+    padding: 20px 20px;
+    display: flex;
+    align-items: center;
+    border-radius: @border-radius-base;
+    cursor: pointer;
+    .link-font-style(fade(@black, 80%));
+
+    &.padding-small {
+      padding: 20px 10px;
+    }
+
+    .ant-avatar {
+      background: fade(@white, 25%);
+      color: @black;
+    }
+
+    .icon {
+      margin-right: 10px;
+    }
+
+    a {
+      color: @black;
+      display: flex;
+      align-items: center;
+    }
+
+    &:hover {
+      background: fade(@black, 5%);
+    }
+  }
+}
+
+.ant-dropdown {
+  .submenu {
+    background: @white;
+    display: flex;
+    border-radius: @border-radius-base;
+    padding: 10px;
+    flex-direction: column;
+  }
+}

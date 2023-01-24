@@ -51,9 +51,15 @@ header.header {
       }
       .header-content {
         ul {
+          align-items: center;
           .action-element {
+            height: 52px;
+            width: 52px;
+            justify-content: center;
+
             .text {
               display: none;
+              margin: 0 4px;
             }
           }
         }
@@ -107,13 +113,16 @@ header.header {
       }
       .action-element {
         display: flex;
-        padding: 0;
+        padding: 2px 8px;
         margin-left: 20px;
+        border-radius: @border-radius-base;
 
         @media @desktop {
-          border-bottom: 1px solid @light-grey;
-          padding: @element-padding;
-          margin-left: 0;
+          padding: 0;
+          margin: 8px;
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
         }
         &.active {
           background: @light-grey;
@@ -128,7 +137,7 @@ header.header {
           padding: 2px;
         }
         .text {
-          margin-left: 12px;
+          margin: 0 8px;
           flex: 1;
           transition: all 0.2s ease-in-out;
           color: @text-color;

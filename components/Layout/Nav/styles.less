@@ -2,13 +2,6 @@
 @import (reference) '../../../styles/fonts.less';
 @import (reference) '../../../styles/mixins.less';
 
-.link-font-style(@color) {
-  .font-medium(@color);
-  letter-spacing: 0;
-  font-size: @font-size-sm;
-  line-height: 1;
-}
-
 nav.nav {
   .apply-color-scheme();
   display: flex;
@@ -20,63 +13,6 @@ nav.nav {
 
   // Themes
   .apply-theme();
-
-  ul.main-menu {
-    flex: 1;
-    background: transparent;
-    border-bottom: none;
-    display: flex;
-    justify-content: flex-end;
-    margin: 0;
-    align-self: center;
-    align-items: center;
-    padding: 0 20px;
-
-    li {
-      padding: 20px 30px;
-      display: flex;
-      align-items: center;
-      cursor: pointer;
-      .link-font-style(fade(@black, 80%));
-
-      &.score {
-        .ant-menu-title-content {
-          display: flex;
-          align-items: center;
-          > span {
-            display: flex;
-            align-items: center;
-          }
-        }
-        .ant-badge {
-          margin-right: 10px;
-          .ant-badge-count {
-            border-color: transparent;
-            box-shadow: none;
-            background-color: @pink;
-            font-size: 12px;
-          }
-        }
-      }
-
-      &.invite-status {
-        &::before {
-          content: '';
-          height: 10px;
-          width: 10px;
-          margin-right: 12px;
-          border-radius: 50%;
-          background-color: @pink;
-          background-size: contain;
-          background-repeat: no-repeat;
-        }
-      }
-
-      &:hover {
-        opacity: 0.8;
-      }
-    }
-  }
 
   .nav-container {
     display: flex;
@@ -93,36 +29,5 @@ nav.nav {
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-}
-
-.popover-content {
-  display: flex;
-  align-items: center;
-  .content {
-    flex: 1;
-    font-size: 17px;
-    display: flex;
-    align-items: center;
-    padding-right: 10px;
-    .logo {
-      margin-right: 15px;
-      box-shadow: @box-shadow-base;
-      padding: 8px;
-      border-radius: @border-radius-base;
-      .logo-wrapper {
-        position: relative;
-        width: 40px;
-        height: 40px;
-      }
-    }
-  }
-  .ant-btn {
-    margin-right: 0;
-    margin-left: auto;
-    width: auto;
-    .anticon {
-      font-size: 17px;
-    }
   }
 }
