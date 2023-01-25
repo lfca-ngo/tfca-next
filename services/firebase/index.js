@@ -10,7 +10,6 @@ import {
   where,
 } from 'firebase/firestore'
 
-const REFERRALS_COLLECTION = 'referrals'
 const USERS_COLLECTION = 'users'
 // const TEAMS_COLLECTION = 'teams'
 
@@ -135,6 +134,7 @@ const updateUserScore = (currentScore, referredUser) => {
 
 export const getTeamScores = async (teamId) => {
   try {
+    const usersRef = collection(firestore, USERS_COLLECTION)
     // get all users invited by this team
     const usersReferredByTeamIdQuery = query(
       usersRef,
@@ -149,6 +149,7 @@ export const getTeamScores = async (teamId) => {
     // the individual users who referred them
     usersReferredByTeamIdQuerySnapshot.forEach((doc) => {
       const data = doc.data()
+
       const referredByUserId = data.referredByUserId
       // update the score of the user who created the referral
       usersScores[referredByUserId] = updateUserScore(
@@ -158,7 +159,6 @@ export const getTeamScores = async (teamId) => {
     })
 
     // get users meta data
-    const usersRef = collection(firestore, USERS_COLLECTION)
     const usersWithTeamIdQuery = query(usersRef, where('teamId', '==', teamId))
     const usersWithTeamIdQuerySnapshot = await getDocs(usersWithTeamIdQuery)
 
@@ -166,6 +166,7 @@ export const getTeamScores = async (teamId) => {
     const teamScores = []
     usersWithTeamIdQuerySnapshot.forEach((doc) => {
       const userData = doc.data()
+
       teamScores.push({
         invitesCount: safeGetObjectsCount(userData.invites),
         userId: doc.id,
@@ -182,32 +183,4 @@ export const getTeamScores = async (teamId) => {
   } catch (error) {
     throw error.message
   }
-}
-
-// DEPRECATED
-
-/**
- * Update the action counter for users that came
- * via referral
- */
-
-export const updateActionCountOnReferredUsers = ({
-  actionId,
-  referredByUserId,
-  userId,
-}) => {
-  // add to invites of this user
-  return setDoc(
-    doc(firestore, REFERRALS_COLLECTION, referredByUserId),
-    {
-      acceptedInvites: {
-        [`${userId}`]: {
-          completedActions: {
-            [actionId]: serverTimestamp(),
-          },
-        },
-      },
-    },
-    { merge: true }
-  )
 }
