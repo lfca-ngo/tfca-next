@@ -1,12 +1,13 @@
 require('./styles.less')
 
-import { ForkOutlined, UserOutlined } from '@ant-design/icons'
-import { Avatar } from 'antd'
+import { CopyOutlined, ForkOutlined, UserOutlined } from '@ant-design/icons'
+import { Avatar, Button, message } from 'antd'
 import classNames from 'classnames'
 import { useRouter } from 'next/router'
 import React from 'react'
+import { CopyToClipboard } from 'react-copy-to-clipboard'
 
-import { useCustomization } from '../../../hooks'
+import { useCustomization, useUserId } from '../../../hooks'
 import { ChallengeStatus } from '../../Elements'
 import { IntlSelector } from '../../IntlSelector'
 import { TimeCounter } from '../../TimeCounter'
@@ -17,6 +18,7 @@ export const MainMenu = ({ className = '', company, mode }) => {
   const { query } = useRouter()
   const team = query.team
   const customization = useCustomization()
+  const userId = useUserId()
 
   return (
     <ul className={classNames(`main-menu`, className, mode)}>
@@ -49,9 +51,29 @@ export const MainMenu = ({ className = '', company, mode }) => {
         submenuItems={[
           <MenuItem
             key="invited-by"
-            title={`Invited by: ${customization?.sender || '-'}`}
+            title={`Invited by: ${customization?.senderName || '-'}`}
           />,
           <MenuItem key="name" title={`Name: ${customization?.name || '-'}`} />,
+          <MenuItem
+            key="login"
+            title={
+              <CopyToClipboard
+                onCopy={() => {
+                  message.success('Copied value')
+                }}
+                text={`https://tfca.earth?login=${userId}`}
+              >
+                <Button
+                  block
+                  icon={<CopyOutlined />}
+                  size="small"
+                  type="primary"
+                >
+                  Copy Login-Link
+                </Button>
+              </CopyToClipboard>
+            }
+          />,
         ]}
         title="You"
       />

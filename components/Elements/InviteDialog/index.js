@@ -15,10 +15,10 @@ import React, { useEffect, useState } from 'react'
 import {
   useContentBlocks,
   useContentLists,
-  // useCustomization,
+  useCustomization,
+  useUserId,
 } from '../../../hooks'
 import { textBlockToString } from '../../../utils'
-import { getCookie, getWindowUid, UID_COOKIE_NAME } from '../../../utils'
 import { CheckList, LoadingSpinner } from '../../Elements'
 import { Share } from './Share'
 
@@ -38,6 +38,9 @@ export const InviteDialog = ({
   imageInviteText = 'I took action|for a brighter|tomorrow',
   // otherUsers = 49,
 }) => {
+  const customization = useCustomization()
+  const userId = useUserId()
+
   const benefits = useContentLists('sharing.benefits')?.items
   const [isGeneratingToken, setIsGeneratingToken] = useState(false)
   // const [error, setError] = useState('')
@@ -101,16 +104,18 @@ export const InviteDialog = ({
           actionCollectionSlug: actionCollectionSlug || '',
           actionId: actionId,
           color: imageInviteColor,
+          invitedUserName: name,
           locale,
           message: imageInviteText,
-          name,
-          sender,
+          referredByTeamId: customization?.referredByTeamId || null, // this needs to be the team that the user was invited by, can be null
+          referredByUserId: customization?.referredByUserId || null, // this is the uid of the user that invited this user, can be null
+          senderName: sender,
           socialDescription: socialDescription,
           socialTitle: textBlockToString(socialTitle, {
             name: name || '',
           }).replace(/\*/g, ''),
           teamId: team,
-          uid: getCookie(UID_COOKIE_NAME) || getWindowUid(),
+          userId: userId,
         }),
         headers: {
           'Content-Type': 'application/json',

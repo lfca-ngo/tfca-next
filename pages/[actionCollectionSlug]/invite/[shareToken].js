@@ -41,8 +41,9 @@ export async function getStaticProps(props) {
   // track the accepted invite in firestore
   try {
     await trackAcceptedInvite({
-      invitedByUserId: customization.uid,
-      userId: customization.invitedUserId,
+      invitedUserId: customization.invitedUserId,
+      referredByTeamId: customization.referredByTeamId,
+      referredByUserId: customization.referredByUserId,
     })
   } catch (e) {
     console.error('Error tracking invite: ', e)

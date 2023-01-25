@@ -41,10 +41,10 @@ export const ChallengeStatus = ({
         <RocketFilled />
       </div>
       <div className="invited-by">
-        {customization?.sender ? (
+        {customization?.senderName ? (
           <>
             <label>{invitedByLabel} </label>
-            <div className="invited-by-text">{customization.sender}</div>
+            <div className="invited-by-text">{customization.senderName}</div>
           </>
         ) : (
           <>
