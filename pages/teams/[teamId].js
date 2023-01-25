@@ -8,7 +8,7 @@ import { useTeamScores } from '../../services/internal/teamscores'
 // Emoji list
 const PLACES = ['🥇', '🥈', '🥉']
 // Static data for testing
-const TEAM_IDS = ['blinkist', 'springer']
+const TEAM_IDS = ['blinkist', 'springer', 'lfca']
 
 export default function LeaderBoard({ teamId = '' }) {
   const { data = [], isLoading } = useTeamScores(teamId)
