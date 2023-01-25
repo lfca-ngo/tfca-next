@@ -9,14 +9,14 @@ export default async function handler(req, res) {
 
   // Create short link
   try {
-    updateActionCountOnReferredUsers({
+    await updateActionCountOnReferredUsers({
       actionId,
       referredByUserId,
       userId,
     })
 
-    res.status(200).json({ actionId, uid })
+    return res.status(200).json({ actionId, userId })
   } catch (e) {
-    throw new Error(e.message || e)
+    return res.status(500).send({ message: e.message })
   }
 }

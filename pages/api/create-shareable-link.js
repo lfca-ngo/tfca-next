@@ -91,8 +91,8 @@ export default async function handler(req, res) {
       userName: sender,
     })
 
-    res.status(200).json({ invitedUserId, ogImageUrl, shortLink })
+    return res.status(200).json({ invitedUserId, ogImageUrl, shortLink })
   } catch (e) {
-    throw new Error(e.message || e)
+    return res.status(500).send({ message: e.message })
   }
 }

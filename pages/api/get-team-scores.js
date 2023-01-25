@@ -10,8 +10,8 @@ export default async function handler(req, res) {
   try {
     const teamScores = await getTeamScores(teamId)
 
-    res.status(200).json(teamScores)
+    return res.status(200).json(teamScores)
   } catch (e) {
-    throw new Error(e.message || e)
+    return res.status(500).send({ message: e.message })
   }
 }
