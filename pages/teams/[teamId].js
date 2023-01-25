@@ -18,7 +18,7 @@ export default function LeaderBoard({ teamId = '' }) {
   const sortedStats = useMemo(() => {
     return data?.sort((a, b) => {
       const sum = (a) =>
-        a.triggeredActionsCount + a.invitesCount + a.acceptedInvitesCount
+        a.totalActionsTriggered + a.invitesCount + a.acceptedInvitesCount
       return sum(b) - sum(a)
     })
   }, [data])
