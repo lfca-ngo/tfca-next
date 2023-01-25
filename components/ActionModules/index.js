@@ -65,6 +65,7 @@ export const ActionModules = (props) => {
         destroyOnClose
         onClose={() => setOpen(false)}
         visible={open}
+        zIndex={2000}
       >
         <Confetti numberOfPieces={800} recycle={false} />
         <InviteDialog otherUsers={1000} />
