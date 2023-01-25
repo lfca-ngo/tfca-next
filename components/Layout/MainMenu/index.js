@@ -9,6 +9,7 @@ import { CopyToClipboard } from 'react-copy-to-clipboard'
 
 import { useCustomization, useUserId } from '../../../hooks'
 import { ChallengeStatus } from '../../Elements'
+import { UserScore } from '../../Elements/UserScore'
 import { IntlSelector } from '../../IntlSelector'
 import { TimeCounter } from '../../TimeCounter'
 import { CompanyMenuItem } from './CompanyMenuItem'
@@ -23,7 +24,6 @@ export const MainMenu = ({ className = '', company, mode }) => {
   return (
     <ul className={classNames(`main-menu`, className, mode)}>
       {company && <CompanyMenuItem company={company} key="company" />}
-
       <MenuItem
         showCaret
         submenuItems={[
@@ -49,11 +49,7 @@ export const MainMenu = ({ className = '', company, mode }) => {
       <MenuItem
         icon={<Avatar icon={<UserOutlined />} shape="square" />}
         submenuItems={[
-          <MenuItem
-            key="invited-by"
-            title={`Invited by: ${customization?.senderName || '-'}`}
-          />,
-          <MenuItem key="name" title={`Name: ${customization?.name || '-'}`} />,
+          <MenuItem key="score" title={<UserScore />} />,
           <MenuItem
             key="login"
             title={
