@@ -73,6 +73,11 @@ body {
   &.ant-btn-primary .anticon {
     color: @white;
   }
+  &.size-xs {
+    height: 30px;
+    padding: 2px 8px;
+    font-size: @font-size-xs;
+  }
 }
 
 .ant-btn.ant-btn-link.no-padding {
@@ -181,6 +186,23 @@ body {
 .ant-popover.popover-sm {
   max-width: 300px;
   font-size: @font-size-sm;
+}
+
+// Tooltop
+.ant-tooltip.tooltip-xs {
+  font-size: @font-size-xs;
+
+  .ant-btn {
+    font-size: @font-size-xs;
+    padding: 0;
+    margin: 0;
+    height: auto;
+    line-height: 1;
+    color: @white;
+    span {
+      text-decoration: underline;
+    }
+  }
 }
 
 // Basic form styles
@@ -301,6 +323,25 @@ label.ant-radio-wrapper {
   }
 }
 
+.ant-list.full-width-items {
+  .ant-list-item {
+    padding-left: 0;
+    padding-right: 0;
+    font-size: @font-size-sm;
+    color: @black;
+
+    .title-icon {
+      margin-right: 8px;
+    }
+
+    .ant-list-item-action {
+      li {
+        padding: 0;
+      }
+    }
+  }
+}
+
 .list-table-header {
   .font-semi();
   font-size: @font-size-xs;
@@ -319,12 +360,6 @@ label.ant-radio-wrapper {
     transition: all 0.3s ease-in-out;
     .font-medium();
     line-height: 1.5;
-
-    .ant-badge .ant-badge-count {
-      box-shadow: none;
-      background: @pink;
-      font-size: @font-size-xs;
-    }
 
     &:hover {
       background: fade(@black, 10%);
@@ -424,6 +459,14 @@ label.ant-radio-wrapper {
       }
     }
   }
+}
+
+// Badge
+
+.ant-badge.score-badge .ant-badge-count {
+  box-shadow: none;
+  background: @pink;
+  font-size: @font-size-xs;
 }
 
 // Other styles

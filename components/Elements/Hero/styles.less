@@ -46,6 +46,10 @@
       margin: 0 auto;
     }
 
+    @media (min-width: @screen-xxl) {
+      max-width: @container-hero-width-xl;
+    }
+
     .scroll-continue {
       position: absolute;
       left: 50%;
@@ -78,6 +82,11 @@
           width: 230px;
           height: 263px;
         }
+
+        @media (min-width: @screen-xl) {
+          width: 270px;
+          height: 323px;
+        }
       }
 
       &.plant {
@@ -90,6 +99,11 @@
           bottom: -40px;
           width: 280px;
           height: 313px;
+        }
+
+        @media (min-width: @screen-xl) {
+          width: 320px;
+          height: 353px;
         }
       }
     }

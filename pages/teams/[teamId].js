@@ -8,7 +8,7 @@ import { useTeamScores } from '../../services/internal/teamscores'
 // Emoji list
 const PLACES = ['🥇', '🥈', '🥉']
 // Static data for testing
-const TEAM_IDS = ['blinkist', 'springer']
+const TEAM_IDS = ['blinkist', 'springer', 'lfca']
 
 export default function LeaderBoard({ teamId = '' }) {
   const { data = [], isLoading } = useTeamScores(teamId)
@@ -61,13 +61,19 @@ export default function LeaderBoard({ teamId = '' }) {
                   {item.name} {item.active ? '(You)' : ''}
                 </div>
                 <div className="table-col col-10">
-                  <Badge count={item.acceptedInvitesCount} />
+                  <Badge
+                    className="score-badge"
+                    count={item.acceptedInvitesCount}
+                  />
                 </div>
                 <div className="table-col col-10">
-                  <Badge count={item.invitesCount} />
+                  <Badge className="score-badge" count={item.invitesCount} />
                 </div>
                 <div className="table-col col-10">
-                  <Badge count={item.triggeredActionsCount} />
+                  <Badge
+                    className="score-badge"
+                    count={item.triggeredActionsCount}
+                  />
                 </div>
               </div>
             </List.Item>

@@ -2,6 +2,7 @@ import { getApp, initializeApp } from 'firebase/app'
 import {
   collection,
   doc,
+  getDoc,
   getDocs,
   getFirestore,
   query,
@@ -180,6 +181,45 @@ export const getTeamScores = async (teamId) => {
     })
 
     return teamScores
+  } catch (error) {
+    throw error.message
+  }
+}
+
+export const getUserScore = async (userId) => {
+  try {
+    const usersRef = collection(firestore, USERS_COLLECTION)
+    // get all users invited by this team
+    const usersReferredByUserIdQuery = query(
+      usersRef,
+      where('referredByUserId', '==', userId)
+    )
+    const usersReferredByUserIdQuerySnapshot = await getDocs(
+      usersReferredByUserIdQuery
+    )
+
+    let userScore
+    // for all users referred by this user, calculate
+    // the total score of this user
+    usersReferredByUserIdQuerySnapshot.forEach((doc) => {
+      const data = doc.data()
+      // update the score of the user who created the referral
+      userScore = updateUserScore(userScore, data)
+    })
+
+    // get users meta data
+    const userRef = doc(firestore, USERS_COLLECTION, userId)
+    const userSnap = await getDoc(userRef)
+
+    const user = userSnap.exists() ? userSnap.data() : null
+
+    return {
+      user,
+      userScore: {
+        ...userScore,
+        invitesCount: safeGetObjectsCount(user.invites),
+      },
+    }
   } catch (error) {
     throw error.message
   }
