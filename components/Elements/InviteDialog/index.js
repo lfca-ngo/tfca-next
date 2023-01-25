@@ -107,15 +107,15 @@ export const InviteDialog = ({
           invitedUserName: name,
           locale,
           message: imageInviteText,
-          referredByTeamId: customization?.referredByTeamId || null, // this needs to be the team that the user was invited by, can be null
-          referredByUserId: customization?.referredByUserId || null, // this is the uid of the user that invited this user, can be null
+          referredByTeamId: customization?.referredByTeamId || null, // this is the team that the inviting user was invited by, can be null
+          referredByUserId: customization?.referredByUserId || null, // this is the uid of the user that invited the inviting user, can be null
           senderName: sender,
           socialDescription: socialDescription,
           socialTitle: textBlockToString(socialTitle, {
             name: name || '',
           }).replace(/\*/g, ''),
-          teamId: team,
-          userId: userId,
+          teamId: team, // this is the teamId of the inviting user
+          userId: userId, // this is the uid of the inviting user
         }),
         headers: {
           'Content-Type': 'application/json',
