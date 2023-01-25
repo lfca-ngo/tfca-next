@@ -9,12 +9,7 @@ import { trackAcceptedInvite } from '../../../services/firebase'
 import { WITH_SIDEBAR_LAYOUT } from '../../../utils'
 import { decodeShareToken } from '../../../utils-server-only'
 
-export default function InvitePage({
-  actions,
-  openGraphInfo,
-  presetUid,
-  stats,
-}) {
+export default function InvitePage({ actions, openGraphInfo, stats }) {
   const router = useRouter()
   // If the page is not yet generated, this will be displayed
   // initially until getStaticProps() finishes running
@@ -25,7 +20,6 @@ export default function InvitePage({
       layout={actions?.layout || WITH_SIDEBAR_LAYOUT}
       nav={actions?.nav}
       openGraphInfo={openGraphInfo}
-      presetUid={presetUid}
     >
       <ActionModules actions={actions?.items} stats={stats} />
     </Layout>
@@ -56,7 +50,6 @@ export async function getStaticProps(props) {
     props: {
       ...staticData,
       customization,
-      presetUid: customization.invitedUserId || null,
     },
   }
 }
