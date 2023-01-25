@@ -74,7 +74,7 @@ body {
     color: @white;
   }
   &.size-xs {
-    height: auto;
+    height: 30px;
     padding: 2px 8px;
     font-size: @font-size-xs;
   }
@@ -186,6 +186,23 @@ body {
 .ant-popover.popover-sm {
   max-width: 300px;
   font-size: @font-size-sm;
+}
+
+// Tooltop
+.ant-tooltip.tooltip-xs {
+  font-size: @font-size-xs;
+
+  .ant-btn {
+    font-size: @font-size-xs;
+    padding: 0;
+    margin: 0;
+    height: auto;
+    line-height: 1;
+    color: @white;
+    span {
+      text-decoration: underline;
+    }
+  }
 }
 
 // Basic form styles
@@ -312,6 +329,10 @@ label.ant-radio-wrapper {
     padding-right: 0;
     font-size: @font-size-sm;
     color: @black;
+
+    .title-icon {
+      margin-right: 8px;
+    }
 
     .ant-list-item-action {
       li {
