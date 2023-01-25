@@ -38,9 +38,9 @@ export default function LeaderBoard({ teamId = '' }) {
       <div className="list-table-header">
         <div className="table-col col-10 align-left" />
         <div className="table-col col-60 align-left">Nickname</div>
-        <div className="table-col col-10">Actions taken</div>
+        <div className="table-col col-10">Accepted Invites</div>
         <div className="table-col col-10">Invited</div>
-        <div className="table-col col-10">Triggered</div>
+        <div className="table-col col-10">Actions Triggered</div>
       </div>
       <List
         className="table-list large"
@@ -64,15 +64,21 @@ export default function LeaderBoard({ teamId = '' }) {
                   <Badge
                     className="score-badge"
                     count={item.acceptedInvitesCount}
+                    showZero
                   />
-                </div>
-                <div className="table-col col-10">
-                  <Badge className="score-badge" count={item.invitesCount} />
                 </div>
                 <div className="table-col col-10">
                   <Badge
                     className="score-badge"
-                    count={item.triggeredActionsCount}
+                    count={item.invitesCount}
+                    showZero
+                  />
+                </div>
+                <div className="table-col col-10">
+                  <Badge
+                    className="score-badge"
+                    count={item.totalActionsTriggered}
+                    showZero
                   />
                 </div>
               </div>
