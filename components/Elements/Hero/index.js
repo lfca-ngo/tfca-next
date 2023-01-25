@@ -51,11 +51,11 @@ export const Hero = ({ onClick, openGraphInfo }) => {
               <>
                 Take action with <strong>{teamCapitalized}</strong>{' '}
               </>
-            ) : customization?.name ? (
+            ) : customization?.invitedUserName ? (
               textBlockToString(
                 customBlock,
                 {
-                  name: customization.name || recipientsFallback,
+                  name: customization.invitedUserName || recipientsFallback,
                 },
                 {},
                 true

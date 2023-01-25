@@ -14,21 +14,12 @@ import { MainMenu } from '../MainMenu'
 import { Nav } from '../Nav'
 import { Template } from '../Template'
 
-export const ActionsLayout = ({
-  children,
-  company,
-  nav,
-  openGraphInfo,
-  presetUid,
-}) => {
+export const ActionsLayout = ({ children, company, nav, openGraphInfo }) => {
   const [collapsed, setCollapsed] = useState(true)
   const customization = useCustomization()
 
   return (
-    <Template
-      className={classNames('actions-layout', 'color-base')}
-      presetUid={presetUid}
-    >
+    <Template className={classNames('actions-layout', 'color-base')}>
       <ActionsNav
         actions={nav}
         collapsed={collapsed}

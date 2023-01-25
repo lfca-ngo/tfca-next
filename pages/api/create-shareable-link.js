@@ -12,15 +12,17 @@ export default async function handler(req, res) {
     actionCollectionSlug,
     actionId,
     color,
+    invitedUserName,
     locale,
     message,
-    name,
-    sender,
+    referredByTeamId = null,
+    referredByUserId = null,
+    senderName,
     socialDescription = '',
     socialImage,
     socialTitle = '',
-    teamId,
-    uid,
+    teamId = null,
+    userId,
   } = req.body
 
   // we create the uid for the invited user here
@@ -32,11 +34,11 @@ export default async function handler(req, res) {
     actionId,
     color,
     invitedUserId,
+    invitedUserName,
     message,
-    name,
-    sender,
-    teamId,
-    uid,
+    referredByTeamId: teamId, // this is the inviting users teamId, NOT the team that she got invited from
+    referredByUserId: userId, // this is the inviting users userId, NOT the userId of the person that she got invited from
+    senderName,
   })
 
   const shareLink = `${process.env.NEXT_PUBLIC_URL}/${
@@ -84,11 +86,13 @@ export default async function handler(req, res) {
     // test firestore
     await trackInvite({
       invitedUserId,
-      invitedUserName: name,
+      invitedUserName,
+      referredByTeamId,
+      referredByUserId,
+      senderName: senderName,
       shortLink,
       teamId,
-      userId: uid,
-      userName: sender,
+      userId,
     })
 
     return res.status(200).json({ invitedUserId, ogImageUrl, shortLink })

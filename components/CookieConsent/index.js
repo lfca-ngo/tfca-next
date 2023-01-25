@@ -4,18 +4,19 @@ import { Button, Col, Row } from 'antd'
 import { motion } from 'framer-motion'
 import React, { useEffect, useState } from 'react'
 
-import { useContent } from '../../hooks'
+import { useContent, useUserId } from '../../hooks'
 import {
   ANALYTICS_CONSENT_COOKIE_NAME,
   getCookie,
-  getWindowUid,
   setCookie,
   textBlockToString,
   UID_COOKIE_NAME,
 } from '../../utils'
 import { ConditionalWrapper, CookieSelector } from './helpers'
 
-export const CookieConsent = ({ presetUid }) => {
+export const CookieConsent = () => {
+  const userId = useUserId()
+
   const cookieBanner = useContent()?.metaData?.cookieBanner
   // We assume that the first cookie is required and always needs to be accepted
   const requiredCookie = cookieBanner?.levels?.[0]?.key
@@ -54,10 +55,8 @@ export const CookieConsent = ({ presetUid }) => {
     }
 
     // Set the uid cookie if we are allowed to
-    const uid =
-      all || cookiesState[ANALYTICS_CONSENT_COOKIE_NAME]
-        ? getWindowUid(presetUid)
-        : ''
+
+    const uid = all || cookiesState[ANALYTICS_CONSENT_COOKIE_NAME] ? userId : ''
     setCookie(UID_COOKIE_NAME, uid)
 
     setVisible(false)

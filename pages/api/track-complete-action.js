@@ -1,17 +1,16 @@
-import { updateActionCountOnReferredUsers } from '../../services/firebase'
+import { updateCompletedActions } from '../../services/firebase'
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).send({ message: 'Only POST requests allowed' })
   }
 
-  const { actionId, referredByUserId, userId } = req.body
+  const { actionId, userId } = req.body
 
   // Create short link
   try {
-    await updateActionCountOnReferredUsers({
+    await updateCompletedActions({
       actionId,
-      referredByUserId,
       userId,
     })
 

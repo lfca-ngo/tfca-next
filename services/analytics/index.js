@@ -1,12 +1,6 @@
 import axios from 'axios'
 
-import {
-  getCookie,
-  getWindowUid,
-  INITIAL_STATS,
-  isBrowser,
-  UID_COOKIE_NAME,
-} from '../../utils'
+import { INITIAL_STATS, isBrowser } from '../../utils'
 
 const DEFAULT_PAYLOAD = {
   api_key: process.env.NEXT_PUBLIC_GRAPH_JSON_API_KEY,
@@ -32,17 +26,13 @@ export const trackEvent = ({
   inviting_uid,
   locale,
   name,
+  userId,
   values = {},
 }) => {
   if (!isBrowser()) return
-  const uidCookie = getCookie(UID_COOKIE_NAME)
-
-  const consent = uidCookie === null ? null : Boolean(uidCookie) // UID cookie will be set with empty '' if no consent is given
-  const userId = uidCookie || getWindowUid()
 
   const event = {
     action_collection_slug,
-    consent,
     Event: name,
     inviting_uid,
     locale,
