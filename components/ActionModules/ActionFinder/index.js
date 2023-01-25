@@ -49,8 +49,8 @@ export const ActionFinderFlow = ({ module }) => {
 
   const handleGoTo = (key) => {
     if (key === ACTION_STATES.SUCCESS) {
-      completeAction()
       module?.onComplete?.()
+      completeAction()
     } else goTo(key)
   }
 
