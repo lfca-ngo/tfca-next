@@ -2,9 +2,8 @@ import { Tabs } from 'antd'
 import { useRouter } from 'next/router'
 import React, { useMemo } from 'react'
 
-import { useFlow } from '../../../hooks'
+import { ACTION_STATES, useFlow } from '../../../hooks'
 import { textBlockToString } from '../../../utils'
-import { Success } from '../../Success'
 import { Details } from './Details'
 import { Filter } from './Filter'
 import { Results } from './Results'
@@ -69,7 +68,6 @@ export const Politics = ({ module }) => {
       ...steps,
       ['results', { component: Results }],
       ['details', { component: Details }],
-      ['success', { component: Success }],
     ])
 
     return {
@@ -82,7 +80,7 @@ export const Politics = ({ module }) => {
 
   const stepsKeys = [...steps.keys()]
 
-  const { goTo, index, setStore, store } = useFlow({
+  const { completeAction, goTo, index, setStore, store } = useFlow({
     id: module?.id,
     initialIndex: stepsKeys[0],
     initialStore: {
@@ -98,7 +96,11 @@ export const Politics = ({ module }) => {
   })
 
   const handleGoTo = (key) => {
-    goTo(key)
+    // if is last item, open success drawer
+    if (key === ACTION_STATES.SUCCESS) {
+      completeAction()
+      module?.onComplete?.()
+    } else goTo(key)
   }
 
   return (

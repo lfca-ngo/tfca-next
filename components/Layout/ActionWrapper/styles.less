@@ -3,7 +3,7 @@
 @import (reference) '../../../styles/mixins.less';
 
 .action-wrapper {
-  .apply-color-scheme();
+  .apply-color-to-module();
 
   align-items: center;
   position: relative;
@@ -15,59 +15,8 @@
     min-height: auto;
   }
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    color: @white;
-  }
-
-  .ant-btn-background-ghost.ant-btn-primary {
-    &:not(.colored) {
-      color: @white;
-      border-color: @white;
-    }
-  }
-
-  a {
-    color: @white;
-    text-decoration: underline;
-  }
-
-  .action-category,
-  .action-category .ant-btn-link,
-  .title,
-  .form-group .form-group-label,
-  .ant-tabs .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn,
-  .check-list .list-elem .anticon,
-  .ant-btn-link {
-    color: @white;
-  }
-
-  .step,
-  .form-group .form-group-description,
-  .ant-form-vertical .ant-form-item-label > label,
-  .ant-checkbox-wrapper,
-  p {
-    color: fade(@white, 85%);
-  }
-
-  .ant-divider {
-    border-color: fade(@white, 75%);
-  }
-
-  .ant-tabs .ant-tabs-tab {
-    color: fade(@white, 75%);
-  }
-
   .stats-wrapper {
-    .description-wrapper {
-      color: @white;
-    }
     .ant-tag {
-      color: @white;
       border: none;
     }
   }
@@ -116,7 +65,7 @@
     h2 {
       .h2();
       margin-bottom: 20px;
-      color: @white;
+      // color: @white;
       @media @desktop {
         margin-bottom: 25px;
       }
@@ -124,7 +73,7 @@
 
     p {
       line-height: 1.4;
-      .font-regular(fade(@white, 90%));
+      // .font-regular(fade(@white, 90%));
     }
   }
 

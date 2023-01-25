@@ -1,28 +1,59 @@
 import { useState } from 'react'
 
-import { STEP } from '../services/analytics'
+import { ACTION_COMPLETED, STEP } from '../services/analytics'
+import { useTrackAction } from '../services/internal/action'
 import { scrollToId } from '../utils'
 import { useAnalytics } from './analytics'
 import { useActionStatus } from './app'
+
+export const ACTION_STATES = {
+  ACTIVE: 'active',
+  IDLE: 'idle',
+  SUCCESS: 'success',
+}
 
 // helper hook for managing the flow state of
 // the different action modules
 export const useFlow = ({ id, initialIndex, initialStore = {}, stepsKeys }) => {
   const [index, set] = useState(initialIndex)
-  const [progress, setProgress] = useState(0)
   const [store, setStore] = useState(initialStore)
   const { setActionStatus } = useActionStatus()
   const { trackEvent } = useAnalytics()
+  const {
+    mutate: trackAction,
+    // isLoading,
+    // isError,
+    // isSuccess,
+  } = useTrackAction()
+
+  const updateProgress = (keyIndex) => {
+    const progress = keyIndex / (stepsKeys.length - 1)
+    // set status for notifications
+    const status =
+      progress === 0
+        ? ACTION_STATES.IDLE
+        : progress === 1
+        ? ACTION_STATES.SUCCESS
+        : ACTION_STATES.ACTIVE
+    setActionStatus(`${id}-${status}`)
+  }
+
+  const completeAction = () => {
+    updateProgress(stepsKeys.length - 1)
+    // track completion
+    trackEvent({
+      name: ACTION_COMPLETED,
+      values: { action_id: id },
+    })
+    // also update the counter in firestore
+    trackAction(id)
+  }
 
   const goTo = (page) => {
     // track progress
     const keyIndex = stepsKeys.indexOf(page)
-    const progress = keyIndex / (stepsKeys.length - 1)
-    setProgress(progress)
-    // set status for notificatinos
-    const status =
-      progress === 0 ? 'idle' : progress === 1 ? 'success' : 'active'
-    setActionStatus(`${id}-${status}`)
+    updateProgress(keyIndex)
+
     // set the page
     set(page)
     scrollToId(id)
@@ -34,11 +65,9 @@ export const useFlow = ({ id, initialIndex, initialStore = {}, stepsKeys }) => {
   }
 
   return {
+    completeAction,
     goTo,
     index,
-    progress,
-    set,
-    setProgress,
     setStore,
     store,
   }

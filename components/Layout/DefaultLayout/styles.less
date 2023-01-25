@@ -1,0 +1,30 @@
+@import (reference) '../../../styles/variables.less';
+@import (reference) '../../../styles/fonts.less';
+@import (reference) '../../../styles/mixins.less';
+
+.default-layout {
+  .apply-base-theme();
+
+  background: @light-white;
+  overflow-x: hidden;
+  header {
+    h1 {
+      .h1-hero();
+      strong {
+        .underline-scribble();
+      }
+    }
+    h2 {
+      .default-text();
+    }
+  }
+
+  &.with-page-title {
+    .page-body {
+      margin: 40px 0;
+      @media @desktop {
+        margin: 60px 0;
+      }
+    }
+  }
+}

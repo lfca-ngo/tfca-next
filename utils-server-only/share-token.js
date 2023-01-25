@@ -16,10 +16,12 @@ const colorByName = {
 
 export function createShareToken({
   actionId,
-  names,
+  invitedUserId,
+  name,
   color = DEFAULT_COLOR,
   message = DEFAULT_MESSAGE,
   sender,
+  teamId,
   uid,
 }) {
   return jwt.sign(
@@ -27,10 +29,12 @@ export function createShareToken({
       actionId,
       color: colorByName[color],
       iat: 1648205376, // Prevent the default timestamp to always create the same token for the same input
+      invitedUserId, // uid that will be used by the invited user
       message,
-      names,
+      name,
       sender,
-      uid,
+      teamId,
+      uid, // uid of the person that sent the invite
     },
     process.env.JWT_TOKEN_PRIVATE_KEY
   )
@@ -41,18 +45,22 @@ export function decodeShareToken(token) {
     const {
       actionId = null,
       color = null,
+      invitedUserId = null,
       message = null,
-      names = null,
+      name = null,
       sender = null,
+      teamId = null,
       uid = null,
     } = jwt.verify(token, process.env.JWT_TOKEN_PRIVATE_KEY)
 
     return {
       actionId,
       color,
+      invitedUserId,
       message,
-      names,
+      name,
       sender,
+      teamId,
       uid,
     }
   } catch (e) {

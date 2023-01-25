@@ -4,7 +4,7 @@ import { ActionModules } from '../../components/ActionModules'
 import { Layout } from '../../components/Layout'
 import { fetchAllStaticData } from '../../services'
 import { fetchActionSlugs } from '../../services/contentful'
-import { WITH_SIDEBAR } from '../../utils'
+import { WITH_SIDEBAR_LAYOUT } from '../../utils'
 
 export default function ActionCollectionPage({
   actions,
@@ -13,7 +13,7 @@ export default function ActionCollectionPage({
 }) {
   return (
     <Layout
-      layout={actions?.layout || WITH_SIDEBAR}
+      layout={actions?.layout || WITH_SIDEBAR_LAYOUT}
       nav={actions?.nav}
       openGraphInfo={openGraphInfo}
     >

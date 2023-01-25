@@ -1,6 +1,7 @@
 import { Button, Space } from 'antd'
 import React from 'react'
 
+import { ACTION_STATES } from '../../../hooks'
 import { textBlockToString } from '../../../utils'
 import {
   CallToAction,
@@ -13,7 +14,6 @@ export const Results = ({
   quizLength,
   goTo,
   module: { blocks = {}, icon = {}, lists = {} },
-  nextKey,
   prevKey,
   store: { answers },
 }) => {
@@ -47,7 +47,7 @@ export const Results = ({
           <CallToAction
             data-testid="quiz-results-cta-btn"
             key={`action-${i}`}
-            onCountMeIn={() => goTo(nextKey)}
+            onCountMeIn={() => goTo(ACTION_STATES.SUCCESS)}
             showLeaveModal
             {...action}
           />
@@ -55,7 +55,12 @@ export const Results = ({
         <h4 style={{ marginTop: '15px' }}>
           {textBlockToString(blocks['results.finish.title'])}
         </h4>
-        <Button block onClick={() => goTo(nextKey)} size="large" type="primary">
+        <Button
+          block
+          onClick={() => goTo(ACTION_STATES.SUCCESS)}
+          size="large"
+          type="primary"
+        >
           {textBlockToString(blocks['results.finish.button.primary'])}
         </Button>
       </Space>

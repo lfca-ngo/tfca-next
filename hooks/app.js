@@ -1,33 +1,22 @@
 import { message } from 'antd'
 import { useRouter } from 'next/router'
-import React, {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from 'react'
-import Confetti from 'react-confetti'
+import React, { createContext, useContext, useEffect, useState } from 'react'
 
 import { PAGE_VISIT, trackEvent } from '../services/analytics'
 import { MOBILE_BREAKPOINT, textBlockToString } from '../utils'
+import { ACTION_STATES } from './flow'
 import { usePrevious } from './usePrevious'
 
 const AppContext = createContext()
 
-export const ACTIVE = 'active'
-export const IDLE = 'idle'
-export const SUCCESS = 'success'
 export const HAS_WARNED = 'has-warned'
-
 export const getStatusString = (id, status) => `${id}-${status}`
 
 // content is passed during the build process on every page
 // therefore the translation provider is fulled on boot up
 export const AppProvider = ({ children, content, customization = null }) => {
-  const [actionStatus, setActionStatus] = useState('idle')
+  const [actionStatus, setActionStatus] = useState(ACTION_STATES.IDLE)
   const [activeAction, setActiveAction] = useState()
-  const [showConfetti, setShowConfetti] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
   const [isClient, setClient] = useState(false)
   const prevActiveAction = usePrevious(activeAction)
@@ -43,7 +32,8 @@ export const AppProvider = ({ children, content, customization = null }) => {
   // being left before being completed
   useEffect(() => {
     if (
-      actionStatus === getStatusString(prevActiveAction, ACTIVE) &&
+      actionStatus ===
+        getStatusString(prevActiveAction, ACTION_STATES.ACTIVE) &&
       activeAction !== prevActiveAction
     ) {
       message.info({ content: statusMessage, style: { fontSize: '18px' } })
@@ -82,14 +72,8 @@ export const AppProvider = ({ children, content, customization = null }) => {
         key,
         setActionStatus,
         setActiveAction,
-        setShowConfetti,
       }}
     >
-      {showConfetti && (
-        <div className="confetti-wrapper">
-          <Confetti />
-        </div>
-      )}
       {children}
     </AppContext.Provider>
   )
@@ -103,6 +87,14 @@ export const useCustomization = () => {
 export const useActiveAction = () => {
   const { activeAction, setActiveAction } = useContext(AppContext)
   return { activeAction, setActiveAction }
+}
+
+export const useActionStatus = () => {
+  const context = useContext(AppContext)
+  return {
+    actionStatus: context?.actionStatus,
+    setActionStatus: context?.setActionStatus,
+  }
 }
 
 export const useContent = () => {
@@ -125,33 +117,9 @@ export const useContentNavs = (key) => {
   return context.content?.navs?.[key] || ''
 }
 
-export const useActionStatus = () => {
-  const context = useContext(AppContext)
-  return {
-    actionStatus: context?.actionStatus,
-    setActionStatus: context?.setActionStatus,
-  }
-}
-
 export const useContentLists = (key) => {
   const context = useContext(AppContext)
   return context.content?.metaData?.lists[key] || { items: [] }
-}
-
-export const useConfetti = () => {
-  const { setShowConfetti } = useContext(AppContext)
-
-  const fireConfetti = useCallback(() => {
-    setShowConfetti(true)
-    let timer = setTimeout(() => setShowConfetti(false), 3500)
-    return () => clearTimeout(timer)
-  }, [setShowConfetti])
-
-  useEffect(() => {
-    fireConfetti()
-  }, [fireConfetti])
-
-  return true
 }
 
 export const useIsMobile = () => {

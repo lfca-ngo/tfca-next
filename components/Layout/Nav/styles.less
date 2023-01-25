@@ -2,91 +2,13 @@
 @import (reference) '../../../styles/fonts.less';
 @import (reference) '../../../styles/mixins.less';
 
-.link-font-style(@color) {
-  .font-medium(@color);
-  letter-spacing: 0;
-  font-size: @font-size-sm;
-  line-height: 1;
-}
-
 nav.nav {
-  .apply-color-scheme();
   display: flex;
   width: 100%;
-
-  .ant-menu {
-    flex: 1;
-    background: transparent;
-    border-bottom: none;
-    display: flex;
-    justify-content: flex-end;
-    margin: 0;
-    align-self: flex-start;
-
-    .ant-menu-submenu,
-    .ant-menu-submenu-open,
-    .ant-menu-item {
-      padding: 20px 30px;
-      display: flex;
-      align-items: center;
-
-      &::after {
-        border-color: transparent;
-      }
-      &:hover {
-        .ant-menu-title-content {
-          .link-font-style(fade(@white, 80%));
-        }
-        &::after {
-          border-color: transparent;
-        }
-      }
-      .ant-menu-title-content,
-      .ant-btn-link {
-        .link-font-style(@white);
-      }
-      .submenu-icon {
-        font-size: 14px;
-        margin-left: 8px;
-        transition: all 0.2s ease;
-        &.open {
-          transform: rotate(180deg);
-        }
-      }
-    }
-
-    .ant-menu-title-content {
-      display: flex;
-      align-items: center;
-    }
-  }
-
-  &.absolute {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    z-index: 10;
-  }
-  &.light {
-    background-color: transparent;
-    background-image: none;
-  }
-  &.dark {
-    background-color: transparent;
-    background-image: none;
-    .ant-menu-submenu,
-    .ant-menu-item {
-      &:hover {
-        .ant-menu-title-content {
-          .link-font-style(fade(@black, 80%));
-        }
-      }
-      .ant-btn-link,
-      .ant-menu-title-content {
-        .link-font-style(@black);
-      }
-    }
-  }
+  background: @yellow;
+  height: @navbar-height;
+  align-items: center;
+  border-bottom: 1px solid @border-color-base;
 
   .nav-container {
     display: flex;

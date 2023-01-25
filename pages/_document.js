@@ -6,7 +6,7 @@ export default function Document() {
     <Html>
       <Head>
         <link
-          href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;800&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;600;800&display=swap"
           rel="stylesheet"
         />
         <link href="/favicon.ico" rel="shortcut icon" />

@@ -15,7 +15,7 @@ import {
 } from '../../utils'
 import { ConditionalWrapper, CookieSelector } from './helpers'
 
-export const CookieConsent = () => {
+export const CookieConsent = ({ presetUid }) => {
   const cookieBanner = useContent()?.metaData?.cookieBanner
   // We assume that the first cookie is required and always needs to be accepted
   const requiredCookie = cookieBanner?.levels?.[0]?.key
@@ -55,7 +55,9 @@ export const CookieConsent = () => {
 
     // Set the uid cookie if we are allowed to
     const uid =
-      all || cookiesState[ANALYTICS_CONSENT_COOKIE_NAME] ? getWindowUid() : ''
+      all || cookiesState[ANALYTICS_CONSENT_COOKIE_NAME]
+        ? getWindowUid(presetUid)
+        : ''
     setCookie(UID_COOKIE_NAME, uid)
 
     setVisible(false)

@@ -1,5 +1,8 @@
-import React from 'react'
+import { Drawer } from 'antd'
+import React, { useState } from 'react'
+import Confetti from 'react-confetti'
 
+import { InviteDialog } from '../Elements/InviteDialog'
 import { ErrorBoundary } from '../ErrorBoundary'
 import { ActionWrapper } from '../Layout/ActionWrapper'
 import { ActionFinderFlow } from './ActionFinder'
@@ -8,6 +11,8 @@ import { Quiz } from './Quiz'
 import { SwitchEnergy } from './SwitchEnergy'
 
 export const ActionModules = (props) => {
+  const [open, setOpen] = useState()
+
   if (!props.actions) return null
 
   const renderAction = (action) => {
@@ -25,7 +30,7 @@ export const ActionModules = (props) => {
     }
   }
 
-  return props.actions.map((action, i) => {
+  const renderModules = props.actions.map((action, i) => {
     const color = `color-${(i % 4) + 1}`
     return (
       <ActionWrapper
@@ -42,10 +47,28 @@ export const ActionModules = (props) => {
           {renderAction({
             ...action,
             color: color,
+            onComplete: () => {
+              setOpen(true)
+            },
             otherUsers: props.stats[action.id],
           })}
         </ErrorBoundary>
       </ActionWrapper>
     )
   })
+
+  return (
+    <>
+      {renderModules}
+      <Drawer
+        className={`drawer-md`}
+        destroyOnClose
+        onClose={() => setOpen(false)}
+        visible={open}
+      >
+        <Confetti numberOfPieces={800} recycle={false} />
+        <InviteDialog otherUsers={1000} />
+      </Drawer>
+    </>
+  )
 }

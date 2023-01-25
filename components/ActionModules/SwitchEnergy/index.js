@@ -1,8 +1,7 @@
 import { Tabs } from 'antd'
 import React from 'react'
 
-import { useFlow } from '../../../hooks'
-import { Success } from '../../Success'
+import { ACTION_STATES, useFlow } from '../../../hooks'
 import { Calculate } from './Calculate'
 import { FormCheck } from './FormCheck'
 import { FormSwitch } from './FormSwitch'
@@ -17,20 +16,22 @@ const steps = new Map([
   ['form-check', FormCheck],
   ['results', Results],
   ['form-switch', FormSwitch],
-  ['success', Success],
 ])
 
 export const SwitchEnergy = ({ module }) => {
   const stepsKeys = [...steps.keys()]
 
-  const { goTo, index, setStore, store } = useFlow({
+  const { completeAction, goTo, index, setStore, store } = useFlow({
     id: module?.id,
     initialIndex: stepsKeys[0],
     stepsKeys,
   })
 
   const handleGoTo = (key) => {
-    goTo(key)
+    if (key === ACTION_STATES.SUCCESS) {
+      completeAction()
+      module?.onComplete?.()
+    } else goTo(key)
   }
 
   return (
@@ -45,10 +46,6 @@ export const SwitchEnergy = ({ module }) => {
           const Page = steps.get(key)
           const nextKey = i <= stepsKeys.length ? stepsKeys[i + 1] : null
           let prevKey = i > 0 ? stepsKeys[i - 1] : null
-
-          if (key === 'success') {
-            prevKey = undefined
-          }
 
           return (
             <TabPane key={key} tab={key}>

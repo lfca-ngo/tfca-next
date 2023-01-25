@@ -1,0 +1,14 @@
+@import (reference) '../../../styles/variables.less';
+@import (reference) '../../../styles/fonts.less';
+@import (reference) '../../../styles/mixins.less';
+
+.floating-wrapper {
+  width: 100%;
+  max-width: @container-max-width;
+  position: absolute;
+  left: 50%;
+  bottom: 50px;
+  transform: translateX(-50%);
+  display: flex;
+  padding: 0 @default-section-padding;
+}

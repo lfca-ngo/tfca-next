@@ -2,6 +2,7 @@ import { Alert, Button, Select } from 'antd'
 import debounce from 'lodash/debounce'
 import React, { useRef, useState } from 'react'
 
+import { ACTION_STATES } from '../../../hooks'
 import {
   useRobinWoodRating,
   useSearchRobinWoodProvider,
@@ -94,7 +95,7 @@ export const FormCheck = ({ goTo, module: { blocks = {}, icon = {} } }) => {
             <Button
               block
               data-testid="switch-energy-form-check-complete-btn"
-              onClick={() => goTo('success')}
+              onClick={() => goTo(ACTION_STATES.SUCCESS)}
               size="large"
               style={{ marginTop: '15px' }}
               type="primary"

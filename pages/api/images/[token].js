@@ -8,10 +8,10 @@ import { createShareSvg, decodeShareToken } from '../../../utils-server-only'
  * See: https://github.com/lovell/sharp/issues/2499#issuecomment-987643630
  */
 path.resolve(process.cwd(), 'fonts', 'fonts.conf')
-path.resolve(process.cwd(), 'fonts', 'Manrope-Bold.ttf')
-path.resolve(process.cwd(), 'fonts', 'Manrope-ExtraBold.ttf')
-path.resolve(process.cwd(), 'fonts', 'Manrope-Regular.ttf')
-path.resolve(process.cwd(), 'fonts', 'Manrope-SemiBold.ttf')
+path.resolve(process.cwd(), 'fonts', 'PlusJakartaSans-Bold.ttf')
+path.resolve(process.cwd(), 'fonts', 'PlusJakartaSans-ExtraBold.ttf')
+path.resolve(process.cwd(), 'fonts', 'PlusJakartaSans-Regular.ttf')
+path.resolve(process.cwd(), 'fonts', 'PlusJakartaSans-SemiBold.ttf')
 
 export default async function handler(req, res) {
   if (req.method !== 'GET') {
@@ -20,13 +20,13 @@ export default async function handler(req, res) {
 
   try {
     const { token } = req.query
-    const { color, message, names } = decodeShareToken(token)
+    const { color, message, name } = decodeShareToken(token)
 
     const svgImage = Buffer.from(
       createShareSvg({
         color,
         message,
-        names,
+        name,
       })
     )
 

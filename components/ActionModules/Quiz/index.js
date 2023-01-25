@@ -1,8 +1,7 @@
 import { Tabs } from 'antd'
 import React, { useMemo } from 'react'
 
-import { useFlow } from '../../../hooks'
-import { Success } from '../../Success'
+import { ACTION_STATES, useFlow } from '../../../hooks'
 import { Answer } from './Answer'
 import { Intro } from './Intro'
 import { Question } from './Question'
@@ -35,13 +34,12 @@ export const Quiz = ({ module }) => {
       ['intro', { component: Intro }],
       ...flattened,
       ['results', { component: Results }],
-      ['success', { component: Success }],
     ])
   }, [quizItems])
 
   const stepsKeys = [...steps.keys()]
 
-  const { goTo, index, setStore, store } = useFlow({
+  const { completeAction, goTo, index, setStore, store } = useFlow({
     id: module?.id,
     initialIndex: stepsKeys[0],
     initialStore: {
@@ -51,7 +49,10 @@ export const Quiz = ({ module }) => {
   })
 
   const handleGoTo = (key) => {
-    goTo(key)
+    if (key === ACTION_STATES.SUCCESS) {
+      completeAction()
+      module?.onComplete?.()
+    } else goTo(key)
   }
 
   return (

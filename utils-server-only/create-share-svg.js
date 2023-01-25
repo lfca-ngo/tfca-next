@@ -1,4 +1,4 @@
-export function createShareSvg({ color, message, names = null }) {
+export function createShareSvg({ color, message, name = null }) {
   return `
       <svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
       <rect width="1200" height="630" fill="${color}"/>
@@ -54,12 +54,12 @@ export function createShareSvg({ color, message, names = null }) {
         <path d="M81.4497 119.594L85.9559 124.108L97.2215 112.821" stroke="white" stroke-width="1.94702" stroke-linecap="square"/>
       </g>
      
-      <text x="120" y="128" fill="#FFFFFF" font-family="Manrope" font-size="25" font-weight="500" letter-spacing="-0.1">
+      <text x="120" y="128" fill="#FFFFFF" font-family="PlusJakartaSans" font-size="25" font-weight="500" letter-spacing="-0.1">
       Challenge completed
       </text>
       
       <rect x="66" y="509.638" width="271.552" height="27.9375" fill="#FA3EA6"/>
-      <text x="76" y="518" fill="#FFFFFF" font-family="Manrope" font-size="34" font-weight="700" letter-spacing="-1.2">
+      <text x="76" y="518" fill="#FFFFFF" font-family="PlusJakartaSans" font-size="34" font-weight="700" letter-spacing="-1.2">
         are you joining?
       </text>
 
@@ -74,26 +74,23 @@ export function createShareSvg({ color, message, names = null }) {
       })}
 
       ${
-        names?.length
+        name
           ? `
       <rect x="729" y="90" width="240" height="28" fill="#FA3EA6"/>
-      <text x="740" y="102" fill="#FFFFFF" font-family="Manrope" font-size="42" font-weight="700">
+      <text x="740" y="102" fill="#FFFFFF" font-family="PlusJakartaSans" font-size="42" font-weight="700">
         I nominate
       </text>
 
-      ${names?.map(
-        (name, i) => `
-          <svg x="769" y="${
-            144 + i * 144
-          }" width="431" height="116" viewBox="0 0 431 116" fill="none">
-            <path d="M432 0H17.5L0 116H432V0Z" fill="white" fill-opacity="0.90"/>
-            <text x="47" y="50%" dy="0.37em" fill="#12244A" font-family="Manrope" font-size="66" font-weight="700" letter-spacing="-2.1">
-              ${name}
-            </text>
-          </svg>`
-      )}`
+      <svg x="769" y="${144}" width="431" height="116" viewBox="0 0 431 116" fill="none">
+        <path d="M432 0H17.5L0 116H432V0Z" fill="white" fill-opacity="0.90"/>
+        <text x="47" y="50%" dy="0.37em" fill="#12244A" font-family="PlusJakartaSans" font-size="66" font-weight="700" letter-spacing="-2.1">
+          ${name}
+        </text>
+      </svg>
+      `
           : ''
       }
+
     </svg>
   `
 }
@@ -130,7 +127,7 @@ function createMultilineText({
   }
 
   return `
-    <text x="${x}" y="${y}" fill="#FFFFFF" font-family="Manrope" font-size="${fontSize}" font-weight="${fontWeight}" letter-spacing="${letterSpacing}">
+    <text x="${x}" y="${y}" fill="#FFFFFF" font-family="PlusJakartaSans" font-size="${fontSize}" font-weight="${fontWeight}" letter-spacing="${letterSpacing}">
       ${lines
         .map((line, i) => {
           return `<tspan x="${x}" dy="${i === 0 ? 0 : '1em'}">${line}</tspan>`

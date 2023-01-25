@@ -1,0 +1,26 @@
+@import (reference) '../../styles/variables.less';
+@import (reference) '../../styles/fonts.less';
+@import (reference) '../../styles/mixins.less';
+
+.time-counter {
+  background: fade(@black, 10%);
+  border-radius: @border-radius-base;
+  display: flex;
+  align-items: center;
+  height: @height-sm;
+  padding: 0 16px;
+
+  .time {
+    display: flex;
+    align-items: center;
+    &::before {
+      content: '';
+      display: inline-block;
+      background: @pink;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+  }
+}

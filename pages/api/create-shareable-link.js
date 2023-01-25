@@ -1,3 +1,6 @@
+import { v4 as uuidv4 } from 'uuid'
+
+import { trackInvite } from '../../services/firebase'
 import { createShareToken } from '../../utils-server-only'
 
 export default async function handler(req, res) {
@@ -11,20 +14,28 @@ export default async function handler(req, res) {
     color,
     locale,
     message,
-    names,
+    name,
     sender,
     socialDescription = '',
     socialImage,
     socialTitle = '',
+    teamId,
     uid,
   } = req.body
+
+  // we create the uid for the invited user here
+  // this will be set in the client of the user
+  // that accepted the invite
+  const invitedUserId = uuidv4()
 
   const token = createShareToken({
     actionId,
     color,
+    invitedUserId,
     message,
-    names,
+    name,
     sender,
+    teamId,
     uid,
   })
 
@@ -70,8 +81,18 @@ export default async function handler(req, res) {
     )
     const { shortLink } = await response.json()
 
-    res.status(200).json({ ogImageUrl, shortLink })
+    // test firestore
+    await trackInvite({
+      invitedUserId,
+      invitedUserName: name,
+      shortLink,
+      teamId,
+      userId: uid,
+      userName: sender,
+    })
+
+    return res.status(200).json({ invitedUserId, ogImageUrl, shortLink })
   } catch (e) {
-    throw new Error(e.message || e)
+    return res.status(500).send({ message: e.message })
   }
 }

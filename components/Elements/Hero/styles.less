@@ -1,10 +1,21 @@
 @import (reference) '../../../styles/variables.less';
 @import (reference) '../../../styles/fonts.less';
+@import (reference) '../../../styles/mixins.less';
 
 .hero {
+  background: @yellow;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  @media @desktop {
+    min-height: calc(100vh - 80px);
+  }
+
   h1 {
     .h1-hero();
-    color: @white;
+    color: @black;
     margin-bottom: 30px;
     @media @mobile {
       padding-right: 20px;
@@ -12,60 +23,74 @@
 
     strong {
       .h1-hero();
-      background-color: @pink;
-      background-image: linear-gradient(
-        270deg,
-        darken(@pink, 5%) 0%,
-        @pink 100%
-      );
-      background-size: 100%;
-      background-clip: text;
-      text-decoration: none;
-      -webkit-background-clip: text;
-      -moz-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      -moz-text-fill-color: transparent;
+      .underline-scribble();
     }
   }
   p {
     font-size: 19px;
     margin-bottom: 30px;
-    color: fade(@white, 80%);
+    color: fade(@black, 80%);
     @media @desktop {
       font-size: 26px;
     }
   }
 
-  .container-max {
-    position: relative;
-  }
-
   .content {
-    position: relative;
-    padding-top: 50px;
-    padding-bottom: 60px;
+    padding: 50px 0;
     text-align: left;
 
     @media @desktop {
       text-align: center;
-      padding-top: 60px;
-      padding-bottom: 80px;
-      padding-left: 40px;
-      padding-right: 40px;
+      padding: 30px 40px 60px;
       max-width: @container-hero-width;
       margin: 0 auto;
     }
+
+    .scroll-continue {
+      position: absolute;
+      left: 50%;
+      bottom: 10px;
+      transform: translateX(-50%);
+
+      .ant-btn {
+        background: transparent;
+        border-color: transparent;
+        color: @black;
+
+        .anticon {
+          font-size: 28px;
+        }
+      }
+    }
+
     .bg-wrapper {
       position: absolute;
-      right: -260px;
-      bottom: -240px;
-      width: 380px;
-      height: 380px;
-      @media @desktop {
-        right: -400px;
-        bottom: -240px;
-        width: 435px;
-        height: 435px;
+
+      &.mouth {
+        right: -300px;
+        bottom: -30px;
+        width: 230px;
+        height: 241px;
+        @media @desktop {
+          right: -40px;
+          bottom: auto;
+          top: 30px;
+          width: 230px;
+          height: 263px;
+        }
+      }
+
+      &.plant {
+        left: -300px;
+        bottom: -70px;
+        width: 230px;
+        height: 241px;
+        @media @desktop {
+          left: -80px;
+          bottom: -40px;
+          width: 280px;
+          height: 313px;
+        }
       }
     }
   }

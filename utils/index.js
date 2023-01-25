@@ -8,9 +8,12 @@ export const isDev = process.env.NODE_ENV === 'development'
 export const isBrowser = () => typeof window !== 'undefined'
 export const SETTINGS_ID = '48AtzIK5THq8u72j19vKw1'
 
-export const ERROR = 'error'
-export const WITH_SIDEBAR = 'with-sidebar'
-export const TOGGLE_Q_AND_A = 'toggle-q-and-a'
+// Layouts
+export const ERROR_LAYOUT = 'error'
+export const BASIC_LAYOUT = 'basic'
+export const LANDING_LAYOUT = 'landing'
+export const WITH_SIDEBAR_LAYOUT = 'with-sidebar'
+export const EMBED_LAYOUT = 'embed'
 
 const __CSS_THEME_DARK__ = 'theme-dark'
 
@@ -97,7 +100,6 @@ export const LIST_GRIDS = {
 
 export const SINGLE = 'single'
 export const MULTI = 'multi'
-export const EMBED = 'embed'
 export const DEFAULT = 'default'
 
 export const UID_COOKIE_NAME = 'ui'
@@ -121,10 +123,13 @@ export const deleteCookie = (name) => {
 }
 
 // gets & sets uid in window variable
-export const getWindowUid = () => {
+// if a presetUid is given, no new uid is created
+// this is important for the referral feature, where
+// the uid is set on the server side
+export const getWindowUid = (presetUid) => {
   if (!isBrowser()) return null
   if (window.ui) return window.ui
-  const newUid = uuidv4()
+  const newUid = presetUid || uuidv4()
   window.ui = newUid
   return newUid
 }
@@ -139,8 +144,8 @@ export const INITIAL_STATS = {
   switch_energy: 2218,
 }
 
-export const getLogoSrc = (isDarkMode) =>
-  isDarkMode ? '/images/logo_darkmode.svg' : '/images/logo.svg'
+export const getLogoSrc = (isMobile) =>
+  isMobile ? '/images/logo_mobile.svg' : '/images/logo.svg'
 
 export const getMailToLink = ({ body, cc, subject, to }) => {
   const args = []

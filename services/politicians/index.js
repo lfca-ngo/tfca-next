@@ -1,11 +1,6 @@
 import { useQuery } from 'react-query'
 
-export const fetchData = async (queryString) => {
-  const url = `/api/politicians?${queryString}`
-  const resp = await fetch(url)
-  const json = await resp.json()
-  return json
-}
+import { fetchData } from '..'
 
 export const usePoliticians = (filters = {}) => {
   let queryString = ''
