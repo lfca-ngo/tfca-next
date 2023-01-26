@@ -122,13 +122,13 @@ const updateUserScore = (currentScore, referredUser) => {
   if (!currentScore) {
     return {
       acceptedInvitesCount: 1,
-      triggeredActionsCount: completedActionsCount,
+      totalActionsTriggered: completedActionsCount,
     }
   } else {
     return {
       acceptedInvitesCount: currentScore.acceptedInvitesCount + 1,
-      triggeredActionsCount:
-        currentScore.triggeredActionsCount + completedActionsCount,
+      totalActionsTriggered:
+        currentScore.totalActionsTriggered + completedActionsCount,
     }
   }
 }
