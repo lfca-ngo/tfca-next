@@ -7,7 +7,7 @@ export const useUserScore = (userId, options) => {
 
   return useQuery(
     ['userScore', queryString],
-    async () => fetchData('/api/get-user-score', queryString),
+    async () => fetchData('/api/teams/get-user-score', queryString),
     options
   )
 }

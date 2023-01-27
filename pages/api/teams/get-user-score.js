@@ -1,16 +1,16 @@
-import { getTeamScores } from '../../services/firebase'
+import { getUserScore } from '../../../services/firebase'
 
 export default async function handler(req, res) {
   if (req.method !== 'GET') {
     return res.status(405).send({ message: 'Only GET requests allowed' })
   }
 
-  const teamId = req.query['team']
+  const userId = req.query['userId']
 
   try {
-    const teamScores = await getTeamScores(teamId)
+    const score = await getUserScore(userId)
 
-    return res.status(200).json(teamScores)
+    return res.status(200).json(score)
   } catch (e) {
     return res.status(500).send({ message: e.message })
   }

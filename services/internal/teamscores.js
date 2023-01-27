@@ -6,6 +6,6 @@ export const useTeamScores = (teamId) => {
   let queryString = `team=${teamId}`
 
   return useQuery(['teamScores', queryString], async () =>
-    fetchData('/api/get-team-scores', queryString)
+    fetchData('/api/teams/get-team-scores', queryString)
   )
 }

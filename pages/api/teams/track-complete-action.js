@@ -1,4 +1,4 @@
-import { updateCompletedActions } from '../../services/firebase'
+import { updateCompletedActions } from '../../../services/firebase'
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {

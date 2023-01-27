@@ -12,7 +12,7 @@ import {
 } from 'firebase/firestore'
 
 const USERS_COLLECTION = 'users'
-// const TEAMS_COLLECTION = 'teams'
+const TEAMS_COLLECTION = 'teams'
 
 // Helper to get count of entries in object
 const safeGetObjectsCount = (object) => {
@@ -223,4 +223,43 @@ export const getUserScore = async (userId) => {
   } catch (error) {
     throw error.message
   }
+}
+
+/**
+ * Create or update team
+ */
+export const setTeam = async ({ companyId, teamId, userId }) => {
+  const teamRef = doc(firestore, TEAMS_COLLECTION, teamId)
+  const teamDoc = await getDoc(teamRef)
+  const teamData = teamDoc.data()
+
+  // if team id already exists, check if the user requesting
+  // the change has the right to do, if yes -> allow update
+  if (team.exists() && companyId !== teamData?.companyId) {
+    throw 'Team exists and user does not have the right to update it'
+  }
+
+  // create or update a team
+  return setDoc(
+    doc(firestore, TEAMS_COLLECTION, teamId),
+    {
+      companyId: companyId,
+      createdAt: serverTimestamp(),
+      createdBy: userId,
+      teamId: teamId,
+    },
+    {
+      merge: true,
+    }
+  )
+}
+
+/**
+ * Get all created teams
+ */
+export const getAllTeams = async () => {
+  const teamsRef = collection(firestore, TEAMS_COLLECTION)
+  const teamsDoc = await getDocs(teamsRef)
+
+  return teamsDoc.data()
 }

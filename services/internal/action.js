@@ -11,7 +11,7 @@ export const useTrackAction = () => {
 
   return useMutation({
     mutationFn: (actionId) => {
-      return axios.post('/api/track-complete-action', {
+      return axios.post('/api/teams/track-complete-action', {
         actionId,
         userId,
       })
