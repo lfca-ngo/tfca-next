@@ -3,12 +3,11 @@ import React, { useMemo } from 'react'
 
 import { Layout } from '../../components/Layout'
 import { fetchAllStaticContent } from '../../services/contentful'
+import { getAllTeams } from '../../services/firebase'
 import { useTeamScores } from '../../services/internal/teamscores'
 
 // Emoji list
 const PLACES = ['🥇', '🥈', '🥉']
-// Static data for testing
-const TEAM_IDS = ['blinkist', 'springer', 'lfca']
 
 export default function LeaderBoard({ teamId = '' }) {
   const { data = [], isLoading } = useTeamScores(teamId)
@@ -107,8 +106,10 @@ export async function getStaticProps(props) {
 }
 
 export async function getStaticPaths() {
-  const paths = TEAM_IDS.map((team) => ({
-    params: { teamId: team },
+  const teams = await getAllTeams()
+
+  const paths = teams.map((team) => ({
+    params: { teamId: team.teamId },
   }))
 
   return {
