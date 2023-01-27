@@ -97,11 +97,20 @@ export async function getStaticProps(props) {
   // Fetch content
   const content = await fetchAllStaticContent(locale)
 
+  // If the team is not set, we cache the 404 for 5 mins.
+  if (!teamId) {
+    return {
+      notFound: true,
+      revalidate: 300, // 5min
+    }
+  }
+
   return {
     props: {
       content,
       teamId,
     },
+    revalidate: 86400, // 24h
   }
 }
 
