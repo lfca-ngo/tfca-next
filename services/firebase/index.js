@@ -235,7 +235,7 @@ export const setTeam = async ({ companyId, teamId, userId }) => {
 
   // if team id already exists, check if the user requesting
   // the change has the right to do, if yes -> allow update
-  if (team.exists() && companyId !== teamData?.companyId) {
+  if (teamDoc.exists() && companyId !== teamData?.companyId) {
     throw 'Team exists and user does not have the right to update it'
   }
 
