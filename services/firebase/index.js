@@ -266,3 +266,22 @@ export const getAllTeams = async () => {
 
   return result
 }
+
+/**
+ * Get team by company id
+ */
+export const getTeamsByCompanyId = async (companyId) => {
+  const teamsRef = collection(firestore, TEAMS_COLLECTION)
+
+  // get all teams by companyId
+  const teamsByCompanyIdQuery = query(
+    teamsRef,
+    where('companyId', '==', companyId)
+  )
+  const teamsByCompanyIdQuerySnapshot = await getDocs(teamsByCompanyIdQuery)
+
+  let result = []
+  teamsByCompanyIdQuerySnapshot.forEach((doc) => result.push(doc.data()))
+
+  return result
+}
