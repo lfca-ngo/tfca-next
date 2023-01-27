@@ -1,11 +1,13 @@
 import { getApp, initializeApp } from 'firebase/app'
 import {
   collection,
+  deleteDoc,
   doc,
   getDoc,
   getDocs,
   getFirestore,
   query,
+  runTransaction,
   serverTimestamp,
   setDoc,
   where,
@@ -226,32 +228,36 @@ export const getUserScore = async (userId) => {
 }
 
 /**
- * Create or update team
+ * Create team
  */
-export const setTeam = async ({ companyId, teamId, userId }) => {
+export const createTeam = async ({ companyId, teamId, userId }) => {
   const teamRef = doc(firestore, TEAMS_COLLECTION, teamId)
   const teamDoc = await getDoc(teamRef)
-  const teamData = teamDoc.data()
 
   // if team id already exists, check if the user requesting
   // the change has the right to do, if yes -> allow update
-  if (teamDoc.exists() && companyId !== teamData?.companyId) {
-    throw new Error('Team exists and user does not have the right to update it')
-  }
+  if (teamDoc.exists()) throw new Error('Team exists ')
 
   // create or update a team
-  return setDoc(
-    doc(firestore, TEAMS_COLLECTION, teamId),
-    {
-      companyId: companyId,
-      createdAt: serverTimestamp(),
-      createdBy: userId,
-      teamId: teamId,
-    },
-    {
-      merge: true,
-    }
-  )
+  // use addDoc instead and validate in security rules
+  // that the teamId is not used elsewhere
+  return setDoc(doc(firestore, TEAMS_COLLECTION, teamId), {
+    companyId: companyId,
+    createdAt: serverTimestamp(),
+    createdBy: userId,
+    teamId: teamId,
+  })
+}
+
+/**
+ * To update the team id we need to move the document
+ * to a new place
+ */
+export const deleteTeamById = async ({ teamId }) => {
+  const teamsRef = collection(firestore, TEAMS_COLLECTION)
+  const teamRef = doc(teamsRef, teamId)
+
+  return deleteDoc(teamRef)
 }
 
 /**

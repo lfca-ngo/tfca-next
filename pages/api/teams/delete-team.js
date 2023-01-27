@@ -1,4 +1,4 @@
-import { createTeam } from '../../../services/firebase'
+import { deleteTeamById } from '../../../services/firebase'
 import { validateAuthToken } from '../../../utils-server-only/validate-auth-token'
 
 // setting the team is done from the lfca member base
@@ -8,15 +8,13 @@ export default async function handler(req, res) {
   try {
     validateAuthToken(req, { requestMethod: 'POST' })
 
-    const { companyId, teamId, userId } = req.body
+    const { teamId } = req.body
 
-    if (!companyId || !teamId || !userId)
-      return res.status(500).send({ message: 'Missing params' })
+    if (!teamId) return res.status(500).send({ message: 'Missing params' })
 
-    await createTeam({
+    await deleteTeamById({
       companyId,
       teamId,
-      userId,
     })
 
     return res.status(200).json({ companyId, teamId, userId })
