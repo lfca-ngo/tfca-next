@@ -3,6 +3,7 @@ import axios from 'axios'
 import { parse } from 'json2csv'
 
 import { getDateTimeFileSuffix } from '../../../utils-server-only'
+import { validateAuthToken } from '../../../utils-server-only/validate-auth-token'
 
 const REPORTS = [
   {
@@ -32,13 +33,10 @@ const REPORTS = [
 ]
 
 export default async function handler(req, res) {
-  if (req.headers.authorization !== `Bearer ${process.env.API_ADMIN_TOKEN}`) {
-    return res.status(401).send({ message: 'Unauthorized' })
-  }
-
-  if (req.method !== 'GET') {
-    return res.status(405).send({ message: 'Only GET requests allowed' })
-  }
+  validateAuthToken(req, {
+    needsAdminRights: true,
+    requestMethod: 'GET',
+  })
 
   const recipients = process.env.CUI_REPORT_RECIPIENTS?.split(',')
   if (!recipients.length) {

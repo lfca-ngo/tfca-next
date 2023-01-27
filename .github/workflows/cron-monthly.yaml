@@ -12,7 +12,7 @@ jobs:
         name: Execute API request
         id: api
         with:
-          bearerToken: ${{ secrets.API_ADMIN_TOKEN }}
+          bearerToken: ${{ secrets.TFCA_BACKEND_ADMIN_TOKEN }}
           contentType: 'application/json'
           method: 'GET'
           timeout: 10000

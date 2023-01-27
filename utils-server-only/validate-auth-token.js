@@ -7,7 +7,7 @@ export const validateAuthToken = (req, { needsAdminRights, requestMethod }) => {
   if (!authHeader.startsWith('Bearer ')) throw new Error(`Missing auth token`)
 
   const authToken = authHeader.substring(7, authHeader.length)
-  const isValidKey = authToken === process.env.TFCA_BACKEND_KEY
+  const isValidKey = authToken === process.env.TFCA_BACKEND_TOKEN
   const isValidAdminToken = authToken === process.env.TFCA_BACKEND_ADMIN_TOKEN
 
   // basic rights
