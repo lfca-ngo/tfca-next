@@ -13,11 +13,10 @@ export default async function handler(req, res) {
     if (!teamId) return res.status(500).send({ message: 'Missing params' })
 
     await deleteTeamById({
-      companyId,
       teamId,
     })
 
-    return res.status(200).json({ companyId, teamId, userId })
+    return res.status(200).json({ teamId })
   } catch (e) {
     return res.status(500).send({ message: e.message })
   }
