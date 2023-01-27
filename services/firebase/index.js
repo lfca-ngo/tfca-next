@@ -182,7 +182,7 @@ export const getTeamScores = async (teamId) => {
 
     return teamScores
   } catch (error) {
-    throw error.message
+    throw error
   }
 }
 
@@ -221,7 +221,7 @@ export const getUserScore = async (userId) => {
       },
     }
   } catch (error) {
-    throw error.message
+    throw error
   }
 }
 
@@ -236,7 +236,7 @@ export const setTeam = async ({ companyId, teamId, userId }) => {
   // if team id already exists, check if the user requesting
   // the change has the right to do, if yes -> allow update
   if (teamDoc.exists() && companyId !== teamData?.companyId) {
-    throw 'Team exists and user does not have the right to update it'
+    throw new Error('Team exists and user does not have the right to update it')
   }
 
   // create or update a team
