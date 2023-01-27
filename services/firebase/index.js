@@ -261,5 +261,8 @@ export const getAllTeams = async () => {
   const teamsRef = collection(firestore, TEAMS_COLLECTION)
   const teamsDoc = await getDocs(teamsRef)
 
-  return teamsDoc.data()
+  let result = []
+  teamsDoc.forEach((doc) => result.push(doc.data()))
+
+  return result
 }
