@@ -178,9 +178,11 @@ export const InviteDialog = ({
             name="dynamic_invitees"
             onFinish={createInvites}
           >
-            <Form.Item label="Your team" name="team">
-              <Input disabled placeholder="Your team code" />
-            </Form.Item>
+            {teamId && (
+              <Form.Item label="Your team" name="team">
+                <Input disabled placeholder="Your team code" />
+              </Form.Item>
+            )}
 
             <Form.Item
               label="Your nickname"
