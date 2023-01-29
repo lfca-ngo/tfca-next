@@ -3,10 +3,12 @@ require('./styles.less')
 import {
   CheckCircleOutlined,
   CopyOutlined,
+  ForkOutlined,
   HistoryOutlined,
   InfoCircleOutlined,
   LikeOutlined,
   LoginOutlined,
+  SendOutlined,
   UsergroupAddOutlined,
 } from '@ant-design/icons'
 import { Badge, Button, List, message, Space, Tooltip } from 'antd'
@@ -139,12 +141,16 @@ export const UserScore = () => {
           </List.Item>
           {customization?.senderName ? (
             <List.Item actions={[<>{customization?.senderName}</>]}>
+              <SendOutlined className="title-icon" />
               Invited by
             </List.Item>
           ) : null}
 
           {teamId ? (
-            <List.Item actions={[<>{teamId}</>]}>Team</List.Item>
+            <List.Item actions={[<>{teamId}</>]}>
+              <ForkOutlined className="title-icon" />
+              Team
+            </List.Item>
           ) : null}
         </List>
 
