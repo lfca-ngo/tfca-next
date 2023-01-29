@@ -2,6 +2,7 @@ import { Badge, List } from 'antd'
 import React, { useMemo } from 'react'
 
 import { Layout } from '../../components/Layout'
+import { useUserId } from '../../hooks'
 import { fetchAllStaticContent } from '../../services/contentful'
 import { getAllTeams } from '../../services/firebase'
 import { useTeamScores } from '../../services/internal/teamscores'
@@ -11,16 +12,21 @@ const PLACES = ['🥇', '🥈', '🥉']
 
 export default function LeaderBoard({ teamId = '' }) {
   const { data = [], isLoading } = useTeamScores(teamId)
+  const userId = useUserId()
 
   const team = teamId.charAt(0).toUpperCase() + teamId.slice(1)
 
   const sortedStats = useMemo(() => {
-    return data?.sort((a, b) => {
-      const sum = (a) =>
-        a.totalActionsTriggered + a.invitesCount + a.acceptedInvitesCount
-      return sum(b) - sum(a)
-    })
+    return data
+      ?.sort((a, b) => {
+        const sum = (a) =>
+          a.totalActionsTriggered + a.invitesCount + a.acceptedInvitesCount
+        return sum(b) - sum(a)
+      })
+      .map((user) => ({ ...user, isActive: user.userId === userId }))
   }, [data])
+
+  console.log(' s', sortedStats, userId)
 
   return (
     <Layout

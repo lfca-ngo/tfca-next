@@ -8,7 +8,7 @@ import {
   SendOutlined,
   UserAddOutlined,
 } from '@ant-design/icons'
-import { Alert, Button, Collapse, Divider, Form, Input } from 'antd'
+import { Alert, Button, Collapse, Divider, Form, Input, message } from 'antd'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 
@@ -18,6 +18,7 @@ import {
   useCustomization,
   useUserId,
 } from '../../../hooks'
+import { useUserScore } from '../../../services/internal/userscore'
 import { textBlockToString } from '../../../utils'
 import { CheckList, LoadingSpinner } from '../../Elements'
 import { Share } from './Share'
@@ -29,7 +30,7 @@ const RESULTS = 'results'
 
 const { useForm } = Form
 
-const MAX_INVITES = 5
+const MAX_INVITES = 10
 const NAMES = ['Carla', 'Yasmin', 'Kim']
 
 export const InviteDialog = ({
@@ -40,18 +41,21 @@ export const InviteDialog = ({
 }) => {
   const customization = useCustomization()
   const userId = useUserId()
-
+  const { data, isLoading } = useUserScore(userId)
+  const user = data?.user
   const benefits = useContentLists('sharing.benefits')?.items
   const [isGeneratingToken, setIsGeneratingToken] = useState(false)
-  // const [error, setError] = useState('')
   const [activeCollapseKey, setActiveCollapseKey] = useState(CREATE)
   const [invites, setInvites] = useState([])
   const [form] = useForm()
 
-  // const customization = useCustomization()
   const { locale, query } = useRouter()
   const { actionCollectionSlug, team } = query
   const isPartOfTeam = !!team
+
+  // team can be set in customization or in db
+  const teamId = user?.teamId || team
+  const userName = user?.name || customization?.invitedUserName
 
   const addInvite = textBlockToString(
     useContentBlocks('sharing.button.addinvite')
@@ -85,7 +89,6 @@ export const InviteDialog = ({
       )
     }
 
-    // setVisible(true)
     setIsGeneratingToken(true)
 
     const results = await Promise.all(invites.map((invite) => invite()))
@@ -95,9 +98,7 @@ export const InviteDialog = ({
   }
 
   const createInvite = async ({ name, sender }) => {
-    // setError('')
     // Generate the share token
-
     try {
       const response = await fetch('/api/create-shareable-link', {
         body: JSON.stringify({
@@ -114,7 +115,7 @@ export const InviteDialog = ({
           socialTitle: textBlockToString(socialTitle, {
             name: name || '',
           }).replace(/\*/g, ''),
-          teamId: team, // this is the teamId of the inviting user
+          teamId: teamId, // this is the teamId of the inviting user
           userId: userId, // this is the uid of the inviting user
         }),
         headers: {
@@ -132,21 +133,31 @@ export const InviteDialog = ({
         shortLink,
       }
     } catch (e) {
-      // setError('Failed to generate link')
+      message.error('Failed to create sharing link')
     }
   }
 
+  // prepopulate the team id
   useEffect(() => {
-    if (team) {
-      form.setFieldsValue({ team: team?.toLocaleUpperCase() })
+    if (teamId) {
+      form.setFieldsValue({ team: teamId?.toLocaleUpperCase() })
     }
-  }, [form, team])
+  }, [form, teamId])
+
+  // prepopulate the name
+  useEffect(() => {
+    if (userName) {
+      form.setFieldsValue({ sender: userName })
+    }
+  }, [form, userName])
 
   return (
     <div className="invite-dialog">
       <h1>Invite friends</h1>
       <p>
-        {team ? `You are part of the ${team?.toLocaleUpperCase()} team.` : ''}
+        {teamId
+          ? `You are part of the ${teamId?.toLocaleUpperCase()} team.`
+          : ''}
         Every friend that clicks on your invitation and/or takes action, adds
         points to your score. Win the challenge and help our planet.
       </p>
@@ -274,7 +285,8 @@ export const InviteDialog = ({
           </Form>
         </Panel>
         <Panel
-          header={<>{isGeneratingToken && <LoadingOutlined />} Results</>}
+          extra={(isGeneratingToken || isLoading) && <LoadingOutlined />}
+          header={'Your invite links'}
           key={RESULTS}
         >
           {isGeneratingToken ? (
@@ -284,7 +296,13 @@ export const InviteDialog = ({
               label={'...loading'}
             />
           ) : (
-            <>{invites && <Share invites={invites} />}</>
+            <>
+              {invites && invites.length > 0 ? (
+                <Share invites={invites} />
+              ) : (
+                'Use the form above to create your custom invite links!'
+              )}
+            </>
           )}
         </Panel>
       </Collapse>
