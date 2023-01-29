@@ -24,9 +24,7 @@ export default function LeaderBoard({ teamId = '' }) {
         return sum(b) - sum(a)
       })
       .map((user) => ({ ...user, isActive: user.userId === userId }))
-  }, [data])
-
-  console.log(' s', sortedStats, userId)
+  }, [data, userId])
 
   return (
     <Layout
@@ -54,7 +52,7 @@ export default function LeaderBoard({ teamId = '' }) {
         renderItem={(item, i) => {
           const emoji = PLACES[i] || '⭐️'
           return (
-            <List.Item className={item.active ? 'active' : ''}>
+            <List.Item className={item.isActive ? 'active' : ''}>
               <div className="table-item">
                 <div
                   className="table-col col-10 align-left"
