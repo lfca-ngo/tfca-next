@@ -3,6 +3,9 @@ import { v4 as uuidv4 } from 'uuid'
 import { trackInvite } from '../../services/firebase'
 import { createShareToken } from '../../utils-server-only'
 
+const DEFAULT_SHARING_IMAGE_URL =
+  'https://res.cloudinary.com/dhpk1grmy/image/upload/v1675260867/TFCA%20Campaign/Share%20Images/default-sharing-image_wmgwkc.png'
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).send({ message: 'Only POST requests allowed' })
@@ -12,14 +15,14 @@ export default async function handler(req, res) {
     actionCollectionSlug,
     actionId,
     color,
-    invitedUserName,
+    invitedUserName = null,
     locale,
     message,
     referredByTeamId = null,
     referredByUserId = null,
     senderName,
     socialDescription = '',
-    socialImage,
+    socialImage = DEFAULT_SHARING_IMAGE_URL,
     socialTitle = '',
     teamId = null,
     userId,
@@ -44,8 +47,9 @@ export default async function handler(req, res) {
   const shareLink = `${process.env.NEXT_PUBLIC_URL}/${
     locale ? `${locale}/` : ''
   }${actionCollectionSlug}/invite/${token}`
-  const ogImageUrl =
-    socialImage || `${process.env.NEXT_PUBLIC_URL}/api/images/${token}`
+  const ogImageUrl = !invitedUserName
+    ? socialImage
+    : `${process.env.NEXT_PUBLIC_URL}/api/images/${token}`
 
   // Create short link
   try {

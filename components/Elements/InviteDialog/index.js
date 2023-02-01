@@ -78,16 +78,12 @@ export const InviteDialog = ({
         })
     )
 
-    // If no name is entered, a general invite will be generated
-    // This will only add a general invite on top of individual ones
-    if (!values.names[0]) {
-      // Add a general invite
-      invites.push(() =>
-        createInvite({
-          sender,
-        })
-      )
-    }
+    // Always add a generic invite
+    invites.push(() =>
+      createInvite({
+        sender,
+      })
+    )
 
     setIsGeneratingToken(true)
 
