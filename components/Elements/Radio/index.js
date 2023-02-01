@@ -1,6 +1,6 @@
 require('./styles.less')
 
-import { QuestionCircleOutlined } from '@ant-design/icons'
+import { CheckCircleFilled, QuestionCircleOutlined } from '@ant-design/icons'
 import { Checkbox, Popover } from 'antd'
 import classNames from 'classnames'
 import Image from 'next/image'
@@ -11,7 +11,7 @@ import { textBlockToString } from '../../../utils'
 
 export const SELECT_ALL = 'SELECT_ALL'
 
-const CustomCheckbox = ({ item }) => {
+const CustomCheckbox = ({ item, layout }) => {
   return (
     <Checkbox
       className={classNames({ correct: item.isCorrect })}
@@ -33,6 +33,9 @@ const CustomCheckbox = ({ item }) => {
           )}
         </div>
       </span>
+      {layout === 'vertical' && (
+        <CheckCircleFilled className="checkmark-icon" />
+      )}
     </Checkbox>
   )
 }
@@ -84,7 +87,7 @@ export const Radio = ({
     <span className={classNames('multi-select', quizAnswerStatus, layout)}>
       <Checkbox.Group onChange={onCheckboxChange} value={selected}>
         {items.map((item, i) => (
-          <CustomCheckbox item={item} key={`selected-${i}`} />
+          <CustomCheckbox item={item} key={`selected-${i}`} layout={layout} />
         ))}
         {enableSelectAll && (
           <CustomCheckbox

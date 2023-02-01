@@ -83,6 +83,21 @@
         margin-left: @gutter-width;
         margin-right: @gutter-width;
         flex: 1;
+        position: relative;
+
+        .checkmark-icon {
+          display: none;
+          position: absolute;
+          right: 10px;
+          bottom: 10px;
+          color: @pink;
+        }
+
+        &.ant-checkbox-wrapper-checked {
+          .checkmark-icon {
+            display: flex;
+          }
+        }
 
         &:first-child {
           margin-left: 0;
@@ -124,11 +139,11 @@
       align-items: center;
       flex-direction: row-reverse;
       width: 100%;
-      background: fade(@black, 5%);
+      background: fade(@white, 50%);
       margin-bottom: 14px;
       padding: 12px 14px;
       border-radius: @border-radius-base;
-      border: 1px solid fade(@black, 20%);
+      border: none;
       transition: all 0.3s ease;
       color: @black;
 
@@ -142,6 +157,7 @@
       &.ant-checkbox-wrapper-checked {
         background: @white;
         color: @black;
+
         .ant-checkbox + span {
           flex: 1;
           .label-wrapper {
