@@ -5,6 +5,7 @@ on:
       - '**'
   repository_dispatch:
     types: [publish-event]
+  workflow_dispatch:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
