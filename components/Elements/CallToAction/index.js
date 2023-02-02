@@ -1,6 +1,7 @@
 require('./styles.less')
 
 import { Button } from 'antd'
+import classNames from 'classnames'
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { useState } from 'react'
@@ -47,6 +48,7 @@ const CallToActionWrapper = (props) => {
 
 const CtaButton = ({
   block,
+  className,
   ghost,
   icon,
   onClick,
@@ -59,7 +61,7 @@ const CtaButton = ({
   return (
     <Button
       block={block}
-      className={`cta-button`}
+      className={classNames('cta-button', className)}
       data-testid={props['data-testid']}
       ghost={ghost}
       icon={

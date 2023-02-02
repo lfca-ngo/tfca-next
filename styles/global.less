@@ -67,6 +67,19 @@ body {
 }
 
 .ant-btn {
+  &.secondary-btn {
+    background: fade(@white, 40%);
+    border-color: transparent;
+    color: @black;
+    &:hover {
+      background: fade(@white, 50%);
+      border-color: transparent;
+      color: @black;
+    }
+  }
+}
+
+.ant-btn {
   &.ant-btn-background-ghost .anticon {
     color: @primary-color;
   }
