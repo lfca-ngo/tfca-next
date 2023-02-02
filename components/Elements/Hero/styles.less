@@ -13,6 +13,19 @@
     min-height: calc(100vh - 80px);
   }
 
+  .hero-title {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+
+    height: calc(2 * @h1-hero-xs + 15px);
+
+    @media @desktop {
+      height: calc(2 * @h1-hero-xl + 15px);
+    }
+  }
+
   h1 {
     .h1-hero();
     color: @black;
@@ -22,7 +35,6 @@
     }
 
     strong {
-      .h1-hero();
       .underline-scribble();
     }
   }

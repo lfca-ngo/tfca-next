@@ -7,12 +7,13 @@ import { useRouter } from 'next/router'
 import React from 'react'
 
 import { useContentBlocks, useCustomization } from '../../../hooks'
+import useFitText from '../../../hooks/useTextfit'
 import { textBlockToString } from '../../../utils'
 import { ChallengeStatus } from '../ChallengeStatus'
 import { FloatingWrapper } from '../FloatingWrapper'
 
 export const Hero = ({ onClick, openGraphInfo }) => {
-  const { query } = useRouter()
+  const { isReady, query } = useRouter()
   const { team } = query
   const teamCapitalized = team?.charAt(0).toUpperCase() + team?.slice(1)
 
@@ -24,6 +25,8 @@ export const Hero = ({ onClick, openGraphInfo }) => {
     useContentBlocks('header.title.recipients.fallback')
   )
   const pageSubtitle = useContentBlocks('header.body')
+
+  const { fontSize, ref } = useFitText()
 
   return (
     <div className="hero">
@@ -46,23 +49,33 @@ export const Hero = ({ onClick, openGraphInfo }) => {
             />
           </div>
 
-          <h1 data-testid="hero-title">
-            {team ? (
-              <>
-                Take action with <strong>{teamCapitalized}</strong>{' '}
-              </>
-            ) : customization?.invitedUserName ? (
-              textBlockToString(
-                customBlock,
-                {
-                  name: customization.invitedUserName || recipientsFallback,
-                },
-                {},
-                true
-              )
-            ) : (
-              textBlockToString(defaultBlock, {}, true)
-            )}
+          <h1>
+            <div
+              className="hero-title"
+              data-testid="hero-title"
+              key={isReady ? 'ready' : ''}
+              ref={ref}
+              style={{ fontSize }}
+            >
+              <div>
+                {team ? (
+                  <>
+                    Take action with <strong>{teamCapitalized}</strong>{' '}
+                  </>
+                ) : customization?.invitedUserName ? (
+                  textBlockToString(
+                    customBlock,
+                    {
+                      name: customization.invitedUserName || recipientsFallback,
+                    },
+                    {},
+                    true
+                  )
+                ) : (
+                  textBlockToString(defaultBlock, {}, true)
+                )}
+              </div>
+            </div>
           </h1>
           <p>
             {team
