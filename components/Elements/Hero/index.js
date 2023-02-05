@@ -4,7 +4,7 @@ import { CaretDownOutlined } from '@ant-design/icons'
 import { Button } from 'antd'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import React from 'react'
+import React, { useRef, useState } from 'react'
 
 import { useContentBlocks, useCustomization } from '../../../hooks'
 import useFitText from '../../../hooks/useTextfit'
@@ -13,6 +13,8 @@ import { ChallengeStatus } from '../ChallengeStatus'
 import { FloatingWrapper } from '../FloatingWrapper'
 
 export const Hero = ({ onClick, openGraphInfo }) => {
+  const [finalContainerHeight, setFinalContainerHeight] = useState()
+  const textRef = useRef(null)
   const { isReady, query } = useRouter()
   const { team } = query
   const teamCapitalized = team?.charAt(0).toUpperCase() + team?.slice(1)
@@ -26,7 +28,19 @@ export const Hero = ({ onClick, openGraphInfo }) => {
   )
   const pageSubtitle = useContentBlocks('header.body')
 
-  const { fontSize, ref } = useFitText()
+  const onResizeFinish = () => {
+    setFinalContainerHeight(textRef?.current?.scrollHeight)
+  }
+
+  const { fontSize, ref } = useFitText({
+    minFontSize: 70,
+    onFinish: onResizeFinish,
+    resolution: 2,
+  })
+
+  const innerTextHeight = textRef?.current?.scrollHeight
+  const containerHeight = ref?.current?.scrollHeight
+  const offsetHeight = containerHeight - innerTextHeight
 
   return (
     <div className="hero">
@@ -49,7 +63,12 @@ export const Hero = ({ onClick, openGraphInfo }) => {
             />
           </div>
 
-          <h1>
+          <h1
+            style={{
+              height: finalContainerHeight,
+              marginBottom: offsetHeight || 0,
+            }}
+          >
             <div
               className="hero-title"
               data-testid="hero-title"
@@ -57,10 +76,11 @@ export const Hero = ({ onClick, openGraphInfo }) => {
               ref={ref}
               style={{ fontSize }}
             >
-              <div>
+              <span ref={textRef}>
                 {team ? (
                   <>
-                    Take action with <strong>{teamCapitalized}</strong>{' '}
+                    Take action with{' '}
+                    <span className="highlight">{teamCapitalized}</span>{' '}
                   </>
                 ) : customization?.invitedUserName ? (
                   textBlockToString(
@@ -74,7 +94,7 @@ export const Hero = ({ onClick, openGraphInfo }) => {
                 ) : (
                   textBlockToString(defaultBlock, {}, true)
                 )}
-              </div>
+              </span>
             </div>
           </h1>
           <p>

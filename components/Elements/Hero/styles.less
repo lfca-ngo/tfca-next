@@ -13,28 +13,16 @@
     min-height: calc(100vh - 80px);
   }
 
-  .hero-title {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-
-    height: calc(2 * @h1-hero-xs + 15px);
-
-    @media @desktop {
-      height: calc(2 * @h1-hero-xl + 15px);
-    }
-  }
-
   h1 {
     .h1-hero();
     color: @black;
     margin-bottom: 30px;
+    display: flex;
     @media @mobile {
       padding-right: 20px;
     }
 
-    strong {
+    .highlight {
       .underline-scribble();
     }
   }
@@ -60,6 +48,23 @@
 
     @media (min-width: @screen-xxl) {
       max-width: @container-hero-width-xl;
+    }
+
+    .hero-title {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+
+      height: calc(2 * @h1-hero-xs + 15px);
+
+      @media @desktop {
+        height: calc(2 * @h1-hero-xl + 30px);
+      }
+
+      @media (min-width: @screen-xxl) {
+        height: calc(2 * @h1-hero-xl + 70px);
+      }
     }
 
     .scroll-continue {

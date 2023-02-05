@@ -50,6 +50,9 @@ const useFitText = ({
   const [state, setState] = useState(initState)
   const { calcKey, fontSize, fontSizeMax, fontSizeMin, fontSizePrev } = state
 
+  // scrollHeight = height of content
+  // initial scrollHeight is height of div with fontSize = 100
+
   // Montior div size changes and recalculate on resize
   let animationFrameId = null
   const [ro] = useState(
@@ -90,8 +93,6 @@ const useFitText = ({
       return
     }
     if (innerHtml !== innerHtmlPrevRef.current) {
-      console.log('start due to change of div')
-
       onStart && onStart()
       setState({
         ...initState(),
@@ -106,7 +107,6 @@ const useFitText = ({
     // Don't start calculating font size until the `resizeKey` is incremented
     // above in the `ResizeObserver` callback. This avoids an extra resize
     // on initialization.
-    console.log('calcKey', calcKey)
     if (calcKey === 0) {
       return
     }
@@ -116,6 +116,7 @@ const useFitText = ({
       !!ref.current &&
       (ref.current.scrollHeight > ref.current.offsetHeight ||
         ref.current.scrollWidth > ref.current.offsetWidth)
+
     const isFailed = isOverflow && fontSize === fontSizePrev
     const isAsc = fontSize > fontSizePrev
 
@@ -155,6 +156,7 @@ const useFitText = ({
       delta = isAsc ? fontSizeMax - fontSize : fontSizePrev - fontSize
       newMin = Math.max(fontSizeMin, fontSize)
     }
+
     setState({
       calcKey,
       fontSize: fontSize + delta / 2,
@@ -173,7 +175,10 @@ const useFitText = ({
     resolution,
   ])
 
-  return { fontSize: `${fontSize}%`, ref }
+  return {
+    fontSize: `${fontSize}%`,
+    ref,
+  }
 }
 
 export default useFitText

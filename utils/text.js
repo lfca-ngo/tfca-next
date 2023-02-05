@@ -16,9 +16,15 @@ export const replaceTextVars = (text, vars) => {
 const parseMarkdownStringToReactComponents = (string) => {
   // Currently we only support *bold* marks
   const regex = /((?:^|[^\\])(?:\\.)*)\*((?:\\.|[^*])*)\*/g
-  return string
-    .split(regex)
-    .map((s, i) => (i % 3 === 2 ? <strong key={i}>{s}</strong> : s))
+  return string.split(regex).map((s, i) =>
+    i % 3 === 2 ? (
+      <span className="highlight" key={i}>
+        {s}
+      </span>
+    ) : (
+      s
+    )
+  )
 }
 
 // Returns the plain text from a block
