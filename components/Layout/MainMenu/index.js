@@ -12,6 +12,7 @@ import { IntlSelector } from '../../IntlSelector'
 import { TimeCounter } from '../../TimeCounter'
 import { CompanyMenuItem } from './CompanyMenuItem'
 import { MenuItem } from './MenuItem'
+import { QuestionsMenuItem } from './QuestionsMenuItem'
 
 export const MainMenu = ({ className = '', company, mode }) => {
   const { query } = useRouter()
@@ -26,6 +27,7 @@ export const MainMenu = ({ className = '', company, mode }) => {
           <MenuItem key="campaign" slug="/cms/about" title="The Campagin" />,
           <MenuItem key="about" slug="/cms/about-us" title="About us" />,
           <MenuItem key="overview" slug="/cms/overview" title="Participants" />,
+          <QuestionsMenuItem key="questions" title="Questions?" />,
         ]}
         title={'About'}
       />
