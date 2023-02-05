@@ -19,6 +19,8 @@ import CopyToClipboard from 'react-copy-to-clipboard'
 import { useCustomization, useLogin, useUserId } from '../../../hooks'
 import { useUserScore } from '../../../services/internal/userscore'
 
+const SCORE_PLACEHOLDER = '-'
+
 export const UserScore = () => {
   const [helpVisible, setHelpVisible] = useState(false)
   const { query } = useRouter()
@@ -36,11 +38,10 @@ export const UserScore = () => {
   const user = data?.user
   const userScore = data?.userScore
 
-  const refetch = (e) => {
+  const refetch = async (e) => {
     e.preventDefault()
     refetchUserScore()
   }
-  const SCORE_PLACEHOLDER = '-'
 
   // the users name can come from the link -> customization,
   // but can be overwritten by db entry

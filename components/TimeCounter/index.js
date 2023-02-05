@@ -3,6 +3,9 @@ require('./styles.less')
 import { Popover } from 'antd'
 import React, { useEffect, useState } from 'react'
 
+import { useUserId } from '../../hooks'
+import { useUserScore } from '../../services/internal/userscore'
+
 const formatSeconds = (duration) => {
   // Hours, minutes and seconds
   const hrs = ~~(duration / 3600)
@@ -23,6 +26,13 @@ const formatSeconds = (duration) => {
 
 export const TimeCounter = () => {
   const [seconds, setSeconds] = useState(0)
+  const userId = useUserId()
+
+  // do not actively fetch here, just check in local cache
+  const { data } = useUserScore(userId, {
+    enabled: false,
+  })
+  const hasTakenActions = !!data?.user?.completedActions
 
   useEffect(() => {
     setTimeout(() => setSeconds(seconds + 1), 1000)
@@ -30,7 +40,11 @@ export const TimeCounter = () => {
 
   return (
     <Popover
-      content="The time you’ve spent on this site without taking action 😁"
+      content={
+        hasTakenActions
+          ? 'Awesome! You have already taken action 👏'
+          : 'The time you’ve spent on this site without taking action 😁'
+      }
       overlayClassName="popover-sm"
     >
       <div className="time-counter">
