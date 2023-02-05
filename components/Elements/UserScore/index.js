@@ -198,9 +198,9 @@ export const UserScore = () => {
           </strong>
         </p>
         <p>
-          When you decide to invite others, you can give personal invites by
+          When you decide to invite others, you can personalize invites by
           adding your nickname and your invitees names. Please use only first
-          names or nicknames.
+          names or nicknames so that the data cannot be used to identify you.
         </p>
         <h5>Cookies?</h5>
         <p>
