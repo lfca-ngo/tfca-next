@@ -20,7 +20,7 @@ import {
 } from '../../../hooks'
 import { useUserScore } from '../../../services/internal/userscore'
 import { textBlockToString } from '../../../utils'
-import { CheckList, LoadingSpinner } from '../../Elements'
+import { CheckList, LoadingSpinner, SuperText } from '../../Elements'
 import { Share } from './Share'
 
 const { Panel } = Collapse
@@ -149,13 +149,14 @@ export const InviteDialog = ({
 
   return (
     <div className="invite-dialog">
-      <h1>Invite friends</h1>
+      <SuperText text={'Share the challenge'} />
+      <h2>Invite friends to join the challenge</h2>
       <p>
         {teamId
-          ? `You are part of the ${teamId?.toLocaleUpperCase()} team.`
+          ? `You are part of the ${teamId?.toLocaleUpperCase()} team. `
           : ''}
         Every friend that clicks on your invitation and/or takes action, adds
-        points to your score. Win the challenge and help our planet.
+        points to your score. Win the challenge and help our planet!
       </p>
 
       <CheckList data={benefits} vars={{ users: 'Hundreds of' }} />

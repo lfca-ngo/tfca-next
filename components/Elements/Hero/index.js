@@ -4,15 +4,18 @@ import { CaretDownOutlined } from '@ant-design/icons'
 import { Button } from 'antd'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import React from 'react'
+import React, { useRef, useState } from 'react'
 
 import { useContentBlocks, useCustomization } from '../../../hooks'
+import useFitText from '../../../hooks/useTextfit'
 import { textBlockToString } from '../../../utils'
 import { ChallengeStatus } from '../ChallengeStatus'
 import { FloatingWrapper } from '../FloatingWrapper'
 
 export const Hero = ({ onClick, openGraphInfo }) => {
-  const { query } = useRouter()
+  const [finalContainerHeight, setFinalContainerHeight] = useState()
+  const textRef = useRef(null)
+  const { isReady, query } = useRouter()
   const { team } = query
   const teamCapitalized = team?.charAt(0).toUpperCase() + team?.slice(1)
 
@@ -24,6 +27,20 @@ export const Hero = ({ onClick, openGraphInfo }) => {
     useContentBlocks('header.title.recipients.fallback')
   )
   const pageSubtitle = useContentBlocks('header.body')
+
+  const onResizeFinish = () => {
+    setFinalContainerHeight(textRef?.current?.scrollHeight)
+  }
+
+  const { fontSize, ref } = useFitText({
+    minFontSize: 70,
+    onFinish: onResizeFinish,
+    resolution: 2,
+  })
+
+  const innerTextHeight = textRef?.current?.scrollHeight
+  const containerHeight = ref?.current?.scrollHeight
+  const offsetHeight = containerHeight - innerTextHeight
 
   return (
     <div className="hero">
@@ -46,23 +63,39 @@ export const Hero = ({ onClick, openGraphInfo }) => {
             />
           </div>
 
-          <h1 data-testid="hero-title">
-            {team ? (
-              <>
-                Take action with <strong>{teamCapitalized}</strong>{' '}
-              </>
-            ) : customization?.invitedUserName ? (
-              textBlockToString(
-                customBlock,
-                {
-                  name: customization.invitedUserName || recipientsFallback,
-                },
-                {},
-                true
-              )
-            ) : (
-              textBlockToString(defaultBlock, {}, true)
-            )}
+          <h1
+            style={{
+              height: finalContainerHeight,
+              marginBottom: `${offsetHeight + 15}px`,
+            }}
+          >
+            <div
+              className="hero-title"
+              data-testid="hero-title"
+              key={isReady ? 'ready' : ''}
+              ref={ref}
+              style={{ fontSize }}
+            >
+              <span ref={textRef}>
+                {team ? (
+                  <>
+                    Take action with{' '}
+                    <span className="highlight">{teamCapitalized}</span>{' '}
+                  </>
+                ) : customization?.invitedUserName ? (
+                  textBlockToString(
+                    customBlock,
+                    {
+                      name: customization.invitedUserName || recipientsFallback,
+                    },
+                    {},
+                    true
+                  )
+                ) : (
+                  textBlockToString(defaultBlock, {}, true)
+                )}
+              </span>
+            </div>
           </h1>
           <p>
             {team

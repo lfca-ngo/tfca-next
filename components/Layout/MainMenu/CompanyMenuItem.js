@@ -1,5 +1,6 @@
 import { CloseOutlined } from '@ant-design/icons'
 import { Button, Drawer, Popover } from 'antd'
+import classNames from 'classnames'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 
@@ -32,7 +33,7 @@ const PopoverContent = ({ company, onClose }) => {
   )
 }
 
-export const CompanyMenuItem = ({ company, key }) => {
+export const CompanyMenuItem = ({ className, company, key }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [popoverOpen, setPopoverOpen] = useState(false)
 
@@ -43,7 +44,7 @@ export const CompanyMenuItem = ({ company, key }) => {
   }, [])
 
   return (
-    <li key={key}>
+    <li className={classNames('menu-item', className)} key={key}>
       <Popover
         content={
           <PopoverContent

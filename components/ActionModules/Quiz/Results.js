@@ -45,6 +45,7 @@ export const Results = ({
         <h4>{actions?.label}</h4>
         {actions?.items?.map((action, i) => (
           <CallToAction
+            className="secondary-btn"
             data-testid="quiz-results-cta-btn"
             key={`action-${i}`}
             onCountMeIn={() => goTo(ACTION_STATES.SUCCESS)}

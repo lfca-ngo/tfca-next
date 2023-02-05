@@ -67,6 +67,19 @@ body {
 }
 
 .ant-btn {
+  &.secondary-btn {
+    background: fade(@white, 40%);
+    border-color: transparent;
+    color: @black;
+    &:hover {
+      background: fade(@white, 50%);
+      border-color: transparent;
+      color: @black;
+    }
+  }
+}
+
+.ant-btn {
   &.ant-btn-background-ghost .anticon {
     color: @primary-color;
   }
@@ -329,14 +342,28 @@ label.ant-radio-wrapper {
     padding-right: 0;
     font-size: @font-size-sm;
     color: @black;
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
 
     .title-icon {
       margin-right: 8px;
     }
 
+    &.heading {
+      .font-medium();
+    }
+
     .ant-list-item-action {
+      margin-left: auto;
+      margin-right: 0;
+      padding-left: 50px;
+      display: flex;
+      align-items: center;
+
       li {
         padding: 0;
+        display: flex;
       }
     }
   }

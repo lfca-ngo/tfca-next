@@ -33,7 +33,13 @@ export class ErrorBoundary extends React.Component {
         <div className="error-boundary">
           <h2>Something went wrong...</h2>
           <p>The error has been automatically reported.</p>
-          <Button onClick={() => window.location.reload()}>Reload</Button>
+          <Button
+            onClick={() => window.location.reload()}
+            size="large"
+            type="primary"
+          >
+            Reload
+          </Button>
         </div>
       )
     }

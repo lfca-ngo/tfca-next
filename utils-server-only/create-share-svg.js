@@ -34,7 +34,7 @@ export function createShareSvg({ invitedUserName = null }) {
         invitedUserName
           ? `    
           <svg x="620" y="144" width="582" height="180" viewBox="0 0 582 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <text x="47" y="50%" dy="0.37em" fill="#12244A" font-family="PlusJakartaSans" font-size="80" font-weight="700" letter-spacing="-2.1">
+            <text x="47" y="50%" dy="0.37em" fill="#111111" font-family="PlusJakartaSans" font-size="80" font-weight="700" letter-spacing="-2.1">
               ${invitedUserName}
             </text>
           </svg>`

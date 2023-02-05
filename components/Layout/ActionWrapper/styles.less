@@ -21,6 +21,15 @@
     }
   }
 
+  .ant-btn-lg.ant-btn-background-ghost.ant-btn-primary {
+    background: fade(@white, 30%);
+    border-color: transparent;
+    color: @black;
+    &:hover {
+      background: fade(@white, 40%);
+    }
+  }
+
   .action-container {
     padding-top: 50px;
     padding-bottom: 50px;
@@ -65,7 +74,6 @@
     h2 {
       .h2();
       margin-bottom: 20px;
-      // color: @white;
       @media @desktop {
         margin-bottom: 25px;
       }
@@ -73,7 +81,6 @@
 
     p {
       line-height: 1.4;
-      // .font-regular(fade(@white, 90%));
     }
   }
 
