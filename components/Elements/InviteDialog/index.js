@@ -23,8 +23,6 @@ import { textBlockToString } from '../../../utils'
 import { CheckList, LoadingSpinner, SuperText } from '../../Elements'
 import { Share } from './Share'
 
-import { RocketOutlined } from '@ant-design/icons'
-
 const { Panel } = Collapse
 
 const CREATE = 'create'
