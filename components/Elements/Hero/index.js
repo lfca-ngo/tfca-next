@@ -66,7 +66,7 @@ export const Hero = ({ onClick, openGraphInfo }) => {
           <h1
             style={{
               height: finalContainerHeight,
-              marginBottom: offsetHeight || 0,
+              marginBottom: `${offsetHeight + 15}px`,
             }}
           >
             <div
