@@ -50,11 +50,11 @@ export const InviteDialog = ({
   const [form] = useForm()
 
   const { locale, query } = useRouter()
-  const { actionCollectionSlug, team } = query
-  const isPartOfTeam = !!team
+  const { actionCollectionSlug, teamId: queryTeamId } = query
+  const isPartOfTeam = !!queryTeamId
 
   // team can be set in customization or in db
-  const teamId = user?.teamId || team
+  const teamId = user?.teamId || queryTeamId
   const userName = user?.name || customization?.invitedUserName
 
   const addInvite = textBlockToString(

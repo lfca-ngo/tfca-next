@@ -13,6 +13,10 @@
     min-height: calc(100vh - 80px);
   }
 
+  @media (min-width: @screen-xxl) {
+    min-height: auto;
+  }
+
   h1 {
     .h1-hero();
     color: @black;
@@ -41,7 +45,7 @@
 
     @media @desktop {
       text-align: center;
-      padding: 30px 40px 60px;
+      padding: 30px 20px 60px;
       max-width: @container-hero-width;
       margin: 0 auto;
     }
@@ -55,7 +59,6 @@
       align-items: center;
       flex-direction: column;
       justify-content: center;
-
       height: calc(2 * @h1-hero-xs + 15px);
 
       @media @desktop {

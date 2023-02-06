@@ -3,7 +3,6 @@ require('./styles.less')
 import { CaretDownOutlined } from '@ant-design/icons'
 import { Button } from 'antd'
 import Image from 'next/image'
-import { useRouter } from 'next/router'
 import React, { useRef, useState } from 'react'
 
 import { useContentBlocks, useCustomization } from '../../../hooks'
@@ -12,12 +11,11 @@ import { textBlockToString } from '../../../utils'
 import { ChallengeStatus } from '../ChallengeStatus'
 import { FloatingWrapper } from '../FloatingWrapper'
 
-export const Hero = ({ onClick, openGraphInfo }) => {
+export const Hero = ({ onClick, openGraphInfo, team }) => {
   const [finalContainerHeight, setFinalContainerHeight] = useState()
   const textRef = useRef(null)
-  const { isReady, query } = useRouter()
-  const { team } = query
-  const teamCapitalized = team?.charAt(0).toUpperCase() + team?.slice(1)
+  const teamId = team && team.teamId
+  const teamCapitalized = teamId?.charAt(0).toUpperCase() + teamId?.slice(1)
 
   const customization = useCustomization()
 
@@ -33,7 +31,7 @@ export const Hero = ({ onClick, openGraphInfo }) => {
   }
 
   const { fontSize, ref } = useFitText({
-    minFontSize: 70,
+    minFontSize: 65,
     onFinish: onResizeFinish,
     resolution: 2,
   })
@@ -72,12 +70,11 @@ export const Hero = ({ onClick, openGraphInfo }) => {
             <div
               className="hero-title"
               data-testid="hero-title"
-              key={isReady ? 'ready' : ''}
               ref={ref}
               style={{ fontSize }}
             >
               <span ref={textRef}>
-                {team ? (
+                {teamId ? (
                   <>
                     Take action with{' '}
                     <span className="highlight">{teamCapitalized}</span>{' '}
@@ -98,7 +95,7 @@ export const Hero = ({ onClick, openGraphInfo }) => {
             </div>
           </h1>
           <p>
-            {team
+            {teamId
               ? 'Your team is participating in the TFCA Teams Challenge. Collect points by completing actions and inviting friends!'
               : textBlockToString(pageSubtitle)}
           </p>

@@ -14,7 +14,13 @@ import { MainMenu } from '../MainMenu'
 import { Nav } from '../Nav'
 import { Template } from '../Template'
 
-export const ActionsLayout = ({ children, company, nav, openGraphInfo }) => {
+export const ActionsLayout = ({
+  children,
+  company,
+  nav,
+  openGraphInfo,
+  team,
+}) => {
   const [collapsed, setCollapsed] = useState(true)
   const customization = useCustomization()
 
@@ -46,6 +52,7 @@ export const ActionsLayout = ({ children, company, nav, openGraphInfo }) => {
         <Hero
           onClick={() => scrollToId(customization?.actionId || nav[0]?.id)}
           openGraphInfo={openGraphInfo}
+          team={team}
         />
         <ErrorBoundary>{children}</ErrorBoundary>
         <Footer />
