@@ -16,7 +16,7 @@ import { QuestionsMenuItem } from './QuestionsMenuItem'
 
 export const MainMenu = ({ className = '', company, mode }) => {
   const { query } = useRouter()
-  const team = query.team
+  const team = query?.teamId
 
   return (
     <ul className={classNames(`main-menu`, className, mode)}>
