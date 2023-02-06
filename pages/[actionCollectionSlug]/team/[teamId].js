@@ -6,7 +6,7 @@ import { HomeLoader } from '../../../components/Elements'
 import { Layout } from '../../../components/Layout'
 import { fetchAllStaticData } from '../../../services'
 import { getAllTeams } from '../../../services/firebase'
-import { stringToLowerCase, WITH_SIDEBAR_LAYOUT } from '../../../utils'
+import { WITH_SIDEBAR_LAYOUT } from '../../../utils'
 
 export default function TeamPage({ actions, openGraphInfo, stats, team }) {
   const router = useRouter()
