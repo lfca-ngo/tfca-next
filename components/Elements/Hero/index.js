@@ -49,16 +49,19 @@ export const Hero = ({ onClick, openGraphInfo, team }) => {
               layout="fill"
               objectFit="contain"
               objectPosition={'center'}
-              src={`/images/speaker-simple.png`}
+              src={`/images/earth-yellow.png`}
             />
           </div>
           <div className="bg-wrapper graphic-right">
-            <Image
-              layout="fill"
-              objectFit="contain"
-              objectPosition={'center'}
-              src={`/images/earth-full-phase.png`}
-            />
+            <div className="bg-image">
+              <Image
+                layout="fill"
+                objectFit="contain"
+                objectPosition={'center'}
+                src={`/images/speaker-simple.png`}
+              />
+            </div>
+            <div className="bg-wall" />
           </div>
 
           <h1

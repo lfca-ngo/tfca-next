@@ -91,21 +91,43 @@
       position: absolute;
 
       &.graphic-right {
-        right: -300px;
-        bottom: -30px;
-        width: 230px;
-        height: 241px;
-        @media @desktop {
-          right: -120px;
-          bottom: auto;
-          top: 10px;
-          width: 230px;
-          height: 263px;
+        position: absolute;
+        height: 100%;
+        width: 300px;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        height: 100%;
+
+        .bg-image {
+          right: -25px;
+          width: 360px;
+          height: 400px;
+          top: auto;
+          bottom: -50px;
+          position: absolute;
+          z-index: 20;
         }
 
-        @media (min-width: @screen-xl) {
-          width: 250px;
-          height: 303px;
+        .bg-wall {
+          right: 0;
+          width: 300px;
+          top: 0;
+          bottom: 0;
+          position: absolute;
+          z-index: 10;
+
+          // light background
+          &::after {
+            background-image: url('/images/yellow-bg.svg');
+            background-position: left bottom;
+            background-size: cover;
+            height: 100%;
+            width: 400px;
+            left: 50px;
+            content: '';
+            position: absolute;
+          }
         }
       }
 
@@ -115,15 +137,16 @@
         width: 230px;
         height: 241px;
         @media @desktop {
-          left: -40px;
-          bottom: -30px;
-          width: 300px;
-          height: 333px;
+          left: -90px;
+          bottom: auto;
+          top: 30px;
+          width: 230px;
+          height: 253px;
         }
 
         @media (min-width: @screen-xl) {
-          width: 330px;
-          height: 353px;
+          width: 280px;
+          height: 313px;
         }
       }
     }
