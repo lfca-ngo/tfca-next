@@ -3,7 +3,7 @@
 @import (reference) '../../../styles/mixins.less';
 
 .hero {
-  background: @yellow;
+  background: @color-base;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -90,39 +90,39 @@
     .bg-wrapper {
       position: absolute;
 
-      &.mouth {
+      &.graphic-right {
         right: -300px;
         bottom: -30px;
         width: 230px;
         height: 241px;
         @media @desktop {
-          right: -40px;
+          right: -120px;
           bottom: auto;
-          top: 30px;
+          top: 10px;
           width: 230px;
           height: 263px;
         }
 
         @media (min-width: @screen-xl) {
-          width: 270px;
-          height: 323px;
+          width: 250px;
+          height: 303px;
         }
       }
 
-      &.plant {
+      &.graphic-left {
         left: -300px;
         bottom: -70px;
         width: 230px;
         height: 241px;
         @media @desktop {
-          left: -80px;
-          bottom: -40px;
-          width: 280px;
-          height: 313px;
+          left: -40px;
+          bottom: -30px;
+          width: 300px;
+          height: 333px;
         }
 
         @media (min-width: @screen-xl) {
-          width: 320px;
+          width: 330px;
           height: 353px;
         }
       }
