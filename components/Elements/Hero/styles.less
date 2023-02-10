@@ -40,7 +40,7 @@
   }
 
   .content {
-    padding: 50px 0;
+    padding: 50px 0 70px;
     text-align: left;
 
     @media @desktop {
@@ -92,30 +92,48 @@
 
       &.graphic-right {
         position: absolute;
-        height: 100%;
-        width: 300px;
-        right: 0;
-        top: 0;
+        height: 160px;
+        width: 120px;
+        right: -200px;
+        top: auto;
         bottom: 0;
-        height: 100%;
+
+        @media @desktop {
+          right: 0;
+          height: 100%;
+          width: 300px;
+          top: 0;
+          bottom: 0;
+        }
 
         .bg-image {
-          right: -45px;
-          width: 360px;
-          height: 400px;
+          right: 140px;
+          width: 180px;
+          height: 200px;
           top: auto;
-          bottom: -50px;
+          bottom: -20px;
           position: absolute;
           z-index: 20;
+
+          @media @desktop {
+            width: 360px;
+            height: 400px;
+            right: -45px;
+            bottom: -50px;
+          }
         }
 
         .bg-wall {
           right: 0;
-          width: 300px;
+          width: 0;
           top: 0;
           bottom: 0;
           position: absolute;
           z-index: 10;
+
+          @media @desktop {
+            width: 300px;
+          }
 
           // light background
           &::after {
