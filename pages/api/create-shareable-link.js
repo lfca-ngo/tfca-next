@@ -4,7 +4,7 @@ import { trackInvite } from '../../services/firebase'
 import { createShareToken } from '../../utils-server-only'
 
 const DEFAULT_SHARING_IMAGE_URL =
-  'https://res.cloudinary.com/dhpk1grmy/image/upload/v1675260867/TFCA%20Campaign/Share%20Images/default-sharing-image_wmgwkc.png'
+  'https://res.cloudinary.com/dhpk1grmy/image/upload/v1676207800/TFCA%20Campaign/Share%20Images/og-image-tfca_tue9xc.png'
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {

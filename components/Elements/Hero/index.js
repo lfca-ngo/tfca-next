@@ -1,7 +1,7 @@
 require('./styles.less')
 
 import { CaretDownOutlined } from '@ant-design/icons'
-import { Button, Tag } from 'antd'
+import { Button } from 'antd'
 import Image from 'next/image'
 import React, { useRef, useState } from 'react'
 
