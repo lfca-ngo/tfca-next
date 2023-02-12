@@ -1,13 +1,14 @@
 require('./styles.less')
 
 import { CaretDownOutlined } from '@ant-design/icons'
-import { Button } from 'antd'
+import { Button, Tag } from 'antd'
 import Image from 'next/image'
 import React, { useRef, useState } from 'react'
 
 import { useContentBlocks, useCustomization } from '../../../hooks'
 import useFitText from '../../../hooks/useTextfit'
 import { textBlockToString } from '../../../utils'
+import { TopBar } from '../../Layout/TopBar'
 import { ChallengeStatus } from '../ChallengeStatus'
 import { FloatingWrapper } from '../FloatingWrapper'
 
@@ -63,6 +64,8 @@ export const Hero = ({ onClick, openGraphInfo, team }) => {
             </div>
             <div className="bg-wall" />
           </div>
+
+          <TopBar />
 
           <h1
             style={{

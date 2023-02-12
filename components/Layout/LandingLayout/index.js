@@ -15,7 +15,7 @@ export const LandingLayout = ({
   style,
 }) => {
   return (
-    <Template className="landing-layout" withTopbar>
+    <Template className="landing-layout">
       <Nav className={`${style || ''} absolute`} mode={navigationStyle} />
       <main>
         <ErrorBoundary>{children}</ErrorBoundary>

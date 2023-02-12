@@ -5,9 +5,8 @@ import Head from 'next/head'
 import React, { Fragment } from 'react'
 
 import { CookieConsent } from '../../CookieConsent'
-import { TopBar } from '../TopBar'
 
-export const Template = ({ children, className, withTopbar }) => {
+export const Template = ({ children, className }) => {
   return (
     <Fragment>
       <div className={classNames('siteRoot', className)}>
@@ -16,7 +15,7 @@ export const Template = ({ children, className, withTopbar }) => {
           <meta charSet="utf-8" />
           <link href="/favicon.ico" rel="icon" />
         </Head>
-        {withTopbar && <TopBar />}
+
         <div className="siteContent">
           {children}
           <CookieConsent />
