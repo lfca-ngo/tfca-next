@@ -3,14 +3,7 @@ import { Avatar, Dropdown } from 'antd'
 import classNames from 'classnames'
 import React from 'react'
 
-import { CustomLink } from './CustomLink'
-
-const Title = ({ icon, slug, title, url }) => (
-  <CustomLink slug={slug} url={url}>
-    {icon && <span className="icon">{icon}</span>}
-    <span className="title">{title}</span>
-  </CustomLink>
-)
+import { Title } from './Title'
 
 export const MenuItem = ({
   className,

@@ -1,5 +1,5 @@
-import { CloseOutlined } from '@ant-design/icons'
-import { Button, Drawer, Popover } from 'antd'
+import { CloseOutlined, InfoOutlined } from '@ant-design/icons'
+import { Avatar, Button, Drawer, Popover } from 'antd'
 import classNames from 'classnames'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
@@ -7,6 +7,7 @@ import React, { useEffect, useState } from 'react'
 import { useContentBlocks } from '../../../hooks'
 import { textBlockToString } from '../../../utils'
 import { Disclosure } from '../../Disclosure'
+import { Title } from './Title'
 
 const PopoverContent = ({ company, onClose }) => {
   return (
@@ -56,7 +57,12 @@ export const CompanyMenuItem = ({ className, company, key }) => {
         visible={popoverOpen}
         zIndex={10}
       >
-        <span onClick={() => setIsOpen(true)}>{company?.name}</span>
+        <span onClick={() => setIsOpen(true)}>
+          <Title
+            icon={<Avatar icon={<InfoOutlined />} />}
+            title={company?.name}
+          />
+        </span>
       </Popover>
       <Drawer
         className="drawer-md"
