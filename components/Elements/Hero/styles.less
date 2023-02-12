@@ -3,7 +3,7 @@
 @import (reference) '../../../styles/mixins.less';
 
 .hero {
-  background: @yellow;
+  background: @color-base;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -40,7 +40,7 @@
   }
 
   .content {
-    padding: 50px 0;
+    padding: 50px 0 70px;
     text-align: left;
 
     @media @desktop {
@@ -90,40 +90,81 @@
     .bg-wrapper {
       position: absolute;
 
-      &.mouth {
-        right: -300px;
-        bottom: -30px;
-        width: 230px;
-        height: 241px;
+      &.graphic-right {
+        position: absolute;
+        height: 160px;
+        width: 120px;
+        right: -200px;
+        top: auto;
+        bottom: 0;
+
         @media @desktop {
-          right: -40px;
-          bottom: auto;
-          top: 30px;
-          width: 230px;
-          height: 263px;
+          right: 0;
+          height: 100%;
+          width: 300px;
+          top: 0;
+          bottom: 0;
         }
 
-        @media (min-width: @screen-xl) {
-          width: 270px;
-          height: 323px;
+        .bg-image {
+          right: 140px;
+          width: 180px;
+          height: 200px;
+          top: auto;
+          bottom: -20px;
+          position: absolute;
+          z-index: 20;
+
+          @media @desktop {
+            width: 360px;
+            height: 400px;
+            right: -45px;
+            bottom: -50px;
+          }
+        }
+
+        .bg-wall {
+          right: 0;
+          width: 0;
+          top: 0;
+          bottom: 0;
+          position: absolute;
+          z-index: 10;
+
+          @media @desktop {
+            width: 300px;
+          }
+
+          // light background
+          &::after {
+            background-image: url('/images/yellow-bg.svg');
+            background-position: left bottom;
+            background-size: cover;
+            height: 100%;
+            width: 400px;
+            left: 70px;
+            content: '';
+            position: absolute;
+          }
         }
       }
 
-      &.plant {
+      &.graphic-left {
         left: -300px;
         bottom: -70px;
         width: 230px;
         height: 241px;
         @media @desktop {
-          left: -80px;
-          bottom: -40px;
-          width: 280px;
-          height: 313px;
+          left: -110px;
+          bottom: auto;
+          top: 30px;
+          width: 230px;
+          height: 253px;
         }
 
         @media (min-width: @screen-xl) {
-          width: 320px;
-          height: 353px;
+          width: 280px;
+          height: 313px;
         }
       }
     }
