@@ -118,12 +118,17 @@ export async function getStaticProps(props) {
   }
 }
 
-export async function getStaticPaths() {
+export async function getStaticPaths({ locales }) {
   const teams = await getAllTeams()
 
-  const paths = teams.map((team) => ({
-    params: { teamId: team.teamId },
-  }))
+  const paths = teams.reduce((allPaths, team) => {
+    const pagePaths = locales.map((locale) => ({
+      locale,
+      params: { teamId: team.teamId },
+    }))
+
+    return [...allPaths, ...pagePaths]
+  }, [])
 
   return {
     fallback: false,

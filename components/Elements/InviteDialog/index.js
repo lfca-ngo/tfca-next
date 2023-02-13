@@ -90,7 +90,7 @@ export const InviteDialog = ({
     useContentBlocks('sharing.invite.waiting.message')
   )
   const sharingInviteTitle = textBlockToString(
-    useContentBlocks('sharing.invite.title')
+    useContentBlocks('sharing.links.title')
   )
   const socialDescription = textBlockToString(useContentBlocks('header.body'))
   const socialTitle = useContentBlocks('header.title.custom')
