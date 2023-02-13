@@ -6,6 +6,8 @@ import classNames from 'classnames'
 import { useRouter } from 'next/router'
 import React from 'react'
 
+import { useContentBlocks } from '../../../hooks'
+import { textBlockToString } from '../../../utils'
 import { ChallengeStatus } from '../../Elements'
 import { UserScore } from '../../Elements/UserScore'
 import { IntlSelector } from '../../IntlSelector'
@@ -18,18 +20,50 @@ export const MainMenu = ({ className = '', company, mode }) => {
   const { query } = useRouter()
   const team = query?.teamId
 
+  // menu items
+  const menuAbout = textBlockToString(useContentBlocks('menu.item.about'))
+  const menuLeaderboard = textBlockToString(
+    useContentBlocks('menu.item.leaderboard')
+  )
+  const menuAboutCampaign = textBlockToString(
+    useContentBlocks('menu.item.about.campaign')
+  )
+  const menuAboutAboutUs = textBlockToString(
+    useContentBlocks('menu.item.about.aboutus')
+  )
+  const menuAboutParticipants = textBlockToString(
+    useContentBlocks('menu.item.about.participants')
+  )
+  const menuAboutQuestions = textBlockToString(
+    useContentBlocks('menu.item.about.questions')
+  )
+  const menuTeam = textBlockToString(useContentBlocks('menu.item.team'))
+  const menuYou = textBlockToString(useContentBlocks('menu.item.you'))
+
   return (
     <ul className={classNames(`main-menu`, className, mode)}>
       {company && <CompanyMenuItem company={company} key="company" />}
       <MenuItem
         showCaret
         submenuItems={[
-          <MenuItem key="campaign" slug="/cms/about" title="The Campagin" />,
-          <MenuItem key="about" slug="/cms/about-us" title="About us" />,
-          <MenuItem key="overview" slug="/cms/overview" title="Participants" />,
-          <QuestionsMenuItem key="questions" title="Questions?" />,
+          <MenuItem
+            key="campaign"
+            slug="/cms/about"
+            title={menuAboutCampaign}
+          />,
+          <MenuItem
+            key="about"
+            slug="/cms/about-us"
+            title={menuAboutAboutUs}
+          />,
+          <MenuItem
+            key="overview"
+            slug="/cms/overview"
+            title={menuAboutParticipants}
+          />,
+          <QuestionsMenuItem key="questions" title={menuAboutQuestions} />,
         ]}
-        title={'About'}
+        title={menuAbout}
       />
       {team && (
         <MenuItem
@@ -38,16 +72,16 @@ export const MainMenu = ({ className = '', company, mode }) => {
             <MenuItem
               key="leaderboard"
               slug={`/teams/${team}`}
-              title="Leaderboard"
+              title={menuLeaderboard}
             />,
           ]}
-          title="Team"
+          title={menuTeam}
         />
       )}
       <MenuItem
         icon={<Avatar icon={<UserOutlined />} shape="square" />}
         submenuItems={[<UserScore key="score" />]}
-        title="You"
+        title={menuYou}
       />
       <MenuItem className="padding-small" title={<TimeCounter />} />
       <MenuItem
