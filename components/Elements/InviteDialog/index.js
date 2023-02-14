@@ -63,6 +63,35 @@ export const InviteDialog = ({
   const errorMaxFriends = textBlockToString(
     useContentBlocks('sharing.error.maxfriends')
   )
+  const mainSupertext = textBlockToString(useContentBlocks('sharing.title.sup'))
+  const mainTitle = textBlockToString(useContentBlocks('sharing.title'))
+  const mainBody = textBlockToString(useContentBlocks('sharing.hint'))
+  const mainTeamBody = textBlockToString(
+    useContentBlocks('sharing.team.body'),
+    { team: teamId?.toLocaleUpperCase() }
+  )
+  const panelTitle = textBlockToString(useContentBlocks('sharing.panel.title'))
+  const sharingInputTeamLabel = textBlockToString(
+    useContentBlocks('sharing.input.team.label')
+  )
+  const sharingInputTeamPlaceholder = textBlockToString(
+    useContentBlocks('sharing.input.team.placeholder')
+  )
+  const sharingInputNicknameLabel = textBlockToString(
+    useContentBlocks('sharing.input.nickname.label')
+  )
+  const sharingInputFriendsNameLabel = textBlockToString(
+    useContentBlocks('sharing.input.friendsname.label')
+  )
+  const sharingButtonCreateLinks = textBlockToString(
+    useContentBlocks('sharing.button.create.links')
+  )
+  const sharingInviteWaitingMessage = textBlockToString(
+    useContentBlocks('sharing.invite.waiting.message')
+  )
+  const sharingInviteTitle = textBlockToString(
+    useContentBlocks('sharing.links.title')
+  )
   const socialDescription = textBlockToString(useContentBlocks('header.body'))
   const socialTitle = useContentBlocks('header.title.custom')
 
@@ -149,24 +178,21 @@ export const InviteDialog = ({
 
   return (
     <div className="invite-dialog">
-      <SuperText text={'Share the challenge'} />
-      <h2>Invite friends to join the challenge</h2>
+      <SuperText text={mainSupertext} />
+      <h2>{mainTitle}</h2>
       <p>
-        {teamId
-          ? `You are part of the ${teamId?.toLocaleUpperCase()} team. `
-          : ''}
-        Every friend that clicks on your invitation and/or takes action, adds
-        points to your score. Win the challenge and help our planet!
+        {teamId ? mainTeamBody : null}
+        {mainBody}
       </p>
 
-      <CheckList data={benefits} vars={{ users: 'Hundreds of' }} />
+      <CheckList data={benefits} />
 
       <Collapse
         accordion
         activeKey={activeCollapseKey}
         onChange={(key) => setActiveCollapseKey(key)}
       >
-        <Panel header="Create Invites" key={CREATE}>
+        <Panel header={panelTitle} key={CREATE}>
           <Form
             className="dynamic-form"
             form={form}
@@ -176,13 +202,13 @@ export const InviteDialog = ({
             onFinish={createInvites}
           >
             {teamId && (
-              <Form.Item label="Your team" name="team">
-                <Input disabled placeholder="Your team code" />
+              <Form.Item label={sharingInputTeamLabel} name="team">
+                <Input disabled placeholder={sharingInputTeamPlaceholder} />
               </Form.Item>
             )}
 
             <Form.Item
-              label="Your nickname"
+              label={sharingInputNicknameLabel}
               name="sender"
               rules={[
                 {
@@ -219,7 +245,7 @@ export const InviteDialog = ({
                     <Form.Item key={field.key} required={false}>
                       <Form.Item
                         {...field}
-                        label="Your friends first name"
+                        label={sharingInputFriendsNameLabel}
                         rules={
                           fields.length > 1
                             ? [
@@ -278,14 +304,14 @@ export const InviteDialog = ({
                 style={{ marginTop: '20px' }}
                 type="primary"
               >
-                Create invite links
+                {sharingButtonCreateLinks}
               </Button>
             </Form.Item>
           </Form>
         </Panel>
         <Panel
           extra={(isGeneratingToken || isLoading) && <LoadingOutlined />}
-          header={'Your invite links'}
+          header={sharingInviteTitle}
           key={RESULTS}
         >
           {isGeneratingToken ? (
@@ -299,7 +325,7 @@ export const InviteDialog = ({
               {invites && invites.length > 0 ? (
                 <Share invites={invites} />
               ) : (
-                'Use the form above to create your custom invite links!'
+                sharingInviteWaitingMessage
               )}
             </>
           )}
