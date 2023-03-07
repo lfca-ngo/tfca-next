@@ -104,6 +104,7 @@ export const DEFAULT = 'default'
 
 export const UID_COOKIE_NAME = 'ui'
 export const ANALYTICS_CONSENT_COOKIE_NAME = 'cookies.statistical'
+export const PREFERRED_HOME_COOKIE_NAME = 'preferred_home'
 
 export const MOBILE_BREAKPOINT = 767
 

@@ -44,6 +44,27 @@ export const IntlSelector = () => {
   const activeLanguage =
     activeRegion?.languagesByIsoCode[locale] || activeRegion?.defaultLanguage
 
+  const handleRegionOrLocaleChange = ({
+    newActionCollectionSlug,
+    newLocale,
+  }) => {
+    let path = `/${newActionCollectionSlug || actionCollectionSlug}`
+
+    if (shareToken) {
+      path += `/invite/${shareToken}`
+    } else if (companySlug) {
+      path += `/co/${companySlug}`
+    }
+
+    router.push(path, path, {
+      locale:
+        newLocale ||
+        regionsByActionCollectionSlug[
+          newActionCollectionSlug || actionCollectionSlug
+        ].defaultLanguage.isoCode,
+    })
+  }
+
   return (
     <div className="intl-selector">
       <Popover
@@ -120,22 +141,4 @@ export const IntlSelector = () => {
       </Popover>
     </div>
   )
-
-  function handleRegionOrLocaleChange({ newActionCollectionSlug, newLocale }) {
-    let path = `/${newActionCollectionSlug || actionCollectionSlug}`
-
-    if (shareToken) {
-      path += `/invite/${shareToken}`
-    } else if (companySlug) {
-      path += `/co/${companySlug}`
-    }
-
-    router.push(path, path, {
-      locale:
-        newLocale ||
-        regionsByActionCollectionSlug[
-          newActionCollectionSlug || actionCollectionSlug
-        ].defaultLanguage.isoCode,
-    })
-  }
 }

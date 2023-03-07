@@ -1,15 +1,38 @@
 import { useRouter } from 'next/router'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { ActionModules } from '../../../components/ActionModules'
 import { HomeLoader } from '../../../components/Elements'
 import { Layout } from '../../../components/Layout'
 import { fetchAllStaticData } from '../../../services'
 import { getAllTeams } from '../../../services/firebase'
-import { WITH_SIDEBAR_LAYOUT } from '../../../utils'
+import {
+  PREFERRED_HOME_COOKIE_NAME,
+  setCookie,
+  WITH_SIDEBAR_LAYOUT,
+} from '../../../utils'
 
-export default function TeamPage({ actions, openGraphInfo, stats, team }) {
+export default function TeamPage({
+  actionCollectionSlug,
+  actions,
+  openGraphInfo,
+  stats,
+  team,
+}) {
   const router = useRouter()
+
+  // save the team as a weak preference in the local storage.
+  // when navigating back from leaderboard and other pages, we want
+  // to persist the team selection
+  useEffect(() => {
+    if (team?.teamId) {
+      setCookie(
+        PREFERRED_HOME_COOKIE_NAME,
+        `/${actionCollectionSlug}/team/${team?.teamId}`
+      )
+    }
+  }, [actionCollectionSlug, team])
+
   // If the page is not yet generated, this will be displayed
   // initially until getStaticProps() finishes running
   if (router.isFallback) return <HomeLoader />
@@ -47,6 +70,7 @@ export async function getStaticProps({ locale, params }) {
   return {
     props: {
       ...staticData,
+      actionCollectionSlug,
       team: {
         teamId: team.teamId,
       },

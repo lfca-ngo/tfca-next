@@ -6,12 +6,12 @@ import { useContentBlocks } from '../../../hooks'
 import { textBlockToString } from '../../../utils'
 import { QuestionAnswer } from '../../Elements'
 
-export const QuestionsMenuItem = ({ className, key, title }) => {
+export const QuestionsMenuItem = ({ className, title }) => {
   const menuTitle = useContentBlocks('menu.section.questions')
   const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <li className={classNames('menu-item', className)} key={key}>
+    <li className={classNames('menu-item', className)}>
       <a onClick={() => setIsOpen(!isOpen)}>{title}</a>
 
       <Drawer
