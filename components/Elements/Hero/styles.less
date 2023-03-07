@@ -15,6 +15,7 @@
 
   @media (min-width: @screen-xxl) {
     min-height: auto;
+    margin: 60px 0 0;
   }
 
   h1 {
@@ -51,7 +52,7 @@
     }
 
     @media (min-width: @screen-xxl) {
-      max-width: @container-hero-width-xl;
+      padding-bottom: 140px;
     }
 
     .hero-title {
@@ -63,10 +64,6 @@
 
       @media @desktop {
         height: calc(2 * @h1-hero-xl + 30px);
-      }
-
-      @media (min-width: @screen-xxl) {
-        height: calc(2 * @h1-hero-xl + 70px);
       }
     }
 
@@ -104,6 +101,10 @@
           width: 300px;
           top: 0;
           bottom: 0;
+        }
+
+        @media (min-width: @screen-xxl) {
+          right: -70px;
         }
 
         .bg-image {
