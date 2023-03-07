@@ -61,9 +61,9 @@ export async function getStaticPaths() {
   return {
     fallback: true,
     paths: allTeams.map((team) => ({
-      locale: 'en', // @TODO: allow companies to customize language
+      locale: 'en',
       params: {
-        actionCollectionSlug: 'int', // @TODO: allow companies to customize slug
+        actionCollectionSlug: 'int',
         teamId: team.teamId,
       },
     })),

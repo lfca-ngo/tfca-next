@@ -6,8 +6,14 @@
   .text-wrapper {
     text-align: center;
     max-width: @container-header-width;
-    margin: 0 auto;
-    padding: 80px 0 60px;
+    margin: 0 20px;
+    padding: 40px 0 10px;
+
+    @media @desktop {
+      margin: 0 auto;
+      padding: 80px 0 60px;
+    }
+
     h1 {
       color: @black;
     }

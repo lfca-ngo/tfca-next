@@ -1,14 +1,29 @@
-import { Badge, List } from 'antd'
+import {
+  CheckOutlined,
+  GlobalOutlined,
+  HomeOutlined,
+  PlusOutlined,
+  ShareAltOutlined,
+} from '@ant-design/icons'
+import { Badge, List, Popover } from 'antd'
 import React, { useMemo } from 'react'
 
 import { Layout } from '../../components/Layout'
-import { useUserId } from '../../hooks'
+import { useIsMobile, useUserId } from '../../hooks'
 import { fetchAllStaticContent } from '../../services/contentful'
 import { getAllTeams } from '../../services/firebase'
 import { useTeamScores } from '../../services/internal/teamscores'
 
 // Emoji list
 const PLACES = ['🥇', '🥈', '🥉']
+
+const DynamicTableColHeader = ({ title, icon = <HomeOutlined /> }) => {
+  const isMobile = useIsMobile()
+
+  if (!isMobile) return title
+
+  return <Popover content={title}>{icon}</Popover>
+}
 
 export default function LeaderBoard({ teamId = '' }) {
   const { data = [], isLoading } = useTeamScores(teamId)
@@ -20,7 +35,10 @@ export default function LeaderBoard({ teamId = '' }) {
     return data
       ?.sort((a, b) => {
         const sum = (a) =>
-          a.totalActionsTriggered + a.invitesCount + a.acceptedInvitesCount
+          a.totalActionsTriggered +
+          a.invitesCount +
+          a.acceptedInvitesCount +
+          Object.keys(a.completedActions || {}).length
         return sum(b) - sum(a)
       })
       .map((user) => ({ ...user, isActive: user.userId === userId }))
@@ -40,10 +58,31 @@ export default function LeaderBoard({ teamId = '' }) {
     >
       <div className="list-table-header">
         <div className="table-col col-10 align-left" />
-        <div className="table-col col-60 align-left">Nickname</div>
-        <div className="table-col col-10">Accepted Invites</div>
-        <div className="table-col col-10">Invited</div>
-        <div className="table-col col-10">Actions Triggered</div>
+        <div className="table-col col-50 align-left">Nickname</div>
+        <div className="table-col col-10">
+          <DynamicTableColHeader
+            icon={<PlusOutlined />}
+            title={'Completed Actions'}
+          />
+        </div>
+        <div className="table-col col-10">
+          <DynamicTableColHeader
+            icon={<ShareAltOutlined />}
+            title={'Invited'}
+          />
+        </div>
+        <div className="table-col col-10">
+          <DynamicTableColHeader
+            icon={<CheckOutlined />}
+            title={'Accepted Invites'}
+          />
+        </div>
+        <div className="table-col col-10">
+          <DynamicTableColHeader
+            icon={<GlobalOutlined />}
+            title={'Actions triggered'}
+          />
+        </div>
       </div>
       <List
         className="table-list large"
@@ -60,13 +99,13 @@ export default function LeaderBoard({ teamId = '' }) {
                 >
                   {emoji}
                 </div>
-                <div className="table-col col-60 align-left">
+                <div className="table-col col-50 align-left">
                   {item.name} {item.active ? '(You)' : ''}
                 </div>
                 <div className="table-col col-10">
                   <Badge
                     className="score-badge"
-                    count={item.acceptedInvitesCount}
+                    count={Object.keys(item.completedActions || {}).length}
                     showZero
                   />
                 </div>
@@ -74,6 +113,13 @@ export default function LeaderBoard({ teamId = '' }) {
                   <Badge
                     className="score-badge"
                     count={item.invitesCount}
+                    showZero
+                  />
+                </div>
+                <div className="table-col col-10">
+                  <Badge
+                    className="score-badge"
+                    count={item.acceptedInvitesCount}
                     showZero
                   />
                 </div>
