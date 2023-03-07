@@ -8,7 +8,7 @@ Since traffic spikes for the App can be significant, we decided to build a mostl
 
 ### Switch Energy API
 
-We use the switch energy API from "Switch for the Climate" to allow visitors to change their energy provider inside of the app.
+We use the switch energy API from "Switch for the Climate" to allow visitors to change their energy provider inside of the app
 
 ### Politics API
 
