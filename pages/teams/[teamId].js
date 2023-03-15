@@ -160,7 +160,7 @@ export async function getStaticProps(props) {
       content,
       teamId,
     },
-    revalidate: 86400, // 24h
+    revalidate: 300, // 5min
   }
 }
 
