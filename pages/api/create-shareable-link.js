@@ -27,8 +27,6 @@ export default async function handler(req, res) {
     userId,
   } = req.body
 
-  // @TODO: add one generic invite link
-
   try {
     // iterate over invites and create a share link for each by using promises all
     const shareLinks = await Promise.all(
@@ -70,7 +68,7 @@ export default async function handler(req, res) {
             referredByTeamId,
             referredByUserId,
             senderFirstName: senderFirstName,
-            senderUserName: senderUserName,
+            senderUserName: senderUserName || senderFirstName, // fallback to first name
             shortLink,
             teamId,
             userId,
@@ -80,7 +78,7 @@ export default async function handler(req, res) {
             invitedUserId,
             invitedUserName,
             ogImageUrl,
-            shareLink,
+            shortLink,
           }
         }
       )

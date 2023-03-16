@@ -48,7 +48,7 @@ const NAMES = ['Carla', 'Yasmin', 'Kim']
 
 export const InviteDialog = () => {
   const customization = useCustomization()
-  const { isLoading, user } = useUser()
+  const { isLoading, user, userId } = useUser()
 
   const benefits = useContentLists('sharing.benefits')?.items
   const [activeCollapseKey, setActiveCollapseKey] = useState(CREATE)
@@ -62,8 +62,8 @@ export const InviteDialog = () => {
     isLoading: isCreatingUserName,
     mutate: createUniqueUserName,
   } = useCreateUniqueUserName({
-    onSuccess: ({ data }) => {
-      setCookie(SERVER_UID, data?.userId)
+    onSuccess: () => {
+      setCookie(SERVER_UID, userId)
     },
   })
 
@@ -71,7 +71,11 @@ export const InviteDialog = () => {
     data: invitesData,
     isLoading: isGeneratingToken,
     mutate: createInvites,
-  } = useCreateInvites()
+  } = useCreateInvites({
+    onSuccess: () => {
+      setCookie(SERVER_UID, userId)
+    },
+  })
 
   const invites = invitesData?.data || []
   const userName = userNameData?.data?.userName || user?.userName
@@ -130,7 +134,7 @@ export const InviteDialog = () => {
       socialDescription: socialDescription,
       socialTitle: socialTitle,
       teamId: user?.teamId, // this is the teamId of the inviting user
-      userId: user?.userId, // this is the uid of the inviting user
+      userId: userId, // this is the uid of the inviting user
     }
 
     createInvites(payload)
@@ -138,11 +142,11 @@ export const InviteDialog = () => {
   }
 
   const validateUserName = () => {
-    if (form.isFieldTouched('senderFirstName')) {
+    if (form.isFieldTouched('senderFirstName') && user?.teamId) {
       createUniqueUserName({
         firstName: form.getFieldValue('senderFirstName'),
         teamId: user?.teamId,
-        userId: user?.userId,
+        userId: userId,
       })
     }
   }
@@ -152,9 +156,9 @@ export const InviteDialog = () => {
       senderFirstName: user?.firstName,
       senderUserName: userName,
       team: user?.teamId?.toLocaleUpperCase(),
-      userId: user?.userId,
+      userId: userId,
     })
-  }, [form, user, userName])
+  }, [form, user, userName, userId])
 
   return (
     <div className="invite-dialog">
@@ -203,90 +207,94 @@ export const InviteDialog = () => {
               />
             </Form.Item>
 
-            <p>
-              Save your unique nickname and login key to continue inviting
-              friends from a different device{' '}
-              {user?.teamId
-                ? 'and to check your progress on your teams leaderboard.'
-                : '.'}
-            </p>
+            {user?.teamId && (
+              <>
+                <p>
+                  Save your unique nickname and login key to continue inviting
+                  friends from a different device{' '}
+                  {user?.teamId
+                    ? 'and to check your progress on your teams leaderboard.'
+                    : '.'}
+                </p>
 
-            <Row gutter={16}>
-              <Col md={12} xs={24}>
-                <Form.Item label="User name">
-                  <Input.Group compact>
-                    <Form.Item
-                      name="senderUserName"
-                      noStyle
-                      rules={[
-                        {
-                          required: user?.teamId,
-                        },
-                      ]}
-                    >
-                      <Input
-                        data-testid="success-own-name-input"
-                        disabled
-                        placeholder={'Greta12'}
-                        style={{ width: '80%' }}
-                      />
-                    </Form.Item>
+                <Row gutter={16}>
+                  <Col md={12} xs={24}>
+                    <Form.Item label="User name">
+                      <Input.Group compact>
+                        <Form.Item
+                          name="senderUserName"
+                          noStyle
+                          rules={[
+                            {
+                              required: user?.teamId,
+                            },
+                          ]}
+                        >
+                          <Input
+                            data-testid="success-own-name-input"
+                            disabled
+                            placeholder={'Greta12'}
+                            style={{ width: '80%' }}
+                          />
+                        </Form.Item>
 
-                    <CopyToClipboard
-                      onCopy={() => {
-                        message.success('Copied user name')
-                      }}
-                      text={form.getFieldValue('senderUserName')}
-                    >
-                      <Button
-                        icon={
-                          isCreatingUserName ? (
-                            <LoadingOutlined />
-                          ) : (
-                            <CopyOutlined />
-                          )
-                        }
-                        style={{ width: '20%' }}
-                        type="primary"
-                      />
-                    </CopyToClipboard>
-                  </Input.Group>
-                </Form.Item>
-              </Col>
-              <Col md={12} xs={24}>
-                <Form.Item label="Login key">
-                  <Input.Group compact>
-                    <Form.Item
-                      name="userId"
-                      noStyle
-                      rules={[
-                        {
-                          required: user?.teamId,
-                        },
-                      ]}
-                    >
-                      <Input
-                        disabled
-                        placeholder={'abcd1234'}
-                        style={{ width: '80%' }}
-                      />
+                        <CopyToClipboard
+                          onCopy={() => {
+                            message.success('Copied user name')
+                          }}
+                          text={form.getFieldValue('senderUserName')}
+                        >
+                          <Button
+                            icon={
+                              isCreatingUserName ? (
+                                <LoadingOutlined />
+                              ) : (
+                                <CopyOutlined />
+                              )
+                            }
+                            style={{ width: '20%' }}
+                            type="primary"
+                          />
+                        </CopyToClipboard>
+                      </Input.Group>
                     </Form.Item>
-                    <CopyToClipboard
-                      onCopy={() => {
-                        message.success('Copied login key')
-                      }}
-                      text={form.getFieldValue('userId')}
-                    >
-                      <Button
-                        icon={<CopyOutlined />}
-                        style={{ width: '20%' }}
-                        type="primary"
-                      />
-                    </CopyToClipboard>
-                  </Input.Group>
-                </Form.Item>
-              </Col>
-            </Row>
+                  </Col>
+                  <Col md={12} xs={24}>
+                    <Form.Item label="Login key">
+                      <Input.Group compact>
+                        <Form.Item
+                          name="userId"
+                          noStyle
+                          rules={[
+                            {
+                              required: user?.teamId,
+                            },
+                          ]}
+                        >
+                          <Input
+                            disabled
+                            placeholder={'abcd1234'}
+                            style={{ width: '80%' }}
+                          />
+                        </Form.Item>
+                        <CopyToClipboard
+                          onCopy={() => {
+                            message.success('Copied login key')
+                          }}
+                          text={form.getFieldValue('userId')}
+                        >
+                          <Button
+                            icon={<CopyOutlined />}
+                            style={{ width: '20%' }}
+                            type="primary"
+                          />
+                        </CopyToClipboard>
+                      </Input.Group>
+                    </Form.Item>
+                  </Col>
+                </Row>
+              </>
+            )}
 
             <Divider />
 
@@ -363,7 +371,6 @@ export const InviteDialog = () => {
               <Button
                 block
                 data-testid="success-share-submit-btn"
-                disabled={!userName}
                 htmlType="submit"
                 icon={<SendOutlined />}
                 size="large"
