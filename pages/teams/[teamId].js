@@ -47,7 +47,7 @@ export default function LeaderBoard({ teamId = '' }) {
   return (
     <Layout
       subtitle={
-        'Check how you are doing compared to your team. Who will win your teams prizes?'
+        'Check how you are doing compared to your team. Who will win your teams challenge?!'
       }
       theme="color-1"
       title={
