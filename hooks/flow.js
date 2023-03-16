@@ -2,9 +2,10 @@ import { useState } from 'react'
 
 import { ACTION_COMPLETED, STEP } from '../services/analytics'
 import { useTrackAction } from '../services/internal/action'
-import { scrollToId } from '../utils'
+import { scrollToId, setCookie } from '../utils'
 import { useAnalytics } from './analytics'
 import { useActionStatus } from './app'
+import { SERVER_UID } from './user'
 
 export const ACTION_STATES = {
   ACTIVE: 'active',
@@ -19,12 +20,11 @@ export const useFlow = ({ id, initialIndex, initialStore = {}, stepsKeys }) => {
   const [store, setStore] = useState(initialStore)
   const { setActionStatus } = useActionStatus()
   const { trackEvent } = useAnalytics()
-  const {
-    mutate: trackAction,
-    // isLoading,
-    // isError,
-    // isSuccess,
-  } = useTrackAction()
+  const { mutate: trackAction } = useTrackAction({
+    onSuccess: ({ data }) => {
+      setCookie(SERVER_UID, data?.userId)
+    },
+  })
 
   const updateProgress = (keyIndex) => {
     const progress = keyIndex / (stepsKeys.length - 1)

@@ -12,7 +12,6 @@ import {
   UsergroupAddOutlined,
 } from '@ant-design/icons'
 import { Badge, Button, Drawer, List, message, Space, Tooltip } from 'antd'
-import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import CopyToClipboard from 'react-copy-to-clipboard'
 
@@ -20,9 +19,8 @@ import {
   useContentBlocks,
   useCustomization,
   useLogin,
-  useUserId,
+  useUser,
 } from '../../../hooks'
-import { useUserScore } from '../../../services/internal/userscore'
 import { textBlockToString } from '../../../utils'
 import { Text } from '../Text'
 
@@ -30,9 +28,8 @@ const SCORE_PLACEHOLDER = '-'
 
 export const UserScore = () => {
   const [helpVisible, setHelpVisible] = useState(false)
-  const { query } = useRouter()
   const customization = useCustomization()
-  const userId = useUserId()
+  const { isLoading, user, userId, userScore } = useUser()
   const { setLoginVisible } = useLogin()
 
   // strings
@@ -63,28 +60,10 @@ export const UserScore = () => {
   // content of the help drawer
   const helpContent = useContentBlocks('score.howitworks.content')
 
-  const {
-    data,
-    isLoading,
-    refetch: refetchUserScore,
-  } = useUserScore(userId, {
-    enabled: false,
-  })
-  const user = data?.user
-  const userScore = data?.userScore
-
   const refetch = async (e) => {
     e.preventDefault()
     refetchUserScore()
   }
-
-  // the users name can come from the link -> customization,
-  // but can be overwritten by db entry
-  const userName =
-    customization?.invitedUserName || user?.name || SCORE_PLACEHOLDER
-  // the teamId can be given via param
-  // but can be overwritten by db entry
-  const teamId = query?.team || user?.teamId
 
   return (
     <div className="user-score">
@@ -106,7 +85,7 @@ export const UserScore = () => {
           >
             {joinTitle}
           </List.Item>
-          <List.Item actions={[<>{userName}</>]}>
+          <List.Item actions={[<>{user?.userName || SCORE_PLACEHOLDER}</>]}>
             <Tooltip overlayClassName="tooltip-xs" title={nicknamePopover}>
               <InfoCircleOutlined className="title-icon" />
               {nickname}
@@ -196,8 +175,8 @@ export const UserScore = () => {
             </List.Item>
           ) : null}
 
-          {teamId ? (
-            <List.Item actions={[<>{teamId}</>]}>
+          {user?.teamId ? (
+            <List.Item actions={[<>{user?.teamId}</>]}>
               <ForkOutlined className="title-icon" />
               {team}
             </List.Item>

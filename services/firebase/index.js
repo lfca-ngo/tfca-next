@@ -49,7 +49,8 @@ export const trackInvite = ({
   invitedUserName,
   referredByTeamId,
   referredByUserId, // user that is creating the invite
-  senderName,
+  senderFirstName,
+  senderUserName,
   shortLink,
   teamId,
   userId,
@@ -58,17 +59,18 @@ export const trackInvite = ({
   return setDoc(
     doc(firestore, USERS_COLLECTION, userId),
     {
+      firstName: senderFirstName,
       invites: {
         [`${invitedUserId}`]: {
           name: invitedUserName,
           shortLink: shortLink,
         },
       },
-      name: senderName,
       referredByTeamId: referredByTeamId || null,
       referredByUserId: referredByUserId || null,
       teamId: teamId || null,
       userId: userId,
+      userName: senderUserName,
     },
     { merge: true }
   )

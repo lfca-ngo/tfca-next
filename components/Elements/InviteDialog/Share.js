@@ -42,7 +42,7 @@ export const Share = ({ invites }) => {
   return (
     <div className="share-dialog">
       <Tabs defaultActiveKey="0">
-        {invites.map(({ name, ogImageUrl, shortLink }, i) => {
+        {invites.map(({ invitedUserName: name, ogImageUrl, shareLink }, i) => {
           const tabName = name || 'General'
 
           const shareMessageBody = name
@@ -75,16 +75,16 @@ export const Share = ({ invites }) => {
               <Input.Group className="equal-height" compact>
                 <Input
                   className="copy-input"
-                  data-testid="share-shortlink-input"
+                  data-testid="share-shareLink-input"
                   disabled
                   style={{ width: `calc(100% - ${BTN_WIDTH})` }}
-                  value={shortLink}
+                  value={shareLink}
                 />
                 <CopyToClipboard
                   onCopy={() => {
                     message.success('Copied value')
                   }}
-                  text={shortLink}
+                  text={shareLink}
                 >
                   <Button block style={{ width: BTN_WIDTH }} type="primary">
                     Copy
@@ -101,7 +101,7 @@ export const Share = ({ invites }) => {
                   className="ant-btn ant-btn-primary share-btn"
                   resetButtonStyle={false}
                   title={shareMessageBody}
-                  url={shortLink}
+                  url={shareLink}
                 >
                   <WhatsAppOutlined />
                   Share on WhatsApp
@@ -110,7 +110,7 @@ export const Share = ({ invites }) => {
                   className="ant-btn ant-btn-primary share-btn"
                   quote={shareMessageBody}
                   resetButtonStyle={false}
-                  url={shortLink}
+                  url={shareLink}
                 >
                   <FacebookOutlined />
                   Share on Facebook
@@ -119,7 +119,7 @@ export const Share = ({ invites }) => {
                   className="ant-btn ant-btn-primary share-btn"
                   resetButtonStyle={false}
                   title={shareMessageBody}
-                  url={shortLink}
+                  url={shareLink}
                 >
                   <Icon component={TelegramIcon} />
                   Share on Telegram
@@ -128,7 +128,7 @@ export const Share = ({ invites }) => {
                   className="ant-btn ant-btn-primary share-btn"
                   resetButtonStyle={false}
                   title={shareMessageTitle}
-                  url={shortLink}
+                  url={shareLink}
                 >
                   <TwitterOutlined /> Share on Twitter
                 </TwitterShareButton>
@@ -137,7 +137,7 @@ export const Share = ({ invites }) => {
                   resetButtonStyle={false}
                   summary={shareMessageBody}
                   title={shareMessageTitle}
-                  url={shortLink}
+                  url={shareLink}
                 >
                   <LinkedinOutlined /> Share on Linkedin
                 </LinkedinShareButton>
@@ -146,7 +146,7 @@ export const Share = ({ invites }) => {
                   className="ant-btn ant-btn-primary share-btn"
                   resetButtonStyle={false}
                   subject={shareMessageTitle}
-                  url={shortLink}
+                  url={shareLink}
                 >
                   <MailOutlined /> Share via Email
                 </EmailShareButton>

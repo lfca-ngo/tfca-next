@@ -3,7 +3,7 @@ require('./styles.less')
 import { Popover } from 'antd'
 import React, { useEffect, useState } from 'react'
 
-import { useUserId } from '../../hooks'
+import { useUser } from '../../hooks'
 import { useUserScore } from '../../services/internal/userscore'
 
 const formatSeconds = (duration) => {
@@ -26,7 +26,7 @@ const formatSeconds = (duration) => {
 
 export const TimeCounter = () => {
   const [seconds, setSeconds] = useState(0)
-  const userId = useUserId()
+  const { userId } = useUser()
 
   // do not actively fetch here, just check in local cache
   const { data } = useUserScore(userId, {

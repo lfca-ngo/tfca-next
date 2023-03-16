@@ -2,7 +2,6 @@ require('./styles.less')
 
 import {
   CopyOutlined,
-  InfoCircleOutlined,
   LoadingOutlined,
   MinusCircleOutlined,
   PlusOutlined,
@@ -25,17 +24,15 @@ import React, { useEffect, useState } from 'react'
 import CopyToClipboard from 'react-copy-to-clipboard'
 
 import {
+  SERVER_UID,
   useContentBlocks,
   useContentLists,
   useCustomization,
-  useUserId,
+  useUser,
 } from '../../../hooks'
-import {
-  useCreateUniqueUserName,
-  useCreateUser,
-} from '../../../services/internal/username'
-import { useUserScore } from '../../../services/internal/userscore'
-import { textBlockToString } from '../../../utils'
+import { useCreateInvites } from '../../../services/internal/invites'
+import { useCreateUniqueUserName } from '../../../services/internal/username'
+import { setCookie, textBlockToString } from '../../../utils'
 import { CheckList, LoadingSpinner, SuperText } from '../../Elements'
 import { Share } from './Share'
 
@@ -49,29 +46,35 @@ const { useForm } = Form
 const MAX_INVITES = 10
 const NAMES = ['Carla', 'Yasmin', 'Kim']
 
-export const InviteDialog = ({
-  actionId,
-  imageInviteColor = 'blue',
-  imageInviteText = 'I took action|for a brighter|tomorrow',
-  // otherUsers = 49,
-}) => {
+export const InviteDialog = () => {
   const customization = useCustomization()
-  const userId = useUserId()
-  const { data, isLoading } = useUserScore(userId)
-  const user = data?.user
+  const { isLoading, user } = useUser()
+
   const benefits = useContentLists('sharing.benefits')?.items
-  const [isGeneratingToken, setIsGeneratingToken] = useState(false)
   const [activeCollapseKey, setActiveCollapseKey] = useState(CREATE)
-  const [invites, setInvites] = useState([])
   const [form] = useForm()
 
   const { locale, query } = useRouter()
-  const { actionCollectionSlug, teamId: queryTeamId } = query
-  const isPartOfTeam = !!queryTeamId
+  const { actionCollectionSlug } = query
 
-  // team can be set in customization or in db
-  const teamId = user?.teamId || queryTeamId
-  const userName = user?.name || customization?.invitedUserName
+  const {
+    data: userNameData,
+    isLoading: isCreatingUserName,
+    mutate: createUniqueUserName,
+  } = useCreateUniqueUserName({
+    onSuccess: ({ data }) => {
+      setCookie(SERVER_UID, data?.userId)
+    },
+  })
+
+  const {
+    data: invitesData,
+    isLoading: isGeneratingToken,
+    mutate: createInvites,
+  } = useCreateInvites()
+
+  const invites = invitesData?.data || []
+  const userName = userNameData?.data?.userName || user?.userName
 
   const addInvite = textBlockToString(
     useContentBlocks('sharing.button.addinvite')
@@ -84,7 +87,7 @@ export const InviteDialog = ({
   const mainBody = textBlockToString(useContentBlocks('sharing.hint'))
   const mainTeamBody = textBlockToString(
     useContentBlocks('sharing.team.body'),
-    { team: teamId?.toLocaleUpperCase() }
+    { team: user?.teamId?.toLocaleUpperCase() }
   )
   const panelTitle = textBlockToString(useContentBlocks('sharing.panel.title'))
   const sharingInputTeamLabel = textBlockToString(
@@ -92,9 +95,6 @@ export const InviteDialog = ({
   )
   const sharingInputTeamPlaceholder = textBlockToString(
     useContentBlocks('sharing.input.team.placeholder')
-  )
-  const sharingInputNicknameLabel = textBlockToString(
-    useContentBlocks('sharing.input.nickname.label')
   )
   const sharingInputFriendsNameLabel = textBlockToString(
     useContentBlocks('sharing.input.friendsname.label')
@@ -109,38 +109,31 @@ export const InviteDialog = ({
     useContentBlocks('sharing.links.title')
   )
   const socialDescription = textBlockToString(useContentBlocks('header.body'))
-  const socialTitle = useContentBlocks('header.title.custom')
-
-  const {
-    data: userNameData,
-    isLoading: isCreatingUserName,
-    mutate: createUniqueUserName,
-  } = useCreateUniqueUserName()
+  const socialTitle = textBlockToString(useContentBlocks('header.title.custom'))
 
   // create multiple invite links
   // map of promises with infos
-  const createInvites = async (values) => {
-    const sender = values.sender ? values.sender : undefined
-    const invites = values.names.map(
-      (name) => () =>
-        createInvite({
-          name: name,
-          sender,
-        })
-    )
+  const onCreateInvites = async (values) => {
+    const senderFirstName = values.senderFirstName ?? undefined
+    const senderUserName = values.senderUserName ?? undefined
 
-    // Always add a generic invite
-    invites.push(() =>
-      createInvite({
-        sender,
-      })
-    )
+    const payload = {
+      actionCollectionSlug,
+      invites: values.names.map((name) => ({
+        invitedUserName: name,
+      })),
+      locale,
+      referredByTeamId: customization?.referredByTeamId || null, // this is the team that the inviting user was invited by, can be null
+      referredByUserId: customization?.referredByUserId || null, // this is the uid of the user that invited the inviting user, can be null
+      senderFirstName: senderFirstName,
+      senderUserName: senderUserName,
+      socialDescription: socialDescription,
+      socialTitle: socialTitle,
+      teamId: user?.teamId, // this is the teamId of the inviting user
+      userId: user?.userId, // this is the uid of the inviting user
+    }
 
-    setIsGeneratingToken(true)
-
-    const results = await Promise.all(invites.map((invite) => invite()))
-    setIsGeneratingToken(false)
-    setInvites(results)
+    createInvites(payload)
     setActiveCollapseKey(RESULTS)
   }
 
@@ -148,86 +141,27 @@ export const InviteDialog = ({
     if (form.isFieldTouched('senderFirstName')) {
       createUniqueUserName({
         firstName: form.getFieldValue('senderFirstName'),
-        teamId: teamId,
-        userId: userId,
+        teamId: user?.teamId,
+        userId: user?.userId,
       })
     }
   }
 
-  const createInvite = async ({ name, sender }) => {
-    // Generate the share token
-    try {
-      const response = await fetch('/api/create-shareable-link', {
-        body: JSON.stringify({
-          actionCollectionSlug: actionCollectionSlug || '',
-          actionId: actionId,
-          color: imageInviteColor,
-          invitedUserName: name,
-          locale,
-          message: imageInviteText,
-          referredByTeamId: customization?.referredByTeamId || null, // this is the team that the inviting user was invited by, can be null
-          referredByUserId: customization?.referredByUserId || null, // this is the uid of the user that invited the inviting user, can be null
-          senderName: sender,
-          socialDescription: socialDescription,
-          socialTitle: textBlockToString(socialTitle, {
-            name: name || '',
-          }).replace(/\*/g, ''),
-          teamId: teamId, // this is the teamId of the inviting user
-          userId: userId, // this is the uid of the inviting user
-        }),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        method: 'POST',
-      })
-
-      const { invitedUserId, ogImageUrl, shortLink } = await response.json()
-
-      return {
-        invitedUserId,
-        name,
-        ogImageUrl,
-        shortLink,
-      }
-    } catch (e) {
-      message.error('Failed to create sharing link')
-    }
-  }
-
-  // prepopulate the team id
   useEffect(() => {
-    if (teamId) {
-      form.setFieldsValue({ team: teamId?.toLocaleUpperCase() })
-    }
-  }, [form, teamId])
-
-  // prepopulate the name
-  useEffect(() => {
-    if (userName) {
-      form.setFieldsValue({ sender: userName })
-    }
-  }, [form, userName])
-
-  const userNameServer = userNameData?.data?.userName
-
-  useEffect(() => {
-    if (userNameServer) {
-      form.setFieldsValue({ senderUserName: userNameServer })
-    }
-  }, [form, userNameServer])
-
-  useEffect(() => {
-    if (userId) {
-      form.setFieldsValue({ userId: userId })
-    }
-  }, [form, userId])
+    form.setFieldsValue({
+      senderFirstName: user?.firstName,
+      senderUserName: userName,
+      team: user?.teamId?.toLocaleUpperCase(),
+      userId: user?.userId,
+    })
+  }, [form, user, userName])
 
   return (
     <div className="invite-dialog">
       <SuperText text={mainSupertext} />
       <h2>{mainTitle}</h2>
       <p>
-        {teamId ? mainTeamBody : null}
+        {user?.teamId ? mainTeamBody : null}
         {mainBody}
       </p>
 
@@ -245,9 +179,9 @@ export const InviteDialog = ({
             initialValues={{ names: [''] }}
             layout="vertical"
             name="dynamic_invitees"
-            onFinish={createInvites}
+            onFinish={onCreateInvites}
           >
-            {teamId && (
+            {user?.teamId && (
               <Form.Item label={sharingInputTeamLabel} name="team">
                 <Input disabled placeholder={sharingInputTeamPlaceholder} />
               </Form.Item>
@@ -265,90 +199,94 @@ export const InviteDialog = ({
               <Input
                 data-testid="success-own-name-input"
                 onBlur={validateUserName}
-                placeholder={'Greta12'}
+                placeholder={'Greta'}
               />
             </Form.Item>
 
-            {teamId && (
-              <>
-                <p>
-                  Save your unique nickname and login key to continue playing
-                  from a different device and identify yourself on your teams
-                  leaderboard.
-                </p>
+            <p>
+              Save your unique nickname and login key to continue inviting
+              friends from a different device{' '}
+              {user?.teamId
+                ? 'and to check your progress on your teams leaderboard.'
+                : '.'}
+            </p>
 
-                <Row gutter={16}>
-                  <Col md={12} xs={24}>
-                    <Form.Item label="User name">
-                      <Input.Group compact>
-                        <Form.Item
-                          name="senderUserName"
-                          noStyle
-                          rules={[
-                            {
-                              required: isPartOfTeam,
-                            },
-                          ]}
-                        >
-                          <Input
-                            data-testid="success-own-name-input"
-                            disabled
-                            placeholder={'Greta12'}
-                            style={{ width: '80%' }}
-                          />
-                        </Form.Item>
+            <Row gutter={16}>
+              <Col md={12} xs={24}>
+                <Form.Item label="User name">
+                  <Input.Group compact>
+                    <Form.Item
+                      name="senderUserName"
+                      noStyle
+                      rules={[
+                        {
+                          required: user?.teamId,
+                        },
+                      ]}
+                    >
+                      <Input
+                        data-testid="success-own-name-input"
+                        disabled
+                        placeholder={'Greta12'}
+                        style={{ width: '80%' }}
+                      />
+                    </Form.Item>
 
-                        <CopyToClipboard
-                          onCopy={() => {
-                            message.success('Copied user name')
-                          }}
-                          text={form.getFieldValue('senderUserName')}
-                        >
-                          <Button
-                            icon={<CopyOutlined />}
-                            style={{ width: '20%' }}
-                            type="primary"
-                          />
-                        </CopyToClipboard>
-                      </Input.Group>
+                    <CopyToClipboard
+                      onCopy={() => {
+                        message.success('Copied user name')
+                      }}
+                      text={form.getFieldValue('senderUserName')}
+                    >
+                      <Button
+                        icon={
+                          isCreatingUserName ? (
+                            <LoadingOutlined />
+                          ) : (
+                            <CopyOutlined />
+                          )
+                        }
+                        style={{ width: '20%' }}
+                        type="primary"
+                      />
+                    </CopyToClipboard>
+                  </Input.Group>
+                </Form.Item>
+              </Col>
+              <Col md={12} xs={24}>
+                <Form.Item label="Login key">
+                  <Input.Group compact>
+                    <Form.Item
+                      name="userId"
+                      noStyle
+                      rules={[
+                        {
+                          required: user?.teamId,
+                        },
+                      ]}
+                    >
+                      <Input
+                        disabled
+                        placeholder={'abcd1234'}
+                        style={{ width: '80%' }}
+                      />
                     </Form.Item>
-                  </Col>
-                  <Col md={12} xs={24}>
-                    <Form.Item label="Login key">
-                      <Input.Group compact>
-                        <Form.Item
-                          name="userId"
-                          noStyle
-                          rules={[
-                            {
-                              required: isPartOfTeam,
-                            },
-                          ]}
-                        >
-                          <Input
-                            disabled
-                            placeholder={'abcd1234'}
-                            style={{ width: '80%' }}
-                          />
-                        </Form.Item>
-                        <CopyToClipboard
-                          onCopy={() => {
-                            message.success('Copied login key')
-                          }}
-                          text={form.getFieldValue('userId')}
-                        >
-                          <Button
-                            icon={<CopyOutlined />}
-                            style={{ width: '20%' }}
-                            type="primary"
-                          />
-                        </CopyToClipboard>
-                      </Input.Group>
-                    </Form.Item>
-                  </Col>
-                </Row>
-              </>
-            )}
+                    <CopyToClipboard
+                      onCopy={() => {
+                        message.success('Copied login key')
+                      }}
+                      text={form.getFieldValue('userId')}
+                    >
+                      <Button
+                        icon={<CopyOutlined />}
+                        style={{ width: '20%' }}
+                        type="primary"
+                      />
+                    </CopyToClipboard>
+                  </Input.Group>
+                </Form.Item>
+              </Col>
+            </Row>
 
             <Divider />
 
@@ -425,7 +363,7 @@ export const InviteDialog = ({
               <Button
                 block
                 data-testid="success-share-submit-btn"
-                disabled={!userNameServer}
+                disabled={!userName}
                 htmlType="submit"
                 icon={<SendOutlined />}
                 size="large"

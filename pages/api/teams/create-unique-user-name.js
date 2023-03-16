@@ -15,7 +15,7 @@ export default async function handler(req, res) {
       userId,
     })
 
-    return res.status(200).json({ userName })
+    return res.status(200).json({ userId, userName })
   } catch (e) {
     return res.status(500).send({ message: e.message })
   }

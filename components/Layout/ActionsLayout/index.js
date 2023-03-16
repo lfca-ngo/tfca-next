@@ -3,7 +3,7 @@ require('./styles.less')
 import classNames from 'classnames'
 import React, { useState } from 'react'
 
-import { useContentBlocks, useCustomization } from '../../../hooks'
+import { useContentBlocks } from '../../../hooks'
 import { scrollToId } from '../../../utils'
 import { textBlockToString } from '../../../utils'
 import { ChallengeStatus, Hero, MenuSection } from '../../Elements'
@@ -22,7 +22,6 @@ export const ActionsLayout = ({
   team,
 }) => {
   const [collapsed, setCollapsed] = useState(true)
-  const customization = useCustomization()
 
   return (
     <Template className={classNames('actions-layout', 'color-base')}>
@@ -50,7 +49,7 @@ export const ActionsLayout = ({
 
       <main id="scroll-container">
         <Hero
-          onClick={() => scrollToId(customization?.actionId || nav[0]?.id)}
+          onClick={() => scrollToId(nav[0]?.id)}
           openGraphInfo={openGraphInfo}
           team={team}
         />

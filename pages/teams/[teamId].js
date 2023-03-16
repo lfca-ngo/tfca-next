@@ -9,7 +9,7 @@ import { Badge, List, Popover } from 'antd'
 import React, { useMemo } from 'react'
 
 import { Layout } from '../../components/Layout'
-import { useIsMobile, useUserId } from '../../hooks'
+import { useIsMobile, useUser } from '../../hooks'
 import { fetchAllStaticContent } from '../../services/contentful'
 import { getAllTeams } from '../../services/firebase'
 import { useTeamScores } from '../../services/internal/teamscores'
@@ -27,7 +27,7 @@ const DynamicTableColHeader = ({ title, icon = <HomeOutlined /> }) => {
 
 export default function LeaderBoard({ teamId = '' }) {
   const { data = [], isLoading } = useTeamScores(teamId)
-  const userId = useUserId()
+  const { userId } = useUser()
 
   const team = teamId.charAt(0).toUpperCase() + teamId.slice(1)
 

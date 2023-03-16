@@ -3,12 +3,12 @@ import { useCallback } from 'react'
 
 import { trackEvent as trackRaw } from '../services/analytics'
 import { useCustomization } from './app'
-import { useUserId } from './user'
+import { useUser } from './user'
 
 export const useAnalytics = () => {
   const { locale, query } = useRouter()
   const customization = useCustomization()
-  const userId = useUserId()
+  const { userId } = useUser()
 
   const trackEvent = useCallback(({ collection, name, values }) => {
     trackRaw({

@@ -4,7 +4,7 @@ import { Button, Col, Row } from 'antd'
 import { motion } from 'framer-motion'
 import React, { useEffect, useState } from 'react'
 
-import { useContent, useUserId } from '../../hooks'
+import { useContent, useUser } from '../../hooks'
 import {
   ANALYTICS_CONSENT_COOKIE_NAME,
   getCookie,
@@ -15,7 +15,7 @@ import {
 import { ConditionalWrapper, CookieSelector } from './helpers'
 
 export const CookieConsent = () => {
-  const userId = useUserId()
+  const { userId } = useUser()
 
   const cookieBanner = useContent()?.metaData?.cookieBanner
   // We assume that the first cookie is required and always needs to be accepted
