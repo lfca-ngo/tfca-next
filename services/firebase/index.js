@@ -133,11 +133,13 @@ const isUniqueUserTeamCombination = async ({ teamId, userName }) => {
 const createUser = async ({ firstName, teamId, userId, userName }) => {
   try {
     const userRef = doc(firestore, USERS_COLLECTION, userId)
+
     await setDoc(
       userRef,
       {
         firstName,
         teamId,
+        userId,
         userName,
       },
       {
@@ -159,6 +161,7 @@ export const createUniqueUserName = async ({ firstName, teamId, userId }) => {
       userId,
       userName: firstName,
     })
+
     // if the user exists, append a 3-digit hash to the username and try again
     if (isUnique) {
       return createUser({

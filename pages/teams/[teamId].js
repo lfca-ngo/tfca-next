@@ -100,7 +100,7 @@ export default function LeaderBoard({ teamId = '' }) {
                   {emoji}
                 </div>
                 <div className="table-col col-50 align-left">
-                  {item.name} {item.active ? '(You)' : ''}
+                  {item.userName || item.name} {item.active ? '(You)' : ''}
                 </div>
                 <div className="table-col col-10">
                   <Badge

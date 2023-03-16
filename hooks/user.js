@@ -32,19 +32,17 @@ export const useUser = () => {
   const { data, isLoading } = useUserScore(userId, {
     enabled: !!serverCookieUid && isSameUser,
   })
-  let user = data?.user
+  let user = data?.user || {}
 
   // even when the user is not yet created on the server,
   // we can derive his first name from the invitation
   if (!user && customization?.invitedUserName) {
-    user = {
-      firstName: customization.invitedUserName,
-    }
+    user.firstName = customization.invitedUserName
   }
 
   // the teamId can be also set via query url
-  if (query?.team) {
-    user.teamId = user?.teamId || query?.team
+  if (query?.teamId) {
+    user.teamId = user?.teamId || query?.teamId
   }
 
   return { isLoading, user, userId, userScore: data?.userScore }

@@ -24,7 +24,6 @@ import React, { useEffect, useState } from 'react'
 import CopyToClipboard from 'react-copy-to-clipboard'
 
 import {
-  SERVER_UID,
   useContentBlocks,
   useContentLists,
   useCustomization,
@@ -32,7 +31,8 @@ import {
 } from '../../../hooks'
 import { useCreateInvites } from '../../../services/internal/invites'
 import { useCreateUniqueUserName } from '../../../services/internal/username'
-import { setCookie, textBlockToString } from '../../../utils'
+import { useInvalidateUserScore } from '../../../services/internal/userscore'
+import { textBlockToString } from '../../../utils'
 import { CheckList, LoadingSpinner, SuperText } from '../../Elements'
 import { Share } from './Share'
 
@@ -56,15 +56,14 @@ export const InviteDialog = () => {
 
   const { locale, query } = useRouter()
   const { actionCollectionSlug } = query
+  const invalidateCache = useInvalidateUserScore()
 
   const {
     data: userNameData,
     isLoading: isCreatingUserName,
     mutate: createUniqueUserName,
   } = useCreateUniqueUserName({
-    onSuccess: () => {
-      setCookie(SERVER_UID, userId)
-    },
+    onSuccess: () => invalidateCache(userId),
   })
 
   const {
@@ -72,9 +71,7 @@ export const InviteDialog = () => {
     isLoading: isGeneratingToken,
     mutate: createInvites,
   } = useCreateInvites({
-    onSuccess: () => {
-      setCookie(SERVER_UID, userId)
-    },
+    onSuccess: () => invalidateCache(userId),
   })
 
   const invites = invitesData?.data || []
