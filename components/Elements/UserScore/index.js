@@ -29,7 +29,7 @@ const SCORE_PLACEHOLDER = '-'
 export const UserScore = () => {
   const [helpVisible, setHelpVisible] = useState(false)
   const customization = useCustomization()
-  const { isLoading, user, userId, userScore } = useUser()
+  const { isLoading, refetchUserScore, user, userId, userScore } = useUser()
   const { setLoginVisible } = useLogin()
 
   // strings

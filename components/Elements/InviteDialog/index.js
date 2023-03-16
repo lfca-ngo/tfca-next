@@ -17,6 +17,7 @@ import {
   Form,
   Input,
   message,
+  Popover,
   Row,
 } from 'antd'
 import { useRouter } from 'next/router'
@@ -207,7 +208,7 @@ export const InviteDialog = () => {
             {user?.teamId && (
               <>
                 <p>
-                  Save your unique nickname and login key to continue inviting
+                  Save your unique user name and login key to continue inviting
                   friends from a different device{' '}
                   {user?.teamId
                     ? 'and to check your progress on your teams leaderboard.'
@@ -217,43 +218,48 @@ export const InviteDialog = () => {
                 <Row gutter={16}>
                   <Col md={12} xs={24}>
                     <Form.Item label="User name">
-                      <Input.Group compact>
-                        <Form.Item
-                          name="senderUserName"
-                          noStyle
-                          rules={[
-                            {
-                              required: user?.teamId,
-                            },
-                          ]}
-                        >
-                          <Input
-                            data-testid="success-own-name-input"
-                            disabled
-                            placeholder={'Greta12'}
-                            style={{ width: '80%' }}
-                          />
-                        </Form.Item>
+                      <Popover
+                        content="Your user name is unique for your team and cannot be changed"
+                        overlayClassName="popover-md"
+                      >
+                        <Input.Group compact>
+                          <Form.Item
+                            name="senderUserName"
+                            noStyle
+                            rules={[
+                              {
+                                required: user?.teamId,
+                              },
+                            ]}
+                          >
+                            <Input
+                              data-testid="success-own-name-input"
+                              disabled
+                              placeholder={'Greta12'}
+                              style={{ width: '80%' }}
+                            />
+                          </Form.Item>
 
-                        <CopyToClipboard
-                          onCopy={() => {
-                            message.success('Copied user name')
-                          }}
-                          text={form.getFieldValue('senderUserName')}
-                        >
-                          <Button
-                            icon={
-                              isCreatingUserName ? (
-                                <LoadingOutlined />
-                              ) : (
-                                <CopyOutlined />
-                              )
-                            }
-                            style={{ width: '20%' }}
-                            type="primary"
-                          />
-                        </CopyToClipboard>
-                      </Input.Group>
+                          <CopyToClipboard
+                            onCopy={() => {
+                              message.success('Copied user name')
+                            }}
+                            text={form.getFieldValue('senderUserName')}
+                          >
+                            <Button
+                              icon={
+                                isCreatingUserName ? (
+                                  <LoadingOutlined />
+                                ) : (
+                                  <CopyOutlined />
+                                )
+                              }
+                              style={{ width: '20%' }}
+                              type="primary"
+                            />
+                          </CopyToClipboard>
+                        </Input.Group>
+                      </Popover>
                     </Form.Item>
                   </Col>
                   <Col md={12} xs={24}>

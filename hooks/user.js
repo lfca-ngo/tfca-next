@@ -29,7 +29,11 @@ export const useUser = () => {
   const isSameUser = serverCookieUid === userId
 
   // only if a cookie is set, fetch the user data
-  const { data, isLoading } = useUserScore(userId, {
+  const {
+    data,
+    isLoading,
+    refetch: refetchUserScore,
+  } = useUserScore(userId, {
     enabled: !!serverCookieUid && isSameUser,
   })
   let user = data?.user || {}
@@ -45,5 +49,11 @@ export const useUser = () => {
     user.teamId = user?.teamId || query?.teamId
   }
 
-  return { isLoading, user, userId, userScore: data?.userScore }
+  return {
+    isLoading,
+    refetchUserScore,
+    user,
+    userId,
+    userScore: data?.userScore,
+  }
 }
