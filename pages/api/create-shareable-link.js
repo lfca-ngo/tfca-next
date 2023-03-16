@@ -32,7 +32,7 @@ export default async function handler(req, res) {
     const shareLinks = await Promise.all(
       // always add one generic invite with no name
       [...invites, { invitedUserName: null }].map(
-        async ({ invitedUserName }) => {
+        async ({ invitedUserName, socialTitle: customSocialTitle }) => {
           // we create the uid for the invited user here
           // this will be set in the client of the user
           // that accepted the invite
@@ -57,7 +57,7 @@ export default async function handler(req, res) {
           const shortLink = await createInviteLink(
             shareLink,
             ogImageUrl,
-            socialTitle,
+            customSocialTitle || socialTitle,
             socialDescription
           )
 

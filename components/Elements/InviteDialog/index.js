@@ -111,7 +111,10 @@ export const InviteDialog = () => {
     useContentBlocks('sharing.links.title')
   )
   const socialDescription = textBlockToString(useContentBlocks('header.body'))
-  const socialTitle = textBlockToString(useContentBlocks('header.title.custom'))
+  const socialTitle = textBlockToString(
+    useContentBlocks('sharing.invite.title')
+  )
+  const socialTitleCustomBlock = useContentBlocks('sharing.invite.title.custom')
 
   // create multiple invite links
   // map of promises with infos
@@ -123,6 +126,7 @@ export const InviteDialog = () => {
       actionCollectionSlug,
       invites: values.names.map((name) => ({
         invitedUserName: name,
+        socialTitle: textBlockToString(socialTitleCustomBlock, { name: name }),
       })),
       locale,
       referredByTeamId: customization?.referredByTeamId || null, // this is the team that the inviting user was invited by, can be null
