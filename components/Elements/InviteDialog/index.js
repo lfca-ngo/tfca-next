@@ -1,6 +1,7 @@
 require('./styles.less')
 
 import {
+  CopyOutlined,
   InfoCircleOutlined,
   LoadingOutlined,
   MinusCircleOutlined,
@@ -8,9 +9,20 @@ import {
   SendOutlined,
   UserAddOutlined,
 } from '@ant-design/icons'
-import { Alert, Button, Collapse, Divider, Form, Input, message } from 'antd'
+import {
+  Alert,
+  Button,
+  Col,
+  Collapse,
+  Divider,
+  Form,
+  Input,
+  message,
+  Row,
+} from 'antd'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
+import CopyToClipboard from 'react-copy-to-clipboard'
 
 import {
   useContentBlocks,
@@ -18,6 +30,10 @@ import {
   useCustomization,
   useUserId,
 } from '../../../hooks'
+import {
+  useCreateUniqueUserName,
+  useCreateUser,
+} from '../../../services/internal/username'
 import { useUserScore } from '../../../services/internal/userscore'
 import { textBlockToString } from '../../../utils'
 import { CheckList, LoadingSpinner, SuperText } from '../../Elements'
@@ -95,6 +111,12 @@ export const InviteDialog = ({
   const socialDescription = textBlockToString(useContentBlocks('header.body'))
   const socialTitle = useContentBlocks('header.title.custom')
 
+  const {
+    data: userNameData,
+    isLoading: isCreatingUserName,
+    mutate: createUniqueUserName,
+  } = useCreateUniqueUserName()
+
   // create multiple invite links
   // map of promises with infos
   const createInvites = async (values) => {
@@ -120,6 +142,16 @@ export const InviteDialog = ({
     setIsGeneratingToken(false)
     setInvites(results)
     setActiveCollapseKey(RESULTS)
+  }
+
+  const validateUserName = () => {
+    if (form.isFieldTouched('senderFirstName')) {
+      createUniqueUserName({
+        firstName: form.getFieldValue('senderFirstName'),
+        teamId: teamId,
+        userId: userId,
+      })
+    }
   }
 
   const createInvite = async ({ name, sender }) => {
@@ -176,6 +208,20 @@ export const InviteDialog = ({
     }
   }, [form, userName])
 
+  const userNameServer = userNameData?.data?.userName
+
+  useEffect(() => {
+    if (userNameServer) {
+      form.setFieldsValue({ senderUserName: userNameServer })
+    }
+  }, [form, userNameServer])
+
+  useEffect(() => {
+    if (userId) {
+      form.setFieldsValue({ userId: userId })
+    }
+  }, [form, userId])
+
   return (
     <div className="invite-dialog">
       <SuperText text={mainSupertext} />
@@ -208,20 +254,101 @@ export const InviteDialog = ({
             )}
 
             <Form.Item
-              label={sharingInputNicknameLabel}
-              name="sender"
+              label={'First name'}
+              name="senderFirstName"
               rules={[
                 {
-                  required: isPartOfTeam,
+                  required: true,
                 },
               ]}
             >
               <Input
-                addonBefore={<InfoCircleOutlined />}
                 data-testid="success-own-name-input"
+                onBlur={validateUserName}
                 placeholder={'Greta12'}
               />
             </Form.Item>
+
+            {teamId && (
+              <>
+                <p>
+                  Save your unique nickname and login key to continue playing
+                  from a different device and identify yourself on your teams
+                  leaderboard.
+                </p>
+
+                <Row gutter={16}>
+                  <Col md={12} xs={24}>
+                    <Form.Item label="User name">
+                      <Input.Group compact>
+                        <Form.Item
+                          name="senderUserName"
+                          noStyle
+                          rules={[
+                            {
+                              required: isPartOfTeam,
+                            },
+                          ]}
+                        >
+                          <Input
+                            data-testid="success-own-name-input"
+                            disabled
+                            placeholder={'Greta12'}
+                            style={{ width: '80%' }}
+                          />
+                        </Form.Item>
+
+                        <CopyToClipboard
+                          onCopy={() => {
+                            message.success('Copied user name')
+                          }}
+                          text={form.getFieldValue('senderUserName')}
+                        >
+                          <Button
+                            icon={<CopyOutlined />}
+                            style={{ width: '20%' }}
+                            type="primary"
+                          />
+                        </CopyToClipboard>
+                      </Input.Group>
+                    </Form.Item>
+                  </Col>
+                  <Col md={12} xs={24}>
+                    <Form.Item label="Login key">
+                      <Input.Group compact>
+                        <Form.Item
+                          name="userId"
+                          noStyle
+                          rules={[
+                            {
+                              required: isPartOfTeam,
+                            },
+                          ]}
+                        >
+                          <Input
+                            disabled
+                            placeholder={'abcd1234'}
+                            style={{ width: '80%' }}
+                          />
+                        </Form.Item>
+                        <CopyToClipboard
+                          onCopy={() => {
+                            message.success('Copied login key')
+                          }}
+                          text={form.getFieldValue('userId')}
+                        >
+                          <Button
+                            icon={<CopyOutlined />}
+                            style={{ width: '20%' }}
+                            type="primary"
+                          />
+                        </CopyToClipboard>
+                      </Input.Group>
+                    </Form.Item>
+                  </Col>
+                </Row>
+              </>
+            )}
 
             <Divider />
 
@@ -298,6 +425,7 @@ export const InviteDialog = ({
               <Button
                 block
                 data-testid="success-share-submit-btn"
+                disabled={!userNameServer}
                 htmlType="submit"
                 icon={<SendOutlined />}
                 size="large"

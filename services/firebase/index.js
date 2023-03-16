@@ -111,6 +111,84 @@ export const updateCompletedActions = ({ actionId, userId }) => {
 }
 
 /**
+ * Create a new user and ensure that teamId and userName combination are unique
+ */
+const isUniqueUserTeamCombination = async ({ teamId, userName }) => {
+  const userRef = collection(firestore, USERS_COLLECTION)
+
+  // query to check if a user with this teamId and userName already exists
+  const q = query(
+    userRef,
+    where('teamId', '==', teamId),
+    where('userName', '==', userName)
+  )
+
+  const querySnapshot = await getDocs(q)
+
+  return querySnapshot.empty
+}
+
+const createUser = async ({ firstName, teamId, userId, userName }) => {
+  try {
+    const userRef = doc(firestore, USERS_COLLECTION, userId)
+    await setDoc(
+      userRef,
+      {
+        firstName,
+        teamId,
+        userName,
+      },
+      {
+        merge: true,
+      }
+    )
+
+    return { userName }
+  } catch (error) {
+    throw error
+  }
+}
+
+export const createUniqueUserName = async ({ firstName, teamId, userId }) => {
+  try {
+    // check based on userId if the user already exists
+    const isUnique = await isUniqueUserTeamCombination({
+      teamId,
+      userId,
+      userName: firstName,
+    })
+    // if the user exists, append a 3-digit hash to the username and try again
+    if (isUnique) {
+      return createUser({
+        firstName,
+        teamId,
+        userId,
+        userName: firstName,
+      })
+    }
+
+    const hash = Math.floor(100 + Math.random() * 900)
+    const userNameWithHash = `${firstName}-${hash}`
+    const isUniqueWithHash = await isUniqueUserTeamCombination({
+      teamId,
+      userName: userNameWithHash,
+    })
+
+    // if its still not unique, let it fail so the user can choose a different name
+    if (!isUniqueWithHash) throw new Error('Username already exists')
+
+    return createUser({
+      firstName,
+      teamId,
+      userId,
+      userName: userNameWithHash,
+    })
+  } catch (error) {
+    throw error
+  }
+}
+
+/**
  * Read team scores to show on the leaderboard
  */
 
