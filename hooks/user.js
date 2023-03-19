@@ -27,6 +27,7 @@ export const useUser = () => {
   // check if this user is already created on the server
   const serverCookieUid = getCookie(SERVER_UID)
   const isSameUser = serverCookieUid === userId
+  const isServerUser = !!serverCookieUid && isSameUser
 
   // only if a cookie is set, fetch the user data
   const {
@@ -34,7 +35,7 @@ export const useUser = () => {
     isLoading,
     refetch: refetchUserScore,
   } = useUserScore(userId, {
-    enabled: !!serverCookieUid && isSameUser,
+    enabled: isServerUser,
   })
   let user = data?.user || {}
 
@@ -51,6 +52,7 @@ export const useUser = () => {
 
   return {
     isLoading,
+    isServerUser,
     refetchUserScore,
     user,
     userId,

@@ -29,7 +29,8 @@ const SCORE_PLACEHOLDER = '-'
 export const UserScore = () => {
   const [helpVisible, setHelpVisible] = useState(false)
   const customization = useCustomization()
-  const { isLoading, refetchUserScore, user, userId, userScore } = useUser()
+  const { isLoading, isServerUser, refetchUserScore, user, userId, userScore } =
+    useUser()
   const { setLoginVisible } = useLogin()
 
   // strings
@@ -94,37 +95,38 @@ export const UserScore = () => {
           <List.Item
             actions={[
               <>
-                <CopyToClipboard
-                  onCopy={() => {
-                    message.success('Copied your unique login key')
-                  }}
-                  text={userId}
-                >
-                  <Tooltip title={userId}>
-                    <Button
-                      className="size-xs"
-                      icon={<CopyOutlined />}
-                      size="small"
-                      type="primary"
-                    >
-                      Copy
-                    </Button>
-                  </Tooltip>
-                </CopyToClipboard>
+                {isServerUser ? (
+                  <CopyToClipboard
+                    onCopy={() => {
+                      message.success('Copied your unique login key')
+                    }}
+                    text={userId}
+                  >
+                    <Tooltip title={userId}>
+                      <Button
+                        className="size-xs"
+                        icon={<CopyOutlined />}
+                        size="small"
+                        type="primary"
+                      >
+                        Copy
+                      </Button>
+                    </Tooltip>
+                  </CopyToClipboard>
+                ) : (
+                  <Button
+                    className="size-xs"
+                    onClick={() => setLoginVisible(true)}
+                    size="small"
+                    type="primary"
+                  >
+                    Login
+                  </Button>
+                )}
               </>,
             ]}
           >
-            <Tooltip
-              overlayClassName="tooltip-xs"
-              title={
-                <>
-                  {loginkeyPopover}{' '}
-                  <Button onClick={() => setLoginVisible(true)} type="link">
-                    Login?
-                  </Button>
-                </>
-              }
-            >
+            <Tooltip overlayClassName="tooltip-xs" title={loginkeyPopover}>
               <LoginOutlined className="title-icon" />
               {loginkey}
             </Tooltip>

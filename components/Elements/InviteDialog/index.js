@@ -28,6 +28,7 @@ import {
   useContentBlocks,
   useContentLists,
   useCustomization,
+  useLogin,
   useUser,
 } from '../../../hooks'
 import { useCreateInvites } from '../../../services/internal/invites'
@@ -55,6 +56,7 @@ export const InviteDialog = () => {
   const [activeCollapseKey, setActiveCollapseKey] = useState(CREATE)
   const [form] = useForm()
 
+  const { setLoginVisible } = useLogin()
   const { locale, query } = useRouter()
   const { actionCollectionSlug } = query
   const invalidateCache = useInvalidateUserScore()
@@ -213,10 +215,9 @@ export const InviteDialog = () => {
               <>
                 <p>
                   Save your unique user name and login key to continue inviting
-                  friends from a different device{' '}
-                  {user?.teamId
-                    ? 'and to check your progress on your teams leaderboard.'
-                    : '.'}
+                  friends from a different device and to check your progress on
+                  your teams leaderboard. Already have an account?{' '}
+                  <a onClick={() => setLoginVisible(true)}>Login</a>
                 </p>
 
                 <Row gutter={16}>
