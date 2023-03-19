@@ -4,6 +4,7 @@ import React from 'react'
 import { DisclosureOverview } from '../../components/DisclosureOverview'
 import { Text } from '../../components/Elements'
 import { Layout } from '../../components/Layout'
+import { MailingListSubscription } from '../../components/MailingListSubscription'
 import {
   fetchAllStaticContent,
   fetchPageBySlug,
@@ -13,11 +14,14 @@ import { fetchData } from '../../services/lfca'
 import { QualifiedCompanyFragment } from '../../services/lfca/fragments'
 
 const DISCLOSURE_OVERVIEW = 'disclosureOverview'
+const SHARE_CAMPAIGN = 'shareCampaign'
 
 const renderCustomComponent = (id, data) => {
   switch (id) {
     case DISCLOSURE_OVERVIEW:
       return <DisclosureOverview items={data} />
+    case SHARE_CAMPAIGN:
+      return <MailingListSubscription />
     default:
       return null
   }
