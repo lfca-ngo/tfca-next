@@ -37,6 +37,9 @@ export const MainMenu = ({ className = '', company, mode }) => {
   const menuAboutQuestions = textBlockToString(
     useContentBlocks('menu.item.about.questions')
   )
+  const menuAboutJoin = textBlockToString(
+    useContentBlocks('menu.item.about.join')
+  )
   const menuTeam = textBlockToString(useContentBlocks('menu.item.team'))
   const menuYou = textBlockToString(useContentBlocks('menu.item.you'))
 
@@ -60,6 +63,11 @@ export const MainMenu = ({ className = '', company, mode }) => {
             key="overview"
             slug="/cms/overview"
             title={menuAboutParticipants}
+          />,
+          <MenuItem
+            key="overview"
+            slug="/cms/share-the-campaign"
+            title={menuAboutJoin}
           />,
           <QuestionsMenuItem key="questions" title={menuAboutQuestions} />,
         ]}
