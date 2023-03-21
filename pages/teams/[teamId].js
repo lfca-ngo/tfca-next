@@ -23,7 +23,7 @@ const DynamicTableColHeader = ({ title, icon = <HomeOutlined /> }) => {
   if (!isMobile)
     return (
       <Popover
-        content="Invites are valued at 0.1, accepted invites at 0.5"
+        content="Invites are valued at 0.1, accepted invites at 0.5."
         overlayClassName="popover-md"
       >
         {title}
