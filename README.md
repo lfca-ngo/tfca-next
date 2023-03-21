@@ -1,6 +1,6 @@
 # Time for Climate Action (TFCA) - Next.js Web Application
 
-The TFCA Web App enables individuals to take quick, but powerful actions in just a few clicks and invite your friends to join the movement.
+The TFCA Web App enables individuals to take quick, but powerful actions in just a few clicks and invite your friends to join the movement
 
 ## Architecture: SSG with a couple of dynamic elements
 
