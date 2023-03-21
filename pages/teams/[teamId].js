@@ -20,9 +20,24 @@ const PLACES = ['🥇', '🥈', '🥉']
 const DynamicTableColHeader = ({ title, icon = <HomeOutlined /> }) => {
   const isMobile = useIsMobile()
 
-  if (!isMobile) return title
+  if (!isMobile)
+    return (
+      <Popover
+        content="Invites have a lower value"
+        overlayClassName="popover-md"
+      >
+        {title}
+      </Popover>
+    )
 
   return <Popover content={title}>{icon}</Popover>
+}
+
+const SCORE_WEIGHTS = {
+  acceptedInvitesCount: 0.5,
+  completedActions: 1,
+  invitesCount: 0.1,
+  totalActionsTriggered: 1,
 }
 
 export default function LeaderBoard({ teamId = '' }) {
@@ -33,15 +48,26 @@ export default function LeaderBoard({ teamId = '' }) {
 
   const sortedStats = useMemo(() => {
     return data
-      ?.sort((a, b) => {
+      .map((user) => ({
+        ...user,
+        acceptedInvitesCount:
+          user.acceptedInvitesCount * SCORE_WEIGHTS.acceptedInvitesCount,
+        completedActions:
+          Object.keys(user.completedActions || {}).length *
+          SCORE_WEIGHTS.completedActions,
+        invitesCount: user.invitesCount * SCORE_WEIGHTS.invitesCount,
+        isActive: user.userId === userId,
+        totalActionsTriggered:
+          user.totalActionsTriggered * SCORE_WEIGHTS.totalActionsTriggered,
+      }))
+      .sort((a, b) => {
         const sum = (a) =>
           a.totalActionsTriggered +
           a.invitesCount +
           a.acceptedInvitesCount +
-          Object.keys(a.completedActions || {}).length
+          a.completedActions
         return sum(b) - sum(a)
       })
-      .map((user) => ({ ...user, isActive: user.userId === userId }))
   }, [data, userId])
 
   return (
@@ -105,21 +131,21 @@ export default function LeaderBoard({ teamId = '' }) {
                 <div className="table-col col-10">
                   <Badge
                     className="score-badge"
-                    count={Object.keys(item.completedActions || {}).length}
+                    count={item.completedActions}
                     showZero
                   />
                 </div>
                 <div className="table-col col-10">
                   <Badge
                     className="score-badge"
-                    count={item.invitesCount}
+                    count={item.invitesCount.toFixed(1)}
                     showZero
                   />
                 </div>
                 <div className="table-col col-10">
                   <Badge
                     className="score-badge"
-                    count={item.acceptedInvitesCount}
+                    count={item.acceptedInvitesCount.toFixed(1)}
                     showZero
                   />
                 </div>

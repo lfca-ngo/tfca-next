@@ -257,7 +257,7 @@ export const getTeamScores = async (teamId) => {
         ...userData, // meta data
         // scores
         ...(usersScores[doc.id] || {
-          acceptedInvitesCount: 0, // @TODO: replace
+          acceptedInvitesCount: 0,
           totalActionsTriggered: 0,
         }),
       })
