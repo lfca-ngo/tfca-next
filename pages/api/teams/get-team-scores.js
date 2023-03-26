@@ -1,4 +1,5 @@
 import { getTeamScores } from '../../../services/firebase'
+import { getWeightedUserScore } from '../../../utils-server-only'
 
 export default async function handler(req, res) {
   if (req.method !== 'GET') {
@@ -10,7 +11,10 @@ export default async function handler(req, res) {
   try {
     const teamScores = await getTeamScores(teamId)
 
-    return res.status(200).json(teamScores)
+    // weight scores
+    const weightedScores = teamScores.map((user) => getWeightedUserScore(user))
+
+    return res.status(200).json(weightedScores)
   } catch (e) {
     return res.status(500).send({ message: e.message })
   }

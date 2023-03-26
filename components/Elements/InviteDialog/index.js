@@ -103,6 +103,13 @@ export const InviteDialog = () => {
   const sharingInputFriendsNameLabel = textBlockToString(
     useContentBlocks('sharing.input.friendsname.label')
   )
+  const loginHint = textBlockToString(useContentBlocks('sharing.login.hint'))
+  const userNameHint = textBlockToString(
+    useContentBlocks('sharing.username.hint')
+  )
+  const senderFirstNameLabel = textBlockToString(
+    useContentBlocks('sharing.input.senderfirstname.label')
+  )
   const sharingButtonCreateLinks = textBlockToString(
     useContentBlocks('sharing.button.create.links')
   )
@@ -196,7 +203,7 @@ export const InviteDialog = () => {
             )}
 
             <Form.Item
-              label={'First name'}
+              label={senderFirstNameLabel}
               name="senderFirstName"
               rules={[
                 {
@@ -214,17 +221,14 @@ export const InviteDialog = () => {
             {user?.teamId && (
               <>
                 <p>
-                  Save your unique user name and login key to continue inviting
-                  friends from a different device and to check your progress on
-                  your teams leaderboard. Already have an account?{' '}
-                  <a onClick={() => setLoginVisible(true)}>Login</a>
+                  {loginHint} <a onClick={() => setLoginVisible(true)}>Login</a>
                 </p>
 
                 <Row gutter={16}>
                   <Col md={12} xs={24}>
                     <Form.Item label="User name">
                       <Popover
-                        content="Your user name is unique for your team and cannot be changed"
+                        content={userNameHint}
                         overlayClassName="popover-md"
                       >
                         <Input.Group compact>

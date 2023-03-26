@@ -161,7 +161,7 @@ export const UserScore = () => {
             actions={[
               <Badge
                 className="score-badge"
-                count={userScore?.invitesCount || 0}
+                count={userScore?.invitesCount.toFixed(1) || 0}
                 key="invites"
                 showZero
               />,

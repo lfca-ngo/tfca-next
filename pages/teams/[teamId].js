@@ -50,15 +50,7 @@ export default function LeaderBoard({ teamId = '' }) {
     return data
       .map((user) => ({
         ...user,
-        acceptedInvitesCount:
-          user.acceptedInvitesCount * SCORE_WEIGHTS.acceptedInvitesCount,
-        completedActions:
-          Object.keys(user.completedActions || {}).length *
-          SCORE_WEIGHTS.completedActions,
-        invitesCount: user.invitesCount * SCORE_WEIGHTS.invitesCount,
         isActive: user.userId === userId,
-        totalActionsTriggered:
-          user.totalActionsTriggered * SCORE_WEIGHTS.totalActionsTriggered,
       }))
       .sort((a, b) => {
         const sum = (a) =>

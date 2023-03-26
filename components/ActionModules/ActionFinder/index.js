@@ -17,6 +17,7 @@ export const ActionFinderFlow = ({ module }) => {
     for (const filter of filters) {
       const fieldName = filter?.key
       const options = getFilterOptions(items, fieldName)
+
       const filterElement = {
         fieldName,
         options,
