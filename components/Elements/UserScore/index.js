@@ -38,6 +38,12 @@ export const UserScore = () => {
   const howitworksTitle = textBlockToString(
     useContentBlocks('score.howitworks.title')
   )
+  const menuInvitesHint = textBlockToString(
+    useContentBlocks('menu.score.accepted.hint')
+  )
+  const menuAcceptedInvitesHint = textBlockToString(
+    useContentBlocks('menu.score.accepted.hint')
+  )
   const nickname = textBlockToString(useContentBlocks('score.nickname'))
   const nicknamePopover = textBlockToString(
     useContentBlocks('score.nickname.popover')
@@ -141,8 +147,13 @@ export const UserScore = () => {
               />,
             ]}
           >
-            <CheckCircleOutlined className="title-icon" />
-            {acceptedInvites}
+            <Tooltip
+              overlayClassName="tooltip-xs"
+              title={menuAcceptedInvitesHint}
+            >
+              <CheckCircleOutlined className="title-icon" />
+              {acceptedInvites}
+            </Tooltip>
           </List.Item>
           <List.Item
             actions={[
@@ -167,8 +178,10 @@ export const UserScore = () => {
               />,
             ]}
           >
-            <UsergroupAddOutlined className="title-icon" />
-            {invites}
+            <Tooltip overlayClassName="tooltip-xs" title={menuInvitesHint}>
+              <UsergroupAddOutlined className="title-icon" />
+              {invites}
+            </Tooltip>
           </List.Item>
           {customization?.senderName ? (
             <List.Item actions={[<>{customization?.senderName}</>]}>
