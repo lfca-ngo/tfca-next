@@ -33,13 +33,6 @@ const DynamicTableColHeader = ({ title, icon = <HomeOutlined /> }) => {
   return <Popover content={title}>{icon}</Popover>
 }
 
-const SCORE_WEIGHTS = {
-  acceptedInvitesCount: 0.5,
-  completedActions: 1,
-  invitesCount: 0.1,
-  totalActionsTriggered: 1,
-}
-
 export default function LeaderBoard({ teamId = '' }) {
   const { data = [], isLoading } = useTeamScores(teamId)
   const { userId } = useUser()
