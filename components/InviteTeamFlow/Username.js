@@ -8,7 +8,7 @@ import { useCreateUniqueUserName } from '../../services/internal/username'
 
 const BTN_WIDTH = 60
 
-export const Username = ({ goBack, goNext }) => {
+export const Username = ({ goNext }) => {
   const { isLoggedIn, login, user, userId } = useUser()
   const [form] = Form.useForm()
 
@@ -42,7 +42,7 @@ export const Username = ({ goBack, goNext }) => {
   return (
     <div>
       <div>
-        <h1>Generate your username</h1>
+        <h1>Generate your username 🙋🏻‍♀️</h1>
         <p>
           {`In order to track your scores and see how you compare to your team
           mates, you need a unique username. This username will be displayed on
@@ -136,9 +136,6 @@ export const Username = ({ goBack, goNext }) => {
           <Space>
             <Button onClick={goNext} size="large" type="primary">
               Continue
-            </Button>
-            <Button onClick={goBack} size="large">
-              Back
             </Button>
           </Space>
         </div>

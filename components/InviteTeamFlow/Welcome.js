@@ -39,11 +39,15 @@ export const Welcome = ({ goNext }) => {
         <>
           <h1>Hi there 👋</h1>
           <p>
-            Welcome to the TFCA Teams Challenge of {user?.teamId}. Your goal as
-            part of the Challenge is to complete actions on our campaign page
-            and invite friends and family to do the same.
+            Welcome to the TFCA Teams Challenge of {user?.teamId}! The challenge
+            is simple: We want to trigger as many impactful climate actions as
+            possible. For every action that you complete and for every invite
+            that you share, you will get points and climb up the leaderboard of
+            your team. The team member with the most points wins the challenge!
           </p>
-          <p>Please follow these 4 simple steps to get started!</p>
+
+          <p>Follow these 4 simple steps to get started.</p>
+
           <div className="actions">
             <Button
               disabled={isLoggedIn}
@@ -51,7 +55,7 @@ export const Welcome = ({ goNext }) => {
               size="large"
               type="primary"
             >
-              Continue
+              Get started
             </Button>
           </div>
         </>

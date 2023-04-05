@@ -14,7 +14,7 @@ export const LoginKey = ({ goBack, goNext }) => {
     <div>
       {isLoggedIn ? (
         <div>
-          <h1>Save your login key</h1>
+          <h1>Save your login key 🔑</h1>
           <p>
             Please copy your login key and store it in a safe place (e.g. your
             private Notes App). You will need it to claim your rewards or to
