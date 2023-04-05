@@ -29,7 +29,7 @@ const SCORE_PLACEHOLDER = '-'
 export const UserScore = () => {
   const [helpVisible, setHelpVisible] = useState(false)
   const customization = useCustomization()
-  const { isLoading, isServerUser, refetchUserScore, user, userId, userScore } =
+  const { isLoading, isLoggedIn, refetchUserScore, user, userId, userScore } =
     useUser()
   const { setLoginVisible } = useLogin()
 
@@ -101,7 +101,7 @@ export const UserScore = () => {
           <List.Item
             actions={[
               <>
-                {isServerUser ? (
+                {isLoggedIn ? (
                   <CopyToClipboard
                     onCopy={() => {
                       message.success('Copied your unique login key')

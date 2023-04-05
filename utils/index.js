@@ -9,6 +9,7 @@ export const isBrowser = () => typeof window !== 'undefined'
 export const SETTINGS_ID = '48AtzIK5THq8u72j19vKw1'
 
 // Layouts
+export const FULL_SCREEN_LAYOUT = 'full-screen'
 export const ERROR_LAYOUT = 'error'
 export const BASIC_LAYOUT = 'basic'
 export const LANDING_LAYOUT = 'landing'

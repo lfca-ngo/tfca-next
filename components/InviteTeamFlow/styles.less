@@ -1,0 +1,49 @@
+.leaderboard-explainer {
+  .video-container {
+    display: flex;
+    overflow: hidden;
+    border-radius: 12px;
+    video {
+      max-width: 100%;
+    }
+  }
+}
+
+.steps-flow {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  min-height: 100vh;
+
+  > .container {
+    display: flex;
+    flex-direction: column;
+
+    .ant-steps {
+      margin: 40px 0;
+      .ant-steps-item-container {
+        display: flex;
+        align-items: center;
+      }
+    }
+    .steps-content {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      padding-bottom: 80px;
+
+      p,
+      .ant-collapse-header {
+        font-size: 22px;
+      }
+
+      .actions {
+        margin: 30px 0 0;
+      }
+    }
+    .steps-action {
+      padding: 20px 0;
+      border-top: 1px solid @light-grey;
+    }
+  }
+}

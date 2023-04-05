@@ -1,7 +1,8 @@
 import { useRouter } from 'next/router'
+import { useQueryClient } from 'react-query'
 
 import { useUserScore } from '../services/internal/userscore'
-import { getCookie, getWindowUid, UID_COOKIE_NAME } from '../utils'
+import { getCookie, getWindowUid, setCookie, UID_COOKIE_NAME } from '../utils'
 import { useCustomization } from './app'
 
 export const SERVER_UID = 'server_uid'
@@ -20,6 +21,7 @@ const useUserId = (customization) => {
 }
 
 export const useUser = () => {
+  const queryClient = useQueryClient()
   const { query } = useRouter()
   const customization = useCustomization()
   const userId = useUserId(customization)
@@ -27,7 +29,7 @@ export const useUser = () => {
   // check if this user is already created on the server
   const serverCookieUid = getCookie(SERVER_UID)
   const isSameUser = serverCookieUid === userId
-  const isServerUser = !!serverCookieUid && isSameUser
+  const isLoggedIn = !!serverCookieUid && isSameUser
 
   // only if a cookie is set, fetch the user data
   const {
@@ -35,7 +37,7 @@ export const useUser = () => {
     isLoading,
     refetch: refetchUserScore,
   } = useUserScore(userId, {
-    enabled: isServerUser,
+    enabled: isLoggedIn,
   })
   let user = data?.user || {}
 
@@ -50,9 +52,18 @@ export const useUser = () => {
     user.teamId = user?.teamId || query?.teamId
   }
 
+  // login function
+  const login = async (userId) => {
+    setCookie(UID_COOKIE_NAME, userId)
+    setCookie(SERVER_UID, userId)
+    // invalidate cache
+    queryClient.invalidateQueries(USER_SCORE_QUERY_KEY)
+  }
+
   return {
     isLoading,
-    isServerUser,
+    isLoggedIn,
+    login,
     refetchUserScore,
     user,
     userId,

@@ -33,7 +33,6 @@ import {
 } from '../../../hooks'
 import { useCreateInvites } from '../../../services/internal/invites'
 import { useCreateUniqueUserName } from '../../../services/internal/username'
-import { useInvalidateUserScore } from '../../../services/internal/userscore'
 import { textBlockToString } from '../../../utils'
 import { CheckList, LoadingSpinner, SuperText } from '../../Elements'
 import { Share } from './Share'
@@ -50,7 +49,7 @@ const NAMES = ['Carla', 'Yasmin', 'Kim']
 
 export const InviteDialog = () => {
   const customization = useCustomization()
-  const { isLoading, user, userId } = useUser()
+  const { isLoading, login, user, userId } = useUser()
 
   const benefits = useContentLists('sharing.benefits')?.items
   const [activeCollapseKey, setActiveCollapseKey] = useState(CREATE)
@@ -59,14 +58,13 @@ export const InviteDialog = () => {
   const { setLoginVisible } = useLogin()
   const { locale, query } = useRouter()
   const { actionCollectionSlug } = query
-  const invalidateCache = useInvalidateUserScore()
 
   const {
     data: userNameData,
     isLoading: isCreatingUserName,
     mutate: createUniqueUserName,
   } = useCreateUniqueUserName({
-    onSuccess: () => invalidateCache(userId),
+    onSuccess: () => login(userId),
   })
 
   const {
@@ -74,7 +72,7 @@ export const InviteDialog = () => {
     isLoading: isGeneratingToken,
     mutate: createInvites,
   } = useCreateInvites({
-    onSuccess: () => invalidateCache(userId),
+    onSuccess: () => login(userId),
   })
 
   const invites = invitesData?.data || []
