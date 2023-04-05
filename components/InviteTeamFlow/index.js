@@ -1,16 +1,19 @@
 require('./styles.less')
 
-import { Button, Steps } from 'antd'
+import { Steps } from 'antd'
+import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 
-import { useUser } from '../../hooks'
 import { LoginKey } from './LoginKey'
 import { Start } from './Start'
 import { Username } from './Username'
 import { Welcome } from './Welcome'
 
 export const InviteTeamFlow = () => {
+  const { asPath, push } = useRouter()
   const [step, setStep] = useState(0)
+
+  const forwardLink = asPath.replace('/invite-team', '/team')
 
   const handleNextStep = () => {
     setStep(step + 1)
@@ -18,10 +21,6 @@ export const InviteTeamFlow = () => {
 
   const handlePreviousStep = () => {
     setStep(step - 1)
-  }
-
-  const handleReset = () => {
-    setStep(0)
   }
 
   const steps = [
@@ -38,7 +37,9 @@ export const InviteTeamFlow = () => {
       title: 'Login Key',
     },
     {
-      content: <Start goBack={handlePreviousStep} goNext={handleNextStep} />,
+      content: (
+        <Start goBack={handlePreviousStep} goNext={() => push(forwardLink)} />
+      ),
       title: `Let's go`,
     },
   ]

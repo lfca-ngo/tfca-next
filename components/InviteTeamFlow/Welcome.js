@@ -1,12 +1,15 @@
-import { Button } from 'antd'
+import { Button, Space } from 'antd'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 import React from 'react'
 
 import { useUser } from '../../hooks'
 
 export const Welcome = ({ goNext }) => {
-  const { isLoggedIn, user } = useUser()
+  const { asPath } = useRouter()
+  const { isLoggedIn, logout, user } = useUser()
 
-  console.log('isLoggedIn', user)
+  const forwardLink = asPath.replace('/invite-team', '/team')
 
   return (
     <div>
@@ -14,10 +17,23 @@ export const Welcome = ({ goNext }) => {
         <>
           <h1>Already logged in</h1>
           <p>
-            You are already logged in as {user?.userName}. If you would like to
-            play, click here. If you would like to create a new account, logout.
+            You are already logged in as {user?.userName} of the team{' '}
+            {user?.teamId}. If you would like to play with this account, go to
+            the homepage. If you would like to create a new account, logout.
           </p>
-          <Button>Logout</Button>
+          <div className="actions">
+            <Space>
+              <Link href={forwardLink} passHref>
+                <Button size="large" type="primary">
+                  Go to Homepage
+                </Button>
+              </Link>
+
+              <Button onClick={logout} size="large">
+                Logout
+              </Button>
+            </Space>
+          </div>
         </>
       ) : (
         <>
@@ -28,18 +44,18 @@ export const Welcome = ({ goNext }) => {
             and invite friends and family to do the same.
           </p>
           <p>Please follow these 4 simple steps to get started!</p>
+          <div className="actions">
+            <Button
+              disabled={isLoggedIn}
+              onClick={goNext}
+              size="large"
+              type="primary"
+            >
+              Continue
+            </Button>
+          </div>
         </>
       )}
-      <div className="actions">
-        <Button
-          disabled={isLoggedIn}
-          onClick={goNext}
-          size="large"
-          type="primary"
-        >
-          Continue
-        </Button>
-      </div>
     </div>
   )
 }

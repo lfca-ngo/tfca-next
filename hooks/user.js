@@ -1,7 +1,10 @@
 import { useRouter } from 'next/router'
 import { useQueryClient } from 'react-query'
 
-import { useUserScore } from '../services/internal/userscore'
+import {
+  USER_SCORE_QUERY_KEY,
+  useUserScore,
+} from '../services/internal/userscore'
 import { getCookie, getWindowUid, setCookie, UID_COOKIE_NAME } from '../utils'
 import { useCustomization } from './app'
 
@@ -53,9 +56,17 @@ export const useUser = () => {
   }
 
   // login function
-  const login = async (userId) => {
+  const login = (userId) => {
     setCookie(UID_COOKIE_NAME, userId)
     setCookie(SERVER_UID, userId)
+    // invalidate cache
+    queryClient.invalidateQueries(USER_SCORE_QUERY_KEY)
+  }
+
+  // logout function
+  const logout = () => {
+    setCookie(UID_COOKIE_NAME, '')
+    setCookie(SERVER_UID, '')
     // invalidate cache
     queryClient.invalidateQueries(USER_SCORE_QUERY_KEY)
   }
@@ -64,6 +75,7 @@ export const useUser = () => {
     isLoading,
     isLoggedIn,
     login,
+    logout,
     refetchUserScore,
     user,
     userId,
