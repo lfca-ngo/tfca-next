@@ -48,7 +48,6 @@ const NAMES = ['Carla', 'Yasmin', 'Kim']
 export const InviteDialog = () => {
   const customization = useCustomization()
   const { isLoading, isLoggedIn, login, logout, user, userId } = useUser()
-
   const benefits = useContentLists('sharing.benefits')?.items
   const [activeCollapseKey, setActiveCollapseKey] = useState(CREATE)
   const [form] = useForm()
@@ -70,7 +69,9 @@ export const InviteDialog = () => {
     isLoading: isGeneratingToken,
     mutate: createInvites,
   } = useCreateInvites({
-    onSuccess: () => login(userId),
+    onSuccess: () => {
+      login(userId)
+    },
   })
 
   const invites = invitesData?.data || []

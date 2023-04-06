@@ -73,6 +73,9 @@ export const useUser = () => {
 
   // login function
   const login = (userId) => {
+    // if user is already logged in, do nothing
+    if (isLoggedIn) return
+
     setCookie(UID_COOKIE_NAME, userId)
     setCookie(SERVER_UID, userId)
 
