@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { useQueryClient } from 'react-query'
 
 import { ACTION_COMPLETED, STEP } from '../services/analytics'
 import { useTrackAction } from '../services/internal/action'

@@ -8,11 +8,22 @@ import {
   InfoCircleOutlined,
   LikeOutlined,
   LoginOutlined,
+  LogoutOutlined,
   RocketOutlined,
   SendOutlined,
   UsergroupAddOutlined,
 } from '@ant-design/icons'
-import { Badge, Button, Drawer, List, message, Space, Tooltip } from 'antd'
+import {
+  Badge,
+  Button,
+  Col,
+  Drawer,
+  List,
+  message,
+  Row,
+  Space,
+  Tooltip,
+} from 'antd'
 import React, { useState } from 'react'
 import CopyToClipboard from 'react-copy-to-clipboard'
 
@@ -34,6 +45,7 @@ export const UserScore = () => {
     completedActionsCount,
     isLoading,
     isLoggedIn,
+    logout,
     refetchUserScore,
     user,
     userId,
@@ -225,9 +237,45 @@ export const UserScore = () => {
           ) : null}
         </List>
 
-        <Button block icon={<HistoryOutlined />} onClick={refetch} size="small">
-          {buttonRefresh}
-        </Button>
+        <Row gutter={12}>
+          {isLoggedIn ? (
+            <>
+              <Col span={12}>
+                <Button
+                  block
+                  icon={<HistoryOutlined />}
+                  onClick={refetch}
+                  size="small"
+                >
+                  Refresh
+                </Button>
+              </Col>
+              <Col span={12}>
+                <Button
+                  block
+                  icon={<LogoutOutlined />}
+                  onClick={logout}
+                  size="small"
+                  type="primary"
+                >
+                  Logout
+                </Button>
+              </Col>
+            </>
+          ) : (
+            <Col span={24}>
+              <Button
+                block
+                icon={<LoginOutlined />}
+                onClick={() => setLoginVisible(true)}
+                size="small"
+                type="primary"
+              >
+                Login
+              </Button>
+            </Col>
+          )}
+        </Row>
       </Space>
 
       {/* Drawer with info text */}

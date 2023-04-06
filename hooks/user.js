@@ -46,7 +46,7 @@ export const useUser = () => {
 
   // count completed actions
   const completedActionsCount = useMemo(() => {
-    if (!data?.user) return 0
+    if (!data?.user?.completedActions) return 0
     return Object.keys(data?.user?.completedActions).length
   }, [data?.user])
 
