@@ -18,8 +18,6 @@ import { QuestionsMenuItem } from './QuestionsMenuItem'
 
 export const MainMenu = ({ className = '', company, mode }) => {
   const { isLoggedIn, user } = useUser()
-  const { query } = useRouter()
-  const team = query?.teamId
 
   // menu items
   const menuAbout = textBlockToString(useContentBlocks('menu.item.about'))
@@ -74,13 +72,13 @@ export const MainMenu = ({ className = '', company, mode }) => {
         ]}
         title={menuAbout}
       />
-      {team && (
+      {user?.teamId && (
         <MenuItem
           icon={<Avatar icon={<ForkOutlined />} shape="square" />}
           submenuItems={[
             <MenuItem
               key="leaderboard"
-              slug={`/teams/${team}`}
+              slug={`/teams/${user?.teamId}`}
               title={menuLeaderboard}
             />,
           ]}

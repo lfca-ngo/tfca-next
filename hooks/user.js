@@ -6,7 +6,13 @@ import {
   USER_SCORE_QUERY_KEY,
   useUserScore,
 } from '../services/internal/userscore'
-import { getCookie, getWindowUid, setCookie, UID_COOKIE_NAME } from '../utils'
+import {
+  getCookie,
+  getWindowUid,
+  PREFERRED_HOME_COOKIE_NAME,
+  setCookie,
+  UID_COOKIE_NAME,
+} from '../utils'
 import { useCustomization } from './app'
 
 export const SERVER_UID = 'server_uid'
@@ -32,6 +38,7 @@ export const useUser = () => {
 
   // check if this user is already created on the server
   const serverCookieUid = getCookie(SERVER_UID)
+  const preferredActionCollectionSlug = getCookie(PREFERRED_HOME_COOKIE_NAME)
   const isSameUser = serverCookieUid === userId
   const isLoggedIn = !!serverCookieUid && isSameUser
 
@@ -86,6 +93,8 @@ export const useUser = () => {
   }
 
   return {
+    actionCollectionSlug:
+      query?.actionCollectionSlug || preferredActionCollectionSlug || 'int',
     completedActionsCount,
     isLoading,
     isLoggedIn,
