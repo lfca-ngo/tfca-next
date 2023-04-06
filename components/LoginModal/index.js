@@ -1,17 +1,15 @@
 import { Button, Form, Input, message, Modal } from 'antd'
 import React from 'react'
 
-import { SERVER_UID, useLogin, useUser } from '../../hooks'
-import { setCookie, UID_COOKIE_NAME } from '../../utils'
+import { useLogin, useUser } from '../../hooks'
 
 export const LoginModal = () => {
   const { loginVisible, setLoginVisible } = useLogin()
-  const { isLoading, refetchUserScore } = useUser()
+  const { isLoading, login, refetchUserScore } = useUser()
 
   // handle login
   const handleLogin = async ({ userId: newUserId }) => {
-    setCookie(UID_COOKIE_NAME, newUserId)
-    setCookie(SERVER_UID, newUserId)
+    login(newUserId)
 
     // refetch user score to update the user id
     await refetchUserScore()

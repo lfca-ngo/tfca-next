@@ -11,14 +11,12 @@ import {
 import {
   Alert,
   Button,
-  Col,
   Collapse,
   Divider,
   Form,
   Input,
   message,
   Popover,
-  Row,
 } from 'antd'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
@@ -33,7 +31,6 @@ import {
 } from '../../../hooks'
 import { useCreateInvites } from '../../../services/internal/invites'
 import { useCreateUniqueUserName } from '../../../services/internal/username'
-import { useInvalidateUserScore } from '../../../services/internal/userscore'
 import { textBlockToString } from '../../../utils'
 import { CheckList, LoadingSpinner, SuperText } from '../../Elements'
 import { Share } from './Share'
@@ -50,8 +47,7 @@ const NAMES = ['Carla', 'Yasmin', 'Kim']
 
 export const InviteDialog = () => {
   const customization = useCustomization()
-  const { isLoading, user, userId } = useUser()
-
+  const { isLoading, isLoggedIn, login, logout, user, userId } = useUser()
   const benefits = useContentLists('sharing.benefits')?.items
   const [activeCollapseKey, setActiveCollapseKey] = useState(CREATE)
   const [form] = useForm()
@@ -59,14 +55,13 @@ export const InviteDialog = () => {
   const { setLoginVisible } = useLogin()
   const { locale, query } = useRouter()
   const { actionCollectionSlug } = query
-  const invalidateCache = useInvalidateUserScore()
 
   const {
     data: userNameData,
     isLoading: isCreatingUserName,
     mutate: createUniqueUserName,
   } = useCreateUniqueUserName({
-    onSuccess: () => invalidateCache(userId),
+    onSuccess: () => login(userId),
   })
 
   const {
@@ -74,7 +69,9 @@ export const InviteDialog = () => {
     isLoading: isGeneratingToken,
     mutate: createInvites,
   } = useCreateInvites({
-    onSuccess: () => invalidateCache(userId),
+    onSuccess: () => {
+      login(userId)
+    },
   })
 
   const invites = invitesData?.data || []
@@ -104,9 +101,6 @@ export const InviteDialog = () => {
     useContentBlocks('sharing.input.friendsname.label')
   )
   const loginHint = textBlockToString(useContentBlocks('sharing.login.hint'))
-  const userNameHint = textBlockToString(
-    useContentBlocks('sharing.username.hint')
-  )
   const senderFirstNameLabel = textBlockToString(
     useContentBlocks('sharing.input.senderfirstname.label')
   )
@@ -129,7 +123,7 @@ export const InviteDialog = () => {
   // map of promises with infos
   const onCreateInvites = async (values) => {
     const senderFirstName = values.senderFirstName ?? undefined
-    const senderUserName = values.senderUserName ?? undefined
+    const senderUserName = values.senderUserName || userName || undefined
 
     const payload = {
       actionCollectionSlug,
@@ -153,7 +147,11 @@ export const InviteDialog = () => {
   }
 
   const validateUserName = () => {
-    if (form.isFieldTouched('senderFirstName') && user?.teamId) {
+    if (
+      form.isFieldTouched('senderFirstName') &&
+      form.getFieldValue('senderFirstName') &&
+      user?.teamId
+    ) {
       createUniqueUserName({
         firstName: form.getFieldValue('senderFirstName'),
         teamId: user?.teamId,
@@ -176,7 +174,7 @@ export const InviteDialog = () => {
       <SuperText text={mainSupertext} />
       <h2>{mainTitle}</h2>
       <p>
-        {user?.teamId ? mainTeamBody : null}
+        {user?.teamId ? `${mainTeamBody} ` : null}
         {mainBody}
       </p>
 
@@ -212,28 +210,24 @@ export const InviteDialog = () => {
               ]}
             >
               <Input
+                addonAfter={isCreatingUserName ? <LoadingOutlined /> : null}
                 data-testid="success-own-name-input"
+                disabled={isLoggedIn && userName}
                 onBlur={validateUserName}
-                placeholder={'Greta'}
+                placeholder={user?.firstName || 'Greta'}
               />
             </Form.Item>
 
             {user?.teamId && (
               <>
-                <p>
-                  {loginHint} <a onClick={() => setLoginVisible(true)}>Login</a>
-                </p>
-
-                <Row gutter={16}>
-                  <Col md={12} xs={24}>
-                    <Form.Item label="User name">
-                      <Popover
-                        content={userNameHint}
-                        overlayClassName="popover-md"
-                      >
+                {isLoggedIn ? (
+                  <p>
+                    You are logged in as{' '}
+                    <Popover
+                      content={
                         <Input.Group compact>
                           <Form.Item
-                            name="senderUserName"
+                            name="userId"
                             noStyle
                             rules={[
                               {
@@ -242,69 +236,38 @@ export const InviteDialog = () => {
                             ]}
                           >
                             <Input
-                              data-testid="success-own-name-input"
                               disabled
-                              placeholder={'Greta12'}
+                              placeholder={'abcd1234'}
                               style={{ width: '80%' }}
                             />
                           </Form.Item>
-
                           <CopyToClipboard
                             onCopy={() => {
-                              message.success('Copied user name')
+                              message.success('Copied login key')
                             }}
-                            text={form.getFieldValue('senderUserName')}
+                            text={form.getFieldValue('userId')}
                           >
                             <Button
-                              icon={
-                                isCreatingUserName ? (
-                                  <LoadingOutlined />
-                                ) : (
-                                  <CopyOutlined />
-                                )
-                              }
+                              icon={<CopyOutlined />}
                               style={{ width: '20%' }}
                               type="primary"
                             />
                           </CopyToClipboard>
                         </Input.Group>
-                      </Popover>
-                    </Form.Item>
-                  </Col>
-                  <Col md={12} xs={24}>
-                    <Form.Item label="Login key">
-                      <Input.Group compact>
-                        <Form.Item
-                          name="userId"
-                          noStyle
-                          rules={[
-                            {
-                              required: user?.teamId,
-                            },
-                          ]}
-                        >
-                          <Input
-                            disabled
-                            placeholder={'abcd1234'}
-                            style={{ width: '80%' }}
-                          />
-                        </Form.Item>
-                        <CopyToClipboard
-                          onCopy={() => {
-                            message.success('Copied login key')
-                          }}
-                          text={form.getFieldValue('userId')}
-                        >
-                          <Button
-                            icon={<CopyOutlined />}
-                            style={{ width: '20%' }}
-                            type="primary"
-                          />
-                        </CopyToClipboard>
-                      </Input.Group>
-                    </Form.Item>
-                  </Col>
-                </Row>
+                      }
+                    >
+                      <a>{user?.userName}</a>
+                    </Popover>
+                    . Want to <a onClick={logout}>logout?</a>
+                  </p>
+                ) : (
+                  <>
+                    <p>
+                      {loginHint}{' '}
+                      <a onClick={() => setLoginVisible(true)}>Login</a>
+                    </p>
+                  </>
+                )}
               </>
             )}
 

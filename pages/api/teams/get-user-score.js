@@ -9,15 +9,15 @@ export default async function handler(req, res) {
   const userId = req.query['userId']
 
   try {
-    const score = await getUserScore(userId)
+    const { user, userScore } = await getUserScore(userId)
 
     // weight scores
-    const weightedScore = {
-      ...score,
-      userScore: getWeightedUserScore(score.userScore),
+    const result = {
+      user,
+      userScore: getWeightedUserScore({ user, userScore }),
     }
 
-    return res.status(200).json(weightedScore)
+    return res.status(200).json(result)
   } catch (e) {
     return res.status(500).send({ message: e.message })
   }

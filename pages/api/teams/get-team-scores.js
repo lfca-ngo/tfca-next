@@ -12,7 +12,10 @@ export default async function handler(req, res) {
     const teamScores = await getTeamScores(teamId)
 
     // weight scores
-    const weightedScores = teamScores.map((user) => getWeightedUserScore(user))
+    const weightedScores = teamScores.map(({ user, userScore }) => ({
+      ...user,
+      userScore: getWeightedUserScore({ user, userScore }),
+    }))
 
     return res.status(200).json(weightedScores)
   } catch (e) {

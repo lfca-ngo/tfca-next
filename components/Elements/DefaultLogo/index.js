@@ -4,18 +4,21 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
-import {
-  getCookie,
-  getLogoSrc,
-  PREFERRED_HOME_COOKIE_NAME,
-} from '../../../utils'
+import { useUser } from '../../../hooks'
+import { getLogoSrc } from '../../../utils'
 
 export const DefaultLogo = ({ isMobile }) => {
+  const { actionCollectionSlug, isLoggedIn, user } = useUser()
   const logoSrc = getLogoSrc(isMobile)
+  const isLoggedInWithTeam = user?.teamId && isLoggedIn
 
   // check in local storage if the user has a team preference
   // if so, navigate to the teams page
-  const homeLink = getCookie(PREFERRED_HOME_COOKIE_NAME) || '/'
+  let homeLink = `/${actionCollectionSlug}`
+
+  if (isLoggedInWithTeam) {
+    homeLink = `/${actionCollectionSlug}/team/${user.teamId}`
+  }
 
   return (
     <div className="default-logo">

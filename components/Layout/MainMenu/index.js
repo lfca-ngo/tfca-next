@@ -3,10 +3,9 @@ require('./styles.less')
 import { ForkOutlined, UserOutlined } from '@ant-design/icons'
 import { Avatar } from 'antd'
 import classNames from 'classnames'
-import { useRouter } from 'next/router'
 import React from 'react'
 
-import { useContentBlocks } from '../../../hooks'
+import { useContentBlocks, useUser } from '../../../hooks'
 import { textBlockToString } from '../../../utils'
 import { ChallengeStatus } from '../../Elements'
 import { UserScore } from '../../Elements/UserScore'
@@ -17,8 +16,7 @@ import { MenuItem } from './MenuItem'
 import { QuestionsMenuItem } from './QuestionsMenuItem'
 
 export const MainMenu = ({ className = '', company, mode }) => {
-  const { query } = useRouter()
-  const team = query?.teamId
+  const { isLoggedIn, user } = useUser()
 
   // menu items
   const menuAbout = textBlockToString(useContentBlocks('menu.item.about'))
@@ -73,13 +71,13 @@ export const MainMenu = ({ className = '', company, mode }) => {
         ]}
         title={menuAbout}
       />
-      {team && (
+      {user?.teamId && (
         <MenuItem
           icon={<Avatar icon={<ForkOutlined />} shape="square" />}
           submenuItems={[
             <MenuItem
               key="leaderboard"
-              slug={`/teams/${team}`}
+              slug={`/teams/${user?.teamId}`}
               title={menuLeaderboard}
             />,
           ]}
@@ -89,7 +87,7 @@ export const MainMenu = ({ className = '', company, mode }) => {
       <MenuItem
         icon={<Avatar icon={<UserOutlined />} shape="square" />}
         submenuItems={[<UserScore key="score" />]}
-        title={menuYou}
+        title={isLoggedIn ? user?.userName || menuYou : menuYou}
       />
       <MenuItem className="padding-small" title={<TimeCounter />} />
       <MenuItem

@@ -1,10 +1,15 @@
 require('./styles.less')
 
 import classNames from 'classnames'
-import React, { useState } from 'react'
+import { useRouter } from 'next/router'
+import React, { useEffect, useState } from 'react'
 
 import { useContentBlocks } from '../../../hooks'
-import { scrollToId } from '../../../utils'
+import {
+  PREFERRED_HOME_COOKIE_NAME,
+  scrollToId,
+  setCookie,
+} from '../../../utils'
 import { textBlockToString } from '../../../utils'
 import { ChallengeStatus, Hero, MenuSection } from '../../Elements'
 import { ErrorBoundary } from '../../ErrorBoundary'
@@ -21,7 +26,15 @@ export const ActionsLayout = ({
   openGraphInfo,
   team,
 }) => {
+  const { query } = useRouter()
   const [collapsed, setCollapsed] = useState(true)
+
+  // safe the actionCollectionSlug for navigation
+  useEffect(() => {
+    if (query.actionCollectionSlug) {
+      setCookie(PREFERRED_HOME_COOKIE_NAME, query.actionCollectionSlug)
+    }
+  }, [query.actionCollectionSlug])
 
   return (
     <Template className={classNames('actions-layout', 'color-base')}>

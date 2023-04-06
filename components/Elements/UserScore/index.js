@@ -8,10 +8,22 @@ import {
   InfoCircleOutlined,
   LikeOutlined,
   LoginOutlined,
+  LogoutOutlined,
+  RocketOutlined,
   SendOutlined,
   UsergroupAddOutlined,
 } from '@ant-design/icons'
-import { Badge, Button, Drawer, List, message, Space, Tooltip } from 'antd'
+import {
+  Badge,
+  Button,
+  Col,
+  Drawer,
+  List,
+  message,
+  Row,
+  Space,
+  Tooltip,
+} from 'antd'
 import React, { useState } from 'react'
 import CopyToClipboard from 'react-copy-to-clipboard'
 
@@ -29,8 +41,17 @@ const SCORE_PLACEHOLDER = '-'
 export const UserScore = () => {
   const [helpVisible, setHelpVisible] = useState(false)
   const customization = useCustomization()
-  const { isLoading, isServerUser, refetchUserScore, user, userId, userScore } =
-    useUser()
+  const {
+    completedActionsCount,
+    isLoading,
+    isLoggedIn,
+    logout,
+    refetchUserScore,
+    triggeredActionsCount,
+    user,
+    userId,
+    userScore,
+  } = useUser()
   const { setLoginVisible } = useLogin()
 
   // strings
@@ -61,9 +82,6 @@ export const UserScore = () => {
   )
   const invites = textBlockToString(useContentBlocks('score.invites'))
   const invitedBy = textBlockToString(useContentBlocks('score.invited.by'))
-  const buttonRefresh = textBlockToString(
-    useContentBlocks('score.refresh.button')
-  )
   // content of the help drawer
   const helpContent = useContentBlocks('score.howitworks.content')
 
@@ -101,7 +119,7 @@ export const UserScore = () => {
           <List.Item
             actions={[
               <>
-                {isServerUser ? (
+                {isLoggedIn ? (
                   <CopyToClipboard
                     onCopy={() => {
                       message.success('Copied your unique login key')
@@ -141,6 +159,39 @@ export const UserScore = () => {
             actions={[
               <Badge
                 className="score-badge"
+                count={completedActionsCount || 0}
+                key="accepted"
+                showZero
+              />,
+            ]}
+          >
+            <Tooltip
+              overlayClassName="tooltip-xs"
+              title={menuAcceptedInvitesHint}
+            >
+              <RocketOutlined className="title-icon" />
+              Completed actions
+            </Tooltip>
+          </List.Item>
+          <List.Item
+            actions={[
+              <Badge
+                className="score-badge"
+                count={userScore?.invitesCount.toFixed(1) || 0}
+                key="invites"
+                showZero
+              />,
+            ]}
+          >
+            <Tooltip overlayClassName="tooltip-xs" title={menuInvitesHint}>
+              <UsergroupAddOutlined className="title-icon" />
+              {invites}
+            </Tooltip>
+          </List.Item>
+          <List.Item
+            actions={[
+              <Badge
+                className="score-badge"
                 count={userScore?.acceptedInvitesCount || 0}
                 key="accepted"
                 showZero
@@ -159,7 +210,7 @@ export const UserScore = () => {
             actions={[
               <Badge
                 className="score-badge"
-                count={userScore?.triggeredActionsCount || 0}
+                count={triggeredActionsCount}
                 key="triggered"
                 showZero
               />,
@@ -168,21 +219,7 @@ export const UserScore = () => {
             <LikeOutlined className="title-icon" />
             {triggeredActions}
           </List.Item>
-          <List.Item
-            actions={[
-              <Badge
-                className="score-badge"
-                count={userScore?.invitesCount.toFixed(1) || 0}
-                key="invites"
-                showZero
-              />,
-            ]}
-          >
-            <Tooltip overlayClassName="tooltip-xs" title={menuInvitesHint}>
-              <UsergroupAddOutlined className="title-icon" />
-              {invites}
-            </Tooltip>
-          </List.Item>
+
           {customization?.senderName ? (
             <List.Item actions={[<>{customization?.senderName}</>]}>
               <SendOutlined className="title-icon" />
@@ -198,9 +235,45 @@ export const UserScore = () => {
           ) : null}
         </List>
 
-        <Button block icon={<HistoryOutlined />} onClick={refetch} size="small">
-          {buttonRefresh}
-        </Button>
+        <Row gutter={12}>
+          {isLoggedIn ? (
+            <>
+              <Col span={12}>
+                <Button
+                  block
+                  icon={<HistoryOutlined />}
+                  onClick={refetch}
+                  size="small"
+                >
+                  Refresh
+                </Button>
+              </Col>
+              <Col span={12}>
+                <Button
+                  block
+                  icon={<LogoutOutlined />}
+                  onClick={logout}
+                  size="small"
+                  type="primary"
+                >
+                  Logout
+                </Button>
+              </Col>
+            </>
+          ) : (
+            <Col span={24}>
+              <Button
+                block
+                icon={<LoginOutlined />}
+                onClick={() => setLoginVisible(true)}
+                size="small"
+                type="primary"
+              >
+                Login
+              </Button>
+            </Col>
+          )}
+        </Row>
       </Space>
 
       {/* Drawer with info text */}

@@ -2,10 +2,10 @@ import { useState } from 'react'
 
 import { ACTION_COMPLETED, STEP } from '../services/analytics'
 import { useTrackAction } from '../services/internal/action'
-import { scrollToId, setCookie } from '../utils'
+import { scrollToId } from '../utils'
 import { useAnalytics } from './analytics'
 import { useActionStatus } from './app'
-import { SERVER_UID } from './user'
+import { useUser } from './user'
 
 export const ACTION_STATES = {
   ACTIVE: 'active',
@@ -16,13 +16,14 @@ export const ACTION_STATES = {
 // helper hook for managing the flow state of
 // the different action modules
 export const useFlow = ({ id, initialIndex, initialStore = {}, stepsKeys }) => {
+  const { login } = useUser()
   const [index, set] = useState(initialIndex)
   const [store, setStore] = useState(initialStore)
   const { setActionStatus } = useActionStatus()
   const { trackEvent } = useAnalytics()
   const { mutate: trackAction } = useTrackAction({
     onSuccess: ({ data }) => {
-      setCookie(SERVER_UID, data?.userId)
+      login(data?.userId)
     },
   })
 

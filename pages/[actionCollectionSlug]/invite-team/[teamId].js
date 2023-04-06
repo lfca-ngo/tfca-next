@@ -1,14 +1,14 @@
 import { useRouter } from 'next/router'
 import React from 'react'
 
-import { ActionModules } from '../../../components/ActionModules'
 import { HomeLoader } from '../../../components/Elements'
+import { InviteTeamFlow } from '../../../components/InviteTeamFlow'
 import { Layout } from '../../../components/Layout'
 import { fetchAllStaticData } from '../../../services'
 import { getAllTeams } from '../../../services/firebase'
-import { WITH_SIDEBAR_LAYOUT } from '../../../utils'
+import { FULL_SCREEN_LAYOUT } from '../../../utils'
 
-export default function TeamPage({ actions, openGraphInfo, stats, team }) {
+export default function InviteTeamPage({ team }) {
   const router = useRouter()
 
   // If the page is not yet generated, this will be displayed
@@ -16,13 +16,8 @@ export default function TeamPage({ actions, openGraphInfo, stats, team }) {
   if (router.isFallback) return <HomeLoader />
 
   return (
-    <Layout
-      layout={actions?.layout || WITH_SIDEBAR_LAYOUT}
-      nav={actions?.nav}
-      openGraphInfo={openGraphInfo}
-      team={team}
-    >
-      <ActionModules actions={actions?.items} stats={stats} />
+    <Layout layout={FULL_SCREEN_LAYOUT} team={team}>
+      <InviteTeamFlow />
     </Layout>
   )
 }

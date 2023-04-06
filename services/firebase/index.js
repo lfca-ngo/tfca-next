@@ -11,14 +11,10 @@ import {
   where,
 } from 'firebase/firestore'
 
+import { safeGetObjectsCount } from '../../utils-server-only'
+
 const USERS_COLLECTION = 'users'
 const TEAMS_COLLECTION = 'teams'
-
-// Helper to get count of entries in object
-const safeGetObjectsCount = (object) => {
-  if (typeof object !== 'object') return 0
-  return Object.keys(object).length
-}
 
 const config = {
   apiKey: process.env.FB_API_KEY,
@@ -252,14 +248,16 @@ export const getTeamScores = async (teamId) => {
       const userData = doc.data()
 
       teamScores.push({
-        invitesCount: safeGetObjectsCount(userData.invites),
-        userId: doc.id,
-        ...userData, // meta data
+        user: {
+          invitesCount: safeGetObjectsCount(userData.invites),
+          userId: doc.id,
+          ...userData, // meta data
+        },
         // scores
-        ...(usersScores[doc.id] || {
+        userScore: usersScores[doc.id] || {
           acceptedInvitesCount: 0,
           totalActionsTriggered: 0,
-        }),
+        },
       })
     })
 
@@ -298,10 +296,7 @@ export const getUserScore = async (userId) => {
 
     return {
       user,
-      userScore: {
-        ...userScore,
-        invitesCount: safeGetObjectsCount(user.invites),
-      },
+      userScore: userScore,
     }
   } catch (error) {
     throw error

@@ -1,7 +1,17 @@
 import { useRouter } from 'next/router'
+import { useQueryClient } from 'react-query'
 
-import { useUserScore } from '../services/internal/userscore'
-import { getCookie, getWindowUid, UID_COOKIE_NAME } from '../utils'
+import {
+  USER_SCORE_QUERY_KEY,
+  useUserScore,
+} from '../services/internal/userscore'
+import {
+  getCookie,
+  getWindowUid,
+  PREFERRED_HOME_COOKIE_NAME,
+  setCookie,
+  UID_COOKIE_NAME,
+} from '../utils'
 import { useCustomization } from './app'
 
 export const SERVER_UID = 'server_uid'
@@ -20,14 +30,16 @@ const useUserId = (customization) => {
 }
 
 export const useUser = () => {
+  const queryClient = useQueryClient()
   const { query } = useRouter()
   const customization = useCustomization()
   const userId = useUserId(customization)
 
   // check if this user is already created on the server
   const serverCookieUid = getCookie(SERVER_UID)
+  const preferredActionCollectionSlug = getCookie(PREFERRED_HOME_COOKIE_NAME)
   const isSameUser = serverCookieUid === userId
-  const isServerUser = !!serverCookieUid && isSameUser
+  const isLoggedIn = !!serverCookieUid && isSameUser
 
   // only if a cookie is set, fetch the user data
   const {
@@ -35,13 +47,19 @@ export const useUser = () => {
     isLoading,
     refetch: refetchUserScore,
   } = useUserScore(userId, {
-    enabled: isServerUser,
+    enabled: isLoggedIn,
   })
+
+  // count completed actions
+  const completedActionsCount = data?.userScore?.completedActions || 0
+  const triggeredActionsCount = data?.userScore?.totalActionsTriggered || 0
+
   let user = data?.user || {}
 
   // even when the user is not yet created on the server,
   // we can derive his first name from the invitation
-  if (!user && customization?.invitedUserName) {
+
+  if (!data?.user && customization?.invitedUserName) {
     user.firstName = customization.invitedUserName
   }
 
@@ -50,10 +68,38 @@ export const useUser = () => {
     user.teamId = user?.teamId || query?.teamId
   }
 
+  // login function
+  const login = (userId) => {
+    setCookie(UID_COOKIE_NAME, userId)
+    setCookie(SERVER_UID, userId)
+
+    // invalidate cache
+    queryClient.invalidateQueries(USER_SCORE_QUERY_KEY)
+  }
+
+  // logout function
+  const logout = () => {
+    setCookie(UID_COOKIE_NAME, '')
+    setCookie(SERVER_UID, '')
+    // reset cache
+    queryClient.removeQueries({
+      exact: true,
+      queryKey: USER_SCORE_QUERY_KEY,
+    })
+    // invalidate cache
+    queryClient.invalidateQueries(USER_SCORE_QUERY_KEY)
+  }
+
   return {
+    actionCollectionSlug:
+      query?.actionCollectionSlug || preferredActionCollectionSlug || 'int',
+    completedActionsCount,
     isLoading,
-    isServerUser,
+    isLoggedIn,
+    login,
+    logout,
     refetchUserScore,
+    triggeredActionsCount,
     user,
     userId,
     userScore: data?.userScore,
