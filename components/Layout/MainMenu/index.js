@@ -3,7 +3,6 @@ require('./styles.less')
 import { ForkOutlined, UserOutlined } from '@ant-design/icons'
 import { Avatar } from 'antd'
 import classNames from 'classnames'
-import { useRouter } from 'next/router'
 import React from 'react'
 
 import { useContentBlocks, useUser } from '../../../hooks'

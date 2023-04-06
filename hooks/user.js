@@ -61,7 +61,8 @@ export const useUser = () => {
 
   // even when the user is not yet created on the server,
   // we can derive his first name from the invitation
-  if (!user && customization?.invitedUserName) {
+
+  if (!data?.user && customization?.invitedUserName) {
     user.firstName = customization.invitedUserName
   }
 

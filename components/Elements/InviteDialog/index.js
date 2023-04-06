@@ -211,9 +211,9 @@ export const InviteDialog = () => {
               <Input
                 addonAfter={isCreatingUserName ? <LoadingOutlined /> : null}
                 data-testid="success-own-name-input"
-                disabled={isLoggedIn}
+                disabled={isLoggedIn && userName}
                 onBlur={validateUserName}
-                placeholder={'Greta'}
+                placeholder={user?.firstName || 'Greta'}
               />
             </Form.Item>
 
