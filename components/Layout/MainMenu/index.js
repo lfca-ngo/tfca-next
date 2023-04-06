@@ -6,7 +6,7 @@ import classNames from 'classnames'
 import { useRouter } from 'next/router'
 import React from 'react'
 
-import { useContentBlocks } from '../../../hooks'
+import { useContentBlocks, useUser } from '../../../hooks'
 import { textBlockToString } from '../../../utils'
 import { ChallengeStatus } from '../../Elements'
 import { UserScore } from '../../Elements/UserScore'
@@ -17,6 +17,7 @@ import { MenuItem } from './MenuItem'
 import { QuestionsMenuItem } from './QuestionsMenuItem'
 
 export const MainMenu = ({ className = '', company, mode }) => {
+  const { isLoggedIn, user } = useUser()
   const { query } = useRouter()
   const team = query?.teamId
 
@@ -89,7 +90,7 @@ export const MainMenu = ({ className = '', company, mode }) => {
       <MenuItem
         icon={<Avatar icon={<UserOutlined />} shape="square" />}
         submenuItems={[<UserScore key="score" />]}
-        title={menuYou}
+        title={isLoggedIn ? user?.userName : menuYou}
       />
       <MenuItem className="padding-small" title={<TimeCounter />} />
       <MenuItem

@@ -8,6 +8,7 @@ import {
   InfoCircleOutlined,
   LikeOutlined,
   LoginOutlined,
+  RocketOutlined,
   SendOutlined,
   UsergroupAddOutlined,
 } from '@ant-design/icons'
@@ -29,8 +30,15 @@ const SCORE_PLACEHOLDER = '-'
 export const UserScore = () => {
   const [helpVisible, setHelpVisible] = useState(false)
   const customization = useCustomization()
-  const { isLoading, isLoggedIn, refetchUserScore, user, userId, userScore } =
-    useUser()
+  const {
+    completedActionsCount,
+    isLoading,
+    isLoggedIn,
+    refetchUserScore,
+    user,
+    userId,
+    userScore,
+  } = useUser()
   const { setLoginVisible } = useLogin()
 
   // strings
@@ -141,6 +149,39 @@ export const UserScore = () => {
             actions={[
               <Badge
                 className="score-badge"
+                count={completedActionsCount || 0}
+                key="accepted"
+                showZero
+              />,
+            ]}
+          >
+            <Tooltip
+              overlayClassName="tooltip-xs"
+              title={menuAcceptedInvitesHint}
+            >
+              <RocketOutlined className="title-icon" />
+              Completed actions
+            </Tooltip>
+          </List.Item>
+          <List.Item
+            actions={[
+              <Badge
+                className="score-badge"
+                count={userScore?.invitesCount.toFixed(1) || 0}
+                key="invites"
+                showZero
+              />,
+            ]}
+          >
+            <Tooltip overlayClassName="tooltip-xs" title={menuInvitesHint}>
+              <UsergroupAddOutlined className="title-icon" />
+              {invites}
+            </Tooltip>
+          </List.Item>
+          <List.Item
+            actions={[
+              <Badge
+                className="score-badge"
                 count={userScore?.acceptedInvitesCount || 0}
                 key="accepted"
                 showZero
@@ -168,21 +209,7 @@ export const UserScore = () => {
             <LikeOutlined className="title-icon" />
             {triggeredActions}
           </List.Item>
-          <List.Item
-            actions={[
-              <Badge
-                className="score-badge"
-                count={userScore?.invitesCount.toFixed(1) || 0}
-                key="invites"
-                showZero
-              />,
-            ]}
-          >
-            <Tooltip overlayClassName="tooltip-xs" title={menuInvitesHint}>
-              <UsergroupAddOutlined className="title-icon" />
-              {invites}
-            </Tooltip>
-          </List.Item>
+
           {customization?.senderName ? (
             <List.Item actions={[<>{customization?.senderName}</>]}>
               <SendOutlined className="title-icon" />
