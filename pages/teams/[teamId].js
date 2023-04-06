@@ -4,6 +4,7 @@ import {
   HomeOutlined,
   PlusOutlined,
   ShareAltOutlined,
+  SyncOutlined,
 } from '@ant-design/icons'
 import { Badge, List, Popover } from 'antd'
 import React, { useMemo } from 'react'
@@ -34,7 +35,7 @@ const DynamicTableColHeader = ({ title, icon = <HomeOutlined /> }) => {
 }
 
 export default function LeaderBoard({ teamId = '' }) {
-  const { data = [], isLoading } = useTeamScores(teamId)
+  const { data = [], isLoading, refetch: refetchScores } = useTeamScores(teamId)
   const { userId } = useUser()
 
   const team = teamId.charAt(0).toUpperCase() + teamId.slice(1)
@@ -58,7 +59,13 @@ export default function LeaderBoard({ teamId = '' }) {
   return (
     <Layout
       subtitle={
-        'Check how you are doing compared to your team. Who will win your teams challenge?!'
+        <>
+          Check how you are doing compared to your team. Who will win your teams
+          challenge?!{' '}
+          <a onClick={() => refetchScores()}>
+            Refresh list <SyncOutlined />
+          </a>
+        </>
       }
       theme="color-1"
       title={
