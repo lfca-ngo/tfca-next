@@ -11,14 +11,12 @@ import {
 import {
   Alert,
   Button,
-  Col,
   Collapse,
   Divider,
   Form,
   Input,
   message,
   Popover,
-  Row,
 } from 'antd'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
@@ -102,9 +100,6 @@ export const InviteDialog = () => {
     useContentBlocks('sharing.input.friendsname.label')
   )
   const loginHint = textBlockToString(useContentBlocks('sharing.login.hint'))
-  const userNameHint = textBlockToString(
-    useContentBlocks('sharing.username.hint')
-  )
   const senderFirstNameLabel = textBlockToString(
     useContentBlocks('sharing.input.senderfirstname.label')
   )
@@ -178,7 +173,7 @@ export const InviteDialog = () => {
       <SuperText text={mainSupertext} />
       <h2>{mainTitle}</h2>
       <p>
-        {user?.teamId ? mainTeamBody : null}
+        {user?.teamId ? `${mainTeamBody} ` : null}
         {mainBody}
       </p>
 
@@ -267,10 +262,7 @@ export const InviteDialog = () => {
                 ) : (
                   <>
                     <p>
-                      To join the Teams Challenge, you will need a unique
-                      username that identifies you on your company's
-                      leaderboard. We will generate it based on your first name.
-                      Already have an account?{' '}
+                      {loginHint}{' '}
                       <a onClick={() => setLoginVisible(true)}>Login</a>
                     </p>
                   </>

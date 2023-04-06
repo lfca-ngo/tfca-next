@@ -81,9 +81,6 @@ export const UserScore = () => {
   )
   const invites = textBlockToString(useContentBlocks('score.invites'))
   const invitedBy = textBlockToString(useContentBlocks('score.invited.by'))
-  const buttonRefresh = textBlockToString(
-    useContentBlocks('score.refresh.button')
-  )
   // content of the help drawer
   const helpContent = useContentBlocks('score.howitworks.content')
 

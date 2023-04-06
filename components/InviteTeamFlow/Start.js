@@ -14,7 +14,7 @@ export const Start = ({ goBack, goNext }) => {
         {`Once you click on "Start the challenge", you will get to the campaign
         page, where you can take meaningful climate action and invite your
         friends and family to do the same. For every action that you complete
-        and for every invite you will get points and climb up the leaderboard of
+        and for every invite that you sent, you will get points and climb up the leaderboard of
         your team. The team member with the most points wins the challenge!`}
       </p>
 
