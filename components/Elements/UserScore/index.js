@@ -47,6 +47,7 @@ export const UserScore = () => {
     isLoggedIn,
     logout,
     refetchUserScore,
+    triggeredActionsCount,
     user,
     userId,
     userScore,
@@ -209,7 +210,7 @@ export const UserScore = () => {
             actions={[
               <Badge
                 className="score-badge"
-                count={userScore?.triggeredActionsCount || 0}
+                count={triggeredActionsCount}
                 key="triggered"
                 showZero
               />,

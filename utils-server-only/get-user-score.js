@@ -1,3 +1,5 @@
+import { safeGetObjectsCount } from './get-objects-count'
+
 const SCORE_WEIGHTS = {
   acceptedInvitesCount: 0.5,
   completedActions: 1,
@@ -5,16 +7,16 @@ const SCORE_WEIGHTS = {
   totalActionsTriggered: 1,
 }
 
-export const getWeightedUserScore = (user) => {
+export const getWeightedUserScore = ({ user, userScore }) => {
   return {
-    ...user,
     acceptedInvitesCount:
-      user.acceptedInvitesCount * SCORE_WEIGHTS.acceptedInvitesCount,
+      userScore?.acceptedInvitesCount * SCORE_WEIGHTS.acceptedInvitesCount,
     completedActions:
-      Object.keys(user.completedActions || {}).length *
+      safeGetObjectsCount(user?.completedActions) *
       SCORE_WEIGHTS.completedActions,
-    invitesCount: user.invitesCount * SCORE_WEIGHTS.invitesCount,
+    invitesCount:
+      safeGetObjectsCount(user?.invites) * SCORE_WEIGHTS.invitesCount,
     totalActionsTriggered:
-      user.totalActionsTriggered * SCORE_WEIGHTS.totalActionsTriggered,
+      userScore?.totalActionsTriggered * SCORE_WEIGHTS.totalActionsTriggered,
   }
 }

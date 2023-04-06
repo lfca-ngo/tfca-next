@@ -1,5 +1,4 @@
 import { useRouter } from 'next/router'
-import { useMemo } from 'react'
 import { useQueryClient } from 'react-query'
 
 import {
@@ -52,10 +51,8 @@ export const useUser = () => {
   })
 
   // count completed actions
-  const completedActionsCount = useMemo(() => {
-    if (!data?.user?.completedActions) return 0
-    return Object.keys(data?.user?.completedActions).length
-  }, [data?.user])
+  const completedActionsCount = data?.userScore?.completedActions || 0
+  const triggeredActionsCount = data?.userScore?.totalActionsTriggered || 0
 
   let user = data?.user || {}
 
@@ -73,13 +70,6 @@ export const useUser = () => {
 
   // login function
   const login = (userId) => {
-    // if user is already logged in, do nothing
-    if (isLoggedIn) {
-      // invalidate cache
-      queryClient.invalidateQueries(USER_SCORE_QUERY_KEY)
-      return
-    }
-
     setCookie(UID_COOKIE_NAME, userId)
     setCookie(SERVER_UID, userId)
 
@@ -109,6 +99,7 @@ export const useUser = () => {
     login,
     logout,
     refetchUserScore,
+    triggeredActionsCount,
     user,
     userId,
     userScore: data?.userScore,

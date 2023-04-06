@@ -51,7 +51,7 @@ export default function LeaderBoard({ teamId = '' }) {
           a.invitesCount +
           a.acceptedInvitesCount +
           a.completedActions
-        return sum(b) - sum(a)
+        return sum(b?.userScore) - sum(a?.userScore)
       })
   }, [data, userId])
 
@@ -116,28 +116,28 @@ export default function LeaderBoard({ teamId = '' }) {
                 <div className="table-col col-10">
                   <Badge
                     className="score-badge"
-                    count={item.completedActions}
+                    count={item?.userScore?.completedActions}
                     showZero
                   />
                 </div>
                 <div className="table-col col-10">
                   <Badge
                     className="score-badge"
-                    count={item.invitesCount.toFixed(1)}
+                    count={item?.userScore?.invitesCount.toFixed(1)}
                     showZero
                   />
                 </div>
                 <div className="table-col col-10">
                   <Badge
                     className="score-badge"
-                    count={item.acceptedInvitesCount.toFixed(1)}
+                    count={item?.userScore?.acceptedInvitesCount.toFixed(1)}
                     showZero
                   />
                 </div>
                 <div className="table-col col-10">
                   <Badge
                     className="score-badge"
-                    count={item.totalActionsTriggered}
+                    count={item?.userScore?.totalActionsTriggered}
                     showZero
                   />
                 </div>
