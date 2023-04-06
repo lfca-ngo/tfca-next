@@ -1,4 +1,4 @@
-import { Button, Space } from 'antd'
+import { Button, Popover, Space } from 'antd'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React from 'react'
@@ -7,7 +7,7 @@ import { useUser } from '../../hooks'
 
 export const Welcome = ({ goNext }) => {
   const { asPath } = useRouter()
-  const { isLoggedIn, logout, user } = useUser()
+  const { isLoggedIn, logout, user, userId } = useUser()
 
   const forwardLink = asPath.replace('/invite-team', '/team')
 
@@ -17,9 +17,13 @@ export const Welcome = ({ goNext }) => {
         <>
           <h1>Already logged in</h1>
           <p>
-            You are already logged in as {user?.userName} of the team{' '}
-            {user?.teamId}. If you would like to play with this account, go to
-            the homepage. If you would like to create a new account, logout.
+            You are already logged in as{' '}
+            <Popover content={userId}>
+              <a>{user?.userName}</a>{' '}
+            </Popover>
+            of the team {user?.teamId}. If you would like to play with this
+            account, go to the homepage. If you would like to create a new
+            account, logout.
           </p>
           <div className="actions">
             <Space>

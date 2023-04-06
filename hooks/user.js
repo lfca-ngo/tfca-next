@@ -67,6 +67,11 @@ export const useUser = () => {
   const logout = () => {
     setCookie(UID_COOKIE_NAME, '')
     setCookie(SERVER_UID, '')
+    // reset cache
+    queryClient.removeQueries({
+      exact: true,
+      queryKey: USER_SCORE_QUERY_KEY,
+    })
     // invalidate cache
     queryClient.invalidateQueries(USER_SCORE_QUERY_KEY)
   }

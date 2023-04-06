@@ -10,7 +10,7 @@ export const Start = ({ goBack, goNext }) => {
   return (
     <div className="leaderboard-explainer">
       <h1>You are ready to go! 🚀</h1>
-      <p>
+      <p style={{ margin: '0 0 40px' }}>
         {`Once you click on "Start the challenge", you will get to the campaign
         page, where you can take meaningful climate action and invite your
         friends and family to do the same. For every action that you complete
@@ -29,10 +29,19 @@ export const Start = ({ goBack, goNext }) => {
           </div>
         </Panel>
         <Panel header="How do I invite other users?" key="2">
-          <p>Content of Tab Pane 2</p>
+          <p>
+            {`You can invite users either by clicking on "Share" in the menu, by
+            using the floating button on the homescreen or by using the dialog
+            that pops up after completing an action.`}
+          </p>
         </Panel>
         <Panel header="How do I claim rewards?" key="3">
-          <p>Content of Tab Pane 3</p>
+          <p>
+            {`Your company might offer rewards or prizes for the users who create
+            the biggest impact through the challenge. To claim your reward,
+            reach out to your company's challenge organizer at the end of the
+            challenge with your login key and username.`}
+          </p>
         </Panel>
       </Collapse>
 

@@ -24,6 +24,15 @@
       .ant-steps-item-container {
         display: flex;
         align-items: center;
+
+        .ant-steps-item-content {
+          display: flex;
+          align-items: center;
+
+          @media (max-width: @screen-sm-max) {
+            min-height: 44px;
+          }
+        }
       }
     }
     .steps-content {
