@@ -49,7 +49,7 @@ const NAMES = ['Carla', 'Yasmin', 'Kim']
 
 export const InviteDialog = () => {
   const customization = useCustomization()
-  const { isLoading, login, user, userId } = useUser()
+  const { isLoading, isLoggedIn, login, logout, user, userId } = useUser()
 
   const benefits = useContentLists('sharing.benefits')?.items
   const [activeCollapseKey, setActiveCollapseKey] = useState(CREATE)
@@ -151,7 +151,11 @@ export const InviteDialog = () => {
   }
 
   const validateUserName = () => {
-    if (form.isFieldTouched('senderFirstName') && user?.teamId) {
+    if (
+      form.isFieldTouched('senderFirstName') &&
+      form.getFieldValue('senderFirstName') &&
+      user?.teamId
+    ) {
       createUniqueUserName({
         firstName: form.getFieldValue('senderFirstName'),
         teamId: user?.teamId,
@@ -210,7 +214,9 @@ export const InviteDialog = () => {
               ]}
             >
               <Input
+                addonAfter={isCreatingUserName ? <LoadingOutlined /> : null}
                 data-testid="success-own-name-input"
+                disabled={isLoggedIn}
                 onBlur={validateUserName}
                 placeholder={'Greta'}
               />
@@ -218,20 +224,14 @@ export const InviteDialog = () => {
 
             {user?.teamId && (
               <>
-                <p>
-                  {loginHint} <a onClick={() => setLoginVisible(true)}>Login</a>
-                </p>
-
-                <Row gutter={16}>
-                  <Col md={12} xs={24}>
-                    <Form.Item label="User name">
-                      <Popover
-                        content={userNameHint}
-                        overlayClassName="popover-md"
-                      >
+                {isLoggedIn ? (
+                  <p>
+                    You are logged in as{' '}
+                    <Popover
+                      content={
                         <Input.Group compact>
                           <Form.Item
-                            name="senderUserName"
+                            name="userId"
                             noStyle
                             rules={[
                               {
@@ -240,69 +240,41 @@ export const InviteDialog = () => {
                             ]}
                           >
                             <Input
-                              data-testid="success-own-name-input"
                               disabled
-                              placeholder={'Greta12'}
+                              placeholder={'abcd1234'}
                               style={{ width: '80%' }}
                             />
                           </Form.Item>
-
                           <CopyToClipboard
                             onCopy={() => {
-                              message.success('Copied user name')
+                              message.success('Copied login key')
                             }}
-                            text={form.getFieldValue('senderUserName')}
+                            text={form.getFieldValue('userId')}
                           >
                             <Button
-                              icon={
-                                isCreatingUserName ? (
-                                  <LoadingOutlined />
-                                ) : (
-                                  <CopyOutlined />
-                                )
-                              }
+                              icon={<CopyOutlined />}
                               style={{ width: '20%' }}
                               type="primary"
                             />
                           </CopyToClipboard>
                         </Input.Group>
-                      </Popover>
-                    </Form.Item>
-                  </Col>
-                  <Col md={12} xs={24}>
-                    <Form.Item label="Login key">
-                      <Input.Group compact>
-                        <Form.Item
-                          name="userId"
-                          noStyle
-                          rules={[
-                            {
-                              required: user?.teamId,
-                            },
-                          ]}
-                        >
-                          <Input
-                            disabled
-                            placeholder={'abcd1234'}
-                            style={{ width: '80%' }}
-                          />
-                        </Form.Item>
-                        <CopyToClipboard
-                          onCopy={() => {
-                            message.success('Copied login key')
-                          }}
-                          text={form.getFieldValue('userId')}
-                        >
-                          <Button
-                            icon={<CopyOutlined />}
-                            style={{ width: '20%' }}
-                            type="primary"
-                          />
-                        </CopyToClipboard>
-                      </Input.Group>
-                    </Form.Item>
-                  </Col>
-                </Row>
+                      }
+                    >
+                      <a>{user?.userName}</a>
+                    </Popover>
+                    . Want to <a onClick={logout}>logout?</a>
+                  </p>
+                ) : (
+                  <>
+                    <p>
+                      To join the Teams Challenge, you will need a unique
+                      username that identifies you on your company's
+                      leaderboard. We will generate it based on your first name.
+                      Already have an account?{' '}
+                      <a onClick={() => setLoginVisible(true)}>Login</a>
+                    </p>
+                  </>
+                )}
               </>
             )}
 
