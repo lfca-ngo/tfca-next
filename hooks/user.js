@@ -74,7 +74,11 @@ export const useUser = () => {
   // login function
   const login = (userId) => {
     // if user is already logged in, do nothing
-    if (isLoggedIn) return
+    if (isLoggedIn) {
+      // invalidate cache
+      queryClient.invalidateQueries(USER_SCORE_QUERY_KEY)
+      return
+    }
 
     setCookie(UID_COOKIE_NAME, userId)
     setCookie(SERVER_UID, userId)

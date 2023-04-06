@@ -87,7 +87,7 @@ export const MainMenu = ({ className = '', company, mode }) => {
       <MenuItem
         icon={<Avatar icon={<UserOutlined />} shape="square" />}
         submenuItems={[<UserScore key="score" />]}
-        title={isLoggedIn ? user?.userName : menuYou}
+        title={isLoggedIn ? user?.userName || menuYou : menuYou}
       />
       <MenuItem className="padding-small" title={<TimeCounter />} />
       <MenuItem
