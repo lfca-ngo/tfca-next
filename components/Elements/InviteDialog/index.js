@@ -123,7 +123,7 @@ export const InviteDialog = () => {
   // map of promises with infos
   const onCreateInvites = async (values) => {
     const senderFirstName = values.senderFirstName ?? undefined
-    const senderUserName = values.senderUserName ?? undefined
+    const senderUserName = values.senderUserName || userName || undefined
 
     const payload = {
       actionCollectionSlug,
