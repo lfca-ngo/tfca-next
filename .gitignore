@@ -45,3 +45,6 @@ public/worker-*.js
 
 # playwright
 test-results*
+
+# firebase key
+admin-scripts/firebase_admin_key.json
