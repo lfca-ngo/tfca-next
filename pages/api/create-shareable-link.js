@@ -13,7 +13,7 @@ export default async function handler(req, res) {
   }
 
   const {
-    actionCollectionSlug,
+    actionCollectionSlug = 'int',
     invites = [],
     locale,
     referredByTeamId = null,
