@@ -47,14 +47,21 @@ const NAMES = ['Carla', 'Yasmin', 'Kim']
 
 export const InviteDialog = () => {
   const customization = useCustomization()
-  const { isLoading, isLoggedIn, login, logout, user, userId } = useUser()
+  const {
+    actionCollectionSlug,
+    isLoading,
+    isLoggedIn,
+    login,
+    logout,
+    user,
+    userId,
+  } = useUser()
   const benefits = useContentLists('sharing.benefits')?.items
   const [activeCollapseKey, setActiveCollapseKey] = useState(CREATE)
   const [form] = useForm()
 
   const { setLoginVisible } = useLogin()
-  const { locale, query } = useRouter()
-  const { actionCollectionSlug } = query
+  const { locale } = useRouter()
 
   const {
     data: userNameData,
