@@ -40,16 +40,6 @@
     }
   },
   {
-    "countryCode": "IT",
-    "iconUrl": "/images/countries/it.svg",
-    "label": {
-      "DE": "Italien",
-      "EN": "Italy",
-      "ES": "Italia",
-      "FR": "Italie"
-    }
-  },
-  {
     "countryCode": "AT",
     "iconUrl": "/images/countries/at.svg",
     "label": {
@@ -77,6 +67,16 @@
       "EN": "Netherlands",
       "ES": "Países Bajos",
       "FR": "Pays-Bas"
+    }
+  },
+  {
+    "countryCode": "IT",
+    "iconUrl": "/images/countries/it.svg",
+    "label": {
+      "DE": "Italien",
+      "EN": "Italy",
+      "ES": "Italia",
+      "FR": "Italie"
     }
   },
   {
@@ -127,16 +127,6 @@
       "EN": "Slovakia",
       "ES": "Eslovaquia",
       "FR": "Slovaquie"
-    }
-  },
-  {
-    "countryCode": "CY",
-    "iconUrl": "/images/countries/cy.svg",
-    "label": {
-      "DE": "Zypern",
-      "EN": "Cyprus",
-      "ES": "Chipre",
-      "FR": "Chypre"
     }
   },
   {
@@ -257,6 +247,16 @@
       "EN": "Sweden",
       "ES": "Suecia",
       "FR": "Suède"
+    }
+  },
+  {
+    "countryCode": "CY",
+    "iconUrl": "/images/countries/cy.svg",
+    "label": {
+      "DE": "Zypern",
+      "EN": "Cyprus",
+      "ES": "Chipre",
+      "FR": "Chypre"
     }
   },
   {
