@@ -96,5 +96,5 @@ feat: added some new feature
 For PR titles we use a `:` as delimiter:
 
 ```
-feat: added some new features
+feat: added some new feature
 ```
