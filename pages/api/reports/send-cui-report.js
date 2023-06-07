@@ -1,9 +1,25 @@
-import mandrill from '@mailchimp/mailchimp_transactional'
+import * as aws from '@aws-sdk/client-ses'
 import axios from 'axios'
 import { parse } from 'json2csv'
+import nodemailer from 'nodemailer'
 
 import { getDateTimeFileSuffix } from '../../../utils-server-only'
 import { validateAuthToken } from '../../../utils-server-only/validate-auth-token'
+
+const ses = new aws.SES({
+  credentials: {
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  },
+  region: process.env.AWS_REGION,
+})
+
+const emailTransport = nodemailer.createTransport({
+  SES: {
+    aws,
+    ses,
+  },
+})
 
 const REPORTS = [
   {
@@ -38,8 +54,8 @@ export default async function handler(req, res) {
     requestMethod: 'GET',
   })
 
-  const recipients = process.env.CUI_REPORT_RECIPIENTS?.split(',')
-  if (!recipients.length) {
+  const recipientEmails = process.env.CUI_REPORT_RECIPIENTS?.split(',')
+  if (!recipientEmails.length) {
     return res.status(500).send({ message: 'No recipients found.' })
   }
 
@@ -68,22 +84,28 @@ export default async function handler(req, res) {
 
     attachments.push({
       content: Buffer.from(csv, 'utf8').toString('base64'),
-      name: `${report.filename}_${getDateTimeFileSuffix()}.csv`,
-      type: 'text/csv',
+      contentType: 'text/csv',
+      filename: `${report.filename}_${getDateTimeFileSuffix()}.csv`,
     })
   }
 
-  const mandrillClient = mandrill(process.env.MANDRILL_API_KEY || '')
-
-  await mandrillClient.messages.send({
-    message: {
-      attachments,
-      from_email: 'info@lfca.earth',
-      from_name: 'LFCA',
+  for (const recipientEmail of recipientEmails) {
+    await emailTransport.sendMail({
+      attachments:
+        attachments?.map((a) => ({
+          content: a.content,
+          contentType: a.contentType,
+          encoding: 'base64',
+          filename: a.filename,
+        })) || undefined,
+      from: {
+        address: 'info@lfca.earth',
+        name: 'LFCA',
+      },
       subject: 'Montly CUI report',
-      to: recipients.map((email) => ({ email })),
-    },
-  })
+      to: recipientEmail,
+    })
+  }
 
   res.status(200).json({
     success: true,
