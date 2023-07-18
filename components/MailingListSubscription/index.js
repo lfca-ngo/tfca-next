@@ -52,7 +52,7 @@ const CSS_STYLES = `
   font-family: 'Plus Jakarta Sans';
   font-size: 17px;
   color: #525252cc;
-  margin: 0 0 100px;
+  margin: 0 0 20px;
 }
 `
 
@@ -86,7 +86,7 @@ export const MailingListSubscription = () => {
                       <LoadingOutlined />
                     </div>
                   }
-                  onSuccess={handleFinish}
+                  onFormSubmitted={handleFinish}
                   portalId={process.env.NEXT_PUBLIC_HUBSPOT_PORTAL_ID}
                 />
               </>
