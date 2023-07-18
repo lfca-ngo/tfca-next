@@ -1,27 +1,66 @@
 require('./styles.less')
 
-import { Button, Checkbox, Col, Form, Input, message, Row } from 'antd'
-import React from 'react'
+import { LoadingOutlined } from '@ant-design/icons'
+import { Col, Row } from 'antd'
+import React, { useState } from 'react'
+import HubspotForm from 'react-hubspot-form'
 
-import { useSubscribeUserToMailingList } from '../../services/internal/mailchimp'
 import { DownloadKit } from './DownloadKit'
 
-export const MailingListSubscription = () => {
-  const {
-    isLoading,
-    isSuccess,
-    mutate: subscribeToMail,
-  } = useSubscribeUserToMailingList()
+const CSS_STYLES = `
+.hs-form.hs-custom-style * {
+  font-family: 'Plus Jakarta Sans';
+  font-size: 17px;
+  color: #525252cc;
+}
+.hs-form.hs-custom-style .hs-richtext {
+  font-family: 'Plus Jakarta Sans';
+  font-size: 17px;
+  color: #525252cc;
+}
+.hs-form.hs-custom-style .field label span {
+  color: #1e1e1e;
+}
+.hs-form.hs-custom-style .hs-input:not([type=checkbox]):not([type=radio]) {
+  border-radius: 10px;
+  background: #fff;
+  max-width: none;
+  width: 100%;
+}
+.hs-form.hs-custom-style .hs-input:not([type=file]) {
+  background: #fff;
+}
+.hs-form.hs-custom-style .hs-button {
+  font-family: 'Plus Jakarta Sans';
+  background: #ffc839;
+  color: #1e1e1e;
+  font-size: 17px;
+  border: none;
+  font-weight: 500;
+  width: 100%;
+  padding: 20px 0;
+  border-radius: 10px;
+}
+.hs-form.hs-custom-style .hs-button:hover {
+  font-family: 'Plus Jakarta Sans';
+  background: #e6b72e;
+  color: #1e1e1e;
+  font-size: 17px;
+  border: none;
+}
+.hbspt-form .hs-main-font-element {
+  font-family: 'Plus Jakarta Sans';
+  font-size: 17px;
+  color: #525252cc;
+  margin: 0 0 100px;
+}
+`
 
-  const handleFinish = (values) => {
-    subscribeToMail(values, {
-      onError: (error) => {
-        const parsedError = JSON.parse(error.request.response)
-        const errorMessage = parsedError?.message ?? 'Something went wrong!'
-        message.error(errorMessage)
-      },
-      onSuccess: () => message.success('Successfully subscribed!'),
-    })
+export const MailingListSubscription = () => {
+  const [isSuccess, setIsSuccess] = useState(false)
+
+  const handleFinish = () => {
+    setIsSuccess(true)
   }
 
   return (
@@ -38,87 +77,18 @@ export const MailingListSubscription = () => {
               <DownloadKit />
             ) : (
               <>
-                <Form layout="vertical" onFinish={handleFinish}>
-                  <Form.Item
-                    label="Email"
-                    name="email"
-                    rules={[
-                      { message: 'Please input your email!', required: true },
-                    ]}
-                  >
-                    <Input placeholder="you@org.earth" />
-                  </Form.Item>
-                  <Form.Item
-                    label="First Name"
-                    name="firstName"
-                    rules={[
-                      {
-                        message: 'Please input your first name!',
-                        required: true,
-                      },
-                    ]}
-                  >
-                    <Input placeholder="Nelson" />
-                  </Form.Item>
-                  <Form.Item
-                    label="Last Name"
-                    name="lastName"
-                    rules={[
-                      {
-                        message: 'Please input your last name!',
-                        required: true,
-                      },
-                    ]}
-                  >
-                    <Input placeholder="Thun" />
-                  </Form.Item>
-                  <Form.Item
-                    label="Company Name"
-                    name="companyName"
-                    rules={[
-                      {
-                        message: 'Please input your company name!',
-                        required: true,
-                      },
-                    ]}
-                  >
-                    <Input placeholder="Earth" />
-                  </Form.Item>
-                  <Form.Item
-                    name="agreement"
-                    rules={[
-                      {
-                        validator: (_, value) =>
-                          value
-                            ? Promise.resolve()
-                            : Promise.reject('Please agree to receive emails!'),
-                      },
-                    ]}
-                    valuePropName="checked"
-                  >
-                    <Checkbox>
-                      I agree to receive emails from{' '}
-                      <a
-                        href="https://lfca.earth"
-                        rel="noreferrer"
-                        target="_blank"
-                      >
-                        lfca.earth
-                      </a>{' '}
-                      and understand that I can unsubscribe at any time.
-                    </Checkbox>
-                  </Form.Item>
-                  <Form.Item>
-                    <Button
-                      block
-                      htmlType="submit"
-                      loading={isLoading}
-                      type="primary"
-                    >
-                      Get the social media kit
-                    </Button>
-                  </Form.Item>
-                </Form>
+                <HubspotForm
+                  cssClass="hubspot-form"
+                  cssRequired={CSS_STYLES}
+                  formId={process.env.NEXT_PUBLIC_HUBSPOT_FORM_ID}
+                  loading={
+                    <div className="page-loading-spinner">
+                      <LoadingOutlined />
+                    </div>
+                  }
+                  onSuccess={handleFinish}
+                  portalId={process.env.NEXT_PUBLIC_HUBSPOT_PORTAL_ID}
+                />
               </>
             )}
           </Col>
