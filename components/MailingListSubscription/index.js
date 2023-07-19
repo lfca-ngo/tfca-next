@@ -58,6 +58,16 @@ const CSS_STYLES = `
 
 export const MailingListSubscription = () => {
   const [isSuccess, setIsSuccess] = useState(false)
+  const [loading, setLoading] = useState(true)
+
+  const handleFormReady = () => {
+    // 500ms delay to allow the form to load
+    const timer = setTimeout(() => {
+      setLoading(false)
+    }, 500)
+
+    return () => clearTimeout(timer)
+  }
 
   const handleFinish = () => {
     setIsSuccess(true)
@@ -76,20 +86,38 @@ export const MailingListSubscription = () => {
             {isSuccess ? (
               <DownloadKit />
             ) : (
-              <>
-                <HubspotForm
-                  cssClass="hubspot-form"
-                  cssRequired={CSS_STYLES}
-                  formId={process.env.NEXT_PUBLIC_HUBSPOT_FORM_ID}
-                  loading={
-                    <div className="page-loading-spinner">
-                      <LoadingOutlined />
-                    </div>
-                  }
-                  onFormSubmitted={handleFinish}
-                  portalId={process.env.NEXT_PUBLIC_HUBSPOT_PORTAL_ID}
-                />
-              </>
+              <div>
+                {loading && (
+                  <div
+                    className="page-loading-spinner"
+                    style={{
+                      alignItems: 'center',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      margin: '50px 0',
+                    }}
+                  >
+                    <LoadingOutlined style={{ fontSize: '30px' }} />
+                  </div>
+                )}
+                <div
+                  className={`hubspot-form-wrapper ${
+                    loading ? 'loading' : null
+                  }`}
+                >
+                  <HubspotForm
+                    cssClass="hubspot-form"
+                    cssRequired={CSS_STYLES}
+                    formId={process.env.NEXT_PUBLIC_HUBSPOT_FORM_ID}
+                    key={loading}
+                    onFormReady={handleFormReady}
+                    onFormSubmitted={handleFinish}
+                    portalId={process.env.NEXT_PUBLIC_HUBSPOT_PORTAL_ID}
+                    target="#test"
+                  />
+                </div>
+                <div id="test" />
+              </div>
             )}
           </Col>
         </Row>
