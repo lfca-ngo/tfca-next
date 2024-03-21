@@ -9,12 +9,12 @@ import { DownloadKit } from './DownloadKit'
 
 const CSS_STYLES = `
 .hs-form.hs-custom-style * {
-  font-family: 'Plus Jakarta Sans';
+  font-family: 'Poppins';
   font-size: 17px;
   color: #525252cc;
 }
 .hs-form.hs-custom-style .hs-richtext {
-  font-family: 'Plus Jakarta Sans';
+  font-family: 'Poppins';
   font-size: 17px;
   color: #525252cc;
 }
@@ -31,7 +31,7 @@ const CSS_STYLES = `
   background: #fff;
 }
 .hs-form.hs-custom-style .hs-button {
-  font-family: 'Plus Jakarta Sans';
+  font-family: 'Poppins';
   background: #ffc839;
   color: #1e1e1e;
   font-size: 17px;
@@ -42,14 +42,14 @@ const CSS_STYLES = `
   border-radius: 10px;
 }
 .hs-form.hs-custom-style .hs-button:hover {
-  font-family: 'Plus Jakarta Sans';
+  font-family: 'Poppins';
   background: #e6b72e;
   color: #1e1e1e;
   font-size: 17px;
   border: none;
 }
 .hbspt-form .hs-main-font-element {
-  font-family: 'Plus Jakarta Sans';
+  font-family: 'Poppins';
   font-size: 17px;
   color: #525252cc;
   margin: 0 0 20px;

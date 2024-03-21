@@ -8,10 +8,9 @@ import { createShareSvg, decodeShareToken } from '../../../utils-server-only'
  * See: https://github.com/lovell/sharp/issues/2499#issuecomment-987643630
  */
 path.resolve(process.cwd(), 'fonts', 'fonts.conf')
-path.resolve(process.cwd(), 'fonts', 'PlusJakartaSans-Bold.ttf')
-path.resolve(process.cwd(), 'fonts', 'PlusJakartaSans-ExtraBold.ttf')
-path.resolve(process.cwd(), 'fonts', 'PlusJakartaSans-Regular.ttf')
-path.resolve(process.cwd(), 'fonts', 'PlusJakartaSans-SemiBold.ttf')
+path.resolve(process.cwd(), 'fonts', 'Poppins-Bold.ttf')
+path.resolve(process.cwd(), 'fonts', 'Poppins-Regular.ttf')
+path.resolve(process.cwd(), 'fonts', 'Poppins-SemiBold.ttf')
 
 export default async function handler(req, res) {
   if (req.method !== 'GET') {
